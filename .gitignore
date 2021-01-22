@@ -1,0 +1,35 @@
+# Mac OS X
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+
+# Distribution files
+/components/
+/utils/
+
+# Lab distribution files
+/.lab-dist/
+
+# Styleguide distribution files
+/.styleguide-dist/
