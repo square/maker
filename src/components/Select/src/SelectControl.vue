@@ -35,15 +35,12 @@
 				{{ option.label }}
 			</option>
 		</select>
-		<arrow-down-icon
-			:class="$s.Icon"
-			inline
-		/>
+		<chevron-down :class="$s.Icon" />
 	</div>
 </template>
 
 <script>
-import { ArrowDownIcon } from '@square/orbit-icons';
+import { ChevronDown } from '@square/maker-icons';
 
 /**
  * @inheritAttrs select
@@ -51,7 +48,7 @@ import { ArrowDownIcon } from '@square/orbit-icons';
  */
 export default {
 	components: {
-		ArrowDownIcon,
+		ChevronDown,
 	},
 
 	inheritAttrs: false,
@@ -224,6 +221,5 @@ export default {
 	color: var(--color-disabled);
 	transform: translateY(-50%);
 	pointer-events: none;
-	fill: currentColor;
 }
 </style>

@@ -33,9 +33,11 @@
   "peerDependencies": {
     "chroma-js": "^2.1.0",
     "popmotion": "^8.7.5",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "@square/maker-icons": "1.0.1"
   },
   "devDependencies": {
+    "@square/maker-icons": "1.0.1",
     "@babel/preset-env": "^7.11.5",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
@@ -99,8 +101,5 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-distsize": "^0.1.0"
-  },
-  "dependencies": {
-    "@square/orbit-icons": "^1.0.0-rc.1"
   }
 }

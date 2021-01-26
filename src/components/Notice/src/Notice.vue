@@ -24,8 +24,8 @@
 
 <script>
 import {
- ExclamationTriangleIcon, CheckIcon, AlertCircleIcon, CircleIcon,
-} from '@square/orbit-icons';
+	AlertTriangle, AlertCircle, CheckCircle, Info,
+} from '@square/maker-icons';
 
 /**
  * @inheritAttrs div
@@ -33,10 +33,10 @@ import {
  */
 export default {
 	components: {
-		ExclamationTriangleIcon,
-		CheckIcon,
-		AlertCircleIcon,
-		CircleIcon,
+		AlertTriangle,
+		AlertCircle,
+		CheckCircle,
+		Info,
 	},
 
 	inheritAttrs: false,
@@ -63,15 +63,15 @@ export default {
 	computed: {
 		iconComponent() {
 			if (this.type === 'error') {
-				return ExclamationTriangleIcon;
+				return AlertTriangle;
 			}
 			if (this.type === 'success') {
-				return CheckIcon;
+				return CheckCircle;
 			}
 			if (this.type === 'warning') {
-				return AlertCircleIcon;
+				return AlertCircle;
 			}
-			return CircleIcon;
+			return Info;
 		},
 	},
 };
@@ -125,5 +125,6 @@ export default {
 	width: 16px;
 	height: 16px;
 	fill: currentColor;
+	stroke: white;
 }
 </style>

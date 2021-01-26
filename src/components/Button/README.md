@@ -45,10 +45,7 @@
 							size="large"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -57,20 +54,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
 							size="large"
 							:color="color"
 						>
-							<x-icon
-								inline
-								class="icon"
-							/>
+							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
@@ -102,10 +93,7 @@
 							size="large"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -114,20 +102,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="large"
 							:color="color"
 						>
-							<x-icon
-								inline
-								class="icon"
-							/>
+							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
@@ -159,10 +141,7 @@
 							size="large"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -171,20 +150,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="large"
 							:color="color"
 						>
-							<x-icon
-								inline
-								class="icon"
-							/>
+							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -221,10 +194,7 @@
 							size="medium"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -233,20 +203,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
 							size="medium"
 							:color="color"
 						>
-							<x-icon
-								inline
-								class="icon"
-							/>
+							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
@@ -278,10 +242,7 @@
 							size="medium"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -290,20 +251,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="medium"
 							:color="color"
 						>
-							<x-icon
-								inline
-								class="icon"
-							/>
+							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
@@ -335,10 +290,7 @@
 							size="medium"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -347,20 +299,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="medium"
 							:color="color"
 						>
-							<x-icon
-								inline
-								class="icon"
-							/>
+							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -397,10 +343,7 @@
 							size="small"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -409,20 +352,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
 							size="small"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
@@ -454,10 +391,7 @@
 							size="small"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -466,20 +400,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="small"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
@@ -511,10 +439,7 @@
 							size="small"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
@@ -523,20 +448,14 @@
 							:color="color"
 						>
 							Button
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="small"
 							:color="color"
 						>
-							<plus-icon
-								inline
-								class="icon"
-							/>
+							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -568,14 +487,14 @@
 </template>
 
 <script>
-import { PlusIcon, XIcon } from '@square/orbit-icons';
+import { Plus, X } from '@square/maker-icons';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MButton,
-		PlusIcon,
-		XIcon,
+		Plus,
+		X,
 	},
 	data() {
 		return {
