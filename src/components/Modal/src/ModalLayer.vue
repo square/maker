@@ -1,17 +1,29 @@
 <template>
-	<m-transition-spring-up>
-		<div
-			v-if="modalApi.state.vnode"
-			:class="$s.ModalLayer"
-		>
-			<pseudo-window
-				body
-				:class="$s.disableScroll"
+	<div>
+		<m-transition-fade>
+			<div
+				v-if="modalApi.state.vnode"
+				:class="$s.Translucent"
 			/>
-			<v :nodes="modalApi.state.vnode" />
-			<modal-layer />
-		</div>
-	</m-transition-spring-up>
+		</m-transition-fade>
+		<m-transition-spring-up>
+			<div
+				v-if="modalApi.state.vnode"
+				:class="$s.ModalLayer"
+			>
+				<pseudo-window
+					body
+					:class="$s.disableScroll"
+				/>
+				<div
+					:class="$s.ModalContainer"
+				>
+					<v :nodes="modalApi.state.vnode" />
+				</div>
+				<modal-layer />
+			</div>
+		</m-transition-spring-up>
+	</div>
 </template>
 
 <script>
@@ -19,6 +31,7 @@ import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
+import { MTransitionFade } from '@square/maker/components/TransitionFade';
 import { last } from 'lodash';
 import assert from '@square/maker/utils/assert';
 import modalApi from './modal-api';
@@ -92,6 +105,7 @@ export default {
 	components: {
 		V,
 		MTransitionSpringUp,
+		MTransitionFade,
 		PseudoWindow,
 	},
 
@@ -114,6 +128,34 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.Translucent {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.ModalContainer {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 1000px) {
+	.ModalContainer {
+		display: inline-block;
+		width: auto;
+		height: auto;
+		border-radius: 16px;
+	}
 }
 
 .disableScroll {

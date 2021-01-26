@@ -134,6 +134,5 @@ export default Modal;
 	height: 100%;
 	overflow-y: auto;
 	background: #f5f6f7;
-	box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 }
 </style>

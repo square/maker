@@ -6,7 +6,6 @@ Use the modal component to enter the user into a new _mode_.
 <template>
 	<div>
 		<demo />
-
 		<m-modal-layer />
 	</div>
 </template>
@@ -41,7 +40,7 @@ _Demo.vue_
 
 <script>
 import { modalApi } from '@square/maker/components/Modal';
-import ModalDemo from 'doc/ModalDemo.vue';
+import DemoModal from 'doc/DemoModal.vue';
 
 export default {
 	inject: {
@@ -50,23 +49,23 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <ModalDemo />);
+			this.modalApi.open(() => <DemoModal />);
 		},
 	},
 };
 </script>
 ```
 
-_ModalDemo.vue_
+_DemoModal.vue_
 
 ```vue
 <template>
 	<m-modal>
-		<div class="cover-photo">
-			<m-image
-				src="https://picsum.photos/900"
-			/>
-		</div>
+		<m-image
+			class="cover-photo"
+			src="https://picsum.photos/600/300"
+		/>
+		First modal
 
 		<br><br>
 
@@ -86,7 +85,7 @@ _ModalDemo.vue_
 <script>
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
-import ModalStackedDemo from 'doc/ModalStackedDemo.vue';
+import DemoStackedModal from 'doc/DemoStackedModal.vue';
 
 export default {
 	components: {
@@ -100,7 +99,7 @@ export default {
 
 	methods: {
 		openStackedModal() {
-			this.modalApi.open(() => <ModalStackedDemo />);
+			this.modalApi.open(() => <DemoStackedModal />);
 		},
 	},
 };
@@ -109,17 +108,28 @@ export default {
 <style scoped>
 .cover-photo {
 	width: 100%;
-	height: 280px;
+	height: 300px;
+}
+
+@media screen and (min-width: 1000px) {
+	.cover-photo {
+		width: inherit;
+		height: inherit;
+	}
 }
 </style>
 ```
 
-_ModalStackedDemo.vue_
+_DemoStackedModal.vue_
 
 ```vue
 <template>
 	<m-modal>
-		Second modal
+		<m-image
+			class="cover-photo"
+			src="https://picsum.photos/300/600"
+		/>
+		Second stacked modal
 
 		<br><br>
 
@@ -130,10 +140,12 @@ _ModalStackedDemo.vue_
 </template>
 
 <script>
+import { MImage } from '@square/maker/components/Image';
 import { MModal, modalApi } from '@square/maker/components/Modal';
 
 export default {
 	components: {
+		MImage,
 		MModal,
 	},
 
@@ -142,6 +154,19 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+}
+@media screen and (min-width: 1000px) {
+	.cover-photo {
+		width: inherit;
+		height: inherit;
+	}
+}
+</style>
 ```
 
 
