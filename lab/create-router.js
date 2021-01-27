@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Meta from 'vue-meta';
-import Laboratory from './Laboratory.vue';
+import App from './App.vue';
 
 Vue.use(Router);
 Vue.use(Meta);
@@ -16,7 +16,7 @@ function createRouter() {
 		routes: [
 			{
 				path: '',
-				component: Laboratory,
+				component: App,
 				children: LAB_EXPERIMENTS,
 			},
 		],
