@@ -23,9 +23,10 @@
 </template>
 
 <script>
-import {
-	AlertTriangle, AlertCircle, CheckCircle, Info,
-} from '@square/maker-icons';
+import AlertTriangle from '@square/maker-icons/AlertTriangle';
+import AlertCircle from '@square/maker-icons/AlertCircle';
+import CheckCircle from '@square/maker-icons/CheckCircle';
+import Info from '@square/maker-icons/Info';
 
 /**
  * @inheritAttrs div

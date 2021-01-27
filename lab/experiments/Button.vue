@@ -7,7 +7,7 @@
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
 import Combinations from '~/components/Combinations';
 
 export default {

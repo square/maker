@@ -49,7 +49,7 @@ import { MModal } from '@square/maker/components/Modal';
 import { MActionBar } from '@square/maker/components/ActionBar';
 import { MButton } from '@square/maker/components/Button';
 import { MImage } from '@square/maker/components/Image';
-import { X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
 
 export default {
 	components: {

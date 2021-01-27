@@ -92,7 +92,8 @@
 <script>
 import { MInput } from '@square/maker/components/Input';
 import { MNotice } from '@square/maker/components/Notice';
-import { Plus, X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
 
 export default {
 	components: {

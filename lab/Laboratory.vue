@@ -63,7 +63,7 @@
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import { X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
 import ControlPanel from '~/components/ControlPanel.vue';
 
 export default {

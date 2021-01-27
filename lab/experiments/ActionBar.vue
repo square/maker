@@ -24,7 +24,7 @@
 <script>
 import { MActionBar, MActionBarLayer } from '@square/maker/components/ActionBar';
 import { MButton } from '@square/maker/components/Button';
-import { X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
 
 export default {
 	components: {

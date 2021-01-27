@@ -431,7 +431,8 @@ import { MStepper } from '@square/maker/components/Stepper';
 import { MText } from '@square/maker/components/Text';
 import { MTextarea } from '@square/maker/components/Textarea';
 import { MToggle } from '@square/maker/components/Toggle';
-import { Plus, X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
 
 export default {
 	components: {

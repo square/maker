@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { ChevronDown } from '@square/maker-icons';
+import ChevronDown from '@square/maker-icons/ChevronDown';
 
 /**
  * @inheritAttrs select

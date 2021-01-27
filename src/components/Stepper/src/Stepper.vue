@@ -32,7 +32,8 @@
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { Plus, Minus } from '@square/maker-icons';
+import Plus from '@square/maker-icons/Plus';
+import Minus from '@square/maker-icons/Minus';
 
 export default {
 	components: {

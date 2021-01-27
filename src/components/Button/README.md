@@ -487,7 +487,8 @@
 </template>
 
 <script>
-import { Plus, X } from '@square/maker-icons';
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
