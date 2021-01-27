@@ -12,7 +12,7 @@
 		</div>
 
 		<component
-			:is="sidebarOpen ? 'x' : 'x'"
+			:is="sidebarOpen ? 'x' : 'menu'"
 			v-if="isSmallScreen"
 			:class="$s.ToggleSidebar"
 			inline
@@ -63,6 +63,7 @@
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
+import Menu from '@square/maker-icons/Menu';
 import X from '@square/maker-icons/X';
 import ControlPanel from '~/components/ControlPanel.vue';
 
@@ -71,6 +72,7 @@ export default {
 		MTheme,
 		ControlPanel,
 		X,
+		Menu,
 	},
 
 	data() {
