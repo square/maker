@@ -111,7 +111,7 @@ export default {
 	height: 300px;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
 	.cover-photo {
 		width: inherit;
 		height: inherit;
@@ -160,7 +160,7 @@ export default {
 	width: 100%;
 	height: 300px;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
 	.cover-photo {
 		width: inherit;
 		height: inherit;
