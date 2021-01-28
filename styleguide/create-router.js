@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Meta from 'vue-meta';
-import Landing from './Landing.vue';
+import Readme from '../README.md';
 
 Vue.use(Router);
 Vue.use(Meta);
@@ -15,9 +15,9 @@ function createRouter() {
 		mode: 'hash',
 		routes: [
 			{
-				name: 'landing',
+				name: 'readme',
 				path: '/',
-				component: Landing,
+				component: Readme,
 				navLabel: 'Styleguide',
 			},
 			...COMPONENT_ROUTES,
