@@ -12,24 +12,15 @@
 				Button
 			</m-button>
 			<m-button>
-				<plus-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 				Button
 			</m-button>
 			<m-button>
 				Button
-				<plus-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 			</m-button>
 			<m-button>
-				<x-icon
-					inline
-					class="icon"
-				/>
+				<x class="icon" />
 			</m-button>
 			<m-button disabled>
 				Disabled button
@@ -41,24 +32,15 @@
 				Button
 			</m-button>
 			<m-button variant="secondary">
-				<plus-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 				Button
 			</m-button>
 			<m-button variant="secondary">
 				Button
-				<plus-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 			</m-button>
 			<m-button variant="secondary">
-				<x-icon
-					inline
-					class="icon"
-				/>
+				<x class="icon" />
 			</m-button>
 			<m-button
 				variant="secondary"
@@ -76,24 +58,15 @@
 				Button
 			</m-button>
 			<m-button variant="tertiary">
-				<plus-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 				Button
 			</m-button>
 			<m-button variant="tertiary">
 				Button
-				<plus-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 			</m-button>
 			<m-button variant="tertiary">
-				<x-icon
-					inline
-					class="icon"
-				/>
+				<x class="icon" />
 			</m-button>
 			<m-button
 				variant="tertiary"
@@ -196,10 +169,7 @@
 			</m-input>
 			<m-input placeholder="prefix icon">
 				<template #prefix>
-					<pencil-icon
-						inline
-						class="icon"
-					/>
+					<plus class="icon" />
 				</template>
 			</m-input>
 			<m-input
@@ -207,10 +177,7 @@
 				align="right"
 			>
 				<template #suffix>
-					<calendar-icon
-						inline
-						class="icon"
-					/>
+					<x class="icon" />
 				</template>
 			</m-input>
 			<m-input placeholder="with error message">
@@ -448,9 +415,6 @@
 </template>
 
 <script>
-import {
-	PlusIcon, XIcon, PencilIcon, CalendarIcon,
-} from '@square/orbit-icons';
 import { MButton } from '@square/maker/components/Button';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MDivider } from '@square/maker/components/Divider';
@@ -467,13 +431,13 @@ import { MStepper } from '@square/maker/components/Stepper';
 import { MText } from '@square/maker/components/Text';
 import { MTextarea } from '@square/maker/components/Textarea';
 import { MToggle } from '@square/maker/components/Toggle';
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
 
 export default {
 	components: {
-		PlusIcon,
-		XIcon,
-		PencilIcon,
-		CalendarIcon,
+		Plus,
+		X,
 		MButton,
 		MCheckbox,
 		MDivider,

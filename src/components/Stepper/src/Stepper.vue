@@ -11,10 +11,7 @@
 			:disabled="value === minVal"
 			@click="decrement"
 		>
-			<minus-icon
-				inline
-				:class="$s.Icon"
-			/>
+			<minus :class="$s.Icon" />
 		</m-button>
 		<span :class="$s.Quantity">
 			{{ value }}
@@ -28,23 +25,21 @@
 			:disabled="value === maxVal"
 			@click="increment"
 		>
-			<plus-icon
-				inline
-				:class="$s.Icon"
-			/>
+			<plus :class="$s.Icon" />
 		</m-button>
 	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { PlusIcon, MinusIcon } from '@square/orbit-icons';
+import Plus from '@square/maker-icons/Plus';
+import Minus from '@square/maker-icons/Minus';
 
 export default {
 	components: {
 		MButton,
-		PlusIcon,
-		MinusIcon,
+		Plus,
+		Minus,
 	},
 
 	inheritAttrs: false,
@@ -148,7 +143,7 @@ export default {
 }
 
 .Icon {
-	width: 16px;
-	height: 16px;
+	width: 24px;
+	height: 24px;
 }
 </style>

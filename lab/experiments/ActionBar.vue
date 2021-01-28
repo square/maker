@@ -6,10 +6,7 @@
 				size="large"
 				shape="pill"
 			>
-				<x-icon
-					inline
-					class="icon"
-				/>
+				<x class="icon" />
 			</m-button>
 			<m-button
 				key="primary"
@@ -27,14 +24,14 @@
 <script>
 import { MActionBar, MActionBarLayer } from '@square/maker/components/ActionBar';
 import { MButton } from '@square/maker/components/Button';
-import { XIcon } from '@square/orbit-icons';
+import X from '@square/maker-icons/X';
 
 export default {
 	components: {
 		MActionBar,
 		MActionBarLayer,
 		MButton,
-		XIcon,
+		X,
 	},
 };
 </script>
