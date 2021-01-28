@@ -7,7 +7,7 @@
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { XIcon } from '@square/orbit-icons';
+import X from '@square/maker-icons/X';
 import Combinations from '~/components/Combinations';
 
 export default {
@@ -30,7 +30,7 @@ export default {
 					// 'Primary label',
 					`Really long text${' long'.repeat(30)}`,
 					// (<XIcon inline />),
-					[(<XIcon inline class="icon" />), `Really long text${' long'.repeat(30)}`],
+					[(<X class="icon" />), `Really long text${' long'.repeat(30)}`],
 					// (<AddIcon />),
 				],
 				'$slots.information': [

@@ -12,7 +12,7 @@
 		</div>
 
 		<component
-			:is="sidebarOpen ? 'x-icon' : 'menu-icon'"
+			:is="sidebarOpen ? 'x' : 'menu'"
 			v-if="isSmallScreen"
 			:class="$s.ToggleSidebar"
 			inline
@@ -63,15 +63,16 @@
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import { DragBarsIcon, XIcon } from '@square/orbit-icons';
+import Menu from '@square/maker-icons/Menu';
+import X from '@square/maker-icons/X';
 import ControlPanel from '~/components/ControlPanel.vue';
 
 export default {
 	components: {
 		MTheme,
 		ControlPanel,
-		DragBarsIcon,
-		XIcon,
+		X,
+		Menu,
 	},
 
 	data() {
@@ -113,7 +114,6 @@ export default {
 </script>
 
 <style module="$s">
-
 .Page {
 	font-family: system-ui;
 
@@ -141,5 +141,4 @@ export default {
 	width: 300px;
 	padding: 32px;
 }
-
 </style>

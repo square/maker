@@ -44,10 +44,7 @@
 		<h4>prefix icon</h4>
 		<m-input placeholder="Placeholder">
 			<template #prefix>
-				<pencil-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 			</template>
 		</m-input>
 
@@ -57,10 +54,7 @@
 			align="right"
 		>
 			<template #suffix>
-				<calendar-icon
-					inline
-					class="icon"
-				/>
+				<x class="icon" />
 			</template>
 		</m-input>
 
@@ -70,10 +64,7 @@
 			disabled
 		>
 			<template #prefix>
-				<pencil-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 			</template>
 		</m-input>
 
@@ -83,10 +74,7 @@
 			invalid
 		>
 			<template #prefix>
-				<pencil-icon
-					inline
-					class="icon"
-				/>
+				<plus class="icon" />
 			</template>
 		</m-input>
 
@@ -102,16 +90,17 @@
 </template>
 
 <script>
-import { CalendarIcon, PencilIcon } from '@square/orbit-icons';
 import { MInput } from '@square/maker/components/Input';
 import { MNotice } from '@square/maker/components/Notice';
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
 
 export default {
 	components: {
 		MInput,
 		MNotice,
-		PencilIcon,
-		CalendarIcon,
+		Plus,
+		X,
 	},
 };
 </script>

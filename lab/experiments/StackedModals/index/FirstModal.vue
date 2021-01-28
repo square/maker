@@ -31,10 +31,7 @@
 					size="large"
 					shape="pill"
 				>
-					<x-icon
-						inline
-						class="icon"
-					/>
+					<x class="icon" />
 				</m-button>
 			</router-link>
 			<m-button
@@ -58,7 +55,7 @@ import { MModal } from '@square/maker/components/Modal';
 import { MActionBar } from '@square/maker/components/ActionBar';
 import { MButton } from '@square/maker/components/Button';
 import { MImage } from '@square/maker/components/Image';
-import { XIcon } from '@square/orbit-icons';
+import X from '@square/maker-icons/X';
 
 export default {
 	components: {
@@ -66,7 +63,7 @@ export default {
 		MActionBar,
 		MButton,
 		MImage,
-		XIcon,
+		X,
 	},
 };
 </script>
