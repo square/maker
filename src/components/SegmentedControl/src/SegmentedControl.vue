@@ -1,13 +1,24 @@
 <template>
 	<div :class="$s.Container">
-		<slot />
+		<subslot
+			element="@MSegment"
+			@no-match="onNoSegments"
+		/>
 	</div>
 </template>
 
 <script>
+import Subslot from 'vue-subslot';
+import assert from '@square/maker/utils/assert';
+import { MSegment } from '@square/maker/components/SegmentedControl';
 import key from './key';
 
 export default {
+	components: {
+		Subslot,
+		// eslint-disable-next-line vue/no-unused-components
+		MSegment,
+	},
 	provide() {
 		return {
 			[key]: this.$data,
@@ -31,6 +42,11 @@ export default {
 	watch: {
 		currentValue(newValue) {
 			this.$emit('segmented-control:update', newValue);
+		},
+	},
+	methods: {
+		onNoSegments() {
+			assert.error(false, "You must pass 2-4 MSegment components to MSegmentedControl's default slot.");
 		},
 	},
 };

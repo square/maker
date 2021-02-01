@@ -37,10 +37,10 @@
     "@square/maker-icons": "^2.0.0"
   },
   "devDependencies": {
-    "@square/maker-icons": "^2.0.0",
     "@babel/preset-env": "^7.11.5",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@square/maker-icons": "^2.0.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
     "babel-eslint": "^10.1.0",
@@ -95,6 +95,7 @@
     "vue-pseudo-window": "^0.4.0",
     "vue-router": "^3.4.5",
     "vue-server-renderer": "^2.6.12",
+    "vue-subslot": "^1.2.3",
     "vue-template-compiler": "^2.6.12",
     "vue-v": "^1.2.0",
     "vue-vnode-syringe": "^3.1.0",

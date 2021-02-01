@@ -15,7 +15,7 @@
 			</m-segment>
 		</m-segmented-control>
 
-		{{ selected }}
+		Selected value: {{ selected }}
 	</div>
 </template>
 
@@ -35,3 +35,33 @@ export default {
 };
 </script>
 ```
+
+
+<!-- api-tables:start -->
+## Segment Props
+
+| Prop   | Type        | Default | Possible values | Description |
+| ------ | ----------- | ------- | --------------- | ----------- |
+| value* | `undefined` | —       | —               | —           |
+
+
+## Segment Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
+
+
+## SegmentedControl Props
+
+| Prop     | Type        | Default | Possible values | Description |
+| -------- | ----------- | ------- | --------------- | ----------- |
+| v-model* | `undefined` | —       | —               | —           |
+
+
+## SegmentedControl Events
+
+| Event                    | Type | Description |
+| ------------------------ | ---- | ----------- |
+| segmented-control:update | -    | —           |
+<!-- api-tables:end -->

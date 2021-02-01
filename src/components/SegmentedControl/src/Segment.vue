@@ -38,7 +38,7 @@ export default {
 
 <style module="$s">
 .Button {
-	flex: 1 0 1%;
+	flex: 1 0 0;
 	color: black;
 	font-weight: 500;
 	font-size: 14px;
