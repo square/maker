@@ -52,7 +52,7 @@ const apiMixin = {
 
 				open(renderFn) {
 					const vnode = renderFn(vm.$createElement);
-					vnode.componentOptions.BladeFunction = true;
+					vnode.componentOptions.bladeFunction = true;
 					return this.setBladeVnode(vnode);
 				},
 
