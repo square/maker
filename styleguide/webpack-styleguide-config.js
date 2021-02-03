@@ -38,7 +38,7 @@ const config = merge({}, webpackBaseConfig, {
 	},
 
 	output: {
-		path: path.resolve(`.styleguide-dist/${version}`),
+		path: path.resolve(`.dist/styleguide/${version}`),
 	},
 
 	resolve: {
