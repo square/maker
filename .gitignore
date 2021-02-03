@@ -33,3 +33,6 @@ node_modules/
 
 # Styleguide distribution files
 /.styleguide-dist/
+
+# Distribution files
+/.dist/
