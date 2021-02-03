@@ -84,3 +84,15 @@ export default {
 };
 </script>
 ```
+
+
+<!-- api-tables:start -->
+## Blade Slots
+
+| Slot    | Description   |
+| ------- | ------------- |
+| default | blade content |
+
+
+
+<!-- api-tables:end -->

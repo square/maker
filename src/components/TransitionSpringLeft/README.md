@@ -58,7 +58,7 @@ export default {
 <!-- api-tables:start -->
 ## Slots
 
-| Slot    | Description          |
-| ------- | -------------------- |
-| default | content to spring up |
+| Slot    | Description            |
+| ------- | ---------------------- |
+| default | content to spring left |
 <!-- api-tables:end -->
