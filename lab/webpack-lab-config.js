@@ -74,7 +74,7 @@ const config = merge({}, webpackBaseConfig, {
 	},
 
 	output: {
-		path: path.resolve(`.lab-dist/${branchName}`),
+		path: path.resolve(`.dist/lab/${branchName}`),
 	},
 
 	resolve: {
