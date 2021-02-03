@@ -42,7 +42,7 @@ const BUILT_INDEX = `
 	</ul>
 	<h2>Lab Deploys</h2>
 	<ul>
-		${toDeployLinks('https://square.github.io/maker/lab/', '', LAB_DEPLOYS)}
+		${toDeployLinks('https://square.github.io/maker/lab/', '/#/', LAB_DEPLOYS)}
 	</ul>
 </body>
 </html>
