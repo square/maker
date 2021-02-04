@@ -24,12 +24,9 @@ node_modules/
 # dotenv environment variables file
 .env
 
-# Distribution files
+# NPM package distribution files
 /components/
 /utils/
 
-# Lab distribution files
-/.lab-dist/
-
-# Styleguide distribution files
-/.styleguide-dist/
+# Styleguide & Lab deploy distribution files
+/.dist/
