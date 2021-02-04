@@ -5,9 +5,13 @@ const { JustSsrPlugin } = require('vue-just-ssr');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ent = require('ent');
+const branch = require('git-branch');
 const { merge } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
 const { version } = require('../package.json');
+
+const branchName = branch.sync();
+const deploy = branchName === 'master' ? version : branchName;
 
 const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
@@ -38,7 +42,7 @@ const config = merge({}, webpackBaseConfig, {
 	},
 
 	output: {
-		path: path.resolve(`.styleguide-dist/${version}`),
+		path: path.resolve(`.dist/styleguide/${deploy}`),
 	},
 
 	resolve: {
