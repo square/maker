@@ -19,12 +19,6 @@ const ModalContainer = {
 		};
 	},
 
-	destroyed() {
-		if (this.closeRoutedModal) {
-			this.closeRoutedModal();
-		}
-	},
-
 	methods: {
 		assertRootComponent() {
 			// eslint-disable-next-line no-underscore-dangle
@@ -41,11 +35,7 @@ const ModalContainer = {
 		},
 
 		close() {
-			if (this.closeRoutedModal) {
-				this.modalApi.closeRouted();
-			} else {
-				this.modalApi.close();
-			}
+			this.modalApi.close();
 		},
 
 		onTouchstart(event) {
@@ -119,15 +109,7 @@ const ModalContainer = {
 			</div>
 		);
 
-		// If opened with the API modal.open()
-		if (this.$vnode.context.$vnode.componentOptions.modalFunction) {
-			return vnode;
-		}
-
-		// If opened as a component (eg. Router page)
-		this.closeRoutedModal = this.modalApi.setModalVnode(vnode);
-
-		return undefined;
+		return vnode;
 	},
 };
 

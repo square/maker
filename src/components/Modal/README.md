@@ -67,17 +67,8 @@ _DemoModal.vue_
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
 		/>
-		First modal
-
+		Modal content
 		<br><br>
-
-		Modals can stack too
-		<button @click="openStackedModal">
-			Open another modal
-		</button>
-
-		<br><br>
-
 		<button @click="modalApi.close()">
 			Close
 		</button>
@@ -87,7 +78,6 @@ _DemoModal.vue_
 <script>
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
-import DemoStackedModal from 'doc/DemoStackedModal.vue';
 
 export default {
 	name: 'DemoModal',
@@ -100,12 +90,6 @@ export default {
 	inject: {
 		modalApi,
 	},
-
-	methods: {
-		openStackedModal() {
-			this.modalApi.open(() => <DemoStackedModal />);
-		},
-	},
 };
 </script>
 
@@ -123,58 +107,6 @@ export default {
 }
 </style>
 ```
-
-_DemoStackedModal.vue_
-
-```vue
-<template>
-	<m-modal>
-		<m-image
-			class="cover-photo"
-			src="https://picsum.photos/600/600"
-		/>
-		Second stacked modal
-
-		<br><br>
-
-		<button @click="modalApi.close()">
-			Close
-		</button>
-	</m-modal>
-</template>
-
-<script>
-import { MImage } from '@square/maker/components/Image';
-import { MModal, modalApi } from '@square/maker/components/Modal';
-
-export default {
-	name: 'DemoStackedModal',
-
-	components: {
-		MImage,
-		MModal,
-	},
-
-	inject: {
-		modalApi,
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 300px;
-}
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		width: inherit;
-		height: inherit;
-	}
-}
-</style>
-```
-
 
 ## Setup
 
@@ -236,16 +168,7 @@ export default {
 </script>
 ```
 
-
-### Opening the modal
-
-The same Modal SFC file can be opened in two different ways depending on your use-case.
-
-#### Programmatic API
-The programmatic API is designed to accommodate the majority of use-cases. Use it when you want to open a modal via JavaScript (eg. on a button-click event). Its imperative style signifies that the modal is activated as a new mode outside of the app's inline template flow.
-
 To open a modal programmatically, import `modalApi` and _inject_ it into your component to access the Modal Layer API. In the function you want to open the modal from (eg. a click-event handler), invoke `this.modalApi.open()` with a function that returns the modal instance. This function receives [`createElement`](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) (aliased to `h`) as an argument to instantiate the modal component with, but it's recommended to use the [Vue JSX Babel plugin](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) instead for better readability.
-
 
 ```html
 <template>
@@ -259,7 +182,6 @@ import { modalApi } from '@square/maker/components/Modal';
 import MyModal from './MyModal.vue';
 
 export default {
-
 	// Bind the modal API
 	inject: {
 		modalApi,
@@ -289,69 +211,9 @@ export default {
 };
 </script>
 ```
-
-#### Template API
-Use the template API when you want to open a modal by mounting it in the template. This API is primarily designed for associating a modal with a [Vue Router](https://router.vuejs.org) route so that the it opens upon visiting a page.
-
-```js
-import Router from 'vue-router';
-
-export default new Router({
-	// ...,
-
-	routes: [
-		// ...,
-
-		// Router-entry associated with a modal
-		// Visiting this page will automatically open the modal
-		{
-			path: 'account',
-			component: () => import('./modals/AccountModal.vue'),
-		},
-	],
-});
-```
-
-With this API, it also becomes possible to mount a modal inline in the template as a way to open/close it. However, this API is discouraged for the following reasons:
-1. Gives the reader the impression that your modal component is rendering inline within the same context, when it's actually rendered to a top-level layer of the app to overtake the screen.
-2. Requires modal state management to be implemented on user-land, and therefore could lead to inadvertently attempting to open multiple modals at once despite only one Modal being able to open at a time. Using the programmatic API allows for a much more deliberate syntax that can be traced back to an action instead of a state change.
-
-```html
-<template>
-	<div>
-		<button @click="isModalOpen = true">
-			Open modal
-		</button>
-
-		<!-- This usage is discouraged -->
-		<my-modal
-			v-if="isModalOpen"
-		/>
-	</div>
-</template>
-
-<script>
-import MyModal from './MyModal.vue';
-
-export default {
-	components: {
-		MyModal,
-	},
-
-	data() {
-		return {
-			isModalOpen: false,
-		};
-	},
-};
-</script>
-```
-
 ## Examples
 
 ### Stacked Modals
-
-<!--
 
 ```vue
 <template>
@@ -511,6 +373,7 @@ export default {
 	width: 100%;
 	height: 300px;
 }
+
 @media screen and (min-width: 1200px) {
 	.cover-photo {
 		width: inherit;
@@ -519,8 +382,6 @@ export default {
 }
 </style>
 ```
-
--->
 
 ### Gallery Lightbox
 
@@ -553,7 +414,7 @@ _DemoGallery.vue_
 
 ```vue
 <template>
-	<div class="gallery">
+	<div>
 		<m-image
 			v-for="(src, i) in images"
 			:key="src"
@@ -611,10 +472,6 @@ export default {
 	height: 200px;
 	display: inline-block;
 	cursor: pointer;
-}
-.gallery {
-	position: relative;
-	z-index: 0;
 }
 </style>
 ```
@@ -720,6 +577,8 @@ export default {
 .container {
 	padding: 72px;
 	user-select: none;
+	width: auto;
+	height: auto;
 }
 .icon {
 	color: white;
