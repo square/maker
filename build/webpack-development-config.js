@@ -19,6 +19,8 @@ if (isDevelopmentCmd) {
 const config = merge({}, webpackBaseConfig, {
 	entry,
 
+	devtool: 'source-map',
+
 	optimization: {
 		minimize: false,
 		splitChunks: {

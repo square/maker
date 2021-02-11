@@ -6,7 +6,12 @@
 				:class="$s.Translucent"
 			/>
 		</m-transition-fade>
-		<m-transition-spring-up>
+		<pseudo-window
+			@resize.passive="updateWidth"
+		/>
+		<component
+			:is="currentTransitionComponent"
+		>
 			<div
 				v-if="modalApi.state.vnode"
 				:class="$s.ModalLayer"
@@ -15,14 +20,12 @@
 					body
 					:class="$s.disableScroll"
 				/>
-				<div
-					:class="$s.ModalContainer"
-				>
-					<v :nodes="modalApi.state.vnode" />
-				</div>
+				<v :nodes="modalApi.state.vnode" />
+
 				<modal-layer />
+
 			</div>
-		</m-transition-spring-up>
+		</component>
 	</div>
 </template>
 
@@ -46,10 +49,17 @@ const apiMixin = {
 
 	provide() {
 		const vm = this;
+		let depth = [Math.random().toString(36).slice(2, 5)];
+		if (vm._currentLayer) {
+			depth = vm._currentLayer.state.depth.concat(depth);
+		}
+		//let id = Math.random().toString(36).slice(2, 5);
 		return {
 			[modalApi]: {
 				state: Vue.observable({
 					vnode: undefined,
+					depth,
+					//id,
 				}),
 
 				open(renderFn) {
@@ -118,6 +128,43 @@ export default {
 	inheritAttrs: false,
 
 	apiMixin,
+
+	data() {
+		return {
+			windowWidth: 0,
+			currentTransition: MTransitionFade,
+		};
+	},
+
+	computed: {
+		transitionComponent() {
+			if (this.windowWidth < 1200) {
+				return MTransitionSpringUp;
+			}
+			return MTransitionFade;
+		},
+		currentTransitionComponent() {
+			// if modal is currently open then lock transition despite window resizes
+			// this prevents visual arifacts caused by dynamically switching the
+			// transition component while the modal is open
+			if (this.modalApi.state.vnode) {
+				return this.currentTransition;
+			}
+			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+			this.currentTransition = this.transitionComponent;
+			return this.currentTransition;
+		},
+	},
+
+	mounted() {
+		this.updateWidth();
+	},
+
+	methods: {
+		updateWidth() {
+			this.windowWidth = window.innerWidth;
+		},
+	},
 };
 </script>
 
@@ -140,24 +187,6 @@ export default {
 	bottom: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.3);
-}
-
-.ModalContainer {
-	width: 100%;
-	height: 100%;
-	overflow: scroll;
-	box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
-}
-
-@media screen and (min-width: 1200px) {
-	.ModalContainer {
-		display: inline-block;
-		width: auto;
-		max-width: 1000px;
-		height: auto;
-		max-height: calc(100vh - 48px);
-		border-radius: 16px;
-	}
 }
 
 .disableScroll {
