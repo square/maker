@@ -1,4 +1,4 @@
-# TransitionFade
+# Transition Fade
 
 ```vue
 <template>

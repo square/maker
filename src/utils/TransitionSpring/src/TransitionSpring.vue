@@ -6,7 +6,7 @@
 		@leave="handleLeave"
 		v-on="$listeners"
 	>
-		<!-- @slot content to fade in & out -->
+		<!-- @slot content to animate -->
 		<slot />
 	</transition>
 </template>

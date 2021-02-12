@@ -1,4 +1,4 @@
-# TransitionSpring
+# Transition Spring
 
 Pass popmotion enter & leave configs to configure this spring transition component.
 

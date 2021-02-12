@@ -17,10 +17,10 @@ const stiffness = 600;
 const damping = 60;
 
 export default {
-
 	components: {
 		MTransitionSpring,
 	},
+
 	inheritAttrs: false,
 
 	data() {
