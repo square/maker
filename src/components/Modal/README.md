@@ -98,12 +98,14 @@ export default {
 
 ## Setup
 
-Register the `MModalLayer.apiMixin` mixin and mount the `MModalLayer` component at the top (eg. root) of your app. The location of the Layer component determines where the modal will be mounted. The mixin _provides_ the modal API to the rest of your app, which is accessed by injecting the `modalApi` key in the components you want to open a modal from.
+Register the `MModalLayer.apiMixin` mixin and mount the `MModalLayer` component inside a component template. The location of the Layer component determines where the modal will be mounted. The mixin _provides_ the modal API to the current component and all nested child components. It can be accessed by the current component with `this.modalApi` and can be accessed by nested child components by injecting the `modalApi`.
 
 ```html
 <template>
 	<div>
-		<app />
+		<button @click="openMyModal">
+			Open MyModal
+		</button>
 
 		<m-modal-layer />
 	</div>
@@ -111,17 +113,23 @@ Register the `MModalLayer.apiMixin` mixin and mount the `MModalLayer` component 
 
 <script>
 import { MModalLayer } from '@square/maker/components/Modal';
-import App from './App.vue';
+import MyModal from './MyModal.vue';
 
 export default {
 	components: {
-		App,
 		MModalLayer,
 	},
 
 	mixins: [
 		MModalLayer.apiMixin,
 	],
+
+	methods: {
+		openMyModal() {
+			// this.modalApi is provided by MModalLayer.apiMixin
+			this.modalApi.open(() => <MyModal />);
+		}
+	}
 };
 </script>
 ```
@@ -135,6 +143,7 @@ Modals must always be created in its own Single File Component (SFC) file to sep
 	<m-modal>
 		Modal content
 
+		<!-- modalApi is provided by the injected the modalApi key below -->
 		<button @click="modalApi.close()">
 			Close modal
 		</button>
@@ -379,6 +388,8 @@ export default {
 
 
 ### Gallery Lightbox
+
+Click on any of the images below to open a lightbox.
 
 ```vue
 <template>

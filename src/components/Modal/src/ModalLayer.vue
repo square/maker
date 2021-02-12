@@ -65,6 +65,10 @@ const apiMixin = {
 		};
 
 		if (this.currentLayer) {
+			if (this.modalApi) {
+				// unconditional warning
+				assert.warn(false, 'MModalLayer.apiMixin already provides modalApi to your component, please remove the conflicting injected modalApi');
+			}
 			this.modalApi = {
 				state: api.state,
 				open: api.open.bind(api),
