@@ -1,8 +1,8 @@
 <template>
 	<m-transition-spring
 		v-bind="$attrs"
-		:enter="enter"
-		:leave="leave"
+		:enter="springUp"
+		:leave="springDown"
 		v-on="$listeners"
 	>
 		<!-- @slot content to spring up -->
@@ -12,9 +12,7 @@
 
 <script>
 import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-
-const stiffness = 600;
-const damping = 60;
+import { springUp, springDown } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
@@ -25,26 +23,8 @@ export default {
 
 	data() {
 		return {
-			enter: {
-				from: {
-					y: '100%',
-				},
-				to: {
-					y: '0%',
-				},
-				stiffness,
-				damping,
-			},
-			leave: {
-				from: {
-					y: '0%',
-				},
-				to: {
-					y: '100%',
-				},
-				stiffness,
-				damping,
-			},
+			springUp,
+			springDown,
 		};
 	},
 };

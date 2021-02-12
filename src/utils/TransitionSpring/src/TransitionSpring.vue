@@ -1,20 +1,19 @@
 <template>
-	<transition
-		:css="false"
-		v-bind="$attrs"
-		@enter="handleEnter"
-		@leave="handleLeave"
-		v-on="$listeners"
-	>
+	<m-transition-spring-responsive :transitions="transitions">
 		<!-- @slot content to animate -->
 		<slot />
-	</transition>
+	</m-transition-spring-responsive>
 </template>
 
 <script>
-import { spring, styler } from 'popmotion';
+import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { mobileMinWidth } from '@square/maker/utils/transitions';
 
 export default {
+	components: {
+		MTransitionSpringResponsive,
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -28,21 +27,13 @@ export default {
 		},
 	},
 
-	methods: {
-		handleEnter(element, complete) {
-			const elementStyler = styler(element);
-			spring(this.enter).start({
-				update: (v) => elementStyler.set(v),
-				complete,
-			});
-		},
-
-		handleLeave(element, complete) {
-			const elementStyler = styler(element);
-			spring(this.leave).start({
-				update: (v) => elementStyler.set(v),
-				complete,
-			});
+	computed: {
+		transitions() {
+			return [{
+				minWidth: mobileMinWidth,
+				enter: this.enter,
+				leave: this.leave,
+			}];
 		},
 	},
 };

@@ -8,10 +8,19 @@ const { merge } = require('./utils');
 const webpackBaseConfig = require('./webpack-base-config');
 
 const isDevelopmentCmd = process.env.npm_lifecycle_event === 'dev';
-const { component } = process.env;
-assert(!isDevelopmentCmd || component, 'Environment variable "component" missing');
+const { component, util } = process.env;
+assert(
+	!isDevelopmentCmd || component || util,
+	'Must specify a "component" or "util" environment variable for local development',
+);
 
-const entry = path.resolve(`./src/components/${component}/README.md`);
+let entry;
+if (component) {
+	entry = path.resolve(`./src/components/${component}/README.md`);
+} else if (util) {
+	entry = path.resolve(`./src/utils/${util}/README.md`);
+}
+
 if (isDevelopmentCmd) {
 	require.resolve(entry);
 }
