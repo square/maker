@@ -26,7 +26,7 @@ This is used internally by the Modal component. Resize your viewport below and a
 <script>
 import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
 import {
- fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
+	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
 } from '@square/maker/utils/transitions';
 
 export default {

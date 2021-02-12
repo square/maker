@@ -6,12 +6,7 @@
 				:class="$s.Translucent"
 			/>
 		</m-transition-fade>
-		<pseudo-window
-			@resize.passive="updateWidth"
-		/>
-		<component
-			:is="currentTransitionComponent"
-		>
+		<m-transition-spring-responsive :transitions="transitions">
 			<div
 				v-if="currentLayer.state.vnode"
 				:class="$s.ModalLayer"
@@ -22,7 +17,7 @@
 				/>
 				<v :nodes="currentLayer.state.vnode" />
 			</div>
-		</component>
+		</m-transition-spring-responsive>
 	</div>
 </template>
 
@@ -30,9 +25,12 @@
 import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
-import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
 import { MTransitionFade } from '@square/maker/components/TransitionFade';
 import assert from '@square/maker/utils/assert';
+import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import {
+	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
+} from '@square/maker/utils/transitions';
 import modalApi from './modal-api';
 
 const apiMixin = {
@@ -96,9 +94,9 @@ export default {
 
 	components: {
 		V,
-		MTransitionSpringUp,
 		MTransitionFade,
 		PseudoWindow,
+		MTransitionSpringResponsive,
 	},
 
 	inject: {
@@ -114,45 +112,16 @@ export default {
 
 	data() {
 		return {
-			windowWidth: 0,
-			currentTransition: MTransitionFade,
+			transitions: [{
+				minWidth: mobileMinWidth,
+				enter: springUp,
+				leave: springDown,
+			}, {
+				minWidth: desktopMinWidth,
+				enter: fadeIn,
+				leave: fadeOut,
+			}],
 		};
-	},
-
-	computed: {
-		transitionComponent() {
-			if (this.windowWidth < 1200) {
-				return MTransitionSpringUp;
-			}
-			return MTransitionFade;
-		},
-		currentTransitionComponent() {
-			// if modal is currently open then lock transition despite window resizes
-			// this prevents visual arifacts caused by dynamically switching the
-			// transition component while the modal is open
-			if (this.currentLayer.state.vnode) {
-				return this.currentTransition;
-			}
-			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-			this.currentTransition = this.transitionComponent;
-			return this.currentTransition;
-		},
-		currLayString() {
-			return JSON.stringify(this.currentLayer && this.currentLayer.state.depth);
-		},
-		modalApiString() {
-			return JSON.stringify(this.modalApi && this.modalApi.state.depth);
-		},
-	},
-
-	mounted() {
-		this.updateWidth();
-	},
-
-	methods: {
-		updateWidth() {
-			this.windowWidth = window.innerWidth;
-		},
 	},
 };
 </script>
