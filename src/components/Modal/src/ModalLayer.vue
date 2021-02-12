@@ -1,10 +1,5 @@
 <template>
 	<div :class="$s.Layer">
-		<!--
-		currentLayer: {{ currLayerString }}<br><br>
-		modalApi: {{ modalApiString }}<br><br>
-		-->
-
 		<m-transition-fade>
 			<div
 				v-if="currentLayer.state.vnode"
@@ -26,9 +21,6 @@
 					:class="$s.disableScroll"
 				/>
 				<v :nodes="currentLayer.state.vnode" />
-				<!--
-				<modal-layer />
-				-->
 			</div>
 		</component>
 	</div>
@@ -51,131 +43,47 @@ const apiMixin = {
 		},
 	},
 
-	computed: {
-		currLayString() {
-			return JSON.stringify(this.currentLayer && this.currentLayer.state.depth);
-		},
-		modalApiString() {
-			return JSON.stringify(this.modalApi && this.modalApi.state.depth);
-		},
-	},
-
 	provide() {
 		const vm = this;
-
-		let depth = 1; //[Math.random().toString().slice(2, 5)];
-		if (vm.currentLayer) {
-			depth += vm.currentLayer.state.depth; //.concat(depth);
-		}
-
-		console.log('creating layer', JSON.stringify(depth), 'from', this.$options.name);
-
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
-				depth,
 			}),
 
 			open(renderFn) {
 				const vnode = renderFn(vm.$createElement);
-				let state = this.state;
-
-				/*
-				if (vm.currentLayer) {
-					state = vm.currentLayer.state;
-				}
-				*/
-
-
-				state.vnode = vnode;
-				console.log('opening in layer', JSON.stringify(state.depth), 'from', vm.$options.name);
-				//this.state.vnode = vnode;
-				//vm.currentLayer.state.vnode = vnode;
-				//console.log('opening in layer', JSON.stringify(vm.currentLayer.state.depth));
-
-				// console.log('opening in layer', JSON.stringify(this.state.depth)); //, 'from', this.$options.name);
-
-				// Method that only closes this specific modal
+				this.state.vnode = vnode;
+				// returned method only closes this specific modal
 				return () => {
-					console.log('closing in layer', JSON.stringify(state.depth)); //, 'from', this.$options.name);
-					if (state.vnode === vnode) {
-						state.vnode = undefined;
+					if (this.state.vnode === vnode) {
+						this.state.vnode = undefined;
 					}
 				};
 			},
 
 			close() {
-				console.log('closing in layer', JSON.stringify(this.state.depth), 'from', vm.$options.name);
 				this.state.vnode = undefined;
-
-				if (vm.currentLayer && vm.currentLayer.state.depth.length == 2) {
-					console.log('closing in layer', JSON.stringify(vm.currentLayer.state.depth));
-					vm.currentLayer.state.vnode = undefined;
-				}
-
-				/*
-				assert.warn(vm.currentLayer, 'Layer not found.');
-				if (vm.currentLayer) {
-					console.log('closing in layer', JSON.stringify(vm.currentLayer.state.depth)); //, 'from', this.$options.name);
-					vm.currentLayer.state.vnode = undefined;
-				}
-				*/
 			},
 		};
 
-/*
-		if (!vm.currentLayer) {
-			vm.modalApi = api;
-		} else {
-			vm.modalApi = vm.currentLayer;
-		}
-		*/
-
-		//console.log('this in apiMixin provide', this);
-		//console.log('this in apiMixin provide', this.$options.name);
-
-		//vm.modalApi = api;
-
-/*
-		if (this.$options.name !== COMPONENT_NAME) {
-			vm.modalApi = api;
-		}
-		*/
-
-/*
-		if (vm.currentLayer) {
-			vm.modalApi = {
-				state: api.state,
-				open: api.open,
-				openSelf: vm.currentLayer.open,
-				closeSelf: vm.currentLayer.close,
-				close: api.close,
-			};
-		}
-		*/
-
-		if (!vm.modalApi && !vm.currentLayer) {
-			vm.modalApi2 = api;
-		}
-
-		console.log('inheriting from currentLayer', JSON.stringify(vm.currentLayer && vm.currentLayer.state.depth));
-		if (vm.currentLayer) {
-			vm.modalApi2 = {
+		if (this.currentLayer) {
+			this.modalApi = {
 				state: api.state,
 				open: api.open.bind(api),
-				//openSelf: vm.currentLayer.open,
-				//closeSelf: vm.currentLayer.close,
-				//close: api.close,
-				close: vm.currentLayer.close.bind(vm.currentLayer),
-				//closeSelfSelf: vm.currentLayer.closeSelf,
+				close: this.currentLayer.close.bind(this.currentLayer),
 			};
 		}
 
-		/*
-		if (vm.currentLayer) {
-			vm.modalApi = vm.currentLayer;
+		if (!this.modalApi) {
+			this.modalApi = {
+				state: api.state,
+				open: api.open.bind(api),
+				close: () => {
+					// unconditional warning
+					assert.warn(false, 'modalApi.close() only closes the currentLayer. There is no currentLayer. If you\'re trying to close a modal you spawned from a parent then you need to use the close handler function returned from the modalApi.open() call, e.g. let closeMyModal = modal.open(); closeMyModal();');
+				},
+			};
 		}
-		*/
 
 		return {
 			[modalApi]: api,
@@ -183,10 +91,8 @@ const apiMixin = {
 	},
 };
 
-const COMPONENT_NAME = 'ModalLayer';
-
 export default {
-	name: COMPONENT_NAME,
+	name: 'ModalLayer',
 
 	components: {
 		V,
@@ -195,17 +101,12 @@ export default {
 		PseudoWindow,
 	},
 
-
 	inject: {
 		currentLayer: {
 			default: undefined,
 			from: modalApi,
 		},
 	},
-
-
-	// if this fails revert to above
-	//mixins: [apiMixin],
 
 	inheritAttrs: false,
 

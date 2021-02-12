@@ -5,51 +5,32 @@ Use the modal component to enter the user into a new _mode_.
 ```vue
 <template>
 	<div>
-		<demo />
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
 		<m-modal-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
-import Demo from 'doc/Demo.vue';
+import DemoModal from 'doc/DemoModal.vue';
 
 export default {
 	name: 'DemoSetup',
 
 	components: {
-		Demo,
 		MModalLayer,
+		MButton,
 	},
 
 	mixins: [
 		MModalLayer.apiMixin,
 	],
-};
-</script>
-```
-
-_Demo.vue_
-
-```vue
-<template>
-	<div>
-		<button @click="openModal">
-			Open modal
-		</button>
-	</div>
-</template>
-
-<script>
-import { modalApi } from '@square/maker/components/Modal';
-import DemoModal from 'doc/DemoModal.vue';
-
-export default {
-	name: 'Demo',
-
-	inject: {
-		modalApi,
-	},
 
 	methods: {
 		openModal() {
@@ -71,13 +52,17 @@ _DemoModal.vue_
 		/>
 		Modal content
 		<br><br>
-		<button @click="modalApi.close()">
+		<m-button
+			size="small"
+			@click="modalApi.close()"
+		>
 			Close
-		</button>
+		</m-button>
 	</m-modal>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
 
@@ -87,6 +72,7 @@ export default {
 	components: {
 		MModal,
 		MImage,
+		MButton,
 	},
 
 	inject: {
@@ -109,273 +95,6 @@ export default {
 }
 </style>
 ```
-
-## Fast Open
-
-```vue
-<template>
-	<div>
-		<button @click="openModal">
-			Open modal
-		</button>
-		<m-modal-layer />
-	</div>
-</template>
-
-<script>
-import { MModalLayer } from '@square/maker/components/Modal';
-import DemoFastModal from 'doc/DemoFastModal.vue';
-
-export default {
-	name: 'FastOpenSetup',
-
-	components: {
-		MModalLayer,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	methods: {
-		openModal() {
-			this.modalApi.open(() => <DemoFastModal />);
-		},
-	},
-};
-</script>
-```
-
-_DemoFastModal.vue_
-
-```vue
-<template>
-	<m-modal>
-		<m-image
-			class="cover-photo"
-			src="https://picsum.photos/800/300"
-		/>
-		Modal content
-		<br><br>
-		<button @click="modalApi.close()">
-			Close
-		</button>
-	</m-modal>
-</template>
-
-<script>
-import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MImage } from '@square/maker/components/Image';
-
-export default {
-	name: 'DemoFastModal',
-
-	components: {
-		MModal,
-		MImage,
-	},
-
-	inject: {
-		modalApi,
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 300px;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		width: inherit;
-		height: inherit;
-	}
-}
-</style>
-```
-
-## Fast Stacked
-
-```vue
-<template>
-	<div>
-		<button @click="openModal">
-			Open modal
-		</button>
-		<m-modal-layer />
-	</div>
-</template>
-
-<script>
-import { MModalLayer } from '@square/maker/components/Modal';
-import DemoFastStackedFirstModal from 'doc/DemoFastStackedFirstModal.vue';
-
-export default {
-	name: 'FastStackedDemoSetup',
-
-	components: {
-		MModalLayer,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	methods: {
-		openModal() {
-			this.modalApi2.open(() => <DemoFastStackedFirstModal />);
-		},
-	},
-};
-</script>
-```
-
-_DemoFastStackedFirstModal.vue_
-
-```vue
-<template>
-	<m-modal>
-		<m-image
-			class="cover-photo"
-			src="https://picsum.photos/800/300"
-		/>
-		First modal
-
-		<br><br>
-
-		Modals can stack too
-		<button @click="openStackedModal">
-			Open another modal
-		</button>
-
-		<br><br>
-
-		<button @click="closeModal">
-			Close
-		</button>
-
-		<m-modal-layer />
-
-
-	</m-modal>
-</template>
-
-<script>
-import { MModal, MModalLayer, modalApi } from '@square/maker/components/Modal';
-import { MImage } from '@square/maker/components/Image';
-import DemoFastStackedSecondModal from 'doc/DemoFastStackedSecondModal.vue';
-
-export default {
-	name: 'DemoFastStackedFirstModal',
-
-	components: {
-		MModal,
-		MImage,
-		MModalLayer,
-	},
-
-/*
-	inject: {
-		modalApi,
-	},
-*/
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	methods: {
-		openStackedModal() {
-			this.modalApi2.open(() => <DemoFastStackedSecondModal />);
-		},
-		closeModal() {
-			//this.modalApi2.closeSelfSelf();
-			//this.modalApi2.closeSelf();
-			this.modalApi2.close();
-			 // this.currentLayer.close(); why do fuck does THIS work!?!?
-		},
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 300px;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		width: inherit;
-		height: inherit;
-	}
-}
-</style>
-```
-
-_DemoFastStackedSecondModal.vue_
-
-```vue
-<template>
-	<m-modal>
-		<m-image
-			class="cover-photo"
-			src="https://picsum.photos/600/600"
-		/>
-		Second stacked modal
-
-		<br><br>
-
-		<button @click="closeModal">
-			Close
-		</button>
-	</m-modal>
-</template>
-
-<script>
-import { MImage } from '@square/maker/components/Image';
-import { MModal, modalApi } from '@square/maker/components/Modal';
-
-export default {
-	name: 'DemoFastStackedSecondModal',
-
-	components: {
-		MImage,
-		MModal,
-	},
-
-	inject: {
-		modalApi,
-	},
-
-	methods: {
-		closeModal() {
-			this.modalApi.close();
-		},
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 300px;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		width: inherit;
-		height: inherit;
-	}
-}
-</style>
-```
-
-
-<!--
-
 
 ## Setup
 
@@ -484,61 +203,47 @@ export default {
 
 ### Stacked Modals
 
+
 ```vue
 <template>
 	<div>
-		<demo-stacked />
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
 		<m-modal-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
-import DemoStacked from 'doc/DemoStacked.vue';
+import StackedDemoFirstModal from 'doc/StackedDemoFirstModal.vue';
 
 export default {
+	name: 'StackedDemoSetup',
+
 	components: {
-		DemoStacked,
 		MModalLayer,
+		MButton,
 	},
 
 	mixins: [
 		MModalLayer.apiMixin,
 	],
-};
-</script>
-```
-
-_DemoStacked.vue_
-
-```vue
-<template>
-	<div>
-		<button @click="openModal">
-			Open modal
-		</button>
-	</div>
-</template>
-
-<script>
-import { modalApi } from '@square/maker/components/Modal';
-import DemoStackedFirstModal from 'doc/DemoStackedFirstModal.vue';
-
-export default {
-	inject: {
-		modalApi,
-	},
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <DemoStackedFirstModal />);
+			this.modalApi.open(() => <StackedDemoFirstModal />);
 		},
 	},
 };
 </script>
 ```
 
-_DemoStackedFirstModal.vue_
+_StackedDemoFirstModal.vue_
 
 ```vue
 <template>
@@ -551,37 +256,49 @@ _DemoStackedFirstModal.vue_
 
 		<br><br>
 
-		Modals can stack too
-		<button @click="openStackedModal">
+		<m-button
+			size="small"
+			@click="openStackedModal"
+		>
 			Open another modal
-		</button>
+		</m-button>
 
 		<br><br>
 
-		<button @click="modalApi.close()">
+		<m-button
+			size="small"
+			@click="modalApi.close()"
+		>
 			Close
-		</button>
+		</m-button>
+
+		<m-modal-layer />
 	</m-modal>
 </template>
 
 <script>
-import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MButton } from '@square/maker/components/Button';
+import { MModal, MModalLayer } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
-import DemoStackedSecondModal from 'doc/DemoStackedSecondModal.vue';
+import StackedDemoSecondModal from 'doc/StackedDemoSecondModal.vue';
 
 export default {
+	name: 'StackedDemoFirstModal',
+
 	components: {
 		MModal,
 		MImage,
+		MModalLayer,
+		MButton,
 	},
 
-	inject: {
-		modalApi,
-	},
+	mixins: [
+		MModalLayer.apiMixin,
+	],
 
 	methods: {
 		openStackedModal() {
-			this.modalApi.open(() => <DemoStackedSecondModal />);
+			this.modalApi.open(() => <StackedDemoSecondModal />);
 		},
 	},
 };
@@ -602,7 +319,7 @@ export default {
 </style>
 ```
 
-_DemoStackedSecondModal.vue_
+_StackedDemoSecondModal.vue_
 
 ```vue
 <template>
@@ -615,18 +332,25 @@ _DemoStackedSecondModal.vue_
 
 		<br><br>
 
-		<button @click="modalApi.close()">
+		<m-button
+			size="small"
+			@click="modalApi.close()"
+		>
 			Close
-		</button>
+		</m-button>
 	</m-modal>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MImage } from '@square/maker/components/Image';
 import { MModal, modalApi } from '@square/maker/components/Modal';
 
 export default {
+	name: 'StackedDemoSecondModal',
+
 	components: {
+		MButton,
 		MImage,
 		MModal,
 	},
@@ -652,34 +376,9 @@ export default {
 </style>
 ```
 
+
+
 ### Gallery Lightbox
-
-```vue
-<template>
-	<div>
-		<demo-gallery />
-		<m-modal-layer />
-	</div>
-</template>
-
-<script>
-import { MModalLayer } from '@square/maker/components/Modal';
-import DemoGallery from 'doc/DemoGallery.vue';
-
-export default {
-	components: {
-		DemoGallery,
-		MModalLayer,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-};
-</script>
-```
-
-_DemoGallery.vue_
 
 ```vue
 <template>
@@ -691,22 +390,26 @@ _DemoGallery.vue_
 			class="Image"
 			@click="openLightbox(i)"
 		/>
+		<m-modal-layer />
 	</div>
 </template>
 
 <script>
-import { modalApi } from '@square/maker/components/Modal';
+import { MModalLayer } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
-import DemoLightbox from 'doc/DemoLightbox.vue';
+import LightboxDemoModal from 'doc/LightboxDemoModal.vue';
 
 export default {
+	name: 'LightboxDemoSetup',
+
 	components: {
 		MImage,
+		MModalLayer,
 	},
 
-	inject: {
-		modalApi,
-	},
+	mixins: [
+		MModalLayer.apiMixin,
+	],
 
 	data() {
 		return {
@@ -721,7 +424,7 @@ export default {
 	methods: {
 		openLightbox(sourceIndex) {
 			this.modalApi.open((h) => h(
-				DemoLightbox,
+				LightboxDemoModal,
 				{
 					props: {
 						startIndex: sourceIndex,
@@ -744,15 +447,14 @@ export default {
 </style>
 ```
 
-_DemoLightbox.vue_
+_LightboxDemoModal.vue_
 
 ```vue
 <template>
 	<m-modal-container class="container">
 		<div
-			style="display: inline-block;"
 			class="close-container"
-			@click="close"
+			@click="modalApi.close()"
 		>
 			<x-icon
 				class="close icon"
@@ -760,7 +462,7 @@ _DemoLightbox.vue_
 		</div>
 		<div class="navViewBox">
 			<div
-				style="display: inline-block;"
+				style="icon-container"
 				@click="prevSrc"
 			>
 				<chevron-left-icon
@@ -773,7 +475,7 @@ _DemoLightbox.vue_
 				@click="nextSrc"
 			/>
 			<div
-				style="display: inline-block;"
+				class="icon-container"
 				@click="nextSrc"
 			>
 				<chevron-right-icon
@@ -834,9 +536,6 @@ export default {
 		prevSrc() {
 			this.currentIndex = ((this.currentIndex - 1) + this.images.length) % this.images.length;
 		},
-		close() {
-			this.modalApi.close();
-		},
 	},
 };
 </script>
@@ -858,8 +557,12 @@ export default {
 	width: 24px;
 	height: 24px;
 }
+.icon-container {
+	display: inline-block;
+}
 .close-container {
 	position: absolute;
+	display: inline-block;
 	top: calc(72px - 24px - 8px);
 	right: calc(72px + 24px - 8px);
 }
@@ -874,9 +577,6 @@ export default {
 </style>
 ```
 
-
--->
-
 <!-- api-tables:start -->
 ## Modal Slots
 
@@ -884,13 +584,10 @@ export default {
 | ------- | ------------- |
 | default | Modal content |
 
-
 ## ModalContainer Slots
 
 | Slot    | Description             |
 | ------- | ----------------------- |
 | default | modal container content |
-
-
 
 <!-- api-tables:end -->
