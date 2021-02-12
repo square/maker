@@ -584,10 +584,13 @@ export default {
 | ------- | ------------- |
 | default | Modal content |
 
+
 ## ModalContainer Slots
 
 | Slot    | Description             |
 | ------- | ----------------------- |
 | default | modal container content |
+
+
 
 <!-- api-tables:end -->

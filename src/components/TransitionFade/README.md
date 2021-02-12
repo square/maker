@@ -57,7 +57,7 @@ export default {
 <!-- api-tables:start -->
 ## Slots
 
-| Slot    | Description     |
-| ------- | --------------- |
-| default | content to fade |
+| Slot    | Description              |
+| ------- | ------------------------ |
+| default | content to fade in & out |
 <!-- api-tables:end -->
