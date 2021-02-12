@@ -29,9 +29,9 @@ export default {
 	.Modal {
 		display: inline-block;
 		width: auto;
-		height: auto;
 		min-width: 600px;
 		max-width: 50vw;
+		height: auto;
 		overflow: scroll;
 		border-radius: 16px;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);

@@ -105,7 +105,6 @@ const ModalContainer = {
 					 */
 					this.$slots.default
 				}
-
 			</div>
 		);
 
@@ -119,8 +118,8 @@ export default ModalContainer;
 <style module="$s">
 .ModalContainer {
 	width: 100%;
-	height: 100%;
 	max-width: 100%;
+	height: 100%;
 	max-height: 100%;
 }
 

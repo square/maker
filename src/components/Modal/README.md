@@ -15,6 +15,8 @@ import { MModalLayer } from '@square/maker/components/Modal';
 import Demo from 'doc/Demo.vue';
 
 export default {
+	name: 'DemoSetup',
+
 	components: {
 		Demo,
 		MModalLayer,
@@ -107,6 +109,273 @@ export default {
 }
 </style>
 ```
+
+## Fast Open
+
+```vue
+<template>
+	<div>
+		<button @click="openModal">
+			Open modal
+		</button>
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoFastModal from 'doc/DemoFastModal.vue';
+
+export default {
+	name: 'FastOpenSetup',
+
+	components: {
+		MModalLayer,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <DemoFastModal />);
+		},
+	},
+};
+</script>
+```
+
+_DemoFastModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<m-image
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		/>
+		Modal content
+		<br><br>
+		<button @click="modalApi.close()">
+			Close
+		</button>
+	</m-modal>
+</template>
+
+<script>
+import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MImage } from '@square/maker/components/Image';
+
+export default {
+	name: 'DemoFastModal',
+
+	components: {
+		MModal,
+		MImage,
+	},
+
+	inject: {
+		modalApi,
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		width: inherit;
+		height: inherit;
+	}
+}
+</style>
+```
+
+## Fast Stacked
+
+```vue
+<template>
+	<div>
+		<button @click="openModal">
+			Open modal
+		</button>
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoFastStackedFirstModal from 'doc/DemoFastStackedFirstModal.vue';
+
+export default {
+	name: 'FastStackedDemoSetup',
+
+	components: {
+		MModalLayer,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi2.open(() => <DemoFastStackedFirstModal />);
+		},
+	},
+};
+</script>
+```
+
+_DemoFastStackedFirstModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<m-image
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		/>
+		First modal
+
+		<br><br>
+
+		Modals can stack too
+		<button @click="openStackedModal">
+			Open another modal
+		</button>
+
+		<br><br>
+
+		<button @click="closeModal">
+			Close
+		</button>
+
+		<m-modal-layer />
+
+
+	</m-modal>
+</template>
+
+<script>
+import { MModal, MModalLayer, modalApi } from '@square/maker/components/Modal';
+import { MImage } from '@square/maker/components/Image';
+import DemoFastStackedSecondModal from 'doc/DemoFastStackedSecondModal.vue';
+
+export default {
+	name: 'DemoFastStackedFirstModal',
+
+	components: {
+		MModal,
+		MImage,
+		MModalLayer,
+	},
+
+/*
+	inject: {
+		modalApi,
+	},
+*/
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openStackedModal() {
+			this.modalApi2.open(() => <DemoFastStackedSecondModal />);
+		},
+		closeModal() {
+			//this.modalApi2.closeSelfSelf();
+			//this.modalApi2.closeSelf();
+			this.modalApi2.close();
+			 // this.currentLayer.close(); why do fuck does THIS work!?!?
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		width: inherit;
+		height: inherit;
+	}
+}
+</style>
+```
+
+_DemoFastStackedSecondModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<m-image
+			class="cover-photo"
+			src="https://picsum.photos/600/600"
+		/>
+		Second stacked modal
+
+		<br><br>
+
+		<button @click="closeModal">
+			Close
+		</button>
+	</m-modal>
+</template>
+
+<script>
+import { MImage } from '@square/maker/components/Image';
+import { MModal, modalApi } from '@square/maker/components/Modal';
+
+export default {
+	name: 'DemoFastStackedSecondModal',
+
+	components: {
+		MImage,
+		MModal,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		closeModal() {
+			this.modalApi.close();
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		width: inherit;
+		height: inherit;
+	}
+}
+</style>
+```
+
+
+<!--
+
 
 ## Setup
 
@@ -433,7 +702,6 @@ import DemoLightbox from 'doc/DemoLightbox.vue';
 export default {
 	components: {
 		MImage,
-		DemoLightbox,
 	},
 
 	inject: {
@@ -445,18 +713,18 @@ export default {
 			images: [
 				'https://i.picsum.photos/id/1033/2048/1365.jpg?hmac=zEuPfX7t6U866nzXjWF41bf-uxkKOnf1dDrHXmhcK-Q',
 				'https://i.picsum.photos/id/1047/3264/2448.jpg?hmac=ksy0K4uGgm79hAV7-KvsfHY2ZuPA0Oq1Kii9hqkOCfU',
-				'https://i.picsum.photos/id/1063/4867/3215.jpg?hmac=-ksdmOruOUma2z6ENQo9Yqp9T7lsnokLo8SFfAt-UNU'
+				'https://i.picsum.photos/id/1063/4867/3215.jpg?hmac=-ksdmOruOUma2z6ENQo9Yqp9T7lsnokLo8SFfAt-UNU',
 			],
 		};
 	},
 
 	methods: {
-		openLightbox(srcIndex) {
-			this.modalApi.open(h => h(
+		openLightbox(sourceIndex) {
+			this.modalApi.open((h) => h(
 				DemoLightbox,
 				{
 					props: {
-						startIndex: srcIndex,
+						startIndex: sourceIndex,
 						images: this.images,
 					},
 				},
@@ -532,6 +800,10 @@ export default {
 		ChevronRightIcon,
 	},
 
+	inject: {
+		modalApi,
+	},
+
 	props: {
 		startIndex: {
 			type: Number,
@@ -560,15 +832,11 @@ export default {
 			this.currentIndex = (this.currentIndex + 1) % this.images.length;
 		},
 		prevSrc() {
-			this.currentIndex = ((this.currentIndex - 1) + this.images.length ) % this.images.length;
+			this.currentIndex = ((this.currentIndex - 1) + this.images.length) % this.images.length;
 		},
 		close() {
 			this.modalApi.close();
 		},
-	},
-
-	inject: {
-		modalApi,
 	},
 };
 </script>
@@ -605,6 +873,9 @@ export default {
 }
 </style>
 ```
+
+
+-->
 
 <!-- api-tables:start -->
 ## Modal Slots
