@@ -43,13 +43,21 @@ const apiMixin = {
 
 	provide() {
 		const vm = this;
+		/*
+		let depth = [Math.random().toString().slice(2, 5)];
+		if (this.currentLayer) {
+			depth = this.currentLayer.state.depth.concat(depth);
+		}
+		*/
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
+				// depth,
 			}),
 
 			open(renderFn) {
 				const vnode = renderFn(vm.$createElement);
+				// console.log('opening in layer', Array.from(this.state.depth));
 				this.state.vnode = vnode;
 				// returned method only closes this specific modal
 				return () => {
@@ -60,6 +68,7 @@ const apiMixin = {
 			},
 
 			close() {
+				// console.log('closing in layer', Array.from(this.state.depth));
 				this.state.vnode = undefined;
 			},
 		};
