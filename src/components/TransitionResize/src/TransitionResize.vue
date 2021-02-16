@@ -6,11 +6,8 @@
 		@before-enter="onBeforeEnter"
 		@enter="onEnter"
 		@after-enter="onAfterEnter"
-		@enter-cancelled="onEnterCancelled"
 		@before-leave="onBeforeLeave"
 		@leave="onLeave"
-		@after-leave="onAfterLeave"
-		@leave-cancelled="onLeaveCancelled"
 		v-on="$listeners"
 	>
 		<!-- @slot content to animate -->
@@ -21,8 +18,26 @@
 <script>
 import { spring, styler } from 'popmotion';
 import {
- fadeIn, fadeOut, stiffness, damping,
+	fadeIn, fadeOut,
 } from '@square/maker/utils/transitions';
+
+const fastStiffness = 1000;
+const fastDamping = 1000;
+const mass = 0.5;
+
+const fastFadeIn = {
+	...fadeIn,
+	stiffness: fastStiffness,
+	damping: fastDamping,
+	mass,
+};
+
+const fastFadeOut = {
+	...fadeOut,
+	stiffness: fastStiffness,
+	damping: fastDamping,
+	mass,
+};
 
 export default {
 	name: 'TransitionResize',
@@ -60,16 +75,28 @@ export default {
 					width: `${this.enterWidth}px`,
 					height: `${this.enterHeight}px`,
 				},
-				stiffness,
-				damping,
+				stiffness: fastStiffness,
+				damping: fastDamping,
+				mass: mass * 2,
 			};
 
 			const elementStyler = styler(element);
+
+			// skip resize animation if dimensions are the same
+			if (this.leaveWidth === this.enterWidth && this.leaveHeight === this.enterHeight) {
+				element.style.removeProperty('overflow');
+				spring(fastFadeIn).start({
+					update: (v) => elementStyler.set(v),
+					complete: enterComplete,
+				});
+				return;
+			}
+
 			spring(resize).start({
 				update: (v) => elementStyler.set(v),
 				complete: () => {
 					element.style.removeProperty('overflow');
-					spring(fadeIn).start({
+					spring(fastFadeIn).start({
 						update: (v) => elementStyler.set(v),
 						complete: enterComplete,
 					});
@@ -78,9 +105,12 @@ export default {
 		},
 		onAfterEnter(element) {
 			// console.log('on after enter', element);
-			element.style.opacity = undefined;
-			element.style.width = undefined;
-			element.style.height = undefined;
+			// lint suggests using "undefined" but it literally
+			// does not work it in this scenario, it specifically
+			// has to be "null"
+			element.style.opacity = null; // eslint-disable-line unicorn/no-null
+			element.style.width = null; // eslint-disable-line unicorn/no-null
+			element.style.height = null; // eslint-disable-line unicorn/no-null
 		},
 		onBeforeLeave(element) {
 			// console.log('on before leave', element);
@@ -92,7 +122,7 @@ export default {
 			// console.log('on leave', element);
 
 			const elementStyler = styler(element);
-			spring(fadeOut).start({
+			spring(fastFadeOut).start({
 				update: (v) => elementStyler.set(v),
 				complete: leaveComplete,
 			});
