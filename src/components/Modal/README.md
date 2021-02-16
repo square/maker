@@ -838,9 +838,9 @@ export default {
 <!-- api-tables:start -->
 ## Modal Props
 
-| Prop                 | Type      | Default | Possible values | Description |
-| -------------------- | --------- | ------- | --------------- | ----------- |
-| disable-pan-to-close | `boolean` | `false` | —               | —           |
+| Prop                   | Type      | Default | Possible values | Description |
+| ---------------------- | --------- | ------- | --------------- | ----------- |
+| disable-pan-down-close | `boolean` | `false` | —               | —           |
 
 
 ## Modal Slots
