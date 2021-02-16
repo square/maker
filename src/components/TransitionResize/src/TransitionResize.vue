@@ -18,24 +18,20 @@
 <script>
 import { spring, styler } from 'popmotion';
 import {
-	fadeIn, fadeOut,
+	fadeIn, fadeOut, stiffness, damping,
 } from '@square/maker/utils/transitions';
 
-const fastStiffness = 1000;
-const fastDamping = 1000;
-const mass = 0.5;
+// default mass is 1
+// lighter mass => faster transitions
+const mass = 0.34;
 
 const fastFadeIn = {
 	...fadeIn,
-	stiffness: fastStiffness,
-	damping: fastDamping,
 	mass,
 };
 
 const fastFadeOut = {
 	...fadeOut,
-	stiffness: fastStiffness,
-	damping: fastDamping,
 	mass,
 };
 
@@ -75,8 +71,8 @@ export default {
 					width: `${this.enterWidth}px`,
 					height: `${this.enterHeight}px`,
 				},
-				stiffness: fastStiffness,
-				damping: fastDamping,
+				stiffness,
+				damping,
 				mass: mass * 2,
 			};
 
