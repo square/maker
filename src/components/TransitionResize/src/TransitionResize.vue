@@ -78,9 +78,9 @@ export default {
 		},
 		onAfterEnter(element) {
 			// console.log('on after enter', element);
-		},
-		onEnterCancelled(element) {
-			// console.log('on enter cancelled', element);
+			element.style.opacity = undefined;
+			element.style.width = undefined;
+			element.style.height = undefined;
 		},
 		onBeforeLeave(element) {
 			// console.log('on before leave', element);
@@ -97,16 +97,19 @@ export default {
 				complete: leaveComplete,
 			});
 		},
-		onAfterLeave(element) {
+		/*
+			handlers we may need to use later?
+
+		onAfterLeave(_element) {
 			// console.log('on after leave', element);
 		},
-		onLeaveCancelled(element) {
+		onLeaveCancelled(_element) {
 			// console.log('on leave cancelled', element);
 		},
+		onEnterCancelled(_element) {
+			// console.log('on enter cancelled', element);
+		},
+		*/
 	},
 };
 </script>
-
-<style module="$s">
-
-</style>

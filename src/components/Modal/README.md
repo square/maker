@@ -46,10 +46,10 @@ _DemoModal.vue_
 ```vue
 <template>
 	<m-modal>
-		<m-image
+		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
-		/>
+		>
 		Modal content
 		<br><br>
 		<m-button
@@ -64,14 +64,12 @@ _DemoModal.vue_
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MImage } from '@square/maker/components/Image';
 
 export default {
 	name: 'DemoModal',
 
 	components: {
 		MModal,
-		MImage,
 		MButton,
 	},
 
@@ -85,11 +83,11 @@ export default {
 .cover-photo {
 	width: 100%;
 	height: 300px;
+	object-fit: cover;
 }
 
 @media screen and (min-width: 1200px) {
 	.cover-photo {
-		width: inherit;
 		height: inherit;
 	}
 }
@@ -210,7 +208,7 @@ export default {
 ```
 ## Examples
 
-### Stacked Modals
+### Stacking Modals
 
 
 ```vue
@@ -257,10 +255,10 @@ _StackedDemoFirstModal.vue_
 ```vue
 <template>
 	<m-modal>
-		<m-image
+		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
-		/>
+		>
 		First modal
 
 		<br><br>
@@ -288,7 +286,6 @@ _StackedDemoFirstModal.vue_
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MModal, MModalLayer } from '@square/maker/components/Modal';
-import { MImage } from '@square/maker/components/Image';
 import StackedDemoSecondModal from 'doc/StackedDemoSecondModal.vue';
 
 export default {
@@ -296,7 +293,6 @@ export default {
 
 	components: {
 		MModal,
-		MImage,
 		MModalLayer,
 		MButton,
 	},
@@ -317,11 +313,11 @@ export default {
 .cover-photo {
 	width: 100%;
 	height: 300px;
+	object-fit: cover;
 }
 
 @media screen and (min-width: 1200px) {
 	.cover-photo {
-		width: inherit;
 		height: inherit;
 	}
 }
@@ -374,18 +370,271 @@ export default {
 .cover-photo {
 	width: 100%;
 	height: 300px;
+	object-fit: cover;
 }
 
 @media screen and (min-width: 1200px) {
 	.cover-photo {
-		width: inherit;
 		height: inherit;
 	}
 }
 </style>
 ```
 
+### Mighty Morphin Modals
 
+Use `TransitionResize` for fancy, multi-step, resizing modals.
+
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import MorphinDemoModal from 'doc/MorphinDemoModal.vue';
+
+export default {
+	name: 'MorphinDemoSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <MorphinDemoModal />);
+		},
+	},
+};
+</script>
+```
+
+_MorphinDemoModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<m-transition-resize>
+			<component
+				:is="currentView"
+				:switch-view="switchView"
+			/>
+		</m-transition-resize>
+	</m-modal>
+</template>
+
+<script>
+import { MModal } from '@square/maker/components/Modal';
+import { MTransitionResize } from '@square/maker/components/TransitionResize';
+import MorphinDemoFirstView from 'doc/MorphinDemoFirstView.vue';
+import MorphinDemoSecondView from 'doc/MorphinDemoSecondView.vue';
+
+export default {
+	name: 'MorphinDemoModal',
+
+	components: {
+		MModal,
+		MTransitionResize,
+	},
+
+	data() {
+		return {
+			boolean: true,
+		};
+	},
+	computed: {
+		currentView() {
+			if (this.boolean) {
+				return MorphinDemoFirstView;
+			}
+			return MorphinDemoSecondView;
+		},
+	},
+
+	methods: {
+		switchView() {
+			this.boolean = !this.boolean;
+		},
+	},
+};
+</script>
+```
+
+_MorphinDemoFirstView.vue_
+
+```vue
+<template>
+	<div>
+		<!--
+		<div>
+			<img
+				class="cover-photo"
+				src="https://picsum.photos/800/300"
+			/>
+		</div>
+		-->
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<br>
+		First view
+
+		<br><br>
+
+		<m-button
+			size="small"
+			@click="switchView"
+		>
+			Switch to other view
+		</m-button>
+
+		<br><br>
+
+		<m-button
+			size="small"
+			@click="modalApi.close()"
+		>
+			Close
+		</m-button>
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { modalApi } from '@square/maker/components/Modal';
+
+export default {
+	name: 'MorphinDemoFirstView',
+
+	components: {
+		MButton,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	props: {
+		switchView: {
+			type: Function,
+			required: true,
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		width: 800px;
+	}
+}
+</style>
+```
+
+_MorphinDemoSecondView.vue_
+
+```vue
+<template>
+	<div>
+		<!--
+		<div>
+			<img
+				class="cover-photo"
+				src="https://picsum.photos/600/600"
+			/>
+		</div>
+		-->
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/600/600"
+		>
+		<br>
+		Second view
+
+		<br><br>
+
+		<m-button
+			size="small"
+			@click="switchView"
+		>
+			Switch to other view
+		</m-button>
+
+		<br><br>
+
+		<m-button
+			size="small"
+			@click="modalApi.close()"
+		>
+			Close
+		</m-button>
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { modalApi } from '@square/maker/components/Modal';
+
+export default {
+	name: 'MorphinDemoSecondView',
+
+	components: {
+		MButton,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	props: {
+		switchView: {
+			type: Function,
+			required: true,
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		width: 600px;
+		height: 600px;
+	}
+}
+</style>
+```
 
 ### Gallery Lightbox
 
@@ -394,27 +643,25 @@ Click on any of the images below to open a lightbox.
 ```vue
 <template>
 	<div>
-		<m-image
+		<img
 			v-for="(src, i) in images"
 			:key="src"
 			:src="src"
 			class="Image"
 			@click="openLightbox(i)"
-		/>
+		>
 		<m-modal-layer />
 	</div>
 </template>
 
 <script>
 import { MModalLayer } from '@square/maker/components/Modal';
-import { MImage } from '@square/maker/components/Image';
 import LightboxDemoModal from 'doc/LightboxDemoModal.vue';
 
 export default {
 	name: 'LightboxDemoSetup',
 
 	components: {
-		MImage,
 		MModalLayer,
 	},
 
@@ -454,6 +701,8 @@ export default {
 	height: 200px;
 	display: inline-block;
 	cursor: pointer;
+	object-fit: cover;
+	object-position: center;
 }
 </style>
 ```
@@ -480,11 +729,13 @@ _LightboxDemoModal.vue_
 					class="icon"
 				/>
 			</div>
-			<m-image
-				class="image"
-				:src="currentSrc"
-				@click="nextSrc"
-			/>
+			<div class="img-wrapper">
+				<img
+					class="image"
+					:src="currentSrc"
+					@click="nextSrc"
+				>
+			</div>
 			<div
 				class="icon-container"
 				@click="nextSrc"
@@ -502,12 +753,10 @@ import { MModalContainer, modalApi } from '@square/maker/components/Modal';
 import XIcon from '@square/maker-icons/X';
 import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 import ChevronRightIcon from '@square/maker-icons/ChevronRight';
-import { MImage } from '@square/maker/components/Image';
 
 export default {
 	components: {
 		MModalContainer,
-		MImage,
 		XIcon,
 		ChevronLeftIcon,
 		ChevronRightIcon,
@@ -584,6 +833,9 @@ export default {
 .image {
 	cursor: pointer;
 	height: calc(100vh - 72px * 2);
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
 }
 </style>
 ```

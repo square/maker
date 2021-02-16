@@ -99,6 +99,7 @@ export default {
 		min-width: 600px;
 		max-width: 50vw;
 		height: auto;
+		max-height: calc(100vh - 48px);
 		overflow: scroll;
 		border-radius: 16px;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
