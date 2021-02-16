@@ -133,8 +133,8 @@
 </template>
 
 <script>
+/* eslint vue/no-mutating-props: 0 */
 import { MSection } from '@square/maker/components/Section';
-import { MHeading } from '@square/maker/components/Heading';
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
 import { MText } from '@square/maker/components/Text';
@@ -149,7 +149,6 @@ import XIcon from '@square/maker-icons/X';
 
 export default {
 	components: {
-		MHeading,
 		MModal,
 		MImage,
 		MSection,
@@ -215,7 +214,7 @@ export default {
 						return option.cost;
 					}
 					return 0;
-				}).reduce((sum, current) => sum + current, 0);
+				}).reduce((sum, current) => sum + current, 0); // eslint-disable-line unicorn/no-reduce
 			}
 			return this.item.quantity * (baseCost + additiveCost);
 		},

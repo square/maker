@@ -101,7 +101,7 @@ export default {
 	},
 	computed: {
 		addedItemCount() {
-			return this.items.reduce((sum, item) => {
+			return this.items.reduce((sum, item) => { // eslint-disable-line unicorn/no-reduce
 				if (item.quantity) {
 					return sum + item.quantity;
 				}
