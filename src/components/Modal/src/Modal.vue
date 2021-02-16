@@ -3,7 +3,7 @@
 		<div
 			ref="modal"
 			:class="$s.Modal"
-			@touchstart="onTouchstart"
+			v-on="listeners"
 		>
 			<!-- @slot Modal content -->
 			<slot />
@@ -24,10 +24,28 @@ export default {
 		modalApi,
 	},
 
+	props: {
+		disablePanDownClose: {
+			type: Boolean,
+			default: false,
+		},
+	},
+
 	data() {
 		return {
 			touchStartFrom: undefined,
 		};
+	},
+
+	computed: {
+		listeners() {
+			if (this.disablePanDownClose) {
+				return {};
+			}
+			return {
+				touchstart: this.onTouchstart,
+			};
+		},
 	},
 
 	methods: {

@@ -254,7 +254,7 @@ _StackedDemoFirstModal.vue_
 
 ```vue
 <template>
-	<m-modal>
+	<m-modal disable-pan-down-close>
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -328,7 +328,7 @@ _StackedDemoSecondModal.vue_
 
 ```vue
 <template>
-	<m-modal>
+	<m-modal disable-pan-down-close>
 		<m-image
 			class="cover-photo"
 			src="https://picsum.photos/600/600"
@@ -480,14 +480,6 @@ _MorphinDemoFirstView.vue_
 ```vue
 <template>
 	<div>
-		<!--
-		<div>
-			<img
-				class="cover-photo"
-				src="https://picsum.photos/800/300"
-			/>
-		</div>
-		-->
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -560,14 +552,6 @@ _MorphinDemoSecondView.vue_
 ```vue
 <template>
 	<div>
-		<!--
-		<div>
-			<img
-				class="cover-photo"
-				src="https://picsum.photos/600/600"
-			/>
-		</div>
-		-->
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/600/600"
@@ -802,10 +786,15 @@ export default {
 
 <style scoped>
 .container {
-	padding: 72px;
+	padding: 8px;
 	user-select: none;
 	width: auto;
 	height: auto;
+}
+@media screen and (min-width: 900px) {
+	.container {
+		padding: 72px;
+	}
 }
 .icon {
 	color: white;
@@ -823,8 +812,14 @@ export default {
 .close-container {
 	position: absolute;
 	display: inline-block;
-	top: calc(72px - 24px - 8px);
-	right: calc(72px + 24px - 8px);
+	top: 34px;
+	right: 24px;
+}
+@media screen and (min-width: 900px) {
+	.close-container {
+		top: calc(72px - 24px - 8px);
+		right: calc(72px + 24px - 8px);
+	}
 }
 .navViewBox {
 	display: flex;
@@ -841,6 +836,13 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Modal Props
+
+| Prop                 | Type      | Default | Possible values | Description |
+| -------------------- | --------- | ------- | --------------- | ----------- |
+| disable-pan-to-close | `boolean` | `false` | —               | —           |
+
+
 ## Modal Slots
 
 | Slot    | Description   |
