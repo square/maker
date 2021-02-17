@@ -1,5 +1,11 @@
 <template>
-	<div :class="$s.Container">
+	<div
+		:class="[
+			$s.Container,
+			$s[`shape_${shapeInner}`],
+			$s[`size_${sizeInner}`],
+		]"
+	>
 		<subslot
 			element="@MSegment"
 			@no-match="onNoSegments"
@@ -29,14 +35,35 @@ export default {
 		event: 'segmented-control:update',
 	},
 	props: {
+		/**
+		 * Selected Segment inside Control
+		 */
 		selected: {
 			type: undefined,
 			required: true,
+		},
+		/**
+		 * Shape of Control & Segments
+		 */
+		shape: {
+			type: String,
+			default: 'rounded',
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
+		 * Size of Control & Segments
+		 */
+		size: {
+			type: String,
+			default: 'medium',
+			validator: (size) => ['small', 'medium'].includes(size),
 		},
 	},
 	data() {
 		return {
 			currentValue: this.selected,
+			shapeInner: this.shape,
+			sizeInner: this.size,
 		};
 	},
 	watch: {
@@ -59,5 +86,17 @@ export default {
 	padding: 4px;
 	background-color: rgba(0, 0, 0, 0.05);
 	border-radius: 4px;
+}
+
+.shape_pill {
+	border-radius: 32px;
+}
+
+.shape_squared {
+	border-radius: 0;
+}
+
+.size_small {
+	height: 40px;
 }
 </style>

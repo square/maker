@@ -2,6 +2,8 @@
 	<button
 		:class="[
 			$s.Button,
+			$s[`shape_${controlState.shapeInner}`],
+			$s[`size_${controlState.sizeInner}`],
 			{ [$s.selected]: isSelected },
 		]"
 		@click="selectSelf"
@@ -44,10 +46,19 @@ export default {
 	font-size: 14px;
 	font-family: "Square Market", system-ui;
 	line-height: 24px;
+	background-color: transparent;
 	border: none;
 	border-radius: 4px;
 	outline: none;
 	cursor: pointer;
+}
+
+.shape_pill {
+	border-radius: 32px;
+}
+
+.shape_squared {
+	border-radius: 0;
 }
 
 .selected {
