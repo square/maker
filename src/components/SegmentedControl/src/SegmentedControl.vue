@@ -15,7 +15,7 @@
 
 <script>
 import Subslot from 'vue-subslot';
-import assert from '@square/maker/utils/assert';
+// import assert from '@square/maker/utils/assert';
 import { MSegment } from '@square/maker/components/SegmentedControl';
 import key from './key';
 
@@ -73,7 +73,10 @@ export default {
 	},
 	methods: {
 		onNoSegments() {
-			assert.error(false, "You must pass 2-4 MSegment components to MSegmentedControl's default slot.");
+			// currently disabled because of weird behavior in Website Springboard
+			// commented out for now until we revisit enabling it again later
+			// assert.error(false, "You must pass 2-4 MSegment components to \
+			// MSegmentedControl's default slot.");
 		},
 	},
 };
