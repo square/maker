@@ -15,8 +15,8 @@
     "generate-api-tables": "node ./build/generate-readme-api-tables",
     "styleguide": "npm run generate-api-tables && just-ssr --webpack-config styleguide/webpack-styleguide-config --open",
     "styleguide-build": "npm run generate-api-tables && NODE_ENV=production webpack --config styleguide/webpack-styleguide-config && npm run generate-deploy-index",
-		"generate-deploy-index": "node ./build/generate-deploy-index",
-		"lint": "npm run lint:js && npm run lint:css",
+    "generate-deploy-index": "node ./build/generate-deploy-index",
+    "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint --format=pretty --ext vue,js,md --max-warnings=0 --cache src lab styleguide build",
     "lint:css": "stylelint --max-warnings=0 src/**/*.{vue,css}",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix"
