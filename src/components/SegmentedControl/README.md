@@ -188,6 +188,13 @@ export default {
 | size     | `string`    | `'medium'`  | `small`, `medium`            | Size of Control & Segments      |
 
 
+## SegmentedControl Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
+
+
 ## SegmentedControl Events
 
 | Event                    | Type | Description |
