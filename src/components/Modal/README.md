@@ -212,7 +212,7 @@ export default {
 
 ```vue
 <template>
-	<m-action-bar-layer>
+	<m-action-bar-layer class="fixInStyleguide">
 		<m-button
 			size="small"
 			@click="openModal"
@@ -249,6 +249,29 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+/*
+DO NOT COPY THESE HACKS INTO YOUR APP!
+
+ActionBarLayer will work as intended as long as you
+put a single one at the root of your app, which
+is how it was designed and engineered to be used.
+
+These styleguide-specific hacks are necessary because
+we have multiple inline demos with their own
+ActionBarLayers.
+*/
+.fixInStyleguide {
+	position: relative;
+	left: -240px;
+	padding-bottom: 0 !important;
+}
+.fixInStyleguide > * {
+	position: relative;
+	left: 240px;
+}
+</style>
 ```
 
 _ActionBarDemoModal.vue_
