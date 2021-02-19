@@ -90,6 +90,16 @@ export default {
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
+@media screen and (min-width: 1200px) {
+	.ActionBar {
+		display: none;
+	}
+
+	.ActionBarLayer {
+		padding-bottom: 0;
+	}
+}
+
 .Action {
 	margin-right: 8px;
 	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));

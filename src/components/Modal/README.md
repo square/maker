@@ -208,6 +208,133 @@ export default {
 ```
 ## Examples
 
+### with ActionBar
+
+```vue
+<template>
+	<m-action-bar-layer>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</m-action-bar-layer>
+</template>
+
+<script>
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import ActionBarDemoModal from 'doc/ActionBarDemoModal.vue';
+
+export default {
+	name: 'ActionBarDemoSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+		MActionBarLayer,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <ActionBarDemoModal />);
+		},
+	},
+};
+</script>
+```
+
+_ActionBarDemoModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Modal heading
+			</m-heading>
+			<m-text>
+				modal content
+			</m-text>
+		</m-modal-content>
+		<template #actionbar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="modalApi.close()"
+			>
+				Confirm
+			</m-action-bar-button>
+		</template>
+	</m-modal>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
+import { MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'ActionBarDemoModal',
+
+	components: {
+		MHeading,
+		MText,
+		MModal,
+		MActionBarButton,
+		MModalContent,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		height: inherit;
+	}
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
+
 ### Stacking Modals
 
 
@@ -257,7 +384,7 @@ _StackedDemoFirstModal.vue_
 	<m-modal disable-pan-down-close>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/800/300"
+			src="https://picsum.photos/600/600"
 		>
 		First modal
 
@@ -331,7 +458,7 @@ _StackedDemoSecondModal.vue_
 	<m-modal disable-pan-down-close>
 		<m-image
 			class="cover-photo"
-			src="https://picsum.photos/600/600"
+			src="https://picsum.photos/600/300"
 		/>
 		Second stacked modal
 
