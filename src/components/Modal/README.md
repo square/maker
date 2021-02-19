@@ -972,9 +972,10 @@ export default {
 
 ## Modal Slots
 
-| Slot    | Description   |
-| ------- | ------------- |
-| default | Modal content |
+| Slot      | Description      |
+| --------- | ---------------- |
+| default   | Modal content    |
+| actionbar | Modal action bar |
 
 
 ## ModalContainer Slots
@@ -982,6 +983,13 @@ export default {
 | Slot    | Description             |
 | ------- | ----------------------- |
 | default | modal container content |
+
+
+## ModalContent Slots
+
+| Slot    | Description                                  |
+| ------- | -------------------------------------------- |
+| default | Modal Content content (gets correct padding) |
 
 
 

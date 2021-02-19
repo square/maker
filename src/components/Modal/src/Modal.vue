@@ -14,6 +14,7 @@
 				<div :class="$s.actionBarLayerPadding" />
 				<template v-if="isMobile">
 					<m-action-bar>
+						<!-- @slot Modal action bar -->
 						<slot name="actionbar" />
 					</m-action-bar>
 				</template>
