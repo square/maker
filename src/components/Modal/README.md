@@ -212,7 +212,7 @@ export default {
 
 ```vue
 <template>
-	<m-action-bar-layer class="fixInStyleguide">
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
 		<m-button
 			size="small"
 			@click="openModal"
@@ -249,29 +249,6 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-/*
-DO NOT COPY THESE HACKS INTO YOUR APP!
-
-ActionBarLayer will work as intended as long as you
-put a single one at the root of your app, which
-is how it was designed and engineered to be used.
-
-These styleguide-specific hacks are necessary because
-we have multiple inline demos with their own
-ActionBarLayers.
-*/
-.fixInStyleguide {
-	position: relative;
-	left: -240px;
-	padding-bottom: 0 !important;
-}
-.fixInStyleguide > * {
-	position: relative;
-	left: 240px;
-}
-</style>
 ```
 
 _ActionBarDemoModal.vue_
@@ -363,7 +340,7 @@ export default {
 
 ```vue
 <template>
-	<div>
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
 		<m-button
 			size="small"
 			@click="openModal"
@@ -371,20 +348,22 @@ export default {
 			Open modal
 		</m-button>
 		<m-modal-layer />
-	</div>
+	</m-action-bar-layer>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
-import StackedDemoFirstModal from 'doc/StackedDemoFirstModal.vue';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import StackedActionBarDemoFirstModal from 'doc/StackedActionBarDemoFirstModal.vue';
 
 export default {
-	name: 'StackedDemoSetup',
+	name: 'StackedActionBarDemoSetup',
 
 	components: {
 		MModalLayer,
 		MButton,
+		MActionBarLayer,
 	},
 
 	mixins: [
@@ -393,14 +372,14 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <StackedDemoFirstModal />);
+			this.modalApi.open(() => <StackedActionBarDemoFirstModal />);
 		},
 	},
 };
 </script>
 ```
 
-_StackedDemoFirstModal.vue_
+_StackedActionBarDemoFirstModal.vue_
 
 ```vue
 <template>
@@ -409,42 +388,57 @@ _StackedDemoFirstModal.vue_
 			class="cover-photo"
 			src="https://picsum.photos/600/600"
 		>
-		First modal
-
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="openStackedModal"
-		>
-			Open another modal
-		</m-button>
-
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="modalApi.close()"
-		>
-			Close
-		</m-button>
-
+		<m-modal-content>
+			<m-heading>
+				First modal heading
+			</m-heading>
+			<m-text>
+				modal content
+			</m-text>
+		</m-modal-content>
+		<template #actionbar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="openStackedModal"
+			>
+				Open stacked modal
+			</m-action-bar-button>
+		</template>
 		<m-modal-layer />
 	</m-modal>
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
-import { MModal, MModalLayer } from '@square/maker/components/Modal';
-import StackedDemoSecondModal from 'doc/StackedDemoSecondModal.vue';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import {
+	MModal, MModalContent, MModalLayer,
+} from '@square/maker/components/Modal';
+import { MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+import StackedActionBarDemoSecondModal from 'doc/StackedActionBarDemoSecondModal.vue';
 
 export default {
-	name: 'StackedDemoFirstModal',
+	name: 'StackedActionBarDemoFirstModal',
 
 	components: {
 		MModal,
 		MModalLayer,
-		MButton,
+		MHeading,
+		MText,
+		MModalContent,
+		MActionBarButton,
+		XIcon,
 	},
 
 	mixins: [
@@ -453,7 +447,7 @@ export default {
 
 	methods: {
 		openStackedModal() {
-			this.modalApi.open(() => <StackedDemoSecondModal />);
+			this.modalApi.open(() => <StackedActionBarDemoSecondModal />);
 		},
 	},
 };
@@ -466,6 +460,11 @@ export default {
 	object-fit: cover;
 }
 
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
 @media screen and (min-width: 1200px) {
 	.cover-photo {
 		height: inherit;
@@ -474,40 +473,61 @@ export default {
 </style>
 ```
 
-_StackedDemoSecondModal.vue_
+_StackedActionBarDemoSecondModal.vue_
 
 ```vue
 <template>
 	<m-modal disable-pan-down-close>
-		<m-image
+		<img
 			class="cover-photo"
 			src="https://picsum.photos/600/300"
-		/>
-		Second stacked modal
-
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="modalApi.close()"
 		>
-			Close
-		</m-button>
+		<m-modal-content>
+			<m-heading>
+				Second modal heading
+			</m-heading>
+			<m-text>
+				modal content
+			</m-text>
+		</m-modal-content>
+		<template #actionbar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="modalApi.close()"
+			>
+				Confirm or whatever
+			</m-action-bar-button>
+		</template>
 	</m-modal>
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
-import { MImage } from '@square/maker/components/Image';
-import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
+import { MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'StackedDemoSecondModal',
+	name: 'StackedActionBarDemoSecondModal',
 
 	components: {
-		MButton,
-		MImage,
 		MModal,
+		MHeading,
+		MText,
+		MModalContent,
+		MActionBarButton,
+		XIcon,
 	},
 
 	inject: {
@@ -517,6 +537,11 @@ export default {
 </script>
 
 <style scoped>
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
 .cover-photo {
 	width: 100%;
 	height: 300px;
