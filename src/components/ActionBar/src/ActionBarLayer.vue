@@ -80,12 +80,13 @@ export default {
 
 .ActionBar {
 	position: fixed;
+	right: 0;
 	bottom: 0;
+	left: 0;
 	z-index: 10;
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	width: 100%;
 	padding: 24px 24px 32px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }

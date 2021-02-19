@@ -232,6 +232,7 @@ export default {
 	}
 
 	&.iconButton {
+		flex: 0 0 auto;
 		padding: 20px;
 	}
 
