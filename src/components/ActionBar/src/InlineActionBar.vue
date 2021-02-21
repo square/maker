@@ -65,7 +65,7 @@ export default {
 
 .position_relative {
 	position: relative;
-	z-index: 10;
+	z-index: 1;
 	width: 100%;
 }
 
@@ -74,7 +74,7 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 1;
 }
 
 .position_fixed {
@@ -82,7 +82,7 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 1;
 }
 
 .Action {

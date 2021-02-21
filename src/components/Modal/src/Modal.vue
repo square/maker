@@ -1,8 +1,5 @@
 <template>
 	<m-modal-container :class="$s.Container">
-		<pseudo-window
-			@resize.passive="handleResize"
-		/>
 		<div
 			ref="modal"
 			:class="$s.Modal"
@@ -10,39 +7,17 @@
 		>
 			<!-- @slot Modal content -->
 			<slot />
-			<template v-if="$slots.actionbar">
-				<div :class="$s.actionBarLayerPadding" />
-				<template v-if="isMobile">
-					<m-action-bar>
-						<!-- @slot Modal action bar -->
-						<slot name="actionbar" />
-					</m-action-bar>
-				</template>
-				<template v-else>
-					<div :class="$s.ModalActionBar">
-						<vnode-syringe :class&="$s.Action">
-							<slot name="actionbar" />
-						</vnode-syringe>
-					</div>
-				</template>
-			</template>
 		</div>
 	</m-modal-container>
 </template>
 
 <script>
-import vnodeSyringe from 'vue-vnode-syringe';
-import PseudoWindow from 'vue-pseudo-window';
-import { MActionBar } from '@square/maker/components/ActionBar';
 import modalApi from './modal-api';
 import MModalContainer from './ModalContainer.vue';
 
 export default {
 	components: {
-		PseudoWindow,
 		MModalContainer,
-		MActionBar,
-		vnodeSyringe,
 	},
 
 	inject: {
@@ -74,14 +49,7 @@ export default {
 		},
 	},
 
-	mounted() {
-		this.handleResize();
-	},
-
 	methods: {
-		handleResize() {
-			this.isMobile = window.innerWidth < 1200;
-		},
 		onTouchstart(event) {
 			const [touch] = event.touches;
 			const { clientX, clientY } = touch;
@@ -150,39 +118,13 @@ export default {
 
 @media screen and (min-width: 1200px) {
 	.Container {
-		border-radius: 16px;
+		border-radius: 8px;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 	}
 
 	.Modal {
 		width: 600px;
-		max-width: 50vw;
 		max-height: calc(100vh - 48px);
-	}
-}
-
-.actionBarLayerPadding {
-	padding-bottom: 76px;
-}
-
-.ModalActionBar {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	display: flex;
-	justify-content: space-between;
-	box-sizing: border-box;
-	padding: 24px;
-	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-}
-
-.Action {
-	margin-right: 8px;
-	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
-
-	&:last-child {
-		margin-right: 0;
 	}
 }
 </style>

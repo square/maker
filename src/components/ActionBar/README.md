@@ -211,4 +211,11 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 | Slot    | Description |
 | ------- | ----------- |
 | default | —           |
+
+
+## ResponsiveActionBar Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
 <!-- api-tables:end -->

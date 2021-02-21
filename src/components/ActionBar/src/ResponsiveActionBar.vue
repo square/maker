@@ -3,13 +3,6 @@
 		<pseudo-window
 			@resize.passive="handleResize"
 		/>
-		<!--
-		<template v-if="isMobile">
-			<action-bar>
-				<slot />
-			</action-bar>
-		</template>
-		-->
 		<action-bar v-if="isMobile">
 			<slot />
 		</action-bar>

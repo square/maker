@@ -268,7 +268,7 @@ _ActionBarDemoModal.vue_
 				modal content
 			</m-text>
 		</m-modal-content>
-		<template #actionbar>
+		<m-responsive-action-bar>
 			<m-action-bar-button
 				key="close"
 				shape="pill"
@@ -285,7 +285,7 @@ _ActionBarDemoModal.vue_
 			>
 				Confirm
 			</m-action-bar-button>
-		</template>
+		</m-responsive-action-bar>
 	</m-modal>
 </template>
 
@@ -293,7 +293,7 @@ _ActionBarDemoModal.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
-import { MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -304,6 +304,7 @@ export default {
 		MText,
 		MModal,
 		MActionBarButton,
+		MResponsiveActionBar,
 		MModalContent,
 		XIcon,
 	},
@@ -396,7 +397,7 @@ _StackedActionBarDemoFirstModal.vue_
 				modal content
 			</m-text>
 		</m-modal-content>
-		<template #actionbar>
+		<m-responsive-action-bar>
 			<m-action-bar-button
 				key="close"
 				shape="pill"
@@ -413,7 +414,7 @@ _StackedActionBarDemoFirstModal.vue_
 			>
 				Open stacked modal
 			</m-action-bar-button>
-		</template>
+		</m-responsive-action-bar>
 		<m-modal-layer />
 	</m-modal>
 </template>
@@ -424,7 +425,7 @@ import { MText } from '@square/maker/components/Text';
 import {
 	MModal, MModalContent, MModalLayer,
 } from '@square/maker/components/Modal';
-import { MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 import StackedActionBarDemoSecondModal from 'doc/StackedActionBarDemoSecondModal.vue';
 
@@ -438,6 +439,7 @@ export default {
 		MText,
 		MModalContent,
 		MActionBarButton,
+		MResponsiveActionBar,
 		XIcon,
 	},
 
@@ -490,7 +492,7 @@ _StackedActionBarDemoSecondModal.vue_
 				modal content
 			</m-text>
 		</m-modal-content>
-		<template #actionbar>
+		<m-responsive-action-bar>
 			<m-action-bar-button
 				key="close"
 				shape="pill"
@@ -507,7 +509,7 @@ _StackedActionBarDemoSecondModal.vue_
 			>
 				Confirm or whatever
 			</m-action-bar-button>
-		</template>
+		</m-responsive-action-bar>
 	</m-modal>
 </template>
 
@@ -515,7 +517,7 @@ _StackedActionBarDemoSecondModal.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
-import { MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -526,6 +528,7 @@ export default {
 		MHeading,
 		MText,
 		MModalContent,
+		MResponsiveActionBar,
 		MActionBarButton,
 		XIcon,
 	},
@@ -686,7 +689,7 @@ _MorphinActionBarDemoFirstView.vue_
 				full-width
 				@click="switchView"
 			>
-				Switch to other view
+				Switch to second view
 			</m-action-bar-button>
 		</m-responsive-action-bar>
 	</div>
@@ -755,37 +758,53 @@ _MorphinActionBarDemoSecondView.vue_
 			src="https://picsum.photos/600/600"
 		>
 		<br>
-		Second view
+		<m-modal-content>
+			<m-heading>
+				Second view heading
+			</m-heading>
+			<m-text>
+				Second view content
+			</m-text>
+		</m-modal-content>
 
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="switchView"
-		>
-			Switch to other view
-		</m-button>
-
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="modalApi.close()"
-		>
-			Close
-		</m-button>
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="switchView"
+			>
+				Switch to first view
+			</m-action-bar-button>
+		</m-responsive-action-bar>
 	</div>
 </template>
 
 <script>
-import { modalApi } from '@square/maker/components/Modal';
-import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
 
 export default {
 	name: 'MorphinActionBarDemoSecondView',
 
 	components: {
-		MButton,
+		MHeading,
+		MText,
+		MModalContent,
+		MResponsiveActionBar,
+		MActionBarButton,
+		XIcon,
 	},
 
 	inject: {
