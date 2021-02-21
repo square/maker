@@ -562,7 +562,7 @@ Use `TransitionResize` for fancy, multi-step, resizing modals.
 
 ```vue
 <template>
-	<div>
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
 		<m-button
 			size="small"
 			@click="openModal"
@@ -570,20 +570,22 @@ Use `TransitionResize` for fancy, multi-step, resizing modals.
 			Open modal
 		</m-button>
 		<m-modal-layer />
-	</div>
+	</m-action-bar-layer>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
-import MorphinDemoModal from 'doc/MorphinDemoModal.vue';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import MorphinActionBarDemoModal from 'doc/MorphinActionBarDemoModal.vue';
 
 export default {
-	name: 'MorphinDemoSetup',
+	name: 'MorphinActionBarDemoSetup',
 
 	components: {
 		MModalLayer,
 		MButton,
+		MActionBarLayer,
 	},
 
 	mixins: [
@@ -592,14 +594,14 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <MorphinDemoModal />);
+			this.modalApi.open(() => <MorphinActionBarDemoModal />);
 		},
 	},
 };
 </script>
 ```
 
-_MorphinDemoModal.vue_
+_MorphinActionBarDemoModal.vue_
 
 ```vue
 <template>
@@ -616,11 +618,11 @@ _MorphinDemoModal.vue_
 <script>
 import { MModal } from '@square/maker/components/Modal';
 import { MTransitionResize } from '@square/maker/components/TransitionResize';
-import MorphinDemoFirstView from 'doc/MorphinDemoFirstView.vue';
-import MorphinDemoSecondView from 'doc/MorphinDemoSecondView.vue';
+import MorphinActionBarDemoFirstView from 'doc/MorphinActionBarDemoFirstView.vue';
+import MorphinActionBarDemoSecondView from 'doc/MorphinActionBarDemoSecondView.vue';
 
 export default {
-	name: 'MorphinDemoModal',
+	name: 'MorphinActionBarDemoModal',
 
 	components: {
 		MModal,
@@ -635,9 +637,9 @@ export default {
 	computed: {
 		currentView() {
 			if (this.boolean) {
-				return MorphinDemoFirstView;
+				return MorphinActionBarDemoFirstView;
 			}
-			return MorphinDemoSecondView;
+			return MorphinActionBarDemoSecondView;
 		},
 	},
 
@@ -650,7 +652,7 @@ export default {
 </script>
 ```
 
-_MorphinDemoFirstView.vue_
+_MorphinActionBarDemoFirstView.vue_
 
 ```vue
 <template>
@@ -660,37 +662,53 @@ _MorphinDemoFirstView.vue_
 			src="https://picsum.photos/800/300"
 		>
 		<br>
-		First view
+		<m-modal-content>
+			<m-heading>
+				First view heading
+			</m-heading>
+			<m-text>
+				First view content
+			</m-text>
+		</m-modal-content>
 
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="switchView"
-		>
-			Switch to other view
-		</m-button>
-
-		<br><br>
-
-		<m-button
-			size="small"
-			@click="modalApi.close()"
-		>
-			Close
-		</m-button>
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="switchView"
+			>
+				Switch to other view
+			</m-action-bar-button>
+		</m-responsive-action-bar>
 	</div>
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
-import { modalApi } from '@square/maker/components/Modal';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'MorphinDemoFirstView',
+	name: 'MorphinActionBarDemoFirstView',
 
 	components: {
-		MButton,
+		MHeading,
+		MText,
+		MModalContent,
+		MResponsiveActionBar,
+		MActionBarButton,
+		XIcon,
 	},
 
 	inject: {
@@ -707,6 +725,11 @@ export default {
 </script>
 
 <style scoped>
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
 .cover-photo {
 	width: 100%;
 	height: 300px;
@@ -722,7 +745,7 @@ export default {
 </style>
 ```
 
-_MorphinDemoSecondView.vue_
+_MorphinActionBarDemoSecondView.vue_
 
 ```vue
 <template>
@@ -755,11 +778,11 @@ _MorphinDemoSecondView.vue_
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
 import { modalApi } from '@square/maker/components/Modal';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
-	name: 'MorphinDemoSecondView',
+	name: 'MorphinActionBarDemoSecondView',
 
 	components: {
 		MButton,
@@ -779,6 +802,11 @@ export default {
 </script>
 
 <style scoped>
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
 .cover-photo {
 	width: 100%;
 	height: 300px;

@@ -2,7 +2,6 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`shape_${shape}`],
 			$s[`align_${align}`],
 			{
 				[$s.fullWidth]: fullWidth,
@@ -144,14 +143,6 @@ export default {
 			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
 		},
 		/**
-		 * Shape of button
-		 */
-		shape: {
-			type: String,
-			default: 'rounded',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
-		},
-		/**
 		 * Toggles button disabled state
 		 */
 		disabled: {
@@ -214,7 +205,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 8px;
+	border-radius: 32px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -237,14 +228,6 @@ export default {
 	}
 
 	--text-color: var(--color-contrast, #000);
-
-	&.shape_pill {
-		border-radius: 32px;
-	}
-
-	&.shape_squared {
-		border-radius: 0;
-	}
 
 	&.iconButton > * {
 		line-height: 0;
@@ -307,6 +290,7 @@ export default {
 		}
 
 		&.iconButton {
+			flex: 0 0 auto;
 			padding: 12px;
 		}
 	}
