@@ -1,5 +1,5 @@
 <template>
-	<m-modal-container :class="$s.Container">
+	<div :class="$s.Container">
 		<div
 			ref="modal"
 			:class="$s.Modal"
@@ -8,18 +8,13 @@
 			<!-- @slot Modal content -->
 			<slot />
 		</div>
-	</m-modal-container>
+	</div>
 </template>
 
 <script>
 import modalApi from './modal-api';
-import MModalContainer from './ModalContainer.vue';
 
 export default {
-	components: {
-		MModalContainer,
-	},
-
 	inject: {
 		modalApi,
 	},
@@ -107,6 +102,8 @@ export default {
 <style module="$s">
 .Container {
 	position: relative;
+	width: 100%;
+	height: 100%;
 	overflow: hidden;
 }
 
@@ -118,6 +115,9 @@ export default {
 
 @media screen and (min-width: 1200px) {
 	.Container {
+		display: inline-block;
+		width: auto;
+		height: auto;
 		border-radius: 8px;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 	}

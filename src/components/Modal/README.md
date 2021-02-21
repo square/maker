@@ -629,17 +629,9 @@ export default {
 
 ## Modal Slots
 
-| Slot      | Description      |
-| --------- | ---------------- |
-| default   | Modal content    |
-| actionbar | Modal action bar |
-
-
-## ModalContainer Slots
-
-| Slot    | Description             |
-| ------- | ----------------------- |
-| default | modal container content |
+| Slot    | Description   |
+| ------- | ------------- |
+| default | Modal content |
 
 
 ## ModalContent Slots
