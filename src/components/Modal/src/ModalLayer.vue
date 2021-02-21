@@ -2,20 +2,20 @@
 	<div :class="$s.Layer">
 		<m-transition-fade>
 			<div
-				v-if="currentLayer.state.vnode"
+				v-if="modalApi.state.vnode"
 				:class="$s.Translucent"
 			/>
 		</m-transition-fade>
 		<m-transition-spring-responsive :transitions="transitions">
 			<div
-				v-if="currentLayer.state.vnode"
+				v-if="modalApi.state.vnode"
 				:class="$s.ModalLayer"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="currentLayer.state.vnode" />
+				<v :nodes="modalApi.state.vnode" />
 			</div>
 		</m-transition-spring-responsive>
 	</div>
@@ -26,7 +26,6 @@ import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFade } from '@square/maker/components/TransitionFade';
-import assert from '@square/maker/utils/assert';
 import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
 import {
 	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
@@ -34,30 +33,15 @@ import {
 import modalApi from './modal-api';
 
 const apiMixin = {
-	inject: {
-		currentLayer: {
-			default: undefined,
-			from: modalApi,
-		},
-	},
-
 	provide() {
 		const vm = this;
-		/*
-		let depth = [Math.random().toString().slice(2, 5)];
-		if (this.currentLayer) {
-			depth = this.currentLayer.state.depth.concat(depth);
-		}
-		*/
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
-				// depth,
 			}),
 
 			open(renderFn) {
 				const vnode = renderFn(vm.$createElement);
-				// console.log('opening in layer', Array.from(this.state.depth));
 				this.state.vnode = vnode;
 				// returned method only closes this specific modal
 				return () => {
@@ -68,32 +52,12 @@ const apiMixin = {
 			},
 
 			close() {
-				// console.log('closing in layer', Array.from(this.state.depth));
 				this.state.vnode = undefined;
 			},
 		};
 
-		if (this.currentLayer) {
-			if (this.modalApi) {
-				// unconditional warning
-				assert.warn(false, 'MModalLayer.apiMixin already provides modalApi to your component, please remove the conflicting injected modalApi');
-			}
-			this.modalApi = {
-				state: api.state,
-				open: api.open.bind(api),
-				close: this.currentLayer.close.bind(this.currentLayer),
-			};
-		}
-
 		if (!this.modalApi) {
-			this.modalApi = {
-				state: api.state,
-				open: api.open.bind(api),
-				close: () => {
-					// unconditional warning
-					assert.warn(false, 'modalApi.close() only closes the currentLayer. There is no currentLayer. If you\'re trying to close a modal you spawned from a parent then you need to use the close handler function returned from the modalApi.open() call, e.g. let closeMyModal = modal.open(); closeMyModal();');
-				},
-			};
+			this.modalApi = api;
 		}
 
 		return {
@@ -113,10 +77,7 @@ export default {
 	},
 
 	inject: {
-		currentLayer: {
-			default: undefined,
-			from: modalApi,
-		},
+		modalApi,
 	},
 
 	inheritAttrs: false,
