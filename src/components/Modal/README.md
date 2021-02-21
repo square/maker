@@ -50,20 +50,28 @@ _DemoModal.vue_
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
 		>
-		Modal content
-		<br><br>
-		<m-button
-			size="small"
-			@click="modalApi.close()"
-		>
-			Close
-		</m-button>
+		<m-modal-content>
+			<m-heading>
+				Modal heading
+			</m-heading>
+			<m-text>
+				Modal content
+			</m-text>
+			<m-button
+				size="small"
+				@click="modalApi.close()"
+			>
+				Close
+			</m-button>
+		</m-modal-content>
 	</m-modal>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 
 export default {
 	name: 'DemoModal',
@@ -71,6 +79,9 @@ export default {
 	components: {
 		MModal,
 		MButton,
+		MHeading,
+		MText,
+		MModalContent,
 	},
 
 	inject: {
@@ -84,12 +95,7 @@ export default {
 	width: 100%;
 	height: 300px;
 	object-fit: cover;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		height: inherit;
-	}
+	object-position: center;
 }
 </style>
 ```
@@ -208,7 +214,9 @@ export default {
 ```
 ## Examples
 
-### with ActionBar
+### Modal + ActionBar
+
+Modals are responsive and should be used with `ResponsiveActionBar` which renders the `ActionBar` inline on desktop resolutions and renders it within the root `ActionBarLayer` on mobile resolutions.
 
 ```vue
 <template>
@@ -258,7 +266,7 @@ _ActionBarDemoModal.vue_
 	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/800/300"
+			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
 			<m-heading>
@@ -320,12 +328,7 @@ export default {
 	width: 100%;
 	height: 300px;
 	object-fit: cover;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		height: inherit;
-	}
+	object-position: center;
 }
 
 .icon {
@@ -335,9 +338,14 @@ export default {
 </style>
 ```
 
+### Multi-view Modals
 
-### Stacking Modals
+If you need to
+- implement a multi-step flow within a modal
+- open a modal on top of another modal
+- transition between different modals with dynamic heights
 
+Then what you actually want is a **Multi-view Modal**. This is not a special component, but a combination of `Modal` + `TransitionResize`. If you have multiple modals refactor them into their own views and then switch between them inside a single modal inside of a `TransitionResize` component.
 
 ```vue
 <template>
@@ -356,10 +364,10 @@ export default {
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MActionBarLayer } from '@square/maker/components/ActionBar';
-import StackedActionBarDemoFirstModal from 'doc/StackedActionBarDemoFirstModal.vue';
+import MutliViewDemoModal from 'doc/MutliViewDemoModal.vue';
 
 export default {
-	name: 'StackedActionBarDemoSetup',
+	name: 'MultiViewDemoSetup',
 
 	components: {
 		MModalLayer,
@@ -373,238 +381,14 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <StackedActionBarDemoFirstModal />);
+			this.modalApi.open(() => <MutliViewDemoModal />);
 		},
 	},
 };
 </script>
 ```
 
-_StackedActionBarDemoFirstModal.vue_
-
-```vue
-<template>
-	<m-modal disable-pan-down-close>
-		<img
-			class="cover-photo"
-			src="https://picsum.photos/600/600"
-		>
-		<m-modal-content>
-			<m-heading>
-				First modal heading
-			</m-heading>
-			<m-text>
-				modal content
-			</m-text>
-		</m-modal-content>
-		<m-responsive-action-bar>
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="openStackedModal"
-			>
-				Open stacked modal
-			</m-action-bar-button>
-		</m-responsive-action-bar>
-		<m-modal-layer />
-	</m-modal>
-</template>
-
-<script>
-import { MHeading } from '@square/maker/components/Heading';
-import { MText } from '@square/maker/components/Text';
-import {
-	MModal, MModalContent, MModalLayer,
-} from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
-import StackedActionBarDemoSecondModal from 'doc/StackedActionBarDemoSecondModal.vue';
-
-export default {
-	name: 'StackedActionBarDemoFirstModal',
-
-	components: {
-		MModal,
-		MModalLayer,
-		MHeading,
-		MText,
-		MModalContent,
-		MActionBarButton,
-		MResponsiveActionBar,
-		XIcon,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	methods: {
-		openStackedModal() {
-			this.modalApi.open(() => <StackedActionBarDemoSecondModal />);
-		},
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 300px;
-	object-fit: cover;
-}
-
-.icon {
-	width: 24px;
-	height: 24px;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		height: inherit;
-	}
-}
-</style>
-```
-
-_StackedActionBarDemoSecondModal.vue_
-
-```vue
-<template>
-	<m-modal disable-pan-down-close>
-		<img
-			class="cover-photo"
-			src="https://picsum.photos/600/300"
-		>
-		<m-modal-content>
-			<m-heading>
-				Second modal heading
-			</m-heading>
-			<m-text>
-				modal content
-			</m-text>
-		</m-modal-content>
-		<m-responsive-action-bar>
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="modalApi.close()"
-			>
-				Confirm or whatever
-			</m-action-bar-button>
-		</m-responsive-action-bar>
-	</m-modal>
-</template>
-
-<script>
-import { MHeading } from '@square/maker/components/Heading';
-import { MText } from '@square/maker/components/Text';
-import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
-
-export default {
-	name: 'StackedActionBarDemoSecondModal',
-
-	components: {
-		MModal,
-		MHeading,
-		MText,
-		MModalContent,
-		MResponsiveActionBar,
-		MActionBarButton,
-		XIcon,
-	},
-
-	inject: {
-		modalApi,
-	},
-};
-</script>
-
-<style scoped>
-.icon {
-	width: 24px;
-	height: 24px;
-}
-
-.cover-photo {
-	width: 100%;
-	height: 300px;
-	object-fit: cover;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		height: inherit;
-	}
-}
-</style>
-```
-
-### Mighty Morphin Modals
-
-Use `TransitionResize` for fancy, multi-step, resizing modals.
-
-```vue
-<template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<m-button
-			size="small"
-			@click="openModal"
-		>
-			Open modal
-		</m-button>
-		<m-modal-layer />
-	</m-action-bar-layer>
-</template>
-
-<script>
-import { MButton } from '@square/maker/components/Button';
-import { MModalLayer } from '@square/maker/components/Modal';
-import { MActionBarLayer } from '@square/maker/components/ActionBar';
-import MorphinActionBarDemoModal from 'doc/MorphinActionBarDemoModal.vue';
-
-export default {
-	name: 'MorphinActionBarDemoSetup',
-
-	components: {
-		MModalLayer,
-		MButton,
-		MActionBarLayer,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	methods: {
-		openModal() {
-			this.modalApi.open(() => <MorphinActionBarDemoModal />);
-		},
-	},
-};
-</script>
-```
-
-_MorphinActionBarDemoModal.vue_
+_MutliViewDemoModal.vue_
 
 ```vue
 <template>
@@ -621,11 +405,11 @@ _MorphinActionBarDemoModal.vue_
 <script>
 import { MModal } from '@square/maker/components/Modal';
 import { MTransitionResize } from '@square/maker/components/TransitionResize';
-import MorphinActionBarDemoFirstView from 'doc/MorphinActionBarDemoFirstView.vue';
-import MorphinActionBarDemoSecondView from 'doc/MorphinActionBarDemoSecondView.vue';
+import MutliViewDemoFirstView from 'doc/MutliViewDemoFirstView.vue';
+import MutliViewDemoSecondView from 'doc/MutliViewDemoSecondView.vue';
 
 export default {
-	name: 'MorphinActionBarDemoModal',
+	name: 'MutliViewDemoModal',
 
 	components: {
 		MModal,
@@ -640,9 +424,9 @@ export default {
 	computed: {
 		currentView() {
 			if (this.boolean) {
-				return MorphinActionBarDemoFirstView;
+				return MutliViewDemoFirstView;
 			}
-			return MorphinActionBarDemoSecondView;
+			return MutliViewDemoSecondView;
 		},
 	},
 
@@ -655,7 +439,7 @@ export default {
 </script>
 ```
 
-_MorphinActionBarDemoFirstView.vue_
+_MutliViewDemoFirstView.vue_
 
 ```vue
 <template>
@@ -703,7 +487,7 @@ import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'MorphinActionBarDemoFirstView',
+	name: 'MutliViewDemoFirstView',
 
 	components: {
 		MHeading,
@@ -728,11 +512,6 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-	width: 24px;
-	height: 24px;
-}
-
 .cover-photo {
 	width: 100%;
 	height: 300px;
@@ -740,15 +519,14 @@ export default {
 	object-position: center;
 }
 
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		width: 800px;
-	}
+.icon {
+	width: 24px;
+	height: 24px;
 }
 </style>
 ```
 
-_MorphinActionBarDemoSecondView.vue_
+_MutliViewDemoSecondView.vue_
 
 ```vue
 <template>
@@ -796,7 +574,7 @@ import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'MorphinActionBarDemoSecondView',
+	name: 'MutliViewDemoSecondView',
 
 	components: {
 		MHeading,
@@ -821,11 +599,6 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-	width: 24px;
-	height: 24px;
-}
-
 .cover-photo {
 	width: 100%;
 	height: 300px;
@@ -835,224 +608,13 @@ export default {
 
 @media screen and (min-width: 1200px) {
 	.cover-photo {
-		width: 600px;
 		height: 600px;
 	}
 }
-</style>
-```
 
-### Gallery Lightbox
-
-Click on any of the images below to open a lightbox.
-
-```vue
-<template>
-	<div>
-		<img
-			v-for="(src, i) in images"
-			:key="src"
-			:src="src"
-			class="Image"
-			@click="openLightbox(i)"
-		>
-		<m-modal-layer />
-	</div>
-</template>
-
-<script>
-import { MModalLayer } from '@square/maker/components/Modal';
-import LightboxDemoModal from 'doc/LightboxDemoModal.vue';
-
-export default {
-	name: 'LightboxDemoSetup',
-
-	components: {
-		MModalLayer,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	data() {
-		return {
-			images: [
-				'https://i.picsum.photos/id/1033/2048/1365.jpg?hmac=zEuPfX7t6U866nzXjWF41bf-uxkKOnf1dDrHXmhcK-Q',
-				'https://i.picsum.photos/id/1047/3264/2448.jpg?hmac=ksy0K4uGgm79hAV7-KvsfHY2ZuPA0Oq1Kii9hqkOCfU',
-				'https://i.picsum.photos/id/1063/4867/3215.jpg?hmac=-ksdmOruOUma2z6ENQo9Yqp9T7lsnokLo8SFfAt-UNU',
-			],
-		};
-	},
-
-	methods: {
-		openLightbox(sourceIndex) {
-			this.modalApi.open((h) => h(
-				LightboxDemoModal,
-				{
-					props: {
-						startIndex: sourceIndex,
-						images: this.images,
-					},
-				},
-			));
-		},
-	},
-};
-</script>
-
-<style scoped>
-.Image {
-	width: 200px;
-	height: 200px;
-	display: inline-block;
-	cursor: pointer;
-	object-fit: cover;
-	object-position: center;
-}
-</style>
-```
-
-_LightboxDemoModal.vue_
-
-```vue
-<template>
-	<m-modal-container class="container">
-		<div
-			class="close-container"
-			@click="modalApi.close()"
-		>
-			<x-icon
-				class="close icon"
-			/>
-		</div>
-		<div class="navViewBox">
-			<div
-				style="icon-container"
-				@click="prevSrc"
-			>
-				<chevron-left-icon
-					class="icon"
-				/>
-			</div>
-			<div class="img-wrapper">
-				<img
-					class="image"
-					:src="currentSrc"
-					@click="nextSrc"
-				>
-			</div>
-			<div
-				class="icon-container"
-				@click="nextSrc"
-			>
-				<chevron-right-icon
-					class="icon"
-				/>
-			</div>
-		</div>
-	</m-modal-container>
-</template>
-
-<script>
-import { MModalContainer, modalApi } from '@square/maker/components/Modal';
-import XIcon from '@square/maker-icons/X';
-import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
-import ChevronRightIcon from '@square/maker-icons/ChevronRight';
-
-export default {
-	components: {
-		MModalContainer,
-		XIcon,
-		ChevronLeftIcon,
-		ChevronRightIcon,
-	},
-
-	inject: {
-		modalApi,
-	},
-
-	props: {
-		startIndex: {
-			type: Number,
-			required: true,
-		},
-		images: {
-			type: Array,
-			required: true,
-		},
-	},
-
-	data() {
-		return {
-			currentIndex: this.startIndex,
-		};
-	},
-
-	computed: {
-		currentSrc() {
-			return this.images[this.currentIndex];
-		},
-	},
-
-	methods: {
-		nextSrc() {
-			this.currentIndex = (this.currentIndex + 1) % this.images.length;
-		},
-		prevSrc() {
-			this.currentIndex = ((this.currentIndex - 1) + this.images.length) % this.images.length;
-		},
-	},
-};
-</script>
-
-<style scoped>
-.container {
-	padding: 8px;
-	user-select: none;
-	width: auto;
-	height: auto;
-}
-@media screen and (min-width: 900px) {
-	.container {
-		padding: 72px;
-	}
-}
 .icon {
-	color: white;
-	width: 48px;
-	height: 48px;
-	cursor: pointer;
-}
-.icon.close {
 	width: 24px;
 	height: 24px;
-}
-.icon-container {
-	display: inline-block;
-}
-.close-container {
-	position: absolute;
-	display: inline-block;
-	top: 34px;
-	right: 24px;
-}
-@media screen and (min-width: 900px) {
-	.close-container {
-		top: calc(72px - 24px - 8px);
-		right: calc(72px + 24px - 8px);
-	}
-}
-.navViewBox {
-	display: flex;
-	align-items: center;
-}
-.image {
-	cursor: pointer;
-	height: calc(100vh - 72px * 2);
-	object-fit: cover;
-	object-position: center;
-	width: 100%;
 }
 </style>
 ```
