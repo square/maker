@@ -341,11 +341,10 @@ export default {
 ### Multi-view Modals
 
 If you need to
-- implement a multi-step flow within a modal
 - open a modal on top of another modal
 - transition between different modals with dynamic heights
 
-Then what you actually want is a **Multi-view Modal**. This is not a special component, but a combination of `Modal` + `TransitionResize`. If you have multiple modals refactor them into their own views and then switch between them inside a single modal inside of a `TransitionResize` component.
+Then what you actually want is a **Multi-view Modal**. This is not a special component, but a combination of `Modal` + `TransitionResize`. If you have multiple modals refactor them into their own views and then switch between them inside a single modal inside of a `TransitionResize` component. Note: if all your views have the same height you may want to just skip using `TransitionResize`.
 
 ```vue
 <template>
