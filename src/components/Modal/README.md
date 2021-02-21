@@ -620,13 +620,6 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Modal Props
-
-| Prop                   | Type      | Default | Possible values | Description |
-| ---------------------- | --------- | ------- | --------------- | ----------- |
-| disable-pan-down-close | `boolean` | `false` | —               | —           |
-
-
 ## Modal Slots
 
 | Slot    | Description   |
