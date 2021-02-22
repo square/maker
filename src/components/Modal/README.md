@@ -472,7 +472,7 @@ _MutliViewDemoFirstView.vue_
 				full-width
 				@click="switchView"
 			>
-				Switch to second view
+				Proceed to next view
 			</m-action-bar-button>
 		</m-responsive-action-bar>
 	</div>
@@ -549,17 +549,17 @@ _MutliViewDemoSecondView.vue_
 				key="close"
 				shape="pill"
 				color="#f6f6f6"
-				@click="modalApi.close()"
+				@click="switchView"
 			>
-				<x-icon class="icon" />
+				<chevron-left-icon class="icon" />
 			</m-action-bar-button>
 			<m-action-bar-button
 				key="confirm"
 				shape="pill"
 				full-width
-				@click="switchView"
+				@click="modalApi.close()"
 			>
-				Switch to first view
+				Finish flow
 			</m-action-bar-button>
 		</m-responsive-action-bar>
 	</div>
@@ -570,7 +570,7 @@ import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModalContent, modalApi } from '@square/maker/components/Modal';
 import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
+import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 
 export default {
 	name: 'MutliViewDemoSecondView',
@@ -581,7 +581,7 @@ export default {
 		MModalContent,
 		MResponsiveActionBar,
 		MActionBarButton,
-		XIcon,
+		ChevronLeftIcon,
 	},
 
 	inject: {
