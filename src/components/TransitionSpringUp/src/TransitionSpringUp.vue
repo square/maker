@@ -1,60 +1,31 @@
 <template>
-	<transition
-		:css="false"
+	<m-transition-spring
 		v-bind="$attrs"
-		@enter="handleEnter"
-		@leave="handleLeave"
+		:enter="springUp"
+		:leave="springDown"
 		v-on="$listeners"
 	>
 		<!-- @slot content to spring up -->
 		<slot />
-	</transition>
+	</m-transition-spring>
 </template>
 
 <script>
-import { spring, styler } from 'popmotion';
-
-const enter = {
-	from: {
-		y: '100%',
-	},
-	to: {
-		y: '0%',
-	},
-	stiffness: 600,
-	damping: 60,
-};
-
-const leave = {
-	from: {
-		y: '0%',
-	},
-	to: {
-		y: '100%',
-	},
-	stiffness: 600,
-	damping: 60,
-};
+import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
+import { springUp, springDown } from '@square/maker/utils/transitions';
 
 export default {
+	components: {
+		MTransitionSpring,
+	},
+
 	inheritAttrs: false,
 
-	methods: {
-		handleEnter(element, complete) {
-			const elementStyler = styler(element);
-			spring(enter).start({
-				update: (v) => elementStyler.set(v),
-				complete,
-			});
-		},
-
-		handleLeave(element, complete) {
-			const elementStyler = styler(element);
-			spring(leave).start({
-				update: (v) => elementStyler.set(v),
-				complete,
-			});
-		},
+	data() {
+		return {
+			springUp,
+			springDown,
+		};
 	},
 };
 </script>

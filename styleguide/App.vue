@@ -16,15 +16,30 @@ export default {
 </script>
 
 <style>
+:root {
+	--nav-width: 200px;
+	--demo-left-offset: 40px;
+}
+
 body {
 	margin: 16px;
+}
+
+.FixInlineActionBarLayerDemosInStyleguide {
+	position: relative;
+	left: calc(-1 * (var(--nav-width) + var(--demo-left-offset)));
+	padding-bottom: 0 !important;
+}
+.FixInlineActionBarLayerDemosInStyleguide > * {
+	position: relative;
+	left: calc(var(--nav-width) + var(--demo-left-offset));
 }
 </style>
 
 <style scoped>
 .container {
 	display: grid;
-	grid-template-columns: 200px 1fr;
+	grid-template-columns: var(--nav-width) 1fr;
 }
 </style>
 

@@ -5,103 +5,87 @@ Use the modal component to enter the user into a new _mode_.
 ```vue
 <template>
 	<div>
-		<demo />
-
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
 		<m-modal-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
-import Demo from 'doc/Demo.vue';
+import DemoModal from 'doc/DemoModal.vue';
 
 export default {
+	name: 'DemoSetup',
+
 	components: {
-		Demo,
 		MModalLayer,
+		MButton,
 	},
 
 	mixins: [
 		MModalLayer.apiMixin,
 	],
-};
-</script>
-```
-
-_Demo.vue_
-
-```vue
-<template>
-	<div>
-		<button @click="openModal">
-			Open modal
-		</button>
-	</div>
-</template>
-
-<script>
-import { modalApi } from '@square/maker/components/Modal';
-import ModalDemo from 'doc/ModalDemo.vue';
-
-export default {
-	inject: {
-		modalApi,
-	},
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <ModalDemo />);
+			this.modalApi.open(() => <DemoModal />);
 		},
 	},
 };
 </script>
 ```
 
-_ModalDemo.vue_
+_DemoModal.vue_
 
 ```vue
 <template>
 	<m-modal>
-		<div class="cover-photo">
-			<m-image
-				src="https://picsum.photos/900"
-			/>
-		</div>
-
-		<br><br>
-
-		Modals can stack too
-		<button @click="openStackedModal">
-			Open another modal
-		</button>
-
-		<br><br>
-
-		<button @click="modalApi.close()">
-			Close
-		</button>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Modal heading
+			</m-heading>
+			<m-text>
+				Modal content
+			</m-text>
+			<m-button
+				size="small"
+				@click="modalApi.close()"
+			>
+				Close
+			</m-button>
+		</m-modal-content>
 	</m-modal>
 </template>
 
 <script>
-import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MImage } from '@square/maker/components/Image';
-import ModalStackedDemo from 'doc/ModalStackedDemo.vue';
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 
 export default {
+	name: 'DemoModal',
+
 	components: {
 		MModal,
-		MImage,
+		MButton,
+		MHeading,
+		MText,
+		MModalContent,
 	},
 
 	inject: {
 		modalApi,
-	},
-
-	methods: {
-		openStackedModal() {
-			this.modalApi.open(() => <ModalStackedDemo />);
-		},
 	},
 };
 </script>
@@ -109,50 +93,23 @@ export default {
 <style scoped>
 .cover-photo {
 	width: 100%;
-	height: 280px;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
 }
 </style>
 ```
 
-_ModalStackedDemo.vue_
-
-```vue
-<template>
-	<m-modal>
-		Second modal
-
-		<br><br>
-
-		<button @click="modalApi.close()">
-			Close
-		</button>
-	</m-modal>
-</template>
-
-<script>
-import { MModal, modalApi } from '@square/maker/components/Modal';
-
-export default {
-	components: {
-		MModal,
-	},
-
-	inject: {
-		modalApi,
-	},
-};
-</script>
-```
-
-
 ## Setup
 
-Register the `MModalLayer.apiMixin` mixin and mount the `MModalLayer` component at the top (eg. root) of your app. The location of the Layer component determines where the modal will be mounted. The mixin _provides_ the modal API to the rest of your app, which is accessed by injecting the `modalApi` key in the components you want to open a modal from.
+Register the `MModalLayer.apiMixin` mixin and mount the `MModalLayer` component inside a component template. The location of the Layer component determines where the modal will be mounted. The mixin _provides_ the modal API to the current component and all nested child components. It can be accessed by the current component with `this.modalApi` and can be accessed by nested child components by injecting the `modalApi`.
 
 ```html
 <template>
 	<div>
-		<app />
+		<button @click="openMyModal">
+			Open MyModal
+		</button>
 
 		<m-modal-layer />
 	</div>
@@ -160,17 +117,23 @@ Register the `MModalLayer.apiMixin` mixin and mount the `MModalLayer` component 
 
 <script>
 import { MModalLayer } from '@square/maker/components/Modal';
-import App from './App.vue';
+import MyModal from './MyModal.vue';
 
 export default {
 	components: {
-		App,
 		MModalLayer,
 	},
 
 	mixins: [
 		MModalLayer.apiMixin,
 	],
+
+	methods: {
+		openMyModal() {
+			// this.modalApi is provided by MModalLayer.apiMixin
+			this.modalApi.open(() => <MyModal />);
+		}
+	}
 };
 </script>
 ```
@@ -184,6 +147,7 @@ Modals must always be created in its own Single File Component (SFC) file to sep
 	<m-modal>
 		Modal content
 
+		<!-- modalApi is provided by the injected the modalApi key below -->
 		<button @click="modalApi.close()">
 			Close modal
 		</button>
@@ -205,16 +169,7 @@ export default {
 </script>
 ```
 
-
-### Opening the modal
-
-The same Modal SFC file can be opened in two different ways depending on your use-case.
-
-#### Programmatic API
-The programmatic API is designed to accommodate the majority of use-cases. Use it when you want to open a modal via JavaScript (eg. on a button-click event). Its imperative style signifies that the modal is activated as a new mode outside of the app's inline template flow.
-
 To open a modal programmatically, import `modalApi` and _inject_ it into your component to access the Modal Layer API. In the function you want to open the modal from (eg. a click-event handler), invoke `this.modalApi.open()` with a function that returns the modal instance. This function receives [`createElement`](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) (aliased to `h`) as an argument to instantiate the modal component with, but it's recommended to use the [Vue JSX Babel plugin](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) instead for better readability.
-
 
 ```html
 <template>
@@ -228,7 +183,6 @@ import { modalApi } from '@square/maker/components/Modal';
 import MyModal from './MyModal.vue';
 
 export default {
-
 	// Bind the modal API
 	inject: {
 		modalApi,
@@ -258,62 +212,410 @@ export default {
 };
 </script>
 ```
+## Examples
 
-#### Template API
-Use the template API when you want to open a modal by mounting it in the template. This API is primarily designed for associating a modal with a [Vue Router](https://router.vuejs.org) route so that the it opens upon visiting a page.
+### Modal + ActionBar
 
-```js
-import Router from 'vue-router';
+Modals are responsive and should be used with `ResponsiveActionBar` which renders the `ActionBar` inline on desktop resolutions and renders it within the root `ActionBarLayer` on mobile resolutions.
 
-export default new Router({
-	// ...,
-
-	routes: [
-		// ...,
-
-		// Router-entry associated with a modal
-		// Visiting this page will automatically open the modal
-		{
-			path: 'account',
-			component: () => import('./modals/AccountModal.vue'),
-		},
-	],
-});
-```
-
-With this API, it also becomes possible to mount a modal inline in the template as a way to open/close it. However, this API is discouraged for the following reasons:
-1. Gives the reader the impression that your modal component is rendering inline within the same context, when it's actually rendered to a top-level layer of the app to overtake the screen.
-2. Requires modal state management to be implemented on user-land, and therefore could lead to inadvertently attempting to open multiple modals at once despite only one Modal being able to open at a time. Using the programmatic API allows for a much more deliberate syntax that can be traced back to an action instead of a state change.
-
-```html
+```vue
 <template>
-	<div>
-		<button @click="isModalOpen = true">
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+		<m-button
+			size="small"
+			@click="openModal"
+		>
 			Open modal
-		</button>
-
-		<!-- This usage is discouraged -->
-		<my-modal
-			v-if="isModalOpen"
-		/>
-	</div>
+		</m-button>
+		<m-modal-layer />
+	</m-action-bar-layer>
 </template>
 
 <script>
-import MyModal from './MyModal.vue';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import ActionBarDemoModal from 'doc/ActionBarDemoModal.vue';
 
 export default {
+	name: 'ActionBarDemoSetup',
+
 	components: {
-		MyModal,
+		MModalLayer,
+		MButton,
+		MActionBarLayer,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <ActionBarDemoModal />);
+		},
+	},
+};
+</script>
+```
+
+_ActionBarDemoModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/600/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Modal heading
+			</m-heading>
+			<m-text>
+				modal content
+			</m-text>
+		</m-modal-content>
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="modalApi.close()"
+			>
+				Confirm
+			</m-action-bar-button>
+		</m-responsive-action-bar>
+	</m-modal>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'ActionBarDemoModal',
+
+	components: {
+		MHeading,
+		MText,
+		MModal,
+		MActionBarButton,
+		MResponsiveActionBar,
+		MModalContent,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
+### Multi-view Modals
+
+If you need to
+- open a modal on top of another modal
+- transition between different modals with dynamic heights
+
+Then what you actually want is a **Multi-view Modal**. This is not a special component, but a combination of `Modal` + `TransitionResize`. If you have multiple modals refactor them into their own views and then switch between them inside a single modal inside of a `TransitionResize` component. Note: if all your views have the same height you may want to just skip using `TransitionResize`.
+
+```vue
+<template>
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</m-action-bar-layer>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import MutliViewDemoModal from 'doc/MutliViewDemoModal.vue';
+
+export default {
+	name: 'MultiViewDemoSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+		MActionBarLayer,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <MutliViewDemoModal />);
+		},
+	},
+};
+</script>
+```
+
+_MutliViewDemoModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<m-transition-resize>
+			<component
+				:is="currentView"
+				:switch-view="switchView"
+			/>
+		</m-transition-resize>
+	</m-modal>
+</template>
+
+<script>
+import { MModal } from '@square/maker/components/Modal';
+import { MTransitionResize } from '@square/maker/components/TransitionResize';
+import MutliViewDemoFirstView from 'doc/MutliViewDemoFirstView.vue';
+import MutliViewDemoSecondView from 'doc/MutliViewDemoSecondView.vue';
+
+export default {
+	name: 'MutliViewDemoModal',
+
+	components: {
+		MModal,
+		MTransitionResize,
 	},
 
 	data() {
 		return {
-			isModalOpen: false,
+			boolean: true,
 		};
+	},
+	computed: {
+		currentView() {
+			if (this.boolean) {
+				return MutliViewDemoFirstView;
+			}
+			return MutliViewDemoSecondView;
+		},
+	},
+
+	methods: {
+		switchView() {
+			this.boolean = !this.boolean;
+		},
 	},
 };
 </script>
+```
+
+_MutliViewDemoFirstView.vue_
+
+```vue
+<template>
+	<div>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<br>
+		<m-modal-content>
+			<m-heading>
+				First view heading
+			</m-heading>
+			<m-text>
+				First view content
+			</m-text>
+		</m-modal-content>
+
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="switchView"
+			>
+				Proceed to next view
+			</m-action-bar-button>
+		</m-responsive-action-bar>
+	</div>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'MutliViewDemoFirstView',
+
+	components: {
+		MHeading,
+		MText,
+		MModalContent,
+		MResponsiveActionBar,
+		MActionBarButton,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	props: {
+		switchView: {
+			type: Function,
+			required: true,
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
+_MutliViewDemoSecondView.vue_
+
+```vue
+<template>
+	<div>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/600/600"
+		>
+		<br>
+		<m-modal-content>
+			<m-heading>
+				Second view heading
+			</m-heading>
+			<m-text>
+				Second view content
+			</m-text>
+		</m-modal-content>
+
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				key="close"
+				shape="pill"
+				color="#f6f6f6"
+				@click="switchView"
+			>
+				<chevron-left-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				shape="pill"
+				full-width
+				@click="modalApi.close()"
+			>
+				Finish flow
+			</m-action-bar-button>
+		</m-responsive-action-bar>
+	</div>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
+
+export default {
+	name: 'MutliViewDemoSecondView',
+
+	components: {
+		MHeading,
+		MText,
+		MModalContent,
+		MResponsiveActionBar,
+		MActionBarButton,
+		ChevronLeftIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	props: {
+		switchView: {
+			type: Function,
+			required: true,
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+
+@media screen and (min-width: 1200px) {
+	.cover-photo {
+		height: 600px;
+	}
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
@@ -321,7 +623,14 @@ export default {
 
 | Slot    | Description   |
 | ------- | ------------- |
-| default | modal content |
+| default | Modal content |
+
+
+## ModalContent Slots
+
+| Slot    | Description                                  |
+| ------- | -------------------------------------------- |
+| default | Modal Content content (gets correct padding) |
 
 
 

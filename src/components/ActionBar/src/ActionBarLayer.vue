@@ -7,15 +7,13 @@
 		<slot />
 
 		<transition-action-bar>
-			<transition-action-bar-items
+			<inline-action-bar
 				v-if="actionBarVnodes"
-				:class="$s.ActionBar"
-				tag="div"
+				hide-on="desktop"
+				position="fixed"
 			>
-				<vnode-syringe :class&="$s.Action">
-					<v :nodes="actionBarVnodes" />
-				</vnode-syringe>
-			</transition-action-bar-items>
+				<v :nodes="actionBarVnodes" />
+			</inline-action-bar>
 		</transition-action-bar>
 	</div>
 </template>
@@ -23,16 +21,14 @@
 <script>
 import { throttle } from 'lodash';
 import V from 'vue-v';
-import vnodeSyringe from 'vue-vnode-syringe';
 import TransitionActionBar from './TransitionActionBar.vue';
-import TransitionActionBarItems from './TransitionActionBarItems.vue';
+import InlineActionBar from './InlineActionBar.vue';
 
 export default {
 	components: {
 		V,
-		vnodeSyringe,
 		TransitionActionBar,
-		TransitionActionBarItems,
+		InlineActionBar,
 	},
 
 	provide() {
@@ -80,14 +76,25 @@ export default {
 
 .ActionBar {
 	position: fixed;
+	right: 0;
 	bottom: 0;
+	left: 0;
 	z-index: 10;
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	width: 100%;
 	padding: 24px 24px 32px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+@media screen and (min-width: 1200px) {
+	.ActionBar {
+		display: none;
+	}
+
+	.ActionBarLayer {
+		padding-bottom: 0;
+	}
 }
 
 .Action {
