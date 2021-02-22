@@ -40,6 +40,8 @@
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
 
+// TODO: refactor the code below so it's shared with Button component
+
 function getContrast(chromaBg, targetChromaFg) {
 	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
 		const isLight = chromaBg.luminance() > 0.32;
