@@ -289,16 +289,15 @@ export default {
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Prop       | Type      | Default     | Possible values                    | Description                           |
-| ---------- | --------- | ----------- | ---------------------------------- | ------------------------------------- |
-| type       | `string`  | `'button'`  | —                                  | Type of the button                    |
-| full-width | `boolean` | `false`     | —                                  | Whether to make the button full-width |
-| color      | `string`  | `'#000'`    | —                                  | Background color of button            |
-| text-color | `string`  | —           | —                                  | Text color of button                  |
-| variant    | `string`  | `'primary'` | `primary`, `secondary`             | Semantic variant                      |
-| disabled   | `boolean` | `false`     | —                                  | Toggles button disabled state         |
-| align      | `string`  | `'center'`  | `center`, `stack`, `space-between` | How to align button's contents        |
-| loading    | `boolean` | `false`     | —                                  | Toggles button loading state          |
+| Prop       | Type      | Default    | Possible values                    | Description                           |
+| ---------- | --------- | ---------- | ---------------------------------- | ------------------------------------- |
+| type       | `string`  | `'button'` | —                                  | Type of the button                    |
+| full-width | `boolean` | `false`    | —                                  | Whether to make the button full-width |
+| color      | `string`  | `'#000'`   | —                                  | Background color of button            |
+| text-color | `string`  | —          | —                                  | Text color of button                  |
+| disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state         |
+| align      | `string`  | `'center'` | `center`, `stack`, `space-between` | How to align button's contents        |
+| loading    | `boolean` | `false`    | —                                  | Toggles button loading state          |
 
 
 ## ActionBarButton Slots

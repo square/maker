@@ -66,22 +66,6 @@ function fill(tokens) {
 	};
 }
 
-function outline(tokens) {
-	const color = chroma(tokens.color);
-	const focusColor = getFocus(color);
-	return {
-		'--color-main': 'transparent',
-		'--color-contrast': color.hex(),
-		'--color-focus': focusColor.hex(),
-		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
-	};
-}
-
-const VARIANTS = {
-	primary: fill,
-	secondary: outline,
-};
-
 /**
  * Button component
  * @inheritAttrs button
@@ -126,14 +110,6 @@ export default {
 			validator: (color) => chroma.valid(color),
 		},
 		/**
-		 * Semantic variant
-		 */
-		variant: {
-			type: String,
-			default: 'primary',
-			validator: (variant) => ['primary', 'secondary'].includes(variant),
-		},
-		/**
 		 * Toggles button disabled state
 		 */
 		disabled: {
@@ -159,7 +135,7 @@ export default {
 
 	computed: {
 		style() {
-			return VARIANTS[this.variant]({
+			return fill({
 				color: this.color,
 				textColor: this.textColor,
 			});
