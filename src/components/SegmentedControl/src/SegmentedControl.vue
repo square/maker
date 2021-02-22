@@ -69,6 +69,8 @@ export default {
 	box-sizing: border-box;
 	height: 56px;
 	padding: 4px;
+	font-size: 14px;
+	line-height: 24px;
 	background-color: rgba(0, 0, 0, 0.05);
 	border-radius: 4px;
 }
@@ -83,5 +85,7 @@ export default {
 
 .size_small {
 	height: 40px;
+	font-size: 12px;
+	line-height: 16px;
 }
 </style>
