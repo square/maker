@@ -43,9 +43,9 @@ export default {
 	flex: 1 0 0;
 	color: black;
 	font-weight: 500;
-	font-size: 14px;
+	font-size: inherit;
 	font-family: "Square Market", system-ui;
-	line-height: 24px;
+	line-height: inherit;
 	background-color: transparent;
 	border: none;
 	border-radius: 4px;
