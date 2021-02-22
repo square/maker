@@ -66,6 +66,7 @@ export default {
 <style module="$s">
 .Container {
 	display: flex;
+	box-sizing: border-box;
 	height: 56px;
 	padding: 4px;
 	background-color: rgba(0, 0, 0, 0.05);
