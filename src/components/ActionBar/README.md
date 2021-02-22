@@ -3,6 +3,9 @@
 ```vue
 <template>
 	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+		<button @click="showActionBar = !showActionBar">
+			toggle actionbar
+		</button>
 		<div class="container">
 			<div class="card">
 				<div class="content">
@@ -23,7 +26,7 @@
 						<li>content content content</li>
 						<li>content content content</li>
 					</ol>
-					<demo-responsive-action-bar />
+					<demo-responsive-action-bar v-if="showActionBar" />
 				</div>
 			</div>
 		</div>
@@ -39,6 +42,11 @@ export default {
 	components: {
 		MActionBarLayer,
 		DemoResponsiveActionBar,
+	},
+	data() {
+		return {
+			showActionBar: true,
+		};
 	},
 };
 </script>
@@ -104,31 +112,67 @@ export default {
 </style>
 ```
 
-<!--
+# Keyed transitions
+
+Use `key` on action bar items to smoothly transition them in and out when, for example, opening a modal changes the context of the action bar. Note: the root-level action bar will always be hidden on desktop resolutions, please do not put any important actions into it, or otherwise display other UI on the page at desktop resolutions `min-width: 1200px` that allows the user to perform the same actions that they would via the action bar on mobile resolutions.
 
 ```vue
 <template>
 	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<m-action-bar-button>
-			action bar button
-		</m-action-bar-button>
-		<demo-action-bar />
+		<button @click="showActionBar = !showActionBar">
+			toggle actionbar
+		</button>
+		<demo-action-bar v-if="showActionBar" />
+		<m-modal-layer />
 	</m-action-bar-layer>
 </template>
 
 <script>
-import { MActionBar, MActionBarLayer, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MModalLayer } from '@square/maker/components/Modal';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
 import DemoActionBar from 'doc/DemoActionBar.vue';
 
 export default {
 	name: 'DemoSetup',
+
 	components: {
 		MActionBarLayer,
-		MActionBarButton,
 		DemoActionBar,
+		MModalLayer,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	data() {
+		return {
+			showActionBar: false,
+		};
 	},
 };
 </script>
+
+<style scoped>
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.card {
+	width: 600px;
+	height: 400px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 16px;
+	box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
+	padding: 16px;
+}
+.content {
+	overflow: scroll;
+	height: 100%;
+}
+</style>
 ```
 
 _DemoActionBar.vue_
@@ -136,25 +180,37 @@ _DemoActionBar.vue_
 ```vue
 <template>
 	<m-action-bar>
-		<m-action-bar-button key="close">
-			<x-icon class="icon" />
-		</m-action-bar-button>
-		<m-action-bar-button key="confirm" full-width>
-			Confirm or whatever
+		<m-action-bar-button
+			key="primary"
+			full-width
+			@click="openModal"
+		>
+			Open modal
 		</m-action-bar-button>
 	</m-action-bar>
 </template>
 
 <script>
+import { modalApi } from '@square/maker/components/Modal';
 import { MActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
+import DemoActionBarModal from 'doc/DemoActionBarModal.vue';
 
 export default {
 	name: 'DemoActionBar',
+
 	components: {
-		MActionBar,
 		MActionBarButton,
-		XIcon,
+		MActionBar,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <DemoActionBarModal />);
+		},
 	},
 };
 </script>
@@ -167,7 +223,59 @@ export default {
 </style>
 ```
 
--->
+_DemoActionBarModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		modal content
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				key="secondary"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="primary"
+				full-width
+				@click="modalApi.close()"
+			>
+				Confirm or whatever
+			</m-action-bar-button>
+		</m-responsive-action-bar>
+	</m-modal>
+</template>
+
+<script>
+import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'DemoActionBarModal',
+
+	components: {
+		MModal,
+		MResponsiveActionBar,
+		MActionBarButton,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+};
+</script>
+
+<style scoped>
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
 
 <!-- api-tables:start -->
 ## ActionBar Slots
