@@ -75,20 +75,9 @@ function outline(tokens) {
 	};
 }
 
-function ghost(tokens) {
-	const color = chroma(tokens.color);
-	const focusColor = getFocus(color);
-	return {
-		'--color-main': 'transparent',
-		'--color-contrast': color.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
 const VARIANTS = {
 	primary: fill,
 	secondary: outline,
-	tertiary: ghost,
 };
 
 /**
@@ -140,7 +129,7 @@ export default {
 		variant: {
 			type: String,
 			default: 'primary',
-			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
+			validator: (variant) => ['primary', 'secondary'].includes(variant),
 		},
 		/**
 		 * Toggles button disabled state
