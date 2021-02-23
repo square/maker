@@ -76,7 +76,7 @@ export default {
 
 	padding: 16px 24px;
 	color: var(--color-black-90);
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 	background-color: var(--color-white);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }

@@ -143,7 +143,7 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--font-family: "Square Market", system-ui;
+	--font-family: inherit;
 	--color-background: rgba(0, 0, 0, 0.05);
 	--color-background-focus: rgb(255, 255, 255, 0.95);
 	--color-placeholder: rgba(0, 0, 0, 0.55);

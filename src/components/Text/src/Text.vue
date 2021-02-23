@@ -76,7 +76,7 @@ export default {
 }
 
 .Paragraph {
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 }
 
 .Paragraph.size_minus-1 {

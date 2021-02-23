@@ -80,7 +80,7 @@ export default {
 
 <style module="$s">
 .Notice {
-	--font-family: "Square Market", system-ui;
+	--font-family: inherit;
 
 	display: flex;
 	color: var(--color);
