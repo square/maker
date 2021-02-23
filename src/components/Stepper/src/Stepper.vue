@@ -137,7 +137,7 @@ export default {
 	margin: 0 16px;
 	color: var(--text-color);
 	font-weight: 500;
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 	font-feature-settings: "tnum";
 	font-variant-numeric: tabular-nums;
 }

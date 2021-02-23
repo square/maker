@@ -168,7 +168,7 @@ export default {
 	color: var(--text-color);
 	font-weight: 500;
 	font-size: 16px;
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;

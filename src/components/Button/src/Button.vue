@@ -215,7 +215,7 @@ export default {
 	min-width: 0;
 	color: var(--text-color);
 	font-weight: 500;
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;

@@ -108,7 +108,7 @@ export default {
 
 .Heading {
 	margin: 0;
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 }
 
 .Heading.size_minus-2 {

@@ -44,7 +44,7 @@ export default {
 	color: black;
 	font-weight: 500;
 	font-size: inherit;
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 	line-height: inherit;
 	background-color: transparent;
 	border: none;
