@@ -7,7 +7,7 @@
 		</div>
 
 		<div>
-			Modal content
+			<h1>Cart modal content</h1>
 			<div
 				v-for="i in 100"
 				:key="i"
@@ -16,48 +16,45 @@
 			</div>
 		</div>
 
-		<m-action-bar>
-			<router-link
+		<m-responsive-action-bar>
+			<m-action-bar-button
 				key="close"
-				:to="{ name: 'action-bar-test-index' }"
+				@click="modalApi.close()"
+				color="#f6f6f6"
 			>
-				<m-button
-					size="large"
-					shape="pill"
-				>
-					<x class="icon" />
-				</m-button>
-			</router-link>
-			<m-button
+				<x class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
 				key="primary"
-				size="large"
-				shape="pill"
 				align="center"
+				@click="modalApi.close()"
 				full-width
 			>
 				Add to Cart
 				<template #information>
 					$10.00
 				</template>
-			</m-button>
-		</m-action-bar>
+			</m-action-bar-button>
+		</m-responsive-action-bar>
 	</m-modal>
 </template>
 
 <script>
-import { MModal } from '@square/maker/components/Modal';
-import { MActionBar } from '@square/maker/components/ActionBar';
-import { MButton } from '@square/maker/components/Button';
+import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import { MImage } from '@square/maker/components/Image';
 import X from '@square/maker-icons/X';
 
 export default {
 	components: {
 		MModal,
-		MActionBar,
-		MButton,
+		MResponsiveActionBar,
+		MActionBarButton,
 		MImage,
 		X,
+	},
+	inject: {
+		modalApi,
 	},
 };
 </script>

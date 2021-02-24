@@ -1,42 +1,41 @@
 <template>
 	<div>
-		<h1>Welcome!</h1>
-
-		<router-link :to="{ name: 'action-bar-test-index-modal' }">
-			Open product
-		</router-link>
-
+		<h1>root index</h1>
 		<m-action-bar>
-			<m-button
+			<m-action-bar-button
 				key="primary"
-				size="large"
-				shape="pill"
 				align="center"
+				@click="openCart"
 				full-width
 			>
 				View Cart
 				<template #information>
 					3 items
 				</template>
-			</m-button>
+			</m-action-bar-button>
 		</m-action-bar>
-
-		<!--
-		Indicates nested modal route and allows the underlying page
-		to be visible when sliding the modal down
-		-->
-		<router-view />
 	</div>
 </template>
 
 <script>
-import { MActionBar } from '@square/maker/components/ActionBar';
-import { MButton } from '@square/maker/components/Button';
+import { modalApi } from '@square/maker/components/Modal';
+import { MActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import CartModal from './CartModal.vue';
 
 export default {
 	components: {
 		MActionBar,
-		MButton,
+		MActionBarButton,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		openCart() {
+			this.modalApi.open(() => <CartModal />);
+		},
 	},
 };
 </script>
