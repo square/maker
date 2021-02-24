@@ -618,6 +618,235 @@ export default {
 </style>
 ```
 
+### Stacking modals
+
+```vue
+<template>
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</m-action-bar-layer>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import StackingDemoFirstModal from 'doc/StackingDemoFirstModal.vue';
+
+export default {
+	name: 'StackingDemoSetup',
+
+	components: {
+		MModalLayer,
+		MActionBarLayer,
+		MButton,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <StackingDemoFirstModal />);
+		},
+	},
+};
+</script>
+```
+
+_StackingDemoFirstModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/600/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				First modal heading
+			</m-heading>
+			<m-text>
+				First modal content
+			</m-text>
+			<m-button @click="closeFirst">
+				close
+			</m-button>
+			<m-responsive-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					class="1"
+					@click="closeFirst"
+				>
+					<chevron-left-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					class="1"
+					full-width
+					@click="openSecondModal"
+				>
+					Open second modal
+				</m-action-bar-button>
+			</m-responsive-action-bar>
+		</m-modal-content>
+	</m-modal>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import StackingDemoSecondModal from 'doc/StackingDemoSecondModal.vue';
+import XIcon from '@square/maker-icons/X';
+import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
+
+export default {
+	name: 'StackingDemoFirstModal',
+
+	components: {
+		MModal,
+		MButton,
+		MHeading,
+		MText,
+		MModalContent,
+		MResponsiveActionBar,
+		MActionBarButton,
+		XIcon,
+		ChevronLeftIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		openSecondModal() {
+			this.modalApi.open(() => <StackingDemoSecondModal />);
+		},
+		closeFirst() {
+			this.modalApi.close();
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
+_StackingDemoSecondModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/400/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Second modal heading
+			</m-heading>
+			<m-text>
+				Second modal content
+			</m-text>
+			<m-button @click="closeSecond">
+				close
+			</m-button>
+			<m-responsive-action-bar>
+				<m-action-bar-button
+					key="close"
+					class="2"
+					color="#f6f6f6"
+					@click="closeSecond"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					class="2"
+					full-width
+					@click="closeSecond"
+				>
+					Confirm
+				</m-action-bar-button>
+			</m-responsive-action-bar>
+		</m-modal-content>
+	</m-modal>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'StackingDemoSecondModal',
+
+	components: {
+		MModal,
+		MButton,
+		MHeading,
+		MText,
+		MModalContent,
+		MResponsiveActionBar,
+		MActionBarButton,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		closeSecond() {
+			this.modalApi.close();
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
 <!-- api-tables:start -->
 ## Modal Slots
 

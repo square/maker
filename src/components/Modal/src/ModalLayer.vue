@@ -2,22 +2,23 @@
 	<div :class="$s.Layer">
 		<m-transition-fade>
 			<div
-				v-if="modalApi.state.vnode"
+				v-if="currentLayer.state.vnode"
 				:class="$s.Translucent"
 			/>
 		</m-transition-fade>
 		<m-transition-spring-responsive :transitions="transitions">
 			<div
-				v-if="modalApi.state.vnode"
+				v-if="currentLayer.state.vnode"
 				:class="$s.ModalLayer"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="modalApi.state.vnode" />
+				<v :nodes="currentLayer.state.vnode" />
 			</div>
 		</m-transition-spring-responsive>
+		<modal-layer v-if="currentLayer.state.vnode" />
 	</div>
 </template>
 
@@ -33,16 +34,26 @@ import {
 import modalApi from './modal-api';
 
 const apiMixin = {
+	inject: {
+		currentLayer: {
+			default: undefined,
+			from: modalApi,
+		},
+	},
+
 	provide() {
 		const vm = this;
+		const id = Math.random().toString().slice(2, 5);
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
+				id,
 			}),
 
 			open(renderFn) {
 				const vnode = renderFn(vm.$createElement);
 				this.state.vnode = vnode;
+				console.log('opening in layer', this.state.id);
 				// returned method only closes this specific modal
 				return () => {
 					if (this.state.vnode === vnode) {
@@ -52,7 +63,11 @@ const apiMixin = {
 			},
 
 			close() {
-				this.state.vnode = undefined;
+				// this.state.vnode = undefined;
+				if (vm.currentLayer) {
+					console.log('closing in layer', vm.currentLayer.state.id);
+					vm.currentLayer.state.vnode = undefined;
+				}
 			},
 		};
 
@@ -76,9 +91,15 @@ export default {
 		MTransitionSpringResponsive,
 	},
 
+/*
 	inject: {
 		modalApi,
 	},
+	*/
+
+	mixins: [
+		apiMixin,
+	],
 
 	inheritAttrs: false,
 

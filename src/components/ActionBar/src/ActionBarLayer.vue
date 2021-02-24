@@ -8,18 +8,21 @@
 
 		<transition-action-bar>
 			<inline-action-bar
-				v-if="actionBarVnodes"
+				v-if="stack[stack.length-1].vnodes"
 				hide-on="desktop"
 				position="fixed"
 			>
+				<!--
 				<v :nodes="actionBarVnodes" />
+				-->
+				<v :nodes="stack[stack.length-1].vnodes" />
 			</inline-action-bar>
 		</transition-action-bar>
 	</div>
 </template>
 
 <script>
-import { throttle } from 'lodash';
+import { throttle, findIndex } from 'lodash';
 import V from 'vue-v';
 import TransitionActionBar from './TransitionActionBar.vue';
 import InlineActionBar from './InlineActionBar.vue';
@@ -36,13 +39,34 @@ export default {
 		return {
 			'action-bar': {
 				register(uid, vnodes) {
+					vm.setActionbar2(uid, vnodes);
+					/*
 					vm.registeredBy = uid;
 					vm.setActionbar(vnodes);
+					const stackItem = {
+						uid,
+						vnodes,
+					};
+					const index = findIndex(vm.stack, item => item.uid === uid);
+					if (index === -1) {
+						vm.stack.push(stackItem);
+						return;
+					}
+					vm.$set(vm.stack, index, stackItem);
+					*/
 				},
 				unregister(uid) {
+					vm.setActionbar2(uid);
+					/*
+					const index = findIndex(vm.stack, item => item.uid === uid);
+					if (index === -1) {
+						return;
+					}
+					vm.stack.splice(index, 1);
 					if (vm.registeredBy === uid) {
 						vm.setActionbar();
 					}
+					*/
 				},
 			},
 		};
@@ -52,18 +76,61 @@ export default {
 
 	data() {
 		return {
+			stack: [{
+				uid: 'sentinel',
+				vnodes: undefined,
+			}],
 			registeredBy: undefined,
 			actionBarVnodes: undefined,
 		};
 	},
 
+	computed: {
+		currentVnodes() {
+			/*
+			if (this.stack.length === 0) {
+				return undefined;
+			}
+			return this.stack[this.stack.length-1].vnodes;
+			*/
+			return this.stack[this.stack.length - 1].vnodes;
+		},
+	},
+
 	created() {
 		this.setActionbar = throttle(this.setActionbar, 50, { leading: false });
+		this.setActionbar2 = throttle(this.setActionbar2, 50, { leading: false });
 	},
 
 	methods: {
 		setActionbar(vnodes) {
 			this.actionBarVnodes = vnodes;
+		},
+		setActionbar2(uid, vnodes) {
+			// this.registeredBy = uid;
+			// this.setActionbar(vnodes);
+
+			// remove vnodes
+			if (vnodes === undefined) {
+				const index = findIndex(this.stack, (item) => item.uid === uid);
+				if (index === -1) {
+					return;
+				}
+				this.stack.splice(index, 1);
+				return;
+			}
+
+			// add or update vnodes
+			const stackItem = {
+				uid,
+				vnodes,
+			};
+			const index = findIndex(this.stack, (item) => item.uid === uid);
+			if (index === -1) {
+				this.stack.push(stackItem);
+				return;
+			}
+			this.$set(this.stack, index, stackItem);
 		},
 	},
 };
