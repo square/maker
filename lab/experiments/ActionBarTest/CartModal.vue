@@ -19,16 +19,16 @@
 		<m-responsive-action-bar>
 			<m-action-bar-button
 				key="close"
-				@click="modalApi.close()"
 				color="#f6f6f6"
+				@click="modalApi.close()"
 			>
 				<x class="icon" />
 			</m-action-bar-button>
 			<m-action-bar-button
 				key="primary"
 				align="center"
-				@click="modalApi.close()"
 				full-width
+				@click="modalApi.close()"
 			>
 				Add to Cart
 				<template #information>

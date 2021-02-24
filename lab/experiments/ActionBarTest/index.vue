@@ -5,8 +5,8 @@
 			<m-action-bar-button
 				key="primary"
 				align="center"
-				@click="openCart"
 				full-width
+				@click="openCart"
 			>
 				View Cart
 				<template #information>
