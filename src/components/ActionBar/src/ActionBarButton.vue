@@ -162,10 +162,10 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
+	min-height: 64px;
 
 	/* large size */
 	padding: 20px 32px;
-	min-height: 64px;
 	color: var(--text-color);
 	font-weight: 500;
 	font-size: 16px;
@@ -249,9 +249,10 @@ export default {
 
 @media screen and (min-width: 1200px) {
 	.Button {
+		min-height: 48px;
+
 		/* medium size */
 		padding: 12px 24px;
-		min-height: 48px;
 		font-size: 14px;
 
 		& > * {

@@ -216,7 +216,7 @@ export default {
 
 ### Modal + ActionBar
 
-Modals are responsive and should be used with `ResponsiveActionBar` which renders the `ActionBar` inline on desktop resolutions and renders it within the root `ActionBarLayer` on mobile resolutions.
+Modals are responsive and should be used with `InlineActionBar` which renders the `ActionBar` inline inside the modal instead of the root `ActionBarLayer`.
 
 ```vue
 <template>
@@ -303,7 +303,7 @@ _ActionBarDemoModal.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -314,7 +314,6 @@ export default {
 		MText,
 		MModal,
 		MActionBarButton,
-		MResponsiveActionBar,
 		MInlineActionBar,
 		MModalContent,
 		XIcon,
@@ -344,7 +343,7 @@ export default {
 ### Multi-view Modals
 
 If you need to
-- open a modal on top of another modal
+- open a modal "on top" of another modal
 - transition between different modals with dynamic heights
 
 Then what you actually want is a **Multi-view Modal**. This is not a special component, but a combination of `Modal` + `TransitionResize`. If you have multiple modals refactor them into their own views and then switch between them inside a single modal inside of a `TransitionResize` component. Note: if all your views have the same height you may want to just skip using `TransitionResize`.
@@ -485,7 +484,7 @@ _MutliViewDemoFirstView.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -495,7 +494,6 @@ export default {
 		MHeading,
 		MText,
 		MModalContent,
-		MResponsiveActionBar,
 		MActionBarButton,
 		MInlineActionBar,
 		XIcon,
@@ -573,7 +571,7 @@ _MutliViewDemoSecondView.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 
 export default {
@@ -583,7 +581,6 @@ export default {
 		MHeading,
 		MText,
 		MModalContent,
-		MResponsiveActionBar,
 		MActionBarButton,
 		MInlineActionBar,
 		ChevronLeftIcon,
@@ -624,6 +621,8 @@ export default {
 ```
 
 ### Stacking modals
+
+If refactoring multiple modals into their own views and dynamically switching between them is impractical then you can literally stack a modal on top of another modal using `modalApi`. Note: Prefer the non-stacking API wherever possible, it has better UX and less gotchas.
 
 ```vue
 <template>
@@ -714,10 +713,9 @@ import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import StackingDemoSecondModal from 'doc/StackingDemoSecondModal.vue';
 import XIcon from '@square/maker-icons/X';
-import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 
 export default {
 	name: 'StackingDemoFirstModal',
@@ -728,11 +726,9 @@ export default {
 		MHeading,
 		MText,
 		MModalContent,
-		MResponsiveActionBar,
 		MInlineActionBar,
 		MActionBarButton,
 		XIcon,
-		ChevronLeftIcon,
 	},
 
 	inject: {
@@ -811,9 +807,8 @@ import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
-import XIcon from '@square/maker-icons/X';
 
 export default {
 	name: 'StackingDemoSecondModal',
@@ -824,9 +819,7 @@ export default {
 		MHeading,
 		MText,
 		MModalContent,
-		MResponsiveActionBar,
 		MActionBarButton,
-		XIcon,
 		ChevronLeftIcon,
 		MInlineActionBar,
 	},
