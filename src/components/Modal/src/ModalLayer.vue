@@ -2,22 +2,29 @@
 	<div :class="$s.Layer">
 		<m-transition-fade>
 			<div
-				v-if="modalApi.state.vnode"
-				:class="$s.Translucent"
+				v-if="currentLayer.state.vnode"
+				:class="[
+					$s.Translucent,
+					{ [$s.Transparent]: currentLayer.state.isStacked },
+				]"
 			/>
 		</m-transition-fade>
 		<m-transition-spring-responsive :transitions="transitions">
 			<div
-				v-if="modalApi.state.vnode"
-				:class="$s.ModalLayer"
+				v-if="currentLayer.state.vnode"
+				:class="[
+					$s.ModalLayer,
+					{ [$s.Hidden]: modalApi.state.vnode },
+				]"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="modalApi.state.vnode" />
+				<v :nodes="currentLayer.state.vnode" />
 			</div>
 		</m-transition-spring-responsive>
+		<modal-layer v-if="currentLayer.state.vnode" />
 	</div>
 </template>
 
@@ -33,11 +40,19 @@ import {
 import modalApi from './modal-api';
 
 const apiMixin = {
+	inject: {
+		currentLayer: {
+			default: undefined,
+			from: modalApi,
+		},
+	},
+
 	provide() {
 		const vm = this;
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
+				isStacked: !!vm.currentLayer,
 			}),
 
 			open(renderFn) {
@@ -52,7 +67,9 @@ const apiMixin = {
 			},
 
 			close() {
-				this.state.vnode = undefined;
+				if (vm.currentLayer) {
+					vm.currentLayer.state.vnode = undefined;
+				}
 			},
 		};
 
@@ -76,9 +93,9 @@ export default {
 		MTransitionSpringResponsive,
 	},
 
-	inject: {
-		modalApi,
-	},
+	mixins: [
+		apiMixin,
+	],
 
 	inheritAttrs: false,
 
@@ -124,6 +141,19 @@ export default {
 	bottom: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Transparent {
+	background-color: transparent;
+}
+
+.Hidden {
+	/*
+	!important is important to override the inline opacity
+	added to the modal after the fadeIn/fadeOut transition
+	*/
+	opacity: 0 !important;
+	transition: opacity 0.1s;
 }
 
 .disableScroll {

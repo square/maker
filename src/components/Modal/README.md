@@ -216,19 +216,21 @@ export default {
 
 ### Modal + ActionBar
 
-Modals are responsive and should be used with `ResponsiveActionBar` which renders the `ActionBar` inline on desktop resolutions and renders it within the root `ActionBarLayer` on mobile resolutions.
+Modals are responsive and should be used with `InlineActionBar` which renders the `ActionBar` inline inside the modal instead of the root `ActionBarLayer`.
 
 ```vue
 <template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<m-button
-			size="small"
-			@click="openModal"
-		>
-			Open modal
-		</m-button>
+	<div>
+		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+			<m-button
+				size="small"
+				@click="openModal"
+			>
+				Open modal
+			</m-button>
+		</m-action-bar-layer>
 		<m-modal-layer />
-	</m-action-bar-layer>
+	</div>
 </template>
 
 <script>
@@ -275,25 +277,23 @@ _ActionBarDemoModal.vue_
 			<m-text>
 				modal content
 			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="modalApi.close()"
+				>
+					Confirm
+				</m-action-bar-button>
+			</m-inline-action-bar>
 		</m-modal-content>
-		<m-responsive-action-bar>
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="modalApi.close()"
-			>
-				Confirm
-			</m-action-bar-button>
-		</m-responsive-action-bar>
 	</m-modal>
 </template>
 
@@ -301,7 +301,7 @@ _ActionBarDemoModal.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -312,7 +312,7 @@ export default {
 		MText,
 		MModal,
 		MActionBarButton,
-		MResponsiveActionBar,
+		MInlineActionBar,
 		MModalContent,
 		XIcon,
 	},
@@ -338,40 +338,38 @@ export default {
 </style>
 ```
 
-### Multi-view Modals
+### Stacking modals
 
-If you need to
-- open a modal on top of another modal
-- transition between different modals with dynamic heights
-
-Then what you actually want is a **Multi-view Modal**. This is not a special component, but a combination of `Modal` + `TransitionResize`. If you have multiple modals refactor them into their own views and then switch between them inside a single modal inside of a `TransitionResize` component. Note: if all your views have the same height you may want to just skip using `TransitionResize`.
+It's possible to stack modals, i.e. open another modal from inside a modal.
 
 ```vue
 <template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<m-button
-			size="small"
-			@click="openModal"
-		>
-			Open modal
-		</m-button>
+	<div>
+		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+			<m-button
+				size="small"
+				@click="openModal"
+			>
+				Open modal
+			</m-button>
+		</m-action-bar-layer>
 		<m-modal-layer />
-	</m-action-bar-layer>
+	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MActionBarLayer } from '@square/maker/components/ActionBar';
-import MutliViewDemoModal from 'doc/MutliViewDemoModal.vue';
+import StackingDemoFirstModal from 'doc/StackingDemoFirstModal.vue';
 
 export default {
-	name: 'MultiViewDemoSetup',
+	name: 'StackingDemoSetup',
 
 	components: {
 		MModalLayer,
-		MButton,
 		MActionBarLayer,
+		MButton,
 	},
 
 	mixins: [
@@ -380,119 +378,66 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <MutliViewDemoModal />);
+			this.modalApi.open(() => <StackingDemoFirstModal />);
 		},
 	},
 };
 </script>
 ```
 
-_MutliViewDemoModal.vue_
+_StackingDemoFirstModal.vue_
 
 ```vue
 <template>
 	<m-modal>
-		<m-transition-resize>
-			<component
-				:is="currentView"
-				:switch-view="switchView"
-			/>
-		</m-transition-resize>
-	</m-modal>
-</template>
-
-<script>
-import { MModal } from '@square/maker/components/Modal';
-import { MTransitionResize } from '@square/maker/components/TransitionResize';
-import MutliViewDemoFirstView from 'doc/MutliViewDemoFirstView.vue';
-import MutliViewDemoSecondView from 'doc/MutliViewDemoSecondView.vue';
-
-export default {
-	name: 'MutliViewDemoModal',
-
-	components: {
-		MModal,
-		MTransitionResize,
-	},
-
-	data() {
-		return {
-			boolean: true,
-		};
-	},
-	computed: {
-		currentView() {
-			if (this.boolean) {
-				return MutliViewDemoFirstView;
-			}
-			return MutliViewDemoSecondView;
-		},
-	},
-
-	methods: {
-		switchView() {
-			this.boolean = !this.boolean;
-		},
-	},
-};
-</script>
-```
-
-_MutliViewDemoFirstView.vue_
-
-```vue
-<template>
-	<div>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/800/300"
+			src="https://picsum.photos/600/300"
 		>
-		<br>
 		<m-modal-content>
 			<m-heading>
-				First view heading
+				First modal heading
 			</m-heading>
 			<m-text>
-				First view content
+				First modal content
 			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="openSecondModal"
+				>
+					Open second modal
+				</m-action-bar-button>
+			</m-inline-action-bar>
 		</m-modal-content>
-
-		<m-responsive-action-bar>
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="switchView"
-			>
-				Proceed to next view
-			</m-action-bar-button>
-		</m-responsive-action-bar>
-	</div>
+	</m-modal>
 </template>
 
 <script>
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
-import { MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import StackingDemoSecondModal from 'doc/StackingDemoSecondModal.vue';
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'MutliViewDemoFirstView',
+	name: 'StackingDemoFirstModal',
 
 	components: {
+		MModal,
 		MHeading,
 		MText,
 		MModalContent,
-		MResponsiveActionBar,
+		MInlineActionBar,
 		MActionBarButton,
 		XIcon,
 	},
@@ -501,10 +446,12 @@ export default {
 		modalApi,
 	},
 
-	props: {
-		switchView: {
-			type: Function,
-			required: true,
+	methods: {
+		openSecondModal() {
+			this.modalApi.open(() => <StackingDemoSecondModal />);
+		},
+		closeFirst() {
+			this.modalApi.close();
 		},
 	},
 };
@@ -513,7 +460,7 @@ export default {
 <style scoped>
 .cover-photo {
 	width: 100%;
-	height: 300px;
+	height: 600px;
 	object-fit: cover;
 	object-position: center;
 }
@@ -525,73 +472,69 @@ export default {
 </style>
 ```
 
-_MutliViewDemoSecondView.vue_
+_StackingDemoSecondModal.vue_
 
 ```vue
 <template>
-	<div>
+	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/600/600"
+			src="https://picsum.photos/400/300"
 		>
-		<br>
 		<m-modal-content>
 			<m-heading>
-				Second view heading
+				Second modal heading
 			</m-heading>
 			<m-text>
-				Second view content
+				Second modal content
 			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+				>
+					<chevron-left-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="modalApi.close()"
+				>
+					Confirm
+				</m-action-bar-button>
+			</m-inline-action-bar>
 		</m-modal-content>
-
-		<m-responsive-action-bar>
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="switchView"
-			>
-				<chevron-left-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="modalApi.close()"
-			>
-				Finish flow
-			</m-action-bar-button>
-		</m-responsive-action-bar>
-	</div>
+	</m-modal>
 </template>
 
 <script>
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
-import { MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 
 export default {
-	name: 'MutliViewDemoSecondView',
+	name: 'StackingDemoSecondModal',
 
 	components: {
+		MModal,
 		MHeading,
 		MText,
 		MModalContent,
-		MResponsiveActionBar,
 		MActionBarButton,
 		ChevronLeftIcon,
+		MInlineActionBar,
 	},
 
 	inject: {
 		modalApi,
 	},
 
-	props: {
-		switchView: {
-			type: Function,
-			required: true,
+	methods: {
+		closeSecond() {
+			this.modalApi.close();
 		},
 	},
 };
@@ -600,15 +543,9 @@ export default {
 <style scoped>
 .cover-photo {
 	width: 100%;
-	height: 300px;
+	height: 400px;
 	object-fit: cover;
 	object-position: center;
-}
-
-@media screen and (min-width: 1200px) {
-	.cover-photo {
-		height: 600px;
-	}
 }
 
 .icon {

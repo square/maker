@@ -32,7 +32,7 @@
 
 	.Modal {
 		width: 600px;
-		max-height: calc(100vh - 48px);
+		max-height: calc(100vh - 64px);
 	}
 }
 </style>
