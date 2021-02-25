@@ -44,7 +44,7 @@ export default {
 	props: {
 		position: {
 			type: String,
-			default: 'static',
+			default: 'absolute',
 			validator: (position) => ['static', 'relative', 'absolute', 'fixed'].includes(position),
 		},
 		hideOn: {
@@ -70,12 +70,12 @@ export default {
 }
 
 .ActionBarWrapper {
-	padding-bottom: 106px;
+	margin-bottom: 120px;
 }
 
 @media screen and (min-width: 1200px) {
 	.ActionBarWrapper {
-		padding-bottom: 76px;
+		margin-bottom: 104px;
 	}
 }
 

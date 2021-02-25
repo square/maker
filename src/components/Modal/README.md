@@ -277,25 +277,23 @@ _ActionBarDemoModal.vue_
 			<m-text>
 				modal content
 			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="modalApi.close()"
+				>
+					Confirm
+				</m-action-bar-button>
+			</m-inline-action-bar>
 		</m-modal-content>
-		<m-inline-action-bar position="absolute">
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="modalApi.close()"
-			>
-				Confirm
-			</m-action-bar-button>
-		</m-inline-action-bar>
 	</m-modal>
 </template>
 
@@ -457,26 +455,23 @@ _MutliViewDemoFirstView.vue_
 			<m-text>
 				First view content
 			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="switchView"
+				>
+					Proceed to next view
+				</m-action-bar-button>
+			</m-inline-action-bar>
 		</m-modal-content>
-
-		<m-inline-action-bar position="absolute">
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="switchView"
-			>
-				Proceed to next view
-			</m-action-bar-button>
-		</m-inline-action-bar>
 	</div>
 </template>
 
@@ -544,26 +539,23 @@ _MutliViewDemoSecondView.vue_
 			<m-text>
 				Second view content
 			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="switchView"
+				>
+					<chevron-left-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="modalApi.close()"
+				>
+					Finish flow
+				</m-action-bar-button>
+			</m-inline-action-bar>
 		</m-modal-content>
-
-		<m-inline-action-bar position="absolute">
-			<m-action-bar-button
-				key="close"
-				shape="pill"
-				color="#f6f6f6"
-				@click="switchView"
-			>
-				<chevron-left-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="confirm"
-				shape="pill"
-				full-width
-				@click="modalApi.close()"
-			>
-				Finish flow
-			</m-action-bar-button>
-		</m-inline-action-bar>
 	</div>
 </template>
 
@@ -683,7 +675,7 @@ _StackingDemoFirstModal.vue_
 			<m-text>
 				First modal content
 			</m-text>
-			<m-inline-action-bar position="absolute">
+			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
 					color="#f6f6f6"
@@ -770,7 +762,7 @@ _StackingDemoSecondModal.vue_
 			<m-text>
 				Second modal content
 			</m-text>
-			<m-inline-action-bar position="absolute">
+			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
 					color="#f6f6f6"
