@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{98:function(r,e,n){
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{95:function(r,e,n){
 /**
  * chroma.js - JavaScript library for color conversions
  *
