@@ -683,21 +683,16 @@ _StackingDemoFirstModal.vue_
 			<m-text>
 				First modal content
 			</m-text>
-			<m-button @click="closeFirst">
-				close
-			</m-button>
 			<m-inline-action-bar position="absolute">
 				<m-action-bar-button
 					key="close"
 					color="#f6f6f6"
-					class="1"
-					@click="closeFirst"
+					@click="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
 				<m-action-bar-button
 					key="confirm"
-					class="1"
 					full-width
 					@click="openSecondModal"
 				>
@@ -709,7 +704,6 @@ _StackingDemoFirstModal.vue_
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
@@ -722,7 +716,6 @@ export default {
 
 	components: {
 		MModal,
-		MButton,
 		MHeading,
 		MText,
 		MModalContent,
@@ -777,23 +770,18 @@ _StackingDemoSecondModal.vue_
 			<m-text>
 				Second modal content
 			</m-text>
-			<m-button @click="closeSecond">
-				close
-			</m-button>
 			<m-inline-action-bar position="absolute">
 				<m-action-bar-button
 					key="close"
-					class="2"
 					color="#f6f6f6"
-					@click="closeSecond"
+					@click="modalApi.close()"
 				>
 					<chevron-left-icon class="icon" />
 				</m-action-bar-button>
 				<m-action-bar-button
 					key="confirm"
-					class="2"
 					full-width
-					@click="closeSecond"
+					@click="modalApi.close()"
 				>
 					Confirm
 				</m-action-bar-button>
@@ -803,7 +791,6 @@ _StackingDemoSecondModal.vue_
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
@@ -815,7 +802,6 @@ export default {
 
 	components: {
 		MModal,
-		MButton,
 		MHeading,
 		MText,
 		MModalContent,
