@@ -332,11 +332,11 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 ## InlineActionBar Props
 
-| Prop     | Type      | Default    | Possible values                           | Description |
-| -------- | --------- | ---------- | ----------------------------------------- | ----------- |
-| position | `string`  | `'static'` | `static`, `relative`, `absolute`, `fixed` | —           |
-| hide-on  | `string`  | `'none'`   | `none`, `mobile`, `desktop`               | —           |
-| flush    | `boolean` | `false`    | —                                         | —           |
+| Prop     | Type      | Default      | Possible values                           | Description |
+| -------- | --------- | ------------ | ----------------------------------------- | ----------- |
+| position | `string`  | `'absolute'` | `static`, `relative`, `absolute`, `fixed` | —           |
+| hide-on  | `string`  | `'none'`     | `none`, `mobile`, `desktop`               | —           |
+| flush    | `boolean` | `false`      | —                                         | —           |
 
 
 ## InlineActionBar Slots
