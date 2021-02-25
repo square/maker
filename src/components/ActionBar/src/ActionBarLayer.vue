@@ -11,6 +11,7 @@
 				v-if="stack[stack.length-1].vnodes"
 				hide-on="desktop"
 				position="fixed"
+				flush
 			>
 				<!--
 				<v :nodes="actionBarVnodes" />

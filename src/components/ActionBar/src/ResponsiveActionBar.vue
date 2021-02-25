@@ -1,5 +1,5 @@
 <template>
-	<div :class="{ [$s.inlinePadding]: !isMobile }">
+	<div>
 		<pseudo-window
 			@resize.passive="handleResize"
 		/>
@@ -45,9 +45,3 @@ export default {
 	},
 };
 </script>
-
-<style module="$s">
-.inlinePadding {
-	padding-bottom: 76px;
-}
-</style>

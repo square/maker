@@ -3,13 +3,19 @@
 		<m-transition-fade>
 			<div
 				v-if="currentLayer.state.vnode"
-				:class="$s.Translucent"
+				:class="[
+					$s.Translucent,
+					{ [$s.Transparent]: currentLayer.state.isStacked },
+				]"
 			/>
 		</m-transition-fade>
 		<m-transition-spring-responsive :transitions="transitions">
 			<div
 				v-if="currentLayer.state.vnode"
-				:class="$s.ModalLayer"
+				:class="[
+					$s.ModalLayer,
+					{ [$s.Hidden]: modalApi.state.vnode },
+				]"
 			>
 				<pseudo-window
 					body
@@ -32,6 +38,7 @@ import {
 	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
 } from '@square/maker/utils/transitions';
 import modalApi from './modal-api';
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
 
 const apiMixin = {
 	inject: {
@@ -48,6 +55,7 @@ const apiMixin = {
 			state: Vue.observable({
 				vnode: undefined,
 				id,
+				isStacked: !!vm.currentLayer,
 			}),
 
 			open(renderFn) {
@@ -89,13 +97,8 @@ export default {
 		MTransitionFade,
 		PseudoWindow,
 		MTransitionSpringResponsive,
+		MActionBarLayer,
 	},
-
-/*
-	inject: {
-		modalApi,
-	},
-	*/
 
 	mixins: [
 		apiMixin,
@@ -145,6 +148,15 @@ export default {
 	bottom: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Transparent {
+	background-color: transparent;
+}
+
+.Hidden {
+	opacity: 0 !important;
+	transition: opacity 0.1s;
 }
 
 .disableScroll {

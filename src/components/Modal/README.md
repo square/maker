@@ -220,15 +220,17 @@ Modals are responsive and should be used with `ResponsiveActionBar` which render
 
 ```vue
 <template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<m-button
-			size="small"
-			@click="openModal"
-		>
-			Open modal
-		</m-button>
+	<div>
+		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+			<m-button
+				size="small"
+				@click="openModal"
+			>
+				Open modal
+			</m-button>
+		</m-action-bar-layer>
 		<m-modal-layer />
-	</m-action-bar-layer>
+	</div>
 </template>
 
 <script>
@@ -276,7 +278,7 @@ _ActionBarDemoModal.vue_
 				modal content
 			</m-text>
 		</m-modal-content>
-		<m-responsive-action-bar>
+		<m-inline-action-bar position="absolute">
 			<m-action-bar-button
 				key="close"
 				shape="pill"
@@ -293,7 +295,7 @@ _ActionBarDemoModal.vue_
 			>
 				Confirm
 			</m-action-bar-button>
-		</m-responsive-action-bar>
+		</m-inline-action-bar>
 	</m-modal>
 </template>
 
@@ -301,7 +303,7 @@ _ActionBarDemoModal.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -313,6 +315,7 @@ export default {
 		MModal,
 		MActionBarButton,
 		MResponsiveActionBar,
+		MInlineActionBar,
 		MModalContent,
 		XIcon,
 	},
@@ -457,7 +460,7 @@ _MutliViewDemoFirstView.vue_
 			</m-text>
 		</m-modal-content>
 
-		<m-responsive-action-bar>
+		<m-inline-action-bar position="absolute">
 			<m-action-bar-button
 				key="close"
 				shape="pill"
@@ -474,7 +477,7 @@ _MutliViewDemoFirstView.vue_
 			>
 				Proceed to next view
 			</m-action-bar-button>
-		</m-responsive-action-bar>
+		</m-inline-action-bar>
 	</div>
 </template>
 
@@ -482,7 +485,7 @@ _MutliViewDemoFirstView.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -494,6 +497,7 @@ export default {
 		MModalContent,
 		MResponsiveActionBar,
 		MActionBarButton,
+		MInlineActionBar,
 		XIcon,
 	},
 
@@ -544,7 +548,7 @@ _MutliViewDemoSecondView.vue_
 			</m-text>
 		</m-modal-content>
 
-		<m-responsive-action-bar>
+		<m-inline-action-bar position="absolute">
 			<m-action-bar-button
 				key="close"
 				shape="pill"
@@ -561,7 +565,7 @@ _MutliViewDemoSecondView.vue_
 			>
 				Finish flow
 			</m-action-bar-button>
-		</m-responsive-action-bar>
+		</m-inline-action-bar>
 	</div>
 </template>
 
@@ -569,7 +573,7 @@ _MutliViewDemoSecondView.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 
 export default {
@@ -581,6 +585,7 @@ export default {
 		MModalContent,
 		MResponsiveActionBar,
 		MActionBarButton,
+		MInlineActionBar,
 		ChevronLeftIcon,
 	},
 
@@ -622,15 +627,18 @@ export default {
 
 ```vue
 <template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<m-button
-			size="small"
-			@click="openModal"
-		>
-			Open modal
-		</m-button>
+	<div>
+		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+			<m-button
+				size="small"
+				@click="openModal"
+			>
+				Open modal
+			</m-button>
+
+		</m-action-bar-layer>
 		<m-modal-layer />
-	</m-action-bar-layer>
+	</div>
 </template>
 
 <script>
@@ -680,14 +688,14 @@ _StackingDemoFirstModal.vue_
 			<m-button @click="closeFirst">
 				close
 			</m-button>
-			<m-responsive-action-bar>
+			<m-inline-action-bar position="absolute">
 				<m-action-bar-button
 					key="close"
 					color="#f6f6f6"
 					class="1"
 					@click="closeFirst"
 				>
-					<chevron-left-icon class="icon" />
+					<x-icon class="icon" />
 				</m-action-bar-button>
 				<m-action-bar-button
 					key="confirm"
@@ -697,7 +705,7 @@ _StackingDemoFirstModal.vue_
 				>
 					Open second modal
 				</m-action-bar-button>
-			</m-responsive-action-bar>
+			</m-inline-action-bar>
 		</m-modal-content>
 	</m-modal>
 </template>
@@ -707,7 +715,7 @@ import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import StackingDemoSecondModal from 'doc/StackingDemoSecondModal.vue';
 import XIcon from '@square/maker-icons/X';
 import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
@@ -722,6 +730,7 @@ export default {
 		MText,
 		MModalContent,
 		MResponsiveActionBar,
+		MInlineActionBar,
 		MActionBarButton,
 		XIcon,
 		ChevronLeftIcon,
@@ -776,14 +785,14 @@ _StackingDemoSecondModal.vue_
 			<m-button @click="closeSecond">
 				close
 			</m-button>
-			<m-responsive-action-bar>
+			<m-inline-action-bar position="absolute">
 				<m-action-bar-button
 					key="close"
 					class="2"
 					color="#f6f6f6"
 					@click="closeSecond"
 				>
-					<x-icon class="icon" />
+					<chevron-left-icon class="icon" />
 				</m-action-bar-button>
 				<m-action-bar-button
 					key="confirm"
@@ -793,7 +802,7 @@ _StackingDemoSecondModal.vue_
 				>
 					Confirm
 				</m-action-bar-button>
-			</m-responsive-action-bar>
+			</m-inline-action-bar>
 		</m-modal-content>
 	</m-modal>
 </template>
@@ -803,7 +812,8 @@ import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MResponsiveActionBar, MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -818,6 +828,8 @@ export default {
 		MResponsiveActionBar,
 		MActionBarButton,
 		XIcon,
+		ChevronLeftIcon,
+		MInlineActionBar,
 	},
 
 	inject: {

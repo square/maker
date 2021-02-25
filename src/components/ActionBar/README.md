@@ -10,21 +10,7 @@
 			<div class="card">
 				<div class="content">
 					<ol>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
-						<li>content content content</li>
+						<li v-for="i in 20" :key="i">content content content</li>
 					</ol>
 					<demo-responsive-action-bar v-if="showActionBar" />
 				</div>
@@ -111,6 +97,8 @@ export default {
 }
 </style>
 ```
+
+<!--
 
 # Keyed transitions
 
@@ -276,6 +264,8 @@ export default {
 </style>
 ```
 
+-->
+
 
 <!-- api-tables:start -->
 ## ActionBar Slots
@@ -314,6 +304,22 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 
 ## ActionBarLayer Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
+
+
+## InlineActionBar Props
+
+| Prop     | Type      | Default    | Possible values                           | Description |
+| -------- | --------- | ---------- | ----------------------------------------- | ----------- |
+| position | `string`  | `'static'` | `static`, `relative`, `absolute`, `fixed` | —           |
+| hide-on  | `string`  | `'none'`   | `none`, `mobile`, `desktop`               | —           |
+| flush    | `boolean` | `false`    | —                                         | —           |
+
+
+## InlineActionBar Slots
 
 | Slot    | Description |
 | ------- | ----------- |

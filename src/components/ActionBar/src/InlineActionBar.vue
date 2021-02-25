@@ -1,5 +1,20 @@
 <template>
+	<div v-if="!flush" :class="$s.ActionBarWrapper">
+		<transition-action-bar-items
+			:class="[
+				$s.ActionBar,
+				$s[`position_${position}`],
+				$s[`hide-on_${hideOn}`],
+			]"
+			tag="div"
+		>
+			<vnode-syringe :class&="$s.Action">
+				<slot />
+			</vnode-syringe>
+		</transition-action-bar-items>
+	</div>
 	<transition-action-bar-items
+		v-else
 		:class="[
 			$s.ActionBar,
 			$s[`position_${position}`],
@@ -34,6 +49,10 @@ export default {
 			default: 'none',
 			validator: (hideOn) => ['none', 'mobile', 'desktop'].includes(hideOn),
 		},
+		flush: {
+			type: Boolean,
+			default: false,
+		},
 	},
 };
 </script>
@@ -45,6 +64,16 @@ export default {
 	box-sizing: border-box;
 	padding: 24px 24px 32px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+.ActionBarWrapper {
+	padding-bottom: 106px;
+}
+
+@media screen and (min-width: 1200px) {
+	.ActionBarWrapper {
+		padding-bottom: 76px;
+	}
 }
 
 @media screen and (min-width: 1200px) {
