@@ -635,7 +635,6 @@ export default {
 			>
 				Open modal
 			</m-button>
-
 		</m-action-bar-layer>
 		<m-modal-layer />
 	</div>

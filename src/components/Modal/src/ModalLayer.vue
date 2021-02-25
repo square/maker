@@ -37,8 +37,8 @@ import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSprin
 import {
 	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
 } from '@square/maker/utils/transitions';
-import modalApi from './modal-api';
 import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import modalApi from './modal-api';
 
 const apiMixin = {
 	inject: {

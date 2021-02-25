@@ -1,5 +1,8 @@
 <template>
-	<div v-if="!flush" :class="$s.ActionBarWrapper">
+	<div
+		v-if="!flush"
+		:class="$s.ActionBarWrapper"
+	>
 		<transition-action-bar-items
 			:class="[
 				$s.ActionBar,

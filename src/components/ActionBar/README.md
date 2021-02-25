@@ -10,7 +10,12 @@
 			<div class="card">
 				<div class="content">
 					<ol>
-						<li v-for="i in 20" :key="i">content content content</li>
+						<li
+							v-for="i in 20"
+							:key="i"
+						>
+							content content content
+						</li>
 					</ol>
 					<demo-responsive-action-bar v-if="showActionBar" />
 				</div>
@@ -63,17 +68,27 @@ _DemoResponsiveActionBar.vue_
 
 ```vue
 <template>
-	<m-responsive-action-bar>
-		<m-action-bar-button key="close">
-			<x-icon class="icon" />
-		</m-action-bar-button>
-		<m-action-bar-button
-			key="confirm"
-			full-width
-		>
-			Confirm or whatever
-		</m-action-bar-button>
-	</m-responsive-action-bar>
+	<div>
+		<button @click="showClose = !showClose">
+			toggle close button
+		</button>
+		<br><br>
+		<m-responsive-action-bar>
+			<m-action-bar-button
+				v-if="showClose"
+				key="close"
+				color="#f6f6f6"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+			<m-action-bar-button
+				key="confirm"
+				full-width
+			>
+				Confirm or whatever
+			</m-action-bar-button>
+		</m-responsive-action-bar>
+	</div>
 </template>
 
 <script>
@@ -86,6 +101,11 @@ export default {
 		MResponsiveActionBar,
 		MActionBarButton,
 		XIcon,
+	},
+	data() {
+		return {
+			showClose: true,
+		};
 	},
 };
 </script>
