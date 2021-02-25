@@ -71,6 +71,10 @@ export default {
 
 	created() {
 		this.actionBarStatesStaged = [];
+
+		/* Throttling prevents infinite render loop from happening when
+		 * slot child updates the actionBarStates, which re-renders slot child.
+		 */
 		this.applyStaged = throttle(this.applyStaged, 50, { leading: false });
 	},
 
