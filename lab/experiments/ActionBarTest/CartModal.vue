@@ -60,7 +60,10 @@ export default {
 	},
 
 	props: {
-		openedBy: String,
+		openedBy: {
+			type: String,
+			required: true,
+		},
 	},
 };
 </script>
