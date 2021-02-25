@@ -6,6 +6,8 @@
 			/>
 		</div>
 
+		<h2>Opened by {{ openedBy }}</h2>
+
 		<div>
 			<h1>Cart modal content</h1>
 			<div
@@ -55,6 +57,10 @@ export default {
 	},
 	inject: {
 		modalApi,
+	},
+
+	props: {
+		openedBy: String,
 	},
 };
 </script>

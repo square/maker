@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<h1>Welcome to Index</h1>
-		<router-link to="/ActionBarTest/PageA">
-			Go to Page A
+		<h1>Welcome to Page B</h1>
+		<router-link to="/ActionBarTest/">
+			Go to index
 		</router-link>
 		<m-action-bar>
 			<m-action-bar-button
@@ -11,7 +11,7 @@
 				full-width
 				@click="openCart"
 			>
-				Open modal from index
+				Open modal from Page B
 			</m-action-bar-button>
 		</m-action-bar>
 	</div>
@@ -34,7 +34,7 @@ export default {
 
 	methods: {
 		openCart() {
-			this.modalApi.open(() => <CartModal opened-by="index" />);
+			this.modalApi.open(() => <CartModal opened-by="page-b" />);
 		},
 	},
 };

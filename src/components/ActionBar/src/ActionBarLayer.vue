@@ -8,11 +8,11 @@
 
 		<transition-action-bar>
 			<inline-action-bar
-				v-if="actionBarVnodes"
+				v-if="actionBarStates"
 				hide-on="desktop"
 				position="fixed"
 			>
-				<v :nodes="actionBarVnodes" />
+				<v :nodes="currentActionBarVnodes" />
 			</inline-action-bar>
 		</transition-action-bar>
 	</div>
@@ -36,13 +36,15 @@ export default {
 		return {
 			'action-bar': {
 				register(uid, vnodes) {
-					vm.registeredBy = uid;
-					vm.setActionbar(vnodes);
+					vm.actionBarSet({
+						registeredBy: uid,
+						vnodes,
+					});
 				},
 				unregister(uid) {
-					if (vm.registeredBy === uid) {
-						vm.setActionbar();
-					}
+					vm.actionBarSet({
+						registeredBy: uid,
+					});
 				},
 			},
 		};
@@ -52,18 +54,70 @@ export default {
 
 	data() {
 		return {
-			registeredBy: undefined,
-			actionBarVnodes: undefined,
+			actionBarStates: [],
 		};
 	},
 
+	computed: {
+		currentActionBarVnodes() {
+			const actionBarState = this.actionBarStates[this.actionBarStates.length - 1];
+			if (!actionBarState) {
+				return undefined;
+			}
+			this.restoreListeners(actionBarState.vnodes);
+			return actionBarState.vnodes;
+		},
+	},
+
 	created() {
-		this.setActionbar = throttle(this.setActionbar, 50, { leading: false });
+		this.actionBarStatesStaged = [];
+		this.applyStaged = throttle(this.applyStaged, 50, { leading: false });
 	},
 
 	methods: {
-		setActionbar(vnodes) {
-			this.actionBarVnodes = vnodes;
+		/* These two methods address a Vue vNode patch bug where
+		 * the original listener on the vNode gets overwritten by
+		 * the next one (same key replacement) and doesn't get reverted
+		 */
+		backupListeners(vnodes) {
+			vnodes.forEach((vnode) => {
+				if (vnode.componentOptions) {
+					vnode.componentOptions.originalListeners = {
+						...vnode.componentOptions.listeners,
+					};
+				}
+			});
+		},
+
+		restoreListeners(vnodes) {
+			vnodes.forEach((vnode) => {
+				if (vnode.componentOptions && vnode.componentOptions.originalListeners) {
+					Object.assign(
+						vnode.componentOptions.listeners,
+						vnode.componentOptions.originalListeners,
+					);
+				}
+			});
+		},
+
+		actionBarSet(actionBarState) {
+			if (actionBarState.vnodes) {
+				this.backupListeners(actionBarState.vnodes);
+				this.actionBarStatesStaged.push(actionBarState);
+			} else {
+				const actionBarStateIdx = this.actionBarStatesStaged.findIndex(
+					({ registeredBy }) => registeredBy === actionBarState.registeredBy,
+				);
+				if (actionBarStateIdx === -1) {
+					throw new Error('Can\'t find Action Bar vNode');
+				}
+				this.actionBarStatesStaged.splice(actionBarStateIdx, 1);
+			}
+			this.applyStaged();
+		},
+
+		applyStaged() {
+			this.actionBarStates = this.actionBarStatesStaged.slice();
 		},
 	},
 };
