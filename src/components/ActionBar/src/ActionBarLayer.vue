@@ -7,14 +7,13 @@
 		<slot />
 
 		<transition-action-bar>
-			<inline-action-bar
+			<atomic-action-bar
 				v-if="actionBarVnodes"
 				hide-on="desktop"
 				position="fixed"
-				flush
 			>
 				<v :nodes="actionBarVnodes" />
-			</inline-action-bar>
+			</atomic-action-bar>
 		</transition-action-bar>
 	</div>
 </template>
@@ -23,13 +22,13 @@
 import { throttle } from 'lodash';
 import V from 'vue-v';
 import TransitionActionBar from './TransitionActionBar.vue';
-import InlineActionBar from './InlineActionBar.vue';
+import AtomicActionBar from './AtomicActionBar.vue';
 
 export default {
 	components: {
 		V,
 		TransitionActionBar,
-		InlineActionBar,
+		AtomicActionBar,
 	},
 
 	provide() {

@@ -1,10 +1,19 @@
 # ActionBar
 
+There are 2 versions of ActionBar:
+1. InlineActionBar - this should be used when the action bar needs to be rendered inline, e.g. in a Card or in a Section, as well as when the action bar needs to be rendered inside any responsive components, e.g. Modal or Blade.
+2. ActionBar - this is a special, but older version, of ActionBar that only works with a parent ActionBarLayer. You should use this if you need a "persistent" ActionBar that stays above all other layered components and animates between different routed views. Also, this ActionBar is only visible on mobile resolutions (width < 1200px) and is hidden on desktop resolutions (width >= 1200px). Again, this is somewhat of a special case, so you probably want InlineActionBar.
+3. In a future major release of Maker we may attempt to coalesce the above 2 components into a single one.
+
+## Examples
+
+### InlineActionBar
+
 ```vue
 <template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<button @click="showActionBar = !showActionBar">
-			toggle actionbar
+	<div>
+		<button @click="showClose = !showClose">
+			toggle close button
 		</button>
 		<div class="container">
 			<div class="card">
@@ -17,26 +26,41 @@
 							content content content
 						</li>
 					</ol>
-					<demo-responsive-action-bar v-if="showActionBar" />
+					<m-inline-action-bar>
+						<m-action-bar-button
+							v-if="showClose"
+							key="close"
+							color="#f6f6f6"
+						>
+							<x-icon class="icon" />
+						</m-action-bar-button>
+						<m-action-bar-button
+							key="confirm"
+							full-width
+						>
+							Confirm or whatever
+						</m-action-bar-button>
+					</m-inline-action-bar>
 				</div>
 			</div>
 		</div>
-	</m-action-bar-layer>
+	</div>
 </template>
 
 <script>
-import { MActionBarLayer } from '@square/maker/components/ActionBar';
-import DemoResponsiveActionBar from 'doc/DemoResponsiveActionBar.vue';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'ResponsiveDemoSetup',
+	name: 'InlineDemo',
 	components: {
-		MActionBarLayer,
-		DemoResponsiveActionBar,
+		MInlineActionBar,
+		MActionBarButton,
+		XIcon,
 	},
 	data() {
 		return {
-			showActionBar: true,
+			showClose: true,
 		};
 	},
 };
@@ -61,10 +85,45 @@ export default {
 	overflow: scroll;
 	height: 100%;
 }
+.icon {
+	width: 24px;
+	height: 24px;
+}
 </style>
 ```
 
-_DemoResponsiveActionBar.vue_
+### ActionBar
+
+```vue
+<template>
+	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+		<button @click="showActionBar = !showActionBar">
+			toggle actionbar
+		</button>
+		<demo-action-bar v-if="showActionBar" />
+	</m-action-bar-layer>
+</template>
+
+<script>
+import { MActionBarLayer } from '@square/maker/components/ActionBar';
+import DemoActionBar from 'doc/DemoActionBar.vue';
+
+export default {
+	name: 'Demo',
+	components: {
+		MActionBarLayer,
+		DemoActionBar,
+	},
+	data() {
+		return {
+			showActionBar: true,
+		};
+	},
+};
+</script>
+```
+
+_DemoActionBar.vue_
 
 ```vue
 <template>
@@ -72,8 +131,7 @@ _DemoResponsiveActionBar.vue_
 		<button @click="showClose = !showClose">
 			toggle close button
 		</button>
-		<br><br>
-		<m-responsive-action-bar>
+		<m-action-bar>
 			<m-action-bar-button
 				v-if="showClose"
 				key="close"
@@ -87,18 +145,18 @@ _DemoResponsiveActionBar.vue_
 			>
 				Confirm or whatever
 			</m-action-bar-button>
-		</m-responsive-action-bar>
+		</m-action-bar>
 	</div>
 </template>
 
 <script>
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
 	name: 'DemoResponsiveActionBar',
 	components: {
-		MResponsiveActionBar,
+		MActionBar,
 		MActionBarButton,
 		XIcon,
 	},
@@ -117,174 +175,6 @@ export default {
 }
 </style>
 ```
-
-<!--
-
-# Keyed transitions
-
-Use `key` on action bar items to smoothly transition them in and out when, for example, opening a modal changes the context of the action bar. Note: the root-level action bar will always be hidden on desktop resolutions, please do not put any important actions into it, or otherwise display other UI on the page at desktop resolutions `min-width: 1200px` that allows the user to perform the same actions that they would via the action bar on mobile resolutions.
-
-```vue
-<template>
-	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<button @click="showActionBar = !showActionBar">
-			toggle actionbar
-		</button>
-		<demo-action-bar v-if="showActionBar" />
-		<m-modal-layer />
-	</m-action-bar-layer>
-</template>
-
-<script>
-import { MModalLayer } from '@square/maker/components/Modal';
-import { MActionBarLayer } from '@square/maker/components/ActionBar';
-import DemoActionBar from 'doc/DemoActionBar.vue';
-
-export default {
-	name: 'DemoSetup',
-
-	components: {
-		MActionBarLayer,
-		DemoActionBar,
-		MModalLayer,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	data() {
-		return {
-			showActionBar: false,
-		};
-	},
-};
-</script>
-
-<style scoped>
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.card {
-	width: 600px;
-	height: 400px;
-	position: relative;
-	overflow: hidden;
-	border-radius: 16px;
-	box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
-	padding: 16px;
-}
-.content {
-	overflow: scroll;
-	height: 100%;
-}
-</style>
-```
-
-_DemoActionBar.vue_
-
-```vue
-<template>
-	<m-action-bar>
-		<m-action-bar-button
-			key="primary"
-			full-width
-			@click="openModal"
-		>
-			Open modal
-		</m-action-bar-button>
-	</m-action-bar>
-</template>
-
-<script>
-import { modalApi } from '@square/maker/components/Modal';
-import { MActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import DemoActionBarModal from 'doc/DemoActionBarModal.vue';
-
-export default {
-	name: 'DemoActionBar',
-
-	components: {
-		MActionBarButton,
-		MActionBar,
-	},
-
-	inject: {
-		modalApi,
-	},
-
-	methods: {
-		openModal() {
-			this.modalApi.open(() => <DemoActionBarModal />);
-		},
-	},
-};
-</script>
-
-<style scoped>
-.icon {
-	width: 24px;
-	height: 24px;
-}
-</style>
-```
-
-_DemoActionBarModal.vue_
-
-```vue
-<template>
-	<m-modal>
-		modal content
-		<m-responsive-action-bar>
-			<m-action-bar-button
-				key="secondary"
-				@click="modalApi.close()"
-			>
-				<x-icon class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="primary"
-				full-width
-				@click="modalApi.close()"
-			>
-				Confirm or whatever
-			</m-action-bar-button>
-		</m-responsive-action-bar>
-	</m-modal>
-</template>
-
-<script>
-import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
-
-export default {
-	name: 'DemoActionBarModal',
-
-	components: {
-		MModal,
-		MResponsiveActionBar,
-		MActionBarButton,
-		XIcon,
-	},
-
-	inject: {
-		modalApi,
-	},
-};
-</script>
-
-<style scoped>
-.icon {
-	width: 24px;
-	height: 24px;
-}
-</style>
-```
-
--->
 
 
 <!-- api-tables:start -->
@@ -332,11 +222,10 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 ## InlineActionBar Props
 
-| Prop     | Type      | Default      | Possible values                           | Description |
-| -------- | --------- | ------------ | ----------------------------------------- | ----------- |
-| position | `string`  | `'absolute'` | `static`, `relative`, `absolute`, `fixed` | —           |
-| hide-on  | `string`  | `'none'`     | `none`, `mobile`, `desktop`               | —           |
-| flush    | `boolean` | `false`      | —                                         | —           |
+| Prop     | Type     | Default      | Possible values                           | Description |
+| -------- | -------- | ------------ | ----------------------------------------- | ----------- |
+| position | `string` | `'absolute'` | `static`, `relative`, `absolute`, `fixed` | —           |
+| hide-on  | `string` | `'none'`     | `none`, `mobile`, `desktop`               | —           |
 
 
 ## InlineActionBar Slots
@@ -346,9 +235,4 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 | default | —           |
 
 
-## ResponsiveActionBar Slots
-
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
 <!-- api-tables:end -->

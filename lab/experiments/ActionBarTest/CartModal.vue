@@ -16,7 +16,7 @@
 			</div>
 		</div>
 
-		<m-responsive-action-bar>
+		<m-inline-action-bar>
 			<m-action-bar-button
 				key="close"
 				color="#f6f6f6"
@@ -35,20 +35,20 @@
 					$10.00
 				</template>
 			</m-action-bar-button>
-		</m-responsive-action-bar>
+		</m-inline-action-bar>
 	</m-modal>
 </template>
 
 <script>
 import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MResponsiveActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import { MImage } from '@square/maker/components/Image';
 import X from '@square/maker-icons/X';
 
 export default {
 	components: {
 		MModal,
-		MResponsiveActionBar,
+		MInlineActionBar,
 		MActionBarButton,
 		MImage,
 		X,

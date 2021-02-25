@@ -49,18 +49,15 @@ const apiMixin = {
 
 	provide() {
 		const vm = this;
-		// const id = Math.random().toString().slice(2, 5);
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
-				// id,
 				isStacked: !!vm.currentLayer,
 			}),
 
 			open(renderFn) {
 				const vnode = renderFn(vm.$createElement);
 				this.state.vnode = vnode;
-				// console.log('opening in layer', this.state.id);
 				// returned method only closes this specific modal
 				return () => {
 					if (this.state.vnode === vnode) {
@@ -70,9 +67,7 @@ const apiMixin = {
 			},
 
 			close() {
-				// this.state.vnode = undefined;
 				if (vm.currentLayer) {
-					// console.log('closing in layer', vm.currentLayer.state.id);
 					vm.currentLayer.state.vnode = undefined;
 				}
 			},
@@ -153,6 +148,10 @@ export default {
 }
 
 .Hidden {
+	/*
+	!important is important to override the inline opacity
+	added to the modal after the fadeIn/fadeOut transition
+	*/
 	opacity: 0 !important;
 	transition: opacity 0.1s;
 }
