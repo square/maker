@@ -164,7 +164,7 @@ export default {
 	font-size: 16px;
 	font-family: var(--font-family);
 	background-color: var(--color-background);
-	border: 1px solid var(--color-background);
+	border: 1px solid transparent;
 	border-radius: var(--border-radius);
 	transition: border-color 0.2s ease;
 
@@ -174,7 +174,7 @@ export default {
 
 	&.disabled {
 		color: var(--color-disabled);
-		border-color: var(--color-background);
+		border-color: transparent;
 		cursor: not-allowed;
 
 		& .Affix {
