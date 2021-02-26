@@ -230,9 +230,7 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 ## InlineActionBar Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
-
-
+| Slot    | Description     |
+| ------- | --------------- |
+| default | ActionBar items |
 <!-- api-tables:end -->
