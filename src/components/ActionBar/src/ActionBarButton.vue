@@ -2,8 +2,6 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`size_${size}`],
-			$s[`shape_${shape}`],
 			$s[`align_${align}`],
 			{
 				[$s.fullWidth]: fullWidth,
@@ -42,6 +40,8 @@
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
 
+// TODO: refactor the code below so it's shared with Button component
+
 function getContrast(chromaBg, targetChromaFg) {
 	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
 		const isLight = chromaBg.luminance() > 0.32;
@@ -66,33 +66,6 @@ function fill(tokens) {
 	};
 }
 
-function outline(tokens) {
-	const color = chroma(tokens.color);
-	const focusColor = getFocus(color);
-	return {
-		'--color-main': 'transparent',
-		'--color-contrast': color.hex(),
-		'--color-focus': focusColor.hex(),
-		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
-	};
-}
-
-function ghost(tokens) {
-	const color = chroma(tokens.color);
-	const focusColor = getFocus(color);
-	return {
-		'--color-main': 'transparent',
-		'--color-contrast': color.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
-const VARIANTS = {
-	primary: fill,
-	secondary: outline,
-	tertiary: ghost,
-};
-
 /**
  * Button component
  * @inheritAttrs button
@@ -112,14 +85,6 @@ export default {
 		type: {
 			type: String,
 			default: 'button',
-		},
-		/**
-		 * Size of the button
-		 */
-		size: {
-			type: String,
-			default: 'medium',
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
 		 * Whether to make the button full-width
@@ -143,22 +108,6 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
-		},
-		/**
-		 * Semantic variant
-		 */
-		variant: {
-			type: String,
-			default: 'primary',
-			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
-		},
-		/**
-		 * Shape of button
-		 */
-		shape: {
-			type: String,
-			default: 'rounded',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
 		 * Toggles button disabled state
@@ -186,7 +135,7 @@ export default {
 
 	computed: {
 		style() {
-			return VARIANTS[this.variant]({
+			return fill({
 				color: this.color,
 				textColor: this.textColor,
 			});
@@ -213,13 +162,18 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
+	min-height: 64px;
+
+	/* large size */
+	padding: 20px 32px;
 	color: var(--text-color);
 	font-weight: 500;
+	font-size: 16px;
 	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 8px;
+	border-radius: 32px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -232,58 +186,16 @@ export default {
 	touch-action: manipulation;
 	fill: currentColor;
 
-	--text-color: var(--color-contrast, #000);
-
-	&.shape_pill {
-		border-radius: 32px;
-	}
-
-	&.shape_squared {
-		border-radius: 0;
+	& > * {
+		line-height: 1.5;
 	}
 
 	&.iconButton {
-		min-width: max-content;
+		flex: 0 0 auto;
+		padding: 20px;
 	}
 
-	&.size_small {
-		padding: 8px 16px;
-		font-size: 12px;
-
-		& > * {
-			line-height: 1.4;
-		}
-
-		&.iconButton {
-			padding: 8px;
-		}
-	}
-
-	&.size_medium {
-		padding: 12px 24px;
-		font-size: 14px;
-
-		& > * {
-			line-height: 1.77;
-		}
-
-		&.iconButton {
-			padding: 12px;
-		}
-	}
-
-	&.size_large {
-		padding: 20px 32px;
-		font-size: 16px;
-
-		& > * {
-			line-height: 1.5;
-		}
-
-		&.iconButton {
-			padding: 20px;
-		}
-	}
+	--text-color: var(--color-contrast, #000);
 
 	&.iconButton > * {
 		line-height: 0;
@@ -332,6 +244,25 @@ export default {
 
 	&.loading {
 		color: transparent;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.Button {
+		min-height: 48px;
+
+		/* medium size */
+		padding: 12px 24px;
+		font-size: 14px;
+
+		& > * {
+			line-height: 1.77;
+		}
+
+		&.iconButton {
+			flex: 0 0 auto;
+			padding: 12px;
+		}
 	}
 }
 

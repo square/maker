@@ -20,9 +20,3 @@ export default {
 	],
 };
 </script>
-
-<style>
-html, body {
-	font-family: "Square Market", system-ui;
-}
-</style>

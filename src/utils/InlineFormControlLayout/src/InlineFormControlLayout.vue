@@ -33,7 +33,7 @@ export default {
 	display: inline-flex;
 	color: var(--color-foreground);
 	font-size: 14px;
-	font-family: "Square Market", system-ui;
+	font-family: inherit;
 	line-height: 24px;
 	cursor: pointer;
 }

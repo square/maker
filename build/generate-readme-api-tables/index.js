@@ -61,7 +61,13 @@ async function parseComponent(componentPath) {
 			const inheritsFromPath = path.join(path.dirname(componentPath), inheritsFrom);
 			const inherited = await parseComponent(inheritsFromPath);
 
-			componentInfo.props = Object.assign(Object.create(inherited.props), componentInfo.props);
+			componentInfo.props = {
+				...(inherited.props || {}),
+				...(componentInfo.props || {}),
+			};
+			if (Object.keys(componentInfo.props).length === 0) {
+				delete componentInfo.props;
+			}
 			if (inherited.tags.inheritAttrs) {
 				componentInfo.tags.inheritAttrs.push(...inherited.tags.inheritAttrs);
 			}
@@ -75,7 +81,13 @@ async function parseComponent(componentPath) {
 			const inheritsFromPath = path.join(path.dirname(componentPath), inheritsFrom);
 			const inherited = await parseComponent(inheritsFromPath);
 
-			componentInfo.events = Object.assign(Object.create(inherited.events), componentInfo.events);
+			componentInfo.events = {
+				...(inherited.events || {}),
+				...(componentInfo.events || {}),
+			};
+			if (Object.keys(componentInfo.events).length === 0) {
+				delete componentInfo.events;
+			}
 			if (inherited.tags.inheritListeners) {
 				componentInfo.tags.inheritListeners.push(...inherited.tags.inheritListeners);
 			}
@@ -93,6 +105,9 @@ async function parseComponent(componentPath) {
 				...(inherited.slots || []),
 				...(componentInfo.slots || []),
 			];
+			if (componentInfo.slots.length === 0) {
+				delete componentInfo.slots;
+			}
 			if (inherited.tags.inheritSlots) {
 				componentInfo.tags.inheritSlots.push(...inherited.tags.inheritSlots);
 			}
