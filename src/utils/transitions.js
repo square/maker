@@ -48,11 +48,35 @@ export const springDown = {
 	damping,
 };
 
+export const springLeft = {
+	from: {
+		x: '100%',
+	},
+	to: {
+		x: '0%',
+	},
+	stiffness,
+	damping,
+};
+
+export const springRight = {
+	from: {
+		x: '0%',
+	},
+	to: {
+		x: '100%',
+	},
+	stiffness,
+	damping,
+};
+
 export default {
 	fadeIn,
 	fadeOut,
 	springUp,
 	springDown,
+	springLeft,
+	springRight,
 	stiffness,
 	damping,
 	mobileMinWidth,

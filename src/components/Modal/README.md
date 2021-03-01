@@ -221,20 +221,17 @@ Modals are responsive and should be used with `InlineActionBar` which renders th
 ```vue
 <template>
 	<div>
-		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-			<m-button
-				size="small"
-				@click="openModal"
-			>
-				Open modal
-			</m-button>
-		</m-action-bar-layer>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
 		<m-modal-layer />
 	</div>
 </template>
 
 <script>
-import { MActionBarLayer } from '@square/maker/components/ActionBar';
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
 import ActionBarDemoModal from 'doc/ActionBarDemoModal.vue';
@@ -245,7 +242,6 @@ export default {
 	components: {
 		MModalLayer,
 		MButton,
-		MActionBarLayer,
 	},
 
 	mixins: [
