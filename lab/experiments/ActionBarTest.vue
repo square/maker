@@ -1,7 +1,6 @@
 <template>
 	<m-action-bar-layer>
 		<router-view />
-
 		<m-modal-layer />
 	</m-action-bar-layer>
 </template>
@@ -21,3 +20,9 @@ export default {
 	],
 };
 </script>
+
+<style>
+html, body {
+	font-family: "Square Market", system-ui;
+}
+</style>

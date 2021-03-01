@@ -1,23 +1,31 @@
-<template functional>
-	<transition
-		:enter-active-class="$s.fading"
-		:leave-active-class="$s.fading"
-		:enter-class="$s.transparent"
-		:leave-to-class="$s.transparent"
-		v-bind="data.attrs"
+<template>
+	<m-transition-spring
+		v-bind="$attrs"
+		:enter="fadeIn"
+		:leave="fadeOut"
+		v-on="$listeners"
 	>
-		<!-- @slot content to fade -->
+		<!-- @slot content to fade in & out -->
 		<slot />
-	</transition>
+	</m-transition-spring>
 </template>
 
-<style module="$s">
-.fading {
-	position: absolute;
-	transition: opacity 0.2s ease-in;
-}
+<script>
+import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
+import { fadeIn, fadeOut } from '@square/maker/utils/transitions';
 
-.transparent {
-	opacity: 0;
-}
-</style>
+export default {
+	components: {
+		MTransitionSpring,
+	},
+
+	inheritAttrs: false,
+
+	data() {
+		return {
+			fadeIn,
+			fadeOut,
+		};
+	},
+};
+</script>
