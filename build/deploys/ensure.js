@@ -5,17 +5,17 @@ const origin = require('remote-origin-url');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 
-module.exports = async function() {
+module.exports = async function ensureDeployDirectory() {
 	// check if .dist exists, otherwise create it
 
-	let distPath = path.resolve('./', '.dist');
+	const distPath = path.resolve('./', '.dist');
 	fse.ensureDirSync(distPath);
 	process.chdir(distPath);
 
 	// current working directory is now .dist
 	// check if .dist is a git repo, otherwise git init
 
-	let dotGitPath = path.resolve('./', '.git');
+	const dotGitPath = path.resolve('./', '.git');
 	let didInit = false;
 	if (!fse.existsSync(dotGitPath)) {
 		await exec('git init');
@@ -25,7 +25,7 @@ module.exports = async function() {
 	// check if git repo has square/maker as its remote origin
 
 	const remoteOrigin = origin.sync(); // returns undefined if no remote origin set
-	didAddOrigin = false;
+	let didAddOrigin = false;
 	if (remoteOrigin !== 'git@github.com:square/maker.git') {
 		if (!didInit) {
 			throw new Error(`you have some git repo in .dist with remote origin ${remoteOrigin} but the deploy script expects git@github.com:square/maker.git`);
