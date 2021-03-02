@@ -13,7 +13,5 @@ const deploy = version;
 let deployPath = path.resolve('./', '.dist/styleguide', deploy);
 let latestPath = path.resolve('./', '.dist/styleguide/latest');
 
-console.log(deployPath, latestPath);
-
 fse.removeSync(latestPath);
 fse.copySync(deployPath, latestPath);

@@ -30,3 +30,4 @@ node_modules/
 
 # Styleguide & Lab deploy distribution files
 /.dist/
+/.dist-test/
