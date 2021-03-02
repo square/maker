@@ -34,6 +34,7 @@ module.exports = {
 		// eslint parsing bug: https://github.com/babel/babel/issues/10904
 		'template-curly-spacing': 'off',
 
+		'unicorn/no-process-exit': 'off',
 		'unicorn/no-useless-undefined': 'off',
 		'unicorn/filename-case': ['error', {
 			cases: {
