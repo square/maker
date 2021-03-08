@@ -154,7 +154,6 @@ export default {
 	--font-family: inherit;
 	--color-background: rgba(0, 0, 0, 0.05);
 	--color-background-focus: rgb(255, 255, 255, 0.95);
-	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-disabled: rgba(0, 0, 0, 0.3);
 	--color-accent: #222;
@@ -187,7 +186,7 @@ export default {
 	height: 48px;
 	padding: 0 32px 0 16px;
 	overflow: hidden;
-	color: var(--color-placeholder);
+	color: var(--color-foreground);
 	font-size: inherit;
 	font-family: inherit;
 	white-space: nowrap;
