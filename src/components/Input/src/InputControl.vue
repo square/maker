@@ -146,7 +146,7 @@ export default {
 	--color-background-disabled: rgba(0, 0, 0, 0.05);
 	--color-accent: #222;
 	--color-error: #ff3b30;
-	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
+	--focus-shadow: none;
 	--border-radius: 8px;
 	--border-color: rgba(0, 0, 0, 0.15);
 	--border-color-hover: rgba(0, 0, 0, 0.3);
