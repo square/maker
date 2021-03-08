@@ -165,8 +165,8 @@ export default {
 }
 
 .variant_outline {
-	--color-background: transparent;
-	--color-background-focus: transparent;
+	--color-background: #fff;
+	--color-background-focus: #fff;
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-disabled: rgba(0, 0, 0, 0.3);
 	--color-background-disabled: rgba(0, 0, 0, 0.05);
