@@ -1,44 +1,160 @@
 # Select
 
+## Examples
+
+### Default State
+
 ```vue
 <template>
-	<div>
-		<h4>normal state</h4>
-		<m-select
-			v-model="currentValue"
-			placeholder="Placeholder"
-			:options="options"
-		/>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		:options="options"
+	/>
+</template>
 
-		<h4>disabled state</h4>
-		<m-select
-			v-model="currentDisabledValue"
-			placeholder="Placeholder"
-			:options="disabledOptions"
-			disabled
-		/>
+<script>
+import { MSelect } from '@square/maker/components/Select';
 
-		<h4>invalid state</h4>
-		<m-select
-			v-model="currentInvalidValue"
-			placeholder="Placeholder"
-			:options="invalidOptions"
-			invalid
-		/>
+export default {
+	components: {
+		MSelect,
+	},
 
-		<h4>with error slot</h4>
-		<m-select
-			v-model="currentInvalidValue"
-			placeholder="Placeholder"
-			:options="invalidOptions"
-		>
-			<template #error>
-				<m-notice type="error">
-					error message here
-				</m-notice>
-			</template>
-		</m-select>
-	</div>
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+				{
+					value: '4',
+					disabled: true,
+					label: 'Really Long Disabled Option 4',
+				},
+			],
+		};
+	},
+};
+</script>
+```
+
+### Disabled State
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		:options="options"
+		disabled
+	/>
+</template>
+
+<script>
+import { MSelect } from '@square/maker/components/Select';
+
+export default {
+	components: {
+		MSelect,
+	},
+
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+			],
+		};
+	},
+};
+</script>
+```
+
+### Invalid State
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		:options="options"
+		invalid
+	/>
+</template>
+
+<script>
+import { MSelect } from '@square/maker/components/Select';
+
+export default {
+	components: {
+		MSelect,
+	},
+
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+				{
+					value: '4',
+					disabled: true,
+					label: 'Really Long Disabled Option 4',
+				},
+			],
+		};
+	},
+};
+</script>
+```
+
+### With Error Slot
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		:options="options"
+	>
+		<template #error>
+			<m-notice type="error">
+				error message here
+			</m-notice>
+		</template>
+	</m-select>
 </template>
 
 <script>
@@ -56,51 +172,89 @@ export default {
 			currentValue: undefined,
 			options: [
 				{
-					value: 1,
+					value: '1',
 					label: 'Short Option 1',
 				},
 				{
-					value: 2,
+					value: '2',
 					label: 'Longer Option 2',
 				},
 				{
-					value: 3,
+					value: '3',
 					label: 'Even Longer Option 3',
 				},
 				{
-					value: 4,
+					value: '4',
 					disabled: true,
 					label: 'Really Long Disabled Option 4',
-				},
-			],
-			currentDisabledValue: undefined,
-			disabledOptions: [
-				{
-					value: 1,
-					disabled: true,
-					label: 'Disabled Option 1',
-				},
-				{
-					value: 2,
-					disabled: true,
-					label: 'Invalid Option 2',
-				},
-			],
-			currentInvalidValue: undefined,
-			invalidOptions: [
-				{
-					value: 1,
-					label: 'Invalid Option 1',
-				},
-				{
-					value: 2,
-					label: 'Invalid Option 2',
 				},
 			],
 		};
 	},
 };
 </script>
+```
+
+### With Prefix Slot
+
+Only 16px by 16px icons can be used in the prefix slot
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		:options="options"
+	>
+		<template #prefix>
+			<feather-icon class="icon" />
+		</template>
+	</m-select>
+</template>
+
+<script>
+import { MSelect } from '@square/maker/components/Select';
+import FeatherIcon from '@square/maker-icons/Feather';
+
+export default {
+	components: {
+		MSelect,
+		FeatherIcon,
+	},
+
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+				{
+					value: '4',
+					disabled: true,
+					label: 'Really Long Disabled Option 4',
+				},
+			],
+		};
+	},
+};
+</script>
+
+<style scoped>
+.icon {
+	width: 16px;
+	height: 16px;
+}
+</style>
 ```
 
 <!-- api-tables:start -->

@@ -5,6 +5,13 @@
 			$s[`variant_${variant}`],
 		]"
 	>
+		<span
+			v-if="$slots.prefix"
+			:class="$s.Prefix"
+		>
+			<!-- @slot Select prefix -->
+			<slot name="prefix" />
+		</span>
 		<select
 			ref="select"
 			v-model="selected"
@@ -13,6 +20,7 @@
 				{
 					[$s.selected]: optionSelected,
 					[$s.invalid]: invalid,
+					[$s.hasPrefix]: $slots.prefix,
 				},
 			]"
 			v-bind="$attrs"
@@ -164,6 +172,15 @@ export default {
 	border-radius: var(--border-radius);
 }
 
+.Prefix {
+	position: absolute;
+	top: 50%;
+	left: 16px;
+	line-height: 0;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
 .Select {
 	box-sizing: inherit;
 	width: 100%;
@@ -182,6 +199,11 @@ export default {
 	cursor: pointer;
 	transition: border-color 0.2s ease;
 	appearance: none;
+
+	&.hasPrefix {
+		/* select left padding + icon width + icon right padding */
+		padding-left: calc(16px + 16px + 8px);
+	}
 
 	&.selected {
 		color: var(--color-foreground);
