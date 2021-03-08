@@ -4,6 +4,8 @@
 
 ### Default State
 
+Filled variant.
+
 ```vue
 <template>
 	<m-select
@@ -255,6 +257,147 @@ export default {
 	height: 16px;
 }
 </style>
+```
+
+### Outline Variant
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		variant="outline"
+		:options="options"
+	/>
+</template>
+
+<script>
+import { MSelect } from '@square/maker/components/Select';
+
+export default {
+	components: {
+		MSelect,
+	},
+
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+				{
+					value: '4',
+					disabled: true,
+					label: 'Really Long Disabled Option 4',
+				},
+			],
+		};
+	},
+};
+</script>
+```
+
+### Outline Variant Disabled State
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		variant="outline"
+		:options="options"
+		disabled
+	/>
+</template>
+
+<script>
+import { MSelect } from '@square/maker/components/Select';
+
+export default {
+	components: {
+		MSelect,
+	},
+
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+			],
+		};
+	},
+};
+</script>
+```
+
+### Outline Variant Invalid State
+
+```vue
+<template>
+	<m-select
+		v-model="currentValue"
+		placeholder="Placeholder"
+		variant="outline"
+		:options="options"
+		invalid
+	/>
+</template>
+
+<script>
+import { MSelect } from '@square/maker/components/Select';
+
+export default {
+	components: {
+		MSelect,
+	},
+
+	data() {
+		return {
+			currentValue: undefined,
+			options: [
+				{
+					value: '1',
+					label: 'Short Option 1',
+				},
+				{
+					value: '2',
+					label: 'Longer Option 2',
+				},
+				{
+					value: '3',
+					label: 'Even Longer Option 3',
+				},
+				{
+					value: '4',
+					disabled: true,
+					label: 'Really Long Disabled Option 4',
+				},
+			],
+		};
+	},
+};
+</script>
 ```
 
 <!-- api-tables:start -->
