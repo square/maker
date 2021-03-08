@@ -121,7 +121,6 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--font-family: inherit;
 	--color-background: rgba(0, 0, 0, 0.05);
 	--color-background-focus: rgb(255, 255, 255, 0.95);
 	--color-placeholder: rgba(0, 0, 0, 0.55);
@@ -137,9 +136,8 @@ export default {
 }
 
 .variant_outline {
-	--font-family: inherit;
-	--color-background: transparent;
-	--color-background-focus: transparent;
+	--color-background: #fff;
+	--color-background-focus: #fff;
 	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-disabled: rgba(0, 0, 0, 0.3);
@@ -181,6 +179,7 @@ export default {
 	padding: 0 16px;
 	color: var(--color-foreground);
 	font-size: 16px;
+	font-family: inherit;
 	font-family: var(--font-family);
 	background-color: var(--color-background);
 	border: 1px solid var(--border-color);
