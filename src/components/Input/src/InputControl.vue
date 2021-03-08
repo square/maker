@@ -64,7 +64,7 @@ export default {
 		variant: {
 			type: String,
 			default: 'fill',
-			validator: (variant) => ['fill'].includes(variant),
+			validator: (variant) => ['fill', 'outline'].includes(variant),
 		},
 		/**
 		 * Toggles input disabled state
@@ -127,10 +127,29 @@ export default {
 	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-disabled: rgba(0, 0, 0, 0.3);
+	--color-background-disabled: rgba(0, 0, 0, 0.05);
 	--color-accent: #222;
 	--color-error: #ff3b30;
 	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
 	--border-radius: 8px;
+	--border-color: transparent;
+	--border-color-hover: #222;
+}
+
+.variant_outline {
+	--font-family: inherit;
+	--color-background: transparent;
+	--color-background-focus: transparent;
+	--color-placeholder: rgba(0, 0, 0, 0.55);
+	--color-foreground: rgba(0, 0, 0, 0.9);
+	--color-disabled: rgba(0, 0, 0, 0.3);
+	--color-background-disabled: rgba(0, 0, 0, 0.05);
+	--color-accent: #222;
+	--color-error: #ff3b30;
+	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
+	--border-radius: 8px;
+	--border-color: rgba(0, 0, 0, 0.15);
+	--border-color-hover: rgba(0, 0, 0, 0.3);
 }
 
 .Affix {
@@ -164,17 +183,18 @@ export default {
 	font-size: 16px;
 	font-family: var(--font-family);
 	background-color: var(--color-background);
-	border: 1px solid transparent;
+	border: 1px solid var(--border-color);
 	border-radius: var(--border-radius);
 	transition: border-color 0.2s ease;
 
 	&:not(.disabled, .invalid):hover {
-		border-color: var(--color-accent);
+		border-color: var(--border-color-hover);
 	}
 
 	&.disabled {
 		color: var(--color-disabled);
-		border-color: transparent;
+		background-color: var(--color-background-disabled);
+		border-color: var(--border-color);
 		cursor: not-allowed;
 
 		& .Affix {
@@ -188,7 +208,7 @@ export default {
 
 	&:focus-within:not(.invalid, .disabled) {
 		background-color: var(--color-background-focus);
-		border-color: var(--color-accent);
+		border-color: var(--border-color-hover);
 		box-shadow: var(--focus-shadow);
 	}
 
