@@ -3,9 +3,9 @@
 		:class="$s.Stepper"
 	>
 		<m-button
-			size="large"
-			variant="primary"
 			shape="pill"
+			:variant="buttonVariant"
+			:size="size"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === minVal"
@@ -17,9 +17,9 @@
 			{{ value }}
 		</span>
 		<m-button
-			size="large"
-			variant="primary"
 			shape="pill"
+			:variant="buttonVariant"
+			:size="size"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === maxVal"
@@ -85,6 +85,15 @@ export default {
 			type: String,
 			default: '#000000',
 		},
+
+		/**
+		 * stepper size, adjusts button variation and size
+		 */
+		size: {
+			type: String,
+			default: 'small',
+			validator: (size) => ['small', 'medium', 'large'].includes(size),
+		},
 	},
 
 	computed: {
@@ -94,6 +103,10 @@ export default {
 
 		minVal() {
 			return Number.parseInt(this.min, 10);
+		},
+
+		buttonVariant() {
+			return this.size === 'small' ? 'primary' : 'secondary';
 		},
 	},
 
