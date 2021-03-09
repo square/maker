@@ -3,6 +3,10 @@
 ## Supported environments
 
 - Desktop
+	- Safari
+	- Chrome
+	- Firefox
+	- Edge
 - Mobile
   - iOS - Safari
   - iOS - Chrome
@@ -64,32 +68,25 @@ Start the server normally and expose it via [ngrok](https://ngrok.com/), in a se
 $ ngrok http <SERVER PORT>
 ```
 
-### Lint JS
+### Linting
 
 ```sh
+# run JS lints
 $ npm run lint:js
-```
 
-#### Autofix violations
-```sh
+# run JS lints & autofix where possible
 $ npm run lint:js -- --fix
-```
 
-### Lint CSS
-
-```
+# run CSS lints
 $ npm run lint:css
-```
 
-#### Autofix violations
-
-```sh
+# run CSS lints & autofix where possible
 $ npm run lint:css -- --fix
 ```
 
 ### Build
 
-Build component library and produce distribution files
+Build component library and produce distribution files.
 
 ```sh
 $ npm run build
