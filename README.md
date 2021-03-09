@@ -13,3 +13,7 @@ npm i @square/maker
 # install peer dependencies
 npx i-peers -a
 ```
+
+## Contributing
+
+Please read the [contributing document](.github/CONTRITBUTING.md).
