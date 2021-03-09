@@ -59,14 +59,14 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop       | Type            | Default     | Possible values            | Description                                     |
-| ---------- | --------------- | ----------- | -------------------------- | ----------------------------------------------- |
-| v-model*   | `number`        | —           | —                          | stepper's current value                         |
-| min        | `number|string` | —           | —                          | stepper min value                               |
-| max        | `number|string` | —           | —                          | stepper max value                               |
-| color      | `string`        | `'#cccccc'` | —                          | stepper button background color                 |
-| text-color | `string`        | `'#000000'` | —                          | stepper button text color                       |
-| size       | `string`        | `'small'`   | `small`, `medium`, `large` | stepper button size                             |
+| Prop       | Type            | Default     | Possible values            | Description                     |
+| ---------- | --------------- | ----------- | -------------------------- | ------------------------------- |
+| v-model*   | `number`        | —           | —                          | stepper's current value         |
+| min        | `number|string` | —           | —                          | stepper min value               |
+| max        | `number|string` | —           | —                          | stepper max value               |
+| color      | `string`        | `'#cccccc'` | —                          | stepper button background color |
+| text-color | `string`        | `'#000000'` | —                          | stepper button text color       |
+| size       | `string`        | `'small'`   | `small`, `medium`, `large` | stepper button size             |
 
 
 ## Events
