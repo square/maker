@@ -4,7 +4,7 @@
 	>
 		<m-button
 			shape="pill"
-			:variant="buttonVariant"
+			variant="primary"
 			:size="size"
 			:color="color"
 			:text-color="textColor"
@@ -18,7 +18,7 @@
 		</span>
 		<m-button
 			shape="pill"
-			:variant="buttonVariant"
+			variant="primary"
 			:size="size"
 			:color="color"
 			:text-color="textColor"
@@ -87,7 +87,7 @@ export default {
 		},
 
 		/**
-		 * stepper size, adjusts button variation and size
+		 * stepper button size
 		 */
 		size: {
 			type: String,
@@ -103,10 +103,6 @@ export default {
 
 		minVal() {
 			return Number.parseInt(this.min, 10);
-		},
-
-		buttonVariant() {
-			return this.size === 'small' ? 'primary' : 'secondary';
 		},
 	},
 
