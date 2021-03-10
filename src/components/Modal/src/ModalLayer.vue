@@ -35,7 +35,7 @@ import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFade } from '@square/maker/components/TransitionFade';
 import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
 import {
-	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
+	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, tabletMinWidth,
 } from '@square/maker/utils/transitions';
 import modalApi from './modal-api';
 
@@ -108,7 +108,7 @@ export default {
 				enter: springUp,
 				leave: springDown,
 			}, {
-				minWidth: desktopMinWidth,
+				minWidth: tabletMinWidth,
 				enter: fadeIn,
 				leave: fadeOut,
 			}],
