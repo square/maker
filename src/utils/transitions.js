@@ -1,5 +1,6 @@
 export const mobileMinWidth = 0;
-export const desktopMinWidth = 840;
+export const tabletMinWidth = 840;
+export const desktopMinWidth = 1200;
 
 export const stiffness = 600;
 export const damping = 60;
@@ -56,5 +57,6 @@ export default {
 	stiffness,
 	damping,
 	mobileMinWidth,
+	tabletMinWidth,
 	desktopMinWidth,
 };
