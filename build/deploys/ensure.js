@@ -33,9 +33,9 @@ module.exports = async function ensureDeployDirectory() {
 
 	const remoteOrigin = origin.sync(); // returns undefined if no remote origin set
 	let didAddOrigin = false;
-	if (validOrigins.includes(remoteOrigin)) {
+	if (!validOrigins.includes(remoteOrigin)) {
 		if (!didInit) {
-			throw new Error(`you have some git repo in .dist with remote origin ${remoteOrigin} but the deploy script expects one of: ${validOrigins.join(', ')}`);
+			throw new Error(`you have some git repo in .dist with remote origin ${remoteOrigin} but the deploy script expects one of: ${validOrigins.join(' ')}`);
 		}
 		await exec('git remote add origin git@github.com:square/maker.git');
 		didAddOrigin = true;
