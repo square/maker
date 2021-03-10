@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Checkout Maker Repo master branch
         uses: actions/checkout@v2
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
 
       - name: Checkout nested Maker Repo deploys branch in .dist directory
         uses: actions/checkout@v2
@@ -25,9 +22,6 @@ jobs:
           repository: square/maker
           ref: deploys
           path: .dist
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
 
       - name: Set Github Actions Bot username & email
         run: |
