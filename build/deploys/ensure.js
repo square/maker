@@ -24,11 +24,18 @@ module.exports = async function ensureDeployDirectory() {
 
 	// check if git repo has square/maker as its remote origin
 
+	const validOrigins = [
+		'git@github.com:square/maker.git',
+		'git@github.com:square/maker',
+		'https://github.com/square/maker.git',
+		'https://github.com/square/maker',
+	];
+
 	const remoteOrigin = origin.sync(); // returns undefined if no remote origin set
 	let didAddOrigin = false;
-	if (remoteOrigin !== 'git@github.com:square/maker.git') {
+	if (validOrigins.includes(remoteOrigin)) {
 		if (!didInit) {
-			throw new Error(`you have some git repo in .dist with remote origin ${remoteOrigin} but the deploy script expects git@github.com:square/maker.git`);
+			throw new Error(`you have some git repo in .dist with remote origin ${remoteOrigin} but the deploy script expects one of: ${validOrigins.join(', ')}`);
 		}
 		await exec('git remote add origin git@github.com:square/maker.git');
 		didAddOrigin = true;
