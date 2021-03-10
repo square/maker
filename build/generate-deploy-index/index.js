@@ -51,11 +51,11 @@ const BUILT_INDEX = `
 </head>
 <body>
 	<h2>Styleguide Deploys</h2>
-	<h3>Versioned releases</h3>
+	<h3>Versioned Releases</h3>
 	<ul>
 		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion))}
 	</ul>
-	<h3>WIP branches</h3>
+	<h3>WIP Branches</h3>
 	<ul>
 		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 	</ul>
