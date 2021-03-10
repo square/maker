@@ -1,6 +1,6 @@
 # Contributing
 
-This document contains all of the dry technical details of how to contribute to Maker. This document assumes your proposed contribution is sensible and within Maker's scope and guiding philosophies. If you are unsure if the last sentence applies to you please read [What is Maker?](./WHAT_IS_MAKER.md).
+This document contains all of the dry technical details of how to contribute to Maker. This document assumes your proposed contribution is sensible and within Maker's scope and guiding philosophies. If you are unsure if the last sentence applies to you please read [What is Maker?](./WHAT_IS_MAKER.md)
 
 ## Supported environments
 

@@ -16,4 +16,4 @@ npx i-peers -a
 
 ## Contributing
 
-Please read the [contributing docs](.github/CONTRITBUTING.md).
+Please read the [contributing docs](.github/CONTRIBUTING.md).
