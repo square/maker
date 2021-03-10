@@ -1,7 +1,10 @@
 <template>
-	<div class="container">
-		<side-nav />
-		<router-view />
+	<div>
+		<h1>THE TEST SUCCEEDED! Also: do not actually merge this in.</h1>
+		<div class="container">
+			<side-nav />
+			<router-view />
+		</div>
 	</div>
 </template>
 
