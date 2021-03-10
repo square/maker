@@ -29,3 +29,14 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
+      - name: Setup Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build & Deploy Styleguide
+        run: npm run styleguide-deploy
+
