@@ -1,3 +1,5 @@
+/* eslint unicorn/no-fn-reference-in-iterator: 0 */
+
 const path = require('path');
 const fs = require('fs');
 
