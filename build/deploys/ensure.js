@@ -37,7 +37,7 @@ module.exports = async function ensureDeployDirectory() {
 	// fetch remote branches if necessary
 
 	if (didAddOrigin) {
-		await exec('git fetch');
+		await exec('git fetch origin deploys --depth=1');
 	}
 
 	// check if git repo has the deploys branch checked out
