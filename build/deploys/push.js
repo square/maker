@@ -13,7 +13,7 @@ const ensureDeployDirectory = require('./ensure');
 	// commit
 	try {
 		await exec('git commit -m "docs: update deploys"');
-	} catch (e) {
+	} catch {
 		// this would fail if the above command did not
 		// add any files to the staging index, so
 		// it's okay to let this command to fail as well
