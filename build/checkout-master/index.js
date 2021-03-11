@@ -21,7 +21,10 @@ function hasUncommitedChanges(gitStatusStdout) {
 		throw new Error('cannot switch to master branch if you have uncommitted changes');
 	}
 
-	await exec('git checkout master');
+	let result = await exec('git checkout master');
+	console.log(result);
+	let result = await exec('git pull');
+	console.log(result);
 
 
 	/*
