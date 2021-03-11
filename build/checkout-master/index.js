@@ -21,6 +21,8 @@ function hasUncommitedChanges(gitStatusStdout) {
 		throw new Error('cannot switch to master branch if you have uncommitted changes');
 	}
 
+	await exec('git checkout master');
+
 
 	/*
 	// check if git repo has square/maker as its remote origin
