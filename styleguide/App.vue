@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>THE TEST SUCCEEDED! Also: do not actually merge this in. 2</h1>
+		<h1>THE TEST SUCCEEDED! Also: do not actually merge this in. Test 3!</h1>
 		<div class="container">
 			<side-nav />
 			<router-view />
