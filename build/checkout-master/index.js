@@ -23,7 +23,7 @@ function hasUncommitedChanges(gitStatusStdout) {
 
 	let result = await exec('git checkout master');
 	console.log(result);
-	let result = await exec('git pull');
+	result = await exec('git pull');
 	console.log(result);
 
 
