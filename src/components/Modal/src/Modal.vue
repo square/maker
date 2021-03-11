@@ -21,7 +21,7 @@
 	background: #f5f6f7;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 840px) {
 	.Container {
 		display: inline-block;
 		width: auto;
@@ -32,6 +32,7 @@
 
 	.Modal {
 		width: 600px;
+		min-height: 180px;
 		max-height: calc(100vh - 64px);
 	}
 }

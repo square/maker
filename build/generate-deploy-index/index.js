@@ -1,3 +1,5 @@
+/* eslint unicorn/no-fn-reference-in-iterator: 0 */
+
 const path = require('path');
 const fs = require('fs');
 
@@ -24,10 +26,22 @@ ensureDirectory(STYLEGUIDE_DIST);
 const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST);
 const LAB_DEPLOYS = getDirectories(LAB_DIST);
 
+const VERSION_REGEX = /^\d+\.\d+\.\d+/;
+function isVersion(deployName) {
+	return deployName === 'latest' || VERSION_REGEX.test(deployName);
+}
+function isntVersion(deployName) {
+	return !isVersion(deployName);
+}
+
 function toDeployLinks(prefix, suffix, items) {
 	items.sort();
 	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
 }
+
+const STYLEGUIDE_URL_PREFIX = 'https://square.github.io/maker/styleguide/';
+const LAB_URL_PREFIX = 'https://square.github.io/maker/lab/';
+const URL_SUFFIX = '/#/';
 
 const BUILT_INDEX = `
 <!doctype html>
@@ -37,12 +51,17 @@ const BUILT_INDEX = `
 </head>
 <body>
 	<h2>Styleguide Deploys</h2>
+	<h3>Versioned Releases</h3>
 	<ul>
-		${toDeployLinks('https://square.github.io/maker/styleguide/', '/#/', STYLEGUIDE_DEPLOYS)}
+		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion))}
+	</ul>
+	<h3>WIP Branches</h3>
+	<ul>
+		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 	</ul>
 	<h2>Lab Deploys</h2>
 	<ul>
-		${toDeployLinks('https://square.github.io/maker/lab/', '/#/', LAB_DEPLOYS)}
+		${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS)}
 	</ul>
 </body>
 </html>
