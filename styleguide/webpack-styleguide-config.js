@@ -13,6 +13,9 @@ const { version } = require('../package.json');
 const branchName = branch.sync();
 const deploy = branchName === 'master' ? version : branchName;
 
+console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
+console.log('ENV VARS:', JSON.stringify(process.env, null, 4));
+
 const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
 
