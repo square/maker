@@ -1,6 +1,6 @@
 # What is Maker?
 
-Most people contributing to and using Maker will be familiar with [Orbit](https://github.com/square/orbit) and will likely have a lot of wrong ideas about Maker's goals by assuming they're the same as Orbit's. This is incorrect. Maker is not Orbit. Their key high-level differences in a table:
+Most people contributing to and using Maker will be familiar with [Orbit](https://github.com/square/orbit), but might have the wrong idea about Maker's goals, by assuming they're the same as Orbit's. This is incorrect. Maker is not Orbit. Their key high-level differences in a table:
 
 | | Orbit | Maker |
 |-|-------|-------|
