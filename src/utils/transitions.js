@@ -27,6 +27,58 @@ export const fadeOut = {
 	damping,
 };
 
+export const fadeInSlideLeft = {
+	from: {
+		opacity: '0%',
+		x: '40px',
+	},
+	to: {
+		opacity: '100%',
+		x: '0px',
+	},
+	stiffness,
+	damping,
+};
+
+export const fadeOutSlideLeft = {
+	from: {
+		opacity: '100%',
+		x: '0px',
+	},
+	to: {
+		opacity: '0%',
+		x: '-40px',
+	},
+	stiffness,
+	damping,
+};
+
+export const fadeInSlideRight = {
+	from: {
+		opacity: '0%',
+		x: '-40px',
+	},
+	to: {
+		opacity: '100%',
+		x: '0px',
+	},
+	stiffness,
+	damping,
+};
+
+export const fadeOutSlideRight = {
+	from: {
+		opacity: '100%',
+		x: '0px',
+	},
+	to: {
+		opacity: '0%',
+		x: '40px',
+	},
+	stiffness,
+	damping,
+};
+
 export const springUp = {
 	from: {
 		y: '100%',
@@ -52,6 +104,10 @@ export const springDown = {
 export default {
 	fadeIn,
 	fadeOut,
+	fadeInSlideLeft,
+	fadeOutSlideLeft,
+	fadeInSlideRight,
+	fadeOutSlideRight,
 	springUp,
 	springDown,
 	stiffness,

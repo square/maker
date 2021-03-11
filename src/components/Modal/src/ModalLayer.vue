@@ -12,10 +12,8 @@
 		<m-transition-spring-responsive :transitions="transitions">
 			<div
 				v-if="currentLayer.state.vnode"
-				:class="[
-					$s.ModalLayer,
-					{ [$s.Hidden]: modalApi.state.vnode },
-				]"
+				ref="baseModalLayer"
+				:class="$s.ModalLayer"
 			>
 				<pseudo-window
 					body
@@ -35,8 +33,18 @@ import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFade } from '@square/maker/components/TransitionFade';
 import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
 import {
-	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, tabletMinWidth,
+	fadeIn,
+	fadeOut,
+	fadeInSlideLeft,
+	fadeOutSlideLeft,
+	fadeInSlideRight,
+	fadeOutSlideRight,
+	springUp,
+	springDown,
+	mobileMinWidth,
+	tabletMinWidth,
 } from '@square/maker/utils/transitions';
+import { spring, styler } from 'popmotion';
 import modalApi from './modal-api';
 
 const apiMixin = {
@@ -102,6 +110,12 @@ export default {
 	apiMixin,
 
 	data() {
+		let tabletEnter = fadeIn;
+		let tabletLeave = fadeOut;
+		if (this.currentLayer.state.isStacked) {
+			tabletEnter = fadeInSlideLeft;
+			tabletLeave = fadeOutSlideRight;
+		}
 		return {
 			transitions: [{
 				minWidth: mobileMinWidth,
@@ -109,10 +123,47 @@ export default {
 				leave: springDown,
 			}, {
 				minWidth: tabletMinWidth,
-				enter: fadeIn,
-				leave: fadeOut,
+				enter: tabletEnter,
+				leave: tabletLeave,
 			}],
 		};
+	},
+
+	mounted() {
+		const vm = this;
+		this.unwatchStackedModal = this.$watch(() => vm.modalApi.state.vnode, () => {
+			const isTablet = window.innerWidth >= tabletMinWidth;
+			const isMobile = !isTablet;
+			const isOpeningStackedModal = !!vm.modalApi.state.vnode;
+			const isClosingStackedModal = !isOpeningStackedModal;
+			const baseModalLayerStyler = styler(vm.$refs.baseModalLayer);
+
+			if (isTablet && isOpeningStackedModal) {
+				spring(fadeOutSlideLeft).start({
+					update: (v) => baseModalLayerStyler.set(v),
+				});
+			} else if (isTablet && isClosingStackedModal) {
+				spring(fadeInSlideRight).start({
+					update: (v) => baseModalLayerStyler.set(v),
+				});
+			} else if (isMobile && isOpeningStackedModal) {
+				window.setTimeout(() => {
+					baseModalLayerStyler.set({
+						opacity: '0%',
+						x: '-40px',
+					});
+				}, 500);
+			} else if (isMobile && isClosingStackedModal) {
+				baseModalLayerStyler.set({
+					opacity: '100%',
+					x: '0px',
+				});
+			}
+		});
+	},
+
+	destroyed() {
+		this.unwatchStackedModal();
 	},
 };
 </script>
@@ -145,15 +196,6 @@ export default {
 
 .Transparent {
 	background-color: transparent;
-}
-
-.Hidden {
-	/*
-	!important is important to override the inline opacity
-	added to the modal after the fadeIn/fadeOut transition
-	*/
-	opacity: 0 !important;
-	transition: opacity 0.1s;
 }
 
 .disableScroll {
