@@ -10,7 +10,12 @@ const { merge } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
 const { version } = require('../package.json');
 
-const branchName = branch.sync();
+// branch.sync() doesn't work in the Github Actions env
+let branchName = branch.sync();
+if (!branchName) {
+	// but that's okay because the Github Actions env provides this var
+	branchName = process.env.GITHUB_HEAD_REF;
+}
 const deploy = branchName === 'master' ? version : branchName;
 
 console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
