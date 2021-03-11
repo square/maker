@@ -247,7 +247,7 @@ export default {
 	}
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 840px) {
 	.Button {
 		min-height: 48px;
 
