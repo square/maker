@@ -18,8 +18,8 @@ if (!branchName) {
 }
 const deploy = branchName === 'master' ? version : branchName;
 
-console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
-console.log('ENV VARS:', JSON.stringify(process.env, null, 4));
+// console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
+// console.log('ENV VARS:', JSON.stringify(process.env, undefined, 4));
 
 const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
