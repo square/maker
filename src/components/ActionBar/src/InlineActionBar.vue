@@ -32,7 +32,7 @@ export default {
 	padding-bottom: 120px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 840px) {
 	.ActionBarWrapper {
 		padding-bottom: 104px;
 	}
