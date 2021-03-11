@@ -42,3 +42,11 @@ jobs:
       - name: Build & Deploy Styleguide
         run: npm run styleguide-deploy
 
+      - name: Comment Styleguide Deploy link on PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: ${{ format('Styleguide deployed to https://square.github.io/maker/styleguide/{0}/#/', github.head_ref) }}
+          check_for_duplicate_msg: true
+
