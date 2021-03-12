@@ -11,11 +11,11 @@
     "build": "NODE_ENV=production webpack --config build/webpack-build-config",
     "dev": "npm run generate-api-tables && just-ssr --webpack-config build/webpack-development-config --open",
     "lab": "just-ssr --webpack-config lab/webpack-lab-config --open --port 8081",
-		"lab-build": "NODE_ENV=production webpack --config lab/webpack-lab-config",
+    "lab-build": "NODE_ENV=production webpack --config lab/webpack-lab-config",
     "lab-deploy": "npm run pull-deploys && NODE_ENV=production webpack --config lab/webpack-lab-config && npm run generate-deploy-index && npm run push-deploys",
     "generate-api-tables": "node ./build/generate-readme-api-tables",
     "styleguide": "npm run generate-api-tables && just-ssr --webpack-config styleguide/webpack-styleguide-config --open",
-		"styleguide-build": "NODE_ENV=production webpack --config styleguide/webpack-styleguide-config",
+    "styleguide-build": "NODE_ENV=production webpack --config styleguide/webpack-styleguide-config",
     "styleguide-deploy": "npm run generate-api-tables && npm run pull-deploys && NODE_ENV=production webpack --config styleguide/webpack-styleguide-config && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "generate-deploy-index": "node ./build/generate-deploy-index",
     "lint": "npm run lint:js && npm run lint:css",
@@ -38,7 +38,8 @@
   },
   "peerDependencies": {
     "chroma-js": "^2.1.0",
-    "popmotion": "^8.7.5",
+    "popmotion": "^9.3.1",
+    "stylefire": "^7.0.3",
     "vue": "^2.6.12",
     "@square/maker-icons": "^2.0.0"
   },

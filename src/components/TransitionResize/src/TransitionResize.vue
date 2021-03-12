@@ -16,9 +16,10 @@
 </template>
 
 <script>
-import { spring, styler } from 'popmotion';
+import styler from 'stylefire';
+import { animate } from 'popmotion';
 import {
-	fadeIn, fadeOut, stiffness, damping,
+	fadeIn, fadeOut, type, stiffness, damping,
 } from '@square/maker/utils/transitions';
 
 // default mass is 1
@@ -71,6 +72,7 @@ export default {
 					width: `${this.enterWidth}px`,
 					height: `${this.enterHeight}px`,
 				},
+				type,
 				stiffness,
 				damping,
 				mass: mass * 2,
@@ -81,13 +83,21 @@ export default {
 			// skip resize animation if dimensions are the same
 			if (this.leaveWidth === this.enterWidth && this.leaveHeight === this.enterHeight) {
 				element.style.removeProperty('overflow');
+				/*
 				spring(fastFadeIn).start({
 					update: (v) => elementStyler.set(v),
 					complete: enterComplete,
 				});
+				*/
+				animate({
+					...fastFadeIn,
+					onUpdate: (v) => elementStyler.set(v),
+					onComplete: enterComplete,
+				})
 				return;
 			}
 
+			/*
 			spring(resize).start({
 				update: (v) => elementStyler.set(v),
 				complete: () => {
@@ -97,6 +107,19 @@ export default {
 						complete: enterComplete,
 					});
 				},
+			});
+			*/
+			animate({
+				...resize,
+				onUpdate: (v) => elementStyler.set(v),
+				onComplete: () => {
+					element.style.removeProperty('overflow');
+					animate({
+						...fastFadeIn,
+						onUpdate: (v) => elementStyler.set(v),
+						onComplete: enterComplete,
+					});
+				}
 			});
 		},
 		onAfterEnter(element) {
@@ -118,9 +141,16 @@ export default {
 			// console.log('on leave', element);
 
 			const elementStyler = styler(element);
+			/*
 			spring(fastFadeOut).start({
 				update: (v) => elementStyler.set(v),
 				complete: leaveComplete,
+			});
+			*/
+			animate({
+				...fastFadeOut,
+				onUpdate: (v) => elementStyler.set(v),
+				onComplete: leaveComplete,
 			});
 		},
 		/*

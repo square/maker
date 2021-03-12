@@ -1,37 +1,42 @@
-# Transition Spring Responsive
+# Transition Responsive
 
 Foundational transition component that the rest are built on top of. Has the ability to customize enter and leave transition based on viewport width.
 
 ## Examples
 
-### Spring up & down on Mobile but Fade in & out on Desktop
+### Spring up & down on Mobile but Fade in & out on Tablet
 
-This is used internally by the Modal component. Resize your viewport below and above the desktop breakpoint of `1200px` to see the transitions change.
+This is used internally by the Modal component. Resize your viewport below and above the tablet breakpoint of `840px` to see the transitions change.
 
 
 ```vue
 <template>
 	<div class="container">
-		<m-transition-spring-responsive
+		<m-transition-responsive
 			:transitions="transitions"
 		>
 			<div
 				v-if="visible"
 				class="box"
 			/>
-		</m-transition-spring-responsive>
+		</m-transition-responsive>
 	</div>
 </template>
 
 <script>
-import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { MTransitionResponsive } from '@square/maker/utils/TransitionSpringResponsive';
 import {
-	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, desktopMinWidth,
+	fadeInFn,
+	fadeOutFn,
+	springUpFn,
+	springDownFn,
+	mobileMinWidth,
+	tabletMinWidth,
 } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpringResponsive,
+		MTransitionResponsive,
 	},
 
 	inheritAttrs: false,
@@ -40,12 +45,12 @@ export default {
 		return {
 			transitions: [{
 				minWidth: mobileMinWidth,
-				enter: springUp,
-				leave: springDown,
+				enter: springUpFn,
+				leave: springDownFn,
 			}, {
-				minWidth: desktopMinWidth,
-				enter: fadeIn,
-				leave: fadeOut,
+				minWidth: tabletMinWidth,
+				enter: fadeInFn,
+				leave: fadeOutFn,
 			}],
 			visible: false,
 		};
