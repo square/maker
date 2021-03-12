@@ -225,7 +225,7 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 | Prop     | Type     | Default      | Possible values                           | Description |
 | -------- | -------- | ------------ | ----------------------------------------- | ----------- |
 | position | `string` | `'absolute'` | `static`, `relative`, `absolute`, `fixed` | —           |
-| hide-on  | `string` | `'none'`     | `none`, `mobile`, `desktop`               | —           |
+| hide-on  | `string` | `'none'`     | `none`, `mobile`, `tablet`, `desktop`     | —           |
 
 
 ## InlineActionBar Slots

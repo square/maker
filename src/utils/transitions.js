@@ -10,6 +10,8 @@ export const stiffness = 600;
 export const damping = 60;
 export const mass = 1;
 
+export const springDelay = 200;
+
 export const spring = {
 	type,
 	stiffness,
@@ -26,53 +28,6 @@ export const animateDown = {
 	from: 100,
 	to: 0,
 };
-
-/**
- * Scales input domain to output range, and the input domain
- * is always assumed to be 0 - 100 and the output range is assumed
- * to be something from 0 to any other number, so calling this
- * function with args (50, -40) would return -20 because 50 is
- * the midpoint between 0 & 100 and -20 is the midpoint between 0 & -40
- * @param {Number} domain between 0 - 100
- * @param {Number} range between 0 - any other number
- */
-/*
-function scaleToRange(domain, range) {
-	let normalized = domain / 100;
-	let scaled = normalized * range;
-	return scaled;
-}
-
-function toOpacity(num) {
-	return {
-		opacity: `${num}%`,
-	};
-}
-
-function toRelativeY(num) {
-	return {
-		y: `${num}%`,
-	};
-}
-
-function toAbsoluteY(num) {
-	return {
-		y: `${num}px`,
-	};
-}
-
-function toRelativeX(num) {
-	return {
-		x: `${num}%`,
-	};
-}
-
-function toAbsoluteX(num) {
-	return {
-		x: `${num}px`,
-	};
-}
-*/
 
 /**
  * @param {Number} progress 0 - 100
@@ -107,6 +62,11 @@ export function styleFactory(startRange, endRange, styleProp, unit) {
 
 const toOpacity = styleFactory(0, 100, 'opacity', '%');
 const toRelativeY = styleFactory(0, 100, 'y', '%');
+const toMiniSlideY = styleFactory(40, 0, 'y', 'px');
+const toFloatyY = (progress) => ({
+	...toOpacity(progress),
+	...toMiniSlideY(progress),
+});
 
 export function fadeInFn({ element, onComplete }) {
 	let elementStyler = styler(element);
@@ -123,6 +83,25 @@ export function fadeInFn({ element, onComplete }) {
 		},
 		onComplete,
 	});
+};
+
+export function delayedFadeInFn({ element, onComplete }) {
+	let elementStyler = styler(element);
+	let styleFn = toOpacity;
+	let animationDirection = animateUp;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	window.setTimeout(() => {
+		animate({
+			...animationDirection,
+			...spring,
+			//duration: 3000,
+			onUpdate(num) {
+				elementStyler.set(styleFn(num));
+			},
+			onComplete,
+		});
+	}, springDelay);
 };
 
 export function fadeOutFn({ element, onComplete }) {
@@ -166,16 +145,80 @@ export function springDownFn({ element, onComplete }) {
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
-		...animateUp,
+		...animationDirection,
 		...spring,
-		//...defaultAnimationType,
 		//duration: 3000,
 		onUpdate(num) {
-			elementStyler.set(toRelativeY(num));
+			elementStyler.set(styleFn(num));
 		},
 		onComplete,
 	});
 };
+
+export function floatUpFn({ element, onComplete }) {
+	let elementStyler = styler(element);
+	let styleFn = toFloatyY;
+	let animationDirection = animateUp;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...spring,
+		//duration: 3000,
+		onUpdate(num) {
+			elementStyler.set(styleFn(num));
+		},
+		onComplete,
+	});
+};
+
+export function delayedFloatUpFn({ element, onComplete }) {
+	let elementStyler = styler(element);
+	let styleFn = toFloatyY;
+	let animationDirection = animateUp;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	window.setTimeout(() => {
+		animate({
+			...animationDirection,
+			...spring,
+			//duration: 3000,
+			onUpdate(num) {
+				elementStyler.set(styleFn(num));
+			},
+			onComplete,
+		});
+	}, springDelay);
+};
+
+export function floatDownFn({ element, onComplete }) {
+	let elementStyler = styler(element);
+	let styleFn = toFloatyY;
+	let animationDirection = animateDown;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...spring,
+		//duration: 3000,
+		onUpdate(num) {
+			elementStyler.set(styleFn(num));
+		},
+		onComplete,
+	});
+};
+
+
+
+/*
+export function delayFn(animateFn) {
+	return (...args) => {
+		window.setTimeout(() => {
+			animateFn(...args);
+		}, 500);
+	};
+};
+*/
 
 /*
 export const fadeIn = {

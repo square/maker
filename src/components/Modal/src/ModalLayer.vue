@@ -1,6 +1,6 @@
 <template>
 	<div :class="$s.Layer">
-		<m-transition-fade>
+		<m-transition-fade-in>
 			<div
 				v-if="currentLayer.state.vnode"
 				:class="[
@@ -8,8 +8,8 @@
 					{ [$s.Transparent]: currentLayer.state.isStacked },
 				]"
 			/>
-		</m-transition-fade>
-		<m-transition-spring-responsive :transitions="transitions">
+		</m-transition-fade-in>
+		<m-transition-responsive :transitions="transitions">
 			<div
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
@@ -21,7 +21,7 @@
 				/>
 				<v :nodes="currentLayer.state.vnode" />
 			</div>
-		</m-transition-spring-responsive>
+		</m-transition-responsive>
 		<modal-layer v-if="currentLayer.state.vnode" />
 	</div>
 </template>
@@ -30,21 +30,20 @@
 import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
-import { MTransitionFade } from '@square/maker/components/TransitionFade';
-import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
-	fadeIn,
-	fadeOut,
-	fadeInSlideLeft,
-	fadeOutSlideLeft,
-	fadeInSlideRight,
-	fadeOutSlideRight,
-	springUp,
-	springDown,
+	fadeInFn,
+	fadeOutFn,
+	springUpFn,
+	springDownFn,
+	floatUpFn,
+	floatDownFn,
+	delayedFloatUpFn,
+	delayedFadeInFn,
 	mobileMinWidth,
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
-import { spring, styler } from 'popmotion';
 import modalApi from './modal-api';
 
 const apiMixin = {
@@ -96,9 +95,9 @@ export default {
 
 	components: {
 		V,
-		MTransitionFade,
 		PseudoWindow,
-		MTransitionSpringResponsive,
+		MTransitionFadeIn,
+		MTransitionResponsive,
 	},
 
 	mixins: [
@@ -110,21 +109,21 @@ export default {
 	apiMixin,
 
 	data() {
-		let tabletEnter = fadeIn;
-		let tabletLeave = fadeOut;
+		let tabletEnterFn = fadeInFn;
+		let tabletLeaveFn = fadeOutFn;
 		if (this.currentLayer.state.isStacked) {
-			tabletEnter = fadeInSlideLeft;
-			tabletLeave = fadeOutSlideRight;
+			tabletEnterFn = delayedFloatUpFn;
+			tabletLeaveFn = floatDownFn;
 		}
 		return {
 			transitions: [{
 				minWidth: mobileMinWidth,
-				enter: springUp,
-				leave: springDown,
+				enter: springUpFn,
+				leave: springDownFn,
 			}, {
 				minWidth: tabletMinWidth,
-				enter: tabletEnter,
-				leave: tabletLeave,
+				enter: tabletEnterFn,
+				leave: tabletLeaveFn,
 			}],
 		};
 	},
@@ -136,8 +135,21 @@ export default {
 			const isMobile = !isTablet;
 			const isOpeningStackedModal = !!vm.modalApi.state.vnode;
 			const isClosingStackedModal = !isOpeningStackedModal;
-			const baseModalLayerStyler = styler(vm.$refs.baseModalLayer);
+			const element = this.$refs.baseModalLayer;
 
+			if (isTablet && isOpeningStackedModal) {
+				fadeOutFn({ element });
+			} else if (isTablet && isClosingStackedModal) {
+				delayedFadeInFn({ element });
+			} else if (isMobile && isOpeningStackedModal) {
+
+			} else if (isMobile && isClosingStackedModal) {
+
+			}
+
+
+			/*
+			const baseModalLayerStyler = styler(vm.$refs.baseModalLayer);
 			if (isTablet && isOpeningStackedModal) {
 				spring(fadeOutSlideLeft).start({
 					update: (v) => baseModalLayerStyler.set(v),
@@ -159,6 +171,7 @@ export default {
 					x: '0px',
 				});
 			}
+			*/
 		});
 	},
 
