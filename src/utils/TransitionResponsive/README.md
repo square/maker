@@ -24,7 +24,7 @@ This is used internally by the Modal component. Resize your viewport below and a
 </template>
 
 <script>
-import { MTransitionResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
 	fadeInFn,
 	fadeOutFn,

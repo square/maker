@@ -1,28 +1,28 @@
 <template>
-	<m-transition-spring-responsive :transitions="transitions">
+	<m-transition-responsive :transitions="transitions">
 		<!-- @slot content to animate -->
 		<slot />
-	</m-transition-spring-responsive>
+	</m-transition-responsive>
 </template>
 
 <script>
-import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import { mobileMinWidth } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpringResponsive,
+		MTransitionResponsive,
 	},
 
 	inheritAttrs: false,
 
 	props: {
 		enter: {
-			type: Object,
+			type: Function,
 			required: true,
 		},
 		leave: {
-			type: Object,
+			type: Function,
 			required: true,
 		},
 	},
