@@ -10,17 +10,19 @@ export const stiffness = 600;
 export const damping = 60;
 export const mass = 1;
 
-const spring = {
+export const spring = {
 	type,
 	stiffness,
 	damping,
 	mass,
 };
-const animateUp = {
+
+export const animateUp = {
 	from: 0,
 	to: 100,
 };
-const animateDown = {
+
+export const animateDown = {
 	from: 100,
 	to: 0,
 };
@@ -34,6 +36,7 @@ const animateDown = {
  * @param {Number} domain between 0 - 100
  * @param {Number} range between 0 - any other number
  */
+/*
 function scaleToRange(domain, range) {
 	let normalized = domain / 100;
 	let scaled = normalized * range;
@@ -69,6 +72,41 @@ function toAbsoluteX(num) {
 		x: `${num}px`,
 	};
 }
+*/
+
+/**
+ * @param {Number} progress 0 - 100
+ * @param {Number} startRange any number
+ * @param {Number} endRange any number
+ * @param {String} styleProp style property name
+ * @param {String} unit 'px' or '%'
+ * @returns {Object} style object
+ */
+export function toStyle(progress, startRange, endRange, styleProp, unit) {
+	let normalizedProgress = progress / 100;
+	let scaleFactor = endRange - startRange;
+	let scaledProgress = normalizedProgress * scaleFactor;
+	let inRange = scaledProgress + startRange;
+	return {
+		[styleProp]: `${inRange}${unit}`,
+	};
+};
+
+/**
+ * @param {Number} startRange any number
+ * @param {Number} endRange any number > startRange
+ * @param {String} styleProp style property name
+ * @param {String} unit 'px' or '%'
+ * @returns {Function} takes progress, returns style object
+ */
+export function styleFactory(startRange, endRange, styleProp, unit) {
+	return (progress) => {
+		return toStyle(progress, startRange, endRange, styleProp, unit);
+	};
+};
+
+const toOpacity = styleFactory(0, 100, 'opacity', '%');
+const toRelativeY = styleFactory(0, 100, 'y', '%');
 
 export function fadeInFn({ element, onComplete }) {
 	let elementStyler = styler(element);
@@ -139,6 +177,7 @@ export function springDownFn({ element, onComplete }) {
 	});
 };
 
+/*
 export const fadeIn = {
 	from: {
 		opacity: '0%',
@@ -259,3 +298,4 @@ export default {
 	tabletMinWidth,
 	desktopMinWidth,
 };
+*/
