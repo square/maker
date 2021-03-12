@@ -2,18 +2,13 @@
 
 ```vue
 <template>
-	<div>
-		<div class="container">
-			<m-transition-spring-up>
-				<div
-					v-if="shown"
-					class="gray-box"
-				/>
-			</m-transition-spring-up>
-		</div>
-		<p>
-			{{ shown ? 'Visible' : 'Hidden' }}
-		</p>
+	<div class="container">
+		<m-transition-spring-up>
+			<div
+				v-if="visible"
+				class="gray-box"
+			/>
+		</m-transition-spring-up>
 	</div>
 </template>
 
@@ -27,14 +22,14 @@ export default {
 
 	data() {
 		return {
-			shown: true,
+			visible: true,
 		};
 	},
 
 	mounted() {
 		setInterval(() => {
-			this.shown = !this.shown;
-		}, 1500);
+			this.visible = !this.visible;
+		}, 2000);
 	},
 };
 </script>

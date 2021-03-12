@@ -1,5 +1,9 @@
 <template>
-	<m-transition-responsive :transitions="transitions">
+	<m-transition-responsive
+		v-bind="$attrs"
+		:transitions="transitions"
+		v-on="$listeners"
+	>
 		<!-- @slot content to animate -->
 		<slot />
 	</m-transition-responsive>

@@ -1,30 +1,30 @@
 <template>
-	<m-transition-spring
+	<m-transition
 		v-bind="$attrs"
-		:enter="springUp"
-		:leave="springDown"
+		:enter="springUpFn"
+		:leave="springDownFn"
 		v-on="$listeners"
 	>
 		<!-- @slot content to spring up -->
 		<slot />
-	</m-transition-spring>
+	</m-transition>
 </template>
 
 <script>
-import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-import { springUp, springDown } from '@square/maker/utils/transitions';
+import { MTransition } from '@square/maker/utils/Transition';
+import { springUpFn, springDownFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpring,
+		MTransition,
 	},
 
 	inheritAttrs: false,
 
 	data() {
 		return {
-			springUp,
-			springDown,
+			springUpFn,
+			springDownFn,
 		};
 	},
 };
