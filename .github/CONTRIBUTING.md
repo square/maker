@@ -4,17 +4,7 @@ This document contains all of the dry technical details of how to contribute to 
 
 ## Supported environments
 
-- Desktop
-	- Safari
-	- Chrome
-	- Firefox
-	- Edge
-- Mobile
-  - iOS - Safari
-  - iOS - Chrome
-  - iOS - Firefox
-  - Android - Chrome
-- Node.js (SSR)
+Last 2 major versions of Safari, Chrome, Firefox, & Edge on macOS, Linux, Windows, iOS, & Android. Also 12.x+ Node.js SSR.
 
 ## Codebase setup
 
