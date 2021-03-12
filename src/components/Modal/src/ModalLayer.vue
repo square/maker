@@ -109,8 +109,8 @@ export default {
 	apiMixin,
 
 	data() {
-		let tabletEnterFn = fadeInFn;
-		let tabletLeaveFn = fadeOutFn;
+		let tabletEnterFn = floatUpFn;
+		let tabletLeaveFn = floatDownFn;
 		if (this.currentLayer.state.isStacked) {
 			tabletEnterFn = delayedFloatUpFn;
 			tabletLeaveFn = floatDownFn;
