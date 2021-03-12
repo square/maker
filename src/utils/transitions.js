@@ -5,7 +5,7 @@ export const mobileMinWidth = 0;
 export const tabletMinWidth = 840;
 export const desktopMinWidth = 1200;
 
-export const type = "spring";
+export const type = 'spring';
 export const stiffness = 600;
 export const damping = 60;
 export const mass = 1;
@@ -38,14 +38,14 @@ export const animateDown = {
  * @returns {Object} style object
  */
 export function toStyle(progress, startRange, endRange, styleProp, unit) {
-	let normalizedProgress = progress / 100;
-	let scaleFactor = endRange - startRange;
-	let scaledProgress = normalizedProgress * scaleFactor;
-	let inRange = scaledProgress + startRange;
+	const normalizedProgress = progress / 100;
+	const scaleFactor = endRange - startRange;
+	const scaledProgress = normalizedProgress * scaleFactor;
+	const inRange = scaledProgress + startRange;
 	return {
 		[styleProp]: `${inRange}${unit}`,
 	};
-};
+}
 
 /**
  * @param {Number} startRange any number
@@ -55,10 +55,8 @@ export function toStyle(progress, startRange, endRange, styleProp, unit) {
  * @returns {Function} takes progress, returns style object
  */
 export function styleFactory(startRange, endRange, styleProp, unit) {
-	return (progress) => {
-		return toStyle(progress, startRange, endRange, styleProp, unit);
-	};
-};
+	return (progress) => toStyle(progress, startRange, endRange, styleProp, unit);
+}
 
 const toOpacity = styleFactory(0, 100, 'opacity', '%');
 const toRelativeY = styleFactory(0, 100, 'y', '%');
@@ -69,151 +67,149 @@ const toFloatyY = (progress) => ({
 });
 
 export function fadeInFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toOpacity;
-	let animationDirection = animateUp;
+	const elementStyler = styler(element);
+	const styleFn = toOpacity;
+	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animationDirection,
 		...spring,
-		//duration: 3000,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		// duration: 3000,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
-};
+}
 
 export function delayedFadeInFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toOpacity;
-	let animationDirection = animateUp;
+	const elementStyler = styler(element);
+	const styleFn = toOpacity;
+	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
-	window.setTimeout(() => {
+	setTimeout(() => {
 		animate({
 			...animationDirection,
 			...spring,
-			//duration: 3000,
-			onUpdate(num) {
-				elementStyler.set(styleFn(num));
+			// duration: 3000,
+			onUpdate(number) {
+				elementStyler.set(styleFn(number));
 			},
 			onComplete,
 		});
 	}, springDelay);
-};
+}
 
 export function fadeOutFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toOpacity;
-	let animationDirection = animateDown;
+	const elementStyler = styler(element);
+	const styleFn = toOpacity;
+	const animationDirection = animateDown;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animateDown,
 		...spring,
-		//duration: 3000,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		// duration: 3000,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
-};
+}
 
 export function springUpFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toRelativeY;
-	let animationDirection = animateDown;
+	const elementStyler = styler(element);
+	const styleFn = toRelativeY;
+	const animationDirection = animateDown;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animationDirection,
 		...spring,
-		//duration: 3000,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		// duration: 3000,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
-};
+}
 
 export function springDownFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toRelativeY;
-	let animationDirection = animateUp;
+	const elementStyler = styler(element);
+	const styleFn = toRelativeY;
+	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animationDirection,
 		...spring,
-		//duration: 3000,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		// duration: 3000,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
-};
+}
 
 export function floatUpFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toFloatyY;
-	let animationDirection = animateUp;
+	const elementStyler = styler(element);
+	const styleFn = toFloatyY;
+	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animationDirection,
 		...spring,
-		//duration: 3000,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		// duration: 3000,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
-};
+}
 
 export function delayedFloatUpFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toFloatyY;
-	let animationDirection = animateUp;
+	const elementStyler = styler(element);
+	const styleFn = toFloatyY;
+	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
-	window.setTimeout(() => {
+	setTimeout(() => {
 		animate({
 			...animationDirection,
 			...spring,
-			//duration: 3000,
-			onUpdate(num) {
-				elementStyler.set(styleFn(num));
+			// duration: 3000,
+			onUpdate(number) {
+				elementStyler.set(styleFn(number));
 			},
 			onComplete,
 		});
 	}, springDelay);
-};
+}
 
 export function floatDownFn({ element, onComplete }) {
-	let elementStyler = styler(element);
-	let styleFn = toFloatyY;
-	let animationDirection = animateDown;
+	const elementStyler = styler(element);
+	const styleFn = toFloatyY;
+	const animationDirection = animateDown;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animationDirection,
 		...spring,
-		//duration: 3000,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		// duration: 3000,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
-};
-
-
+}
 
 /*
 export function delayFn(animateFn) {
 	return (...args) => {
-		window.setTimeout(() => {
+		setTimeout(() => {
 			animateFn(...args);
 		}, 500);
 	};

@@ -147,7 +147,6 @@ export default {
 
 			}
 
-
 			/*
 			const baseModalLayerStyler = styler(vm.$refs.baseModalLayer);
 			if (isTablet && isOpeningStackedModal) {

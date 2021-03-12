@@ -19,27 +19,27 @@
 import styler from 'stylefire';
 import { animate } from 'popmotion';
 import {
-	fadeInFn, fadeOutFn, animateUp, spring, styleFactory
+	fadeInFn, fadeOutFn, animateUp, spring, styleFactory,
 } from '@square/maker/utils/transitions';
 
-function resizeFn({ element, startWidth, endWidth, startHeight, endHeight, onComplete }) {
-	let elementStyler = styler(element);
-	let resizeWidthFn = styleFactory(startWidth, endWidth, 'width', 'px');
-	let resizeHeightFn = styleFactory(startHeight, endHeight, 'height', 'px');
-	let styleFn = (progress) => {
-		return {
-			...resizeWidthFn(progress),
-			...resizeHeightFn(progress),
-		};
-	};
-	let animationDirection = animateUp;
+function resizeFn({
+ element, startWidth, endWidth, startHeight, endHeight, onComplete,
+}) {
+	const elementStyler = styler(element);
+	const resizeWidthFn = styleFactory(startWidth, endWidth, 'width', 'px');
+	const resizeHeightFn = styleFactory(startHeight, endHeight, 'height', 'px');
+	const styleFn = (progress) => ({
+		...resizeWidthFn(progress),
+		...resizeHeightFn(progress),
+	});
+	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(num) {
-			elementStyler.set(styleFn(num));
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
