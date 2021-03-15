@@ -39,6 +39,9 @@ jobs:
       - name: Install NPM dependencies
         run: npm ci
 
+      - name: Install NPM peer dependencies
+        run: npx i-peers -a ci
+
       - name: Build & Deploy Styleguide
         run: npm run styleguide-deploy
 
