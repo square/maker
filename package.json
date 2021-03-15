@@ -8,6 +8,7 @@
     "utils"
   ],
   "scripts": {
+    "dep-version-check": "node .github/dep-version-check",
     "build": "NODE_ENV=production webpack --config build/webpack-build-config",
     "dev": "npm run generate-api-tables && just-ssr --webpack-config build/webpack-development-config --open",
     "lab": "just-ssr --webpack-config lab/webpack-lab-config --open --port 8081",
@@ -89,6 +90,7 @@
     "prismjs": "^1.23.0",
     "remote-origin-url": "^2.0.0",
     "stylefire": "^7.0.3",
+    "semver": "^7.3.4",
     "stylelint": "^13.9.0",
     "stylelint-config-css-modules": "^2.2.0",
     "stylelint-config-rational-order": "^0.1.2",
