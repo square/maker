@@ -1,38 +1,80 @@
 # Textarea
 
+## Examples
+
+### Default State
+
+Filled variant.
+
 ```vue
 <template>
-	<div>
-		<h4>normal state</h4>
-		<m-textarea placeholder="Placeholder" />
+	<m-textarea placeholder="Placeholder" />
+</template>
 
-		<h4>disabled state</h4>
-		<m-textarea
-			placeholder="Placeholder"
-			disabled
-		/>
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
 
-		<h4>invalid state</h4>
-		<m-textarea
-			placeholder="Placeholder"
-			invalid
-		/>
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
 
-		<h4>resizable</h4>
-		<m-textarea
-			placeholder="Placeholder"
-			resizable
-		/>
+### Disabled State
 
-		<h4>with error slot</h4>
-		<m-textarea placeholder="Placeholder">
-			<template #error>
-				<m-notice type="error">
-					error message here
-				</m-notice>
-			</template>
-		</m-textarea>
-	</div>
+```vue
+<template>
+	<m-textarea
+		disabled
+		placeholder="Placeholder"
+	/>
+</template>
+
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
+
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
+
+### Invalid State
+
+```vue
+<template>
+	<m-textarea
+		invalid
+		placeholder="Placeholder"
+	/>
+</template>
+
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
+
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
+
+### With Error Slot
+
+```vue
+<template>
+	<m-textarea placeholder="Placeholder">
+		<template #error>
+			<m-notice type="error">
+				error message here
+			</m-notice>
+		</template>
+	</m-textarea>
 </template>
 
 <script>
@@ -48,17 +90,105 @@ export default {
 </script>
 ```
 
+### Resizeable
+
+```vue
+<template>
+	<m-textarea
+		resizable
+		placeholder="Placeholder"
+	/>
+</template>
+
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
+
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
+
+### Outline Variant
+
+```vue
+<template>
+	<m-textarea
+		variant="outline"
+		placeholder="Placeholder"
+	/>
+</template>
+
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
+
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
+
+### Outline Variant Disabled State
+
+```vue
+<template>
+	<m-textarea
+		variant="outline"
+		disabled
+		placeholder="Placeholder"
+	/>
+</template>
+
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
+
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
+
+### Outline Variant Invalid State
+
+```vue
+<template>
+	<m-textarea
+		variant="outline"
+		invalid
+		placeholder="Placeholder"
+	/>
+</template>
+
+<script>
+import { MTextarea } from '@square/maker/components/Textarea';
+
+export default {
+	components: {
+		MTextarea,
+	},
+};
+</script>
+```
+
+
+
 <!-- api-tables:start -->
 ## Props
 
 Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
 
-| Prop      | Type      | Default  | Possible values | Description                           |
-| --------- | --------- | -------- | --------------- | ------------------------------------- |
-| variant   | `string`  | `'fill'` | `fill`          | textarea variant                      |
-| v-model   | `string`  | `''`     | —               | textarea's current value              |
-| invalid   | `boolean` | `false`  | —               | Toggle textarea's invalid state       |
-| resizable | `boolean` | `false`  | —               | Toggles whether textarea is resizable |
+| Prop      | Type      | Default  | Possible values   | Description                           |
+| --------- | --------- | -------- | ----------------- | ------------------------------------- |
+| variant   | `string`  | `'fill'` | `fill`, `outline` | textarea variant                      |
+| v-model   | `string`  | `''`     | —                 | textarea's current value              |
+| invalid   | `boolean` | `false`  | —                 | Toggle textarea's invalid state       |
+| resizable | `boolean` | `false`  | —                 | Toggles whether textarea is resizable |
 
 
 ## Slots

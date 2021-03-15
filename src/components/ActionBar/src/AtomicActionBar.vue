@@ -33,7 +33,7 @@ export default {
 		hideOn: {
 			type: String,
 			default: 'none',
-			validator: (hideOn) => ['none', 'mobile', 'desktop'].includes(hideOn),
+			validator: (hideOn) => ['none', 'mobile', 'tablet', 'desktop'].includes(hideOn),
 		},
 	},
 };
@@ -44,18 +44,24 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px 32px;
+	padding: 24px 24px 40px 24px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
-@media screen and (min-width: 1200px) {
-	.hide-on_desktop {
+@media screen and (max-width: 839px) {
+	.hide-on_mobile {
 		display: none;
 	}
 }
 
-@media screen and (max-width: 1199px) {
-	.hide-on_mobile {
+@media screen and (min-width: 840px) {
+	.hide-on_tablet {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.hide-on_desktop {
 		display: none;
 	}
 }
