@@ -47,27 +47,8 @@ checkDeps(branchPackage.peerDependencies, branchPackage.devDependencies);
 
 /* checkout master */
 
-function hasUncommitedChanges(gitStatus) {
-	const stdout = gitStatus.stdout.toLowerCase();
-	const uncommitedPhrases = [
-		'changes not staged for commit:',
-		'changes to be committed:',
-		'untracked files:',
-	];
-	return uncommitedPhrases.some(stdout.includes.bind(stdout));
-}
-
 (async function checkoutMasterAndPull() {
-	const gitStatus = await exec('git status');
-	if (hasUncommitedChanges(gitStatus)) {
-		throw new Error('cannot switch to master branch if you have uncommitted changes');
-	}
-
 	await exec(`git checkout ${masterRef}`);
-	const gitPull = await exec('git pull');
-	if (gitPull.stderr) {
-		throw new Error(`git pull wrote to stderr: ${gitPull.stderr}`);
-	}
 
 	const branchVer = branchPackage.version;
 
@@ -77,6 +58,8 @@ function hasUncommitedChanges(gitStatus) {
 
 	// if PR branch's version is not > master's version throw error
 	if (!semver.gt(branchVer, masterVer)) {
-		throw new Error(`${branchName} PR has Maker verison ${branchVer} in package.json which is not >${masterVer} in master branch. You must increment the package version before your changes can be merged into master so that your changes can be published to NPM.`);
+		throw new Error(`${branchName} PR has Maker version ${branchVer} in package.json which is not >${masterVer} in master branch. You must increment the package version before your changes can be merged into master so that your changes can be published to NPM.`);
+	} else {
+		console.log(`${branchName} PR's Maker version is ${branchVer} which is >${masterVer} in master!`)
 	}
 }());
