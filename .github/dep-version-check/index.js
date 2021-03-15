@@ -13,6 +13,13 @@ if (!branchName) {
 	branchName = branch.sync();
 }
 
+// this may not be the literal 'master' on CI
+let masterRef = process.env.GITHUB_BASE_REF;
+if (!masterRef) {
+	// fallback for local testing
+	masterRef = 'master';
+}
+
 // current working directory is project root
 const branchPackage = fse.readJsonSync('./package.json');
 
@@ -56,7 +63,7 @@ function hasUncommitedChanges(gitStatus) {
 		throw new Error('cannot switch to master branch if you have uncommitted changes');
 	}
 
-	await exec('git checkout master');
+	await exec(`git checkout ${masterRef}`);
 	const gitPull = await exec('git pull');
 	if (gitPull.stderr) {
 		throw new Error(`git pull wrote to stderr: ${gitPull.stderr}`);
