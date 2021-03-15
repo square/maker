@@ -1,6 +1,6 @@
 {
   "name": "@square/maker",
-  "version": "1.5.0",
+  "version": "2.0.0-beta.0",
   "description": "📚 Maker Design System by Square",
   "license": "Apache-2.0",
   "files": [
@@ -26,7 +26,8 @@
     "sync-to-latest": "node ./build/sync-to-latest",
     "pull-deploys": "node ./build/deploys/pull.js",
     "push-deploys": "node ./build/deploys/push.js",
-		"release": "node ./build/checkout-master && npm run deploy-all && npm run build && npm publish"
+		"release": "node ./build/checkout-master && npm run deploy-all && npm run build && npm publish",
+		"pre-release": "npm run-deploy-all && npm run build && npm publish"
   },
   "husky": {
     "hooks": {
