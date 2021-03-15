@@ -1,14 +1,10 @@
 # Contributing
 
+This document contains all of the dry technical details of how to contribute to Maker. This document assumes your proposed contribution is sensible and within Maker's scope and guiding philosophies. If you are unsure if the last sentence applies to you please read [What is Maker?](./WHAT_IS_MAKER.md)
+
 ## Supported environments
 
-- Desktop
-- Mobile
-  - iOS - Safari
-  - iOS - Chrome
-  - iOS - Firefox
-  - Android - Chrome
-- Node.js (SSR)
+Last 2 major versions of Safari, Chrome, Firefox, & Edge on macOS, Linux, Windows, iOS, & Android. Also 12.x+ Node.js SSR.
 
 ## Codebase setup
 
@@ -28,17 +24,33 @@
 
 ## Development
 
-### Develop in DocDev
+### Local Component Development
 
-Render a component README.md in doc-dev—a server-side rendered dev environment with [hot-module replacement (HMR)](https://webpack.js.org/concepts/hot-module-replacement/):
+Render a component's README.md with [hot-module replacement (HMR)](https://webpack.js.org/concepts/hot-module-replacement/):
 
 ```sh
 $ component=COMPONENT_NAME npm run dev
 ```
 
-### Develop in the Lab
+This kind of local development is most appropriate when you are working on a single component and your changes will be reflected in that component's documentation.
+
+If you need to share your WIP work with someone else (such as a Designer or a fellow Engineer), you can do a WIP Styleguide deploy.
+
+### Local Lab Development
 
 Refer to [/lab/README.md](/lab/README.md).
+
+This kind of local development is most appropriate when you are working on multiple components simultaneously and you need to experiment with complex multi-component views to make sure all of your changes work together.
+
+It's both easy & possible to build & deploy Lab experiments in WIP branches to [Maker's public Github Pages directory](https://square.github.io/maker/) if you need to share your in-progress work with someone else.
+
+### Local Styleguide Development
+
+Refer to [/styleguide/README.md](/styleguide/README.md).
+
+This kind of local development is only appropriate if you are directly working on the styleguide itself, and not on any particular component.
+
+It's both easy & possible to build & deploy Styleguide changes in WIP branches to [Maker's public Github Pages directory](https://square.github.io/maker/) if you need to share your in-progress work with someone else.
 
 ### Testing local changes on local network devices (eg. mobile)
 
@@ -64,40 +76,29 @@ Start the server normally and expose it via [ngrok](https://ngrok.com/), in a se
 $ ngrok http <SERVER PORT>
 ```
 
-### Lint JS
+### Linting
 
 ```sh
+# run JS lints
 $ npm run lint:js
-```
 
-#### Autofix violations
-```sh
+# run JS lints & autofix where possible
 $ npm run lint:js -- --fix
-```
 
-### Lint CSS
-
-```
+# run CSS lints
 $ npm run lint:css
-```
 
-#### Autofix violations
-
-```sh
+# run CSS lints & autofix where possible
 $ npm run lint:css -- --fix
 ```
 
 ### Build
 
-Build component library and produce distribution files
+Build component library and produce distribution files.
 
 ```sh
 $ npm run build
 ```
-
-### Developing the Styleguide
-
-Refer to [/styleguide/README.md](/styleguide/README.md).
 
 ### Testing releases
 
@@ -128,11 +129,17 @@ If you want to test a branch before releasing it, you can push up a _built branc
 
 ### Branches
 
-- `master`
+The only "special" branch is the `master` branch which represents the latest stable version of the library. Most PRs with bug fixes, features, and even breaking changes should probably be made against, and ultimately merged into, `master`. The only exception is if you're unsure of changes and need to validate your ideas in production before making an official stable Maker release, which would be most common in the case of breaking changes and major version releases, so let's go over an example of how we'd do one.
 
-- `built`
+Let's say Maker is on version `1.5.2` and you have a breaking change, or maybe several, that you'd like to make and that would require a major version release of `2.0.0`. Unless you're very confident in your changes you'll likely want to do a few _pre-releases_ first, and hold out on directly merging your changes directly into `master`. So what you'd do is:
 
-- `develop`
+1. Make a `v2` branch, or whatever you want to call it, as long as the name is descriptive.
+2. Within this branch bump the version of Maker within `package.json` from `1.5.2` to `2.0.0-beta.0`.
+3. Make and merge all your tentative changes into `v2` and bump the pre-release version with every merged change, e.g. `-beta.0`, `-beta.1`, `-beta.2`, etc.
+4. Build, i.e. `npm run build`, and publish them to npm, i.e. `npm run publish`.
+5. Build and deploy the styleguide for your changes to get feedback from coworkers, i.e. `npm run styleguide-build`.
+6. Repeat steps 3 - 6 until you feel confident in your changes and they have stabilized.
+7. Open `v2` PR against `master`, get approval, merge in, build & publish official `2.0.0` release.
 
 ### Commit style
 
