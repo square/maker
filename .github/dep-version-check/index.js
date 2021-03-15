@@ -64,7 +64,7 @@ function hasUncommitedChanges(gitStatus) {
 	const masterVer = masterPackage.version;
 
 	// if PR branch's version is not > master's version throw error
-	if (!semver.ge(branchVer, masterVer)) {
+	if (!semver.gt(branchVer, masterVer)) {
 		throw new Error(`${branchName} PR has Maker ver ${branchVer} in package.json which is not >${masterVer} in master branch`);
 	}
 }());
