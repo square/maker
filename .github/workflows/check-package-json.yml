@@ -17,6 +17,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Fetch master branch
+      run: |
+        git fetch origin master
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
