@@ -2,11 +2,16 @@
 
 const fse = require('fs-extra');
 const semver = require('semver');
+const branch = require('git-branch');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 
 // env var set by CI
-const branchName = process.env.GITHUB_HEAD_REF;
+let branchName = process.env.GITHUB_HEAD_REF;
+if (!branchName) {
+	// fallback for local testing
+	branchName = branch.sync();
+}
 
 // current working directory is project root
 const branchPackage = fse.readJsonSync('./package.json');
