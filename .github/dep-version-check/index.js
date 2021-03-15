@@ -18,7 +18,7 @@ function checkDeps(requiredDeps, installedDeps) {
 		}
 		let installedVer = installedDeps[requiredDep];
 		if (installedVer !== requiredVer) {
-			errors.push(`expected dep ${installedDep} to be ver ${requiredVer} but found ${installedVer}`);
+			errors.push(`expected dep ${requiredDep} to be ver ${requiredVer} but found ${installedVer}`);
 		}
 	}
 	if (errors.length > 0) {
