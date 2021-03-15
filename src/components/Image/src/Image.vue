@@ -1,7 +1,7 @@
 <template>
 	<div :class="$s.ImageWrapper">
 		<template v-if="isIntersecting">
-			<m-transition-fade>
+			<m-transition-fade-in>
 				<m-skeleton-block
 					v-if="!loaded"
 				/>
@@ -13,13 +13,13 @@
 					v-bind="$attrs"
 					v-on="$listeners"
 				>
-			</m-transition-fade>
+			</m-transition-fade-in>
 		</template>
 	</div>
 </template>
 
 <script>
-import { MTransitionFade } from '@square/maker/components/TransitionFade';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 
 function SharedIntersectionObserver() {
@@ -50,7 +50,7 @@ let observer;
  */
 export default {
 	components: {
-		MTransitionFade,
+		MTransitionFadeIn,
 		MSkeletonBlock,
 	},
 

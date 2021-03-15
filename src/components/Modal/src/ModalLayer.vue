@@ -1,6 +1,6 @@
 <template>
 	<div :class="$s.Layer">
-		<m-transition-fade>
+		<m-transition-fade-in>
 			<div
 				v-if="currentLayer.state.vnode"
 				:class="[
@@ -8,14 +8,12 @@
 					{ [$s.Transparent]: currentLayer.state.isStacked },
 				]"
 			/>
-		</m-transition-fade>
-		<m-transition-spring-responsive :transitions="transitions">
+		</m-transition-fade-in>
+		<m-transition-responsive :transitions="transitions">
 			<div
 				v-if="currentLayer.state.vnode"
-				:class="[
-					$s.ModalLayer,
-					{ [$s.Hidden]: modalApi.state.vnode },
-				]"
+				ref="baseModalLayer"
+				:class="$s.ModalLayer"
 			>
 				<pseudo-window
 					body
@@ -23,7 +21,7 @@
 				/>
 				<v :nodes="currentLayer.state.vnode" />
 			</div>
-		</m-transition-spring-responsive>
+		</m-transition-responsive>
 		<modal-layer v-if="currentLayer.state.vnode" />
 	</div>
 </template>
@@ -32,10 +30,19 @@
 import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
-import { MTransitionFade } from '@square/maker/components/TransitionFade';
-import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
-	fadeIn, fadeOut, springUp, springDown, mobileMinWidth, tabletMinWidth,
+	fadeOutFn,
+	springUpFn,
+	springDownFn,
+	springDelay,
+	floatUpFn,
+	floatDownFn,
+	delayedFloatUpFn,
+	delayedFadeInFn,
+	mobileMinWidth,
+	tabletMinWidth,
 } from '@square/maker/utils/transitions';
 import modalApi from './modal-api';
 
@@ -88,9 +95,9 @@ export default {
 
 	components: {
 		V,
-		MTransitionFade,
 		PseudoWindow,
-		MTransitionSpringResponsive,
+		MTransitionFadeIn,
+		MTransitionResponsive,
 	},
 
 	mixins: [
@@ -102,17 +109,50 @@ export default {
 	apiMixin,
 
 	data() {
+		let tabletEnterFn = floatUpFn;
+		let tabletLeaveFn = floatDownFn;
+		if (this.currentLayer.state.isStacked) {
+			tabletEnterFn = delayedFloatUpFn;
+			tabletLeaveFn = floatDownFn;
+		}
 		return {
 			transitions: [{
 				minWidth: mobileMinWidth,
-				enter: springUp,
-				leave: springDown,
+				enter: springUpFn,
+				leave: springDownFn,
 			}, {
 				minWidth: tabletMinWidth,
-				enter: fadeIn,
-				leave: fadeOut,
+				enter: tabletEnterFn,
+				leave: tabletLeaveFn,
 			}],
 		};
+	},
+
+	mounted() {
+		const vm = this;
+		this.unwatchStackedModal = this.$watch(() => vm.modalApi.state.vnode, () => {
+			const isTablet = window.innerWidth >= tabletMinWidth;
+			const isMobile = !isTablet;
+			const isOpeningStackedModal = !!vm.modalApi.state.vnode;
+			const isClosingStackedModal = !isOpeningStackedModal;
+			const element = this.$refs.baseModalLayer;
+
+			if (isTablet && isOpeningStackedModal) {
+				fadeOutFn({ element });
+			} else if (isTablet && isClosingStackedModal) {
+				delayedFadeInFn({ element });
+			} else if (isMobile && isOpeningStackedModal) {
+				setTimeout(() => {
+					element.style.opacity = '0%';
+				}, springDelay);
+			} else if (isMobile && isClosingStackedModal) {
+				element.style.removeProperty('opacity');
+			}
+		});
+	},
+
+	destroyed() {
+		this.unwatchStackedModal();
 	},
 };
 </script>
@@ -145,15 +185,6 @@ export default {
 
 .Transparent {
 	background-color: transparent;
-}
-
-.Hidden {
-	/*
-	!important is important to override the inline opacity
-	added to the modal after the fadeIn/fadeOut transition
-	*/
-	opacity: 0 !important;
-	transition: opacity 0.1s;
 }
 
 .disableScroll {

@@ -6,28 +6,28 @@
 	>
 		<slot />
 
-		<transition-action-bar>
+		<m-transition-spring-up>
 			<atomic-action-bar
 				v-if="actionBarVnodes"
-				hide-on="desktop"
+				hide-on="tablet"
 				position="fixed"
 			>
 				<v :nodes="actionBarVnodes" />
 			</atomic-action-bar>
-		</transition-action-bar>
+		</m-transition-spring-up>
 	</div>
 </template>
 
 <script>
 import { throttle } from 'lodash';
 import V from 'vue-v';
-import TransitionActionBar from './TransitionActionBar.vue';
+import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
 import AtomicActionBar from './AtomicActionBar.vue';
 
 export default {
 	components: {
 		V,
-		TransitionActionBar,
+		MTransitionSpringUp,
 		AtomicActionBar,
 	},
 
@@ -87,7 +87,7 @@ export default {
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 840px) {
 	.ActionBar {
 		display: none;
 	}

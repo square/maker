@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import { spring, styler } from 'popmotion';
-
 export default {
 	inheritAttrs: false,
 
@@ -38,22 +36,14 @@ export default {
 	},
 
 	methods: {
-		handleEnter(element, complete) {
+		handleEnter(element, onComplete) {
 			const transition = this.getResponsiveTransition();
-			const elementStyler = styler(element);
-			spring(transition.enter).start({
-				update: (v) => elementStyler.set(v),
-				complete,
-			});
+			transition.enter({ element, onComplete });
 		},
 
-		handleLeave(element, complete) {
+		handleLeave(element, onComplete) {
 			const transition = this.getResponsiveTransition();
-			const elementStyler = styler(element);
-			spring(transition.leave).start({
-				update: (v) => elementStyler.set(v),
-				complete,
-			});
+			transition.leave({ element, onComplete });
 		},
 
 		getResponsiveTransition() {
