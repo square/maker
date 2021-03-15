@@ -33,10 +33,10 @@ import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
-	fadeInFn,
 	fadeOutFn,
 	springUpFn,
 	springDownFn,
+	springDelay,
 	floatUpFn,
 	floatDownFn,
 	delayedFloatUpFn,
@@ -142,35 +142,12 @@ export default {
 			} else if (isTablet && isClosingStackedModal) {
 				delayedFadeInFn({ element });
 			} else if (isMobile && isOpeningStackedModal) {
-
+				setTimeout(() => {
+					element.style.opacity = '0%';
+				}, springDelay);
 			} else if (isMobile && isClosingStackedModal) {
-
+				element.style.removeProperty('opacity');
 			}
-
-			/*
-			const baseModalLayerStyler = styler(vm.$refs.baseModalLayer);
-			if (isTablet && isOpeningStackedModal) {
-				spring(fadeOutSlideLeft).start({
-					update: (v) => baseModalLayerStyler.set(v),
-				});
-			} else if (isTablet && isClosingStackedModal) {
-				spring(fadeInSlideRight).start({
-					update: (v) => baseModalLayerStyler.set(v),
-				});
-			} else if (isMobile && isOpeningStackedModal) {
-				window.setTimeout(() => {
-					baseModalLayerStyler.set({
-						opacity: '0%',
-						x: '-40px',
-					});
-				}, 500);
-			} else if (isMobile && isClosingStackedModal) {
-				baseModalLayerStyler.set({
-					opacity: '100%',
-					x: '0px',
-				});
-			}
-			*/
 		});
 	},
 
