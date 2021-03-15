@@ -93,7 +93,6 @@ export function delayedFadeInFn({ element, onComplete }) {
 		animate({
 			...animationDirection,
 			...spring,
-			// duration: 3000,
 			onUpdate(number) {
 				elementStyler.set(styleFn(number));
 			},
@@ -111,7 +110,6 @@ export function fadeOutFn({ element, onComplete }) {
 	animate({
 		...animateDown,
 		...spring,
-		// duration: 3000,
 		onUpdate(number) {
 			elementStyler.set(styleFn(number));
 		},
@@ -128,7 +126,6 @@ export function springUpFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		// duration: 3000,
 		onUpdate(number) {
 			elementStyler.set(styleFn(number));
 		},
@@ -145,7 +142,6 @@ export function springDownFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		// duration: 3000,
 		onUpdate(number) {
 			elementStyler.set(styleFn(number));
 		},
@@ -162,7 +158,6 @@ export function floatUpFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		// duration: 3000,
 		onUpdate(number) {
 			elementStyler.set(styleFn(number));
 		},
@@ -180,7 +175,6 @@ export function delayedFloatUpFn({ element, onComplete }) {
 		animate({
 			...animationDirection,
 			...spring,
-			// duration: 3000,
 			onUpdate(number) {
 				elementStyler.set(styleFn(number));
 			},
@@ -198,143 +192,9 @@ export function floatDownFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		// duration: 3000,
 		onUpdate(number) {
 			elementStyler.set(styleFn(number));
 		},
 		onComplete,
 	});
 }
-
-/*
-export function delayFn(animateFn) {
-	return (...args) => {
-		setTimeout(() => {
-			animateFn(...args);
-		}, 500);
-	};
-};
-*/
-
-/*
-export const fadeIn = {
-	from: {
-		opacity: '0%',
-	},
-	to: {
-		opacity: '100%',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const fadeOut = {
-	from: {
-		opacity: '100%',
-	},
-	to: {
-		opacity: '0%',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const fadeInSlideLeft = {
-	from: {
-		opacity: '0%',
-		x: '40px',
-	},
-	to: {
-		opacity: '100%',
-		x: '0px',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const fadeOutSlideLeft = {
-	from: {
-		opacity: '100%',
-		x: '0px',
-	},
-	to: {
-		opacity: '0%',
-		x: '-40px',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const fadeInSlideRight = {
-	from: {
-		opacity: '0%',
-		x: '-40px',
-	},
-	to: {
-		opacity: '100%',
-		x: '0px',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const fadeOutSlideRight = {
-	from: {
-		opacity: '100%',
-		x: '0px',
-	},
-	to: {
-		opacity: '0%',
-		x: '40px',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const springUp = {
-	from: {
-		y: '100%',
-	},
-	to: {
-		y: '0%',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export const springDown = {
-	from: {
-		y: '0%',
-	},
-	to: {
-		y: '100%',
-	},
-	type,
-	stiffness,
-	damping,
-};
-
-export default {
-	fadeIn,
-	fadeOut,
-	fadeInSlideLeft,
-	fadeOutSlideLeft,
-	fadeInSlideRight,
-	fadeOutSlideRight,
-	springUp,
-	springDown,
-	type,
-	stiffness,
-	damping,
-	mobileMinWidth,
-	tabletMinWidth,
-	desktopMinWidth,
-};
-*/
