@@ -1,43 +1,43 @@
-# Transition Spring
+# Transition
 
-Pass popmotion enter & leave configs to configure this spring transition component. The public transition component are built on top of this component (which itself is built on top of TransitionSpringResponsive).
+Pass transition functions from `@square/maker/utils/transitions` to the `Transition` component to animate conditionally rendered elements. All of the transition components in Maker's public API are built on top of this component (which itself is built on top of the `TransitionResponsive` component).
 
 ## Examples
 
 ### Fade in & out
 
-If you want this just use the TransitionFade component.
+If you want this just use the `TransitionFadeIn` component.
 
 ```vue
 <template>
 	<div class="container">
-		<m-transition-spring
-			:enter="fadeIn"
-			:leave="fadeOut"
+		<m-transition
+			:enter="fadeInFn"
+			:leave="fadeOutFn"
 		>
 			<div
 				v-if="visible"
 				class="box"
 			/>
-		</m-transition-spring>
+		</m-transition>
 	</div>
 </template>
 
 <script>
-import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-import { fadeIn, fadeOut } from '@square/maker/utils/transitions';
+import { MTransition } from '@square/maker/utils/Transition';
+import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpring,
+		MTransition,
 	},
 
 	inheritAttrs: false,
 
 	data() {
 		return {
-			fadeIn,
-			fadeOut,
+			fadeInFn,
+			fadeOutFn,
 			visible: false,
 		};
 	},
@@ -67,36 +67,36 @@ export default {
 
 ### Spring up & down
 
-If you want this just use the TransitionSpringUp component.
+If you want this just use the `TransitionSpringUp` component.
 
 ```vue
 <template>
 	<div class="container">
-		<m-transition-spring
-			:enter="springUp"
-			:leave="springDown"
+		<m-transition
+			:enter="springUpFn"
+			:leave="springDownFn"
 		>
 			<div
 				v-if="visible"
 				class="box"
 			/>
-		</m-transition-spring>
+		</m-transition>
 	</div>
 </template>
 
 <script>
-import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-import { springUp, springDown } from '@square/maker/utils/transitions';
+import { MTransition } from '@square/maker/utils/Transition';
+import { springUpFn, springDownFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpring,
+		MTransition,
 	},
 
 	data() {
 		return {
-			springUp,
-			springDown,
+			springUpFn,
+			springDownFn,
 			visible: false,
 		};
 	},
@@ -131,31 +131,31 @@ Example of mixing different transition styles on enter and leave.
 ```vue
 <template>
 	<div class="container">
-		<m-transition-spring
-			:enter="fadeIn"
-			:leave="springDown"
+		<m-transition
+			:enter="fadeInFn"
+			:leave="springDownFn"
 		>
 			<div
 				v-if="visible"
 				class="box"
 			/>
-		</m-transition-spring>
+		</m-transition>
 	</div>
 </template>
 
 <script>
-import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-import { fadeIn, springDown } from '@square/maker/utils/transitions';
+import { MTransition } from '@square/maker/utils/Transition';
+import { fadeInFn, springDownFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpring,
+		MTransition,
 	},
 
 	data() {
 		return {
-			fadeIn,
-			springDown,
+			fadeInFn,
+			springDownFn,
 			visible: false,
 		};
 	},
@@ -190,31 +190,31 @@ Another example of mixing different transition styles on enter and leave.
 ```vue
 <template>
 	<div class="container">
-		<m-transition-spring
-			:enter="springUp"
-			:leave="fadeOut"
+		<m-transition
+			:enter="springUpFn"
+			:leave="fadeOutFn"
 		>
 			<div
 				v-if="visible"
 				class="box"
 			/>
-		</m-transition-spring>
+		</m-transition>
 	</div>
 </template>
 
 <script>
-import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-import { springUp, fadeOut } from '@square/maker/utils/transitions';
+import { MTransition } from '@square/maker/utils/Transition';
+import { springUpFn, fadeOutFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpring,
+		MTransition,
 	},
 
 	data() {
 		return {
-			springUp,
-			fadeOut,
+			springUpFn,
+			fadeOutFn,
 			visible: false,
 		};
 	},
@@ -246,10 +246,10 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop   | Type     | Default | Possible values | Description |
-| ------ | -------- | ------- | --------------- | ----------- |
-| enter* | `object` | —       | —               | —           |
-| leave* | `object` | —       | —               | —           |
+| Prop   | Type   | Default | Possible values | Description |
+| ------ | ------ | ------- | --------------- | ----------- |
+| enter* | `func` | —       | —               | —           |
+| leave* | `func` | —       | —               | —           |
 
 
 ## Slots

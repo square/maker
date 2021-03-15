@@ -1,6 +1,6 @@
 {
   "name": "@square/maker",
-  "version": "1.3.1",
+  "version": "2.0.1",
   "description": "📚 Maker Design System by Square",
   "license": "Apache-2.0",
   "files": [
@@ -8,23 +8,27 @@
     "utils"
   ],
   "scripts": {
+    "dep-version-check": "node .github/dep-version-check",
     "build": "NODE_ENV=production webpack --config build/webpack-build-config",
     "dev": "npm run generate-api-tables && just-ssr --webpack-config build/webpack-development-config --open",
     "lab": "just-ssr --webpack-config lab/webpack-lab-config --open --port 8081",
-		"lab-build": "NODE_ENV=production webpack --config lab/webpack-lab-config",
-    "lab-deploy": "npm run pull-deploys && NODE_ENV=production webpack --config lab/webpack-lab-config && npm run generate-deploy-index && npm run push-deploys",
+    "lab-build": "NODE_ENV=production webpack --config lab/webpack-lab-config",
+    "lab-deploy": "npm run pull-deploys && npm run lab-build && npm run generate-deploy-index && npm run push-deploys",
     "generate-api-tables": "node ./build/generate-readme-api-tables",
     "styleguide": "npm run generate-api-tables && just-ssr --webpack-config styleguide/webpack-styleguide-config --open",
-		"styleguide-build": "NODE_ENV=production webpack --config styleguide/webpack-styleguide-config",
-    "styleguide-deploy": "npm run generate-api-tables && npm run pull-deploys && NODE_ENV=production webpack --config styleguide/webpack-styleguide-config && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
+    "styleguide-build": "npm run generate-api-tables && NODE_ENV=production webpack --config styleguide/webpack-styleguide-config",
+    "styleguide-deploy": "npm run pull-deploys && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "generate-deploy-index": "node ./build/generate-deploy-index",
+    "deploy-all": "npm run pull-deploys && npm run lab-build && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint --format=pretty --ext vue,js,md --max-warnings=0 --cache src lab styleguide build",
     "lint:css": "stylelint --max-warnings=0 src/**/*.{vue,css}",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
     "sync-to-latest": "node ./build/sync-to-latest",
     "pull-deploys": "node ./build/deploys/pull.js",
-    "push-deploys": "node ./build/deploys/push.js"
+    "push-deploys": "node ./build/deploys/push.js",
+    "release": "node ./build/checkout-master && npm run deploy-all && npm run build && npm publish",
+    "pre-release": "npm run deploy-all && npm run build && npm publish"
   },
   "husky": {
     "hooks": {
@@ -38,7 +42,8 @@
   },
   "peerDependencies": {
     "chroma-js": "^2.1.0",
-    "popmotion": "^8.7.5",
+    "popmotion": "^9.3.1",
+    "stylefire": "^7.0.3",
     "vue": "^2.6.12",
     "@square/maker-icons": "^2.0.0"
   },
@@ -79,11 +84,13 @@
     "md-vue-loader": "^2.0.0",
     "mini-css-extract-plugin": "^0.11.2",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "popmotion": "^8.7.5",
+    "popmotion": "^9.3.1",
     "postcss-loader": "^4.0.2",
     "postcss-preset-env": "^6.7.0",
     "prismjs": "^1.23.0",
     "remote-origin-url": "^2.0.0",
+    "stylefire": "^7.0.3",
+    "semver": "^7.3.4",
     "stylelint": "^13.9.0",
     "stylelint-config-css-modules": "^2.2.0",
     "stylelint-config-rational-order": "^0.1.2",

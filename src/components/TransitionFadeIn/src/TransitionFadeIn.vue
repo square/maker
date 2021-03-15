@@ -1,18 +1,18 @@
 <template>
 	<m-transition
 		v-bind="$attrs"
-		:enter="springUpFn"
-		:leave="springDownFn"
+		:enter="fadeInFn"
+		:leave="fadeOutFn"
 		v-on="$listeners"
 	>
-		<!-- @slot content to spring up -->
+		<!-- @slot content to fade in & out -->
 		<slot />
 	</m-transition>
 </template>
 
 <script>
 import { MTransition } from '@square/maker/utils/Transition';
-import { springUpFn, springDownFn } from '@square/maker/utils/transitions';
+import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
@@ -23,8 +23,8 @@ export default {
 
 	data() {
 		return {
-			springUpFn,
-			springDownFn,
+			fadeInFn,
+			fadeOutFn,
 		};
 	},
 };

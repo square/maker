@@ -1,40 +1,35 @@
-# Transition Fade
+# Transition Fade In
 
 ```vue
 <template>
-	<div>
-		<div class="container">
-			<m-transition-fade>
-				<div
-					v-if="shown"
-					class="gray-box"
-				/>
-			</m-transition-fade>
-		</div>
-		<p>
-			{{ shown ? 'Visible' : 'Hidden' }}
-		</p>
+	<div class="container">
+		<m-transition-fade-in>
+			<div
+				v-if="visible"
+				class="gray-box"
+			/>
+		</m-transition-fade-in>
 	</div>
 </template>
 
 <script>
-import { MTransitionFade } from '@square/maker/components/TransitionFade';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 
 export default {
 	components: {
-		MTransitionFade,
+		MTransitionFadeIn,
 	},
 
 	data() {
 		return {
-			shown: true,
+			visible: true,
 		};
 	},
 
 	mounted() {
 		setInterval(() => {
-			this.shown = !this.shown;
-		}, 1500);
+			this.visible = !this.visible;
+		}, 2000);
 	},
 };
 </script>
