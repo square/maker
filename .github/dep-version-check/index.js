@@ -70,6 +70,6 @@ function hasUncommitedChanges(gitStatus) {
 
 	// if PR branch's version is not > master's version throw error
 	if (!semver.gt(branchVer, masterVer)) {
-		throw new Error(`${branchName} PR has Maker ver ${branchVer} in package.json which is not >${masterVer} in master branch`);
+		throw new Error(`${branchName} PR has Maker verison ${branchVer} in package.json which is not >${masterVer} in master branch. You must increment the package version before your changes can be merged into master so that your changes can be published to NPM.`);
 	}
 }());
