@@ -341,14 +341,12 @@ It's possible to stack modals, i.e. open another modal from inside a modal.
 ```vue
 <template>
 	<div>
-		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-			<m-button
-				size="small"
-				@click="openModal"
-			>
-				Open modal
-			</m-button>
-		</m-action-bar-layer>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
 		<m-modal-layer />
 	</div>
 </template>
@@ -356,7 +354,6 @@ It's possible to stack modals, i.e. open another modal from inside a modal.
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
-import { MActionBarLayer } from '@square/maker/components/ActionBar';
 import StackingDemoFirstModal from 'doc/StackingDemoFirstModal.vue';
 
 export default {
@@ -364,7 +361,6 @@ export default {
 
 	components: {
 		MModalLayer,
-		MActionBarLayer,
 		MButton,
 	},
 
@@ -490,7 +486,7 @@ _StackingDemoSecondModal.vue_
 					color="#f6f6f6"
 					@click="modalApi.close()"
 				>
-					<chevron-left-icon class="icon" />
+					<x-icon class="icon" />
 				</m-action-bar-button>
 				<m-action-bar-button
 					key="confirm"
@@ -509,7 +505,7 @@ import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import ChevronLeftIcon from '@square/maker-icons/ChevronLeft';
+import XIcon from '@square/maker-icons/X';
 
 export default {
 	name: 'StackingDemoSecondModal',
@@ -520,7 +516,7 @@ export default {
 		MText,
 		MModalContent,
 		MActionBarButton,
-		ChevronLeftIcon,
+		XIcon,
 		MInlineActionBar,
 	},
 
