@@ -1,12 +1,12 @@
 <template>
 	<div :class="$s.Layer">
-		<m-transition-fade>
+		<m-transition-fade-in>
 			<div
 				v-if="bladeApi.state.vnode"
 				:class="$s.Translucent"
 			/>
-		</m-transition-fade>
-		<m-transition-spring-responsive :transitions="transitions">
+		</m-transition-fade-in>
+		<m-transition-responsive :transitions="transitions">
 			<div
 				v-if="bladeApi.state.vnode"
 				:class="$s.BladeLayer"
@@ -17,7 +17,7 @@
 				/>
 				<v :nodes="bladeApi.state.vnode" />
 			</div>
-		</m-transition-spring-responsive>
+		</m-transition-responsive>
 	</div>
 </template>
 
@@ -25,10 +25,10 @@
 import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
-import { MTransitionFade } from '@square/maker/components/TransitionFade';
-import { MTransitionSpringResponsive } from '@square/maker/utils/TransitionSpringResponsive';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
-	springUp, springDown, springLeft, springRight, mobileMinWidth, desktopMinWidth,
+	springUpFn, springDownFn, springLeftFn, springRightFn, mobileMinWidth, tabletMinWidth,
 } from '@square/maker/utils/transitions';
 import bladeApi from './blade-api';
 
@@ -72,8 +72,8 @@ export default {
 	components: {
 		V,
 		PseudoWindow,
-		MTransitionFade,
-		MTransitionSpringResponsive,
+		MTransitionFadeIn,
+		MTransitionResponsive,
 	},
 
 	inject: {
@@ -88,12 +88,12 @@ export default {
 		return {
 			transitions: [{
 				minWidth: mobileMinWidth,
-				enter: springUp,
-				leave: springDown,
+				enter: springUpFn,
+				leave: springDownFn,
 			}, {
-				minWidth: desktopMinWidth,
-				enter: springLeft,
-				leave: springRight,
+				minWidth: tabletMinWidth,
+				enter: springLeftFn,
+				leave: springRightFn,
 			}],
 		};
 	},
