@@ -27,4 +27,4 @@ jobs:
     - name: Install NPM dependencies
       run: npm ci
     - name: Run package.json checks
-      run: npm run dep-version-check
+      run: node .github/dep-version-check
