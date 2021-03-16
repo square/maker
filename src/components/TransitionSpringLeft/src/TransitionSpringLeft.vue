@@ -1,30 +1,30 @@
 <template>
-	<m-transition-spring
+	<m-transition
 		v-bind="$attrs"
-		:enter="springLeft"
-		:leave="springRight"
+		:enter="springLeftFn"
+		:leave="springRightFn"
 		v-on="$listeners"
 	>
 		<!-- @slot content to spring left -->
 		<slot />
-	</m-transition-spring>
+	</m-transition>
 </template>
 
 <script>
-import { MTransitionSpring } from '@square/maker/utils/TransitionSpring';
-import { springLeft, springRight } from '@square/maker/utils/transitions';
+import { MTransition } from '@square/maker/utils/Transition';
+import { springLeftFn, springRightFn } from '@square/maker/utils/transitions';
 
 export default {
 	components: {
-		MTransitionSpring,
+		MTransition,
 	},
 
 	inheritAttrs: false,
 
 	data() {
 		return {
-			springLeft,
-			springRight,
+			springLeftFn,
+			springRightFn,
 		};
 	},
 };
