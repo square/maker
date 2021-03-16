@@ -1,8 +1,8 @@
 # ActionBar
 
 There are 2 versions of ActionBar:
-1. InlineActionBar - this should be used when the action bar needs to be rendered inline, e.g. in a Card or in a Section, as well as when the action bar needs to be rendered inside any responsive components, e.g. Modal or Blade.
-2. ActionBar - this is a special, but older version, of ActionBar that only works with a parent ActionBarLayer. You should use this if you need a "persistent" ActionBar that stays above all other layered components and animates between different routed views. Also, this ActionBar is only visible on mobile resolutions (width < 1200px) and is hidden on desktop resolutions (width >= 1200px). Again, this is somewhat of a special case, so you probably want InlineActionBar.
+1. InlineActionBar - this should be used when the action bar needs to be rendered inline, e.g. in a Card or in a Section, as well as when the action bar needs to be rendered inside any responsive components, e.g. Modal or Blade. This component should be used with ActionBarButtons which are responsive and change size on mobile vs tablet resolutions. This component can be used without a parent ActionBarLayer.
+2. ActionBar - this is a special, but older version, of ActionBar that only works with a parent ActionBarLayer. It's also only visible on mobile resolutions and hides on tablet or desktop resolutions. You should use this if you need a "persistent" ActionBar that stays above all other layered components and animates between different routed views. Again, this is somewhat of a special case, so you probably want InlineActionBar.
 3. In a future major release of Maker we may attempt to coalesce the above 2 components into a single one.
 
 ## Examples
@@ -97,10 +97,16 @@ export default {
 ```vue
 <template>
 	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
-		<button @click="showActionBar = !showActionBar">
-			toggle actionbar
-		</button>
-		<demo-action-bar v-if="showActionBar" />
+		<div class="showOnMobile">
+			<button @click="showActionBar = !showActionBar">
+				toggle actionbar
+			</button>
+			<demo-action-bar v-if="showActionBar" />
+		</div>
+		<div class="showOnTablet">
+			Global ActionBar is only visible on mobile resolutions.
+			Please resize your screen to be &lt;840px wide to see the ActionBar.
+		</div>
 	</m-action-bar-layer>
 </template>
 
@@ -121,6 +127,21 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.showOnTablet {
+	display: none;
+}
+
+@media screen and (min-width: 840px) {
+	.showOnMobile {
+		display: none;
+	}
+	.showOnTablet {
+		display: block;
+	}
+}
+</style>
 ```
 
 _DemoActionBar.vue_
