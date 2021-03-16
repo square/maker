@@ -38,7 +38,8 @@ function checkDeps(requiredDeps, installedDeps) {
 		}
 	}
 	if (errors.length > 0) {
-		throw new Error(`found dep errors:\n${errors.join('\n')}`);
+		console.error(`found dep errors:\n${errors.join('\n')}`);
+		process.exit(1);
 	}
 }
 
@@ -58,7 +59,8 @@ checkDeps(branchPackage.peerDependencies, branchPackage.devDependencies);
 
 	// if PR branch's version is not > master's version throw error
 	if (!semver.gt(branchVer, masterVer)) {
-		throw new Error(`${branchName} PR has Maker version ${branchVer} in package.json which is not >${masterVer} in master branch. You must increment the package version before your changes can be merged into master so that your changes can be published to NPM.`);
+		console.error(`${branchName} PR has Maker version ${branchVer} in package.json which is not >${masterVer} in master branch. You must increment the package version before your changes can be merged into master so that your changes can be published to NPM.`);
+		process.exit(1);
 	} else {
 		console.log(`${branchName} PR's Maker version is ${branchVer} which is >${masterVer} in master!`)
 	}
