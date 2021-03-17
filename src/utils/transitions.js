@@ -60,6 +60,7 @@ export function styleFactory(startRange, endRange, styleProp, unit) {
 
 const toOpacity = styleFactory(0, 100, 'opacity', '%');
 const toRelativeY = styleFactory(0, 100, 'y', '%');
+const toRelativeX = styleFactory(0, 100, 'x', '%');
 const toMiniSlideY = styleFactory(40, 0, 'y', 'px');
 const toFloatyY = (progress) => ({
 	...toOpacity(progress),
@@ -136,6 +137,38 @@ export function springUpFn({ element, onComplete }) {
 export function springDownFn({ element, onComplete }) {
 	const elementStyler = styler(element);
 	const styleFn = toRelativeY;
+	const animationDirection = animateUp;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...spring,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
+		},
+		onComplete,
+	});
+}
+
+export function springLeftFn({ element, onComplete }) {
+	const elementStyler = styler(element);
+	const styleFn = toRelativeX;
+	const animationDirection = animateDown;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...spring,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
+		},
+		onComplete,
+	});
+}
+
+export function springRightFn({ element, onComplete }) {
+	const elementStyler = styler(element);
+	const styleFn = toRelativeX;
 	const animationDirection = animateUp;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();

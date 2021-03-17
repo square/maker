@@ -5,7 +5,16 @@
 				:invalid="isInvalid"
 				v-bind="$attrs"
 				v-on="$listeners"
-			/>
+			>
+				<template
+					v-for="(_, slot) of $slots"
+					#[slot]
+				>
+					<slot
+						:name="slot"
+					/>
+				</template>
+			</select-control>
 		</template>
 		<template #error>
 			<!-- @slot slot for error messages -->

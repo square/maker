@@ -5,6 +5,13 @@
 			$s[`variant_${variant}`],
 		]"
 	>
+		<span
+			v-if="$slots.prefix"
+			:class="$s.Prefix"
+		>
+			<!-- @slot Select prefix -->
+			<slot name="prefix" />
+		</span>
 		<select
 			ref="select"
 			v-model="selected"
@@ -13,6 +20,7 @@
 				{
 					[$s.selected]: optionSelected,
 					[$s.invalid]: invalid,
+					[$s.hasPrefix]: $slots.prefix,
 				},
 			]"
 			v-bind="$attrs"
@@ -35,12 +43,12 @@
 				{{ option.label }}
 			</option>
 		</select>
-		<chevron-down :class="$s.Icon" />
+		<chevron-down-icon :class="$s.Icon" />
 	</div>
 </template>
 
 <script>
-import ChevronDown from '@square/maker-icons/ChevronDown';
+import ChevronDownIcon from '@square/maker-icons/ChevronDown';
 
 /**
  * @inheritAttrs select
@@ -48,7 +56,7 @@ import ChevronDown from '@square/maker-icons/ChevronDown';
  */
 export default {
 	components: {
-		ChevronDown,
+		ChevronDownIcon,
 	},
 
 	inheritAttrs: false,
@@ -65,7 +73,7 @@ export default {
 		variant: {
 			type: String,
 			default: 'fill',
-			validator: (variant) => ['fill'].includes(variant),
+			validator: (variant) => ['fill', 'outline'].includes(variant),
 		},
 		/**
 		 * current selected value
@@ -143,16 +151,32 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--font-family: inherit;
 	--color-background: rgba(0, 0, 0, 0.05);
 	--color-background-focus: rgb(255, 255, 255, 0.95);
-	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-disabled: rgba(0, 0, 0, 0.3);
+	--color-background-disabled: rgba(0, 0, 0, 0.05);
 	--color-accent: #222;
+	--color-border: transparent;
+	--color-border-active: #222;
 	--color-error: #ff3b30;
 	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
 	--border-radius: 8px;
+}
+
+.variant_outline {
+	--color-background: #fff;
+	--color-background-focus: #fff;
+	--color-foreground: rgba(0, 0, 0, 0.9);
+	--color-disabled: rgba(0, 0, 0, 0.3);
+	--color-background-disabled: rgba(0, 0, 0, 0.05);
+	--color-accent: #222;
+	--color-border: rgba(0, 0, 0, 0.15);
+	--color-border-active: rgba(0, 0, 0, 0.3);
+	--color-error: #ff3b30;
+	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
+	--border-radius: 8px;
+	--focus-shadow: none;
 }
 
 .SelectContainer {
@@ -160,8 +184,18 @@ export default {
 	box-sizing: border-box;
 	min-width: 80px;
 	font-size: 16px;
+	font-family: inherit;
 	font-family: var(--font-family);
 	border-radius: var(--border-radius);
+}
+
+.Prefix {
+	position: absolute;
+	top: 50%;
+	left: 16px;
+	line-height: 0;
+	transform: translateY(-50%);
+	pointer-events: none;
 }
 
 .Select {
@@ -170,36 +204,42 @@ export default {
 	height: 48px;
 	padding: 0 32px 0 16px;
 	overflow: hidden;
-	color: var(--color-placeholder);
+	color: var(--color-foreground);
 	font-size: inherit;
 	font-family: inherit;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	background-color: var(--color-background);
-	border: 1px solid transparent;
+	border: 1px solid var(--color-border);
 	border-radius: inherit;
 	outline: none;
 	cursor: pointer;
 	transition: border-color 0.2s ease;
 	appearance: none;
 
+	&.hasPrefix {
+		/* select left padding + icon width + icon right padding */
+		padding-left: calc(16px + 16px + 8px);
+	}
+
 	&.selected {
 		color: var(--color-foreground);
 	}
 
 	&:not(:disabled, :invalid):hover {
-		border-color: var(--color-accent);
+		border-color: var(--color-border-active);
 	}
 
 	&:not(:disabled, :invalid):focus,
 	&:not(:disabled, :invalid):active {
 		background-color: var(--color-background-focus);
-		border-color: var(--color-accent);
+		border-color: var(--color-border-active);
 		box-shadow: var(--focus-shadow);
 	}
 
 	&:disabled {
 		color: var(--color-disabled);
+		background-color: var(--color-background-disabled);
 		cursor: not-allowed;
 	}
 
