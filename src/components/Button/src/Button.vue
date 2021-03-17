@@ -51,27 +51,57 @@ function getContrast(chromaBg, targetChromaFg) {
 }
 
 function getFocus(chromaColor) {
-	return chromaColor.alpha(0.8);
+	return chromaColor.alpha(0.3);
+}
+
+function getHover(chromaColor) {
+	// mix color with 5% black
+	return chroma.mix(chromaColor, '#000', 0.05);
+}
+
+function getActive(chromaColor) {
+	// mix color with 10% black
+	return chroma.mix(chromaColor, '#000', 0.1);
 }
 
 function fill(tokens) {
 	const color = chroma(tokens.color);
+	const colorHover = getHover(color);
+	const colorActive = getActive(color);
 	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
 	const contrastColor = getContrast(color, textColor);
+	const contrastColorHover = getHover(contrastColor);
+	const contrastColorActive = getActive(contrastColor);
 	const focusColor = getFocus(color);
 	return {
+		'--small-padding': '8px 16px',
+		'--medium-padding': '12px 24px',
+		'--large-padding': '20px 32px',
 		'--color-main': color.hex(),
+		'--color-main-hover': colorHover.hex(),
+		'--color-main-active': colorActive.hex(),
 		'--color-contrast': contrastColor.hex(),
+		'--color-contrast-hover': contrastColorHover.hex(),
+		'--color-contrast-active': contrastColorActive.hex(),
 		'--color-focus': focusColor.hex(),
 	};
 }
 
 function outline(tokens) {
 	const color = chroma(tokens.color);
+	const colorHover = getHover(color);
+	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
 	return {
+		'--small-padding': '8px 16px',
+		'--medium-padding': '12px 24px',
+		'--large-padding': '20px 32px',
 		'--color-main': 'transparent',
+		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
+		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
 		'--color-contrast': color.hex(),
+		'--color-contrast-hover': colorHover.hex(),
+		'--color-contrast-active': colorActive.hex(),
 		'--color-focus': focusColor.hex(),
 		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
 	};
@@ -79,10 +109,19 @@ function outline(tokens) {
 
 function ghost(tokens) {
 	const color = chroma(tokens.color);
+	const colorHover = getHover(color);
+	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
 	return {
+		'--small-padding': '8px',
+		'--medium-padding': '12px',
+		'--large-padding': '20px',
 		'--color-main': 'transparent',
+		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
+		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
 		'--color-contrast': color.hex(),
+		'--color-contrast-hover': colorHover.hex(),
+		'--color-contrast-active': colorActive.hex(),
 		'--color-focus': focusColor.hex(),
 	};
 }
@@ -213,7 +252,7 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--text-color);
+	color: var(--color-contrast);
 	font-weight: 500;
 	font-family: inherit;
 	vertical-align: middle;
@@ -227,12 +266,11 @@ export default {
 	cursor: pointer;
 	transition:
 		color 0.2s ease-in,
-		background-color 0.2s ease-in;
+		background-color 0.2s ease-in,
+		box-shadow 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
-
-	--text-color: var(--color-contrast, #000);
 
 	&.shape_pill {
 		border-radius: 32px;
@@ -247,7 +285,7 @@ export default {
 	}
 
 	&.size_small {
-		padding: 8px 16px;
+		padding: var(--small-padding);
 		font-size: 12px;
 
 		& > * {
@@ -260,7 +298,7 @@ export default {
 	}
 
 	&.size_medium {
-		padding: 12px 24px;
+		padding: var(--medium-padding);
 		font-size: 14px;
 
 		& > * {
@@ -273,7 +311,7 @@ export default {
 	}
 
 	&.size_large {
-		padding: 20px 32px;
+		padding: var(--large-padding);
 		font-size: 16px;
 
 		& > * {
@@ -316,22 +354,23 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 2px #fff,
-			0 0 0 4px var(--color-focus);
+			0 0 0 1px #fff,
+			0 0 0 3px var(--color-focus);
 	}
 
-	&:active {
-		background-color: var(--color-active, var(--color-main));
+	&:hover:not(:disabled) {
+		color: var(--color-contrast-hover);
+		background-color: var(--color-main-hover);
 	}
 
-	@media (hover: hover) {
-		&:hover {
-			background-color: var(--color-hover, var(--color-main));
-		}
+	&:active:not(:disabled) {
+		color: var(--color-contrast-active);
+		background-color: var(--color-main-active);
 	}
 
 	&.loading {
-		color: transparent;
+		/* don't inherit color in loading state on hover/active */
+		color: transparent !important;
 	}
 }
 
@@ -344,8 +383,8 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--text-color);
-	background-color: inherit;
+	color: var(--color-contrast);
+	background-color: transparent;
 }
 
 .MainText {
