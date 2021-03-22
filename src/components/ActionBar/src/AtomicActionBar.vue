@@ -58,6 +58,10 @@ export default {
 	.hide-on_tablet {
 		display: none;
 	}
+
+	.ActionBar {
+		padding: 24px 24px 32px 24px;
+	}
 }
 
 @media screen and (min-width: 1200px) {

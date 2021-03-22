@@ -29,7 +29,7 @@ export default {
 
 <style module="$s">
 .ActionBarWrapper {
-	padding-bottom: 146px;
+	padding-bottom: 120px;
 }
 
 @media screen and (min-width: 840px) {
