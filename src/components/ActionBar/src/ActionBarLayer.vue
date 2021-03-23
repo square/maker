@@ -71,7 +71,7 @@ export default {
 
 <style module="$s">
 .ActionBarLayer {
-	padding-bottom: 128px;
+	padding-bottom: 146px;
 }
 
 .ActionBar {
@@ -83,7 +83,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px 40px 24px;
+	padding: 24px 24px 58px 24px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
