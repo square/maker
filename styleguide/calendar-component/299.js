@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[299],{336:function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t,o,r){return n[e]};var n={lastWeek:"'წინა' eeee LT'-ზე'",yesterday:"'გუშინ' LT'-ზე'",today:"'დღეს' LT'-ზე'",tomorrow:"'ხვალ' LT'-ზე'",nextWeek:"'შემდეგი' eeee LT'-ზე'",other:"L"};e.exports=t.default}}]);

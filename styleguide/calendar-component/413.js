@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[413],{456:function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t,o,n){return p[e]};var p={lastWeek:"'கடந்த' eeee p 'மணிக்கு'",yesterday:"'நேற்று ' p 'மணிக்கு'",today:"'இன்று ' p 'மணிக்கு'",tomorrow:"'நாளை ' p 'மணிக்கு'",nextWeek:"eeee p 'மணிக்கு'",other:"P"};e.exports=t.default}}]);

@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[336],{376:function(e,a,p){"use strict";Object.defineProperty(a,"__esModule",{value:!0}),a.default=function(e,a,p,o){return t[e]};var t={lastWeek:"eeee 'lepas pada jam' p",yesterday:"'Semalam pada jam' p",today:"'Hari ini pada jam' p",tomorrow:"'Esok pada jam' p",nextWeek:"eeee 'pada jam' p",other:"P"};e.exports=a.default}}]);
