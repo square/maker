@@ -61,6 +61,7 @@
     "combos": "^0.2.0",
     "comment-mark": "^1.0.0",
     "css-loader": "^4.3.0",
+    "date-fns": "^2.19.0",
     "ent": "^2.2.0",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -88,8 +89,8 @@
     "postcss-preset-env": "^6.7.0",
     "prismjs": "^1.23.0",
     "remote-origin-url": "^2.0.0",
-    "stylefire": "^7.0.3",
     "semver": "^7.3.4",
+    "stylefire": "^7.0.3",
     "stylelint": "^13.9.0",
     "stylelint-config-css-modules": "^2.2.0",
     "stylelint-config-rational-order": "^0.1.2",
@@ -117,7 +118,5 @@
     "webpack-cli": "^3.3.12",
     "webpack-distsize": "^0.1.0"
   },
-  "dependencies": {
-    "date-fns": "^2.19.0"
-  }
+  "dependencies": {}
 }
