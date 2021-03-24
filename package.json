@@ -116,5 +116,8 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-distsize": "^0.1.0"
+  },
+  "dependencies": {
+    "date-fns": "^2.19.0"
   }
 }

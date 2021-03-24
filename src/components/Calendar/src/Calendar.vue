@@ -78,10 +78,29 @@
 </template>
 
 <script>
+import {
+	startOfWeek,
+	startOfMonth,
+	eachDayOfInterval,
+	getDay,
+	lastDayOfMonth,
+	addDays,
+	format,
+	isToday,
+	isAfter,
+	isSameDay,
+	isSameMonth,
+	isSameYear,
+	addMonths,
+	parse,
+} from 'date-fns';
+import * as dateFnsLocale from 'date-fns/locale';
 import { MButton } from '@square/maker/components/Button';
 import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
 
+const localeOptions = Object.keys(dateFnsLocale);
+const DATE_STRING_FORMAT = 'yyyy-MM-dd';
 const isDateFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); // YYYY-MM-DD
 
 /**
@@ -108,7 +127,8 @@ export default {
 		 */
 		locale: {
 			type: String,
-			default: 'en-US',
+			default: 'enUS',
+			validator: (locale) => localeOptions.includes(locale),
 		},
 		/**
 		 * Selected date value (YYYY-MM-DD)
@@ -152,59 +172,37 @@ export default {
 	},
 
 	computed: {
+		localeModule() {
+			return dateFnsLocale[this.locale] || dateFnsLocale.enUS;
+		},
+
 		monthName() {
-			return this.viewingDate.toLocaleString(this.locale, { month: 'long', year: 'numeric' });
+			return format(this.viewingDate, 'MMMM yyyy', { locale: this.localeModule });
 		},
 
 		weekdays() {
-			const weekdays = [];
 			const date = new Date();
-			for (let i = 0; i < 7; i += 1) {
-				weekdays[date.getDay()] = new Date(date);
-				date.setDate(date.getDate() + 1);
-			}
-
-			const localizedDays = weekdays.map((d) => d.toLocaleDateString(this.locale, { weekday: 'short' }));
-			if (localizedDays.toString() === 'Sun,Mon,Tue,Wed,Thu,Fri,Sat') {
-				return localizedDays;
-			}
-
-			return weekdays.map((d) => d.toLocaleDateString(this.locale, { weekday: 'narrow' }));
+			const firstDOW = startOfWeek(date);
+			return [...new Array(7)].map((_, i) => format(addDays(firstDOW, i), 'E', { locale: this.localeModule }));
 		},
 
 		weeks() {
-			const month = this.viewingDate.getMonth();
-			const date = new Date(
-				this.viewingDate.getFullYear(),
-				month,
-				1,
-			);
-
+			const start = startOfMonth(this.viewingDate);
+			const end = lastDayOfMonth(this.viewingDate);
+			const eachDay = eachDayOfInterval({ start, end });
+			const emptyDays = [...new Array(getDay(eachDay[0]))];
 			const weeks = [];
-			let week = [];
-			while (date.getMonth() === month) {
-				const weekday = date.getDay();
-				week[weekday] = date.getDate();
 
-				if (weekday === 6) {
-					weeks.push(week);
-					week = [];
+			[...emptyDays, ...eachDay].forEach((date, index) => {
+				const key = Math.floor(index / 7);
+				if (!weeks[key]) {
+					weeks[key] = [];
 				}
-
-				date.setDate(date.getDate() + 1);
-			}
-
-			weeks.push(week);
+				const day = date ? format(date, 'd') : '';
+				weeks[key].push(day);
+			});
 
 			return weeks;
-		},
-
-		formattedToday() {
-			const today = new Date();
-			const year = today.getFullYear();
-			const month = `0${today.getMonth() + 1}`.slice(-2);
-			const day = `0${today.getDate()}`.slice(-2);
-			return `${year}-${month}-${day}`;
 		},
 	},
 
@@ -236,35 +234,19 @@ export default {
 			if (!dateString) {
 				return new Date();
 			}
-			const [year, month, day] = dateString.split('-');
-			return new Date(year, month - 1, day);
+			return parse(dateString, DATE_STRING_FORMAT, new Date());
 		},
 
 		/**
-		 * Determines if the previous/next buttons should be disabled
-		 * @param {Number} [n]
-		 * @return {Boolean}
+		 * Returns a Date object of the given day
+		 * @return {Date}
 		 */
-		shouldDisableHeaderButton(n) {
-			if (n > 0 && this.maxDate) {
-				const maxDate = this.getDateObj(this.maxDate);
-				return this.viewingDate.getMonth() === maxDate.getMonth();
-			} if (n < 0 && this.minDate) {
-				const minDate = this.getDateObj(this.minDate);
-				return this.viewingDate.getMonth() === minDate.getMonth();
-			}
-			return false;
-		},
-
-		/**
-		 * Changes the calendar month
-		 * @param {Number} [n]
-		 */
-		incMonth(n) {
-			const nextMonth = new Date(this.viewingDate);
-			nextMonth.setDate(1);
-			nextMonth.setMonth(nextMonth.getMonth() + n);
-			this.viewingDate = nextMonth;
+		getDeriveViewingDateObj(day) {
+			return new Date(
+				this.viewingDate.getFullYear(),
+				this.viewingDate.getMonth(),
+				day,
+			);
 		},
 
 		/**
@@ -276,10 +258,31 @@ export default {
 			if (!_day) {
 				return undefined;
 			}
-			const year = this.viewingDate.getFullYear();
-			const month = `0${this.viewingDate.getMonth() + 1}`.slice(-2);
-			const day = `0${_day}`.slice(-2);
-			return `${year}-${month}-${day}`;
+			return format(this.getDeriveViewingDateObj(_day), DATE_STRING_FORMAT);
+		},
+
+		/**
+		 * Determines if the previous/next buttons should be disabled
+		 * @param {Number} [n]
+		 * @return {Boolean}
+		 */
+		shouldDisableHeaderButton(n) {
+			if (n > 0 && this.maxDate) {
+				const maxDate = this.getDateObj(this.maxDate);
+				return isSameMonth(maxDate, this.viewingDate);
+			} if (n < 0 && this.minDate) {
+				const minDate = this.getDateObj(this.minDate);
+				return isSameMonth(minDate, this.viewingDate);
+			}
+			return false;
+		},
+
+		/**
+		 * Changes the calendar month
+		 * @param {Number} [n]
+		 */
+		incMonth(n) {
+			this.viewingDate = addMonths(this.viewingDate, n);
 		},
 
 		/**
@@ -288,7 +291,11 @@ export default {
 		 * @return {Boolean}
 		 */
 		isDateSelected(day) {
-			return this.selectedDate === this.deriveViewingDate(day);
+			const selectedDateObject = this.getDateObj(this.selectedDate);
+			const viewingDateObject = this.getDeriveViewingDateObj(day);
+			return isSameDay(selectedDateObject, viewingDateObject)
+				&& isSameMonth(selectedDateObject, viewingDateObject)
+				&& isSameYear(selectedDateObject, viewingDateObject);
 		},
 
 		/**
@@ -299,15 +306,15 @@ export default {
 		isDateDisabled(day) {
 			let isDisabledDate = false;
 			const date = this.deriveViewingDate(day);
-			const deriveViewingDate = date ? this.getDateObj(date).getTime() : undefined;
+			const viewingDateObject = this.getDeriveViewingDateObj(day);
 
-			if (this.minDate && deriveViewingDate) {
-				const minDate = this.getDateObj(this.minDate).getTime();
-				isDisabledDate = minDate > deriveViewingDate;
+			if (this.minDate && date) {
+				const minDateObject = parse(this.minDate, DATE_STRING_FORMAT, new Date());
+				isDisabledDate = isAfter(minDateObject, viewingDateObject);
 			}
-			if (this.maxDate && deriveViewingDate && !isDisabledDate) {
-				const maxDate = this.getDateObj(this.maxDate).getTime();
-				isDisabledDate = maxDate < deriveViewingDate;
+			if (this.maxDate && date && !isDisabledDate) {
+				const maxDateObject = parse(this.maxDate, DATE_STRING_FORMAT, new Date());
+				isDisabledDate = isAfter(viewingDateObject, maxDateObject);
 			}
 
 			return this.disabledDates.includes(date) || isDisabledDate;
@@ -319,7 +326,7 @@ export default {
 		 * @return {Boolean}
 		 */
 		isToday(day) {
-			return this.formattedToday === this.deriveViewingDate(day);
+			return isToday(this.getDeriveViewingDateObj(day));
 		},
 
 		/**

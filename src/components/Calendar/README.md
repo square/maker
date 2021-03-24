@@ -8,6 +8,7 @@
 		>
 			<m-calendar
 				v-model="selectedDate"
+				:locale="locale"
 				:min-date="minDate"
 				:max-date="maxDate"
 				:disabled-dates="disabledDates"
@@ -33,11 +34,26 @@
 				v-model="maxDate"
 				type="date"
 			>
+		</label><br><br>
+		<label>
+			Locale:
+			<select
+				v-model="locale"
+			>
+				<option
+					v-for="(option, index) in localeSelection"
+					:key="index"
+					:value="option"
+				>
+					{{ option }}
+				</option>
+			</select>
 		</label>
 	</div>
 </template>
 
 <script>
+import * as dateFnsLocale from 'date-fns/locale';
 import { MCalendar } from '@square/maker/components/Calendar';
 
 export default {
@@ -51,6 +67,8 @@ export default {
 			minDate: '',
 			maxDate: '',
 			disabledDates: [],
+			locale: 'enUS',
+			localeSelection: [],
 		};
 	},
 
@@ -67,6 +85,7 @@ export default {
 		this.minDate = `${year}-${month}-${minDay}`;
 		this.maxDate = `${year}-${maxMonth}-${selectedDay}`;
 		this.disabledDates.push(`${year}-${month}-${disabledDay}`);
+		this.localeSelection = Object.keys(dateFnsLocale);
 	},
 };
 </script>
@@ -77,13 +96,13 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop           | Type     | Default   | Possible values | Description                           |
-| -------------- | -------- | --------- | --------------- | ------------------------------------- |
-| locale         | `string` | `'en-US'` | —               | Language specific format to use       |
-| v-model        | `string` | `''`      | —               | Selected date value (YYYY-MM-DD)      |
-| min-date       | `string` | `''`      | —               | Disable the dates before the min-date |
-| max-date       | `string` | `''`      | —               | Disable the dates after the max-date  |
-| disabled-dates | `array`  | `[]`      | —               | List of disabled dates                |
+| Prop           | Type     | Default  | Possible values | Description                           |
+| -------------- | -------- | -------- | --------------- | ------------------------------------- |
+| locale         | `string` | `'enUS'` | —               | Language specific format to use       |
+| v-model        | `string` | `''`     | —               | Selected date value (YYYY-MM-DD)      |
+| min-date       | `string` | `''`     | —               | Disable the dates before the min-date |
+| max-date       | `string` | `''`     | —               | Disable the dates after the max-date  |
+| disabled-dates | `array`  | `[]`     | —               | List of disabled dates                |
 
 
 ## Events
