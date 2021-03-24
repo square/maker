@@ -94,14 +94,13 @@ import {
 	addMonths,
 	parse,
 } from 'date-fns';
-import * as dateFnsLocale from 'date-fns/locale';
 import { MButton } from '@square/maker/components/Button';
 import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
 
-const localeOptions = Object.keys(dateFnsLocale);
 const DATE_STRING_FORMAT = 'yyyy-MM-dd';
 const isDateFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); // YYYY-MM-DD
+const getLocale = (locale) => import(`date-fns/locale/${locale}/index.js`);
 
 /**
  * @inheritAttrs div
@@ -123,12 +122,11 @@ export default {
 
 	props: {
 		/**
-		 * Language specific format to use
+		 * Language specific format to use: https://github.com/date-fns/date-fns/tree/master/src/locale
 		 */
 		locale: {
 			type: String,
-			default: 'enUS',
-			validator: (locale) => localeOptions.includes(locale),
+			default: 'en-US',
 		},
 		/**
 		 * Selected date value (YYYY-MM-DD)
@@ -168,14 +166,11 @@ export default {
 		return {
 			headerButtonColor: '#f2f2f2',
 			viewingDate: this.selectedDateObj() || new Date(),
+			localeModule: undefined,
 		};
 	},
 
 	computed: {
-		localeModule() {
-			return dateFnsLocale[this.locale] || dateFnsLocale.enUS;
-		},
-
 		monthName() {
 			return format(this.viewingDate, 'MMMM yyyy', { locale: this.localeModule });
 		},
@@ -213,6 +208,16 @@ export default {
 				this.viewingDate = newViewingDate;
 			}
 		},
+
+		async locale(value) {
+			if (value) {
+				this.localeModule = await getLocale(value);
+			}
+		},
+	},
+
+	async created() {
+		this.localeModule = await getLocale(this.locale);
 	},
 
 	methods: {
