@@ -55,6 +55,7 @@
     "@vue/babel-preset-jsx": "^1.1.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-date-fns": "^2.0.0",
     "babel-plugin-lodash": "^3.3.4",
     "chroma-js": "^2.1.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -117,6 +118,5 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-distsize": "^0.1.0"
-  },
-  "dependencies": {}
+  }
 }
