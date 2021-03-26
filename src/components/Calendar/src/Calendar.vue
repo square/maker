@@ -39,8 +39,8 @@
 			<thead>
 				<tr>
 					<th
-						v-for="day in weekdays"
-						:key="`day-${day}`"
+						v-for="(day, index) in weekdays"
+						:key="`day-${day}-${index}`"
 						:class="$s.DateHeaderCell"
 					>
 						{{ day }}
@@ -100,7 +100,6 @@ import ChevronRight from '@square/maker-icons/ChevronRight';
 
 const DATE_STRING_FORMAT = 'yyyy-MM-dd';
 const isDateFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); // YYYY-MM-DD
-const getLocale = (locale) => import(`date-fns/locale/${locale}/index.js`);
 
 /**
  * @inheritAttrs div
@@ -122,7 +121,7 @@ export default {
 
 	props: {
 		/**
-		 * Language specific format to use: https://github.com/date-fns/date-fns/tree/master/src/locale
+		 * Language specific format to use
 		 */
 		locale: {
 			type: String,
@@ -166,19 +165,19 @@ export default {
 		return {
 			headerButtonColor: '#f2f2f2',
 			viewingDate: this.selectedDateObj() || new Date(),
-			localeModule: undefined,
 		};
 	},
 
 	computed: {
 		monthName() {
-			return format(this.viewingDate, 'MMMM yyyy', { locale: this.localeModule });
+			return this.viewingDate.toLocaleString(this.locale, { month: 'long', year: 'numeric' });
 		},
 
 		weekdays() {
 			const date = new Date();
 			const firstDOW = startOfWeek(date);
-			return [...new Array(7)].map((_, i) => format(addDays(firstDOW, i), 'E', { locale: this.localeModule }));
+			const weekdays = [...new Array(7)].map((_, i) => addDays(firstDOW, i));
+			return weekdays.map((d) => d.toLocaleDateString(this.locale, { weekday: 'short' }));
 		},
 
 		weeks() {
@@ -208,16 +207,6 @@ export default {
 				this.viewingDate = newViewingDate;
 			}
 		},
-
-		async locale(value) {
-			if (value) {
-				this.localeModule = await getLocale(value);
-			}
-		},
-	},
-
-	async created() {
-		this.localeModule = await getLocale(this.locale);
 	},
 
 	methods: {
