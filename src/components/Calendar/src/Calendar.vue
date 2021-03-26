@@ -7,7 +7,7 @@
 		<div :class="$s.CalendarHeader">
 			<m-button
 				:disabled="shouldDisableHeaderButton(-1)"
-				:color="headerButtonColor"
+				color="#f2f2f2"
 				size="small"
 				variant="primary"
 				tabindex="-1"
@@ -163,7 +163,6 @@ export default {
 
 	data() {
 		return {
-			headerButtonColor: '#f2f2f2',
 			viewingDate: this.selectedDateObj() || new Date(),
 		};
 	},
