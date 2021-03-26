@@ -112,13 +112,13 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop           | Type     | Default   | Possible values | Description                                                                                  |
-| -------------- | -------- | --------- | --------------- | -------------------------------------------------------------------------------------------- |
-| locale         | `string` | `'en-US'` | —               | Language specific format to use: https://github.com/date-fns/date-fns/tree/master/src/locale |
-| v-model        | `string` | `''`      | —               | Selected date value (YYYY-MM-DD)                                                             |
-| min-date       | `string` | `''`      | —               | Disable the dates before the min-date                                                        |
-| max-date       | `string` | `''`      | —               | Disable the dates after the max-date                                                         |
-| disabled-dates | `array`  | `[]`      | —               | List of disabled dates                                                                       |
+| Prop           | Type     | Default   | Possible values | Description                           |
+| -------------- | -------- | --------- | --------------- | ------------------------------------- |
+| locale         | `string` | `'en-US'` | —               | Language specific format to use       |
+| v-model        | `string` | `''`      | —               | Selected date value (YYYY-MM-DD)      |
+| min-date       | `string` | `''`      | —               | Disable the dates before the min-date |
+| max-date       | `string` | `''`      | —               | Disable the dates after the max-date  |
+| disabled-dates | `array`  | `[]`      | —               | List of disabled dates                |
 
 
 ## Events
