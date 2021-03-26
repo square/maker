@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[224],{265:function(e,o,n){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.default=function(e,o,n,p){return t[e]};var t={lastWeek:"'viime' eeee 'klo' p",yesterday:"'eilen klo' p",today:"'tänään klo' p",tomorrow:"'huomenna klo' p",nextWeek:"'ensi' eeee 'klo' p",other:"P"};e.exports=o.default}}]);

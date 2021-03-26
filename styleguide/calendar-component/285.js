@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[285],{321:function(e,d,t){"use strict";Object.defineProperty(d,"__esModule",{value:!0}),d.default=function(e,d,t,r){return o[e]};var o={lastWeek:"'síðasta' dddd 'kl.' p",yesterday:"'í gær kl.' p",today:"'í dag kl.' p",tomorrow:"'á morgun kl.' p",nextWeek:"dddd 'kl.' p",other:"L"};e.exports=d.default}}]);
