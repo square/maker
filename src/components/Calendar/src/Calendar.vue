@@ -6,12 +6,11 @@
 	>
 		<div :class="$s.CalendarHeader">
 			<m-button
-				:disabled="shouldDisableHeaderButton(-1)"
+				:disabled="isCalendarNavDisabled(-1)"
 				color="#f2f2f2"
 				size="small"
 				variant="primary"
-				tabindex="-1"
-				@click="incMonth(-1)"
+				@click="incrementMonth(-1)"
 			>
 				<chevron-left
 					:class="$s.CalendarHeaderButtonIcon"
@@ -23,12 +22,11 @@
 			</span>
 
 			<m-button
-				:disabled="shouldDisableHeaderButton(1)"
+				:disabled="isCalendarNavDisabled(1)"
 				size="small"
 				variant="primary"
-				tabindex="-1"
 				color="#f2f2f2"
-				@click="incMonth(1)"
+				@click="incrementMonth(1)"
 			>
 				<chevron-right
 					:class="$s.CalendarHeaderButtonIcon"
@@ -39,8 +37,8 @@
 			<thead>
 				<tr>
 					<th
-						v-for="(day, index) in weekdays"
-						:key="`day-${day}-${index}`"
+						v-for="day in weekdays"
+						:key="`day-${day}`"
 						:class="$s.DateHeaderCell"
 					>
 						{{ day }}
@@ -81,30 +79,22 @@
 import {
 	startOfWeek,
 	startOfMonth,
-	eachDayOfInterval,
-	getDay,
-	lastDayOfMonth,
+	endOfMonth,
 	addDays,
-	format,
 	isToday,
-	isAfter,
 	isSameDay,
 	isSameMonth,
 	isSameYear,
 	addMonths,
-	parse,
+	parseISO,
+	formatISO,
 } from 'date-fns';
 import { MButton } from '@square/maker/components/Button';
 import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
 
-const DATE_STRING_FORMAT = 'yyyy-MM-dd';
-const isDateFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); // YYYY-MM-DD
+const isIsoFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); // YYYY-MM-DD
 
-/**
- * @inheritAttrs div
- * @inheritListeners div
- */
 export default {
 	components: {
 		MButton,
@@ -121,43 +111,43 @@ export default {
 
 	props: {
 		/**
-		 * Language specific format to use
+		 * Calendar locale. Defaults to browser locale.
 		 */
 		locale: {
 			type: String,
-			default: 'en-US',
+			default: undefined,
 		},
 		/**
-		 * Selected date value (YYYY-MM-DD)
+		 * Selected date value in ISO format.
 		 */
 		selectedDate: {
 			type: String,
-			default: '',
-			validator: isDateFormat,
+			default: undefined,
+			validator: isIsoFormat,
 		},
 		/**
-		 * Disable the dates before the min-date
+		 * Disable the dates before the min-date in ISO format.
 		 */
 		minDate: {
 			type: String,
-			default: '',
-			validator: isDateFormat,
+			default: undefined,
+			validator: isIsoFormat,
 		},
 		/**
-		 * Disable the dates after the max-date
+		 * Disable the dates after the max-date in ISO format.
 		 */
 		maxDate: {
 			type: String,
-			default: '',
-			validator: isDateFormat,
+			default: undefined,
+			validator: isIsoFormat,
 		},
 		/**
-		 * List of disabled dates
+		 * List of disabled dates in ISO format.
 		 */
 		disabledDates: {
 			type: Array,
 			default: () => ([]),
-			validator: (v) => v.every((date) => isDateFormat(date)),
+			validator: (disabledDates) => disabledDates.every((date) => isIsoFormat(date)),
 		},
 	},
 
@@ -173,29 +163,40 @@ export default {
 		},
 
 		weekdays() {
-			const date = new Date();
-			const firstDOW = startOfWeek(date);
-			const weekdays = [...new Array(7)].map((_, i) => addDays(firstDOW, i));
-			return weekdays.map((d) => d.toLocaleDateString(this.locale, { weekday: 'short' }));
+			const firstDayOfWeek = startOfWeek(new Date());
+			const weekdays = Array.from({ length: 7 }, (_, i) => addDays(firstDayOfWeek, i));
+			return weekdays.map((date) => date.toLocaleDateString(this.locale, { weekday: 'short' }));
 		},
 
 		weeks() {
-			const start = startOfMonth(this.viewingDate);
-			const end = lastDayOfMonth(this.viewingDate);
-			const eachDay = eachDayOfInterval({ start, end });
-			const emptyDays = [...new Array(getDay(eachDay[0]))];
-			const weeks = [];
+			const month = this.viewingDate.getMonth();
+			const dateOfMonth = startOfMonth(this.viewingDate);
 
-			[...emptyDays, ...eachDay].forEach((date, index) => {
-				const key = Math.floor(index / 7);
-				if (!weeks[key]) {
-					weeks[key] = [];
+			const weeks = [];
+			let week = [];
+			while (dateOfMonth.getMonth() === month) {
+				const weekday = dateOfMonth.getDay();
+				week[weekday] = dateOfMonth.getDate();
+
+				if (weekday === 6) {
+					weeks.push(week);
+					week = [];
 				}
-				const day = date ? format(date, 'd') : '';
-				weeks[key].push(day);
-			});
+
+				dateOfMonth.setDate(dateOfMonth.getDate() + 1);
+			}
+
+			weeks.push(week);
 
 			return weeks;
+		},
+
+		maxDateObj() {
+			return this.maxDate && parseISO(this.maxDate);
+		},
+
+		minDateObj() {
+			return this.minDate && parseISO(this.minDate);
 		},
 	},
 
@@ -215,77 +216,70 @@ export default {
 		 */
 		selectedDateObj() {
 			return this.selectedDate
-				? this.getDateObj(this.selectedDate)
+				? parseISO(this.selectedDate)
 				: undefined;
 		},
 
 		/**
 		 * Returns a Date object of the given date
+		 * @param {number} date
 		 * @return {Date}
 		 */
-		getDateObj(dateString) {
-			if (!dateString) {
-				return new Date();
-			}
-			return parse(dateString, DATE_STRING_FORMAT, new Date());
-		},
-
-		/**
-		 * Returns a Date object of the given day
-		 * @return {Date}
-		 */
-		getDeriveViewingDateObj(day) {
+		getDeriveViewingDateObj(date) {
 			return new Date(
 				this.viewingDate.getFullYear(),
 				this.viewingDate.getMonth(),
-				day,
+				date,
 			);
 		},
 
 		/**
 		 * Converts the Date obj into a date string
-		 * @param {Date} [_day]
-		 * @return {(undefined|String)}
+		 * @param {number} [date]
+		 * @return {(undefined|string)}
 		 */
-		deriveViewingDate(_day) {
-			if (!_day) {
-				return undefined;
-			}
-			return format(this.getDeriveViewingDateObj(_day), DATE_STRING_FORMAT);
+		deriveViewingDate(date) {
+			return date && formatISO(
+				this.getDeriveViewingDateObj(date),
+				{ representation: 'date' },
+			);
 		},
 
 		/**
-		 * Determines if the previous/next buttons should be disabled
-		 * @param {Number} [n]
-		 * @return {Boolean}
+		 * Determines if the previous/next month buttons should be disabled
+		 * @param {number} direction
+		 * @return {boolean}
 		 */
-		shouldDisableHeaderButton(n) {
-			if (n > 0 && this.maxDate) {
-				const maxDate = this.getDateObj(this.maxDate);
-				return isSameMonth(maxDate, this.viewingDate);
-			} if (n < 0 && this.minDate) {
-				const minDate = this.getDateObj(this.minDate);
-				return isSameMonth(minDate, this.viewingDate);
+		isCalendarNavDisabled(direction) {
+			const projectedDate = addMonths(this.viewingDate, direction);
+
+			if (direction === -1 && this.minDateObj) {
+				return startOfMonth(this.minDateObj) > startOfMonth(projectedDate);
 			}
+
+			if (direction === 1 && this.maxDateObj) {
+				return endOfMonth(this.maxDateObj) < endOfMonth(projectedDate);
+			}
+
 			return false;
 		},
 
 		/**
-		 * Changes the calendar month
-		 * @param {Number} [n]
+		 * Increment/decrement the calendar month
+		 * @param {number} incrementBy
 		 */
-		incMonth(n) {
-			this.viewingDate = addMonths(this.viewingDate, n);
+		incrementMonth(incrementBy) {
+			this.viewingDate = addMonths(this.viewingDate, incrementBy);
 		},
 
 		/**
 		 * Determines if the date is selected
-		 * @param {String} [day]
-		 * @return {Boolean}
+		 * @param {number} date
+		 * @return {boolean}
 		 */
-		isDateSelected(day) {
-			const selectedDateObject = this.getDateObj(this.selectedDate);
-			const viewingDateObject = this.getDeriveViewingDateObj(day);
+		isDateSelected(date) {
+			const selectedDateObject = this.selectedDate ? parseISO(this.selectedDate) : new Date();
+			const viewingDateObject = this.getDeriveViewingDateObj(date);
 			return isSameDay(selectedDateObject, viewingDateObject)
 				&& isSameMonth(selectedDateObject, viewingDateObject)
 				&& isSameYear(selectedDateObject, viewingDateObject);
@@ -293,41 +287,43 @@ export default {
 
 		/**
 		 * Determines if the date is disabled
-		 * @param {String} [day]
-		 * @return {Boolean}
+		 * @param {number} date
+		 * @return {boolean}
 		 */
-		isDateDisabled(day) {
-			let isDisabledDate = false;
-			const date = this.deriveViewingDate(day);
-			const viewingDateObject = this.getDeriveViewingDateObj(day);
+		isDateDisabled(date) {
+			const viewingDateObject = this.getDeriveViewingDateObj(date);
 
-			if (this.minDate && date) {
-				const minDateObject = parse(this.minDate, DATE_STRING_FORMAT, new Date());
-				isDisabledDate = isAfter(minDateObject, viewingDateObject);
-			}
-			if (this.maxDate && date && !isDisabledDate) {
-				const maxDateObject = parse(this.maxDate, DATE_STRING_FORMAT, new Date());
-				isDisabledDate = isAfter(viewingDateObject, maxDateObject);
+			if (this.minDateObj && this.minDateObj > viewingDateObject) {
+				return true;
 			}
 
-			return this.disabledDates.includes(date) || isDisabledDate;
+			if (this.maxDateObj && this.maxDateObj < viewingDateObject) {
+				return true;
+			}
+
+			const isoDateString = this.deriveViewingDate(date);
+			return this.disabledDates.includes(isoDateString);
 		},
 
 		/**
 		 * Determines if the date is today
-		 * @param {String} [day]
-		 * @return {Boolean}
+		 * @param {number} date
+		 * @return {boolean}
 		 */
-		isToday(day) {
-			return isToday(this.getDeriveViewingDateObj(day));
+		isToday(date) {
+			return isToday(this.getDeriveViewingDateObj(date));
 		},
 
 		/**
-		 * Emits the new date
-		 * @param {String} [day]
+		 * Emits a new Date ISO string with a new date value
+		 * @param {number} day
 		 */
 		emitDate(day) {
 			if (!this.isDateDisabled(day)) {
+				/**
+				 * New ISO date
+				 * @property {string}
+				 */
 				this.$emit('calendar:update', this.deriveViewingDate(day));
 			}
 		},

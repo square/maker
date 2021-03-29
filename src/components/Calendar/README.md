@@ -66,7 +66,7 @@ export default {
 			minDate: '',
 			maxDate: '',
 			disabledDates: [],
-			locale: 'en-US',
+			locale: undefined,
 			localeSelection: [
 				'en-US',
 				'da',
@@ -98,7 +98,6 @@ export default {
 		const minDay = `0${today.getDate() - 1}`.slice(-2);
 		const disabledDay = `0${today.getDate() + 5}`.slice(-2);
 
-		this.selectedDate = `${year}-${month}-${selectedDay}`;
 		this.minDate = `${year}-${month}-${minDay}`;
 		this.maxDate = `${year}-${maxMonth}-${selectedDay}`;
 		this.disabledDates.push(`${year}-${month}-${disabledDay}`);
@@ -110,22 +109,18 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
-
-| Prop           | Type     | Default   | Possible values | Description                           |
-| -------------- | -------- | --------- | --------------- | ------------------------------------- |
-| locale         | `string` | `'en-US'` | —               | Language specific format to use       |
-| v-model        | `string` | `''`      | —               | Selected date value (YYYY-MM-DD)      |
-| min-date       | `string` | `''`      | —               | Disable the dates before the min-date |
-| max-date       | `string` | `''`      | —               | Disable the dates after the max-date  |
-| disabled-dates | `array`  | `[]`      | —               | List of disabled dates                |
+| Prop           | Type     | Default | Possible values | Description                                          |
+| -------------- | -------- | ------- | --------------- | ---------------------------------------------------- |
+| locale         | `string` | —       | —               | Calendar locale. Defaults to browser locale.         |
+| v-model        | `string` | —       | —               | Selected date value in ISO format.                   |
+| min-date       | `string` | —       | —               | Disable the dates before the min-date in ISO format. |
+| max-date       | `string` | —       | —               | Disable the dates after the max-date in ISO format.  |
+| disabled-dates | `array`  | `[]`    | —               | List of disabled dates in ISO format.                |
 
 
 ## Events
 
-Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
-
-| Event           | Type | Description |
-| --------------- | ---- | ----------- |
-| calendar:update | -    | —           |
+| Event           | Type     | Description  |
+| --------------- | -------- | ------------ |
+| calendar:update | `string` | New ISO date |
 <!-- api-tables:end -->
