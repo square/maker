@@ -483,6 +483,16 @@
 		>
 			One-Off Reversed Button
 		</m-button>
+			<m-button
+				variant="success"
+			>
+				Success button
+			</m-button>
+			<m-button
+				variant="error"
+			>
+				Error button
+			</m-button>
 	</div>
 </template>
 

@@ -126,10 +126,57 @@ function ghost(tokens) {
 	};
 }
 
+function success(tokens) {
+	const color = chroma('#1fad1f');
+	const colorHover = getHover(color);
+	const colorActive = getActive(color);
+	const textColor = tokens.textColor ? 'rgba(255, 255, 255, 0.95)' : undefined;
+	const contrastColor = getContrast(color, textColor);
+	const contrastColorHover = getHover(contrastColor);
+	const contrastColorActive = getActive(contrastColor);
+	const focusColor = getFocus(color);
+	return {
+		'--small-padding': '8px 16px',
+		'--medium-padding': '12px 24px',
+		'--large-padding': '20px 32px',
+		'--color-main': color.hex(),
+		'--color-main-hover': colorHover.hex(),
+		'--color-main-active': colorActive.hex(),
+		'--color-contrast': contrastColor.hex(),
+		'--color-contrast-hover': contrastColorHover.hex(),
+		'--color-contrast-active': contrastColorActive.hex(),
+		'--color-focus': focusColor.hex(),
+	};
+}
+function error(tokens) {
+	const color = chroma('#ce3217');
+	const colorHover = getHover(color);
+	const colorActive = getActive(color);
+	const textColor = tokens.textColor ? 'rgba(255, 255, 255, 0.95)' : undefined;
+	const contrastColor = getContrast(color, textColor);
+	const contrastColorHover = getHover(contrastColor);
+	const contrastColorActive = getActive(contrastColor);
+	const focusColor = getFocus(color);
+	return {
+		'--small-padding': '8px 16px',
+		'--medium-padding': '12px 24px',
+		'--large-padding': '20px 32px',
+		'--color-main': color.hex(),
+		'--color-main-hover': colorHover.hex(),
+		'--color-main-active': colorActive.hex(),
+		'--color-contrast': contrastColor.hex(),
+		'--color-contrast-hover': contrastColorHover.hex(),
+		'--color-contrast-active': contrastColorActive.hex(),
+		'--color-focus': focusColor.hex(),
+	};
+}
+
 const VARIANTS = {
 	primary: fill,
 	secondary: outline,
 	tertiary: ghost,
+	success,
+	error,
 };
 
 /**
@@ -189,7 +236,7 @@ export default {
 		variant: {
 			type: String,
 			default: 'primary',
-			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
+			validator: (variant) => ['primary', 'secondary', 'tertiary', 'success', 'error'].includes(variant),
 		},
 		/**
 		 * Shape of button
