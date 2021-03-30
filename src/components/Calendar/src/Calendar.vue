@@ -54,7 +54,6 @@
 						v-for="(date, di) in week"
 						:key="`date-${wi-di}`"
 						:class="$s.DateCell"
-						@click.prevent="emitDate(date)"
 					>
 						<button
 							v-if="date"
@@ -65,6 +64,7 @@
 							}]"
 							type="button"
 							tabindex="-1"
+							@click.prevent="emitDate(date)"
 						>
 							{{ date.getDate() }}
 						</button>
@@ -356,7 +356,6 @@ export default {
 	overflow: hidden;
 	color: var(--color-black);
 	text-align: center;
-	cursor: pointer;
 }
 
 .DateCellButton {
@@ -368,7 +367,7 @@ export default {
 	border: none;
 	border-radius: 8px;
 	outline: none;
-	cursor: inherit;
+	cursor: pointer;
 	transition: background-color 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
