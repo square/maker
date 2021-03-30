@@ -1,10 +1,10 @@
-# Contributing
+# 🛠 Contributing
 
 This document contains all of the dry technical details of how to contribute to Maker. This document assumes your proposed contribution is sensible and within Maker's scope and guiding philosophies. If you are unsure if the last sentence applies to you please read [What is Maker?](./WHAT_IS_MAKER.md)
 
 ## Supported environments
 
-Last 2 major versions of Safari, Chrome, Firefox, & Edge on macOS, Linux, Windows, iOS, & Android. Also 12.x+ Node.js SSR.
+Last 2 major versions of Safari, Chrome, Firefox, & Edge on macOS, Linux, Windows, iOS, & Android. Also, Node.js LTS for Vue.js SSR.
 
 ## Codebase setup
 
@@ -79,16 +79,19 @@ $ ngrok http <SERVER PORT>
 ### Linting
 
 ```sh
-# run JS lints
+# Lint JS & CSS
+$ npm run lint
+
+# Lint JS
 $ npm run lint:js
 
-# run JS lints & autofix where possible
+# Lint JS & autofix where possible
 $ npm run lint:js -- --fix
 
-# run CSS lints
+# Lint CSS
 $ npm run lint:css
 
-# run CSS lints & autofix where possible
+# Lint CSS & autofix where possible
 $ npm run lint:css -- --fix
 ```
 
@@ -126,30 +129,12 @@ If you want to test a branch before releasing it, you can push up a _built branc
    ```
 
 ## Git workflow
-
-### Branches
-
-The only "special" branch is the `master` branch which represents the latest stable version of the library. Most PRs with bug fixes, features, and even breaking changes should probably be made against, and ultimately merged into, `master`. The only exception is if you're unsure of changes and need to validate your ideas in production before making an official stable Maker release, which would be most common in the case of breaking changes and major version releases, so let's go over an example of how we'd do one.
-
-Let's say Maker is on version `1.5.2` and you have a breaking change, or maybe several, that you'd like to make and that would require a major version release of `2.0.0`. Unless you're very confident in your changes you'll likely want to do a few _pre-releases_ first, and hold out on directly merging your changes directly into `master`. So what you'd do is:
-
-1. Make a `v2` branch, or whatever you want to call it, as long as the name is descriptive.
-2. Within this branch bump the version of Maker within `package.json` from `1.5.2` to `2.0.0-beta.0`.
-3. Make and merge all your tentative changes into `v2` and bump the pre-release version with every merged change, e.g. `-beta.0`, `-beta.1`, `-beta.2`, etc.
-4. Build, i.e. `npm run build`, and publish them to npm, i.e. `npm run publish`.
-5. Build and deploy the styleguide for your changes to get feedback from coworkers, i.e. `npm run styleguide-build`.
-6. Repeat steps 3 - 6 until you feel confident in your changes and they have stabilized.
-7. Open `v2` PR against `master`, get approval, merge in, build & publish official `2.0.0` release.
-
 ### Commit style
 
-Commit following the [Conventional Commits style](https://www.conventionalcommits.org) for simple yet meaningful commit messages. It has the following formats:
+This repository uses [Conventional Commits](https://www.conventionalcommits.org) for simple yet meaningful commit messages. Not only are they user-friendly, they are also machine-readable for automated release notes and versioning.
 
-#### With scope
 
-```
-<type>(<scope>): <subject>
-```
+It has the following formats:
 
 #### Without scope
 
@@ -157,22 +142,54 @@ Commit following the [Conventional Commits style](https://www.conventionalcommit
 <type>: <subject>
 ```
 
-Reference [this JSON](https://github.com/commitizen/conventional-commit-types/blob/master/index.json) for supported commit types.
+#### With scope
+```
+<type>(<scope>): <subject>
+```
+
+#### Breaking change
+
+```
+<type>(<scope>)!: <subject>
+```
+
+#### Breaking change with message
+
+```
+<type>: <subject>
+BREAKING CHANGE: Required message
+```
+
+#### Types
+- `feat`: new feature for the user, not a new feature for build script
+- `fix`: bug fix for the user, not a fix to a build script
+- `docs`: changes to the documentation
+- `build`: changes that affect the build system or external dependencies
+- `test`: adding missing tests, refactoring tests; no production code change
+- `refactor`: refactoring production code, eg. renaming a variable
+- `style`: formatting, missing semi colons, etc; no production code change
+- `chore`: updating grunt tasks etc; no production code change
+- `revert`: reverts a previous commit
+- `perf`: changes that improve performance
+- `ci`: changes to CI configuration files and scripts (eg. GitHub Actions)
 
 #### Examples
+-  `chore: enabled NUXT SSR`
+- `style: linting fix`
+- `feat(button): add button component`
+- `fix(button): inherit event listeners`
+- `refactor(button)!: remove deprecated size prop`
 
-```
-chore: enabled NUXT SSR
-```
+### Branches
+#### develop
+The default repository branch that contains all changes staged for release.
 
-```
-style: correcting linting error
-```
+All PRs should be made against `develop` and **squashed** to merge.
 
-```
-feat: added button component
-```
 
-```
-fix(button): inherit event listeners
-```
+#### master
+The latest stable version of the library. 
+
+PRs against `master` must only be from the `develop` branch for releasing purposes and merged via **merge commit**.
+
+On merge, [semantic-release](https://semantic-release.gitbook.io/semantic-release/) will run on Github Action to determine the next version based on the commits and publish a new version to [npm](https://www.npmjs.com/package/@square/maker) and [GitHub](https://github.com/square/maker/releases).
