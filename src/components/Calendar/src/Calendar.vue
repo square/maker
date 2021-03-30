@@ -60,7 +60,7 @@
 							:class="[$s.DateCellButton, {
 								[$s.selected]: isDateSelected(date),
 								[$s.disabled]: isDateDisabled(date),
-								[$s.today]: isToday(date)
+								[$s.today]: isToday(date),
 							}]"
 							type="button"
 							tabindex="-1"
