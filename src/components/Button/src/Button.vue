@@ -505,12 +505,12 @@ export default {
 }
 
 .Icon.type_success {
-	--color-contrast: rgba(52, 199, 89, 1);
-	--color-main: rgba(239, 245, 241, 1);
+	--color-contrast: #1fad1f;
+	--color-main: rgba(255, 255, 255, 0.95);
 }
 
 .Icon.type_error {
-	--color-contrast: rgba(255, 59, 48, 1);
-	--color-main: rgba(245, 239, 239, 1);
+	--color-contrast: #ce3217;
+	--color-main: rgba(255, 255, 255, 0.95);
 }
 </style>
