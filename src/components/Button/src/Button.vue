@@ -17,6 +17,19 @@
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
+		<div
+			v-if="variant === 'success' || 'error'"
+			:class="$s.IconAligner"
+		>
+			<component
+				:is="iconComponent"
+				:class="[
+					$s.Icon,
+					$s[`type_${type}`],
+				]"
+				inline
+			/>
+		</div>
 		<m-loading
 			v-if="loading"
 			:class="$s.Loading"
@@ -41,6 +54,8 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
+import CheckCircle from '@square/maker-icons/CheckCircle';
+import AlertCircle from '@square/maker-icons/AlertCircle';
 
 function getContrast(chromaBg, targetChromaFg) {
 	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
@@ -187,6 +202,8 @@ const VARIANTS = {
 export default {
 	components: {
 		MLoading,
+		CheckCircle,
+		AlertCircle,
 	},
 
 	inheritAttrs: false,
@@ -276,6 +293,15 @@ export default {
 				color: this.color,
 				textColor: this.textColor,
 			});
+		},
+		iconComponent() {
+			if (this.variant === 'error') {
+				return AlertCircle;
+			}
+			if (this.variant === 'success') {
+				return CheckCircle;
+			}
+			return undefined;
 		},
 	},
 
@@ -462,5 +488,29 @@ export default {
 
 .Button.align_space-between .InformationText {
 	margin-right: 8px;
+}
+
+.IconAligner {
+	display: flex;
+	align-items: center;
+	height: 24px;
+	margin-right: 8px;
+}
+
+.Icon {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+	stroke: var(--color-main);
+}
+
+.Icon.type_success {
+	--color-contrast: rgba(52, 199, 89, 1);
+	--color-main: rgba(239, 245, 241, 1);
+}
+
+.Icon.type_error {
+	--color-contrast: rgba(255, 59, 48, 1);
+	--color-main: rgba(245, 239, 239, 1);
 }
 </style>
