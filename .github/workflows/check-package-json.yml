@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: Install NPM dependencies
+    - name: Install npm dependencies
       run: npm ci
     - name: Run package.json checks
       run: node .github/dep-version-check
