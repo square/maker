@@ -41,6 +41,7 @@
   },
   "peerDependencies": {
     "chroma-js": "^2.1.0",
+    "date-fns": "^2.19.0",
     "popmotion": "^9.3.1",
     "stylefire": "^7.0.3",
     "vue": "^2.6.12",
