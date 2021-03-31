@@ -15,8 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Node version
-      run: |
-        node -v
+      run: node -v
     - name: Install NPM dependencies
       run: npm ci
     - name: Lint Code
