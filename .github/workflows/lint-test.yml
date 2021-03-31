@@ -16,8 +16,13 @@ jobs:
       uses: actions/checkout@v2
     - name: Use nvm Node.js
       shell: bash -l {0}
-      run: nvm i
-    - name: Node version
+      run: |
+        nvm i
+        node -v
+    - name: Node version 1
+      run: node -v
+    - name: Node version 2
+      shell: bash --login {0}
       run: node -v
     - name: Install NPM dependencies
       run: npm ci
