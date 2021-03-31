@@ -14,21 +14,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Delete npm prefix
-      run: npm config delete prefix
-    - name: Use nvm Node.js
+    - name: Lint
       shell: bash -l {0}
       run: |
         nvm i
-        node -v
-    - name: Node version 1
-      run: node -v
-    - name: Node version 2
-      shell: bash -l {0}
-      run: node -v
-    - name: Install NPM dependencies
-      run: npm ci
-    - name: Lint Code
-      run: npm run lint
-    - name: Run Tests
-      run: npm run test --if-present
+        npm ci
+        npm run lint
