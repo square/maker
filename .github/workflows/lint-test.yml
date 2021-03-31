@@ -14,10 +14,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    steps:
-      - name: Use nvm Node.js
-        shell: bash -l {0}
-        run: nvm i
+    - name: Use nvm Node.js
+      shell: bash -l {0}
+      run: nvm i
     - name: Node version
       run: node -v
     - name: Install NPM dependencies
