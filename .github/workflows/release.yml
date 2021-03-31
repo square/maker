@@ -12,18 +12,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Use Node.js v14
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
     - name: Install dependencies
-      run: npm ci
-    - name: Test
-      run: npm run test --if-present
-    - name: Build
-      run: npm run build --if-present
-    - name: Release
+      shell: bash -l {0}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: npx semantic-release
+      run: |
+        nvm i
+        npm ci
+        npm run build
+        npx semantic-release
