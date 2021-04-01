@@ -4,7 +4,6 @@ on:
   pull_request:
     types:
       - opened
-      - edited
       - synchronize
 
 jobs:
@@ -15,36 +14,23 @@ jobs:
     steps:
       - name: Checkout Maker Repo master branch
         uses: actions/checkout@v2
-
       - name: Checkout nested Maker Repo deploys branch in .dist directory
         uses: actions/checkout@v2
         with:
           repository: square/maker
           ref: deploys
           path: .dist
-
-      - name: Set Github Actions Bot username & email
+      - name: Build & deploy
+        shell: bash -l {0}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           cd .dist
           git config user.name github-actions
           git config user.email github-actions@github.com
-
-      - name: Setup Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-
-      - name: Install NPM dependencies
-        run: npm ci
-
-      - name: Install NPM peer dependencies
-        run: npx i-peers -a ci
-
-      - name: Build & Deploy Styleguide
-        run: npm run styleguide-deploy
-
+          nvm i
+          npm ci
+          npm run styleguide-deploy
       - name: Comment Styleguide Deploy link on PR
         uses: unsplash/comment-on-pr@master
         env:
@@ -52,4 +38,3 @@ jobs:
         with:
           msg: ${{ format('Styleguide deployed to https://square.github.io/maker/styleguide/{0}/#/', github.head_ref) }}
           check_for_duplicate_msg: true
-

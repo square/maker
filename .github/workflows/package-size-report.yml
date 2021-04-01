@@ -1,12 +1,12 @@
-name: Package Size Report
+name: Package size report
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master, next, next-major, beta, alpha]
 
 jobs:
   pkg-size-report:
-    name: Package Size Report
+    name: Package size report
     runs-on: ubuntu-latest
 
     steps:
