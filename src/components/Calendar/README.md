@@ -54,6 +54,11 @@
 
 <script>
 import { MCalendar } from '@square/maker/components/Calendar';
+import {
+	addDays,
+	addMonths,
+	formatISO,
+} from 'date-fns';
 
 export default {
 	components: {
@@ -91,16 +96,19 @@ export default {
 
 	mounted() {
 		const today = new Date();
-		const year = today.getFullYear();
-		const month = `0${today.getMonth() + 1}`.slice(-2);
-		const maxMonth = `0${today.getMonth() + 4}`.slice(-2);
-		const selectedDay = `0${today.getDate() + 1}`.slice(-2);
-		const minDay = `0${today.getDate() - 1}`.slice(-2);
-		const disabledDay = `0${today.getDate() + 5}`.slice(-2);
+		const maxDate = formatISO(addMonths(today, 4), {
+			representation: 'date',
+		});
+		const minDate = formatISO(addDays(today, -1), {
+			representation: 'date',
+		});
+		const disabledDate = formatISO(addDays(today, 5), {
+			representation: 'date',
+		});
 
-		this.minDate = `${year}-${month}-${minDay}`;
-		this.maxDate = `${year}-${maxMonth}-${selectedDay}`;
-		this.disabledDates.push(`${year}-${month}-${disabledDay}`);
+		this.minDate = minDate;
+		this.maxDate = maxDate;
+		this.disabledDates.push(disabledDate);
 	},
 };
 </script>
