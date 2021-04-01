@@ -34,7 +34,9 @@ export default {
 
 @media screen and (min-width: 840px) {
 	.ActionBarWrapper {
-		padding-bottom: 130px;
+		--action-bar-bottom-padding: 64px;
+
+		padding-bottom: calc(72px + var(--action-bar-bottom-padding));
 	}
 }
 </style>
