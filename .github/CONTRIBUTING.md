@@ -194,6 +194,16 @@ To release your approved PR, simply merge it to `master` via squash.
 
 [semantic-release](https://semantic-release.gitbook.io/semantic-release/) will run on Github Actions to determine the next version based on the commits and publish a new version to [npm](https://www.npmjs.com/package/@square/maker) and [GitHub](https://github.com/square/maker/releases).
 
-
 #### Pre-releases
 For instructions on how to do pre-releases, refer to the [semantic-release docs](https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/pre-releases.md).
+
+#### Dry-run
+If you'd like to verify the expected version changes locally, you can run `semantic-release` in dry-mode.
+
+In your local environment, run the following from your branch:
+
+```sh
+GH_TOKEN=<YOUR GitHub PAT> npx semantic-release -d -b <CURRENT BRANCHNAME>
+```
+
+Note, this will look at the specific commits in your branch but that they will be squashed when merged.
