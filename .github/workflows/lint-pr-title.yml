@@ -1,4 +1,4 @@
-name: Lint PR Title
+name: Lint PR title
 
 on:
   pull_request:
@@ -8,9 +8,11 @@ on:
       - synchronize
 
 jobs:
-  main:
+  lint-pr-title:
+    name: Lint PR title
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v2.1.0
+      - name: Lint PR title
+        uses: amannn/action-semantic-pull-request@v2.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

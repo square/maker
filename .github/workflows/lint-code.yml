@@ -1,4 +1,4 @@
-name: Lint
+name: Lint code
 
 on:
   push:
@@ -7,14 +7,14 @@ on:
     branches: [master, next, next-major, beta, alpha]
 
 jobs:
-  lint-test:
-    name: Lint
+  lint-code:
+    name: Lint code
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Lint
+    - name: Lint code
       shell: bash -l {0}
       run: |
         nvm i

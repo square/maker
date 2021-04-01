@@ -118,7 +118,7 @@ If you want to test a branch before releasing it, you can push up a _built branc
 3. Add the distribution files. The force flag is necessary because the distribution is ignored by gitignore.
 
    ```sh
-   $ git add -f components
+   $ git add -f components utils
    ```
 
 4. Commit and push. The no-verify flag (`-n`) is so that commit hooks don't run on the distribution files.
