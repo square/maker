@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    branches: [master, next, next-major, beta, alpha]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Release
+      shell: bash -l {0}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        nvm i
+        npm ci
+        npm run build
+        npx semantic-release
