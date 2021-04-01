@@ -2,7 +2,7 @@ name: Package Size Report
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master, next, next-major, beta, alpha]
 
 jobs:
   pkg-size-report:

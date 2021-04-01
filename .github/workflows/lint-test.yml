@@ -1,14 +1,14 @@
-name: Lint Code & Run Tests
+name: Lint
 
 on:
   push:
-    branches: [master]
+    branches: [master, next, next-major, beta, alpha]
   pull_request:
-    branches: [master]
+    branches: [master, next, next-major, beta, alpha]
 
 jobs:
   lint-test:
-    name: Lint Code & Run Tests
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -20,3 +20,4 @@ jobs:
         nvm i
         npm ci
         npm run lint
+        node .github/dep-version-check
