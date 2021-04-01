@@ -129,6 +129,8 @@ If you want to test a branch before releasing it, you can push up a _built branc
    ```
 
 ## Git workflow
+
+This repo uses the [GitHub flow](https://guides.github.com/introduction/flow/). 
 ### Commit style
 
 This repository uses [Conventional Commits](https://www.conventionalcommits.org) for simple yet meaningful commit messages. Not only are they user-friendly, they are also machine-readable for automated release notes and versioning.
@@ -154,27 +156,33 @@ It has the following formats:
 ```
 
 #### Breaking change with message
-
+You can also put indicate a breaking change on the second line of the commit message with a description.
 ```
 <type>: <subject>
-BREAKING CHANGE: Required message
+BREAKING CHANGE: <required message>
 ```
 
 #### Types
-- `feat`: new feature for the user, not a new feature for build script
-- `fix`: bug fix for the user, not a fix to a build script
+
+Version influencing types:
+- `fix`: user-facing bug fix (patch version bump 🏥)
+- `feat`: user-facing feature (minor version bump 🌟)
+
+Other types:
+- `revert`: reverts a previous commit
 - `docs`: changes to the documentation
 - `build`: changes that affect the build system or external dependencies
 - `test`: adding missing tests, refactoring tests; no production code change
 - `refactor`: refactoring production code, eg. renaming a variable
 - `style`: formatting, missing semi colons, etc; no production code change
-- `chore`: updating grunt tasks etc; no production code change
-- `revert`: reverts a previous commit
 - `perf`: changes that improve performance
 - `ci`: changes to CI configuration files and scripts (eg. GitHub Actions)
+- `chore`: updating grunt tasks etc; no production code change
+
+If deciding between `feat` or `fix` vs another type, choose `feat` or `fix` because they influence the version bump appropriately.
 
 #### Examples
--  `chore: enabled NUXT SSR`
+- `chore: enabled NUXT SSR`
 - `style: linting fix`
 - `feat(button): add button component`
 - `fix(button): inherit event listeners`
