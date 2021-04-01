@@ -193,3 +193,7 @@ If deciding between `feat` or `fix` vs another type, choose `feat` or `fix` beca
 To release your approved PR, simply merge it to `master` via squash.
 
 [semantic-release](https://semantic-release.gitbook.io/semantic-release/) will run on Github Actions to determine the next version based on the commits and publish a new version to [npm](https://www.npmjs.com/package/@square/maker) and [GitHub](https://github.com/square/maker/releases).
+
+
+#### Pre-releases
+For instructions on how to do pre-releases, refer to the [semantic-release docs](https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/pre-releases.md).
