@@ -180,16 +180,8 @@ BREAKING CHANGE: Required message
 - `fix(button): inherit event listeners`
 - `refactor(button)!: remove deprecated size prop`
 
-### Branches
-#### develop
-The default repository branch that contains all changes staged for release.
+### Releasing
 
-All PRs should be made against `develop` and **squashed** to merge.
+To release your approved PR, simply merge it to `master` via squash.
 
-
-#### master
-The latest stable version of the library. 
-
-PRs against `master` must only be from the `develop` branch for releasing purposes and merged via **merge commit**.
-
-On merge, [semantic-release](https://semantic-release.gitbook.io/semantic-release/) will run on Github Action to determine the next version based on the commits and publish a new version to [npm](https://www.npmjs.com/package/@square/maker) and [GitHub](https://github.com/square/maker/releases).
+[semantic-release](https://semantic-release.gitbook.io/semantic-release/) will run on Github Actions to determine the next version based on the commits and publish a new version to [npm](https://www.npmjs.com/package/@square/maker) and [GitHub](https://github.com/square/maker/releases).
