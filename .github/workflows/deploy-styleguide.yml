@@ -20,11 +20,8 @@ jobs:
           repository: square/maker
           ref: deploys
           path: .dist
-      - name: Release
+      - name: Build & deploy
         shell: bash -l {0}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
