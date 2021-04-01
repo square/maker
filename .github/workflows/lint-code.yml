@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Lint code
-      shell: bash -l {0}
-      run: |
-        nvm i
-        npm ci
-        npm run lint
-        node .github/dep-version-check
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Lint code
+        shell: bash -l {0}
+        run: |
+          nvm i
+          npm ci
+          npm run lint
+          node .github/dep-version-check
