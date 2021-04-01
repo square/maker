@@ -151,7 +151,7 @@ export default {
 
 	data() {
 		return {
-			showingMonth: this.selectedDateObj || new Date(),
+			showingMonth: new Date(),
 		};
 	},
 
@@ -209,6 +209,12 @@ export default {
 				this.showingMonth = newSelectedDate;
 			}
 		},
+	},
+
+	mounted() {
+		if (this.selectedDateObject) {
+			this.showingMonth = this.selectedDateObject;
+		}
 	},
 
 	methods: {
