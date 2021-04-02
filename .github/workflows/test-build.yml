@@ -1,17 +1,17 @@
-name: Release
+name: Test Build
 
 on:
   push:
 
 jobs:
   release:
-    name: Release
+    name: Test Build
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Release
+    - name: Test Build
       shell: bash -l {0}
       run: |
         nvm i
