@@ -5,7 +5,6 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { JustSsrPlugin, clientOnly } = require('vue-just-ssr');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const branch = require('git-branch');
 const { merge } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
@@ -100,7 +99,6 @@ const config = merge({}, webpackBaseConfig, {
 			emitWarning: true,
 		})),
 		...(isProduction ? [
-			new CleanWebpackPlugin(),
 			new HtmlWebpackPlugin({
 				scriptLoading: 'defer',
 				templateContent: '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><div id="app"></div></body></html>',

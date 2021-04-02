@@ -3,7 +3,6 @@ const fs = require('fs');
 const webpack = require('webpack');
 const { JustSsrPlugin } = require('vue-just-ssr');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ent = require('ent');
 const branch = require('git-branch');
 const { merge } = require('../build/utils');
@@ -106,7 +105,6 @@ const config = merge({}, webpackBaseConfig, {
 		new JustSsrPlugin({
 			createAppPath: './styleguide/create-app.js',
 		}),
-		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			scriptLoading: 'defer',
 			templateContent: '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><div id="app"></div></body></html>',
