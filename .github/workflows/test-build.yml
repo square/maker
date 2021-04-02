@@ -19,3 +19,4 @@ jobs:
         npm run build
         ls -R components utils
         npx pkg-size
+        npm publish --dry-run
