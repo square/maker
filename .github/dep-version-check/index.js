@@ -1,67 +1,29 @@
-// this should only run on CI
+// This should only run on CI
 
-const fse = require('fs-extra');
-const semver = require('semver');
-const branch = require('git-branch');
-const { promisify } = require('util');
-const exec = promisify(require('child_process').exec);
+const packageJson = require('../../package.json');
 
-// env var set by CI
-let branchName = process.env.GITHUB_HEAD_REF;
-if (!branchName) {
-	// fallback for local testing
-	branchName = branch.sync();
-}
+function assertPeerDependenciesAsDevDependencies({
+	peerDependencies,
+	devDependencies,
+}) {
+	const errors = [];
 
-// this may not be the literal 'master' on CI
-let masterRef = process.env.GITHUB_BASE_REF;
-if (!masterRef) {
-	// fallback for local testing
-	masterRef = 'master';
-}
-
-// current working directory is project root
-const branchPackage = fse.readJsonSync('./package.json');
-
-/* check deps */
-
-function checkDeps(requiredDeps, installedDeps) {
-	let errors = [];
-	for (let [requiredDep, requiredVer] of Object.entries(requiredDeps)) {
-		if (!installedDeps[requiredDep]) {
-			errors.push(`missing required dep: ${requiredDep}@${requiredVer}`);
+	for (const peerDepName in peerDependencies) {
+		if (!devDependencies.hasOwnProperty(peerDepName)) {
+			errors.push(`Missing "${peerDepName}" in devDependencies`);
 			continue;
 		}
-		let installedVer = installedDeps[requiredDep];
-		if (installedVer !== requiredVer) {
-			errors.push(`expected dep ${requiredDep} to be ver ${requiredVer} but found ${installedVer}`);
+
+		if (devDependencies[peerDepName] !== peerDependencies[peerDepName]) {
+			errors.push(`Expected dev-dependency "${peerDepName}" to have semver "${peerDependencies[peerDepName]}"`);
+			continue;
 		}
 	}
+
 	if (errors.length > 0) {
-		console.error(`found dep errors:\n${errors.join('\n')}`);
+		console.error(`Error:\n${errors.join('\n')}`);
 		process.exit(1);
 	}
 }
 
-// peer deps should be mirrored in dev deps identically
-checkDeps(branchPackage.peerDependencies, branchPackage.devDependencies);
-
-/* checkout master */
-
-(async function checkoutMasterAndPull() {
-	await exec(`git checkout ${masterRef}`);
-
-	const branchVer = branchPackage.version;
-
-	// read master's package.json
-	const masterPackage = fse.readJsonSync('./package.json');
-	const masterVer = masterPackage.version;
-
-	// if PR branch's version is not > master's version throw error
-	if (!semver.gt(branchVer, masterVer)) {
-		console.error(`${branchName} PR has Maker version ${branchVer} in package.json which is not >${masterVer} in master branch. You must increment the package version before your changes can be merged into master so that your changes can be published to NPM.`);
-		process.exit(1);
-	} else {
-		console.log(`${branchName} PR's Maker version is ${branchVer} which is >${masterVer} in master!`)
-	}
-}());
+assertPeerDependenciesAsDevDependencies(packageJson);

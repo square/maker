@@ -3,7 +3,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('./utils');
 const webpackBaseConfig = require('./webpack-base-config');
 const componentEntryPlugin = require('./component-entry-plugin');
@@ -84,7 +83,6 @@ const buildComponents = fs.readdirSync(componentsDirectory)
 			libraryTarget: 'umd',
 		},
 		plugins: [
-			new CleanWebpackPlugin(),
 			componentEntryPlugin,
 		],
 	}));
@@ -103,7 +101,6 @@ const buildUtils = fs.readdirSync(utilsDirectory)
 				libraryTarget: 'umd',
 			},
 			plugins: [
-				new CleanWebpackPlugin(),
 				...(isComponent ? [componentEntryPlugin] : []),
 			],
 		});

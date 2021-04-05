@@ -239,9 +239,6 @@ export default {
 </script>
 ```
 
-## Props
-Supports all `<input>` attributes
-
 <!-- api-tables:start -->
 ## Props
 
