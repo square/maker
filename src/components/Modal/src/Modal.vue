@@ -7,6 +7,55 @@
 	</div>
 </template>
 
+<script>
+import modalApi from './modal-api';
+
+export default {
+	inject: {
+		modalApi,
+	},
+
+	props: {
+		/**
+		 * Close the modal on ESC
+		 */
+		closeOnEsc: {
+			type: Boolean,
+			default: false,
+		},
+	},
+
+	mounted() {
+		this.addEvents();
+	},
+
+	destroyed() {
+		this.removeEvents();
+	},
+
+	methods: {
+		addEvents() {
+			if (this.closeOnEsc) {
+				document.addEventListener('keyup', this.handleEscKey);
+			}
+		},
+
+		removeEvents() {
+			if (this.closeOnEsc) {
+				document.removeEventListener('keyup', this.handleEscKey);
+			}
+		},
+
+		handleEscKey(event) {
+			const isClosingStackedModal = !!this.modalApi.state.vnode;
+			if (!isClosingStackedModal && event.key === 'Escape') {
+				this.modalApi.close();
+			}
+		},
+	},
+};
+</script>
+
 <style module="$s">
 .Container {
 	position: relative;

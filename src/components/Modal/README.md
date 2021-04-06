@@ -45,7 +45,7 @@ _DemoModal.vue_
 
 ```vue
 <template>
-	<m-modal>
+	<m-modal :close-on-esc="true">
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -381,7 +381,7 @@ _StackingDemoFirstModal.vue_
 
 ```vue
 <template>
-	<m-modal>
+	<m-modal :close-on-esc="true">
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/600/300"
@@ -548,6 +548,13 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Modal Props
+
+| Prop         | Type      | Default | Possible values | Description            |
+| ------------ | --------- | ------- | --------------- | ---------------------- |
+| close-on-esc | `boolean` | `false` | —               | Close the modal on ESC |
+
+
 ## Modal Slots
 
 | Slot    | Description   |
