@@ -1,7 +1,7 @@
 module.exports = {
 	plugins: ['lodash', 'date-fns'],
 	presets: [
-		['@babel/preset-env', { modules: false }],
+		'@babel/preset-env',
 		'@vue/babel-preset-jsx',
 	],
 };
