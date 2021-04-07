@@ -4,13 +4,22 @@
 			<!-- @slot Modal content -->
 			<slot />
 		</div>
+		<pseudo-window
+			document
+			@keyup.esc="handleEscKey"
+		/>
 	</div>
 </template>
 
 <script>
+import PseudoWindow from 'vue-pseudo-window';
 import modalApi from './modal-api';
 
 export default {
+	components: {
+		PseudoWindow,
+	},
+
 	inject: {
 		modalApi,
 	},
@@ -25,30 +34,10 @@ export default {
 		},
 	},
 
-	mounted() {
-		this.addEvents();
-	},
-
-	destroyed() {
-		this.removeEvents();
-	},
-
 	methods: {
-		addEvents() {
-			if (this.closeOnEsc) {
-				document.addEventListener('keyup', this.handleEscKey);
-			}
-		},
-
-		removeEvents() {
-			if (this.closeOnEsc) {
-				document.removeEventListener('keyup', this.handleEscKey);
-			}
-		},
-
 		handleEscKey(event) {
 			const isClosingStackedModal = !!this.modalApi.state.vnode;
-			if (!isClosingStackedModal && event.key === 'Escape') {
+			if (this.closeOnEsc && !isClosingStackedModal && event.key === 'Escape') {
 				this.modalApi.close();
 			}
 		},
