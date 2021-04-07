@@ -1,8 +1,10 @@
 <template>
 	<div :class="$s.Container">
-		<div :class="$s.Modal">
-			<!-- @slot Modal content -->
-			<slot />
+		<div :class="$s.ModalContainer">
+			<div :class="$s.Modal">
+				<!-- @slot Modal content -->
+				<slot />
+			</div>
 		</div>
 	</div>
 </template>
@@ -10,6 +12,11 @@
 <style module="$s">
 .Container {
 	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.ModalContainer {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;

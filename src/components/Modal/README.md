@@ -547,6 +547,159 @@ export default {
 </style>
 ```
 
+### Multi-pane modals
+
+It's possible to create multi-pane modals with left & right navigation.
+
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import MultiPaneModal from 'doc/MultiPaneModal.vue';
+
+export default {
+	name: 'MultiPaneDemoSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <MultiPaneModal />);
+		},
+	},
+};
+</script>
+```
+
+_MultiPaneModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<m-modal-multi-pane :active-index="activeIndex">
+			<div>
+				<img
+					class="cover-photo"
+					src="https://picsum.photos/600/300"
+				>
+				<m-modal-content>
+					<m-heading>
+						First modal heading
+					</m-heading>
+					<m-text>
+						First modal content
+					</m-text>
+				</m-modal-content>
+			</div>
+			<div>
+				<img
+					class="cover-photo"
+					src="https://picsum.photos/400/300"
+				>
+				<m-modal-content>
+					<m-heading>
+						Second modal heading
+					</m-heading>
+					<m-text>
+						Second modal content
+					</m-text>
+				</m-modal-content>
+			</div>
+			<div>
+				<img
+					class="cover-photo"
+					src="https://picsum.photos/300/300"
+				>
+				<m-modal-content>
+					<m-heading>
+						Third modal heading
+					</m-heading>
+					<m-text>
+						Third modal content
+					</m-text>
+				</m-modal-content>
+			</div>
+		</m-modal-multi-pane>
+		<m-inline-action-bar>
+			<m-action-bar-button
+				key="close"
+				@click="modalApi.close()"
+			>
+				<x-icon class="icon" />
+			</m-action-bar-button>
+		</m-inline-action-bar>
+	</m-modal>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import {
+ MModal, MModalMultiPane, MModalContent, modalApi,
+} from '@square/maker/components/Modal';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'MultiPaneModal',
+
+	components: {
+		MModal,
+		MHeading,
+		MText,
+		MModalMultiPane,
+		MModalContent,
+		MInlineActionBar,
+		MActionBarButton,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	data() {
+		return {
+			activeIndex: 0,
+		};
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
 <!-- api-tables:start -->
 ## Modal Slots
 
@@ -563,4 +716,11 @@ export default {
 
 
 
+
+
+## ModalMultiPane Props
+
+| Prop         | Type     | Default | Possible values | Description |
+| ------------ | -------- | ------- | --------------- | ----------- |
+| active-index | `number` | `0`     | —               | —           |
 <!-- api-tables:end -->
