@@ -1,3 +1,117 @@
+# modal with arrows
+
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoArrowsModal from 'doc/DemoArrowsModal.vue';
+
+export default {
+	name: 'DemoArrowsSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <DemoArrowsModal />);
+		},
+	},
+};
+</script>
+```
+
+_DemoArrowsModal.vue_
+
+```vue
+<template>
+	<m-modal
+		has-left-arrow
+		has-right-arrow
+	>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Modal heading
+			</m-heading>
+			<m-text>
+				Modal content
+			</m-text>
+			<m-button
+				size="small"
+				@click="modalApi.close()"
+			>
+				Close
+			</m-button>
+		</m-modal-content>
+	</m-modal>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+
+export default {
+	name: 'DemoModal',
+
+	components: {
+		MModal,
+		MButton,
+		MHeading,
+		MText,
+		MModalContent,
+	},
+
+	inject: {
+		modalApi,
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+.left-icon {
+
+}
+</style>
+```
+
+
+
+
 # Modal
 
 Use the modal component to enter the user into a new _mode_.
