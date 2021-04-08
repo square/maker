@@ -35,9 +35,9 @@ export default {
 	},
 
 	methods: {
-		handleEscKey(event) {
+		handleEscKey() {
 			const isClosingStackedModal = !!this.modalApi.state.vnode;
-			if (this.closeOnEsc && !isClosingStackedModal && event.key === 'Escape') {
+			if (this.closeOnEsc && !isClosingStackedModal) {
 				this.modalApi.close();
 			}
 		},
