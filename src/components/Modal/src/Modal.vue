@@ -1,22 +1,50 @@
 <template>
-	<div :class="$s.Container">
-		<div :class="$s.ModalContainer">
+	<div :class="$s.ArrowsContainer">
+		<m-modal-arrow
+			v-if="hasLeftArrow"
+			:class="$s.modalArrow"
+			position="left"
+			@click="$emit('go-left')"
+		/>
+		<div :class="$s.Container">
 			<div :class="$s.Modal">
 				<!-- @slot Modal content -->
 				<slot />
 			</div>
 		</div>
+		<m-modal-arrow
+			v-if="hasRightArrow"
+			:class="$s.modalArrow"
+			position="right"
+			@click="$emit('go-right')"
+		/>
 	</div>
 </template>
+
+<script>
+import MModalArrow from './ModalArrow.vue';
+
+export default {
+	components: {
+		MModalArrow,
+	},
+
+	props: {
+		hasLeftArrow: {
+			type: Boolean,
+			default: false,
+		},
+		hasRightArrow: {
+			type: Boolean,
+			default: false,
+		},
+	},
+};
+</script>
 
 <style module="$s">
 .Container {
 	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-.ModalContainer {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;

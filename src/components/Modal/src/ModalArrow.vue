@@ -1,5 +1,5 @@
 <template>
-	<div
+	<span
 		:class="[
 			$s.ModalArrow,
 			$s[`position_${position}`],
@@ -10,7 +10,7 @@
 			:is="icon"
 			:class="$s.ModalArrowIcon"
 		/>
-	</div>
+	</span>
 </template>
 
 <script>
@@ -49,19 +49,17 @@ export default {
 	--arrow-color: #fff;
 	--arrow-size: 24px;
 	--arrow-size-half: calc(var(--arrow-size) / 2);
-	--modal-width-half: 300px;
-	--arrow-horizontal-position: calc(50% - var(--arrow-size-half) - var(--modal-width-half) - 30px);
 
 	position: absolute;
 	top: calc(50% - var(--arrow-size-half));
 	cursor: pointer;
 
 	&.position_left {
-		left: var(--arrow-horizontal-position);
+		transform: translateY(-50%) translateX(-100%);
 	}
 
 	&.position_right {
-		right: var(--arrow-horizontal-position);
+		transform: translateY(-50%);
 	}
 }
 

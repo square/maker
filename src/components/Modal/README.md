@@ -594,51 +594,35 @@ _MultiPaneModal.vue_
 
 ```vue
 <template>
-	<m-modal>
-		<m-modal-multi-pane :active-index="activeIndex">
-			<div>
-				<img
-					class="cover-photo"
-					src="https://picsum.photos/600/300"
+	<m-modal
+		:has-left-arrow="shouldShowLeftArrow"
+		:has-right-arrow="shouldShowRightArrow"
+		@go-left="handleLeft"
+		@go-right="handleRight"
+	>
+		<div
+			v-for="(pane, index) in multiPane"
+			:key="index"
+		>
+			<m-transition-fade-in>
+				<div
+					v-if="isActivePane(index)"
 				>
-				<m-modal-content>
-					<m-heading>
-						First modal heading
-					</m-heading>
-					<m-text>
-						First modal content
-					</m-text>
-				</m-modal-content>
-			</div>
-			<div>
-				<img
-					class="cover-photo"
-					src="https://picsum.photos/400/300"
-				>
-				<m-modal-content>
-					<m-heading>
-						Second modal heading
-					</m-heading>
-					<m-text>
-						Second modal content
-					</m-text>
-				</m-modal-content>
-			</div>
-			<div>
-				<img
-					class="cover-photo"
-					src="https://picsum.photos/300/300"
-				>
-				<m-modal-content>
-					<m-heading>
-						Third modal heading
-					</m-heading>
-					<m-text>
-						Third modal content
-					</m-text>
-				</m-modal-content>
-			</div>
-		</m-modal-multi-pane>
+					<img
+						:src="pane.image"
+						class="cover-photo"
+					>
+					<m-modal-content>
+						<m-heading>
+							{{ pane.heading }}
+						</m-heading>
+						<m-text>
+							{{ pane.content }}
+						</m-text>
+					</m-modal-content>
+				</div>
+			</m-transition-fade-in>
+		</div>
 		<m-inline-action-bar>
 			<m-action-bar-button
 				key="close"
@@ -654,9 +638,10 @@ _MultiPaneModal.vue_
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import {
- MModal, MModalMultiPane, MModalContent, modalApi,
+ MModal, MModalContent, modalApi,
 } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import XIcon from '@square/maker-icons/X';
 
 export default {
@@ -666,10 +651,10 @@ export default {
 		MModal,
 		MHeading,
 		MText,
-		MModalMultiPane,
 		MModalContent,
 		MInlineActionBar,
 		MActionBarButton,
+		MTransitionFadeIn,
 		XIcon,
 	},
 
@@ -680,7 +665,52 @@ export default {
 	data() {
 		return {
 			activeIndex: 0,
+			multiPane: [
+				{
+					image: 'https://picsum.photos/600/300',
+					heading: 'First modal heading',
+					content: 'First modal content',
+				},
+				{
+					image: 'https://picsum.photos/400/300',
+					heading: 'Second modal heading',
+					content: 'Second modal content',
+				},
+				{
+					image: 'https://picsum.photos/300/300',
+					heading: 'Third modal heading',
+					content: 'Third modal content',
+				},
+			],
 		};
+	},
+
+	computed: {
+		shouldShowLeftArrow() {
+			return this.activeIndex > 0;
+		},
+
+		shouldShowRightArrow() {
+			return (this.activeIndex + 1) < this.multiPane.length;
+		},
+	},
+
+	methods: {
+		isActivePane(index) {
+			return this.activeIndex === index;
+		},
+
+		handleLeft() {
+			if (this.activeIndex > 0) {
+				this.activeIndex -= 1;
+			}
+		},
+
+		handleRight() {
+			if (this.activeIndex < this.multiPane.length) {
+				this.activeIndex += 1;
+			}
+		},
 	},
 };
 </script>
@@ -701,11 +731,27 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Modal Props
+
+| Prop            | Type      | Default | Possible values | Description |
+| --------------- | --------- | ------- | --------------- | ----------- |
+| has-left-arrow  | `boolean` | `false` | —               | —           |
+| has-right-arrow | `boolean` | `false` | —               | —           |
+
+
 ## Modal Slots
 
 | Slot    | Description   |
 | ------- | ------------- |
 | default | Modal content |
+
+
+## Modal Events
+
+| Event    | Type | Description |
+| -------- | ---- | ----------- |
+| go-left  | -    | —           |
+| go-right | -    | —           |
 
 
 ## ModalContent Slots
@@ -716,11 +762,4 @@ export default {
 
 
 
-
-
-## ModalMultiPane Props
-
-| Prop         | Type     | Default | Possible values | Description |
-| ------------ | -------- | ------- | --------------- | ----------- |
-| active-index | `number` | `0`     | —               | —           |
 <!-- api-tables:end -->
