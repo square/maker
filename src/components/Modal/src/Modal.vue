@@ -6,7 +6,7 @@
 		</div>
 		<pseudo-window
 			document
-			@keyup.esc="handleEscKey"
+			@keyup.esc="$emit('window-esc')"
 		/>
 	</div>
 </template>
@@ -22,25 +22,6 @@ export default {
 
 	inject: {
 		modalApi,
-	},
-
-	props: {
-		/**
-		 * Close the modal on ESC
-		 */
-		closeOnEsc: {
-			type: Boolean,
-			default: false,
-		},
-	},
-
-	methods: {
-		handleEscKey() {
-			const isClosingStackedModal = !!this.modalApi.state.vnode;
-			if (this.closeOnEsc && !isClosingStackedModal) {
-				this.modalApi.close();
-			}
-		},
 	},
 };
 </script>
