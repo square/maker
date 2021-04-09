@@ -13,15 +13,10 @@
 
 <script>
 import PseudoWindow from 'vue-pseudo-window';
-import modalApi from './modal-api';
 
 export default {
 	components: {
 		PseudoWindow,
-	},
-
-	inject: {
-		modalApi,
 	},
 };
 </script>
