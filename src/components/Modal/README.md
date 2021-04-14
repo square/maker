@@ -45,7 +45,7 @@ _DemoModal.vue_
 
 ```vue
 <template>
-	<m-modal @window-esc="modalApi.close()">
+	<m-modal>
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -278,6 +278,7 @@ _ActionBarDemoModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
+					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
@@ -381,7 +382,7 @@ _StackingDemoFirstModal.vue_
 
 ```vue
 <template>
-	<m-modal @window-esc="handleEscKey">
+	<m-modal>
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/600/300"
@@ -398,6 +399,7 @@ _StackingDemoFirstModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
+					@window-esc="handleEscKey"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
@@ -559,13 +561,6 @@ export default {
 | Slot    | Description   |
 | ------- | ------------- |
 | default | Modal content |
-
-
-## Modal Events
-
-| Event      | Type | Description |
-| ---------- | ---- | ----------- |
-| window-esc | -    | —           |
 
 
 ## ModalContent Slots

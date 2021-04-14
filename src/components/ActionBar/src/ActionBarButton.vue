@@ -33,11 +33,16 @@
 				name="information"
 			/>
 		</span>
+		<pseudo-window
+			document
+			@keyup.esc="$emit('window-esc')"
+		/>
 	</button>
 </template>
 
 <script>
 import chroma from 'chroma-js';
+import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 
 // TODO: refactor the code below so it's shared with Button component
@@ -74,6 +79,7 @@ function fill(tokens) {
 export default {
 	components: {
 		MLoading,
+		PseudoWindow,
 	},
 
 	inheritAttrs: false,

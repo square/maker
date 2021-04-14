@@ -4,22 +4,8 @@
 			<!-- @slot Modal content -->
 			<slot />
 		</div>
-		<pseudo-window
-			document
-			@keyup.esc="$emit('window-esc')"
-		/>
 	</div>
 </template>
-
-<script>
-import PseudoWindow from 'vue-pseudo-window';
-
-export default {
-	components: {
-		PseudoWindow,
-	},
-};
-</script>
 
 <style module="$s">
 .Container {
