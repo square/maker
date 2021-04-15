@@ -161,7 +161,7 @@ export default {
 
 		handleEscKey() {
 			/**
-			 * ESC keyup event
+			 * ESC keyup event on window
 			 * @property {string}
 			 */
 			this.$emit('window-esc');
