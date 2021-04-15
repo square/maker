@@ -35,7 +35,7 @@
 		</span>
 		<pseudo-window
 			document
-			@keyup.esc="$emit('window-esc')"
+			@keyup.esc="handleEscKey"
 		/>
 	</button>
 </template>
@@ -157,6 +157,14 @@ export default {
 				(vnode) => vnode.tag || vnode.text.trim().length > 0,
 			);
 			return children.length === 1 && children[0].tag;
+		},
+
+		handleEscKey() {
+			/**
+			 * ESC keyup event
+			 * @property {string}
+			 */
+			this.$emit('window-esc');
 		},
 	},
 };

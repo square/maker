@@ -233,9 +233,9 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 
 Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Event      | Type | Description |
-| ---------- | ---- | ----------- |
-| window-esc | -    | —           |
+| Event      | Type     | Description     |
+| ---------- | -------- | --------------- |
+| window-esc | `string` | ESC keyup event |
 
 
 ## ActionBarLayer Slots
