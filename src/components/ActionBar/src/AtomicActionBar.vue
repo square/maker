@@ -41,10 +41,12 @@ export default {
 
 <style module="$s">
 .ActionBar {
+	--action-bar-bottom-padding: 64px;
+
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px 64px 24px;
+	padding: 24px 24px var(--action-bar-bottom-padding) 24px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
