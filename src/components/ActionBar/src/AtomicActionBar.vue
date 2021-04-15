@@ -45,7 +45,6 @@ export default {
 	justify-content: space-between;
 	box-sizing: border-box;
 	padding: 24px 24px 64px 24px;
-	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
 @media screen and (max-width: 839px) {
