@@ -74,7 +74,8 @@ const apiMixin = {
 			},
 
 			close() {
-				if (vm.currentLayer) {
+				const isModalActive = !this.state.vnode; // Verify there's no modal on top
+				if (isModalActive && vm.currentLayer) {
 					vm.currentLayer.state.vnode = undefined;
 				}
 			},

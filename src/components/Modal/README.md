@@ -433,7 +433,7 @@ _StackingDemoFirstModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
-					@window-esc="handleEscKey"
+					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
@@ -480,12 +480,6 @@ export default {
 		},
 		closeFirst() {
 			this.modalApi.close();
-		},
-		handleEscKey() {
-			const isClosingStackedModal = !!this.modalApi.state.vnode;
-			if (!isClosingStackedModal) {
-				this.modalApi.close();
-			}
 		},
 	},
 };
