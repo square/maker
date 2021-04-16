@@ -1,6 +1,9 @@
 <template>
 	<div
-		:class="$s.ActionBarLayer"
+		:class="[
+			$s.ActionBarLayer,
+			{ [$s.NoActionBar]: !hasActionBar },
+		]"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -57,6 +60,12 @@ export default {
 		};
 	},
 
+	computed: {
+		hasActionBar() {
+			return !!this.actionBarVnodes;
+		},
+	},
+
 	created() {
 		this.setActionbar = throttle(this.setActionbar, 50, { leading: false });
 	},
@@ -74,6 +83,10 @@ export default {
 	--action-bar-bottom-padding: 64px;
 
 	padding-bottom: calc(88px + var(--action-bar-bottom-padding));
+
+	&.NoActionBar {
+		padding-bottom: 0;
+	}
 }
 
 .ActionBar {
