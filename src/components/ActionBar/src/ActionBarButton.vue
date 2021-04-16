@@ -33,11 +33,16 @@
 				name="information"
 			/>
 		</span>
+		<pseudo-window
+			document
+			@keyup.esc="handleEscKey"
+		/>
 	</button>
 </template>
 
 <script>
 import chroma from 'chroma-js';
+import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 
 // TODO: refactor the code below so it's shared with Button component
@@ -74,6 +79,7 @@ function fill(tokens) {
 export default {
 	components: {
 		MLoading,
+		PseudoWindow,
 	},
 
 	inheritAttrs: false,
@@ -151,6 +157,14 @@ export default {
 				(vnode) => vnode.tag || vnode.text.trim().length > 0,
 			);
 			return children.length === 1 && children[0].tag;
+		},
+
+		handleEscKey() {
+			/**
+			 * ESC keyup event on window
+			 * @property {string}
+			 */
+			this.$emit('window-esc');
 		},
 	},
 };
