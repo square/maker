@@ -21,10 +21,14 @@
   - perf: changes that improve performance
   - ci: changes to CI configuration files and scripts (eg. GitHub Actions)
 
-  Examples:
+  👍 Do examples:
   - feat(button): primary variant
   - fix(action-bar): inherit event-listeners
-  - refactor(stepper)!: removed "type" prop
+
+  👎 Don't examples:
+  - feat(button): [ABC-123] primary variant
+
+  Read CONTRIBUTING.md for more info.
 -->
 
 ## Describe the problem this PR addresses
