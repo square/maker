@@ -212,6 +212,40 @@ export default {
 };
 </script>
 ```
+
+To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
+
+```html
+<template>
+	<m-modal>
+		Modal content
+
+		<!-- modalApi is provided by the injected the modalApi key below -->
+		<m-action-bar-button
+			@click="modalApi.close()"
+			@window-esc="modalApi.close()"
+		>
+			Close modal
+		</m-action-bar-button>
+	</m-modal>
+</template>
+
+<script>
+import { MModal, modalApi } from '@square/maker/components/Modal';
+import { MActionBarButton } from '@square/maker/components/ActionBar';
+
+export default {
+	components: {
+		MModal,
+		MActionBarButton,
+	},
+
+	inject: {
+		modalApi,
+	},
+};
+</script>
+```
 ## Examples
 
 ### Modal + ActionBar
@@ -278,6 +312,7 @@ _ActionBarDemoModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
+					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
@@ -398,6 +433,7 @@ _StackingDemoFirstModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
+					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
