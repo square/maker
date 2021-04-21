@@ -113,7 +113,7 @@ export default {
 
 .Action {
 	margin-right: 8px;
-	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d(0, 0, 0); /* Fixes buttons flickering on mobile devices */
 	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
 
 	&:last-child {
