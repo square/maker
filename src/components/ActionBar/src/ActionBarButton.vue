@@ -19,14 +19,13 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span :class="$s.MainText">
+		<span :class="[$s.MainText, $s.TruncateText]">
 			<!-- @slot Button label -->
 			<slot />
 		</span>
-
 		<span
 			v-if="$scopedSlots.information"
-			:class="$s.InformationText"
+			:class="[$s.InformationText, $s.TruncateText]"
 		>
 			<!-- @slot Information label -->
 			<slot
@@ -172,14 +171,17 @@ export default {
 
 <style module="$s">
 .Button {
+	--button-large: 64px;
+	--button-medium: 48px;
+
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	min-height: 64px;
+	height: var(--button-large);
 
 	/* large size */
-	padding: 20px 32px;
+	padding: 0 32px;
 	color: var(--text-color);
 	font-weight: 500;
 	font-size: 16px;
@@ -205,8 +207,12 @@ export default {
 	}
 
 	&.iconButton {
+		display: inline-flex;
 		flex: 0 0 auto;
-		padding: 20px;
+		align-items: center;
+		width: var(--button-large);
+		height: var(--button-large);
+		padding: 0;
 	}
 
 	--text-color: var(--color-contrast, #000);
@@ -225,6 +231,9 @@ export default {
 
 	&.align_stack {
 		flex-direction: column;
+		justify-content: space-evenly;
+		padding-top: 4px;
+		padding-bottom: 4px;
 	}
 
 	&.align_space-between {
@@ -263,10 +272,10 @@ export default {
 
 @media screen and (min-width: 840px) {
 	.Button {
-		min-height: 48px;
+		height: var(--button-medium);
 
 		/* medium size */
-		padding: 12px 24px;
+		padding: 0 24px;
 		font-size: 14px;
 
 		& > * {
@@ -275,7 +284,8 @@ export default {
 
 		&.iconButton {
 			flex: 0 0 auto;
-			padding: 12px;
+			width: var(--button-medium);
+			height: var(--button-medium);
 		}
 	}
 }
@@ -295,25 +305,29 @@ export default {
 }
 
 .MainText {
-	display: flex;
 	gap: 8px;
-	align-items: center;
 	width: max-content;
-	max-width: 100%;
-	overflow: hidden;
-	line-height: 1;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+}
+
+.iconButton .MainText {
+	display: flex;
 }
 
 .InformationText {
 	width: min-content;
+	opacity: 0.6;
+}
+
+.align_stack .InformationText {
+	font-size: 12px;
+}
+
+.TruncateText {
 	max-width: 100%;
 	overflow: hidden;
 	line-height: 1;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	opacity: 0.6;
 }
 
 .Button.align_center .InformationText {
