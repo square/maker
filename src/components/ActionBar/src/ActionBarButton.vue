@@ -313,12 +313,6 @@ export default {
 	display: flex;
 }
 
-@media screen and (max-width: 839px) {
-	.MainText {
-		min-width: 50%;
-	}
-}
-
 .InformationText {
 	width: min-content;
 	opacity: 0.6;
