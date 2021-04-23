@@ -19,12 +19,10 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-
 		<span :class="[$s.MainText, $s.TruncateText]">
 			<!-- @slot Button label -->
 			<slot />
 		</span>
-
 		<span
 			v-if="$scopedSlots.information"
 			:class="[$s.InformationText, $s.TruncateText]"
