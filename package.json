@@ -25,7 +25,8 @@
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
     "sync-to-latest": "node ./build/sync-to-latest",
     "pull-deploys": "node ./build/deploys/pull.js",
-    "push-deploys": "node ./build/deploys/push.js"
+    "push-deploys": "node ./build/deploys/push.js",
+    "prepublishOnly": "npm run build"
   },
   "husky": {
     "hooks": {
