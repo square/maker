@@ -20,5 +20,4 @@ jobs:
       run: |
         nvm i
         npm ci
-        npm run build
         npx semantic-release
