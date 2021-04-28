@@ -21,3 +21,19 @@ jobs:
         nvm i
         npm ci
         npx semantic-release
+    - name: Checkout nested Maker Repo deploys branch in .dist directory
+      uses: actions/checkout@v2
+      with:
+        repository: square/maker
+        ref: deploys
+        path: .dist
+    - name: Build & deploy styleguide
+      shell: bash -l {0}
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        cd .dist
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        cd ..
+        npm run styleguide-deploy

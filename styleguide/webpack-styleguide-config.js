@@ -4,18 +4,13 @@ const webpack = require('webpack');
 const { JustSsrPlugin } = require('vue-just-ssr');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ent = require('ent');
-const branch = require('git-branch');
 const { merge } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
 const { version } = require('../package.json');
+const { getCurrentBranch, isSemanticReleaseBranch, getLibVersion } = require('../build/utils');
 
-// branch.sync() doesn't work in the Github Actions env
-let branchName = branch.sync();
-if (!branchName) {
-	// but that's okay because the Github Actions env provides this var
-	branchName = process.env.GITHUB_HEAD_REF;
-}
-const deploy = branchName === 'master' ? version : branchName;
+let branchName = getCurrentBranch();
+const deploy = isSemanticReleaseBranch(branchName) ? getLibVersion() : branchName;
 
 // console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
 // console.log('ENV VARS:', JSON.stringify(process.env, undefined, 4));
