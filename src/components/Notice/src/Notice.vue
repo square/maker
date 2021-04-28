@@ -8,16 +8,25 @@
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
-		<div :class="$s.IconAligner">
-			<component
-				:is="iconComponent"
-				:class="$s.Icon"
-				inline
-			/>
+		<div :class="$s.IconContentWrapper">
+			<div :class="$s.IconAligner">
+				<component
+					:is="iconComponent"
+					:class="$s.Icon"
+					inline
+				/>
+			</div>
+			<div>
+				<!-- @slot notice content -->
+				<slot />
+			</div>
 		</div>
-		<div>
-			<!-- @slot notice content -->
-			<slot />
+		<div
+			v-if="$slots.actions"
+			:class="$s.ActionsWrapper"
+		>
+			<!-- @slot put notice buttons here -->
+			<slot name="actions" />
 		</div>
 	</div>
 </template>
@@ -80,34 +89,55 @@ export default {
 
 <style module="$s">
 .Notice {
-	--font-family: inherit;
-
-	display: flex;
 	color: var(--color);
 	font-size: 14px;
-	font-family: var(--font-family);
+	font-family: inherit;
 	line-height: 24px;
 	border-radius: 8px;
 }
 
+.IconContentWrapper {
+	display: flex;
+}
+
+.ActionsWrapper {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.ActionsWrapper > * {
+	margin-right: 24px;
+}
+
+.ActionsWrapper > *:last-child {
+	margin-right: 0;
+}
+
 .type_error {
-	--color: rgba(255, 59, 48, 1);
-	--color-bg: rgba(245, 239, 239, 1);
+	--color: rgba(161, 39, 18, 1);
+	--color-icon: rgba(206, 51, 22, 1);
+	--color-bg: rgba(252, 235, 232, 1);
+;
 }
 
 .type_warning {
-	--color: rgba(255, 149, 0, 1);
-	--color-bg: rgba(245, 243, 239, 1);
+	--color: rgba(77, 59, 0, 1);
+	--color-icon: rgba(242, 189, 13, 1);
+	--color-bg: rgba(252, 242, 207, 1);
+
 }
 
 .type_success {
-	--color: rgba(52, 199, 89, 1);
-	--color-bg: rgba(239, 245, 241, 1);
+	--color: rgba(8, 69, 8, 1);
+	--color-icon: rgba(33, 172, 30, 1);
+	--color-bg: rgba(233, 251, 233, 1);
+
 }
 
 .type_info {
-	--color: hsl(0, 0%, 69%);
-	--color-bg: hsl(0, 0%, 97%);
+	--color: rgba(24, 24, 24, 1);
+	--color-icon: rgba(169, 169, 169, 1);
+	--color-bg: rgba(241, 241, 241, 1);
 }
 
 .variant_block {
@@ -125,7 +155,7 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
-	fill: currentColor;
+	fill: var(--color-icon);
 	stroke: white;
 }
 </style>
