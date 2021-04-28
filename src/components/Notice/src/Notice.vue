@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div
-			v-if="$slots.actions"
+			v-if="showActions"
 			:class="$s.ActionsWrapper"
 		>
 			<!-- @slot put notice buttons here -->
@@ -36,6 +36,7 @@ import AlertTriangle from '@square/maker-icons/AlertTriangle';
 import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
+import assert from '@square/maker/utils/assert';
 
 /**
  * @inheritAttrs div
@@ -83,6 +84,13 @@ export default {
 			}
 			return Info;
 		},
+		showActions() {
+			return this.$slots.actions && this.variant === 'block';
+		},
+	},
+
+	created() {
+		assert.warn(this.variant === 'inline' && !this.$slots.actions, 'inline Notices can not have an actions slot');
 	},
 };
 </script>

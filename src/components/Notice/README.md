@@ -12,7 +12,7 @@ Use Notice to notify users of things.
 
 ```vue
 <template>
-	<div>
+	<div class="spaceout">
 		<m-notice type="error">
 			I am a error notice
 		</m-notice>
@@ -54,6 +54,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
 ```
 
 
@@ -61,7 +70,7 @@ export default {
 
 ```vue
 <template>
-	<div>
+	<div class="spaceout">
 		<m-notice type="success">
 			I am a success notice
 		</m-notice>
@@ -103,6 +112,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
 ```
 
 
@@ -110,7 +128,7 @@ export default {
 
 ```vue
 <template>
-	<div>
+	<div class="spaceout">
 		<m-notice type="warning">
 			I am a warning notice
 		</m-notice>
@@ -152,6 +170,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
 ```
 
 
@@ -160,7 +187,7 @@ export default {
 
 ```vue
 <template>
-	<div>
+	<div class="spaceout">
 		<m-notice type="info">
 			I am a info notice
 		</m-notice>
@@ -202,6 +229,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
