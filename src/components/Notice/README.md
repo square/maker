@@ -217,9 +217,10 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Notice Slots
 
-| Slot    | Description    |
-| ------- | -------------- |
-| default | notice content |
+| Slot    | Description             |
+| ------- | ----------------------- |
+| default | notice content          |
+| actions | put notice buttons here |
 
 
 ## Notice Events
