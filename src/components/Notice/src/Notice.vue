@@ -117,21 +117,18 @@ export default {
 	--color: rgba(161, 39, 18, 1);
 	--color-icon: rgba(206, 51, 22, 1);
 	--color-bg: rgba(252, 235, 232, 1);
-;
 }
 
 .type_warning {
 	--color: rgba(77, 59, 0, 1);
 	--color-icon: rgba(242, 189, 13, 1);
 	--color-bg: rgba(252, 242, 207, 1);
-
 }
 
 .type_success {
 	--color: rgba(8, 69, 8, 1);
 	--color-icon: rgba(33, 172, 30, 1);
 	--color-bg: rgba(233, 251, 233, 1);
-
 }
 
 .type_info {

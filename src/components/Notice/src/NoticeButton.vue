@@ -15,13 +15,13 @@ export default {};
 
 <style module="$s">
 .Button {
-	font-weight: 600;
-	border: none;
-	background: none;
-	color: inherit;
-	cursor: pointer;
 	padding: 0;
+	color: inherit;
+	font-weight: 600;
 	font-size: inherit;
 	line-height: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
 }
 </style>
