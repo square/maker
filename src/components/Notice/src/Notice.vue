@@ -74,13 +74,13 @@ export default {
 	computed: {
 		iconComponent() {
 			if (this.type === 'error') {
-				return AlertTriangle;
+				return AlertCircle;
 			}
 			if (this.type === 'success') {
 				return CheckCircle;
 			}
 			if (this.type === 'warning') {
-				return AlertCircle;
+				return AlertTriangle;
 			}
 			return Info;
 		},
