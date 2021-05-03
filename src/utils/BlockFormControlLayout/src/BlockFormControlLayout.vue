@@ -23,7 +23,7 @@
 
 .Error {
 	/* provided by theme eventually */
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 
 	display: inline-block;
 	margin-top: 8px;

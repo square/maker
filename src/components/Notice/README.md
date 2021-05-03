@@ -1,20 +1,27 @@
 # Notice
 
+Use Notice to notify users of things.
+
+
+
+## Examples
+
+
+
+### Error
+
 ```vue
 <template>
-	<div>
-		<h4>error notice</h4>
+	<div class="spaceout">
 		<m-notice type="error">
-			I am an error notice
+			I am a error notice
 		</m-notice>
 
-		<h4>long error notice</h4>
 		<m-notice type="error">
 			I am a long error notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>long error block notice</h4>
 		<m-notice
 			type="error"
 			variant="block"
@@ -23,18 +30,56 @@
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>success notice</h4>
+		<m-notice
+			type="error"
+			variant="block"
+		>
+			I am a long error notice text text text wrap wrap wrap
+			see me wrap wrap wrap text text text text text text
+			<template #actions>
+				<m-notice-button>button</m-notice-button>
+				<m-notice-button>dismiss</m-notice-button>
+			</template>
+		</m-notice>
+	</div>
+</template>
+
+<script>
+import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+
+export default {
+	components: {
+		MNotice,
+		MNoticeButton,
+	},
+};
+</script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
+```
+
+
+### Success
+
+```vue
+<template>
+	<div class="spaceout">
 		<m-notice type="success">
-			I am an success notice
+			I am a success notice
 		</m-notice>
 
-		<h4>long success notice</h4>
 		<m-notice type="success">
 			I am a long success notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>long success block notice</h4>
 		<m-notice
 			type="success"
 			variant="block"
@@ -43,18 +88,56 @@
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>warning notice</h4>
+		<m-notice
+			type="success"
+			variant="block"
+		>
+			I am a long success notice text text text wrap wrap wrap
+			see me wrap wrap wrap text text text text text text
+			<template #actions>
+				<m-notice-button>button</m-notice-button>
+				<m-notice-button>dismiss</m-notice-button>
+			</template>
+		</m-notice>
+	</div>
+</template>
+
+<script>
+import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+
+export default {
+	components: {
+		MNotice,
+		MNoticeButton,
+	},
+};
+</script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
+```
+
+
+### Warning
+
+```vue
+<template>
+	<div class="spaceout">
 		<m-notice type="warning">
-			I am an warning notice
+			I am a warning notice
 		</m-notice>
 
-		<h4>long warning notice</h4>
 		<m-notice type="warning">
 			I am a long warning notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>long warning block notice</h4>
 		<m-notice
 			type="warning"
 			variant="block"
@@ -63,18 +146,57 @@
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>info notice</h4>
+		<m-notice
+			type="warning"
+			variant="block"
+		>
+			I am a long warning notice text text text wrap wrap wrap
+			see me wrap wrap wrap text text text text text text
+			<template #actions>
+				<m-notice-button>button</m-notice-button>
+				<m-notice-button>dismiss</m-notice-button>
+			</template>
+		</m-notice>
+	</div>
+</template>
+
+<script>
+import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+
+export default {
+	components: {
+		MNotice,
+		MNoticeButton,
+	},
+};
+</script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
+```
+
+
+
+### Info
+
+```vue
+<template>
+	<div class="spaceout">
 		<m-notice type="info">
-			I am an info notice
+			I am a info notice
 		</m-notice>
 
-		<h4>long info notice</h4>
 		<m-notice type="info">
 			I am a long info notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
 
-		<h4>long info block notice</h4>
 		<m-notice
 			type="info"
 			variant="block"
@@ -82,22 +204,44 @@
 			I am a long info notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 		</m-notice>
+
+		<m-notice
+			type="info"
+			variant="block"
+		>
+			I am a long info notice text text text wrap wrap wrap
+			see me wrap wrap wrap text text text text text text
+			<template #actions>
+				<m-notice-button>button</m-notice-button>
+				<m-notice-button>dismiss</m-notice-button>
+			</template>
+		</m-notice>
 	</div>
 </template>
 
 <script>
-import { MNotice } from '@square/maker/components/Notice';
+import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
 
 export default {
 	components: {
 		MNotice,
+		MNoticeButton,
 	},
 };
 </script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
-## Props
+## Notice Props
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
@@ -107,14 +251,32 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | variant | `string` | `'inline'` | `inline`, `block`                     | notice variant |
 
 
-## Slots
+## Notice Slots
+
+| Slot    | Description             |
+| ------- | ----------------------- |
+| default | notice content          |
+| actions | put notice buttons here |
+
+
+## Notice Events
+
+Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+
+
+## NoticeButton Props
+
+Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
+
+
+## NoticeButton Slots
 
 | Slot    | Description    |
 | ------- | -------------- |
-| default | notice content |
+| default | button content |
 
 
-## Events
+## NoticeButton Events
 
-Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 <!-- api-tables:end -->

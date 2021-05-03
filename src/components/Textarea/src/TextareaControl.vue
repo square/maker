@@ -107,7 +107,7 @@ export default {
 	--color-border: transparent;
 	--color-border-active: #222;
 	--border-radius: 8px;
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
 }
 
@@ -121,7 +121,7 @@ export default {
 	--color-border: rgb(0, 0, 0, 0.15);
 	--color-border-active: rgb(0, 0, 0, 0.3);
 	--border-radius: 8px;
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 	--focus-shadow: none;
 }
 

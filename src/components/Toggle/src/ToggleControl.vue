@@ -92,7 +92,7 @@ export default {
 	--color-black-30: rgba(0, 0, 0, 0.3);
 	--color-black-15: rgba(0, 0, 0, 0.15);
 	--color-black-05: rgba(0, 0, 0, 0.05);
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 	--color-white: #fff;
 	--transition: 0.2s ease;
 

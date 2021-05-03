@@ -159,7 +159,7 @@ export default {
 	--color-accent: #222;
 	--color-border: transparent;
 	--color-border-active: #222;
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
 	--border-radius: 8px;
 }
@@ -173,7 +173,7 @@ export default {
 	--color-accent: #222;
 	--color-border: rgba(0, 0, 0, 0.15);
 	--color-border-active: rgba(0, 0, 0, 0.3);
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
 	--border-radius: 8px;
 	--focus-shadow: none;
