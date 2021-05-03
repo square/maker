@@ -23,12 +23,12 @@ function getDirectories(baseDirectory) {
 ensureDirectory(LAB_DIST);
 ensureDirectory(STYLEGUIDE_DIST);
 
-const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST);
+const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter(d => d !== '0.0.0-semantic-release');
 const LAB_DEPLOYS = getDirectories(LAB_DIST);
 
 const VERSION_REGEX = /^\d+\.\d+\.\d+/;
 function isVersion(deployName) {
-	return deployName === 'latest' || VERSION_REGEX.test(deployName);
+	return ['latest', 'latest-preview'].includes(deployName) || VERSION_REGEX.test(deployName);
 }
 function isntVersion(deployName) {
 	return !isVersion(deployName);
