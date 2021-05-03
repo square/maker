@@ -95,7 +95,7 @@ export default {
 	--color-background: rgba(255, 255, 255, 0.95);
 	--color-fill: rgba(0, 0, 0, 0.9);
 	--color-focus: rgba(0, 0, 0, 0.9);
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 	--color-disabled: rgba(0, 0, 0, 0.05);
 	--color-disabled-fill: rgba(0, 0, 0, 0.15);
 }

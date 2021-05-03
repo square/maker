@@ -53,4 +53,6 @@ module.exports = async function ensureDeployDirectory() {
 	if (gitBranch !== 'deploys') {
 		await exec('git checkout deploys');
 	}
+
+	return distPath;
 };

@@ -97,7 +97,7 @@ export default {
 	--color-foreground: rgba(255, 255, 255, 0.95);
 	--color-disabled: rgba(0, 0, 0, 0.05);
 	--color-disabled-checked: rgba(0, 0, 0, 0.15);
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 }
 
 .Checkbox {
