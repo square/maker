@@ -228,7 +228,7 @@ export default {
 	border-radius: inherit;
 	outline: none;
 	box-shadow: none;
-	cursor: inherit;
+	cursor: text;
 	appearance: none;
 
 	&::placeholder {
