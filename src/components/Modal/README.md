@@ -34,7 +34,12 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <DemoModal />);
+			this.modalApi.open(
+				() => <DemoModal />,
+				{
+					closeOnOutsideClick: true,
+				},
+			);
 		},
 	},
 };
@@ -405,7 +410,10 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <StackingDemoFirstModal />);
+			this.modalApi.open(
+				() => <StackingDemoFirstModal />,
+				{ closeOnOutsideClick: true },
+			);
 		},
 	},
 };
@@ -476,7 +484,7 @@ export default {
 
 	methods: {
 		openSecondModal() {
-			this.modalApi.open(() => <StackingDemoSecondModal />);
+			this.modalApi.open(() => <StackingDemoSecondModal />, { closeOnOutsideClick: true });
 		},
 		closeFirst() {
 			this.modalApi.close();

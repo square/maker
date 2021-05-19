@@ -14,12 +14,17 @@
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
+				@click="closeOnOutsideClick"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="currentLayer.state.vnode" />
+				<div
+					ref="modal"
+				>
+					<v :nodes="currentLayer.state.vnode" />
+				</div>
 			</div>
 		</m-transition-responsive>
 		<modal-layer v-if="currentLayer.state.vnode" />
@@ -59,12 +64,14 @@ const apiMixin = {
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
+				options: {},
 				isStacked: !!vm.currentLayer,
 			}),
 
-			open(renderFn) {
+			open(renderFn, options = {}) {
 				const vnode = renderFn(vm.$createElement);
 				this.state.vnode = vnode;
+				this.state.options = options;
 				// returned method only closes this specific modal
 				return () => {
 					if (this.state.vnode === vnode) {
@@ -154,6 +161,16 @@ export default {
 
 	destroyed() {
 		this.unwatchStackedModal();
+	},
+
+	methods: {
+		closeOnOutsideClick(event) {
+			const { closeOnOutsideClick } = this.currentLayer.state.options;
+			const { modal } = this.$refs;
+			if (modal && closeOnOutsideClick && !modal.contains(event.target)) {
+				this.modalApi.close();
+			}
+		},
 	},
 };
 </script>
