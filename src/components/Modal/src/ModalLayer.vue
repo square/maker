@@ -14,7 +14,7 @@
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
-				@click="closeOnOutsideClick"
+				@click="closeOnClickOutside"
 			>
 				<pseudo-window
 					body
@@ -80,10 +80,17 @@ const apiMixin = {
 				};
 			},
 
-			close() {
+			async close() {
 				const isModalActive = !this.state.vnode; // Verify there's no modal on top
+
 				if (isModalActive && vm.currentLayer) {
-					vm.currentLayer.state.vnode = undefined;
+					if (typeof vm.currentLayer.state.options.beforeCloseHook === 'function') {
+						if (!(await vm.currentLayer.state.options.beforeCloseHook())) {
+							return; // cancel
+						}
+					}
+
+					vm.currentLayer.state.vnode = undefined; // close modal
 				}
 			},
 		};
@@ -164,10 +171,10 @@ export default {
 	},
 
 	methods: {
-		closeOnOutsideClick(event) {
-			const { closeOnOutsideClick } = this.currentLayer.state.options;
+		closeOnClickOutside(event) {
+			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
-			if (modal && closeOnOutsideClick && !modal.contains(event.target)) {
+			if (modal && closeOnClickOutside && !modal.contains(event.target)) {
 				this.modalApi.close();
 			}
 		},

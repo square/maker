@@ -37,7 +37,7 @@ export default {
 			this.modalApi.open(
 				() => <DemoModal />,
 				{
-					closeOnOutsideClick: true,
+					closeOnClickOutside: true,
 				},
 			);
 		},
@@ -136,7 +136,16 @@ export default {
 	methods: {
 		openMyModal() {
 			// this.modalApi is provided by MModalLayer.apiMixin
-			this.modalApi.open(() => <MyModal />);
+			this.modalApi.open(
+				() => <MyModal />,
+				{
+					closeOnClickOutside: true,
+					beforeCloseHook: () => {
+						// Intercept logic here
+						return true; // or false if you want to block modal from closing
+					},
+				},
+			);
 		}
 	}
 };
@@ -216,6 +225,17 @@ export default {
 	},
 };
 </script>
+```
+### Configurable options
+The `modalApi.open()` function has a second optional object parameter that you allows for configurable options. Current available options are:
+
+```html
+{
+	// Modal will close when clicked outside of it - default false
+	closeOnClickOutside: boolean,
+	// function to run before modal is closed. If return value is false modal will not close.
+	beforeCloseHook: () => { return boolean },
+}
 ```
 
 To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
@@ -412,7 +432,9 @@ export default {
 		openModal() {
 			this.modalApi.open(
 				() => <StackingDemoFirstModal />,
-				{ closeOnOutsideClick: true },
+				{
+					closeOnClickOutside: true,
+				},
 			);
 		},
 	},
@@ -484,7 +506,12 @@ export default {
 
 	methods: {
 		openSecondModal() {
-			this.modalApi.open(() => <StackingDemoSecondModal />, { closeOnOutsideClick: true });
+			this.modalApi.open(
+				() => <StackingDemoSecondModal />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
 		},
 		closeFirst() {
 			this.modalApi.close();
