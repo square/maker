@@ -50,7 +50,9 @@ _DemoModal.vue_
 
 ```vue
 <template>
-	<m-modal>
+	<m-modal
+		:before-close="beforeCloseHook"
+	>
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -91,6 +93,13 @@ export default {
 
 	inject: {
 		modalApi,
+	},
+
+	methods: {
+		beforeCloseHook() {
+			// intercept close here
+			return true; // or false if you want to block modal from closing
+		},
 	},
 };
 </script>
@@ -140,10 +149,6 @@ export default {
 				() => <MyModal />,
 				{
 					closeOnClickOutside: true,
-					beforeCloseHook: () => {
-						// Intercept logic here
-						return true; // or false if you want to block modal from closing
-					},
 				},
 			);
 		}
@@ -233,16 +238,19 @@ The `modalApi.open()` function has a second optional object parameter that offer
 {
 	// Modal will close when clicked outside of it - default false
 	closeOnClickOutside: boolean,
-	// function to run before modal is closed. If return value is false modal will not close.
-	beforeCloseHook: () => { return boolean },
 }
 ```
 
 To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
 
+To hook into the close function, add the `beforeClose` prop on the modal component.
+The function must return a boolean - true to close the modal or false to block closing.
+
 ```html
 <template>
-	<m-modal>
+	<m-modal
+		:before-close="beforeCloseHook"
+	>
 		Modal content
 
 		<!-- modalApi is provided by the injected the modalApi key below -->
@@ -267,6 +275,13 @@ export default {
 
 	inject: {
 		modalApi,
+	},
+
+	methods: {
+		beforeCloseHook() {
+			// intercept close here
+			return true; // or false if you want to block modal from closing
+		},
 	},
 };
 </script>

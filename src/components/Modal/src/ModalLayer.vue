@@ -84,8 +84,8 @@ const apiMixin = {
 				const isModalActive = !this.state.vnode; // Verify there's no modal on top
 
 				if (isModalActive && vm.currentLayer) {
-					if (typeof vm.currentLayer.state.options.beforeCloseHook === 'function') {
-						if (!(await vm.currentLayer.state.options.beforeCloseHook())) {
+					if (typeof this.state.options.beforeCloseHook === 'function') {
+						if (!(await this.state.options.beforeCloseHook())) {
 							return; // cancel
 						}
 					}

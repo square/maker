@@ -7,6 +7,29 @@
 	</div>
 </template>
 
+<script>
+import modalApi from './modal-api';
+
+export default {
+	name: 'Modal',
+
+	inject: {
+		modalApi,
+	},
+
+	props: {
+		beforeClose: {
+			type: Function,
+			default: () => true,
+		},
+	},
+
+	mounted() {
+		this.modalApi.state.options.beforeCloseHook = this.beforeClose;
+	},
+};
+</script>
+
 <style module="$s">
 .Container {
 	position: relative;
