@@ -227,7 +227,7 @@ export default {
 </script>
 ```
 ### Configurable options
-The `modalApi.open()` function has a second optional object parameter that you allows for configurable options. Current available options are:
+The `modalApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
 
 ```html
 {
