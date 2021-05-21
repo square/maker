@@ -21,9 +21,10 @@ export default {
 		/**
 		 * Before close hook, can block closing
 		 */
-		beforeClose: { // eslint-disable-line vue/require-default-prop
+		beforeClose: {
 			type: Function,
 			required: false,
+			default: undefined,
 		},
 	},
 
