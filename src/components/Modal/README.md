@@ -234,10 +234,10 @@ export default {
 ### Configurable options
 The `modalApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
 
-```html
+```ts
 {
 	// Modal will close when clicked outside of it - default false
-	closeOnClickOutside: boolean,
+	closeOnClickOutside: boolean;
 }
 ```
 
@@ -278,7 +278,7 @@ export default {
 	},
 
 	methods: {
-		beforeCloseHook() {
+		async beforeCloseHook() {
 			// intercept close here
 			return true; // or false if you want to block modal from closing
 		},

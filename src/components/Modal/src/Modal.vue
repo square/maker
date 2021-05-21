@@ -18,14 +18,22 @@ export default {
 	},
 
 	props: {
-		beforeClose: {
+		/**
+		 * Before close hook, can block closing
+		 */
+		beforeClose: { // eslint-disable-line vue/require-default-prop
 			type: Function,
-			default: () => true,
+			required: false,
 		},
 	},
 
-	mounted() {
-		this.modalApi.state.options.beforeCloseHook = this.beforeClose;
+	watch: {
+		beforeClose: {
+			immediate: true,
+			handler(hook) {
+				this.modalApi.state.options.beforeCloseHook = hook;
+			},
+		},
 	},
 };
 </script>
