@@ -634,6 +634,13 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Modal Props
+
+| Prop         | Type   | Default | Possible values | Description                          |
+| ------------ | ------ | ------- | --------------- | ------------------------------------ |
+| before-close | `func` | —       | —               | Before close hook, can block closing |
+
+
 ## Modal Slots
 
 | Slot    | Description   |

@@ -22,6 +22,7 @@
 				/>
 				<div
 					ref="modal"
+					:class="$s.Container"
 				>
 					<v :nodes="currentLayer.state.vnode" />
 				</div>
@@ -214,5 +215,22 @@ export default {
 
 .disableScroll {
 	overflow: hidden;
+}
+
+.Container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 840px) {
+	.Container {
+		display: inline-block;
+		width: auto;
+		height: auto;
+		border-radius: 8px;
+		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
+	}
 }
 </style>
