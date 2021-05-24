@@ -34,7 +34,12 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <DemoModal />);
+			this.modalApi.open(
+				() => <DemoModal />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
 		},
 	},
 };
@@ -45,7 +50,9 @@ _DemoModal.vue_
 
 ```vue
 <template>
-	<m-modal>
+	<m-modal
+		:before-close="beforeCloseHook"
+	>
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -86,6 +93,13 @@ export default {
 
 	inject: {
 		modalApi,
+	},
+
+	methods: {
+		beforeCloseHook() {
+			// intercept close here
+			return true; // or false if you want to block modal from closing
+		},
 	},
 };
 </script>
@@ -131,7 +145,12 @@ export default {
 	methods: {
 		openMyModal() {
 			// this.modalApi is provided by MModalLayer.apiMixin
-			this.modalApi.open(() => <MyModal />);
+			this.modalApi.open(
+				() => <MyModal />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
 		}
 	}
 };
@@ -212,12 +231,26 @@ export default {
 };
 </script>
 ```
+### Configurable options
+The `modalApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
+
+```ts
+{
+	// Modal will close when clicked outside of it - default false
+	closeOnClickOutside: boolean;
+}
+```
 
 To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
 
+To hook into the close function, add the `beforeClose` prop on the modal component.
+The function must return a boolean - true to close the modal or false to block closing.
+
 ```html
 <template>
-	<m-modal>
+	<m-modal
+		:before-close="beforeCloseHook"
+	>
 		Modal content
 
 		<!-- modalApi is provided by the injected the modalApi key below -->
@@ -242,6 +275,13 @@ export default {
 
 	inject: {
 		modalApi,
+	},
+
+	methods: {
+		async beforeCloseHook() {
+			// intercept close here
+			return true; // or false if you want to block modal from closing
+		},
 	},
 };
 </script>
@@ -405,7 +445,12 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <StackingDemoFirstModal />);
+			this.modalApi.open(
+				() => <StackingDemoFirstModal />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
 		},
 	},
 };
@@ -476,7 +521,12 @@ export default {
 
 	methods: {
 		openSecondModal() {
-			this.modalApi.open(() => <StackingDemoSecondModal />);
+			this.modalApi.open(
+				() => <StackingDemoSecondModal />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
 		},
 		closeFirst() {
 			this.modalApi.close();
