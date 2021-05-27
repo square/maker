@@ -175,7 +175,11 @@ export default {
 		closeOnClickOutside(event) {
 			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
-			if (modal && closeOnClickOutside && !modal.contains(event.target)) {
+			if (
+				modal
+				&& closeOnClickOutside
+				&& modal.compareDocumentPosition(event.target) !== 20
+			) {
 				this.modalApi.close();
 			}
 		},
