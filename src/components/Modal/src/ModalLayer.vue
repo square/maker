@@ -175,23 +175,13 @@ export default {
 		closeOnClickOutside(event) {
 			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
-
 			if (
 				modal
 				&& closeOnClickOutside
-				&& !this.isClickInsideModal(modal, event)
+				&& modal.compareDocumentPosition(event.target) === 10
 			) {
 				this.modalApi.close();
 			}
-		},
-
-		isClickInsideModal(modal, event) {
-			const pos = modal.getBoundingClientRect();
-			console.log(pos); // eslint-disable-line no-console
-			console.log(`Event x: ${event.clientX} and Event y: ${event.clientY}`); // eslint-disable-line no-console
-			const containsX = event.clientX > pos.left && event.clientX < pos.right;
-			const containsY = event.clientY > pos.top && event.clientY < pos.bottom;
-			return containsX && containsY;
 		},
 	},
 };
