@@ -178,7 +178,8 @@ export default {
 			if (
 				modal
 				&& closeOnClickOutside
-				&& modal.compareDocumentPosition(event.target) === 10
+				&& modal.compareDocumentPosition(event.target)
+					=== (Node.DOCUMENT_POSITION_PRECEDING + Node.DOCUMENT_POSITION_CONTAINS)
 			) {
 				this.modalApi.close();
 			}
