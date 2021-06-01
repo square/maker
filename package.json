@@ -35,8 +35,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{vue,css}": "stylelint --max-warnings=0",
-    "src/**/*.{vue,js,md}": "eslint --max-warnings=0"
+    "*.{vue,css}": "stylelint --max-warnings=0",
+    "*.{vue,js,md}": "eslint --max-warnings=0"
   },
   "peerDependencies": {
     "chroma-js": "^2.1.0",
