@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Release
-      shell: bash -l {0}
+      shell: bash -e -l {0}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -28,7 +28,7 @@ jobs:
         ref: deploys
         path: .dist
     - name: Build & deploy styleguide
-      shell: bash -l {0}
+      shell: bash -e -l {0}
       run: |
         cd .dist
         git config user.name github-actions

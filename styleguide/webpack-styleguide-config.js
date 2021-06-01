@@ -6,11 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ent = require('ent');
 const { merge } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
-const { version } = require('../package.json');
-const { getCurrentBranch, isSemanticReleaseBranch, getLibVersion } = require('../build/utils');
+const { getCurrentBranch, isSemanticReleaseBranch, getLibraryVersion } = require('../build/utils');
 
-let branchName = getCurrentBranch();
-const deploy = isSemanticReleaseBranch(branchName) ? getLibVersion() : branchName;
+const branchName = getCurrentBranch();
+const deploy = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
 
 // console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
 // console.log('ENV VARS:', JSON.stringify(process.env, undefined, 4));

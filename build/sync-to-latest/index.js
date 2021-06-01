@@ -1,11 +1,13 @@
 const path = require('path');
 const fse = require('fs-extra');
 const semver = require('semver');
-const { getCurrentBranch, getLibVersion, isStableRelease, isPreviewRelease } = require('../utils');
+const {
+ getCurrentBranch, isStableRelease, isPreviewRelease,
+} = require('../utils');
 
-let branchName = getCurrentBranch();
-let isStable = isStableRelease(branchName);
-let isPreview = isPreviewRelease(branchName);
+const branchName = getCurrentBranch();
+const isStable = isStableRelease(branchName);
+const isPreview = isPreviewRelease(branchName);
 
 if (!isStable && !isPreview) {
 	// only sync versioned releases to latest or latest-preview directories
@@ -23,7 +25,10 @@ function getDirectories(baseDirectory) {
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const STYLEGUIDE_DIST = path.resolve(DIST, 'styleguide');
-const STYLEGUIDE_SEMVER_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter(deploy => semver.valid(deploy));
+const STYLEGUIDE_SEMVER_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter(
+	(deploy) => semver.valid(deploy),
+);
+
 STYLEGUIDE_SEMVER_DEPLOYS.sort((semverA, semverB) => {
 	if (semver.gt(semverA, semverB)) {
 		return -1;
