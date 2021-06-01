@@ -20,8 +20,8 @@
     "generate-deploy-index": "node ./build/generate-deploy-index",
     "deploy-all": "npm run pull-deploys && npm run lab-build && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "lint": "npm run lint:js && npm run lint:css",
-    "lint:js": "eslint --format=pretty --ext vue,js,md --max-warnings=0 --cache src lab styleguide build",
-    "lint:css": "stylelint --max-warnings=0 src/**/*.{vue,css}",
+    "lint:js": "eslint --format=pretty --ext vue,js,md --cache src lab styleguide build",
+    "lint:css": "stylelint src/**/*.{vue,css}",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
     "sync-to-latest": "node ./build/sync-to-latest",
     "pull-deploys": "node ./build/deploys/pull.js",
@@ -35,8 +35,8 @@
     }
   },
   "lint-staged": {
-    "*.{vue,css}": "stylelint --max-warnings=0",
-    "*.{vue,js,md}": "eslint --max-warnings=0"
+    "*.{vue,js,md}": "eslint --max-warnings=0",
+    "*.{vue,css}": "stylelint --max-warnings=0"
   },
   "peerDependencies": {
     "chroma-js": "^2.1.0",
