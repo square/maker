@@ -15,9 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Lint code
-        shell: bash -l {0} -e
+        shell: bash -e -l {0}
         run: |
-          set -e
           nvm i
           npm ci
           npm run lint
