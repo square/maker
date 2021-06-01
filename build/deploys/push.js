@@ -3,8 +3,8 @@ const exec = promisify(require('child_process').exec);
 const ensureDeployDirectory = require('./ensure');
 
 (async function pushDeploys() {
-	const deployDir = await ensureDeployDirectory();
-	process.chdir(deployDir);
+	const deployDirectory = await ensureDeployDirectory();
+	process.chdir(deployDirectory);
 
 	// add all changes
 	await exec('git add --all');

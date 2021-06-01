@@ -21,7 +21,7 @@ jobs:
           ref: deploys
           path: .dist
       - name: Build & deploy
-        shell: bash -l {0}
+        shell: bash -e -l {0}
         run: |
           cd .dist
           git config user.name github-actions
