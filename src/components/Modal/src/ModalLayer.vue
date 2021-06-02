@@ -14,7 +14,7 @@
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
-				@click="closeOnClickOutside"
+				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
 					body
@@ -175,12 +175,7 @@ export default {
 		closeOnClickOutside(event) {
 			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
-			if (
-				modal
-				&& closeOnClickOutside
-				&& modal.compareDocumentPosition(event.target)
-					=== (Node.DOCUMENT_POSITION_PRECEDING + Node.DOCUMENT_POSITION_CONTAINS)
-			) {
+			if (modal && closeOnClickOutside && !modal.contains(event.target)) {
 				this.modalApi.close();
 			}
 		},
