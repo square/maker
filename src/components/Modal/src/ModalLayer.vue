@@ -14,7 +14,7 @@
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
-				@click="closeOnClickOutside"
+				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
 					body
