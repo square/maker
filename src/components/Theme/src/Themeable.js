@@ -1,5 +1,5 @@
-import { isString } from 'lodash';
-import key from './key';
+import { isString, get } from 'lodash';
+import themeKey from './key';
 
 function getComputedTheme(parentTheme = {}, myTheme = {}, myMixins = [], myThemingFn) {
 	const combinedTheme = {
@@ -12,6 +12,13 @@ function getComputedTheme(parentTheme = {}, myTheme = {}, myMixins = [], myThemi
 		}
 		if (myTheme.mixins && myTheme.mixins[mixin]) {
 			Object.assign(combinedTheme, myTheme.mixins[mixin]);
+		}
+	}
+	for (const [key, maybePointerValue] of Object.entries(combinedTheme)) {
+		if (maybePointerValue.startsWith('@')) {
+			const pointerPath = maybePointerValue.slice(1 - maybePointerValue.length);
+			const derefValue = get(parentTheme, pointerPath);
+			combinedTheme[key] = derefValue;
 		}
 	}
 	return myThemingFn(combinedTheme) || {};
@@ -34,7 +41,7 @@ function Themeable(Component, themingFn, themeSubtree) {
 
 		inject: {
 			parentTheme: {
-				from: key,
+				from: themeKey,
 				default: () => ({}),
 			},
 		},

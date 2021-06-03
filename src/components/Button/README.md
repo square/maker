@@ -1,5 +1,49 @@
 # Button
 
+
+## Themeable Buttons
+
+```vue
+<template>
+	<div>
+		<m-button>
+			no theme button
+		</m-button>
+		<m-theme :theme="theme">
+			<m-button>
+				theme button
+			</m-button>
+		</m-theme>
+		<m-button :theme="theme">
+			theme button
+		</m-button>
+	</div>
+</template>
+
+<script>
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
+import { MButton } from '@square/maker/components/Button';
+import { MTheme } from '@square/maker/components/Theme';
+
+export default {
+	components: {
+		MButton,
+		MTheme,
+		Plus,
+		X,
+	},
+	data() {
+		return {
+			theme: {
+
+			},
+		};
+	},
+};
+</script>
+```
+
 ## Styles & Sizes
 
 ```vue
