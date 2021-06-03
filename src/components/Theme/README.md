@@ -37,6 +37,13 @@ export default {
 </script>
 ```
 <!-- api-tables:start -->
+## Props
+
+| Prop   | Type     | Default | Possible values | Description |
+| ------ | -------- | ------- | --------------- | ----------- |
+| theme* | `object` | —       | —               | —           |
+
+
 ## Slots
 
 | Slot    | Description |
