@@ -15,6 +15,9 @@ There are 2 versions of ActionBar:
 		<button @click="showClose = !showClose">
 			toggle close button
 		</button>
+		<button @click="showPrimary = !showPrimary">
+			toggle primary button
+		</button>
 		<div class="container">
 			<div class="card">
 				<div class="content">
@@ -26,6 +29,9 @@ There are 2 versions of ActionBar:
 							content content content
 						</li>
 					</ol>
+					<button>
+						I should be clickable through action bar container
+					</button>
 					<m-inline-action-bar>
 						<m-action-bar-button
 							v-if="showClose"
@@ -35,6 +41,7 @@ There are 2 versions of ActionBar:
 							<x-icon class="icon" />
 						</m-action-bar-button>
 						<m-action-bar-button
+							v-if="showPrimary"
 							key="confirm"
 							full-width
 						>
@@ -61,6 +68,7 @@ export default {
 	data() {
 		return {
 			showClose: true,
+			showPrimary: true,
 		};
 	},
 };
