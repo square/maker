@@ -35,7 +35,6 @@ There are 2 versions of ActionBar:
 							<x-icon class="icon" />
 						</m-action-bar-button>
 						<m-action-bar-button
-							v-if="showPrimary"
 							key="confirm"
 							full-width
 						>
