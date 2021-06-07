@@ -1,5 +1,10 @@
 <template>
-	<div :class="$s.ActionBarWrapper">
+	<div
+		:class="[
+			$s.ActionBarWrapper,
+			{ [$s.safariAdjustment]: hasSafariAdjustment },
+		]"
+	>
 		<atomic-action-bar
 			v-bind="$attrs"
 			v-on="$listeners"
@@ -11,6 +16,7 @@
 </template>
 
 <script>
+import { isMobileSafari } from '@square/maker/utils/browser';
 import AtomicActionBar from './AtomicActionBar.vue';
 
 /**
@@ -24,11 +30,24 @@ export default {
 	},
 
 	inheritAttrs: false,
+
+	computed: {
+		hasSafariAdjustment() {
+			return isMobileSafari;
+		},
+	},
 };
 </script>
 
 <style module="$s">
 .ActionBarWrapper {
-	padding-bottom: 96px; /* action bar height */
+	--action-bar-height: 96px; /* button + padding */
+	--safari-padding: 44px;
+
+	padding-bottom: var(--action-bar-height);
+
+	&.hasSafariAdjustment {
+		padding-bottom: calc(var(--action-bar-height) + var(--safari-padding));
+	}
 }
 </style>

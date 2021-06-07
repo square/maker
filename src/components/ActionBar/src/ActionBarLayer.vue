@@ -3,6 +3,7 @@
 		:class="[
 			$s.ActionBarLayer,
 			{ [$s.NoActionBar]: !hasActionBar },
+			{ [$s.safariAdjustment]: hasSafariAdjustment },
 		]"
 		v-bind="$attrs"
 		v-on="$listeners"
@@ -25,6 +26,7 @@
 import { throttle } from 'lodash';
 import V from 'vue-v';
 import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
+import { isMobileSafari } from '@square/maker/utils/browser';
 import AtomicActionBar from './AtomicActionBar.vue';
 
 export default {
@@ -64,6 +66,9 @@ export default {
 		hasActionBar() {
 			return !!this.actionBarVnodes;
 		},
+		hasSafariAdjustment() {
+			return isMobileSafari;
+		},
 	},
 
 	created() {
@@ -82,11 +87,16 @@ export default {
 <style module="$s">
 .ActionBarLayer {
 	--action-bar-height: 96px; /* button + padding */
+	--safari-padding: 44px;
 
 	padding-bottom: var(--action-bar-height);
 
 	&.NoActionBar {
 		padding-bottom: 0;
+	}
+
+	&.hasSafariAdjustment {
+		padding-bottom: calc(var(--action-bar-height) + var(--safari-padding));
 	}
 }
 
