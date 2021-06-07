@@ -67,7 +67,8 @@ export default {
 	},
 
 	created() {
-		this.setActionbar = throttle(this.setActionbar, 50, { leading: false });
+		const waitTimeMs = 50;
+		this.setActionbar = throttle(this.setActionbar, waitTimeMs, { leading: false });
 	},
 
 	methods: {
@@ -80,9 +81,9 @@ export default {
 
 <style module="$s">
 .ActionBarLayer {
-	--action-bar-bottom-padding: 64px;
+	--action-bar-height: 96px; /* button + padding */
 
-	padding-bottom: calc(88px + var(--action-bar-bottom-padding));
+	padding-bottom: var(--action-bar-height);
 
 	&.NoActionBar {
 		padding-bottom: 0;
@@ -98,7 +99,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px var(--action-bar-bottom-padding) 24px;
+	padding: 24px;
 }
 
 @media screen and (min-width: 840px) {
@@ -113,7 +114,7 @@ export default {
 
 .Action {
 	margin-right: 8px;
-	-webkit-transform: translate3d(0, 0, 0); /* Fixes buttons flickering on mobile devices */
+	transform: translate3d(0, 0, 0); /* Fixes buttons flickering on mobile devices */
 	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
 
 	&:last-child {

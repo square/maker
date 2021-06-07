@@ -29,14 +29,6 @@ export default {
 
 <style module="$s">
 .ActionBarWrapper {
-	padding-bottom: 120px;
-}
-
-@media screen and (min-width: 840px) {
-	.ActionBarWrapper {
-		--action-bar-bottom-padding: 64px;
-
-		padding-bottom: calc(72px + var(--action-bar-bottom-padding));
-	}
+	padding-bottom: 96px; /* action bar height */
 }
 </style>

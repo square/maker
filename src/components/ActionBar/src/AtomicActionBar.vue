@@ -41,12 +41,10 @@ export default {
 
 <style module="$s">
 .ActionBar {
-	--action-bar-bottom-padding: 64px;
-
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px var(--action-bar-bottom-padding) 24px;
+	padding: 24px;
 }
 
 @media screen and (max-width: 839px) {
@@ -58,10 +56,6 @@ export default {
 @media screen and (min-width: 840px) {
 	.hide-on_tablet {
 		display: none;
-	}
-
-	.ActionBar {
-		padding: 24px 24px 32px 24px;
 	}
 }
 
@@ -99,7 +93,7 @@ export default {
 
 .Action {
 	margin-right: 8px;
-	-webkit-transform: translate3d(0, 0, 0);  /* Fixes buttons flickering on mobile devices */
+	transform: translate3d(0, 0, 0);  /* Fixes buttons flickering on mobile devices */
 	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
 
 	&:last-child {
