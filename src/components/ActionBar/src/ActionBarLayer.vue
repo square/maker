@@ -67,7 +67,7 @@ export default {
 			return !!this.actionBarVnodes;
 		},
 		hasSafariAdjustment() {
-			return isMobileSafari;
+			return isMobileSafari();
 		},
 	},
 
@@ -86,8 +86,12 @@ export default {
 
 <style module="$s">
 .ActionBarLayer {
+	/*
+	* The action bar layer injects space in the dom
+	* to ensure the content behind the actions remain visible
+	*/
 	--action-bar-height: 96px; /* button + padding */
-	--safari-padding: 44px;
+	--safari-padding: 116px; /* action bar height + safari offset */
 
 	padding-bottom: var(--action-bar-height);
 
@@ -95,40 +99,8 @@ export default {
 		padding-bottom: 0;
 	}
 
-	&.hasSafariAdjustment {
-		padding-bottom: calc(var(--action-bar-height) + var(--safari-padding));
-	}
-}
-
-.ActionBar {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 10;
-	display: flex;
-	justify-content: space-between;
-	box-sizing: border-box;
-	padding: 24px;
-}
-
-@media screen and (min-width: 840px) {
-	.ActionBar {
-		display: none;
-	}
-
-	.ActionBarLayer {
-		padding-bottom: 0;
-	}
-}
-
-.Action {
-	margin-right: 8px;
-	transform: translate3d(0, 0, 0); /* Fixes buttons flickering on mobile devices */
-	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
-
-	&:last-child {
-		margin-right: 0;
+	&.safariAdjustment {
+		padding-bottom: var(--safari-padding);
 	}
 }
 </style>

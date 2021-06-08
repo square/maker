@@ -33,7 +33,7 @@ export default {
 
 	computed: {
 		hasSafariAdjustment() {
-			return isMobileSafari;
+			return isMobileSafari();
 		},
 	},
 };
@@ -41,13 +41,17 @@ export default {
 
 <style module="$s">
 .ActionBarWrapper {
+	/*
+	* The action bar wrapper injects space in the dom
+	* to ensure the content behind the actions remain visible
+	*/
 	--action-bar-height: 96px; /* button + padding */
-	--safari-padding: 44px;
+	--safari-padding: 116px; /* padding + button + safari offset + additional padding */
 
 	padding-bottom: var(--action-bar-height);
 
-	&.hasSafariAdjustment {
-		padding-bottom: calc(var(--action-bar-height) + var(--safari-padding));
+	&.safariAdjustment {
+		padding-bottom: var(--safari-padding);
 	}
 }
 </style>

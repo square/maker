@@ -4,6 +4,7 @@
 			$s.ActionBar,
 			$s[`position_${position}`],
 			$s[`hide-on_${hideOn}`],
+			{ [$s.safariAdjustment]: hasSafariAdjustment },
 		]"
 		tag="div"
 	>
@@ -16,6 +17,7 @@
 
 <script>
 import vnodeSyringe from 'vue-vnode-syringe';
+import { isMobileSafari } from '@square/maker/utils/browser';
 import TransitionActionBarItems from './TransitionActionBarItems.vue';
 
 export default {
@@ -36,15 +38,28 @@ export default {
 			validator: (hideOn) => ['none', 'mobile', 'tablet', 'desktop'].includes(hideOn),
 		},
 	},
+
+	computed: {
+		hasSafariAdjustment() {
+			return isMobileSafari();
+		},
+	},
 };
 </script>
 
 <style module="$s">
 .ActionBar {
+	--action-bar-padding: 24px;
+	--safari-padding: 64px; /* 44px safari deadzone + some additional spacing */
+
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px;
+	padding: var(--action-bar-padding);
+
+	&.safariAdjustment {
+		padding-bottom: var(--safari-padding);
+	}
 }
 
 @media screen and (max-width: 839px) {
