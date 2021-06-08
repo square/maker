@@ -1,7 +1,7 @@
 <template>
 	<section
 		:class="[
-			$s.Section,
+			$s.Box,
 			$s[`size_${size}`],
 		]"
 		v-bind="$attrs"
@@ -28,7 +28,7 @@
 			</div>
 		</header>
 
-		<!-- @slot section content -->
+		<!-- @slot box content -->
 		<slot />
 	</section>
 </template>
@@ -43,21 +43,21 @@ export default {
 
 	props: {
 		/**
-		 * Section label
+		 * Box label
 		 */
 		label: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Section sublabel
+		 * Box sublabel
 		 */
 		sublabel: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Section size
+		 * Box size
 		 */
 		size: {
 			type: String,
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style module="$s">
-.Section {
+.Box {
 	--color-white: #fff;
 	--color-black-90: rgba(0, 0, 0, 0.9);
 	--color-black-55: rgba(0, 0, 0, 0.55);

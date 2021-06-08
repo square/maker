@@ -1,69 +1,69 @@
-# Section
+# Box
 
 ```vue
 <template>
 	<div>
 		<h4>content</h4>
-		<m-section>
-			section content
-		</m-section>
+		<m-box>
+			box content
+		</m-box>
 
 		<h4>label + content</h4>
-		<m-section label="section label">
-			section content
-		</m-section>
+		<m-box label="box label">
+			box content
+		</m-box>
 
 		<h4>label + sublabel + content</h4>
-		<m-section
-			label="section label"
-			sublabel="section sublabel"
+		<m-box
+			label="box label"
+			sublabel="box sublabel"
 		>
-			section content
-		</m-section>
+			box content
+		</m-box>
 
 		<h4>label + sublabel + requirement label + content</h4>
-		<m-section
-			label="section label"
-			sublabel="section sublabel"
+		<m-box
+			label="box label"
+			sublabel="box sublabel"
 		>
-			section content
+			box content
 			<template #requirement-label>
-				section requirement label
+				box requirement label
 			</template>
-		</m-section>
+		</m-box>
 
 		<h4>size small</h4>
-		<m-section
-			label="section label"
-			sublabel="section sublabel"
+		<m-box
+			label="box label"
+			sublabel="box sublabel"
 			size="small"
 		>
-			section content
+			box content
 			<template #requirement-label>
-				section requirement label
+				box requirement label
 			</template>
-		</m-section>
+		</m-box>
 
 		<h4>size large</h4>
-		<m-section
-			label="section label"
-			sublabel="section sublabel"
+		<m-box
+			label="box label"
+			sublabel="box sublabel"
 			size="large"
 		>
-			section content
+			box content
 			<template #requirement-label>
-				section requirement label
+				box requirement label
 			</template>
-		</m-section>
+		</m-box>
 	</div>
 </template>
 
 <script>
-import { MSection } from '@square/maker/components/Section';
+import { MBox } from '@square/maker/components/Box';
 
 export default {
 	components: {
-		MSection,
+		MBox,
 	},
 };
 </script>
