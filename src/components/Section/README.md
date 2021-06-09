@@ -6,7 +6,7 @@
 		<h3>Text Section POC</h3>
 		<m-section>
 			<m-heading :size="2">
-				Quality Craftsmanship
+				Basic default text section
 			</m-heading>
 			<m-text>Simple, affordable, memorable</m-text>
 			<m-heading :size="1">
@@ -23,7 +23,35 @@
 			<m-text>
 				One of our most popular items. Perfect for everyday use.
 				Exceptional quality and choice.
-			</m-text>m-text>
+			</m-text>
+			<a>Learn More</a>
+		</m-section>
+		<m-section text-align="center">
+			<m-heading :size="2">
+				Alignment
+			</m-heading>
+			<m-text>Simple, affordable, memorable</m-text>
+			<m-heading :size="1">
+				Distinctive and Bold
+			</m-heading>
+			<m-text>
+				One of our most popular items. Perfect for everyday use.
+				Exceptional quality and choice.
+			</m-text>
+			<a>Learn More</a>
+		</m-section>
+		<m-section color="#5EA581">
+			<m-heading :size="2">
+				Handling color
+			</m-heading>
+			<m-text>Simple, affordable, memorable</m-text>
+			<m-heading :size="1">
+				Distinctive and Bold
+			</m-heading>
+			<m-text>
+				One of our most popular items. Perfect for everyday use.
+				Exceptional quality and choice.
+			</m-text>
 			<a>Learn More</a>
 		</m-section>
 

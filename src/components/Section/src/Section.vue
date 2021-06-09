@@ -4,6 +4,7 @@
 			$s.Section,
 			$s[`height_${height}`],
 			$s[`horizontalAlign_${horizontalAlign}`],
+			$s[`textAlign_${textAlign}`],
 		]"
 		v-bind="$attrs"
 		:style="style"
@@ -70,6 +71,11 @@ export default {
 			type: String,
 			default: 'middle',
 			validator: (verticalAlign) => ['top', 'middle', 'bottom'].includes(verticalAlign),
+		},
+		textAlign: {
+			type: String,
+			default: 'left',
+			validator: (textAlign) => ['left', 'center', 'right'].includes(textAlign),
 		},
 		/**
 		 * Background image for section
@@ -169,5 +175,17 @@ export default {
 
 .contentWidth_large {
 	width: 100%;
+}
+
+.textAlign_left {
+	text-align: left;
+}
+
+.textAlign_center {
+	text-align: center;
+}
+
+.textAlign_right {
+	text-align: right;
 }
 </style>
