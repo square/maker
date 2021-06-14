@@ -26,6 +26,13 @@ module.exports = {
 		'no-param-reassign': 'off',
 		'no-return-await': 'off',
 
+		// TODO: convert to error once codebase is clean
+		'no-magic-numbers': ['warn', {
+			ignoreArrayIndexes: true,
+			ignoreDefaultValues: true,
+			enforceConst: true,
+		}],
+
 		// As a library, dependencies are packaged in and can be in devDeps
 		'import/no-extraneous-dependencies': 'off',
 		'import/prefer-default-export': 'off',
