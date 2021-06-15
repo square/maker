@@ -2,8 +2,6 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`size_${size}`],
-			$s[`shape_${shape}`],
 			$s[`align_${align}`],
 			{
 				[$s.fullWidth]: fullWidth,
@@ -13,7 +11,6 @@
 		]"
 		:type="type"
 		:disabled="disabled"
-		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -39,98 +36,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
-
-function getContrast(chromaBg, targetChromaFg) {
-	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
-		const isLight = chromaBg.luminance() > 0.32;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
-
-function getFocus(chromaColor) {
-	return chromaColor.alpha(0.3);
-}
-
-function getHover(chromaColor) {
-	// mix color with 5% black
-	return chroma.mix(chromaColor, '#000', 0.05);
-}
-
-function getActive(chromaColor) {
-	// mix color with 10% black
-	return chroma.mix(chromaColor, '#000', 0.1);
-}
-
-function fill(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
-	const contrastColorHover = getHover(contrastColor);
-	const contrastColorActive = getActive(contrastColor);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '8px 16px',
-		'--medium-padding': '12px 24px',
-		'--large-padding': '20px 32px',
-		'--color-main': color.hex(),
-		'--color-main-hover': colorHover.hex(),
-		'--color-main-active': colorActive.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-contrast-hover': contrastColorHover.hex(),
-		'--color-contrast-active': contrastColorActive.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
-function outline(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '8px 16px',
-		'--medium-padding': '12px 24px',
-		'--large-padding': '20px 32px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
-		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
-	};
-}
-
-function ghost(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '8px',
-		'--medium-padding': '12px',
-		'--large-padding': '20px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
-const VARIANTS = {
-	primary: fill,
-	secondary: outline,
-	tertiary: ghost,
-};
 
 /**
  * Button component
@@ -153,51 +59,11 @@ export default {
 			default: 'button',
 		},
 		/**
-		 * Size of the button
-		 */
-		size: {
-			type: String,
-			default: 'medium',
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
-		},
-		/**
 		 * Whether to make the button full-width
 		 */
 		fullWidth: {
 			type: Boolean,
 			default: false,
-		},
-		/**
-		 * Background color of button
-		 */
-		color: {
-			type: String,
-			default: '#000',
-			validator: (color) => chroma.valid(color),
-		},
-		/**
-		 * Text color of button
-		 */
-		textColor: {
-			type: String,
-			default: undefined,
-			validator: (color) => chroma.valid(color),
-		},
-		/**
-		 * Semantic variant
-		 */
-		variant: {
-			type: String,
-			default: 'primary',
-			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
-		},
-		/**
-		 * Shape of button
-		 */
-		shape: {
-			type: String,
-			default: 'rounded',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
 		 * Toggles button disabled state
@@ -220,15 +86,6 @@ export default {
 		loading: {
 			type: Boolean,
 			default: false,
-		},
-	},
-
-	computed: {
-		style() {
-			return VARIANTS[this.variant]({
-				color: this.color,
-				textColor: this.textColor,
-			});
 		},
 	},
 
@@ -258,7 +115,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 8px;
+	border-radius: var(--border-radius);
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -271,60 +128,20 @@ export default {
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
+	padding: var(--padding);
+	font-size: var(--font-size);
 
-	&.shape_pill {
-		border-radius: 32px;
-	}
-
-	&.shape_squared {
-		border-radius: 0;
+	& > * {
+		line-height: var(--line-height);
 	}
 
 	&.iconButton {
 		min-width: max-content;
-	}
-
-	&.size_small {
-		padding: var(--small-padding);
-		font-size: 12px;
+		padding: var(--icon-padding);
 
 		& > * {
-			line-height: 1.4;
+			line-height: 0;
 		}
-
-		&.iconButton {
-			padding: 8px;
-		}
-	}
-
-	&.size_medium {
-		padding: var(--medium-padding);
-		font-size: 14px;
-
-		& > * {
-			line-height: 1.77;
-		}
-
-		&.iconButton {
-			padding: 12px;
-		}
-	}
-
-	&.size_large {
-		padding: var(--large-padding);
-		font-size: 16px;
-
-		& > * {
-			line-height: 1.5;
-		}
-
-		&.iconButton {
-			padding: 20px;
-		}
-	}
-
-	&.iconButton > * {
-		line-height: 0;
 	}
 
 	&.fullWidth {
@@ -369,7 +186,7 @@ export default {
 	}
 
 	&.loading {
-		/* don't inherit color in loading state on hover/active */
+		/* don't inherit color in loading state on hover or active */
 		color: transparent !important;
 	}
 }

@@ -1,23 +1,33 @@
 import { isString, get } from 'lodash';
 import themeKey from './key';
 
-function getComputedTheme(parentTheme = {}, myTheme = {}, myMixins = [], myThemingFn) {
+/**
+ * @param {Object} entireTheme entire theme object, with top-level theme definitions and all component themes
+ * @param {Object} parentTheme inherited theme from parent for this particular component
+ * @param {Object} myTheme theme definition for this particular component
+ * @param {String[]} myMixins this particular component's selected mixins
+ * @param {Function} myThemingFn this particular component's theming function
+ * @return {Object} concrete component theme
+ */
+function getComputedTheme(entireTheme = {}, parentTheme = {}, myTheme = {}, myMixins = [], myThemingFn) {
 	const combinedTheme = {
 		...parentTheme,
 		...myTheme,
-	};
-	for (const mixin of myMixins) {
-		if (parentTheme.mixins && parentTheme.mixins[mixin]) {
-			Object.assign(combinedTheme, parentTheme.mixins[mixin]);
+		mixins: {
+			...parentTheme.mixins,
+			...myTheme.mixins,
 		}
-		if (myTheme.mixins && myTheme.mixins[mixin]) {
-			Object.assign(combinedTheme, myTheme.mixins[mixin]);
+	};
+	// console.log({ myMixins });
+	for (const mixin of myMixins) {
+		if (combinedTheme && combinedTheme.mixins[mixin]) {
+			Object.assign(combinedTheme, combinedTheme.mixins[mixin]);
 		}
 	}
 	for (const [key, maybePointerValue] of Object.entries(combinedTheme)) {
-		if (maybePointerValue.startsWith('@')) {
+		if (isString(maybePointerValue) && maybePointerValue.startsWith('@')) {
 			const pointerPath = maybePointerValue.slice(1 - maybePointerValue.length);
-			const derefValue = get(parentTheme, pointerPath);
+			const derefValue = get(entireTheme, pointerPath);
 			combinedTheme[key] = derefValue;
 		}
 	}
@@ -29,17 +39,20 @@ function Themeable(Component, themingFn, themeSubtree) {
 		inheritAttrs: false,
 
 		props: {
+			// theme object
 			theme: {
 				type: Object,
-				default: () => {},
+				default: () => ({}),
 			},
+			// list of string mixins, which should be present in theme
 			mixins: {
 				type: [String, Array],
-				default: () => [],
+				default: () => ([]),
 			},
 		},
 
 		inject: {
+			// inherited theme object from parent
 			parentTheme: {
 				from: themeKey,
 				default: () => ({}),
@@ -67,13 +80,15 @@ function Themeable(Component, themingFn, themeSubtree) {
 				}
 				return this.mixins;
 			},
-			myTheme() {
+			myConcreteTheme() {
+				const entireTheme = this.parentTheme || {};
 				const parentTheme = this.parentTheme && this.parentTheme[themeSubtree];
-				return getComputedTheme(parentTheme, this.theme, this.myMixins, themingFn);
+				// console.log(this.myMixins);
+				return getComputedTheme(entireTheme, parentTheme, this.theme, this.myMixins, themingFn);
 			},
 			styles() {
 				const styles = {};
-				for (const [property, value] of Object.entries(this.myTheme)) {
+				for (const [property, value] of Object.entries(this.myConcreteTheme)) {
 					styles[property] = value;
 				}
 				return styles;
