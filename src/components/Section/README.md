@@ -5,58 +5,176 @@
 	<div>
 		<h3>Text Section POC</h3>
 		<m-section>
-			<m-heading :size="2">
-				Basic default text section
-			</m-heading>
-			<m-text>Simple, affordable, memorable</m-text>
-			<m-heading :size="1">
-				Distinctive and Bold
-			</m-heading>
-			<m-text>
-				One of our most popular items. Perfect for everyday use.
-				Exceptional quality and choice.
-			</m-text>
-			<a>Learn More</a>
-			<m-heading :size="1">
-				Distinctive and Bold
-			</m-heading>
-			<m-text>
-				One of our most popular items. Perfect for everyday use.
-				Exceptional quality and choice.
-			</m-text>
-			<a>Learn More</a>
+			<div class="section-content">
+				<m-heading :size="2">
+					Basic default text section
+				</m-heading>
+				<m-text>Simple, affordable, memorable</m-text>
+			</div>
+			<div class="section-group">
+				<div>
+					<m-heading :size="1">
+						Distinctive and Bold
+					</m-heading>
+					<m-text>
+						One of our most popular items. Perfect for everyday use.
+						Exceptional quality and choice.
+					</m-text>
+					<a>Learn More</a>
+				</div>
+				<div>
+					<m-heading :size="1">
+						Distinctive and Bold
+					</m-heading>
+					<m-text>
+						One of our most popular items. Perfect for everyday use.
+						Exceptional quality and choice.
+					</m-text>
+					<a>Learn More</a>
+				</div>
+			</div>
 		</m-section>
 		<m-section text-align="center">
-			<m-heading :size="2">
-				Alignment
-			</m-heading>
-			<m-text>Simple, affordable, memorable</m-text>
-			<m-heading :size="1">
-				Distinctive and Bold
-			</m-heading>
-			<m-text>
-				One of our most popular items. Perfect for everyday use.
-				Exceptional quality and choice.
-			</m-text>
-			<a>Learn More</a>
+			<div class="section-content">
+				<m-heading :size="2">
+					Alignment
+				</m-heading>
+				<m-text>Simple, affordable, memorable</m-text>
+			</div>
+			<div class="section-group">
+				<div>
+					<m-heading :size="1">
+						Distinctive and Bold
+					</m-heading>
+					<m-text>
+						One of our most popular items. Perfect for everyday use.
+						Exceptional quality and choice.
+					</m-text>
+					<a>Learn More</a>
+				</div>
+				<div>
+					<m-heading :size="1">
+						Distinctive and Bold
+					</m-heading>
+					<m-text>
+						One of our most popular items. Perfect for everyday use.
+						Exceptional quality and choice.
+					</m-text>
+					<a>Learn More</a>
+				</div>
+			</div>
 		</m-section>
-		<m-section color="#5EA581">
-			<m-heading :size="2">
-				Handling color
-			</m-heading>
-			<m-text>Simple, affordable, memorable</m-text>
-			<m-heading :size="1">
-				Distinctive and Bold
-			</m-heading>
-			<m-text>
-				One of our most popular items. Perfect for everyday use.
-				Exceptional quality and choice.
-			</m-text>
-			<a>Learn More</a>
+		<m-section
+			bg-color="#5EA581"
+			color="white"
+		>
+			<div class="section-content">
+				<m-heading :size="2">
+					Handling color
+				</m-heading>
+				<m-text>Simple, affordable, memorable</m-text>
+			</div>
+			<div class="section-group">
+				<div>
+					<m-heading :size="1">
+						Distinctive and Bold
+					</m-heading>
+					<m-text>
+						One of our most popular items. Perfect for everyday use.
+						Exceptional quality and choice.
+					</m-text>
+					<a>Learn More</a>
+				</div>
+				<div>
+					<m-heading :size="1">
+						Distinctive and Bold
+					</m-heading>
+					<m-text>
+						One of our most popular items. Perfect for everyday use.
+						Exceptional quality and choice.
+					</m-text>
+					<a>Learn More</a>
+				</div>
+			</div>
+		</m-section>
+		<m-section content-width="large">
+			<div class="layout layout-1">
+				<div class="section-content">
+					<m-heading :size="2">
+						Layout Alternative
+					</m-heading>
+					<m-text>Simple, affordable, memorable</m-text>
+				</div>
+				<div class="section-group">
+					<div>
+						<m-heading :size="1">
+							Distinctive and Bold
+						</m-heading>
+						<m-text>
+							One of our most popular items. Perfect for everyday use.
+							Exceptional quality and choice.
+						</m-text>
+						<a>Learn More</a>
+					</div>
+					<div>
+						<m-heading :size="1">
+							Distinctive and Bold
+						</m-heading>
+						<m-text>
+							One of our most popular items. Perfect for everyday use.
+							Exceptional quality and choice.
+						</m-text>
+						<a>Learn More</a>
+					</div>
+				</div>
+			</div>
+		</m-section>
+
+		<m-section content-width="large">
+			<div class="layout layout-2">
+				<div class="section-content">
+					<m-heading :size="2">
+						Layout with grid
+					</m-heading>
+					<m-text>Simple, affordable, memorable</m-text>
+				</div>
+				<div class="section-group">
+					<div>
+						<m-heading :size="1">
+							Distinctive and Bold
+						</m-heading>
+						<m-text>
+							One of our most popular items. Perfect for everyday use.
+							Exceptional quality and choice.
+						</m-text>
+						<a>Learn More</a>
+					</div>
+					<div>
+						<m-heading :size="1">
+							Distinctive and Bold
+						</m-heading>
+						<m-text>
+							One of our most popular items. Perfect for everyday use.
+							Exceptional quality and choice.
+						</m-text>
+						<a>Learn More</a>
+					</div>
+					<div>
+						<m-heading :size="1">
+							Distinctive and Bold
+						</m-heading>
+						<m-text>
+							One of our most popular items. Perfect for everyday use.
+							Exceptional quality and choice.
+						</m-text>
+						<a>Learn More</a>
+					</div>
+				</div>
+			</div>
 		</m-section>
 
 		<h3>Basic section tests</h3>
-		<m-section height="small">
+		<m-section height="auto">
 			<div class="headerWrap">
 				<m-heading :size="2">
 					Number8
@@ -66,7 +184,7 @@
 		</m-section>
 		<m-section
 			background-image="https://source.unsplash.com/oNm9NkTFLfA/1000x480"
-			text-color="white"
+			color="white"
 		>
 			<m-heading :size="-1">
 				Default Section
@@ -94,7 +212,7 @@
 				Shop all Flavors
 			</m-button>
 		</m-section>
-		<m-section color="#f2f2f2">
+		<m-section bg-color="#f2f2f2">
 			<m-image
 				src="https://source.unsplash.com/200x200/weekly?coffee"
 				style="width: 200px"
@@ -116,9 +234,9 @@
 			</m-button>
 		</m-section>
 		<m-section
-			color="black"
-			text-color="white"
-			height="small"
+			bg-color="black"
+			color="white"
+			height="auto"
 		>
 			<div class="footerWrap">
 				<m-heading :size="2">
@@ -149,6 +267,29 @@ export default {
 </script>
 
 <style>
+
+.section-content {
+	margin-bottom: 32px;
+}
+
+.section-group {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+
+	--grid-col: 3;
+}
+
+.layout-1 {
+	display: grid;
+}
+
+.layout-1 .section-group,
+.layout-2 .section-group {
+	display: grid;
+	grid-template-columns: repeat(var(--grid-col), minmax(240px, 1fr) );
+}
+
 .headerWrap,
 .footerWrap {
 	display: flex;

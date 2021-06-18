@@ -38,8 +38,8 @@ export default {
 		 */
 		height: {
 			type: String,
-			default: 'medium',
-			validator: (height) => ['small', 'medium', 'large'].includes(height),
+			default: 'small',
+			validator: (height) => ['auto', 'small', 'medium', 'large'].includes(height),
 		},
 		/**
 		 * Section custom height
@@ -53,7 +53,7 @@ export default {
 		 */
 		contentWidth: {
 			type: String,
-			default: 'medium',
+			default: 'large',
 			validator: (contentWidth) => ['small', 'medium', 'large'].includes(contentWidth),
 		},
 		/**
@@ -95,7 +95,7 @@ export default {
 		/**
 		 * Background color of section
 		 */
-		color: {
+		bgColor: {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
@@ -103,7 +103,7 @@ export default {
 		/**
 		 * Text color of section
 		 */
-		textColor: {
+		color: {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
@@ -113,8 +113,8 @@ export default {
 	computed: {
 		style() {
 			return {
-				'--bg-color': this.color,
-				'--text-color': this.textColor,
+				'--bg-color': this.bgColor,
+				'--color': this.color,
 				backgroundImage: `url(${ this.backgroundImage })`,
 				height: this.customHeight,
 				minHeight: this.customHeight,
@@ -130,15 +130,19 @@ export default {
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	align-items: center;
 	padding: 3.5vh 6vh;
-	color: var(--profile-color, var(--text-color, #000));
-	background: var(--profile-bg, var(--bg-color, #fff));
+	color: var(--profile-color, var(--color, #000));
+	background: var(--profile-bg-color, var(--bg-color, #fff));
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	background-size: cover;
 }
 
-.height_small {
+.height_auto {
 	min-height: auto;
+}
+
+.height_small {
+	min-height: 25vh;
 }
 
 .height_medium {

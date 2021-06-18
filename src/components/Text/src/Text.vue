@@ -1,4 +1,8 @@
 <script>
+const minTextSize = -1;
+const maxTextSize = 1;
+const naturalSize = 0;
+
 /**
  * @inheritAttrs span
  * @inheritListeners span
@@ -21,13 +25,13 @@ export default {
 		size: {
 			type: Number,
 			default: 0,
-			validator: (size) => size >= -1 && size <= 1,
+			validator: (size) => size >= minTextSize && size <= maxTextSize,
 		},
 	},
 
 	computed: {
 		stringSize() {
-			if (this.size >= 0) {
+			if (this.size >= naturalSize) {
 				return this.size.toString();
 			}
 			return `minus-${Math.abs(this.size)}`;
@@ -76,6 +80,8 @@ export default {
 }
 
 .Paragraph {
+	margin: 0;
+	padding: 0;
 	font-family: inherit;
 }
 
