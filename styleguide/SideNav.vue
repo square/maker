@@ -1,15 +1,22 @@
 <template>
 	<div>
-		<ul>
-			<li
+		<img
+			src="/static/maker-logo.png"
+			alt="Maker"
+		>
+		<nav class="nav">
+			<template
 				v-for="navLink in navLinks"
-				:key="navLink.path.name"
 			>
-				<router-link :to="navLink.path">
+				<router-link
+					:key="navLink.path.name"
+					:to="navLink.path"
+					class="link"
+				>
 					{{ navLink.label }}
 				</router-link>
-			</li>
-		</ul>
+			</template>
+		</nav>
 	</div>
 </template>
 
@@ -30,3 +37,17 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.nav a {
+	display: block;
+	color: #5f666c;
+	font-size: 14px;
+	line-height: 1.75;
+	text-decoration: none;
+}
+
+.nav a:hover {
+	color: #006aff;
+}
+</style>
