@@ -47,6 +47,7 @@ export default {
 	justify-content: space-between;
 	box-sizing: border-box;
 	padding: 24px 24px var(--action-bar-bottom-padding) 24px;
+	pointer-events: none;
 }
 
 @media screen and (max-width: 839px) {
@@ -101,6 +102,7 @@ export default {
 	margin-right: 8px;
 	-webkit-transform: translate3d(0, 0, 0);  /* Fixes buttons flickering on mobile devices */
 	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
+	pointer-events: auto;
 
 	&:last-child {
 		margin-right: 0;
