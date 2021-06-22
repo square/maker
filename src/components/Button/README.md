@@ -1,5 +1,81 @@
 # Button
 
+
+## Theming Button
+
+```vue
+<template>
+	<div>
+		<m-button>theme-less button</m-button>
+		<br>
+
+		pick theme primary color
+		<br>
+		<input type="color" v-model="theme.colors.primary">
+		<br>
+
+		pick theme default button size
+		<br>
+		<select v-model="theme.button.size">
+			<option value="small">small</option>
+			<option value="medium">medium</option>
+			<option value="large">large</option>
+		</select>
+		<br>
+
+		pick theme default button shape
+		<br>
+		<select v-model="theme.button.shape">
+			<option value="squared">squared</option>
+			<option value="rounded">rounded</option>
+			<option value="pill">pill</option>
+		</select>
+		<br>
+
+		<m-theme :theme="theme">
+			<m-button>default themed button</m-button>
+			<br>
+			<m-button color="#000000">always black button</m-button>
+			<br>
+			<m-button size="medium">always medium button</m-button>
+			<br>
+			<m-button shape="rounded">always rounded button</m-button>
+			<br>
+		</m-theme>
+	</div>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MTheme,
+		MButton,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					primary: '#000000',
+				},
+				button: {
+					size: 'medium',
+					variant: 'primary',
+					shape: 'rounded',
+					color: '@colors.primary',
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
+
+<!--
+
 ## Styles & Sizes
 
 ```vue
@@ -518,6 +594,9 @@ body {
 }
 </style>
 ```
+
+
+-->
 
 <!-- api-tables:start -->
 ## Props

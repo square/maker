@@ -2,8 +2,8 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`size_${size}`],
-			$s[`shape_${shape}`],
+			$s[`size_${resolvedSize}`],
+			$s[`shape_${resolvedShape}`],
 			$s[`align_${align}`],
 			{
 				[$s.fullWidth]: fullWidth,
@@ -41,6 +41,7 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 function getContrast(chromaBg, targetChromaFg) {
 	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
@@ -144,6 +145,13 @@ export default {
 
 	inheritAttrs: false,
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	props: {
 		/**
 		 * Type of the button
@@ -157,7 +165,7 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'medium',
+			default: undefined,
 			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
@@ -172,7 +180,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -188,7 +196,7 @@ export default {
 		 */
 		variant: {
 			type: String,
-			default: 'primary',
+			default: undefined,
 			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
 		},
 		/**
@@ -196,7 +204,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'rounded',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -224,9 +232,45 @@ export default {
 	},
 
 	computed: {
+		resolvedSize() {
+			let sizeValueOrPointer = null;
+			if (this.size) {
+				sizeValueOrPointer = this.size;
+			} else {
+				sizeValueOrPointer = this.theme.button.size;
+			}
+			return this.theme.resolve(sizeValueOrPointer);
+		},
+		resolvedColor() {
+			let colorValueOrPointer = null;
+			if (this.color) {
+				colorValueOrPointer = this.color;
+			} else {
+				colorValueOrPointer = this.theme.button.color;
+			}
+			return this.theme.resolve(colorValueOrPointer);
+		},
+		resolvedVariant() {
+			let variantValueOrPointer = null;
+			if (this.variant) {
+				variantValueOrPointer = this.variant;
+			} else {
+				variantValueOrPointer = this.theme.button.variant;
+			}
+			return this.theme.resolve(variantValueOrPointer);
+		},
+		resolvedShape() {
+			let shapeValueOrPointer = null;
+			if (this.shape) {
+				shapeValueOrPointer = this.shape;
+			} else {
+				shapeValueOrPointer = this.theme.button.shape;
+			}
+			return this.theme.resolve(shapeValueOrPointer);
+		},
 		style() {
-			return VARIANTS[this.variant]({
-				color: this.color,
+			return VARIANTS[this.resolvedVariant]({
+				color: this.resolvedColor,
 				textColor: this.textColor,
 			});
 		},

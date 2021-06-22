@@ -5,41 +5,41 @@
 </template>
 
 <script>
-import { kebabCase } from 'lodash';
+import key from './key';
+import { resolve, getPath } from './utils';
 
 export default {
+	provide() {
+		return {
+			// provided data needs to be reactive
+			[key]: this.$data,
+		};
+	},
 	inheritAttrs: false,
-
-	/* TODO
-	 * Declaring the top-level design-tokens as props will make them
-	 * reactive and easier to watch & re-render
-	 */
-	mounted() {
-		this.applyTheme();
-	},
-
-	updated() {
-		this.applyTheme();
-	},
-
-	methods: {
-		applyTheme() {
-			const { $el } = this;
-
-			// First level
-			Object.entries(this.$attrs).forEach(([namespace, designTokens]) => {
-				// Second level
-				Object.entries(designTokens).forEach(([tokenName, tokenValue]) => {
-					const hashedName = `--${this.hash(namespace, tokenName)}`;
-					$el.style.setProperty(hashedName, tokenValue);
-				});
-			});
+	props: {
+		theme: {
+			type: Object,
+			required: true,
 		},
-
-		hash(namespace, tokenName) {
-			// TODO: Update to use hash
-			return `${kebabCase(namespace)}-${kebabCase(tokenName)}`;
-			// return `maker-${kebabCase(namespace)}-${kebabCase(tokenName)}`;
+	},
+	data() {
+		const data = {};
+		for (const [property, value] of Object.entries(this.theme)) {
+			data[property] = value;
+		}
+		data.resolve = resolve;
+		data.getPath = getPath;
+		return data;
+	},
+	updated() {
+		// update theme on prop changes
+		this.updateTheme();
+	},
+	methods: {
+		updateTheme() {
+			for (const [property, value] of Object.entries(this.theme)) {
+				this.$data[property] = value;
+			}
 		},
 	},
 };
