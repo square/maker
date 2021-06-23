@@ -65,7 +65,8 @@ async function parseComponent(componentPath) {
 				...(inherited.props || {}),
 				...(componentInfo.props || {}),
 			};
-			if (Object.keys(componentInfo.props).length === 0) {
+			const noProps = 0;
+			if (Object.keys(componentInfo.props).length === noProps) {
 				delete componentInfo.props;
 			}
 			if (inherited.tags.inheritAttrs) {
@@ -75,7 +76,9 @@ async function parseComponent(componentPath) {
 	}
 
 	if (componentInfo.tags.inheritListeners) {
-		const { description: inheritsFrom } = componentInfo.tags.inheritListeners[0];
+		const firstInheritedListenerIndex = 0;
+		const { description: inheritsFrom } = componentInfo.tags
+			.inheritListeners[firstInheritedListenerIndex];
 
 		if (inheritsFrom.startsWith('.')) {
 			const inheritsFromPath = path.join(path.dirname(componentPath), inheritsFrom);
@@ -85,7 +88,8 @@ async function parseComponent(componentPath) {
 				...(inherited.events || {}),
 				...(componentInfo.events || {}),
 			};
-			if (Object.keys(componentInfo.events).length === 0) {
+			const noEvents = 0;
+			if (Object.keys(componentInfo.events).length === noEvents) {
 				delete componentInfo.events;
 			}
 			if (inherited.tags.inheritListeners) {
@@ -105,7 +109,8 @@ async function parseComponent(componentPath) {
 				...(inherited.slots || []),
 				...(componentInfo.slots || []),
 			];
-			if (componentInfo.slots.length === 0) {
+			const noSlots = 0;
+			if (componentInfo.slots.length === noSlots) {
 				delete componentInfo.slots;
 			}
 			if (inherited.tags.inheritSlots) {
@@ -129,16 +134,19 @@ async function interpolateTables(readmePath, apiTables) {
 
 (async () => {
 	const allVueFiles = await tinyGlob('./src/**/src/*.vue');
+	const sliceStart = 0;
+	const sliceEnd = 3;
 	const components = groupBy(
 		allVueFiles,
-		(vuePath) => vuePath.split(path.sep).slice(0, 3).join(path.sep),
+		(vuePath) => vuePath.split(path.sep).slice(sliceStart, sliceEnd).join(path.sep),
 	);
 
 	await Promise.all(
 		Object.entries(components).map(async ([componentPath, componentVueFiles]) => {
 			const readmePath = await ensureReadme(componentPath);
 			const publicSubcomponents = await filterPublicSubcomponents(componentPath, componentVueFiles);
-			const hasMultiple = publicSubcomponents.length > 1;
+			const one = 1;
+			const hasMultiple = publicSubcomponents.length > one;
 
 			const apiTables = await Promise.all(
 				publicSubcomponents.map(async (vueFilePath) => {

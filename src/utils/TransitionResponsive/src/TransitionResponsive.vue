@@ -20,15 +20,19 @@ export default {
 			type: Array,
 			required: true,
 			validator: (transitions) => {
+				const noTransitions = 0;
 				// cannot be empty
-				if (transitions.length === 0) {
+				if (transitions.length === noTransitions) {
 					return false;
 				}
+				const firstTransitionIndex = 0;
+				const smallestMinWidth = 0;
 				// must have default catch-all transition
-				if (transitions[0].minWidth !== 0) {
+				if (transitions[firstTransitionIndex].minWidth !== smallestMinWidth) {
 					return false;
 				}
-				return transitions.every((transition) => (transition.minWidth || transition.minWidth === 0)
+				return transitions.every((transition) => (transition.minWidth
+					|| transition.minWidth === smallestMinWidth)
 					&& transition.enter
 					&& transition.leave);
 			},
@@ -47,8 +51,10 @@ export default {
 		},
 
 		getResponsiveTransition() {
-			if (this.transitions.length === 1) {
-				return this.transitions[0];
+			const singleTransition = 1;
+			const firstTransitionIndex = 0;
+			if (this.transitions.length === singleTransition) {
+				return this.transitions[firstTransitionIndex];
 			}
 			const viewportWidth = window.innerWidth;
 			let responsiveTransition;

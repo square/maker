@@ -43,9 +43,10 @@ export default {
 	},
 
 	mounted() {
+		const transitionIntervalMs = 2000;
 		setInterval(() => {
 			this.visible = !this.visible;
-		}, 2000);
+		}, transitionIntervalMs);
 	},
 };
 </script>
@@ -102,9 +103,10 @@ export default {
 	},
 
 	mounted() {
+		const transitionIntervalMs = 2000;
 		setInterval(() => {
 			this.visible = !this.visible;
-		}, 2000);
+		}, transitionIntervalMs);
 	},
 };
 </script>
@@ -161,9 +163,10 @@ export default {
 	},
 
 	mounted() {
+		const transitionIntervalMs = 2000;
 		setInterval(() => {
 			this.visible = !this.visible;
-		}, 2000);
+		}, transitionIntervalMs);
 	},
 };
 </script>
@@ -220,9 +223,10 @@ export default {
 	},
 
 	mounted() {
+		const transitionIntervalMs = 2000;
 		setInterval(() => {
 			this.visible = !this.visible;
-		}, 2000);
+		}, transitionIntervalMs);
 	},
 };
 </script>

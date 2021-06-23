@@ -44,25 +44,31 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 function getContrast(chromaBg, targetChromaFg) {
-	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
-		const isLight = chromaBg.luminance() > 0.32;
+	const contrastAccessibilityThreshold = 4.5;
+	if (!targetChromaFg
+		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
+		const isLightThreshold = 0.32;
+		const isLight = chromaBg.luminance() > isLightThreshold;
 		return chroma(isLight ? '#000' : '#fff');
 	}
 	return targetChromaFg;
 }
 
 function getFocus(chromaColor) {
-	return chromaColor.alpha(0.3);
+	const arbitraryAlphaValue = 0.3;
+	return chromaColor.alpha(arbitraryAlphaValue);
 }
 
 function getHover(chromaColor) {
 	// mix color with 5% black
-	return chroma.mix(chromaColor, '#000', 0.05);
+	const arbitraryValue = 0.05;
+	return chroma.mix(chromaColor, '#000', arbitraryValue);
 }
 
 function getActive(chromaColor) {
 	// mix color with 10% black
-	return chroma.mix(chromaColor, '#000', 0.1);
+	const arbitraryValue = 0.1;
+	return chroma.mix(chromaColor, '#000', arbitraryValue);
 }
 
 function fill(tokens) {
@@ -281,10 +287,13 @@ export default {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
+			const empty = 0;
 			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+				(vnode) => vnode.tag || vnode.text.trim().length > empty,
 			);
-			return children.length === 1 && children[0].tag;
+			const firstChildIndex = 0;
+			const singleChild = 1;
+			return children.length === singleChild && children[firstChildIndex].tag;
 		},
 	},
 };

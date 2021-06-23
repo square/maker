@@ -1,4 +1,8 @@
 <script>
+const DEFAULT_SIZE = 0;
+const MIN_SIZE = -1;
+const MAX_SIZE = 1;
+
 /**
  * @inheritAttrs span
  * @inheritListeners span
@@ -20,14 +24,15 @@ export default {
 		 */
 		size: {
 			type: Number,
-			default: 0,
-			validator: (size) => size >= -1 && size <= 1,
+			default: DEFAULT_SIZE,
+			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 	},
 
 	computed: {
 		stringSize() {
-			if (this.size >= 0) {
+			const minNonNegativeSize = 0;
+			if (this.size >= minNonNegativeSize) {
 				return this.size.toString();
 			}
 			return `minus-${Math.abs(this.size)}`;
