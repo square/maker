@@ -12,7 +12,8 @@ const isPreview = isPreviewRelease(branchName);
 if (!isStable && !isPreview) {
 	// only sync versioned releases to latest or latest-preview directories
 	// e.g. no WIP branches or draft branches
-	process.exit(0);
+	const noErrorStatus = 0;
+	process.exit(noErrorStatus);
 }
 
 const latestAlias = isStable ? 'latest' : 'latest-preview';
@@ -30,18 +31,23 @@ const STYLEGUIDE_SEMVER_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter(
 );
 
 STYLEGUIDE_SEMVER_DEPLOYS.sort((semverA, semverB) => {
+	const lessThan = -1;
+	const greaterThan = 1;
 	if (semver.gt(semverA, semverB)) {
-		return -1;
+		return lessThan;
 	}
-	return 1;
+	return greaterThan;
 });
 
-if (STYLEGUIDE_SEMVER_DEPLOYS.length === 0) {
+const noDeploys = 0;
+if (STYLEGUIDE_SEMVER_DEPLOYS.length === noDeploys) {
 	// nothing to sync
-	process.exit(0);
+	const noErrorStatus = 0;
+	process.exit(noErrorStatus);
 }
 
-const latestDeploy = STYLEGUIDE_SEMVER_DEPLOYS[0];
+const firstDeployIndex = 0;
+const latestDeploy = STYLEGUIDE_SEMVER_DEPLOYS[firstDeployIndex];
 const deployPath = path.resolve('./', '.dist/styleguide', latestDeploy);
 const latestPath = path.resolve('./', '.dist/styleguide', latestAlias);
 

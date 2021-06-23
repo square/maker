@@ -61,7 +61,8 @@ const webpackBuildConfig = (() => {
 	const cssRule = config.module.rules.find((r) => r.test.test('file.css'));
 	cssRule.oneOf.forEach((rule) => {
 		const vsl = rule.use.indexOf('vue-style-loader');
-		rule.use.splice(vsl, 1, MiniCssExtractPlugin.loader);
+		const singleLoader = 1;
+		rule.use.splice(vsl, singleLoader, MiniCssExtractPlugin.loader);
 
 		if (rule.resourceQuery && rule.resourceQuery.test('module')) {
 			const cssLoader = rule.use.find((loader) => (loader.loader || loader) === 'css-loader');

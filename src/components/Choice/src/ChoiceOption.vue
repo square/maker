@@ -42,7 +42,8 @@ export default {
 				const currentValueArray = this.controlState.currentValue.slice();
 
 				if (currentValueArray.includes(currentValue)) {
-					currentValueArray.splice(currentValueArray.indexOf(currentValue), 1);
+					const singleValue = 1;
+					currentValueArray.splice(currentValueArray.indexOf(currentValue), singleValue);
 				} else {
 					currentValueArray.push(currentValue);
 				}

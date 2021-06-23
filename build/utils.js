@@ -36,6 +36,7 @@ function isPreviewRelease(branchName) {
 }
 
 function getLibraryVersion() {
+	const zero = 0;
 	let libraryVersion = version;
 	if (libraryVersion === '0.0.0-semantic-release') {
 		let tagsOutput = execSync('git tag --points-at HEAD'); // returns byte buffer
@@ -43,16 +44,18 @@ function getLibraryVersion() {
 		const semverTags = tagsOutput
 			.trim()
 			.split(/(\s+)/)
-			.filter((tag) => tag.trim().length > 0)
+			.filter((tag) => tag.trim().length > zero)
 			.map((tag) => semver.clean(tag)) // may return null
 			.filter((tag) => !!tag); // null check
 		semverTags.sort((tagA, tagB) => {
+			const lessThan = -1;
+			const greaterThan = 1;
 			if (semver.gt(tagA, tagB)) {
-				return -1;
+				return lessThan;
 			}
-			return 1;
+			return greaterThan;
 		});
-		if (semverTags.length > 0) {
+		if (semverTags.length > zero) {
 			[libraryVersion] = semverTags; // latest semver tag
 		}
 	}

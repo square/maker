@@ -67,7 +67,8 @@ export default {
 	},
 
 	created() {
-		this.setActionbar = throttle(this.setActionbar, 50, { leading: false });
+		const shortDelayMs = 50;
+		this.setActionbar = throttle(this.setActionbar, shortDelayMs, { leading: false });
 	},
 
 	methods: {

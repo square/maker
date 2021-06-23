@@ -90,11 +90,12 @@ export default {
 			// but this handler is being called slightly too early
 			// so we delay it by 50ms to make sure it gets executed
 			// after the fadeIn transition completes
+			const shortDelayMs = 50;
 			window.setTimeout(() => {
 				element.style.removeProperty('opacity');
 				element.style.removeProperty('width');
 				element.style.removeProperty('height');
-			}, 50);
+			}, shortDelayMs);
 		},
 		onBeforeLeave(element) {
 			this.leaveWidth = element.offsetWidth;

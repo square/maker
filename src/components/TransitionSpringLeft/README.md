@@ -32,9 +32,10 @@ export default {
 	},
 
 	mounted() {
+		const transitionIntervalMs = 2000;
 		setInterval(() => {
 			this.shown = !this.shown;
-		}, 1500);
+		}, transitionIntervalMs);
 	},
 };
 </script>
