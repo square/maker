@@ -149,14 +149,14 @@ export default {
 		MLoading,
 	},
 
-	inheritAttrs: false,
-
 	inject: {
 		theme: {
 			default: defaultTheme(),
 			from: MThemeKey,
 		},
 	},
+
+	inheritAttrs: false,
 
 	props: {
 		/**
@@ -239,7 +239,7 @@ export default {
 
 	computed: {
 		resolvedSize() {
-			let sizeValueOrPointer = null;
+			let sizeValueOrPointer;
 			if (this.size) {
 				sizeValueOrPointer = this.size;
 			} else {
@@ -248,7 +248,7 @@ export default {
 			return this.theme.resolve(sizeValueOrPointer);
 		},
 		resolvedColor() {
-			let colorValueOrPointer = null;
+			let colorValueOrPointer;
 			if (this.color) {
 				colorValueOrPointer = this.color;
 			} else {
@@ -257,7 +257,7 @@ export default {
 			return this.theme.resolve(colorValueOrPointer);
 		},
 		resolvedVariant() {
-			let variantValueOrPointer = null;
+			let variantValueOrPointer;
 			if (this.variant) {
 				variantValueOrPointer = this.variant;
 			} else {
@@ -266,7 +266,7 @@ export default {
 			return this.theme.resolve(variantValueOrPointer);
 		},
 		resolvedShape() {
-			let shapeValueOrPointer = null;
+			let shapeValueOrPointer;
 			if (this.shape) {
 				shapeValueOrPointer = this.shape;
 			} else {

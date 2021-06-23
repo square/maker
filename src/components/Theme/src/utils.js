@@ -1,4 +1,6 @@
-import { isString, isNull, isUndefined, get } from 'lodash';
+import {
+ isString, isNull, isUndefined, get,
+} from 'lodash';
 
 export function resolve(valueOrPointer) {
 	if (!isString(valueOrPointer)) {
@@ -17,8 +19,9 @@ export function getPath(pointer) {
 	if (!pointer.startsWith('@')) {
 		throw new Error(`cannot resolve pointer ${pointer} it is missed the @ prefix`);
 	}
-	let path = pointer.substring(1); // remove first character
-	let result = get(this, path);
+	const firstCharacterIndex = 1;
+	const path = pointer.slice(firstCharacterIndex); // remove first character
+	const result = get(this, path);
 	if (isUndefined(result) || isNull(result)) {
 		throw new Error(`invalid pointer ${pointer} does not point to a field that exists within the theme`);
 	}

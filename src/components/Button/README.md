@@ -11,50 +11,83 @@
 
 		pick theme primary color
 		<br>
-		<input type="color" v-model="theme.colors.primary">
+		<input
+			v-model="theme.colors.primary"
+			type="color"
+		>
 		<br>
 
 		pick theme default button size
 		<br>
 		<select v-model="theme.button.size">
-			<option value="small">small</option>
-			<option value="medium">medium</option>
-			<option value="large">large</option>
+			<option value="small">
+				small
+			</option>
+			<option value="medium">
+				medium
+			</option>
+			<option value="large">
+				large
+			</option>
 		</select>
 		<br>
 
 		pick theme default button shape
 		<br>
 		<select v-model="theme.button.shape">
-			<option value="squared">squared</option>
-			<option value="rounded">rounded</option>
-			<option value="pill">pill</option>
+			<option value="squared">
+				squared
+			</option>
+			<option value="rounded">
+				rounded
+			</option>
+			<option value="pill">
+				pill
+			</option>
 		</select>
 		<br>
 
 		pick theme default button variant
 		<br>
 		<select v-model="theme.button.variant">
-			<option value="primary">primary</option>
-			<option value="secondary">secondary</option>
-			<option value="tertiary">tertiary</option>
+			<option value="primary">
+				primary
+			</option>
+			<option value="secondary">
+				secondary
+			</option>
+			<option value="tertiary">
+				tertiary
+			</option>
 		</select>
 		<br>
 
 		<m-theme :theme="theme">
 			<m-button>default themed button</m-button>
 			<br>
-			<m-button color="#000000">always black button</m-button>
+			<m-button color="#000000">
+				always black button
+			</m-button>
 			<br>
-			<m-button size="medium">always medium button</m-button>
+			<m-button size="medium">
+				always medium button
+			</m-button>
 			<br>
-			<m-button shape="rounded">always rounded button</m-button>
+			<m-button shape="rounded">
+				always rounded button
+			</m-button>
 			<br>
-			<m-button variant="primary">always primary button</m-button>
+			<m-button variant="primary">
+				always primary button
+			</m-button>
 			<br>
-			<m-button variant="secondary">always secondary button</m-button>
+			<m-button variant="secondary">
+				always secondary button
+			</m-button>
 			<br>
-			<m-button variant="tertiary">always tertiary button</m-button>
+			<m-button variant="tertiary">
+				always tertiary button
+			</m-button>
 			<br>
 		</m-theme>
 	</div>
