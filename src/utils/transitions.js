@@ -19,14 +19,18 @@ export const spring = {
 	mass,
 };
 
+const START_VALUE = 0;
+const END_VALUE = 100;
+const MINI_END_VALUE = 40;
+
 export const animateUp = {
-	from: 0,
+	from: START_VALUE,
 	to: 100,
 };
 
 export const animateDown = {
 	from: 100,
-	to: 0,
+	to: START_VALUE,
 };
 
 /**
@@ -38,7 +42,8 @@ export const animateDown = {
  * @returns {Object} style object
  */
 export function toStyle(progress, startRange, endRange, styleProp, unit) {
-	const normalizedProgress = progress / 100;
+	const hundred = 100;
+	const normalizedProgress = progress / hundred;
 	const scaleFactor = endRange - startRange;
 	const scaledProgress = normalizedProgress * scaleFactor;
 	const inRange = scaledProgress + startRange;
@@ -58,10 +63,10 @@ export function styleFactory(startRange, endRange, styleProp, unit) {
 	return (progress) => toStyle(progress, startRange, endRange, styleProp, unit);
 }
 
-const toOpacity = styleFactory(0, 100, 'opacity', '%');
-const toRelativeY = styleFactory(0, 100, 'y', '%');
-const toRelativeX = styleFactory(0, 100, 'x', '%');
-const toMiniSlideY = styleFactory(40, 0, 'y', 'px');
+const toOpacity = styleFactory(START_VALUE, END_VALUE, 'opacity', '%');
+const toRelativeY = styleFactory(START_VALUE, END_VALUE, 'y', '%');
+const toRelativeX = styleFactory(START_VALUE, END_VALUE, 'x', '%');
+const toMiniSlideY = styleFactory(MINI_END_VALUE, START_VALUE, 'y', 'px');
 const toFloatyY = (progress) => ({
 	...toOpacity(progress),
 	...toMiniSlideY(progress),

@@ -96,13 +96,16 @@ export default {
 
 	mounted() {
 		const today = new Date();
-		const maxDate = formatISO(addMonths(today, 4), {
+		const arbitraryAddMonths = 4;
+		const maxDate = formatISO(addMonths(today, arbitraryAddMonths), {
 			representation: 'date',
 		});
-		const minDate = formatISO(addDays(today, -1), {
+		const arbitraryAddDays = -1;
+		const minDate = formatISO(addDays(today, arbitraryAddDays), {
 			representation: 'date',
 		});
-		const disabledDate = formatISO(addDays(today, 5), {
+		const arbitraryRelativeDisabledDate = 5;
+		const disabledDate = formatISO(addDays(today, arbitraryRelativeDisabledDate), {
 			representation: 'date',
 		});
 

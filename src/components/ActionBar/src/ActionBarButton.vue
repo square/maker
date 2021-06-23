@@ -47,15 +47,19 @@ import { MLoading } from '@square/maker/components/Loading';
 // TODO: refactor the code below so it's shared with Button component
 
 function getContrast(chromaBg, targetChromaFg) {
-	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
-		const isLight = chromaBg.luminance() > 0.32;
+	const contrastAccessibilityThreshold = 4.5;
+	const isLightColorThreshold = 0.32;
+	if (!targetChromaFg
+		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
+		const isLight = chromaBg.luminance() > isLightColorThreshold;
 		return chroma(isLight ? '#000' : '#fff');
 	}
 	return targetChromaFg;
 }
 
 function getFocus(chromaColor) {
-	return chromaColor.alpha(0.8);
+	const arbitraryAlphaValue = 0.8;
+	return chromaColor.alpha(arbitraryAlphaValue);
 }
 
 function fill(tokens) {
@@ -152,10 +156,13 @@ export default {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
+			const zero = 0;
 			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+				(vnode) => vnode.tag || vnode.text.trim().length > zero,
 			);
-			return children.length === 1 && children[0].tag;
+			const singleChild = 1;
+			const firstChildIndex = 0;
+			return children.length === singleChild && children[firstChildIndex].tag;
 		},
 
 		handleEscKey() {

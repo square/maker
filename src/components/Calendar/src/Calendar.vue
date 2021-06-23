@@ -176,12 +176,14 @@ export default {
 				const weekday = dateOfMonth.getDay();
 				week[weekday] = new Date(dateOfMonth);
 
-				if (weekday === 6) {
+				const lastWeekdayIndex = 6;
+				if (weekday === lastWeekdayIndex) {
 					weeks.push(week);
 					week = [];
 				}
 
-				dateOfMonth.setDate(dateOfMonth.getDate() + 1);
+				const incrementDateBy = 1;
+				dateOfMonth.setDate(dateOfMonth.getDate() + incrementDateBy);
 			}
 
 			weeks.push(week);
@@ -225,12 +227,14 @@ export default {
 		 */
 		isCalendarNavDisabled(direction) {
 			const projectedDate = addMonths(this.showingMonth, direction);
+			const previousDirection = -1;
+			const nextDirection = 1;
 
-			if (direction === -1 && this.minDateObject) {
+			if (direction === previousDirection && this.minDateObject) {
 				return startOfMonth(this.minDateObject) > startOfMonth(projectedDate);
 			}
 
-			if (direction === 1 && this.maxDateObject) {
+			if (direction === nextDirection && this.maxDateObject) {
 				return endOfMonth(this.maxDateObject) < endOfMonth(projectedDate);
 			}
 
