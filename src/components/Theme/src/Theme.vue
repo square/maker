@@ -5,10 +5,24 @@
 </template>
 
 <script>
+import { merge } from 'lodash';
 import key from './key';
+import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
 
+function resolveTheme(data, parentTheme, theme) {
+	merge(data, parentTheme, theme);
+	data.resolve = resolve;
+	data.getPath = getPath;
+}
+
 export default {
+	inject: {
+		parentTheme: {
+			default: defaultTheme(),
+			from: key,
+		},
+	},
 	provide() {
 		return {
 			// provided data needs to be reactive
@@ -24,23 +38,12 @@ export default {
 	},
 	data() {
 		const data = {};
-		for (const [property, value] of Object.entries(this.theme)) {
-			data[property] = value;
-		}
-		data.resolve = resolve;
-		data.getPath = getPath;
+		resolveTheme(data, this.parentTheme, this.theme);
 		return data;
 	},
-	updated() {
+	beforeUpdate() {
 		// update theme on prop changes
-		this.updateTheme();
-	},
-	methods: {
-		updateTheme() {
-			for (const [property, value] of Object.entries(this.theme)) {
-				this.$data[property] = value;
-			}
-		},
+		resolveTheme(this.$data, this.parentTheme, this.theme);
 	},
 };
 </script>

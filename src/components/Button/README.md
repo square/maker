@@ -6,9 +6,11 @@
 ```vue
 <template>
 	<div>
+		<h2>no theme</h2>
 		<m-button>theme-less button</m-button>
 		<br>
 
+		<h2>theme</h2>
 		pick theme primary color
 		<br>
 		<input
@@ -89,6 +91,19 @@
 				always tertiary button
 			</m-button>
 			<br>
+
+			<h2>nested theme</h2>
+			pick nested theme primary color
+			<br>
+			<input
+				v-model="nestedTheme.colors.primary"
+				type="color"
+			>
+			<br>
+
+			<m-theme :theme="nestedTheme">
+				<m-button>default nested themed button</m-button>
+			</m-theme>
 		</m-theme>
 	</div>
 </template>
@@ -113,6 +128,11 @@ export default {
 					variant: 'primary',
 					shape: 'rounded',
 					color: '@colors.primary',
+				},
+			},
+			nestedTheme: {
+				colors: {
+					primary: '#cc00cc',
 				},
 			},
 		};
