@@ -41,12 +41,20 @@ export default {
 
 <style module="$s">
 .ActionBar {
-	--action-bar-bottom-padding: 64px;
+	--regular-bottom-padding: 32px;
+	--extra-bottom-padding-for-deadclick: 32px;
+	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
+	--mobile-bottom-padding:
+		calc(
+			var(--regular-bottom-padding)
+			+ var(--extra-bottom-padding-for-deadclick)
+			+ var(--safe-area-inset-padding)
+		);
 
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px var(--action-bar-bottom-padding) 24px;
+	padding: 24px 24px var(--mobile-bottom-padding) 24px;
 	pointer-events: none;
 }
 
@@ -62,7 +70,7 @@ export default {
 	}
 
 	.ActionBar {
-		padding: 24px 24px 32px 24px;
+		padding: 24px 24px var(--regular-bottom-padding) 24px;
 	}
 }
 
@@ -100,7 +108,7 @@ export default {
 
 .Action {
 	margin-right: 8px;
-	-webkit-transform: translate3d(0, 0, 0);  /* Fixes buttons flickering on mobile devices */
+	transform: translate3d(0, 0, 0);  /* Fixes buttons flickering on mobile devices */
 	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
 	pointer-events: auto;
 

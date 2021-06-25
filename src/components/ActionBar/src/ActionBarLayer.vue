@@ -81,44 +81,31 @@ export default {
 
 <style module="$s">
 .ActionBarLayer {
-	--action-bar-bottom-padding: 64px;
+	--regular-bottom-padding: 32px;
+	--extra-bottom-padding-for-deadclick: 32px;
+	--actionbar-bottom-padding:
+		calc(
+			var(--regular-bottom-padding)
+			+ var(--extra-bottom-padding-for-deadclick)
+		);
+	--actionbar-size: 64px;
+	--actionbar-top-padding: 24px;
 
-	padding-bottom: calc(88px + var(--action-bar-bottom-padding));
+	padding-bottom:
+		calc(
+			var(--actionbar-top-padding)
+			+ var(--actionbar-size)
+			+ var(--actionbar-bottom-padding)
+		);
 
 	&.NoActionBar {
 		padding-bottom: 0;
 	}
 }
 
-.ActionBar {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 10;
-	display: flex;
-	justify-content: space-between;
-	box-sizing: border-box;
-	padding: 24px 24px var(--action-bar-bottom-padding) 24px;
-}
-
 @media screen and (min-width: 840px) {
-	.ActionBar {
-		display: none;
-	}
-
 	.ActionBarLayer {
 		padding-bottom: 0;
-	}
-}
-
-.Action {
-	margin-right: 8px;
-	-webkit-transform: translate3d(0, 0, 0); /* Fixes buttons flickering on mobile devices */
-	filter: drop-shadow(0 15px 10px rgb(0 0 0 / 20%));
-
-	&:last-child {
-		margin-right: 0;
 	}
 }
 </style>
