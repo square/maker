@@ -83,13 +83,15 @@ export default {
 .ActionBarLayer {
 	--regular-bottom-padding: 32px;
 	--extra-bottom-padding-for-deadclick: 32px;
+	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
 	--actionbar-bottom-padding:
 		calc(
 			var(--regular-bottom-padding)
 			+ var(--extra-bottom-padding-for-deadclick)
+			+ var(--safe-area-inset-padding)
 		);
 	--actionbar-size: 64px;
-	--actionbar-top-padding: 24px;
+	--actionbar-top-padding: 32px;
 
 	padding-bottom:
 		calc(
