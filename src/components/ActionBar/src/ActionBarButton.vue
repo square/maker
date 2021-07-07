@@ -178,20 +178,20 @@ export default {
 
 <style module="$s">
 .Button {
-	--button-large: 64px;
-	--button-medium: 48px;
+	--medium-height: 48px;
+	--medium-font-size: 16px;
+	--medium-padding: 24px;
+	--medium-line-height: 1.77;
 
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	height: var(--button-large);
-
-	/* large size */
-	padding: 0 32px;
+	height: var(--medium-height);
+	padding: 0 var(--medium-padding);
 	color: var(--text-color);
 	font-weight: 500;
-	font-size: 16px;
+	font-size: var(--medium-font-size);
 	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
@@ -210,15 +210,15 @@ export default {
 	fill: currentColor;
 
 	& > * {
-		line-height: 1.5;
+		line-height: var(--medium-line-height);
 	}
 
 	&.iconButton {
 		display: inline-flex;
 		flex: 0 0 auto;
 		align-items: center;
-		width: var(--button-large);
-		height: var(--button-large);
+		width: var(--medium-height);
+		height: var(--medium-height);
 		padding: 0;
 	}
 
@@ -274,26 +274,6 @@ export default {
 
 	&.loading {
 		color: transparent;
-	}
-}
-
-@media screen and (min-width: 840px) {
-	.Button {
-		height: var(--button-medium);
-
-		/* medium size */
-		padding: 0 24px;
-		font-size: 14px;
-
-		& > * {
-			line-height: 1.77;
-		}
-
-		&.iconButton {
-			flex: 0 0 auto;
-			width: var(--button-medium);
-			height: var(--button-medium);
-		}
 	}
 }
 
