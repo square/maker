@@ -43,6 +43,7 @@
 import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 // TODO: refactor the code below so it's shared with Button component
 
@@ -85,6 +86,13 @@ export default {
 		PseudoWindow,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -107,7 +115,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -143,9 +151,18 @@ export default {
 	},
 
 	computed: {
+		resolvedColor() {
+			let colorValueOrPointer;
+			if (this.color) {
+				colorValueOrPointer = this.color;
+			} else {
+				colorValueOrPointer = this.theme.actionbarbutton.color;
+			}
+			return this.theme.resolve(colorValueOrPointer);
+		},
 		style() {
 			return fill({
-				color: this.color,
+				color: this.resolvedColor,
 				textColor: this.textColor,
 			});
 		},

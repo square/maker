@@ -11,6 +11,9 @@ export default function defaultTheme() {
 			shape: 'rounded',
 			color: '@colors.primary',
 		},
+		actionbarbutton: {
+			color: '@colors.primary',
+		},
 		resolve,
 		getPath,
 	};
