@@ -111,21 +111,23 @@ export default {
 			if (!Number.isNaN(this.maxVal) && this.value >= this.maxVal) {
 				return;
 			}
+			const incrementBy = 1;
 			/**
 			 * updated stepper value
 			 * @property {number}
 			 */
-			this.$emit('stepper:update', this.value + 1);
+			this.$emit('stepper:update', this.value + incrementBy);
 		},
 		decrement() {
 			if (!Number.isNaN(this.minVal) && this.value <= this.minVal) {
 				return;
 			}
+			const decrementBy = 1;
 			/**
 			 * updated stepper value
 			 * @property {number}
 			 */
-			this.$emit('stepper:update', this.value - 1);
+			this.$emit('stepper:update', this.value - decrementBy);
 		},
 	},
 };

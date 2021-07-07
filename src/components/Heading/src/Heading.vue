@@ -1,4 +1,8 @@
 <script>
+const DEFAULT_SIZE = 0;
+const MAX_SIZE = 7;
+const MIN_SIZE = -2;
+
 /**
  * Heading
  * @inheritAttrs h1
@@ -13,8 +17,8 @@ export default {
 		 */
 		size: {
 			type: Number,
-			default: 0,
-			validator: (size) => size >= -2 && size <= 7,
+			default: DEFAULT_SIZE,
+			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
 		 * Override Heading element. By default, the element is derived from size.
@@ -31,24 +35,31 @@ export default {
 			if (this.element) {
 				return this.element;
 			}
-			switch (this.size) {
-			case -2:
-			case -1:
-				return 'h6';
-			case 0:
-				return 'h5';
-			case 1:
-				return 'h4';
-			case 2:
-				return 'h3';
-			case 3:
-				return 'h2';
-			default: // 4 - 7
+			const h1Threshold = 4;
+			const h2Threshold = 3;
+			const h3Threshold = 2;
+			const h4Threshold = 1;
+			const h5Threshold = 0;
+			if (this.size >= h1Threshold) {
 				return 'h1';
 			}
+			if (this.size >= h2Threshold) {
+				return 'h2';
+			}
+			if (this.size >= h3Threshold) {
+				return 'h3';
+			}
+			if (this.size >= h4Threshold) {
+				return 'h4';
+			}
+			if (this.size >= h5Threshold) {
+				return 'h5';
+			}
+			return 'h6';
 		},
 		stringSize() {
-			if (this.size >= 0) {
+			const minNonNegativeSize = 0;
+			if (this.size >= minNonNegativeSize) {
 				return this.size.toString();
 			}
 			return `minus-${Math.abs(this.size)}`;

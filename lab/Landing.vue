@@ -24,7 +24,8 @@ function flattenRoute(basePath, route) {
 		return [];
 	}
 	const routePath = appendPath(basePath, route.path);
-	if (!route.children || route.children.length === 0) {
+	const noChildren = 0;
+	if (!route.children || route.children.length === noChildren) {
 		return [routePath];
 	}
 	let flattened = [];

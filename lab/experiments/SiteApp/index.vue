@@ -101,12 +101,13 @@ export default {
 	},
 	computed: {
 		addedItemCount() {
+			const startingSum = 0;
 			return this.items.reduce((sum, item) => { // eslint-disable-line unicorn/no-reduce
 				if (item.quantity) {
 					return sum + item.quantity;
 				}
 				return sum;
-			}, 0);
+			}, startingSum);
 		},
 	},
 	methods: {
@@ -130,8 +131,10 @@ export default {
 			}
 			// otherwise calculate cost range
 			let minCost = Number.MAX_SAFE_INTEGER;
-			let maxCost = 0;
-			item.oneOf[0].options.forEach((option) => {
+			const minimumMaximumCost = 0;
+			let maxCost = minimumMaximumCost;
+			const firstIndex = 0;
+			item.oneOf[firstIndex].options.forEach((option) => {
 				minCost = Math.min(minCost, option.cost);
 				maxCost = Math.max(maxCost, option.cost);
 			});
@@ -140,8 +143,10 @@ export default {
 			return `${formattedMinCost} - ${formattedMaxCost}`;
 		},
 		formatCost(integer) {
-			const float = integer / 100;
-			const string = float.toFixed(2);
+			const centsPerDollar = 100;
+			const float = integer / centsPerDollar;
+			const centDigits = 2;
+			const string = float.toFixed(centDigits);
 			return `$${string}`;
 		},
 	},
@@ -154,8 +159,8 @@ export default {
 }
 
 .item {
-	padding: 24px;
 	display: flex;
+	padding: 24px;
 	cursor: pointer;
 }
 
@@ -168,30 +173,30 @@ export default {
 }
 
 .item-preview {
-	border-radius: 16px;
+	flex: 0 0 auto;
 	width: 96px;
 	height: 96px;
 	overflow: hidden;
-	flex: 0 0 auto;
+	border-radius: 16px;
 }
 
 .notice-banner {
-	background-color: rgb(160, 121, 164);
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	padding: 16px;
+	background-color: rgb(160, 121, 164);
 }
 
 .banner-text {
-	color: white;
 	margin: 8px;
+	color: white;
 }
 
 .banner-subtext {
-	color: rgba(255, 255, 255, 0.7);
 	margin: 8px;
+	color: rgba(255, 255, 255, 0.7);
 }
 
 .highlight {
@@ -200,7 +205,8 @@ export default {
 </style>
 
 <style>
-html, body {
+html,
+body {
 	background: #f6f6f6;
 }
 </style>

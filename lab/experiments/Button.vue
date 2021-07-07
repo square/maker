@@ -17,6 +17,7 @@ export default {
 	},
 
 	data() {
+		const repetitions = 30;
 		return {
 			options: {
 				size: ['small', 'medium', 'large'],
@@ -28,9 +29,9 @@ export default {
 				'$slots.default': [
 					// '',
 					// 'Primary label',
-					`Really long text${' long'.repeat(30)}`,
+					`Really long text${' long'.repeat(repetitions)}`,
 					// (<XIcon inline />),
-					[(<X class="icon" />), `Really long text${' long'.repeat(30)}`],
+					[(<X class="icon" />), `Really long text${' long'.repeat(repetitions)}`],
 					// (<AddIcon />),
 				],
 				'$slots.information': [

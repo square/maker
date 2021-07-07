@@ -94,10 +94,13 @@ export default {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
+			const empty = 0;
 			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+				(vnode) => vnode.tag || vnode.text.trim().length > empty,
 			);
-			return children.length === 1 && children[0].tag;
+			const firstChildIndex = 0;
+			const singleChild = 1;
+			return children.length === singleChild && children[firstChildIndex].tag;
 		},
 	},
 };
