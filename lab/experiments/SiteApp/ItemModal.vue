@@ -31,7 +31,7 @@
 			<div
 				v-for="(option, i) in oneOf.options"
 				:key="option.name"
-				style="padding-top: 16px"
+				style="padding-top: 16px;"
 			>
 				<div class="option-cost">
 					<m-radio
@@ -65,7 +65,7 @@
 			<div
 				v-for="(option, i) in anyOf.options"
 				:key="option.name"
-				style="padding-top: 16px"
+				style="padding-top: 16px;"
 			>
 				<div class="option-cost">
 					<m-checkbox
@@ -133,7 +133,7 @@
 </template>
 
 <script>
-/* eslint vue/no-mutating-props: 0 */
+/* eslint vue/no-mutating-props: 0, max-len: 0, unicorn/no-reduce: 0 */
 import { MSection } from '@square/maker/components/Section';
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
@@ -205,16 +205,20 @@ export default {
 				return this.item.quantity * baseCost;
 			}
 
-			let additiveCost = 0;
-			for (let i = 0; i < this.item.anyOf.length; i += 1) {
+			const startCost = 0;
+			let additiveCost = startCost;
+			const incrementBy = 1;
+			const startIndex = 0;
+			for (let i = startIndex; i < this.item.anyOf.length; i += incrementBy) {
 				const anyOf = this.item.anyOf[i];
 				const { selected } = anyOf;
 				additiveCost += anyOf.options.map((option) => {
 					if (selected.includes(option.name)) {
 						return option.cost;
 					}
-					return 0;
-				}).reduce((sum, current) => sum + current, 0); // eslint-disable-line unicorn/no-reduce
+					const notSelectedCost = 0;
+					return notSelectedCost;
+				}).reduce((sum, current) => sum + current, startCost);
 			}
 			return this.item.quantity * (baseCost + additiveCost);
 		},
@@ -231,11 +235,14 @@ export default {
 
 	methods: {
 		formatCost(integer) {
-			if (Number.isNaN(integer) || (!integer && integer !== 0)) {
+			const zero = 0;
+			if (Number.isNaN(integer) || (!integer && integer !== zero)) {
 				return '';
 			}
-			const float = integer / 100;
-			const string = float.toFixed(2);
+			const centsInDollar = 100;
+			const centsDigits = 2;
+			const float = integer / centsInDollar;
+			const string = float.toFixed(centsDigits);
 			return `$${string}`;
 		},
 	},

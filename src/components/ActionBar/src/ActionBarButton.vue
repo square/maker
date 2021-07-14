@@ -3,6 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
+			$s[`shape_${shape}`],
 			{
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
@@ -47,15 +48,19 @@ import { MLoading } from '@square/maker/components/Loading';
 // TODO: refactor the code below so it's shared with Button component
 
 function getContrast(chromaBg, targetChromaFg) {
-	if (!targetChromaFg || chroma.contrast(chromaBg, targetChromaFg) < 4.5) {
-		const isLight = chromaBg.luminance() > 0.32;
+	const contrastAccessibilityThreshold = 4.5;
+	const isLightColorThreshold = 0.32;
+	if (!targetChromaFg
+		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
+		const isLight = chromaBg.luminance() > isLightColorThreshold;
 		return chroma(isLight ? '#000' : '#fff');
 	}
 	return targetChromaFg;
 }
 
 function getFocus(chromaColor) {
-	return chromaColor.alpha(0.8);
+	const arbitraryAlphaValue = 0.8;
+	return chromaColor.alpha(arbitraryAlphaValue);
 }
 
 function fill(tokens) {
@@ -115,6 +120,14 @@ export default {
 			validator: (color) => chroma.valid(color),
 		},
 		/**
+		 * Shape of button
+		 */
+		shape: {
+			type: String,
+			default: 'pill',
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
 		 * Toggles button disabled state
 		 */
 		disabled: {
@@ -152,10 +165,13 @@ export default {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
+			const zero = 0;
 			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+				(vnode) => vnode.tag || vnode.text.trim().length > zero,
 			);
-			return children.length === 1 && children[0].tag;
+			const singleChild = 1;
+			const firstChildIndex = 0;
+			return children.length === singleChild && children[firstChildIndex].tag;
 		},
 
 		handleEscKey() {
@@ -171,20 +187,20 @@ export default {
 
 <style module="$s">
 .Button {
-	--button-large: 64px;
-	--button-medium: 48px;
+	--medium-height: 48px;
+	--medium-font-size: 16px;
+	--medium-padding: 24px;
+	--medium-line-height: 1.77;
 
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	height: var(--button-large);
-
-	/* large size */
-	padding: 0 32px;
+	height: var(--medium-height);
+	padding: 0 var(--medium-padding);
 	color: var(--text-color);
 	font-weight: 500;
-	font-size: 16px;
+	font-size: var(--medium-font-size);
 	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
@@ -203,15 +219,15 @@ export default {
 	fill: currentColor;
 
 	& > * {
-		line-height: 1.5;
+		line-height: var(--medium-line-height);
 	}
 
 	&.iconButton {
 		display: inline-flex;
 		flex: 0 0 auto;
 		align-items: center;
-		width: var(--button-large);
-		height: var(--button-large);
+		width: var(--medium-height);
+		height: var(--medium-height);
 		padding: 0;
 	}
 
@@ -241,6 +257,18 @@ export default {
 		justify-content: space-between;
 	}
 
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: 8px;
+	}
+
+	&.shape_pill {
+		border-radius: 32px;
+	}
+
 	&:disabled {
 		cursor: initial;
 
@@ -267,26 +295,6 @@ export default {
 
 	&.loading {
 		color: transparent;
-	}
-}
-
-@media screen and (min-width: 840px) {
-	.Button {
-		height: var(--button-medium);
-
-		/* medium size */
-		padding: 0 24px;
-		font-size: 14px;
-
-		& > * {
-			line-height: 1.77;
-		}
-
-		&.iconButton {
-			flex: 0 0 auto;
-			width: var(--button-medium);
-			height: var(--button-medium);
-		}
 	}
 }
 
