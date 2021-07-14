@@ -1,10 +1,11 @@
 <template>
 	<section
 		:class="[
-			$s.Section,
+			$s.Container,
 			$s[`size_${size}`],
 		]"
 		v-bind="$attrs"
+		:style="style"
 		v-on="$listeners"
 	>
 		<header :class="$s.Header">
@@ -34,7 +35,7 @@
 </template>
 
 <script>
-import assert from '@square/maker/utils/assert';
+import chroma from 'chroma-js';
 
 /**
  * @inheritAttrs section
@@ -66,24 +67,41 @@ export default {
 			default: 'medium',
 			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
+		/**
+		 * Background color of section
+		 */
+		bgColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color) || color === 'transparent',
+		},
+		/**
+		 * Text color of section
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
-	created() {
-		assert.warn('This component will change dramatically in a future release. Consider changing to Container component.');
+	computed: {
+		style() {
+			return {
+				'--bg-color': this.bgColor,
+				'--color': this.color,
+			};
+		},
 	},
 };
 </script>
 
 <style module="$s">
-.Section {
-	--color-white: #fff;
-	--color-black-90: rgba(0, 0, 0, 0.9);
-	--color-black-55: rgba(0, 0, 0, 0.55);
-
+.Container {
 	padding: 16px 24px;
-	color: var(--color-black-90);
+	color: var(--color, #000);
 	font-family: inherit;
-	background-color: var(--color-white);
+	background-color: var(--bg-color, #fff);
 }
 
 .Label {
