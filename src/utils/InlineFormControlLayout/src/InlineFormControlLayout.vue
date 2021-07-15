@@ -31,7 +31,7 @@ export default {
 	--color-sublabel: rgba(0, 0, 0, 0.55);
 
 	display: inline-flex;
-	color: inherit;
+	color: var(--color-foreground);
 	font-size: 14px;
 	font-family: inherit;
 	line-height: 24px;
@@ -46,6 +46,6 @@ export default {
 }
 
 .SubLabel {
-	opacity: 0.55;
+	color: var(--color-sublabel);
 }
 </style>
