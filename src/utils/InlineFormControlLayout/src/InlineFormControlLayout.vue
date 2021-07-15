@@ -27,7 +27,7 @@ export default {
 
 <style module="$s">
 .LayoutContainer {
-	--opacity-sublabel: 0.55
+	--opacity-sublabel: 0.55;
 
 	display: inline-flex;
 	color: inherit;
