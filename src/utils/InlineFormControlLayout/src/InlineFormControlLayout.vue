@@ -27,11 +27,10 @@ export default {
 
 <style module="$s">
 .LayoutContainer {
-	--color-foreground: rgba(0, 0, 0, 0.9);
-	--color-sublabel: rgba(0, 0, 0, 0.55);
+	--opacity-sublabel: 0.55
 
 	display: inline-flex;
-	color: var(--color-foreground);
+	color: inherit;
 	font-size: 14px;
 	font-family: inherit;
 	line-height: 24px;
@@ -46,6 +45,6 @@ export default {
 }
 
 .SubLabel {
-	color: var(--color-sublabel);
+	opacity: var(--opacity-sublabel);
 }
 </style>
