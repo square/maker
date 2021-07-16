@@ -194,6 +194,21 @@ The `color` prop is theme-able in ActionBarButtons. If you set a value for the `
 			v-model="theme.colors.primary"
 			type="color"
 		>
+		<br>
+
+		pick theme default button shape
+		<br>
+		<select v-model="theme.actionbarbutton.shape">
+			<option value="squared">
+				squared
+			</option>
+			<option value="rounded">
+				rounded
+			</option>
+			<option value="pill">
+				pill
+			</option>
+		</select>
 		<br><br>
 
 		<m-theme :theme="theme">
@@ -247,6 +262,7 @@ export default {
 				},
 				actionbarbutton: {
 					color: '@colors.primary',
+					shape: 'pill',
 				},
 			},
 		};

@@ -3,7 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
-			$s[`shape_${shape}`],
+			$s[`shape_${resolvedShape}`],
 			{
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
@@ -132,7 +132,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'pill',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -168,6 +168,15 @@ export default {
 				colorValueOrPointer = this.theme.actionbarbutton.color;
 			}
 			return this.theme.resolve(colorValueOrPointer);
+		},
+		resolvedShape() {
+			let shapeValueOrPointer;
+			if (this.shape) {
+				shapeValueOrPointer = this.shape;
+			} else {
+				shapeValueOrPointer = this.theme.actionbarbutton.shape;
+			}
+			return this.theme.resolve(shapeValueOrPointer);
 		},
 		style() {
 			return fill({

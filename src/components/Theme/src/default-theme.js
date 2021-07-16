@@ -13,6 +13,7 @@ export default function defaultTheme() {
 		},
 		actionbarbutton: {
 			color: '@colors.primary',
+			shape: 'pill',
 		},
 		resolve,
 		getPath,
