@@ -69,7 +69,7 @@ export default {
 	},
 
 	created() {
-		assert.warn('This component will change dramatically in a future release. Consider changing to Container component.');
+		assert.warn(false, 'The Section component will change dramatically in a future release. Consider changing to Container component.');
 	},
 };
 </script>
