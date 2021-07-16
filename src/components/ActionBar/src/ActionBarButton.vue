@@ -3,6 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
+			$s[`shape_${shape}`],
 			{
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
@@ -125,6 +126,14 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
+		},
+		/**
+		 * Shape of button
+		 */
+		shape: {
+			type: String,
+			default: 'pill',
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
 		 * Toggles button disabled state
@@ -263,6 +272,18 @@ export default {
 	&.align_space-between {
 		flex-direction: row-reverse;
 		justify-content: space-between;
+	}
+
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: 8px;
+	}
+
+	&.shape_pill {
+		border-radius: 32px;
 	}
 
 	&:disabled {
