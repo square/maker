@@ -99,9 +99,9 @@ export default {
 <style module="$s">
 .Container {
 	padding: 16px 24px;
-	color: var(--color, #000);
+	color: var(--color, inherit);
 	font-family: inherit;
-	background-color: var(--bg-color, #fff);
+	background-color: var(--bg-color, inherit);
 }
 
 .Label {
