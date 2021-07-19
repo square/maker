@@ -5,42 +5,45 @@
 </template>
 
 <script>
-import { kebabCase } from 'lodash';
+import { merge } from 'lodash';
+import key from './key';
+import defaultTheme from './default-theme';
+import { resolve, getPath } from './utils';
+
+function resolveTheme(data, parentTheme, theme) {
+	merge(data, parentTheme, theme);
+	data.resolve = resolve;
+	data.getPath = getPath;
+}
 
 export default {
+	inject: {
+		parentTheme: {
+			default: defaultTheme(),
+			from: key,
+		},
+	},
+	provide() {
+		return {
+			// provided data needs to be reactive
+			[key]: this.$data,
+		};
+	},
 	inheritAttrs: false,
-
-	/* TODO
-	 * Declaring the top-level design-tokens as props will make them
-	 * reactive and easier to watch & re-render
-	 */
-	mounted() {
-		this.applyTheme();
-	},
-
-	updated() {
-		this.applyTheme();
-	},
-
-	methods: {
-		applyTheme() {
-			const { $el } = this;
-
-			// First level
-			Object.entries(this.$attrs).forEach(([namespace, designTokens]) => {
-				// Second level
-				Object.entries(designTokens).forEach(([tokenName, tokenValue]) => {
-					const hashedName = `--${this.hash(namespace, tokenName)}`;
-					$el.style.setProperty(hashedName, tokenValue);
-				});
-			});
+	props: {
+		theme: {
+			type: Object,
+			required: true,
 		},
-
-		hash(namespace, tokenName) {
-			// TODO: Update to use hash
-			return `${kebabCase(namespace)}-${kebabCase(tokenName)}`;
-			// return `maker-${kebabCase(namespace)}-${kebabCase(tokenName)}`;
-		},
+	},
+	data() {
+		const data = {};
+		resolveTheme(data, this.parentTheme, this.theme);
+		return data;
+	},
+	beforeUpdate() {
+		// update theme on prop changes
+		resolveTheme(this.$data, this.parentTheme, this.theme);
 	},
 };
 </script>

@@ -214,7 +214,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | ---------- | --------- | ---------- | ---------------------------------- | ------------------------------------- |
 | type       | `string`  | `'button'` | —                                  | Type of the button                    |
 | full-width | `boolean` | `false`    | —                                  | Whether to make the button full-width |
-| color      | `string`  | `'#000'`   | —                                  | Background color of button            |
+| color      | `string`  | —          | —                                  | Background color of button            |
 | text-color | `string`  | —          | —                                  | Text color of button                  |
 | shape      | `string`  | `'pill'`   | `squared`, `rounded`, `pill`       | Shape of button                       |
 | disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state         |
