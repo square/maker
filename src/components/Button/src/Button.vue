@@ -42,6 +42,7 @@
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
+import assert from '@square/maker/utils/assert';
 
 function getContrast(chromaBg, targetChromaFg) {
 	const contrastAccessibilityThreshold = 4.5;
@@ -245,7 +246,9 @@ export default {
 			} else {
 				sizeValueOrPointer = this.theme.button.size;
 			}
-			return this.theme.resolve(sizeValueOrPointer);
+			const sizeValue = this.theme.resolve(sizeValueOrPointer);
+			assert.error(['small', 'medium', 'large'].includes(sizeValue), `${sizeValue} resolved from ${sizeValueOrPointer} is not a valid size value and cannot be used in the size prop of Button`);
+			return sizeValue;
 		},
 		resolvedColor() {
 			let colorValueOrPointer;
@@ -254,7 +257,9 @@ export default {
 			} else {
 				colorValueOrPointer = this.theme.button.color;
 			}
-			return this.theme.resolve(colorValueOrPointer);
+			const colorValue = this.theme.resolve(colorValueOrPointer);
+			assert.error(chroma.valid(colorValue), `${colorValue} resolved from ${colorValueOrPointer} is not a valid CSS color value and cannot be used in the color prop of Button`);
+			return colorValue;
 		},
 		resolvedVariant() {
 			let variantValueOrPointer;
@@ -263,7 +268,9 @@ export default {
 			} else {
 				variantValueOrPointer = this.theme.button.variant;
 			}
-			return this.theme.resolve(variantValueOrPointer);
+			const variantValue = this.theme.resolve(variantValueOrPointer);
+			assert.error(['primary', 'secondary', 'tertiary'].includes(variantValue), `${variantValue} resolved from ${variantValueOrPointer} is not a valid variant value and cannot be used in the variant prop of Button`);
+			return variantValue;
 		},
 		resolvedShape() {
 			let shapeValueOrPointer;
@@ -272,7 +279,9 @@ export default {
 			} else {
 				shapeValueOrPointer = this.theme.button.shape;
 			}
-			return this.theme.resolve(shapeValueOrPointer);
+			const shapeValue = this.theme.resolve(shapeValueOrPointer);
+			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of Button`);
+			return shapeValue;
 		},
 		style() {
 			return VARIANTS[this.resolvedVariant]({

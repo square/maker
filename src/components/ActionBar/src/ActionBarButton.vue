@@ -180,7 +180,7 @@ export default {
 				shapeValueOrPointer = this.theme.actionbarbutton.shape;
 			}
 			const shapeValue = this.theme.resolve(shapeValueOrPointer);
-			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the color prop of ActionBarButton`);
+			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of ActionBarButton`);
 			return shapeValue;
 		},
 		style() {
