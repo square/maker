@@ -3,7 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
-			$s[`shape_${shape}`],
+			$s[`shape_${resolvedShape}`],
 			{
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
@@ -44,6 +44,8 @@
 import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
+import assert from '@square/maker/utils/assert';
 
 // TODO: refactor the code below so it's shared with Button component
 
@@ -86,6 +88,13 @@ export default {
 		PseudoWindow,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -108,7 +117,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -124,7 +133,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'pill',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -152,9 +161,31 @@ export default {
 	},
 
 	computed: {
+		resolvedColor() {
+			let colorValueOrPointer;
+			if (this.color) {
+				colorValueOrPointer = this.color;
+			} else {
+				colorValueOrPointer = this.theme.actionbarbutton.color;
+			}
+			const colorValue = this.theme.resolve(colorValueOrPointer);
+			assert.error(chroma.valid(colorValue), `${colorValue} resolved from ${colorValueOrPointer} is not a valid CSS color value and cannot be used in the color prop of ActionBarButton`);
+			return colorValue;
+		},
+		resolvedShape() {
+			let shapeValueOrPointer;
+			if (this.shape) {
+				shapeValueOrPointer = this.shape;
+			} else {
+				shapeValueOrPointer = this.theme.actionbarbutton.shape;
+			}
+			const shapeValue = this.theme.resolve(shapeValueOrPointer);
+			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of ActionBarButton`);
+			return shapeValue;
+		},
 		style() {
 			return fill({
-				color: this.color,
+				color: this.resolvedColor,
 				textColor: this.textColor,
 			});
 		},
