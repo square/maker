@@ -45,6 +45,7 @@ import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
+import assert from '@square/maker/utils/assert';
 
 // TODO: refactor the code below so it's shared with Button component
 
@@ -167,7 +168,9 @@ export default {
 			} else {
 				colorValueOrPointer = this.theme.actionbarbutton.color;
 			}
-			return this.theme.resolve(colorValueOrPointer);
+			const colorValue = this.theme.resolve(colorValueOrPointer);
+			assert.error(chroma.valid(colorValue), `${colorValue} resolved from ${colorValueOrPointer} is not a valid CSS color value and cannot be used in the color prop of ActionBarButton`);
+			return colorValue;
 		},
 		resolvedShape() {
 			let shapeValueOrPointer;
@@ -176,7 +179,9 @@ export default {
 			} else {
 				shapeValueOrPointer = this.theme.actionbarbutton.shape;
 			}
-			return this.theme.resolve(shapeValueOrPointer);
+			const shapeValue = this.theme.resolve(shapeValueOrPointer);
+			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the color prop of ActionBarButton`);
+			return shapeValue;
 		},
 		style() {
 			return fill({
