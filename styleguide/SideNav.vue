@@ -1,9 +1,5 @@
 <template>
 	<div>
-		<img
-			src="/static/maker-logo.png"
-			alt="Maker"
-		>
 		<nav class="nav">
 			<template
 				v-for="navLink in navLinks"
