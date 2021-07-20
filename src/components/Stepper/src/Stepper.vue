@@ -136,8 +136,6 @@ export default {
 
 <style module="$s">
 .Stepper {
-	--text-color: #4f2d52;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -146,7 +144,7 @@ export default {
 
 .Quantity {
 	margin: 0 16px;
-	color: var(--text-color);
+	color: inherit;
 	font-weight: 500;
 	font-family: inherit;
 	font-feature-settings: "tnum";
