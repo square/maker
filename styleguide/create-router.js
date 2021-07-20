@@ -18,7 +18,6 @@ function createRouter() {
 				name: 'readme',
 				path: '/',
 				component: Readme,
-				navLabel: 'Styleguide',
 			},
 			...COMPONENT_ROUTES,
 		],

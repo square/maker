@@ -1,7 +1,12 @@
+/* eslint-disable max-len */
 <template>
 	<div class="container">
-		<side-nav />
-		<router-view />
+		<aside class="side-nav">
+			<side-nav />
+		</aside>
+		<main class="page">
+			<router-view />
+		</main>
 	</div>
 </template>
 
@@ -17,12 +22,29 @@ export default {
 
 <style>
 :root {
-	--nav-width: 200px;
+	--nav-width: 264px;
 	--demo-left-offset: 40px;
 }
 
+html,
 body {
-	margin: 16px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		"Apple Color Emoji",
+		"Segoe UI Emoji",
+		"Segoe UI Symbol";
 }
 
 .FixInlineActionBarLayerDemosInStyleguide {
@@ -30,6 +52,7 @@ body {
 	left: calc(-1 * (var(--nav-width) + var(--demo-left-offset)));
 	padding-bottom: 0 !important;
 }
+
 .FixInlineActionBarLayerDemosInStyleguide > * {
 	position: relative;
 	left: calc(var(--nav-width) + var(--demo-left-offset));
@@ -40,6 +63,17 @@ body {
 .container {
 	display: grid;
 	grid-template-columns: var(--nav-width) 1fr;
+	gap: 24px;
+	height: 100%;
+}
+
+.side-nav {
+	padding: 40px;
+	border-right: 1px solid #e4e7eb;
+}
+
+.page {
+	padding: 40px;
 }
 </style>
 
