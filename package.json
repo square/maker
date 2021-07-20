@@ -61,6 +61,7 @@
     "chroma-js": "^2.1.0",
     "combos": "^0.2.0",
     "comment-mark": "^1.0.0",
+    "conventional-changelog-conventionalcommits": "^4.6.0",
     "css-loader": "^4.3.0",
     "date-fns": "^2.19.0",
     "ent": "^2.2.0",
@@ -118,5 +119,8 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-distsize": "^0.1.0"
+  },
+  "release": {
+    "preset": "conventionalcommits"
   }
 }

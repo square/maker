@@ -2,7 +2,7 @@
 
 ```vue
 <template>
-	<div>
+	<div style="background-color: #F8F7F7">
 		<h4>content</h4>
 		<m-section>
 			section content
