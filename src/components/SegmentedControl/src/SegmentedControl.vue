@@ -71,7 +71,7 @@ export default {
 	padding: 4px;
 	font-size: 14px;
 	line-height: 24px;
-	background-color: rgba(0, 0, 0, 0.05);
+	background-color: #f6f7f9;
 	border-radius: 4px;
 }
 
