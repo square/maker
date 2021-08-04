@@ -94,6 +94,12 @@ const apiMixin = {
 					vm.currentLayer.state.vnode = undefined; // close modal
 				}
 			},
+
+			async closeAll() {
+				console.log(this.state.vnode); // eslint-disable-line no-console
+				console.log(vm.currentLayer); // eslint-disable-line no-console
+				vm.currentLayer.state.vnode = undefined; // close all modals
+			},
 		};
 
 		if (!this.modalApi) {
