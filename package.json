@@ -121,6 +121,5 @@
   },
   "release": {
     "preset": "conventionalcommits"
-  },
-  "dependencies": {}
+  }
 }
