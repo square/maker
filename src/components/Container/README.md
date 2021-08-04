@@ -78,8 +78,8 @@ Supports attributes from [`<section>`](https://developer.mozilla.org/en-US/docs/
 | label    | `string` | —          | —                          | Section label               |
 | sublabel | `string` | —          | —                          | Section sublabel            |
 | size     | `string` | `'medium'` | `small`, `medium`, `large` | Section size                |
-| bg-color | `string` | —          | Valid CSS color or 'transparent'                          | Background color of section |
-| color    | `string` | —          | Valid CSS color                          | Text color of section       |
+| bg-color | `string` | —          | —                          | Background color of section |
+| color    | `string` | —          | —                          | Text color of section       |
 
 
 ## Slots

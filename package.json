@@ -106,7 +106,7 @@
     "vue-demo-collapse": "0.0.2",
     "vue-docgen-api": "^4.34.2",
     "vue-frag": "^1.1.2",
-    "vue-just-ssr": "github:privatenumber/vue-just-ssr#wp5-support",
+    "vue-just-ssr": "^1.0.0",
     "vue-loader": "^15.9.8",
     "vue-meta": "^2.4.0",
     "vue-pseudo-window": "^0.4.0",
