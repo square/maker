@@ -94,6 +94,10 @@ const apiMixin = {
 					vm.currentLayer.state.vnode = undefined; // close modal
 				}
 			},
+
+			async closeAll() {
+				vm.currentLayer.state.vnode = undefined; // close all modals
+			},
 		};
 
 		if (!this.modalApi) {
