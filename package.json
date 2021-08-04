@@ -36,7 +36,8 @@
   },
   "lint-staged": {
     "*.{vue,js,md}": "eslint --max-warnings=0",
-    "*.{vue,css}": "stylelint --max-warnings=0"
+    "*.{vue,css}": "stylelint --max-warnings=0",
+    "package.json": "node .github/dep-version-check"
   },
   "peerDependencies": {
     "chroma-js": "^2.1.0",
