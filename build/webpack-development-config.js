@@ -37,6 +37,13 @@ const config = merge({}, webpackBaseConfig, {
 		},
 	},
 
+	cache: {
+		type: 'filesystem',
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
+
 	resolve: {
 		alias: {
 			'@square/maker': path.resolve('src'),
