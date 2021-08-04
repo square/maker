@@ -1,26 +1,29 @@
-const ComponentEntryPlugin = {
+const { sources, Compilation } = require('webpack');
+
+const EntryPlugin = {
 	apply(compiler) {
-		compiler.hooks.emit.tapAsync('component-entry', (compilation, callback) => {
-			let index = '';
-
-			if (compilation.assets['styles.css']) {
-				index += 'import "./styles.css";';
-			}
-
-			if (compilation.assets['script.js']) {
-				index += 'export * from "./script.js";';
-			}
-			compilation.assets['index.js'] = {
-				source() {
-					return index;
+		compiler.hooks.thisCompilation.tap('entry-plugin', (compilation) => {
+			compilation.hooks.processAssets.tap(
+				{
+					name: 'entry-plugin',
+					stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
 				},
-				size() {
-					return index.length;
+				() => {
+					let index = '';
+
+					if (compilation.assets['styles.css']) {
+						index += 'import "./styles.css";';
+					}
+
+					if (compilation.assets['script.js']) {
+						index += 'export * from "./script.js";';
+					}
+
+					compilation.emitAsset('index.js', new sources.RawSource(index));
 				},
-			};
-			callback();
+			);
 		});
 	},
 };
 
-module.exports = ComponentEntryPlugin;
+module.exports = EntryPlugin;

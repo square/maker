@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { merge } = require('./utils');
 const webpackBaseConfig = require('./webpack-base-config');
 const componentEntryPlugin = require('./component-entry-plugin');
@@ -15,7 +15,7 @@ const webpackBuildConfig = (() => {
 		devtool: 'source-map',
 		externals: [
 			...Object.keys(packageJsn.peerDependencies).map((dep) => new RegExp(`^${dep}(/.+)?$`)),
-			(context, request, callback) => {
+			({ request }, callback) => {
 				if (request.startsWith('@square/maker')) {
 					callback(undefined, request.replace('@square/maker', '../..'));
 					return;
@@ -36,17 +36,17 @@ const webpackBuildConfig = (() => {
 		},
 		optimization: {
 			minimizer: [
-				new TerserJSPlugin({}),
-				new OptimizeCSSAssetsPlugin({
-					cssProcessorOptions: {
-						reduceIdents: false,
-						discardUnused: false,
-						discardComments: {
-							removeAll: true,
-						},
-						map: {
-							inline: false,
-						},
+				new TerserPlugin(),
+				new CssMinimizerPlugin({
+					minimizerOptions: {
+						preset: [
+							'default',
+							{
+								discardComments: {
+									removeAll: true,
+								},
+							},
+						],
 					},
 				}),
 			],
