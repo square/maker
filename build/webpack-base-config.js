@@ -1,5 +1,7 @@
-const { VueLoaderPlugin } = require('vue-loader');
 const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const webpackBaseConfig = {
@@ -7,11 +9,27 @@ const webpackBaseConfig = {
 
 	bail: isProduction,
 
-	context: path.resolve('src'),
-
 	output: {
 		filename: '[name].js',
 		path: path.resolve('dist'),
+	},
+
+	optimization: {
+		minimizer: [
+			new TerserPlugin(),
+			new CssMinimizerPlugin({
+				minimizerOptions: {
+					preset: [
+						'default',
+						{
+							discardComments: {
+								removeAll: true,
+							},
+						},
+					],
+				},
+			}),
+		],
 	},
 
 	module: {
