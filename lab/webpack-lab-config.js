@@ -91,11 +91,11 @@ const config = merge({}, webpackBaseConfig, {
 			createAppPath: './lab/create-app.js',
 		}),
 		clientOnly(new ESLintPlugin({
-			files: '**/*.{vue,js}',
+			files: './lab/**/*.{vue,js}',
 			emitWarning: true,
 		})),
 		clientOnly(new StylelintPlugin({
-			files: '**/*.{vue,css}',
+			files: './lab/**/*.{vue,css}',
 			emitWarning: true,
 		})),
 		...(isProduction ? [

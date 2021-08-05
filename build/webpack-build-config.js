@@ -1,8 +1,6 @@
-const fs = require('fs');
 const path = require('path');
+const tinyGlob = require('tiny-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { merge } = require('./utils');
 const webpackBaseConfig = require('./webpack-base-config');
 const componentEntryPlugin = require('./component-entry-plugin');
@@ -25,6 +23,7 @@ const webpackBuildConfig = (() => {
 		],
 		output: {
 			globalObject: 'this',
+			libraryTarget: 'umd',
 		},
 		module: {
 			rules: [
@@ -32,23 +31,6 @@ const webpackBuildConfig = (() => {
 					test: /\.js$/,
 					loader: 'babel-loader',
 				},
-			],
-		},
-		optimization: {
-			minimizer: [
-				new TerserPlugin(),
-				new CssMinimizerPlugin({
-					minimizerOptions: {
-						preset: [
-							'default',
-							{
-								discardComments: {
-									removeAll: true,
-								},
-							},
-						],
-					},
-				}),
 			],
 		},
 		plugins: [
@@ -73,41 +55,40 @@ const webpackBuildConfig = (() => {
 	return config;
 })();
 
-const componentsDirectory = './src/components';
-const buildComponents = fs.readdirSync(componentsDirectory)
-	.filter((componentDirectory) => !componentDirectory.startsWith('.') && fs.existsSync(path.join(componentsDirectory, componentDirectory, 'index.js')))
-	.map((component) => merge({}, webpackBuildConfig, {
-		entry: `./components/${component}`,
-		output: {
-			filename: 'script.js',
-			path: path.resolve('components', component),
-			libraryTarget: 'umd',
-		},
-		plugins: [
-			componentEntryPlugin,
-		],
-	}));
+const getComponentDirectory = (componentPath) => (
+	// eslint-disable-next-line no-magic-numbers
+	componentPath.split(path.sep).slice(2, -1).join(path.sep)
+);
 
-const utilsDirectory = './src/utils';
-const buildUtils = fs.readdirSync(utilsDirectory)
-	.filter((utilPath) => !utilPath.startsWith('.'))
-	.map((utilPath) => {
-		const isComponent = fs.statSync(path.join(utilsDirectory, utilPath)).isDirectory();
+const buildComponent = (componentPath) => merge({}, webpackBuildConfig, {
+	entry: componentPath,
+	output: {
+		filename: 'script.js',
+		path: path.resolve(getComponentDirectory(componentPath)),
+	},
+	plugins: [
+		componentEntryPlugin,
+	],
+});
 
-		return merge({}, webpackBuildConfig, {
-			entry: `./utils/${utilPath}`,
-			output: {
-				filename: isComponent ? 'script.js' : utilPath,
-				path: path.resolve('utils', isComponent ? utilPath : ''),
-				libraryTarget: 'umd',
-			},
-			plugins: [
-				...(isComponent ? [componentEntryPlugin] : []),
-			],
-		});
-	});
+const getUtilDirectory = (utilPath) => (
+	// eslint-disable-next-line no-magic-numbers
+	utilPath.split(path.sep).slice(2).join(path.sep)
+);
 
-module.exports = [
-	...buildComponents,
-	...buildUtils,
+const buildUtil = (utilPath) => merge({}, webpackBuildConfig, {
+	entry: utilPath,
+	output: {
+		filename: path.basename(utilPath),
+		path: path.dirname(path.resolve(getUtilDirectory(utilPath))),
+	},
+});
+
+module.exports = async () => [
+	...(await tinyGlob('./src/{components,utils}/**/index.js')).map(
+		(componentPath) => buildComponent(`./${ componentPath}`),
+	),
+	...(await tinyGlob('./src/utils/*.js')).map(
+		(utilPath) => buildUtil(`./${ utilPath}`),
+	),
 ];
