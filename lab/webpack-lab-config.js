@@ -17,7 +17,7 @@ const branchName = branch.sync();
 
 const labDirectory = path.resolve('./lab/experiments/');
 
-function generateRoutes(directoryPath = './') {
+function generateRoutes(directoryPath = './', isNested) {
 	const fullDirectoryPath = path.join(labDirectory, directoryPath);
 	const files = fs.readdirSync(fullDirectoryPath).filter((file) => !file.startsWith('.'));
 	const routes = [];
@@ -41,17 +41,17 @@ function generateRoutes(directoryPath = './') {
 
 		const fullFilePath = path.join(fullDirectoryPath, file);
 		if (fs.statSync(fullFilePath).isDirectory()) {
-			const children = generateRoutes(filePath);
+			const children = generateRoutes(filePath, true);
 			const hasIndex = children.find((route) => !route.path);
 			Object.assign(routeEntry, {
-				path: file,
+				path: (isNested ? '' : '/') + file,
 				children,
 				name: hasIndex ? undefined : routeEntry.name,
 			});
 		} else {
 			const [fileName] = file.split('.');
 			Object.assign(routeEntry, {
-				path: fileName === 'index' ? '' : fileName,
+				path: (isNested ? '' : '/') + (fileName === 'index' ? '' : fileName),
 				component: `|importExperiment('${filePath}')|`,
 			});
 		}
