@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Meta from 'vue-meta';
-import App from './App.vue';
 
 Vue.use(Router);
 Vue.use(Meta);
@@ -13,13 +12,7 @@ const importExperiment = (experiment) => () => import(`./experiments/${experimen
 function createRouter() {
 	return new Router({
 		mode: isProduction ? 'hash' : 'history',
-		routes: [
-			{
-				path: '',
-				component: App,
-				children: LAB_EXPERIMENTS,
-			},
-		],
+		routes: LAB_EXPERIMENTS,
 	});
 }
 
