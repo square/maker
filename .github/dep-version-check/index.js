@@ -1,8 +1,7 @@
-// This should only run on CI
-
+const semver = require('semver');
 const packageJson = require('../../package.json');
 
-function assertPeerDependenciesAsDevDependencies({
+(function assertPeerDependenciesAsDevDependencies({
 	peerDependencies,
 	devDependencies,
 }) {
@@ -10,12 +9,13 @@ function assertPeerDependenciesAsDevDependencies({
 
 	for (const peerDepName in peerDependencies) {
 		if (!devDependencies.hasOwnProperty(peerDepName)) {
-			errors.push(`Missing "${peerDepName}" in devDependencies`);
+			errors.push(`Missing "${peerDepName}" from devDependencies`);
 			continue;
 		}
 
-		if (devDependencies[peerDepName] !== peerDependencies[peerDepName]) {
-			errors.push(`Expected dev-dependency "${peerDepName}" to have semver "${peerDependencies[peerDepName]}"`);
+		const peerDepSemver = peerDependencies[peerDepName];
+		if (semver.satisfies(devDependencies[peerDepName], peerDepSemver)) {
+			errors.push(`Expected dev-dependency "${peerDepName}" to be in range "${peerDependencies[peerDepName]}"`);
 			continue;
 		}
 	}
@@ -24,6 +24,4 @@ function assertPeerDependenciesAsDevDependencies({
 		console.error(`Error:\n${errors.join('\n')}`);
 		process.exit(1);
 	}
-}
-
-assertPeerDependenciesAsDevDependencies(packageJson);
+})(packageJson);

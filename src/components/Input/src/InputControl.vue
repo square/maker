@@ -121,7 +121,7 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: rgba(0, 0, 0, 0.05);
+	--color-background: #f6f7f9;
 	--color-background-focus: rgb(255, 255, 255, 0.95);
 	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-foreground: rgba(0, 0, 0, 0.9);
