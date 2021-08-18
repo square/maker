@@ -23,7 +23,12 @@
 				</div>
 			</div>
 
-			<div :class="$s.RequirementLabel">
+			<div
+				:class="[
+					$s.RequirementLabel,
+					noWrap ? 'no-wrap' : ''
+				]"
+			>
 				<!-- @slot requirement label slot -->
 				<slot name="requirement-label" />
 			</div>
@@ -82,6 +87,13 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
+		},
+		/**
+		 * Whether requirement label should wrap
+		 */
+		noWrap: {
+			type: Boolean,
+			default: false,
 		},
 	},
 
@@ -149,6 +161,10 @@ export default {
 	font-size: 14px;
 	line-height: 24px;
 	opacity: var(--opacity-sublabel);
+}
+
+.RequirementLabel .no-wrap {
+	white-space: nowrap;
 }
 
 .Header {
