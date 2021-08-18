@@ -26,7 +26,7 @@
 			<div
 				:class="[
 					$s.RequirementLabel,
-					noWrap ? 'no-wrap' : ''
+					noWrap ? $s.noWrap : ''
 				]"
 			>
 				<!-- @slot requirement label slot -->
@@ -163,7 +163,7 @@ export default {
 	opacity: var(--opacity-sublabel);
 }
 
-.RequirementLabel .no-wrap {
+.RequirementLabel.noWrap {
 	white-space: nowrap;
 }
 
