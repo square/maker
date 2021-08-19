@@ -146,8 +146,10 @@ export default {
 }
 
 .RequirementLabel {
+	padding-left: 8px;
 	font-size: 14px;
 	line-height: 24px;
+	white-space: nowrap;
 	opacity: var(--opacity-sublabel);
 }
 
