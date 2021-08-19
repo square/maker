@@ -1,8 +1,7 @@
 <template>
 	<m-theme
 		v-bind="theme"
-
-		class="app"
+		:class="['app']"
 	>
 		<div class="profiles">
 			<div
@@ -36,8 +35,6 @@
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-// import theme0 from './theme0';
-// import { ThemeProvider } from 'theme-ui';
 import theme1 from './theme1';
 
 export default {
@@ -48,7 +45,6 @@ export default {
 	data() {
 		return {
 			theme: theme1,
-			colorMode: 'profile1',
 			profiles: [
 				'profile1',
 				'profile2',

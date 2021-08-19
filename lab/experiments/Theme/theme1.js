@@ -3,7 +3,6 @@ const theme1 = {
 		background: '#fff',
 		text: '#000',
 		primary: '#e5d7cc',
-		something: 'green',
 		modes: {
 			profile1: {
 				background: '#fff',
