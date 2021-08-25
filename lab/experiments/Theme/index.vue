@@ -1,8 +1,27 @@
 <template>
 	<m-theme
-		v-bind="theme"
+		:theme="theme"
 		:class="['app']"
 	>
+		<h1 class="heading">
+			Default Heading
+		</h1>
+		<p class="text">
+			Default text. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+			Consequatur debitis excepturi quibusdam modi necessitatibus accusamus, pariatur ut
+			aliquam nihil dolores assumenda quam non maxime voluptatum doloremque. Quaerat
+			dolores fugit consequuntur!
+		</p>
+		<button class="button button--primary">
+			Primary
+		</button>
+		<button class="button button--secondary">
+			Secondary
+		</button>
+
+		<h1 class="heading">
+			Profiles / Modes / Color Styles
+		</h1>
 		<div class="profiles">
 			<div
 				v-for="(set, index) in profiles"
@@ -11,36 +30,48 @@
 					'profile',
 					set,
 				]"
-				:style="set"
+				@click="changeMode(set)"
 			>
 				<div class="profile-content">
-					<div class="profile-title profile-subtitle">
+					<div class="heading profile-title profile-subtitle">
 						Subtitle
 					</div>
-					<div class="profile-title">
+					<div class="heading profile-title">
 						Title
 					</div>
-					<p class="profile-text">
+					<p class="text profile-text">
 						Example paragraph text
 					</p>
 					<div class="controls">
-						<div class="profile-button" />
-						<div class="profile-button-secondary" />
+						<div class="button button--primary profile-button" />
+						<div class="button button--secondary profile-button-secondary" />
 					</div>
 				</div>
 			</div>
 		</div>
+		<h1>Contrast Demo</h1>
+		<contrast-demo />
+		<p>
+			Because the profiles update the CSS properties there is a
+			limitation on reactive contrast checks with just CSS
+		</p>
+		<m-button>
+			Default Button
+		</m-button>
 	</m-theme>
 </template>
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import theme1 from './theme1';
+import { MButton } from '@square/maker/components/Button';
+import { theme1 } from './themes'; // this should probably be a json request, but enough for testing
+import ContrastDemo from './ContrastDemo.vue';
 
 export default {
-	name: 'App',
 	components: {
 		MTheme,
+		MButton,
+		ContrastDemo,
 	},
 	data() {
 		return {
@@ -55,11 +86,14 @@ export default {
 			],
 		};
 	},
-	methods: {
-		// setDefaultMode(mode) {
-		// 	// console.log(mode);
-		// },
-	},
+	// methods: {
+	// 	changeMode(mode) {
+	// 		// very rudimentary "default profile switcher"
+	// 		// console.log(mode);
+	// 		document.body.className = '';
+	// 		document.body.classList.add(mode);
+	// 	},
+	// },
 };
 
 </script>
@@ -81,6 +115,30 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+/* DEMO - Just color tokens
+ * Theme component is currently setting default background and text color
+ * Color defaults with property fallbacks on what would be the component CSS
+ */
+.heading {
+	color: var(--maker-colors-heading, var(--maker-colors-text, #000));
+}
+
+.text {
+	color: var(--maker-colors-text, #000);
+}
+
+.button--primary {
+	color: #fff;
+	background: var(--maker-colors-primary, #000);
+	border: 1px solid var(--maker-colors-primary, #000);
+}
+
+.button--secondary {
+	color: var(--maker-colors-secondary, var(--maker-colors-primary, #000));
+	background: transparent;
+	border: 1px solid var(--maker-colors-secondary, var(--maker-colors-primary, #000));
+}
+
 .profiles {
 	display: grid;
 	grid-gap: 24px;
@@ -91,9 +149,9 @@ body {
 	display: flex;
 	justify-content: center;
 	padding: 32px;
-	color: var(--maker-color-text, #000);
+	color: var(--maker-colors-text, #000);
 	text-align: left;
-	background: var(--maker-color-background, #fff);
+	background: var(--maker-colors-background, #fff);
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 }
@@ -104,7 +162,6 @@ body {
 
 .profile-title {
 	margin: 0 0 0.6rem;
-	color: var(--maker-color-heading, var(--maker-color-text, #000));
 	font-weight: bold;
 	font-size: 22px;
 	line-height: 1;
@@ -118,7 +175,6 @@ body {
 
 .profile-text {
 	margin: 0.2rem 0 1rem;
-	color: var(--maker-color-text, #000);
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 1;
@@ -136,12 +192,4 @@ body {
 	border-radius: 24px;
 }
 
-.profile-button {
-	background: var(--maker-color-primary, #000);
-	border: 1px solid var(--maker-color-primary, #000);
-}
-
-.profile-button-secondary {
-	border: 1px solid var(--maker-color-secondary, var(--maker-color-primary, #000));
-}
 </style>

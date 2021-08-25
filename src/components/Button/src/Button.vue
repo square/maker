@@ -144,9 +144,12 @@ const VARIANTS = {
  * @inheritListeners button
  */
 export default {
+
 	components: {
 		MLoading,
 	},
+
+	inject: ['theme'],
 
 	inheritAttrs: false,
 
@@ -178,7 +181,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -232,10 +235,18 @@ export default {
 	computed: {
 		style() {
 			return VARIANTS[this.variant]({
-				color: this.color,
+				color: this.color || this.theme.colors.primary,
 				textColor: this.textColor,
 			});
 		},
+	},
+
+	mounted() {
+		this.$nextTick(() => {
+			const style = getComputedStyle(this.$el);
+			// eslint-disable-next-line no-console
+			console.log(style);
+		});
 	},
 
 	methods: {

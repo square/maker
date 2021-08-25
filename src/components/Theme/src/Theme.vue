@@ -1,41 +1,30 @@
-<template>
-	<div :class="$s.Theme">
-		<slot />
-	</div>
-</template>
-
 <script>
-// eslint-disable-next-line no-unused-vars
-import { theme } from './stitches.config';
-
-// const darkTheme = theme('dark-theme', {
-// 	colors: {
-// 		hiContrast: 'hsl(206,2%,93%)',
-// 		loContrast: 'hsl(206,8%,8%)',
-
-// 		gray100: 'hsl(206,8%,12%)',
-// 		gray200: 'hsl(206,7%,14%)',
-// 		gray300: 'hsl(206,7%,15%)',
-// 		gray400: 'hsl(206,7%,24%)',
-// 		gray500: 'hsl(206,7%,30%)',
-// 		gray600: 'hsl(206,5%,53%)',
-// 	},
-// 	space: {},
-// 	fonts: {},
-// });
-
-// console.log(darkTheme);
+import { createStitches } from '@stitches/core';
 
 export default {
+
+	// provide() {
+	// 	const theme = {};
+	// 	Object.defineProperty(theme, 'defaultTheme', {
+	// 		enumerable: true,
+	// 		get: () => this.defaultTheme,
+	// 	});
+	// 	return { theme };
+	// },
+
+	provide() {
+		return {
+			theme: this.theme,
+			surfaces: this.themeModes,
+		};
+	},
+
 	inheritAttrs: false,
 
 	props: {
-		/**
-		 * Set color mode for entire app
-		 */
-		colorMode: {
-			type: String,
-			default: '',
+		theme: {
+			type: Object,
+			default: () => undefined,
 		},
 	},
 
@@ -48,52 +37,47 @@ export default {
 
 	mounted() {
 		this.applyTheme();
-		document.body.classList.add('dark-theme');
-		// this.getModes();
-		// console.log(this.themeModes);
 	},
 
 	methods: {
 		applyTheme() {
-			// const themeProps = toCSSVars(this.$attrs);
-			// TODO: Target something else
-			// This injects the styles on the root element,
-			// but ideally we could target a specific :root style
-			// at least until :host is available
-			// const root = document.documentElement;
-			// Object.entries(themeProps).forEach(([prop, value]) => {
-			// 	root.style.setProperty(prop, value);
-			// });
-			// const { colors } = this.$attrs;
-			// this.themeModes = colors.modes;
-			// delete colors.modes;
-			// const { createTheme } = createStitches({ theme: this.$attrs, prefix: 'maker' });
+			const { colors } = this.theme;
+			const { modes } = colors;
+			const modeObjects = [];
+			const modeStrings = [];
+			delete colors.modes;
+
+			const { theme, createTheme } = createStitches({ theme: this.theme, prefix: 'maker' });
+			this.defaultTheme = theme;
+
+			Object.entries(modes).forEach(([name, designTokens]) => {
+				const tokens = { colors: designTokens };
+				const newMode = createTheme(name, tokens);
+				modeObjects.push(newMode);
+				modeStrings.push(newMode.toString());
+			});
+
+			this.themeModes = modeObjects;
 		},
+	},
 
-		getModes() {
-			// const myModes = [];
-
-			// let modeStyles = '';
-			// Object.entries(modes).forEach(([modeName, designTokens]) => {
-			// 	modeStyles += `.${modeName} {\n${toCSSVars(designTokens, 'maker-color')}}\n`;
-			// });
-			// return modeStyles;
-
-			// Object.entries(this.themeModes).forEach(([modeName, designTokens]) => {
-			// 	const tokens = { colors: designTokens };
-			// 	const newMode = this.defaultTheme.theme(modeName, tokens);
-			// 	console.log(newMode);
-			// 	myModes.push(newMode);
-			// });
-			// // console.log(myModes);
-			// return myModes;
-		},
+	render(h) {
+		const { $s } = this;
+		/**
+		 * @slot text content
+		 */
+		const defaultSlot = this.$slots.default;
+		return h('div', {
+			class: [$s.Theme],
+			attrs: this.$attrs,
+			on: this.$listeners,
+		}, defaultSlot);
 	},
 };
 </script>
 <style module="$s">
 .Theme {
-	color: var(--maker-color-text);
-	background-color: var(--maker-color-background);
+	color: var(--maker-colors-text);
+	background-color: var(--maker-colors-background);
 }
 </style>
