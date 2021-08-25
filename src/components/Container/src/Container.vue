@@ -98,7 +98,7 @@ export default {
 
 <style module="$s">
 .Container {
-	--opacity-sublabel: 0.55;
+	--opacity-sublabel: 0.7;
 
 	padding: 16px 24px;
 	color: var(--color, inherit);
@@ -146,8 +146,10 @@ export default {
 }
 
 .RequirementLabel {
+	padding-left: 8px;
 	font-size: 14px;
 	line-height: 24px;
+	white-space: nowrap;
 	opacity: var(--opacity-sublabel);
 }
 
