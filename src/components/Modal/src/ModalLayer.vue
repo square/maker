@@ -67,6 +67,7 @@ const apiMixin = {
 				vnode: undefined,
 				options: {},
 				isStacked: !!vm.currentLayer,
+				parentModal: vm.currentLayer,
 			}),
 
 			open(renderFn, options = {}) {
@@ -93,10 +94,6 @@ const apiMixin = {
 
 					vm.currentLayer.state.vnode = undefined; // close modal
 				}
-			},
-
-			async closeAll() {
-				vm.currentLayer.state.vnode = undefined; // close all modals
 			},
 		};
 
@@ -156,6 +153,10 @@ export default {
 			const isOpeningStackedModal = !!vm.modalApi.state.vnode;
 			const isClosingStackedModal = !isOpeningStackedModal;
 			const element = this.$refs.baseModalLayer;
+
+			if (!element) {
+				return;
+			}
 
 			if (isTablet && isOpeningStackedModal) {
 				fadeOutFn({ element });

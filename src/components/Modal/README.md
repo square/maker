@@ -577,7 +577,7 @@ _StackingDemoSecondModal.vue_
 				<m-action-bar-button
 					key="confirm"
 					full-width
-					@click="modalApi.close()"
+					@click="closeAll()"
 				>
 					Confirm
 				</m-action-bar-button>
@@ -611,8 +611,13 @@ export default {
 	},
 
 	methods: {
-		closeSecond() {
+		closeAll() {
 			this.modalApi.close();
+
+			const { parentModal } = this.modalApi.state;
+			if (parentModal) {
+				parentModal.close();
+			}
 		},
 	},
 };
