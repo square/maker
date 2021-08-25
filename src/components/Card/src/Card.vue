@@ -70,4 +70,10 @@ export default {
 	font-size: 14px;
 	line-height: 20px;
 }
+
+.ActionsWrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
 </style>
