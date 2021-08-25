@@ -6,14 +6,14 @@
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
-		<!-- <header :class="$s.Header">
+		<header>
 			<div
 				v-if="label"
 				:class="$s.Label"
 			>
 				{{ label }}
 			</div>
-		</header> -->
+		</header>
 
 		<div>
 			<!-- @slot card content -->

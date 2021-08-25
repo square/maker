@@ -7,9 +7,20 @@ Use Card to provide a stylized container of information.
 ## Examples
 ```vue
 <template>
-	<m-card>
-		here is my card content
-	</m-card>
+	<div>
+		<m-card
+			label="this is my card label"
+		>
+			here is my card content
+		</m-card>
+		<div class="container">
+			<m-card
+				label="this is my card label"
+			>
+				here is my card content
+			</m-card>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -21,6 +32,13 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.container {
+	width: 300px;
+	height: 80px;
+	background-color: grey;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
