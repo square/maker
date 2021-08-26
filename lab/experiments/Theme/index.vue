@@ -1,64 +1,69 @@
 <template>
-	<m-theme
-		:theme="theme"
-		:class="['app']"
-	>
-		<h1 class="heading">
-			Default Heading
-		</h1>
-		<p class="text">
-			Default text. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-			Consequatur debitis excepturi quibusdam modi necessitatibus accusamus, pariatur ut
-			aliquam nihil dolores assumenda quam non maxime voluptatum doloremque. Quaerat
-			dolores fugit consequuntur!
-		</p>
-		<button class="button button--primary">
-			Primary
-		</button>
-		<button class="button button--secondary">
-			Secondary
-		</button>
+	<div class="page">
+		<m-theme
+			:theme="theme"
+			class="theme"
+		>
+			<h1 class="heading">
+				Default Heading
+			</h1>
+			<p class="text">
+				Default text. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+				Consequatur debitis excepturi quibusdam modi necessitatibus accusamus, pariatur ut
+				aliquam nihil dolores assumenda quam non maxime voluptatum doloremque. Quaerat
+				dolores fugit consequuntur!
+			</p>
+			<button class="button button--primary">
+				Primary
+			</button>
+			<button class="button button--secondary">
+				Secondary
+			</button>
 
-		<h1 class="heading">
-			Profiles / Modes / Color Styles
-		</h1>
-		<div class="profiles">
-			<div
-				v-for="(set, index) in profiles"
-				:key="index"
-				:class="[
-					'profile',
-					set,
-				]"
-				@click="changeMode(set)"
-			>
-				<div class="profile-content">
-					<div class="heading profile-title profile-subtitle">
-						Subtitle
-					</div>
-					<div class="heading profile-title">
-						Title
-					</div>
-					<p class="text profile-text">
-						Example paragraph text
-					</p>
-					<div class="controls">
-						<div class="button button--primary profile-button" />
-						<div class="button button--secondary profile-button-secondary" />
+			<h1 class="heading">
+				Profiles / Modes / Color Styles
+			</h1>
+			<div class="profiles">
+				<div
+					v-for="(set, index) in profiles"
+					:key="index"
+					:class="[
+						'profile',
+						set,
+					]"
+					@click="changeMode(set)"
+				>
+					<div class="profile-content">
+						<div class="heading profile-title profile-subtitle">
+							Subtitle
+						</div>
+						<div class="heading profile-title">
+							Title
+						</div>
+						<p class="text profile-text">
+							Example paragraph text
+						</p>
+						<div class="controls">
+							<div class="button button--primary profile-button" />
+							<div class="button button--secondary profile-button-secondary" />
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<h1>Contrast Demo</h1>
-		<contrast-demo />
-		<p>
-			Because the profiles update the CSS properties there is a
-			limitation on reactive contrast checks with just CSS
-		</p>
-		<m-button>
-			Default Button
-		</m-button>
-	</m-theme>
+			<h1>Attempting to simplify contrast checks</h1>
+			<contrast-demo>
+				Text Contrast only works on initial render,
+				but is calculated automatically
+			</contrast-demo>
+			<p>
+				Because the profiles update the CSS properties there is a
+				limitation on reactive contrast checks with just CSS
+			</p>
+			<m-button>
+				Default Button
+			</m-button>
+		</m-theme>
+	</div>
 </template>
 
 <script>
@@ -86,27 +91,21 @@ export default {
 			],
 		};
 	},
-	// methods: {
-	// 	changeMode(mode) {
-	// 		// very rudimentary "default profile switcher"
-	// 		// console.log(mode);
-	// 		document.body.className = '';
-	// 		document.body.classList.add(mode);
-	// 	},
-	// },
+	methods: {
+		changeMode(mode) {
+			// very rudimentary "default profile switcher"
+			// console.log(mode);
+			document.body.className = '';
+			document.body.classList.add(mode);
+		},
+	},
 };
 
 </script>
 
-<style>
-html,
-body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
+<style scoped>
 
-.app {
+.theme {
 	height: 100%;
 	margin: 0;
 	padding: 60px;
