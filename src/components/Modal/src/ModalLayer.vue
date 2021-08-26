@@ -67,6 +67,7 @@ const apiMixin = {
 				vnode: undefined,
 				options: {},
 				isStacked: !!vm.currentLayer,
+				// return parent modal to allow to close child and parent modals at the same time
 				parentModal: vm.currentLayer,
 			}),
 
@@ -154,6 +155,10 @@ export default {
 			const isClosingStackedModal = !isOpeningStackedModal;
 			const element = this.$refs.baseModalLayer;
 
+			/*
+			element can be undefined when closing child modal and parent modal at the same so
+			we need to check if element exists before applying transitions
+			*/
 			if (!element) {
 				return;
 			}
