@@ -629,7 +629,7 @@ export default {
 
 ### Close stacking modals at once
 
-It's possible to close parent modal and child modal at once. Call `parentModal.close()` to close parent modal.
+It's possible to close parent modal and child modal at once. Call `this.modalApi.state.parentModal.close()` to close parent modal.
 
 ```vue
 <template>
