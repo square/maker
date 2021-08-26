@@ -609,10 +609,233 @@ export default {
 	inject: {
 		modalApi,
 	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
+### Close stacking modals at once
+
+It's possible to close parent modal and child modal at once. Call `this.modalApi.state.parentModal.close()` to close parent modal.
+
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import StackingDemoFirstModalCloseAll from 'doc/StackingDemoFirstModalCloseAll.vue';
+
+export default {
+	name: 'StackingDemoSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
 
 	methods: {
-		closeSecond() {
+		openModal() {
+			this.modalApi.open(
+				() => <StackingDemoFirstModalCloseAll />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
+		},
+	},
+};
+</script>
+```
+
+_StackingDemoFirstModalCloseAll.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/600/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				First modal heading
+			</m-heading>
+			<m-text>
+				First modal content
+			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+					@window-esc="modalApi.close()"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="openSecondModal"
+				>
+					Open second modal
+				</m-action-bar-button>
+			</m-inline-action-bar>
+		</m-modal-content>
+	</m-modal>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import StackingDemoSecondModalCloseAll from 'doc/StackingDemoSecondModalCloseAll.vue';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'StackingDemoFirstModal',
+
+	components: {
+		MModal,
+		MHeading,
+		MText,
+		MModalContent,
+		MInlineActionBar,
+		MActionBarButton,
+		XIcon,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		openSecondModal() {
+			this.modalApi.open(
+				() => <StackingDemoSecondModalCloseAll />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
+		},
+		closeFirst() {
 			this.modalApi.close();
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
+
+_StackingDemoSecondModalCloseAll.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/400/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Second modal heading
+			</m-heading>
+			<m-text>
+				Second modal content
+			</m-text>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					@click="modalApi.close()"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					@click="closeAll()"
+				>
+					Close all modals
+				</m-action-bar-button>
+			</m-inline-action-bar>
+		</m-modal-content>
+	</m-modal>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+
+export default {
+	name: 'StackingDemoSecondModal',
+
+	components: {
+		MModal,
+		MHeading,
+		MText,
+		MModalContent,
+		MActionBarButton,
+		XIcon,
+		MInlineActionBar,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		closeAll() {
+			this.modalApi.close();
+
+			const { parentModal } = this.modalApi.state;
+			if (parentModal) {
+				parentModal.close();
+			}
 		},
 	},
 };
