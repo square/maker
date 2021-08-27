@@ -13,12 +13,6 @@
 				aliquam nihil dolores assumenda quam non maxime voluptatum doloremque. Quaerat
 				dolores fugit consequuntur!
 			</p>
-			<button class="button button--primary">
-				Primary
-			</button>
-			<button class="button button--secondary">
-				Secondary
-			</button>
 
 			<h1 class="heading">
 				Profiles / Modes / Color Styles
@@ -51,16 +45,11 @@
 				</div>
 			</div>
 			<h1>Attempting to simplify contrast checks</h1>
-			<contrast-demo>
-				Text Contrast only works on initial render,
-				but is calculated automatically
-			</contrast-demo>
-			<p>
-				Because the profiles update the CSS properties there is a
-				limitation on reactive contrast checks with just CSS
-			</p>
 			<m-button>
 				Default Button
+			</m-button>
+			<m-button color="#32a852">
+				Green button
 			</m-button>
 		</m-theme>
 	</div>
@@ -70,13 +59,11 @@
 import { MTheme } from '@square/maker/components/Theme';
 import { MButton } from '@square/maker/components/Button';
 import { theme1 } from './themes'; // this should probably be a json request, but enough for testing
-import ContrastDemo from './ContrastDemo.vue';
 
 export default {
 	components: {
 		MTheme,
 		MButton,
-		ContrastDemo,
 	},
 	data() {
 		return {
