@@ -2,6 +2,7 @@
 	<button
 		:class="[
 			$s.Button,
+			$s[`variant_${variant}`],
 			$s[`size_${size}`],
 			$s[`shape_${shape}`],
 			$s[`align_${align}`],
@@ -40,103 +41,8 @@
 
 <script>
 import chroma from 'chroma-js';
+import { getHighestContrast } from '@square/maker/utils/color';
 import { MLoading } from '@square/maker/components/Loading';
-
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLightThreshold = 0.32;
-		const isLight = chromaBg.luminance() > isLightThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
-
-function getFocus(chromaColor) {
-	const arbitraryAlphaValue = 0.3;
-	return chromaColor.alpha(arbitraryAlphaValue);
-}
-
-function getHover(chromaColor) {
-	// mix color with 5% black
-	const arbitraryValue = 0.05;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
-}
-
-function getActive(chromaColor) {
-	// mix color with 10% black
-	const arbitraryValue = 0.1;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
-}
-
-function fill(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
-	const contrastColorHover = getHover(contrastColor);
-	const contrastColorActive = getActive(contrastColor);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '8px 16px',
-		'--medium-padding': '12px 24px',
-		'--large-padding': '20px 32px',
-		'--color-main': color.hex(),
-		'--color-main-hover': colorHover.hex(),
-		'--color-main-active': colorActive.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-contrast-hover': contrastColorHover.hex(),
-		'--color-contrast-active': contrastColorActive.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
-function outline(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '8px 16px',
-		'--medium-padding': '12px 24px',
-		'--large-padding': '20px 32px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
-		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
-	};
-}
-
-function ghost(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '8px',
-		'--medium-padding': '12px',
-		'--large-padding': '20px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
-const VARIANTS = {
-	primary: fill,
-	secondary: outline,
-	tertiary: ghost,
-};
 
 /**
  * Button component
@@ -146,6 +52,10 @@ const VARIANTS = {
 export default {
 	components: {
 		MLoading,
+	},
+
+	inject: {
+		theme: { default: '' },
 	},
 
 	inheritAttrs: false,
@@ -178,7 +88,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -231,10 +141,25 @@ export default {
 
 	computed: {
 		style() {
-			return VARIANTS[this.variant]({
-				color: this.color,
-				textColor: this.textColor,
-			});
+			switch (this.variant) {
+			case 'primary':
+				return this.inlinePrimaryStyle;
+			case 'secondary':
+				return this.inlineSecondaryStyle;
+			default:
+				return this.inlinePrimaryStyle;
+			}
+		},
+		inlinePrimaryStyle() {
+			return (this.color ? {
+				'--inline-background-color': this.color,
+				'--inline-color': getHighestContrast(this.color, ['#fff', '#000']),
+			} : false);
+		},
+		inlineSecondaryStyle() {
+			return (this.color ? {
+				'--inline-color': this.color,
+			} : false);
 		},
 	},
 
@@ -261,11 +186,11 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-contrast);
+	padding: 12px 24px;
 	font-weight: 500;
+	font-size: 14px;
 	font-family: inherit;
 	vertical-align: middle;
-	background-color: var(--color-main);
 	border: none;
 	border-radius: 8px;
 	outline: none;
@@ -281,106 +206,127 @@ export default {
 	touch-action: manipulation;
 	fill: currentColor;
 
-	&.shape_pill {
-		border-radius: 32px;
-	}
-
-	&.shape_squared {
-		border-radius: 0;
+	& > * {
+		line-height: 1.77;
 	}
 
 	&.iconButton {
-		min-width: max-content;
-	}
-
-	&.size_small {
-		padding: var(--small-padding);
-		font-size: 12px;
-
-		& > * {
-			line-height: 1.4;
-		}
-
-		&.iconButton {
-			padding: 8px;
-		}
-	}
-
-	&.size_medium {
-		padding: var(--medium-padding);
-		font-size: 14px;
-
-		& > * {
-			line-height: 1.77;
-		}
-
-		&.iconButton {
-			padding: 12px;
-		}
-	}
-
-	&.size_large {
-		padding: var(--large-padding);
-		font-size: 16px;
-
-		& > * {
-			line-height: 1.5;
-		}
-
-		&.iconButton {
-			padding: 20px;
-		}
+		padding: 12px;
 	}
 
 	&.iconButton > * {
 		line-height: 0;
 	}
+}
 
-	&.fullWidth {
-		width: 100%;
+.Button.size_small {
+	padding: var(--small-padding);
+	font-size: 12px;
+
+	& > * {
+		line-height: 1.4;
 	}
 
-	&.align_center {
-		justify-content: center;
+	&.iconButton {
+		padding: 8px;
+	}
+}
+
+.Button.size_large {
+	padding: var(--large-padding);
+	font-size: 16px;
+
+	& > * {
+		line-height: 1.5;
 	}
 
-	&.align_stack {
-		flex-direction: column;
+	&.iconButton {
+		padding: 20px;
 	}
+}
 
-	&.align_space-between {
-		flex-direction: row-reverse;
-		justify-content: space-between;
+.Button:disabled {
+	cursor: initial;
+
+	& > * {
+		opacity: 0.4;
 	}
+}
 
-	&:disabled {
-		cursor: initial;
+.Button:focus {
+	--focus-border:
+		0 0 0 1px #fff,
+		0 0 0 3px var(--color-focus);
+}
 
-		& > * {
-			opacity: 0.4;
-		}
-	}
+.Button:hover:not(:disabled) {
+	color: var(--color-contrast-hover);
+	background-color: var(--color-main-hover);
+}
 
-	&:focus {
-		--focus-border:
-			0 0 0 1px #fff,
-			0 0 0 3px var(--color-focus);
-	}
+.Button:active:not(:disabled) {
+	color: var(--color-contrast-active);
+	background-color: var(--color-main-active);
+}
 
-	&:hover:not(:disabled) {
-		color: var(--color-contrast-hover);
-		background-color: var(--color-main-hover);
-	}
+.variant_primary {
+	color: var(--inline-color, var(--maker-colors-on-primary, #fff));
+	background-color: var(--inline-background-color, var(--maker-colors-primary, #000));
+}
 
-	&:active:not(:disabled) {
-		color: var(--color-contrast-active);
-		background-color: var(--color-main-active);
-	}
+.variant_secondary {
+	color: var(--inline-color, var(--maker-colors-secondary, var(--maker-colors-primary, #000)));
+	background-color: transparent;
+	border-color:
+		var(
+			--inline-color,
+			var(
+				--maker-colors-secondary,
+				var(
+					--maker-colors-primary,
+					#000
+				)
+			)
+		);
+}
 
-	&.loading {
-		/* don't inherit color in loading state on hover/active */
-		color: transparent !important;
-	}
+.variant_tertiary {
+	color: var(--inline-color, var(--maker-colors-primary, #000));
+	background-color: transparent;
+}
+
+.shape_pill {
+	border-radius: 32px;
+}
+
+.shape_squared {
+	border-radius: 0;
+}
+
+.iconButton {
+	min-width: max-content;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.align_center {
+	justify-content: center;
+}
+
+.align_stack {
+	flex-direction: column;
+}
+
+.align_space-between {
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+
+.Button.loading {
+	/* don't inherit color in loading state on hover/active */
+	color: transparent !important;
 }
 
 .Loading {
