@@ -4,6 +4,7 @@
 			$s.Button,
 			{ [$s.selected]: isSelected },
 		]"
+		:style="style"
 		@click="selectSelf"
 	>
 		<slot />
@@ -11,7 +12,19 @@
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import key from './key';
+
+function getContrast(chromaBg, targetChromaFg) {
+	const contrastAccessibilityThreshold = 4.5;
+	if (!targetChromaFg
+		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
+		const isLightThreshold = 0.32;
+		const isLight = chromaBg.luminance() > isLightThreshold;
+		return chroma(isLight ? '#000' : '#fff');
+	}
+	return targetChromaFg;
+}
 
 export default {
 	inject: {
@@ -23,6 +36,11 @@ export default {
 			type: undefined,
 			required: true,
 		},
+		selectedColor: {
+			type: String,
+			default: '#222',
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	computed: {
@@ -31,6 +49,18 @@ export default {
 				return this.controlState.currentValue.includes(this.value);
 			}
 			return this.controlState.currentValue === this.value;
+		},
+
+		style() {
+			const color = chroma(this.selectedColor);
+			const contrastColor = getContrast(color, '#fff');
+			const alphaValue = 0.4;
+			const disabledTextColor = chroma(contrastColor).alpha(alphaValue);
+			return {
+				'--selected-background-color': this.selectedColor,
+				'--selected-text-color': contrastColor,
+				'--selected-disabled-text-color': disabledTextColor,
+			};
 		},
 	},
 
@@ -63,9 +93,7 @@ export default {
 	--color-white: #fff;
 	--normal-text-color: #222;
 	--normal-disabled-text-color: rgba(0, 0, 0, 0.4);
-	--selected-disabled-text-color: rgba(255, 255, 255, 0.4);
 	--normal-background-color: #f2f2f2;
-	--selected-background-color: #222;
 	--color-focus: rgba(0, 0, 0, 0.3);
 	--button-padding: 12px 24px;
 
@@ -101,7 +129,7 @@ export default {
 }
 
 .selected {
-	color: var(--color-white);
+	color: var(--selected-text-color);
 	background-color: var(--selected-background-color);
 
 	&:disabled {

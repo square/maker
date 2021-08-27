@@ -8,19 +8,20 @@
 ```vue
 <template>
 	<div>
+		<label>
+			Color picker
+			<input
+				v-model="color"
+				type="color"
+			>
+		</label><br><br>
+
 		<m-choice v-model="selected">
-			<m-choice-option value="choice-1">
-				Choice
-			</m-choice-option>
-			<m-choice-option value="choice-2">
-				Choice
-			</m-choice-option>
-			<m-choice-option value="choice-3">
-				Choice
-			</m-choice-option>
 			<m-choice-option
-				:disabled="true"
-				value="choice-4"
+				v-for="opt in [1, 2, 3, 4]"
+				:key="`choice-${opt}`"
+				:value="`choice-${opt}`"
+				:selected-color="color"
 			>
 				Choice
 			</m-choice-option>
@@ -41,6 +42,8 @@ export default {
 	data() {
 		return {
 			selected: 'choice-1',
+			choices: ['1', '2', '3', '4'],
+			color: '#000',
 		};
 	},
 };
@@ -173,9 +176,10 @@ export default {
 
 ## ChoiceOption Props
 
-| Prop   | Type        | Default | Possible values | Description |
-| ------ | ----------- | ------- | --------------- | ----------- |
-| value* | `undefined` | —       | —               | —           |
+| Prop           | Type        | Default  | Possible values | Description |
+| -------------- | ----------- | -------- | --------------- | ----------- |
+| value*         | `undefined` | —        | —               | —           |
+| selected-color | `string`    | `'#222'` | —               | —           |
 
 
 ## ChoiceOption Slots
