@@ -15,7 +15,7 @@ export default {
 	provide() {
 		return {
 			theme: this.theme,
-			surfaces: this.themeModes,
+			surfaces: this.themeSurfaces,
 		};
 	},
 
@@ -31,7 +31,7 @@ export default {
 	data() {
 		return {
 			defaultTheme: {},
-			themeModes: [],
+			themeSurfaces: [],
 		};
 	},
 
@@ -42,19 +42,19 @@ export default {
 	methods: {
 		applyTheme() {
 			const { colors } = this.theme;
-			const { modes } = colors;
+			const { surfaces } = colors;
 			const modeObjects = [];
-			const modeStrings = [];
-			delete colors.modes;
+			const surfaceStrings = [];
+			delete colors.surfaces;
 
 			const { theme, createTheme } = createStitches({ theme: this.theme, prefix: 'maker' });
 			this.defaultTheme = theme;
 
-			Object.entries(modes).forEach(([name, designTokens]) => {
+			Object.entries(surfaces).forEach(([name, designTokens]) => {
 				const tokens = { colors: designTokens };
-				const newMode = createTheme(name, tokens);
-				modeObjects.push(newMode);
-				modeStrings.push(newMode.toString());
+				const newSurface = createTheme(name, tokens);
+				modeObjects.push(newSurface);
+				surfaceStrings.push(newSurface.toString());
 			});
 
 			this.themeModes = modeObjects;

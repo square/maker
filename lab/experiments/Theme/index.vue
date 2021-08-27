@@ -103,6 +103,10 @@ export default {
 
 </script>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Open+Sans&display=swap');
+</style>
+
 <style scoped>
 
 .theme {
@@ -114,16 +118,18 @@ export default {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-/* DEMO - Just color tokens
+/* DEMO
  * Theme component is currently setting default background and text color
  * Color defaults with property fallbacks on what would be the component CSS
  */
 .heading {
 	color: var(--maker-colors-heading, var(--maker-colors-text, #000));
+	font-family: var(--maker-fonts-heading);
 }
 
 .text {
 	color: var(--maker-colors-text, #000);
+	font-family: var(--maker-fonts-text);
 }
 
 .button--primary {
