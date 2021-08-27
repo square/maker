@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_square_maker=self.webpackChunk_square_maker||[]).push([[202],{3202:function(e,r,u){u.r(r),u.d(r,{default:function(){return n}});var n=(0,u(1900).Z)({},(function(){var e=this.$createElement;return(this._self._c||e)("router-view")}),[],!1,null,null,null).exports}}]);
