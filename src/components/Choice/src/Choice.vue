@@ -10,6 +10,7 @@
 
 <script>
 import assert from '@square/maker/utils/assert';
+import chroma from 'chroma-js';
 import key from './key';
 
 export default {
@@ -47,12 +48,19 @@ export default {
 			default: 'single-select',
 			validator: (modeValue) => ['single-select', 'multi-select'].includes(modeValue),
 		},
+
+		selectedColor: {
+			type: String,
+			default: '#222',
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	data() {
 		return {
 			currentValue: this.selected,
 			isMultiSelect: this.mode === 'multi-select',
+			color: () => this.selectedColor,
 		};
 	},
 

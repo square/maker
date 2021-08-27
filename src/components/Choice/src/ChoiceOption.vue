@@ -36,11 +36,6 @@ export default {
 			type: undefined,
 			required: true,
 		},
-		selectedColor: {
-			type: String,
-			default: '#222',
-			validator: (color) => chroma.valid(color),
-		},
 	},
 
 	computed: {
@@ -52,12 +47,13 @@ export default {
 		},
 
 		style() {
-			const color = chroma(this.selectedColor);
-			const contrastColor = getContrast(color, '#fff');
+			const color = this.controlState.color();
+			const chromaColor = chroma(color);
+			const contrastColor = getContrast(chromaColor, '#fff');
 			const alphaValue = 0.4;
 			const disabledTextColor = chroma(contrastColor).alpha(alphaValue);
 			return {
-				'--selected-background-color': this.selectedColor,
+				'--selected-background-color': color,
 				'--selected-text-color': contrastColor,
 				'--selected-disabled-text-color': disabledTextColor,
 			};

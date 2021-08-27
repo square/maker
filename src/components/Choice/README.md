@@ -16,12 +16,22 @@
 			>
 		</label><br><br>
 
-		<m-choice v-model="selected">
+		<m-choice
+			v-model="selected"
+			:selected-color="color"
+		>
+			<m-choice-option value="choice-1">
+				Choice
+			</m-choice-option>
+			<m-choice-option value="choice-2">
+				Choice
+			</m-choice-option>
+			<m-choice-option value="choice-3">
+				Choice
+			</m-choice-option>
 			<m-choice-option
-				v-for="opt in [1, 2, 3, 4]"
-				:key="`choice-${opt}`"
-				:value="`choice-${opt}`"
-				:selected-color="color"
+				:disabled="true"
+				value="choice-4"
 			>
 				Choice
 			</m-choice-option>
@@ -42,8 +52,7 @@ export default {
 	data() {
 		return {
 			selected: 'choice-1',
-			choices: ['1', '2', '3', '4'],
-			color: '#000',
+			color: '#222',
 		};
 	},
 };
@@ -158,6 +167,7 @@ export default {
 | v-model  | `undefined` | —                 | —                               | Selected choice option                                  |
 | disabled | `boolean`   | `false`           | —                               | Disables choice option                                  |
 | mode     | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
+| selected-color     | `string`    | `'#222'` | —                              | Color of selected option                                |
 
 
 ## Choice Slots
@@ -176,10 +186,9 @@ export default {
 
 ## ChoiceOption Props
 
-| Prop           | Type        | Default  | Possible values | Description |
-| -------------- | ----------- | -------- | --------------- | ----------- |
-| value*         | `undefined` | —        | —               | —           |
-| selected-color | `string`    | `'#222'` | —               | —           |
+| Prop   | Type        | Default | Possible values | Description |
+| ------ | ----------- | ------- | --------------- | ----------- |
+| value* | `undefined` | —       | —               | —           |
 
 
 ## ChoiceOption Slots
