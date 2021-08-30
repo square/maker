@@ -162,12 +162,12 @@ export default {
 <!-- api-tables:start -->
 ## Choice Props
 
-| Prop     | Type        | Default           | Possible values                 | Description                                             |
-| -------- | ----------- | ----------------- | ------------------------------- | ------------------------------------------------------- |
-| v-model  | `undefined` | —                 | —                               | Selected choice option                                  |
-| disabled | `boolean`   | `false`           | —                               | Disables choice option                                  |
-| mode     | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
-| selected-color     | `string`    | `'#222'` | —                              | Color of selected option                                |
+| Prop           | Type        | Default           | Possible values                 | Description                                             |
+| -------------- | ----------- | ----------------- | ------------------------------- | ------------------------------------------------------- |
+| v-model        | `undefined` | —                 | —                               | Selected choice option                                  |
+| disabled       | `boolean`   | `false`           | —                               | Disables choice option                                  |
+| mode           | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
+| selected-color | `string`    | `'#222'`          | —                               | Sets the background color of the selected option        |
 
 
 ## Choice Slots
