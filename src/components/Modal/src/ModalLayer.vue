@@ -67,6 +67,8 @@ const apiMixin = {
 				vnode: undefined,
 				options: {},
 				isStacked: !!vm.currentLayer,
+				// return parent modal to allow to close child and parent modals at the same time
+				parentModal: vm.currentLayer,
 			}),
 
 			open(renderFn, options = {}) {
@@ -152,6 +154,14 @@ export default {
 			const isOpeningStackedModal = !!vm.modalApi.state.vnode;
 			const isClosingStackedModal = !isOpeningStackedModal;
 			const element = this.$refs.baseModalLayer;
+
+			/*
+			element can be undefined when closing child modal and parent modal at the same so
+			we need to check if element exists before applying transitions
+			*/
+			if (!element) {
+				return;
+			}
 
 			if (isTablet && isOpeningStackedModal) {
 				fadeOutFn({ element });

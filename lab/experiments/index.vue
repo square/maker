@@ -36,8 +36,7 @@ export default {
 
 	methods: {
 		getExperiments() {
-			const routerEntries = this.$router.options.routes[0].children;
-			const experiments = routerEntries
+			const experiments = this.$router.options.routes
 				.map((routerEntry) => {
 					const entry = (
 						routerEntry.name

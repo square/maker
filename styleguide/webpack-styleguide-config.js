@@ -11,9 +11,6 @@ const { getCurrentBranch, isSemanticReleaseBranch, getLibraryVersion } = require
 const branchName = getCurrentBranch();
 const deploy = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
 
-// console.log(`branchName: ${branchName}, version: ${version}, deploy: ${deploy}`);
-// console.log('ENV VARS:', JSON.stringify(process.env, undefined, 4));
-
 const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
 
