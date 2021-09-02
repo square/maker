@@ -7,7 +7,7 @@ Use Card to provide a stylized container of information.
 ## Examples
 ```vue
 <template>
-	<div>
+	<div class="spaceout">
 		<m-card
 			label="this is my card label"
 		>
@@ -15,9 +15,12 @@ Use Card to provide a stylized container of information.
 		</m-card>
 		<div class="container">
 			<m-card
-				label="this is my card label"
+				label="this is my card inside of a 300px wide container"
 			>
 				here is my card content
+				<template #actions>
+					<m-notice-button>button</m-notice-button>
+				</template>
 			</m-card>
 		</div>
 	</div>
@@ -25,18 +28,24 @@ Use Card to provide a stylized container of information.
 
 <script>
 import { MCard } from '@square/maker/components/Card';
+import { MNoticeButton } from '@square/maker/components/Notice';
 
 export default {
 	components: {
 		MCard,
+		MNoticeButton,
 	},
 };
 </script>
 <style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
 .container {
 	width: 300px;
-	height: 80px;
-	background-color: grey;
 }
 </style>
 ```
@@ -53,10 +62,10 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Slots
 
-| Slot    | Description           |
-| ------- | --------------------- |
-| default | card content          |
-| actions | put card buttons here |
+| Slot    | Description             |
+| ------- | ----------------------- |
+| default | card content            |
+| actions | put notice buttons here |
 
 
 ## Events
