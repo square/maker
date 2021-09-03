@@ -8,27 +8,18 @@ Use Card to provide a stylized container of information.
 ```vue
 <template>
 	<div class="spaceout">
-		<m-card
-			label="this is my card label"
-		>
+		<m-card>
 			here is my card content
 		</m-card>
 		<div class="container">
-			<m-card
-				label="this is my card inside of a 300px wide container"
-			>
-				here is my card content
-				<template #actions>
-					<m-notice-button>button</m-notice-button>
-				</template>
+			<m-card>
+				this is my card inside of a 300px wide container.
+				the card fits the width of the container, but there is no padding on the outside.
 			</m-card>
 		</div>
 		<div style="width:400px;">
-			<m-card
-				label="this is my truncated label inside of a card with fixed width"
-				truncate-label
-			>
-				here is my card content
+			<m-card>
+				here is my card content. there is a fixed width of 400px applied directly to the card.
 			</m-card>
 		</div>
 	</div>
@@ -36,12 +27,10 @@ Use Card to provide a stylized container of information.
 
 <script>
 import { MCard } from '@square/maker/components/Card';
-import { MNoticeButton } from '@square/maker/components/Notice';
 
 export default {
 	components: {
 		MCard,
-		MNoticeButton,
 	},
 };
 </script>
