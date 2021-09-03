@@ -63,17 +63,12 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop  | Type     | Default | Possible values | Description |
-| ----- | -------- | ------- | --------------- | ----------- |
-| label | `string` | `''`    | —               | Card label  |
-
 
 ## Slots
 
-| Slot    | Description             |
-| ------- | ----------------------- |
-| default | card content            |
-| actions | put notice buttons here |
+| Slot    | Description  |
+| ------- | ------------ |
+| default | card content |
 
 
 ## Events
