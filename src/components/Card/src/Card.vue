@@ -9,7 +9,7 @@
 		<header>
 			<div
 				v-if="label"
-				:class="$s.Label"
+				:class="[$s.Label, truncateLabel ? $s.TruncateLabel : '']"
 			>
 				{{ label }}
 			</div>
@@ -46,6 +46,10 @@ export default {
 			type: String,
 			default: '',
 		},
+		truncateLabel: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	computed: {
@@ -69,6 +73,12 @@ export default {
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
+}
+
+.TruncateLabel {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .ActionsWrapper {

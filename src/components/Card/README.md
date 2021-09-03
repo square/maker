@@ -23,6 +23,14 @@ Use Card to provide a stylized container of information.
 				</template>
 			</m-card>
 		</div>
+		<div style="width:400px;">
+			<m-card
+				label="this is my truncated label inside of a card with fixed width"
+				truncate-label
+			>
+				here is my card content
+			</m-card>
+		</div>
 	</div>
 </template>
 
