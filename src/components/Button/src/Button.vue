@@ -137,9 +137,9 @@ function transparent(tokens) {
 	const color = chroma(tokens.color);
 	const transparentHex = chroma('rgba(0, 0, 0, 0)').hex();
 	return {
-		'--small-padding': '8px',
-		'--medium-padding': '12px',
-		'--large-padding': '20px',
+		'--small-padding': '0px',
+		'--medium-padding': '0px',
+		'--large-padding': '0px',
 		'--color-main': 'color',
 		'--color-main-hover': 'transparent',
 		'--color-main-active': 'transparent',
