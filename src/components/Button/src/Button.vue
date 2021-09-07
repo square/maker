@@ -132,19 +132,20 @@ function ghost(tokens) {
 	};
 }
 
-function text() {
-	const color = chroma('rgba(0, 0, 0, 0)');
+function text(tokens) {
+	const color = chroma(tokens.color);
+	const transparentHex = chroma('rgba(0, 0, 0, 0)').hex();
 	return {
 		'--small-padding': '8px',
 		'--medium-padding': '12px',
 		'--large-padding': '20px',
-		'--color-main': 'transparent',
+		'--color-main': 'color',
 		'--color-main-hover': 'transparent',
 		'--color-main-active': 'transparent',
 		'--color-contrast': color.hex(),
-		'--color-contrast-hover': color.hex(),
-		'--color-contrast-active': color.hex(),
-		'--color-focus': color.hex(),
+		'--color-contrast-hover': transparentHex,
+		'--color-contrast-active': transparentHex,
+		'--color-focus': transparentHex,
 	};
 }
 
