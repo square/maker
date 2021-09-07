@@ -37,20 +37,25 @@ Use Notice to notify users of things.
 			I am a long error notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 			<template #actions>
-				<m-notice-button>button</m-notice-button>
-				<m-notice-button>dismiss</m-notice-button>
+				<m-button variant="text">
+					button
+				</m-button>
+				<m-button variant="text">
+					dismiss
+				</m-button>
 			</template>
 		</m-notice>
 	</div>
 </template>
 
 <script>
-import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+import { MNotice } from '@square/maker/components/Notice';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MNotice,
-		MNoticeButton,
+		MButton,
 	},
 };
 </script>
@@ -95,20 +100,25 @@ export default {
 			I am a long success notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 			<template #actions>
-				<m-notice-button>button</m-notice-button>
-				<m-notice-button>dismiss</m-notice-button>
+				<m-button variant="text">
+					button
+				</m-button>
+				<m-button variant="text">
+					dismiss
+				</m-button>
 			</template>
 		</m-notice>
 	</div>
 </template>
 
 <script>
-import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+import { MNotice } from '@square/maker/components/Notice';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MNotice,
-		MNoticeButton,
+		MButton,
 	},
 };
 </script>
@@ -153,20 +163,25 @@ export default {
 			I am a long warning notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 			<template #actions>
-				<m-notice-button>button</m-notice-button>
-				<m-notice-button>dismiss</m-notice-button>
+				<m-button variant="text">
+					button
+				</m-button>
+				<m-button variant="text">
+					dismiss
+				</m-button>
 			</template>
 		</m-notice>
 	</div>
 </template>
 
 <script>
-import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+import { MNotice } from '@square/maker/components/Notice';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MNotice,
-		MNoticeButton,
+		MButton,
 	},
 };
 </script>
@@ -212,20 +227,25 @@ export default {
 			I am a long info notice text text text wrap wrap wrap
 			see me wrap wrap wrap text text text text text text
 			<template #actions>
-				<m-notice-button>button</m-notice-button>
-				<m-notice-button>dismiss</m-notice-button>
+				<m-button variant="text">
+					button
+				</m-button>
+				<m-button variant="text">
+					dismiss
+				</m-button>
 			</template>
 		</m-notice>
 	</div>
 </template>
 
 <script>
-import { MNotice, MNoticeButton } from '@square/maker/components/Notice';
+import { MNotice } from '@square/maker/components/Notice';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MNotice,
-		MNoticeButton,
+		MButton,
 	},
 };
 </script>
@@ -253,10 +273,10 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Notice Slots
 
-| Slot    | Description             |
-| ------- | ----------------------- |
-| default | notice content          |
-| actions | put notice buttons here |
+| Slot    | Description                   |
+| ------- | ----------------------------- |
+| default | notice content                |
+| actions | put text variant buttons here |
 
 
 ## Notice Events

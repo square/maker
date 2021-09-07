@@ -25,7 +25,7 @@
 			v-if="showActions"
 			:class="$s.ActionsWrapper"
 		>
-			<!-- @slot put notice buttons here -->
+			<!-- @slot put text variant buttons here -->
 			<slot name="actions" />
 		</div>
 	</div>
@@ -90,7 +90,7 @@ export default {
 	},
 
 	created() {
-		assert.warn(this.variant === 'inline' && !this.$slots.actions, 'inline Notices can not have an actions slot');
+		assert.warn(this.variant === 'inline' && !this.$slots.actions, 'inline Notices cannot have an actions slot');
 	},
 };
 </script>
