@@ -132,10 +132,27 @@ function ghost(tokens) {
 	};
 }
 
+function text() {
+	const color = 'rgba(0, 0, 0, 0)';
+	return {
+		'--small-padding': '8px',
+		'--medium-padding': '12px',
+		'--large-padding': '20px',
+		'--color-main': 'transparent',
+		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
+		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
+		'--color-contrast': color.hex(),
+		'--color-contrast-hover': color.hex(),
+		'--color-contrast-active': color.hex(),
+		'--color-focus': color.hex(),
+	};
+}
+
 const VARIANTS = {
 	primary: fill,
 	secondary: outline,
 	tertiary: ghost,
+	text,
 };
 
 /**
