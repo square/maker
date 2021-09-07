@@ -9,6 +9,7 @@
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
+				[$s.textButton] : variant === 'text',
 			}
 		]"
 		:type="type"
@@ -132,7 +133,7 @@ function ghost(tokens) {
 	};
 }
 
-function text(tokens) {
+function transparent(tokens) {
 	const color = chroma(tokens.color);
 	const transparentHex = chroma('rgba(0, 0, 0, 0)').hex();
 	return {
@@ -153,7 +154,7 @@ const VARIANTS = {
 	primary: fill,
 	secondary: outline,
 	tertiary: ghost,
-	text,
+	text: transparent,
 };
 
 /**
@@ -379,18 +380,18 @@ export default {
 		}
 	}
 
-	&:focus {
+	&:focus:not(.textButton) {
 		--focus-border:
 			0 0 0 1px #fff,
 			0 0 0 3px var(--color-focus);
 	}
 
-	&:hover:not(:disabled) {
+	&:hover:not(:disabled):not(.textButton) {
 		color: var(--color-contrast-hover);
 		background-color: var(--color-main-hover);
 	}
 
-	&:active:not(:disabled) {
+	&:active:not(:disabled):not(.textButton) {
 		color: var(--color-contrast-active);
 		background-color: var(--color-main-active);
 	}
