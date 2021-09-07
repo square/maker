@@ -26,7 +26,7 @@
 						Tertiary / Ghost
 					</th>
 					<th>
-						Text Only
+						Text / Transparent *
 					</th>
 				</tr>
 			</thead>
@@ -696,4 +696,11 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 ## Events
 
 Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
+
+## * Notes About `Text` Button Variant
+
+This variant is made to be used inside of other wrapper components, such as the Notice and Card.
+- No padding; the text is the only clickable area
+- Not made to be used for Icon Buttons
+- Only difference between `size` is text size
 <!-- api-tables:end -->
