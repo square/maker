@@ -241,7 +241,7 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Notice Props
+## Props
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
@@ -251,7 +251,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | variant | `string` | `'inline'` | `inline`, `block`                     | notice variant |
 
 
-## Notice Slots
+## Slots
 
 | Slot    | Description             |
 | ------- | ----------------------- |
@@ -259,24 +259,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | actions | put notice buttons here |
 
 
-## Notice Events
+## Events
 
 Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
-
-
-## NoticeButton Props
-
-Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
-
-
-## NoticeButton Slots
-
-| Slot    | Description    |
-| ------- | -------------- |
-| default | button content |
-
-
-## NoticeButton Events
-
-Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 <!-- api-tables:end -->
