@@ -41,6 +41,7 @@
 
 <script>
 import chroma from 'chroma-js';
+import assert from '@square/maker/utils/assert';
 import { MLoading } from '@square/maker/components/Loading';
 
 function getContrast(chromaBg, targetChromaFg) {
@@ -255,6 +256,10 @@ export default {
 				textColor: this.textColor,
 			});
 		},
+	},
+
+	created() {
+		assert.warn(!(this.variant === 'text' && this.isSingleChild()), 'the text Button variant should not be used for icon buttons');
 	},
 
 	methods: {
