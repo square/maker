@@ -9,7 +9,7 @@
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
-				[$s.textButton] : variant === 'text',
+				[$s.textVariant] : variant === 'text',
 			}
 		]"
 		:type="type"
@@ -380,18 +380,18 @@ export default {
 		}
 	}
 
-	&:focus:not(.textButton) {
+	&:focus:not(.textVariant) {
 		--focus-border:
 			0 0 0 1px #fff,
 			0 0 0 3px var(--color-focus);
 	}
 
-	&:hover:not(:disabled):not(.textButton) {
+	&:hover:not(:disabled):not(.textVariant) {
 		color: var(--color-contrast-hover);
 		background-color: var(--color-main-hover);
 	}
 
-	&:active:not(:disabled):not(.textButton) {
+	&:active:not(:disabled):not(.textVariant) {
 		color: var(--color-contrast-active);
 		background-color: var(--color-main-active);
 	}
