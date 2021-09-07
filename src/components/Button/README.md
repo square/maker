@@ -25,6 +25,9 @@
 					<th>
 						Tertiary / Ghost
 					</th>
+					<th>
+						Text Only
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -169,6 +172,54 @@
 						</m-button>
 						<m-button
 							variant="tertiary"
+							size="large"
+							:color="color"
+							loading
+						>
+							Loading
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							variant="text"
+							size="large"
+							:color="color"
+						>
+							Button
+						</m-button>
+						<m-button
+							variant="text"
+							size="large"
+							:color="color"
+						>
+							<plus class="icon" />
+							Button
+						</m-button>
+						<m-button
+							variant="text"
+							size="large"
+							:color="color"
+						>
+							Button
+							<plus class="icon" />
+						</m-button>
+						<m-button
+							variant="text"
+							size="large"
+							:color="color"
+						>
+							<x class="icon" />
+						</m-button>
+						<m-button
+							variant="text"
+							size="large"
+							:color="color"
+							disabled
+						>
+							Disabled button
+						</m-button>
+						<m-button
+							variant="text"
 							size="large"
 							:color="color"
 							loading
