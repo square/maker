@@ -376,6 +376,54 @@
 							Loading
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							variant="text"
+							size="medium"
+							:color="color"
+						>
+							Button
+						</m-button>
+						<m-button
+							variant="text"
+							size="medium"
+							:color="color"
+						>
+							<plus class="icon" />
+							Button
+						</m-button>
+						<m-button
+							variant="text"
+							size="medium"
+							:color="color"
+						>
+							Button
+							<plus class="icon" />
+						</m-button>
+						<m-button
+							variant="text"
+							size="medium"
+							:color="color"
+						>
+							<x class="icon" />
+						</m-button>
+						<m-button
+							variant="text"
+							size="medium"
+							:color="color"
+							disabled
+						>
+							Disabled button
+						</m-button>
+						<m-button
+							variant="text"
+							size="medium"
+							:color="color"
+							loading
+						>
+							Loading
+						</m-button>
+					</td>
 				</tr>
 				<tr>
 					<th>
@@ -525,6 +573,54 @@
 							Loading
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							variant="text"
+							size="small"
+							:color="color"
+						>
+							Button
+						</m-button>
+						<m-button
+							variant="text"
+							size="small"
+							:color="color"
+						>
+							<plus class="icon" />
+							Button
+						</m-button>
+						<m-button
+							variant="text"
+							size="small"
+							:color="color"
+						>
+							Button
+							<plus class="icon" />
+						</m-button>
+						<m-button
+							variant="text"
+							size="small"
+							:color="color"
+						>
+							<plus class="icon" />
+						</m-button>
+						<m-button
+							variant="text"
+							size="small"
+							:color="color"
+							disabled
+						>
+							Disabled button
+						</m-button>
+						<m-button
+							variant="text"
+							size="small"
+							:color="color"
+							loading
+						>
+							Loading
+						</m-button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -582,7 +678,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | full-width | `boolean` | `false`     | —                                  | Whether to make the button full-width |
 | color      | `string`  | `'#000'`    | —                                  | Background color of button            |
 | text-color | `string`  | —           | —                                  | Text color of button                  |
-| variant    | `string`  | `'primary'` | `primary`, `secondary`, `tertiary` | Semantic variant                      |
+| variant    | `string`  | `'primary'` | `primary`, `secondary`, `tertiary`, `text` | Semantic variant                      |
 | shape      | `string`  | `'rounded'` | `squared`, `rounded`, `pill`       | Shape of button                       |
 | disabled   | `boolean` | `false`     | —                                  | Toggles button disabled state         |
 | align      | `string`  | `'center'`  | `center`, `stack`, `space-between` | How to align button's contents        |
