@@ -70,14 +70,6 @@ export default {
 			type: String,
 			default: '',
 		},
-		/**
-		 * Semantic variant
-		 */
-		variant: {
-			type: String,
-			default: 'reorder',
-			validator: (variant) => ['reorder'].includes(variant),
-		},
 	},
 
 	computed: {
