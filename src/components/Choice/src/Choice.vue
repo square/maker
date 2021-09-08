@@ -49,7 +49,9 @@ export default {
 			default: 'single-select',
 			validator: (modeValue) => ['single-select', 'multi-select'].includes(modeValue),
 		},
-
+		/**
+		 * Background color of a selected option
+		 */
 		selectedColor: {
 			type: String,
 			default: '#222',
