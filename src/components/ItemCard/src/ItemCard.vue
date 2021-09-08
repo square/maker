@@ -1,41 +1,47 @@
 <template>
-	<div
-		:class="[
-			$s.Card,
-		]"
-		v-bind="$attrs"
-		v-on="$listeners"
-	>
-		<header>
-			<div
-				v-if="label"
-				:class="[$s.Label, truncateLabel ? $s.TruncateLabel : '']"
-			>
-				{{ label }}
-			</div>
-		</header>
-
-		<div>
-			<!-- @slot card content -->
-			<slot />
-		</div>
+	<m-card>
 		<div
-			v-if="showActions"
-			:class="$s.ActionsWrapper"
+			v-bind="$attrs"
+			v-on="$listeners"
 		>
-			<!-- @slot put notice buttons here -->
-			<slot name="actions" />
+			<header>
+				<div
+					v-if="label"
+					:class="[$s.Label, truncateLabel ? $s.TruncateLabel : '']"
+				>
+					{{ label }}
+				</div>
+			</header>
+
+			<div>
+				<!-- @slot card content -->
+				<slot />
+			</div>
+			<footer>
+				<div
+					v-if="showActions"
+					:class="$s.ActionsWrapper"
+				>
+					<!-- @slot put notice buttons here -->
+					<slot name="actions" />
+				</div>
+			</footer>
 		</div>
-	</div>
+	</m-card>
 </template>
 
 <script>
+import { MCard } from '@square/maker/components/Card';
 
 /**
  * @inheritAttrs div
  * @inheritListeners div
  */
 export default {
+	components: {
+		MCard,
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -61,13 +67,6 @@ export default {
 </script>
 
 <style module="$s">
-.Card {
-	padding: 16px 24px;
-	background-color: white;
-	border: 1px solid #eaeaea;
-	border-radius: 8px;
-}
-
 .Label {
 	margin-bottom: 16px;
 	font-weight: 500;
