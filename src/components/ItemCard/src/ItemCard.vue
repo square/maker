@@ -9,7 +9,7 @@
 					v-if="label"
 					:class="[
 						$s.Label,
-						variant === 'reorder' ? $s.TruncateLabel : ''
+						$s.TruncateLabel,
 					]"
 				>
 					{{ label }}
@@ -106,5 +106,13 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 16px;
+}
+
+.ActionsWrapper > * {
+	margin-right: 24px;
+}
+
+.ActionsWrapper > *:last-child {
+	margin-right: 0;
 }
 </style>
