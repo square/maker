@@ -12,19 +12,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
 import key from './key';
-
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLightThreshold = 0.32;
-		const isLight = chromaBg.luminance() > isLightThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
 
 export default {
 	inject: {
@@ -47,15 +35,15 @@ export default {
 		},
 
 		style() {
-			const color = this.controlState.color();
-			const chromaColor = chroma(color);
-			const contrastColor = getContrast(chromaColor, '#fff');
-			const alphaValue = 0.4;
-			const disabledTextColor = chroma(contrastColor).alpha(alphaValue);
+			const {
+				color,
+				selectedTextColor,
+				selectedDisabledTextColor,
+			} = this.controlState.getSelectedStyle();
 			return {
 				'--selected-background-color': color,
-				'--selected-text-color': contrastColor,
-				'--selected-disabled-text-color': disabledTextColor,
+				'--selected-text-color': selectedTextColor,
+				'--selected-disabled-text-color': selectedDisabledTextColor,
 			};
 		},
 	},

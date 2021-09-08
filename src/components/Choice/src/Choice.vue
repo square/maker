@@ -10,6 +10,7 @@
 
 <script>
 import assert from '@square/maker/utils/assert';
+import getContrast from '@square/maker/utils/get-contrast';
 import chroma from 'chroma-js';
 import key from './key';
 
@@ -60,8 +61,27 @@ export default {
 		return {
 			currentValue: this.selected,
 			isMultiSelect: this.mode === 'multi-select',
-			color: () => this.selectedColor,
+			getSelectedStyle: () => ({
+				color: this.selectedColor,
+				selectedTextColor: this.contrastColor,
+				selectedDisabledTextColor: this.disabledContrastColor,
+			}),
 		};
+	},
+
+	computed: {
+		contrastColor() {
+			const color = this.selectedColor;
+			const chromaColor = chroma(color);
+			const contrastColor = getContrast(chromaColor, '#fff');
+			return contrastColor;
+		},
+
+		disabledContrastColor() {
+			const alphaValue = 0.4;
+			const disabledTextColor = chroma(this.contrastColor).alpha(alphaValue);
+			return disabledTextColor;
+		},
 	},
 
 	watch: {
