@@ -14,8 +14,9 @@
 				v-model="color"
 				type="color"
 			>
-		</label><br><br>
-
+		</label>
+		<br>
+		<br>
 		<m-choice
 			v-model="selected"
 			:selected-color="color"
@@ -167,7 +168,7 @@ export default {
 | v-model        | `undefined` | —                 | —                               | Selected choice option                                  |
 | disabled       | `boolean`   | `false`           | —                               | Disables choice option                                  |
 | mode           | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
-| selected-color | `string`    | `'#222'`          | —                               | Background color of selected option                     |
+| selected-color | `string`    | `'#222'`          | —                               | —                                                       |
 
 
 ## Choice Slots
