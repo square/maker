@@ -61,10 +61,10 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop           | Type      | Default | Possible values | Description |
-| -------------- | --------- | ------- | --------------- | ----------- |
-| label          | `string`  | `''`    | —               | Card label  |
-| truncate-label | `boolean` | `false` | —               | —           |
+| Prop    | Type     | Default     | Possible values | Description      |
+| ------- | -------- | ----------- | --------------- | ---------------- |
+| label   | `string` | `''`        | —               | Card label       |
+| variant | `string` | `'reorder'` | `reorder`       | Semantic variant |
 
 
 ## Slots

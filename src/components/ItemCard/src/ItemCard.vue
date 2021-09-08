@@ -7,7 +7,10 @@
 			<header>
 				<div
 					v-if="label"
-					:class="[$s.Label, truncateLabel ? $s.TruncateLabel : '']"
+					:class="[
+						$s.Label,
+						variant === 'reorder' ? $s.TruncateLabel : ''
+					]"
 				>
 					{{ label }}
 				</div>
@@ -52,9 +55,13 @@ export default {
 			type: String,
 			default: '',
 		},
-		truncateLabel: {
-			type: Boolean,
-			default: false,
+		/**
+		 * Semantic variant
+		 */
+		variant: {
+			type: String,
+			default: 'reorder',
+			validator: (variant) => ['reorder'].includes(variant),
 		},
 	},
 
@@ -80,9 +87,12 @@ export default {
 	text-overflow: ellipsis;
 }
 
-.ActionsWrapper {
+.footer {
 	display: flex;
-	justify-content: flex-end;
 	margin-top: 16px;
+}
+
+.ActionsWrapper {
+	justify-content: flex-end;
 }
 </style>
