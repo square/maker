@@ -1,31 +1,22 @@
 # ItemCard
-
+The ItemCard has more of a header / content / footer structure to be used for different Item displays.
 
 
 ## Examples
 ```vue
 <template>
 	<div class="spaceout">
-		<m-item-card
-			label="this is my card label"
-		>
-			here is my card content
-		</m-item-card>
-		<div class="container">
-			<m-item-card
-				label="this is my card inside of a 300px wide container"
-			>
-				here is my card content
-			</m-item-card>
-		</div>
 		<div style="width:400px;">
 			<m-item-card
-				label="this is my truncated label inside of a card with fixed width"
-				price="$999.99"
+				label="this is my card label. the text is truncated when wrapping"
 			>
 				here is my card content
+				<template #footer>
+					$999.99
+				</template>
 				<template #actions>
 					<m-notice-button>button</m-notice-button>
+					<m-notice-button>button2</m-notice-button>
 				</template>
 			</m-item-card>
 		</div>

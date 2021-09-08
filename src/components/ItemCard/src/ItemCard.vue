@@ -17,17 +17,16 @@
 			</header>
 
 			<div>
-				<!-- @slot card content -->
+				<!-- @slot itemcard content -->
 				<slot />
 			</div>
 
 			<footer
 				:class="$s.Footer"
 			>
-				<div
-					:class="$s.Price"
-				>
-					{{ price }}
+				<div>
+					<!-- @slot footer content -->
+					<slot name="footer" />
 				</div>
 				<div
 					v-if="showActions"
@@ -60,13 +59,6 @@ export default {
 		 * Item Card label
 		 */
 		label: {
-			type: String,
-			default: '',
-		},
-		/**
-		 * Item price label
-		 */
-		price: {
 			type: String,
 			default: '',
 		},
