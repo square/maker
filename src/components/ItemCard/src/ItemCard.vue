@@ -20,7 +20,15 @@
 				<!-- @slot card content -->
 				<slot />
 			</div>
-			<footer>
+
+			<footer
+				:class="$s.Footer"
+			>
+				<div
+					:class="$s.Price"
+				>
+					{{ price }}
+				</div>
 				<div
 					v-if="showActions"
 					:class="$s.ActionsWrapper"
@@ -49,9 +57,16 @@ export default {
 
 	props: {
 		/**
-		 * Card label
+		 * Item Card label
 		 */
 		label: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Item price label
+		 */
+		price: {
 			type: String,
 			default: '',
 		},
@@ -87,12 +102,9 @@ export default {
 	text-overflow: ellipsis;
 }
 
-.footer {
+.Footer {
 	display: flex;
+	justify-content: space-between;
 	margin-top: 16px;
-}
-
-.ActionsWrapper {
-	justify-content: flex-end;
 }
 </style>

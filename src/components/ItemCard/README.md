@@ -16,17 +16,17 @@
 				label="this is my card inside of a 300px wide container"
 			>
 				here is my card content
-				<template #actions>
-					<m-notice-button>button</m-notice-button>
-				</template>
 			</m-item-card>
 		</div>
 		<div style="width:400px;">
 			<m-item-card
 				label="this is my truncated label inside of a card with fixed width"
-				truncate-label
+				price="$999.99"
 			>
 				here is my card content
+				<template #actions>
+					<m-notice-button>button</m-notice-button>
+				</template>
 			</m-item-card>
 		</div>
 	</div>
@@ -63,7 +63,8 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop    | Type     | Default     | Possible values | Description      |
 | ------- | -------- | ----------- | --------------- | ---------------- |
-| label   | `string` | `''`        | —               | Card label       |
+| label   | `string` | `''`        | —               | Item Card label  |
+| price   | `string` | `''`        | —               | Item price label |
 | variant | `string` | `'reorder'` | `reorder`       | Semantic variant |
 
 
