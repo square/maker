@@ -31,6 +31,7 @@ import { MLoading } from '@square/maker/components/Loading';
 function textButton(tokens) {
 	const color = chroma(tokens.color);
 	return {
+		'--color-main': 'color',
 		'--color-contrast': color.hex(),
 	};
 }
@@ -108,6 +109,9 @@ export default {
 	font-weight: 500;
 	font-family: inherit;
 	vertical-align: middle;
+	background-color: var(--color-main);
+	border: none;
+	border-radius: 8px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -115,6 +119,7 @@ export default {
 	cursor: pointer;
 	transition:
 		color 0.2s ease-in,
+		background-color 0.2s ease-in,
 		box-shadow 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
