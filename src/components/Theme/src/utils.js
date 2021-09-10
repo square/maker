@@ -4,7 +4,7 @@ import {
 
 export function resolve(valueOrPointer) {
 	if (!isString(valueOrPointer)) {
-		throw new Error(`cannot resolve value ${valueOrPointer} it is not a string`);
+		return valueOrPointer; // non-strings are always values
 	}
 	if (valueOrPointer.startsWith('@')) {
 		return this.getPath(valueOrPointer); // resolve pointer to value

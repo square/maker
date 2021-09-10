@@ -6,7 +6,7 @@
 			$s[`shape_${resolvedShape}`],
 			$s[`align_${align}`],
 			{
-				[$s.fullWidth]: fullWidth,
+				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
 			}
@@ -226,7 +226,7 @@ export default {
 		 */
 		align: {
 			type: String,
-			default: 'center',
+			default: undefined,
 			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
 		},
 		/**
@@ -282,6 +282,28 @@ export default {
 			const shapeValue = this.theme.resolve(shapeValueOrPointer);
 			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of Button`);
 			return shapeValue;
+		},
+		resolvedFullWidth() {
+			let fullWidthValueOrPointer;
+			if (this.fullWidth) {
+				fullWidthValueOrPointer = this.fullWidth;
+			} else {
+				fullWidthValueOrPointer = this.theme.button.fullWidth;
+			}
+			const fullWidthValue = this.theme.resolve(fullWidthValueOrPointer);
+			assert.error([true, false].includes(fullWidthValue), `${fullWidthValue} resolved from ${fullWidthValueOrPointer} is not a valid fullWidth value and cannot be used in the fullWidth prop of Button`);
+			return fullWidthValue;
+		},
+		resolvedAlign() {
+			let alignValueOrPointer;
+			if (this.align) {
+				alignValueOrPointer = this.align;
+			} else {
+				alignValueOrPointer = this.theme.button.align;
+			}
+			const alignValue = this.theme.resolve(alignValueOrPointer);
+			assert.error(['center', 'stack', 'space-between'].includes(alignValue), `${alignValue} resolved from ${alignValueOrPointer} is not a valid align value and cannot be used in the align prop of Button`);
+			return alignValue;
 		},
 		style() {
 			return VARIANTS[this.resolvedVariant]({

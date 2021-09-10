@@ -533,7 +533,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | variant    | `string`  | —          | `primary`, `secondary`, `tertiary` | Semantic variant                      |
 | shape      | `string`  | —          | `squared`, `rounded`, `pill`       | Shape of button                       |
 | disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state         |
-| align      | `string`  | `'center'` | `center`, `stack`, `space-between` | How to align button's contents        |
+| align      | `string`  | —          | `center`, `stack`, `space-between` | How to align button's contents        |
 | loading    | `boolean` | `false`    | —                                  | Toggles button loading state          |
 
 

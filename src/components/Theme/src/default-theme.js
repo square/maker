@@ -10,6 +10,8 @@ export default function defaultTheme() {
 			variant: 'primary',
 			shape: 'rounded',
 			color: '@colors.primary',
+			fullWidth: false,
+			align: 'center',
 		},
 		actionbarbutton: {
 			color: '@colors.primary',

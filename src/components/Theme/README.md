@@ -78,6 +78,33 @@ The `size`, `variant`, `shape`, `color`, and `textColor` are theme-able props in
 		</select>
 		<br>
 
+		pick theme default button align
+		<br>
+		<select v-model="theme.button.align">
+			<option value="center">
+				center
+			</option>
+			<option value="stack">
+				stack
+			</option>
+			<option value="space-between">
+				space between
+			</option>
+		</select>
+		<br>
+
+		pick theme default button fullWidth
+		<br>
+		<select v-model="theme.button.fullWidth">
+			<option :value="true">
+				true
+			</option>
+			<option :value="false">
+				false
+			</option>
+		</select>
+		<br>
+
 		pick theme default button variant
 		<br>
 		<select v-model="theme.button.variant">
@@ -143,6 +170,8 @@ export default {
 					variant: 'primary',
 					shape: 'rounded',
 					color: '@colors.primary',
+					align: 'center',
+					fullWidth: false,
 				},
 			},
 		};
