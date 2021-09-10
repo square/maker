@@ -10,6 +10,7 @@ export default function defaultTheme() {
 			variant: 'primary',
 			shape: 'rounded',
 			color: '@colors.primary',
+			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
 		},

@@ -48,6 +48,14 @@ The `size`, `variant`, `shape`, `color`, and `textColor` are theme-able props in
 		>
 		<br>
 
+		pick theme default button text color
+		<br>
+		<input
+			v-model="theme.button.textColor"
+			type="color"
+		>
+		<br>
+
 		pick theme default button size
 		<br>
 		<select v-model="theme.button.size">
@@ -172,6 +180,7 @@ export default {
 					color: '@colors.primary',
 					align: 'center',
 					fullWidth: false,
+					textColor: undefined,
 				},
 			},
 		};

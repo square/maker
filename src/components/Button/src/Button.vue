@@ -261,6 +261,17 @@ export default {
 			assert.error(chroma.valid(colorValue), `${colorValue} resolved from ${colorValueOrPointer} is not a valid CSS color value and cannot be used in the color prop of Button`);
 			return colorValue;
 		},
+		resolvedTextColor() {
+			let textColorValueOrPointer;
+			if (this.textColor) {
+				textColorValueOrPointer = this.textColor;
+			} else {
+				textColorValueOrPointer = this.theme.button.textColor;
+			}
+			const textColorValue = this.theme.resolve(textColorValueOrPointer);
+			assert.error(!textColorValue || chroma.valid(textColorValue), `${textColorValue} resolved from ${textColorValueOrPointer} is not a valid CSS textColor value and cannot be used in the textColor prop of Button`);
+			return textColorValue;
+		},
 		resolvedVariant() {
 			let variantValueOrPointer;
 			if (this.variant) {
@@ -308,7 +319,7 @@ export default {
 		style() {
 			return VARIANTS[this.resolvedVariant]({
 				color: this.resolvedColor,
-				textColor: this.textColor,
+				textColor: this.resolvedTextColor,
 			});
 		},
 	},
