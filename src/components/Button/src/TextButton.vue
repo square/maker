@@ -3,7 +3,6 @@
 		:class="[
 			$s.Button,
 			$s[`size_${size}`],
-			$s[`shape_${shape}`],
 			{
 				[$s.loading]: loading,
 			}

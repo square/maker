@@ -483,56 +483,6 @@
 		>
 			One-Off Reversed Button
 		</m-button>
-	</div>
-</template>
-
-<script>
-import X from '@square/maker-icons/X';
-import Plus from '@square/maker-icons/Plus';
-import { MButton } from '@square/maker/components/Button';
-
-export default {
-	components: {
-		MButton,
-		Plus,
-		X,
-	},
-	data() {
-		return {
-			color: '#000',
-		};
-	},
-};
-</script>
-
-<style>
-body {
-	background-color: #f9f9f9;
-}
-</style>
-
-<style scoped>
-.icon {
-	width: 16px;
-	height: 16px;
-}
-</style>
-```
-
-# TextButton
-
-## Styles & Sizes
-
-```vue
-<template>
-	<div>
-		<label>
-			Color picker
-			<input
-				v-model="color"
-				type="color"
-			>
-		</label><br><br>
 		<table>
 			<tbody>
 				<tr>
@@ -602,10 +552,15 @@ body {
 </template>
 
 <script>
-import { MTextButton } from '@square/maker/components/Button';
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
+import { MButton, MTextButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
+		MButton,
+		Plus,
+		X,
 		MTextButton,
 	},
 	data() {
@@ -621,7 +576,18 @@ body {
 	background-color: #f9f9f9;
 }
 </style>
+
+<style scoped>
+.icon {
+	width: 16px;
+	height: 16px;
+}
+</style>
 ```
+
+# TextButton
+
+## Styles & Sizes
 
 <!-- api-tables:start -->
 ## Button Props
