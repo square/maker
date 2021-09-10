@@ -79,11 +79,13 @@ const config = merge({}, webpackBaseConfig, {
 		}),
 		clientOnly(new ESLintPlugin({
 			files: '**/*.{vue,js,md}',
-			emitWarning: true,
+			failOnError: false,
+			lintDirtyModulesOnly: true,
 		})),
 		clientOnly(new StylelintPlugin({
 			files: '**/*.{vue,css}',
-			emitWarning: true,
+			failOnError: false,
+			lintDirtyModulesOnly: true,
 		})),
 	],
 });
