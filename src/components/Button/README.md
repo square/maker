@@ -520,7 +520,7 @@ body {
 ```
 
 <!-- api-tables:start -->
-## Props
+## Button Props
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
@@ -538,7 +538,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | loading    | `boolean` | `false`     | —                                  | Toggles button loading state          |
 
 
-## Slots
+## Button Slots
 
 | Slot        | Description       |
 | ----------- | ----------------- |
@@ -546,7 +546,33 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | information | Information label |
 
 
-## Events
+## Button Events
+
+Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
+
+
+## TextButton Props
+
+Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
+
+| Prop       | Type      | Default     | Possible values              | Description                   |
+| ---------- | --------- | ----------- | ---------------------------- | ----------------------------- |
+| type       | `string`  | `'button'`  | —                            | Type of the button            |
+| size       | `string`  | `'medium'`  | `medium`, `large`            | Size of the button            |
+| text-color | `string`  | —           | —                            | Text color of button          |
+| shape      | `string`  | `'rounded'` | `squared`, `rounded`, `pill` | Shape of button               |
+| disabled   | `boolean` | `false`     | —                            | Toggles button disabled state |
+| loading    | `boolean` | `false`     | —                            | Toggles button loading state  |
+
+
+## TextButton Slots
+
+| Slot    | Description  |
+| ------- | ------------ |
+| default | Button label |
+
+
+## TextButton Events
 
 Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 <!-- api-tables:end -->
