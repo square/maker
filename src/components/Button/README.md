@@ -483,7 +483,55 @@
 		>
 			One-Off Reversed Button
 		</m-button>
-		<br> <br>
+	</div>
+</template>
+
+<script>
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MButton,
+		Plus,
+		X,
+	},
+	data() {
+		return {
+			color: '#000',
+		};
+	},
+};
+</script>
+
+<style>
+body {
+	background-color: #f9f9f9;
+}
+</style>
+
+<style scoped>
+.icon {
+	width: 16px;
+	height: 16px;
+}
+</style>
+```
+
+# TextButton
+
+## Styles & Sizes
+```vue
+<template>
+	<div>
+		<label>
+			Color picker
+			<input
+				v-model="color"
+				type="color"
+			>
+		</label><br><br>
 		<table>
 			<tbody>
 				<tr>
@@ -553,15 +601,10 @@
 </template>
 
 <script>
-import X from '@square/maker-icons/X';
-import Plus from '@square/maker-icons/Plus';
-import { MButton, MTextButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
-		MButton,
-		Plus,
-		X,
 		MTextButton,
 	},
 	data() {
@@ -577,18 +620,7 @@ body {
 	background-color: #f9f9f9;
 }
 </style>
-
-<style scoped>
-.icon {
-	width: 16px;
-	height: 16px;
-}
-</style>
 ```
-
-# TextButton
-
-## Styles & Sizes
 
 <!-- api-tables:start -->
 ## Button Props
@@ -601,7 +633,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | size       | `string`  | `'medium'`  | `small`, `medium`, `large`         | Size of the button                    |
 | full-width | `boolean` | `false`     | —                                  | Whether to make the button full-width |
 | color      | `string`  | `'#000'`    | —                                  | Background color of button            |
-| color | `string`  | —           | —                                  | Text color of button                  |
+| text-color | `string`  | —           | —                                  | Text color of button                  |
 | variant    | `string`  | `'primary'` | `primary`, `secondary`, `tertiary` | Semantic variant                      |
 | shape      | `string`  | `'rounded'` | `squared`, `rounded`, `pill`       | Shape of button                       |
 | disabled   | `boolean` | `false`     | —                                  | Toggles button disabled state         |
@@ -621,18 +653,19 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 
 Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
+
 ## TextButton Props
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Prop       | Type      | Default     | Possible values              | Description                   |
-| ---------- | --------- | ----------- | ---------------------------- | ----------------------------- |
-| type       | `string`  | `'button'`  | —                            | Type of the button            |
-| size       | `string`  | `'medium'`  | `medium`, `large`            | Size of the button            |
-| color | `string`  | —           | —                            | Text color of button          |
-| shape      | `string`  | `'rounded'` | `squared`, `rounded`, `pill` | Shape of button               |
-| disabled   | `boolean` | `false`     | —                            | Toggles button disabled state |
-| loading    | `boolean` | `false`     | —                            | Toggles button loading state  |
+| Prop     | Type      | Default    | Possible values   | Description                   |
+| -------- | --------- | ---------- | ----------------- | ----------------------------- |
+| type     | `string`  | `'button'` | —                 | Type of the button            |
+| size     | `string`  | `'medium'` | `medium`, `large` | Size of the button            |
+| color    | `string`  | —          | —                 | Text color of button          |
+| disabled | `boolean` | `false`    | —                 | Toggles button disabled state |
+| loading  | `boolean` | `false`    | —                 | Toggles button loading state  |
+
 
 ## TextButton Slots
 
