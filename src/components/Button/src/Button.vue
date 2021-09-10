@@ -4,7 +4,7 @@
 			$s.Button,
 			$s[`size_${resolvedSize}`],
 			$s[`shape_${resolvedShape}`],
-			$s[`align_${align}`],
+			$s[`align_${resolvedAlign}`],
 			{
 				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild(),
@@ -180,7 +180,7 @@ export default {
 		 */
 		fullWidth: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * Background color of button

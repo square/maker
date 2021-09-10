@@ -234,7 +234,42 @@ The `color` prop is theme-able in ActionBarButtons. If you set a value for the `
 		>
 		<br>
 
-		pick theme default button shape
+		pick theme default actionbarbutton text color
+		<br>
+		<input
+			v-model="theme.actionbarbutton.textColor"
+			type="color"
+		>
+		<br>
+
+		pick theme default actionbarbutton align
+		<br>
+		<select v-model="theme.actionbarbutton.align">
+			<option value="center">
+				center
+			</option>
+			<option value="stack">
+				stack
+			</option>
+			<option value="space-between">
+				space between
+			</option>
+		</select>
+		<br>
+
+		pick theme default actionbarbutton fullWidth
+		<br>
+		<select v-model="theme.actionbarbutton.fullWidth">
+			<option :value="true">
+				true
+			</option>
+			<option :value="false">
+				false
+			</option>
+		</select>
+		<br>
+
+		pick theme default actionbarbutton shape
 		<br>
 		<select v-model="theme.actionbarbutton.shape">
 			<option value="squared">
@@ -300,7 +335,10 @@ export default {
 				},
 				actionbarbutton: {
 					color: '@colors.primary',
+					textColor: undefined,
 					shape: 'pill',
+					align: 'center',
+					fullWidth: false,
 				},
 			},
 		};

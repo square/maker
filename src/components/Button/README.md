@@ -527,7 +527,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | ---------- | --------- | ---------- | ---------------------------------- | ------------------------------------- |
 | type       | `string`  | `'button'` | —                                  | Type of the button                    |
 | size       | `string`  | —          | `small`, `medium`, `large`         | Size of the button                    |
-| full-width | `boolean` | `false`    | —                                  | Whether to make the button full-width |
+| full-width | `boolean` | —          | —                                  | Whether to make the button full-width |
 | color      | `string`  | —          | —                                  | Background color of button            |
 | text-color | `string`  | —          | —                                  | Text color of button                  |
 | variant    | `string`  | —          | `primary`, `secondary`, `tertiary` | Semantic variant                      |

@@ -2,10 +2,10 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`align_${align}`],
+			$s[`align_${resolvedAlign}`],
 			$s[`shape_${resolvedShape}`],
 			{
-				[$s.fullWidth]: fullWidth,
+				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
 			}
@@ -110,7 +110,7 @@ export default {
 		 */
 		fullWidth: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * Background color of button
@@ -148,7 +148,7 @@ export default {
 		 */
 		align: {
 			type: String,
-			default: 'center',
+			default: undefined,
 			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
 		},
 		/**
@@ -183,10 +183,43 @@ export default {
 			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of ActionBarButton`);
 			return shapeValue;
 		},
+		resolvedTextColor() {
+			let textColorValueOrPointer;
+			if (this.textColor) {
+				textColorValueOrPointer = this.textColor;
+			} else {
+				textColorValueOrPointer = this.theme.actionbarbutton.textColor;
+			}
+			const textColorValue = this.theme.resolve(textColorValueOrPointer);
+			assert.error(!textColorValue || chroma.valid(textColorValue), `${textColorValue} resolved from ${textColorValueOrPointer} is not a valid CSS textColor value and cannot be used in the textColor prop of ActionBarButton`);
+			return textColorValue;
+		},
+		resolvedFullWidth() {
+			let fullWidthValueOrPointer;
+			if (this.fullWidth) {
+				fullWidthValueOrPointer = this.fullWidth;
+			} else {
+				fullWidthValueOrPointer = this.theme.actionbarbutton.fullWidth;
+			}
+			const fullWidthValue = this.theme.resolve(fullWidthValueOrPointer);
+			assert.error([true, false].includes(fullWidthValue), `${fullWidthValue} resolved from ${fullWidthValueOrPointer} is not a valid fullWidth value and cannot be used in the fullWidth prop of ActionBarButton`);
+			return fullWidthValue;
+		},
+		resolvedAlign() {
+			let alignValueOrPointer;
+			if (this.align) {
+				alignValueOrPointer = this.align;
+			} else {
+				alignValueOrPointer = this.theme.button.align;
+			}
+			const alignValue = this.theme.resolve(alignValueOrPointer);
+			assert.error(['center', 'stack', 'space-between'].includes(alignValue), `${alignValue} resolved from ${alignValueOrPointer} is not a valid align value and cannot be used in the align prop of Button`);
+			return alignValue;
+		},
 		style() {
 			return fill({
 				color: this.resolvedColor,
-				textColor: this.textColor,
+				textColor: this.resolvedTextColor,
 			});
 		},
 	},
