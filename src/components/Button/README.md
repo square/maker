@@ -520,6 +520,7 @@ body {
 ```
 
 # TextButton
+This button is just clickable text and was made to be used inside the #actions slots of other components such as Notice or Card.
 
 ## Styles & Sizes
 ```vue
@@ -618,6 +619,10 @@ export default {
 <style>
 body {
 	background-color: #f9f9f9;
+}
+
+th {
+	padding-right: 32px;
 }
 </style>
 ```
