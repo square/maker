@@ -5,6 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
+        **⚠️ This is a public repository. Please be aware of sensitive information and prefer referencing internal links.**
+
         Thank you for taking the time to file this feature request.
 
         Please provide as much detail as you can so we can help determine the best solution.
