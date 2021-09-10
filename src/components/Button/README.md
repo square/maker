@@ -519,6 +519,110 @@ body {
 </style>
 ```
 
+# TextButton
+
+## Styles & Sizes
+
+```vue
+<template>
+	<div>
+		<label>
+			Color picker
+			<input
+				v-model="color"
+				type="color"
+			>
+		</label><br><br>
+		<table>
+			<tbody>
+				<tr>
+					<th>
+						Large
+					</th>
+					<td>
+						<m-text-button
+							variant="text"
+							size="large"
+							:text-color="color"
+						>
+							Button
+						</m-text-button>
+						<m-text-button
+							variant="text"
+							size="large"
+							:text-color="color"
+							disabled
+						>
+							Disabled button
+						</m-text-button>
+						<m-text-button
+							variant="text"
+							size="large"
+							:text-color="color"
+							loading
+						>
+							Loading
+						</m-text-button>
+					</td>
+				</tr>
+
+				<tr>
+					<th>
+						Medium
+					</th>
+					<td>
+						<m-text-button
+							variant="text"
+							size="medium"
+							:text-color="color"
+						>
+							Button
+						</m-text-button>
+						<m-text-button
+							variant="text"
+							size="medium"
+							:text-color="color"
+							disabled
+						>
+							Disabled button
+						</m-text-button>
+						<m-text-button
+							variant="text"
+							size="medium"
+							:text-color="color"
+							loading
+						>
+							Loading
+						</m-text-button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</template>
+
+<script>
+import { MTextButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MTextButton,
+	},
+	data() {
+		return {
+			color: '#000',
+		};
+	},
+};
+</script>
+
+<style>
+body {
+	background-color: #f9f9f9;
+}
+</style>
+```
+
 <!-- api-tables:start -->
 ## Button Props
 
@@ -550,7 +654,6 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 
 Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-
 ## TextButton Props
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
@@ -563,7 +666,6 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | shape      | `string`  | `'rounded'` | `squared`, `rounded`, `pill` | Shape of button               |
 | disabled   | `boolean` | `false`     | —                            | Toggles button disabled state |
 | loading    | `boolean` | `false`     | —                            | Toggles button loading state  |
-
 
 ## TextButton Slots
 
