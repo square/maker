@@ -27,6 +27,7 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
+import assert from '@square/maker/utils/assert';
 
 function textButton(tokens) {
 	const color = chroma(tokens.color);
@@ -57,7 +58,7 @@ export default {
 			default: 'button',
 		},
 		/**
-		 * Size of the button
+		 * Size of the button label text
 		 */
 		size: {
 			type: String,
@@ -94,6 +95,10 @@ export default {
 				color: this.color,
 			});
 		},
+	},
+
+	created() {
+		assert.warn(this.$slots.default, 'TextButton should only be used with a label');
 	},
 
 };

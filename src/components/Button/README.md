@@ -521,6 +521,7 @@ body {
 
 # TextButton
 This button is just clickable text and was made to be used inside the #actions slots of other components such as Notice or Card.
+There are no focus, active, or hover states.
 
 ## Styles & Sizes
 ```vue
@@ -666,7 +667,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | Prop     | Type      | Default    | Possible values   | Description                   |
 | -------- | --------- | ---------- | ----------------- | ----------------------------- |
 | type     | `string`  | `'button'` | —                 | Type of the button            |
-| size     | `string`  | `'medium'` | `medium`, `large` | Size of the button            |
+| size     | `string`  | `'medium'` | `medium`, `large` | Size of the button label text |
 | color    | `string`  | —          | —                 | Text color of button          |
 | disabled | `boolean` | `false`    | —                 | Toggles button disabled state |
 | loading  | `boolean` | `false`    | —                 | Toggles button loading state  |
