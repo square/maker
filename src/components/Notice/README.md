@@ -257,10 +257,10 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Slots
 
-| Slot    | Description          |
-| ------- | -------------------- |
-| default | notice content       |
-| actions | put TextButtons here |
+| Slot    | Description           |
+| ------- | --------------------- |
+| default | notice content        |
+| actions | put text buttons here |
 
 
 ## Events
