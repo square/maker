@@ -30,10 +30,10 @@ import { MLoading } from '@square/maker/components/Loading';
 import assert from '@square/maker/utils/assert';
 
 function textButton(tokens) {
-	const color = chroma(tokens.color);
+	const textColor = tokens.color ? chroma(tokens.color) : undefined;
 	return {
 		'--color-main': 'color',
-		'--color-contrast': color.hex(),
+		'--color-contrast': textColor ? textColor.hex() : undefined,
 	};
 }
 
@@ -70,7 +70,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -110,7 +110,7 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-contrast);
+	color: var(--color-contrast, inherit);
 	font-weight: 500;
 	font-family: inherit;
 	vertical-align: middle;

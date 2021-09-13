@@ -665,7 +665,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | -------- | --------- | ---------- | ----------------- | ----------------------------- |
 | type     | `string`  | `'button'` | —                 | Type of the button            |
 | size     | `string`  | `'medium'` | `medium`, `large` | Size of the button label text |
-| color    | `string`  | `'#000'`   | —                 | Text color of button          |
+| color    | `string`  | —          | —                 | Text color of button          |
 | disabled | `boolean` | `false`    | —                 | Toggles button disabled state |
 | loading  | `boolean` | `false`    | —                 | Toggles button loading state  |
 
