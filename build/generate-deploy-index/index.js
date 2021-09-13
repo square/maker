@@ -3,6 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const rsort = require('semver/functions/rsort');
+const { sort } = require('semver');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -28,15 +29,29 @@ const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter((d) => d !== '
 const LAB_DEPLOYS = getDirectories(LAB_DIST);
 
 const VERSION_REGEX = /^\d+\.\d+\.\d+/;
+function isNumericVersion(deployName) {
+	return VERSION_REGEX.test(deployName);
+}
 function isVersion(deployName) {
-	return ['latest', 'latest-preview'].includes(deployName) || VERSION_REGEX.test(deployName);
+	return ['latest', 'latest-preview'].includes(deployName) || isNumericVersion(deployName);
 }
 function isntVersion(deployName) {
 	return !isVersion(deployName);
 }
 
-function toDeployLinks(prefix, suffix, items) {
-	rsort(items);
+function sortVersions(items, isNumeric) {
+	if (isNumeric) {
+		items = items.filter((item) => isNumericVersion(item));
+		rsort(items);
+		items.push('latest', 'latest-preview');
+		return;
+	}
+
+	sort(items);
+}
+
+function toDeployLinks(prefix, suffix, items, isNumeric) {
+	sortVersions(items, isNumeric);
 	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
 }
 
@@ -54,11 +69,11 @@ const BUILT_INDEX = `
 	<h2>Styleguide Deploys</h2>
 	<h3>Versioned Releases</h3>
 	<ul>
-		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion))}
+		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
 	</ul>
 	<h3>WIP Branches</h3>
 	<ul>
-		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
+		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion), false)}
 	</ul>
 	<h2>Lab Deploys</h2>
 	<ul>
