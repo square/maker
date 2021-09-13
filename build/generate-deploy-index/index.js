@@ -72,7 +72,7 @@ const BUILT_INDEX = `
 	</ul>
 	<h3>WIP Branches</h3>
 	<ul>
-		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion), false)}
+		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 	</ul>
 	<h2>Lab Deploys</h2>
 	<ul>
