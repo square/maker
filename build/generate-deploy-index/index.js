@@ -3,7 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 const rsort = require('semver/functions/rsort');
-const { sort } = require('semver');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -49,7 +48,7 @@ function sortVersions(items, isNumeric) {
 		return;
 	}
 
-	sort(items);
+	items.sort();
 }
 
 function toDeployLinks(prefix, suffix, items, isNumeric) {
