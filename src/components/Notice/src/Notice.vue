@@ -25,7 +25,7 @@
 			v-if="showActions"
 			:class="$s.ActionsWrapper"
 		>
-			<!-- @slot put notice buttons here -->
+			<!-- @slot put text buttons here -->
 			<slot name="actions" />
 		</div>
 	</div>
