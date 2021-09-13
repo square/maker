@@ -38,12 +38,14 @@ function isVersion(deployName) {
 function isntVersion(deployName) {
 	return !isVersion(deployName);
 }
-
 function sortVersions(items, isNumeric) {
+	let versions;
+
 	if (isNumeric) {
-		items = items.filter((item) => isNumericVersion(item));
-		rsort(items);
-		items.push('latest', 'latest-preview');
+		versions = items.filter((item) => isNumericVersion(item));
+		rsort(versions);
+		versions.push('latest', 'latest-preview');
+		items = versions;
 		return;
 	}
 
