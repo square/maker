@@ -2,7 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const rsort = require('semver/functions/rsort');
+const vSort = require('semver/functions/sort');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -40,7 +40,7 @@ function isntVersion(deployName) {
 function sortVersions(items, isNumeric) {
 	if (isNumeric) {
 		items = items.filter((item) => isNumericVersion(item));
-		rsort(items);
+		vSort(items);
 		items.push('latest', 'latest-preview');
 		return;
 	}
