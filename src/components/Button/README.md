@@ -573,14 +573,12 @@ There are no focus, active, or hover states.
 					</th>
 					<td>
 						<m-text-button
-							variant="text"
 							size="medium"
 							:color="color"
 						>
 							Button
 						</m-text-button>
 						<m-text-button
-							variant="text"
 							size="medium"
 							:color="color"
 							disabled
@@ -588,7 +586,6 @@ There are no focus, active, or hover states.
 							Disabled button
 						</m-text-button>
 						<m-text-button
-							variant="text"
 							size="medium"
 							:color="color"
 							loading
@@ -668,7 +665,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | -------- | --------- | ---------- | ----------------- | ----------------------------- |
 | type     | `string`  | `'button'` | —                 | Type of the button            |
 | size     | `string`  | `'medium'` | `medium`, `large` | Size of the button label text |
-| color    | `string`  | —          | —                 | Text color of button          |
+| color    | `string`  | `'#000'`   | —                 | Text color of button          |
 | disabled | `boolean` | `false`    | —                 | Toggles button disabled state |
 | loading  | `boolean` | `false`    | —                 | Toggles button loading state  |
 

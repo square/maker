@@ -70,7 +70,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: undefined,
+			default: '#000',
 			validator: (color) => chroma.valid(color),
 		},
 		/**
