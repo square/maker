@@ -38,7 +38,7 @@ function isVersion(deployName) {
 function isntVersion(deployName) {
 	return !isVersion(deployName);
 }
-function sortVersions(items, isNumeric) {
+function sort(items, isNumeric) {
 	if (isNumeric) {
 		items = items.filter((item) => isNumericVersion(item));
 		vSort(items);
@@ -50,7 +50,7 @@ function sortVersions(items, isNumeric) {
 }
 
 function toDeployLinks(prefix, suffix, items, isNumeric) {
-	sortVersions(items, isNumeric);
+	sort(items, isNumeric);
 	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
 }
 
