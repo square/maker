@@ -26,13 +26,14 @@ ensureDirectory(STYLEGUIDE_DIST);
 
 const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter((d) => d !== '0.0.0-semantic-release');
 const LAB_DEPLOYS = getDirectories(LAB_DIST);
+const additionalVersions = ['latest', 'latest-preview'];
 
 const VERSION_REGEX = /^\d+\.\d+\.\d+/;
 function isNumericVersion(deployName) {
 	return VERSION_REGEX.test(deployName);
 }
 function isVersion(deployName) {
-	return ['latest', 'latest-preview'].includes(deployName) || isNumericVersion(deployName);
+	return additionalVersions.includes(deployName) || isNumericVersion(deployName);
 }
 function isntVersion(deployName) {
 	return !isVersion(deployName);
@@ -41,7 +42,7 @@ function sortVersions(items, isNumeric) {
 	if (isNumeric) {
 		items = items.filter((item) => isNumericVersion(item));
 		vSort(items);
-		items.push('latest', 'latest-preview');
+		items.push(additionalVersions);
 		return;
 	}
 
