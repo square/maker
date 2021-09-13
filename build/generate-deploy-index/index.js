@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const rsort = require('semver/functions/rsort');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -35,7 +36,7 @@ function isntVersion(deployName) {
 }
 
 function toDeployLinks(prefix, suffix, items) {
-	items.sort();
+	rsort(items);
 	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
 }
 
