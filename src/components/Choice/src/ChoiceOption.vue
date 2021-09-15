@@ -58,6 +58,12 @@ export default {
 </script>
 
 <style module="$s">
+/*
+	Defined in Choice component:
+	--selected-background-color
+	--selected-text-color
+	--selected-disabled-text-color
+*/
 .Button {
 	--border-radius: 8px;
 	--color-white: #fff;
