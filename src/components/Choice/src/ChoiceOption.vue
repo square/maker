@@ -4,7 +4,6 @@
 			$s.Button,
 			{ [$s.selected]: isSelected },
 		]"
-		:style="style"
 		@click="selectSelf"
 	>
 		<slot />
@@ -32,19 +31,6 @@ export default {
 				return this.controlState.currentValue.includes(this.value);
 			}
 			return this.controlState.currentValue === this.value;
-		},
-
-		style() {
-			const {
-				color,
-				selectedTextColor,
-				selectedDisabledTextColor,
-			} = this.controlState.getSelectedStyle();
-			return {
-				'--selected-background-color': color,
-				'--selected-text-color': selectedTextColor,
-				'--selected-disabled-text-color': selectedDisabledTextColor,
-			};
 		},
 	},
 

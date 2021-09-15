@@ -3,6 +3,7 @@
 		:class="[
 			$s.Container,
 		]"
+		:style="style"
 	>
 		<slot />
 	</div>
@@ -63,11 +64,6 @@ export default {
 		return {
 			currentValue: this.selected,
 			isMultiSelect: this.mode === 'multi-select',
-			getSelectedStyle: () => ({
-				color: this.selectedColor,
-				selectedTextColor: this.contrastColor,
-				selectedDisabledTextColor: this.disabledContrastColor,
-			}),
 		};
 	},
 
@@ -83,6 +79,14 @@ export default {
 			const alphaValue = 0.4;
 			const disabledTextColor = chroma(this.contrastColor).alpha(alphaValue);
 			return disabledTextColor;
+		},
+
+		style() {
+			return {
+				'--selected-background-color': this.selectedColor,
+				'--selected-text-color': this.contrastColor,
+				'--selected-disabled-text-color': this.disabledContrastColor,
+			};
 		},
 	},
 
