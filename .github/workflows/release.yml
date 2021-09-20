@@ -20,7 +20,7 @@ jobs:
       run: |
         nvm i
         npm ci
-        npx semantic-release
+        npx 'semantic-release@^17.0.0'
     - name: Checkout nested Maker Repo deploys branch in .dist directory
       uses: actions/checkout@v2
       with:
