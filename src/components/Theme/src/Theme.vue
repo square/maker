@@ -1,16 +1,20 @@
 <script>
 import { createStitches } from '@stitches/core';
+import { getHighestContrast } from '@square/maker/utils/color';
+
+const contrastCheck = new Set(['primary', 'secondary', 'background']);
+
+function addColorContrast(colorObject) {
+	const colors = colorObject;
+	Object.entries(colors).forEach(([key, value]) => {
+		if (contrastCheck.has(key)) {
+			colors[`on-${key}`] = getHighestContrast(value);
+		}
+	});
+	return colors;
+}
 
 export default {
-
-	// provide() {
-	// 	const theme = {};
-	// 	Object.defineProperty(theme, 'defaultTheme', {
-	// 		enumerable: true,
-	// 		get: () => this.defaultTheme,
-	// 	});
-	// 	return { theme };
-	// },
 
 	provide() {
 		return {
@@ -36,16 +40,28 @@ export default {
 	},
 
 	mounted() {
+		this.generateColorContrast();
 		this.applyTheme();
 	},
 
 	methods: {
+		generateColorContrast() {
+			let { colors } = this.theme;
+			const { surfaces } = colors;
+
+			colors = addColorContrast(colors);
+
+			Object.entries(surfaces).forEach(([key, value]) => {
+				surfaces[key] = addColorContrast(value);
+			});
+		},
+
 		applyTheme() {
 			const { colors } = this.theme;
 			const { surfaces } = colors;
 			const modeObjects = [];
 			const surfaceStrings = [];
-			delete colors.surfaces;
+			delete colors.surfaces; // Removed so stitches doesn't try to generate property from an object
 
 			const { theme, createTheme } = createStitches({ theme: this.theme, prefix: 'maker' });
 			this.defaultTheme = theme;
@@ -57,7 +73,7 @@ export default {
 				surfaceStrings.push(newSurface.toString());
 			});
 
-			this.themeModes = modeObjects;
+			this.themeSurfaces = modeObjects;
 		},
 	},
 

@@ -8,23 +8,19 @@ export const theme1 = {
 		background: '#fff',
 		text: '#000',
 		primary: '#e5d7cc',
-		'on-primary': '#000',
 		surfaces: {
 			profile1: {
 				background: '#fff',
 				text: '#000',
 				heading: '#000',
 				primary: '#000',
-				'on-primary': '#fff',
 				secondary: '#000',
-				'on-secondary': '#fff',
 			},
 			profile2: {
 				background: '#fff',
 				text: '#000',
 				heading: '#000',
 				primary: '#e5d7cc',
-				'on-primary': '#000',
 				secondary: '#000',
 			},
 			profile3: {
@@ -32,7 +28,6 @@ export const theme1 = {
 				heading: '#000',
 				text: '#000',
 				primary: '#000',
-				'on-primary': '#fff',
 				secondary: '#000',
 			},
 			profile4: {
@@ -40,7 +35,6 @@ export const theme1 = {
 				text: '#000',
 				heading: '#000',
 				primary: '#000',
-				'on-primary': '#fff',
 				secondary: '#000',
 			},
 			profile5: {
@@ -48,7 +42,6 @@ export const theme1 = {
 				text: '#000',
 				heading: '#000',
 				primary: '#000',
-				'on-primary': '#fff',
 				secondary: '#000',
 			},
 			profile6: {
@@ -56,7 +49,6 @@ export const theme1 = {
 				text: '#fff',
 				heading: '#e5d7cc',
 				primary: '#e5d7cc',
-				'on-primary': '#000',
 				secondary: '#fff',
 			},
 		},

@@ -38,18 +38,32 @@
 							Example paragraph text
 						</p>
 						<div class="controls">
-							<div class="button button--primary profile-button" />
-							<div class="button button--secondary profile-button-secondary" />
+							<m-button>
+								Button
+							</m-button>
+							<m-button variant="secondary">
+								Button
+							</m-button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<h1>Attempting to simplify contrast checks</h1>
-			<m-button>
-				Default Button
-			</m-button>
+			<h1>Local Overrides</h1>
 			<m-button color="#32a852">
 				Green button
+			</m-button>
+			<m-button
+				color="#32a852"
+				variant="secondary"
+				border-radius="60px"
+			>
+				Green secondary
+			</m-button>
+			<m-button
+				color="#32a852"
+				variant="tertiary"
+			>
+				Green tertiary
 			</m-button>
 		</m-theme>
 	</div>

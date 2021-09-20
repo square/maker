@@ -162,7 +162,7 @@ export function APCAcontrast(bg, fg) {
  * @param {Array} options e.g."#ffffff", "#000000"
  * @return {String} hex value with highest constrast from options
  */
-export function getHighestContrast(bg, options) {
+export function getHighestContrast(bg, options = ['#fff', '#000']) {
 	return maxBy(options, (x) => APCAcontrast(bg, x));
 }
 
@@ -172,4 +172,8 @@ export function meetsTitleContrast(bg, titleColor) {
 
 export function meetsButtonContrast(bg, buttonColor) {
 	return APCAcontrast(bg, buttonColor) >= APCA_CONTRAST_BUTTON;
+}
+
+export function getRGB(color) {
+	return chroma(color).rgb();
 }
