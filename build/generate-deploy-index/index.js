@@ -39,7 +39,11 @@ function sort(items, isNumeric) {
 	if (isNumeric) {
 		items = items.filter((item) => semverValid(item));
 		semverSort(items);
-		items.push(additionalVersions);
+
+		additionalVersions.forEach((version) => {
+			items.push(version);
+		});
+
 		return items;
 	}
 
