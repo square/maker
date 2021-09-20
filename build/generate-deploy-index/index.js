@@ -3,6 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const semverSort = require('semver/functions/sort');
+const semverCompare = require('semver/functions/compare');
 const semverValid = require('semver/functions/valid');
 
 const DIST = path.resolve(process.cwd(), '.dist');
@@ -38,16 +39,16 @@ function isntVersion(deployName) {
 function sort(items, isNumeric) {
 	if (isNumeric) {
 		items = items.filter((item) => semverValid(item));
-		semverSort(items);
+		items.sort(semverCompare);
 		items.push(additionalVersions);
-		return;
+		return items;
 	}
 
-	items.sort();
+	return items.sort();
 }
 
 function toDeployLinks(prefix, suffix, items, isNumeric) {
-	sort(items, isNumeric);
+	items = sort(items, isNumeric);
 	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
 }
 
