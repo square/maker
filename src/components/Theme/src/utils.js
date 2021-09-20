@@ -1,7 +1,13 @@
 import {
- isString, isNull, isUndefined, get,
+	isString, isNull, isUndefined, get,
 } from 'lodash';
 
+/**
+ * Check if passed in value is a pointer, if so resolve the pointer to its value,
+ * otherwise return the value as-is.
+ * @param {value} valueOrPointer
+ * @return {*} resolvedValue
+ */
 export function resolve(valueOrPointer) {
 	if (!isString(valueOrPointer)) {
 		return valueOrPointer; // non-strings are always values
@@ -12,6 +18,11 @@ export function resolve(valueOrPointer) {
 	return valueOrPointer; // not a pointer, already resolved value, return as-is
 }
 
+/**
+ * validates pointer and returns _.get(this, pointer)
+ * @param {*} pointer
+ * @returns {*} _.get(this, pointer)
+ */
 export function getPath(pointer) {
 	if (!isString(pointer)) {
 		throw new Error(`cannot resolve pointer ${pointer} it is not a string`);
