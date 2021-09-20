@@ -2,7 +2,8 @@
 
 const path = require('path');
 const fs = require('fs');
-const vSort = require('semver/functions/sort');
+const semverSort = require('semver/functions/sort');
+const semverValid = require('semver/functions/valid');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -28,20 +29,16 @@ const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter((d) => d !== '
 const LAB_DEPLOYS = getDirectories(LAB_DIST);
 const additionalVersions = ['latest', 'latest-preview'];
 
-const VERSION_REGEX = /^\d+\.\d+\.\d+/;
-function isNumericVersion(deployName) {
-	return VERSION_REGEX.test(deployName);
-}
 function isVersion(deployName) {
-	return additionalVersions.includes(deployName) || isNumericVersion(deployName);
+	return additionalVersions.includes(deployName) || semverValid(deployName);
 }
 function isntVersion(deployName) {
 	return !isVersion(deployName);
 }
 function sort(items, isNumeric) {
 	if (isNumeric) {
-		items = items.filter((item) => isNumericVersion(item));
-		vSort(items);
+		items = items.filter((item) => semverValid(item));
+		semverSort(items);
 		items.push(additionalVersions);
 		return;
 	}
