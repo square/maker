@@ -4,7 +4,6 @@
 			$s.Button,
 			$s[`variant_${variant}`],
 			$s[`size_${size}`],
-			$s[`shape_${shape}`],
 			$s[`align_${align}`],
 			{
 				[$s.fullWidth]: fullWidth,
@@ -41,7 +40,7 @@
 
 <script>
 import chroma from 'chroma-js';
-import { getHighestContrast } from '@square/maker/utils/color';
+import { getHighestContrast, getRGB } from '@square/maker/utils/color';
 import { MLoading } from '@square/maker/components/Loading';
 
 /**
@@ -107,13 +106,13 @@ export default {
 			default: 'primary',
 			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
 		},
+
 		/**
-		 * Shape of button
+		 * Border radius of button
 		 */
-		shape: {
+		borderRadius: {
 			type: String,
-			default: 'rounded',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+			default: undefined,
 		},
 		/**
 		 * Toggles button disabled state
@@ -141,19 +140,27 @@ export default {
 
 	computed: {
 		style() {
+			const color = this.color || this.theme?.colors?.primary;
+			const radii = this.borderRadius || this.theme?.radii?.default;
+			const styles = {
+				'--color-rgb': getRGB(color),
+				'--radii': radii,
+			};
+
 			switch (this.variant) {
 			case 'primary':
-				return this.inlinePrimaryStyle;
+				return Object.assign(styles, this.inlinePrimaryStyle);
 			case 'secondary':
-				return this.inlineSecondaryStyle;
+			case 'tertiary':
+				return Object.assign(styles, this.inlineSecondaryStyle);
 			default:
-				return this.inlinePrimaryStyle;
+				return Object.assign(styles, this.inlinePrimaryStyle);
 			}
 		},
 		inlinePrimaryStyle() {
 			return (this.color ? {
 				'--inline-background-color': this.color,
-				'--inline-color': getHighestContrast(this.color, ['#fff', '#000']),
+				'--inline-color': getHighestContrast(this.color),
 			} : false);
 		},
 		inlineSecondaryStyle() {
@@ -192,10 +199,10 @@ export default {
 	font-family: inherit;
 	vertical-align: middle;
 	border: none;
-	border-radius: 8px;
+	border-radius: var(--radii, 8px);
 	outline: none;
 	box-shadow:
-		var(--outline-border, 0 0),
+		var(--color-rgb, 0 0),
 		var(--focus-border, 0 0);
 	cursor: pointer;
 	transition:
@@ -219,8 +226,66 @@ export default {
 	}
 }
 
+.Button:disabled {
+	cursor: initial;
+	opacity: 0.4;
+}
+
+.Button:focus {
+	--focus-border:
+		0 0 0 1px #fff,
+		0 0 0 3px rgba(var(--color-rgb), 0.3);
+}
+
+.variant_primary {
+	color: var(--inline-color, var(--maker-colors-on-primary, #fff));
+	background-color: var(--inline-background-color, var(--maker-colors-primary, #000));
+
+	&:hover:not(:disabled) {
+		background-color: rgba(var(--color-rgb), 0.8);
+	}
+
+	&:active:not(:disabled) {
+		background-color: rgba(var(--color-rgb), 0.9);
+	}
+}
+
+.variant_secondary {
+	color: var(--inline-color, var(--maker-colors-secondary, var(--maker-colors-primary, #000)));
+	background-color: transparent;
+	border:
+		1px solid
+		var(
+			--inline-color,
+			var(
+				--maker-colors-secondary,
+				var(
+					--maker-colors-primary,
+					#000
+				)
+			)
+		);
+
+	&:hover:not(:disabled) {
+		border-color: rgba(var(--color-rgb), 0.8);
+	}
+
+	&:active:not(:disabled) {
+		border-color: rgba(var(--color-rgb), 0.9);
+	}
+}
+
+.variant_tertiary {
+	color: var(--inline-color, var(--maker-colors-primary, #000));
+	background-color: transparent;
+}
+
+.iconButton {
+	min-width: max-content;
+}
+
 .Button.size_small {
-	padding: var(--small-padding);
+	padding: 12px 24px;
 	font-size: 12px;
 
 	& > * {
@@ -233,7 +298,7 @@ export default {
 }
 
 .Button.size_large {
-	padding: var(--large-padding);
+	padding: 20px 32px;
 	font-size: 16px;
 
 	& > * {
@@ -243,68 +308,6 @@ export default {
 	&.iconButton {
 		padding: 20px;
 	}
-}
-
-.Button:disabled {
-	cursor: initial;
-
-	& > * {
-		opacity: 0.4;
-	}
-}
-
-.Button:focus {
-	--focus-border:
-		0 0 0 1px #fff,
-		0 0 0 3px var(--color-focus);
-}
-
-.Button:hover:not(:disabled) {
-	color: var(--color-contrast-hover);
-	background-color: var(--color-main-hover);
-}
-
-.Button:active:not(:disabled) {
-	color: var(--color-contrast-active);
-	background-color: var(--color-main-active);
-}
-
-.variant_primary {
-	color: var(--inline-color, var(--maker-colors-on-primary, #fff));
-	background-color: var(--inline-background-color, var(--maker-colors-primary, #000));
-}
-
-.variant_secondary {
-	color: var(--inline-color, var(--maker-colors-secondary, var(--maker-colors-primary, #000)));
-	background-color: transparent;
-	border-color:
-		var(
-			--inline-color,
-			var(
-				--maker-colors-secondary,
-				var(
-					--maker-colors-primary,
-					#000
-				)
-			)
-		);
-}
-
-.variant_tertiary {
-	color: var(--inline-color, var(--maker-colors-primary, #000));
-	background-color: transparent;
-}
-
-.shape_pill {
-	border-radius: 32px;
-}
-
-.shape_squared {
-	border-radius: 0;
-}
-
-.iconButton {
-	min-width: max-content;
 }
 
 .fullWidth {
