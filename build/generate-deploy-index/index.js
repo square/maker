@@ -3,7 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 const semverSort = require('semver/functions/sort');
-const semverCompare = require('semver/functions/compare');
 const semverValid = require('semver/functions/valid');
 
 const DIST = path.resolve(process.cwd(), '.dist');
@@ -39,7 +38,7 @@ function isntVersion(deployName) {
 function sort(items, isNumeric) {
 	if (isNumeric) {
 		items = items.filter((item) => semverValid(item));
-		items.sort(semverCompare);
+		semverSort(items);
 		items.push(additionalVersions);
 		return items;
 	}
