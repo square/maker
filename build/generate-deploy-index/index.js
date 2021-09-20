@@ -35,8 +35,8 @@ function isVersion(deployName) {
 function isntVersion(deployName) {
 	return !isVersion(deployName);
 }
-function sort(items, isNumeric) {
-	if (isNumeric) {
+function sort(items, isNumericVersions) {
+	if (isNumericVersions) {
 		items = items.filter((item) => semverValid(item));
 		semverSort(items);
 
@@ -50,8 +50,8 @@ function sort(items, isNumeric) {
 	return items.sort();
 }
 
-function toDeployLinks(prefix, suffix, items, isNumeric) {
-	items = sort(items, isNumeric);
+function toDeployLinks(prefix, suffix, items, isNumericVersions) {
+	items = sort(items, isNumericVersions);
 	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
 }
 
