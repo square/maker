@@ -2,7 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const semverSort = require('semver/functions/sort');
+const semverSort = require('semver/functions/rsort');
 const semverValid = require('semver/functions/valid');
 
 const DIST = path.resolve(process.cwd(), '.dist');
@@ -27,7 +27,7 @@ ensureDirectory(STYLEGUIDE_DIST);
 
 const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter((d) => d !== '0.0.0-semantic-release');
 const LAB_DEPLOYS = getDirectories(LAB_DIST);
-const additionalVersions = ['latest', 'latest-preview'];
+const additionalVersions = ['latest-preview', 'latest'];
 
 function isVersion(deployName) {
 	return additionalVersions.includes(deployName) || semverValid(deployName);
@@ -41,7 +41,7 @@ function sort(items, isNumericVersions) {
 		semverSort(items);
 
 		additionalVersions.forEach((version) => {
-			items.push(version);
+			items.unshift(version);
 		});
 
 		return items;
