@@ -46,6 +46,10 @@ export default {
 			type: Number,
 			default: () => undefined,
 		},
+		maxSize: {
+			type: Number,
+			default: () => undefined,
+		},
 	},
 
 	data: () => ({
@@ -102,6 +106,15 @@ export default {
 		},
 
 		async handleImageUpload(image) {
+			if (this.maxSize && image.file.size > this.maxSize) {
+				Vue.set(image, 'progress', MAX_PROGRESS);
+				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
+				Vue.set(image, 'fileTooLarge', true);
+				return;
+			}
+
+			Vue.set(image, 'fileTooLarge', false);
+
 			if (!this.uploadHandler) {
 				Vue.set(image, 'progress', MAX_PROGRESS);
 				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
