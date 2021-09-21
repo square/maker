@@ -43,15 +43,15 @@ export default {
 	box-sizing: border-box;
 	width: 96px;
 	height: 96px;
-	border: 1px solid rgba(0, 0, 0, 0.9);
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 8px;
 	cursor: pointer;
 	transition: background-color 150ms linear;
 }
 
 .ImagePickerInputIcon {
-	width: 15px;
-	height: 15px;
+	width: 16px;
+	height: 16px;
 }
 
 .ImagePickerInput {
