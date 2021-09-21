@@ -7,8 +7,7 @@
 			ref="input"
 			:class="$s.ImagePickerInput"
 			type="file"
-			multiple="true"
-			accept="image/jpeg, image/png"
+			v-bind="$attrs"
 			@change="selectImages"
 		>
 		<plus-icon
