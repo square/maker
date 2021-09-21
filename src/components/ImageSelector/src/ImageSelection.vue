@@ -101,6 +101,7 @@ export default {
 	height: 96px;
 	overflow: hidden;
 	background-repeat: no-repeat;
+	background-position: center;
 	background-size: cover;
 	border-radius: 8px;
 	transition: background-image linear 150ms;

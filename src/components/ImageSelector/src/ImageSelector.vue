@@ -87,13 +87,16 @@ export default {
 
 		formatImages(images) {
 			const formattedImages = images
-				.map((image) => ({
-					id: this.nextID,
-					file: image,
-					status: IMAGE_SELECTOR_STATUSES.PENDING,
-				}));
+				.map((image) => {
+					this.nextID += ID_INCREMENT;
+
+					return {
+						id: this.nextID,
+						file: image,
+						status: IMAGE_SELECTOR_STATUSES.PENDING,
+					};
+				});
 			formattedImages.forEach((image) => this.buildImageURL(image));
-			this.nextID += ID_INCREMENT;
 
 			return formattedImages;
 		},
