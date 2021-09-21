@@ -18,6 +18,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 				<m-image-selector
 					:model="uploadedImages"
 					:upload-handler="selectImage"
+					:max-size="2000000"
 					@input="setUploadedImages"
 				/>
 			</div>
@@ -144,6 +145,7 @@ export default {
 | model          | `array`  | `[]`                                                                       | `[]`                   | An array of selected images. See below for interface details                                                  |
 | upload-handler | `func`   | `({ image, uploadProgressHandler }) => undefined` | `Function | undefined` | Function to trigger an upload on file selection, should be async. Argument is object with image file and a function to update progress |
 | max-images     | `number` | `undefined`                                                                | -                      | Maximum number of images allowed to be selected                                                               |
+| max-size       | `number` | `undefined`                                                                | -                      | Maximum size of images allowed to be selected (in bytes)                                                      |
 
 
 ## Events
