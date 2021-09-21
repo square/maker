@@ -1,5 +1,9 @@
 # ImageSelector
 
+Use ImageSelector to provide a visual wrapper for a file input. Use with an upload handler to track upload progress and trigger uploads on file selection.
+
+Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with this configuration.
+
 ```vue
 <template>
 	<div>
@@ -17,8 +21,6 @@
 					@input="setUploadedImages"
 				/>
 			</div>
-
-			<pre>{{ lowOverheadImages.uploaded }}</pre>
 		</div>
 
 		<div :class="$s.SelectorContainer">
@@ -32,8 +34,6 @@
 				:model="normalImages"
 				@input="setNormalImages"
 			/>
-
-			<pre>{{ lowOverheadImages.normal }}</pre>
 		</div>
 	</div>
 </template>
@@ -125,18 +125,12 @@ export default {
 </script>
 
 <style module="$s">
-.SelectorContainer {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 16px;
-}
-
 .SelectorContainer + .SelectorContainer {
 	margin-top: 32px;
 }
 
 .SelectorHeader {
-	grid-column: 1 / 3;
+	margin-bottom: 16px;
 }
 </style>
 
@@ -145,16 +139,37 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop           | Type     | Default           | Possible values | Description |
-| -------------- | -------- | ----------------- | --------------- | ----------- |
-| model          | `array`  | `[]`              | —               | —           |
-| upload-handler | `func`   | `() => undefined` | —               | —           |
-| max-images     | `number` | `() => undefined` | —               | —           |
+| Prop           | Type     | Default                                                                    | Possible values        | Description                                                                                                   |
+| -------------- | -------- | -------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------- |
+| model          | `array`  | `[]`                                                                       | `[]`                   | An array of selected images. See below for interface details                                                  |
+| upload-handler | `func`   | `({ image, uploadProgressHandler }) => undefined` | `Function | undefined` | Function to trigger an upload on file selection, should be async. Argument is object with image file and a function to update progress |
+| max-images     | `number` | `undefined`                                                                | -                      | Maximum number of images allowed to be selected                                                               |
 
 
 ## Events
 
-| Event | Type | Description |
-| ----- | ---- | ----------- |
-| input | -    | —           |
+| Event | Type | Description                             |
+| ----- | ---- | --------------------------------------- |
+| input | `[]` | Array of images when a file is selected |
+
+## Image Selection Interface
+```typescript
+interface ImageSelectionWithUpload {
+	id: number;
+	file: File | Blob;
+	url: string; // base64 representation of image to display on UI
+	status: 'pending' | 'complete' | 'error';
+	progress: number; // progress of upload, should be value from 0-100
+	apiResponse?: any; // return value from upload handler, only present when status is 'complete'
+	apiError?: any; // error from upload handler if an error is thrown, only present when status is 'error'
+}
+
+interface ImageSelectionWithoutUpload {
+	id: number;
+	file: File | Blob;
+	url: string; // base64 representation of image to display on UI
+	status: 'complete';
+	progress: 100;
+}
+```
 <!-- api-tables:end -->

@@ -144,12 +144,11 @@ export default {
 .ImageUploaderContainer {
 	display: flex;
 	flex-wrap: wrap;
+	gap: 16px;
 	align-items: flex-start;
 }
 
 .ImageUploaderItem {
 	flex-shrink: 0;
-	margin-top: 16px;
-	margin-right: 16px;
 }
 </style>
