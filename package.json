@@ -122,5 +122,8 @@
   },
   "release": {
     "preset": "conventionalcommits"
+  },
+  "dependencies": {
+    "@adobe/leonardo-contrast-colors": "^1.0.0-alpha.8"
   }
 }
