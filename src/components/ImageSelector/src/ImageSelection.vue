@@ -28,15 +28,20 @@
 			@click="$emit('removeImage', image.id)"
 		>
 			<!-- TODO: Icon -->
-			<x-icon inline />
+			<x-icon
+				inline
+				:class="$s.ImageSelectionRemoveIcon"
+			/>
 		</button>
 	</div>
 </template>
 
 <script>
 import { MLoading } from '@square/maker/components/Loading';
-import XIcon from '@square-icons/vue/16/UI/X-Stroked';
+import XIcon from '@square/maker-icons/X';
 import { IMAGE_SELECTOR_STATUSES } from './constants';
+
+const MAX_PROGRESS = 100;
 
 export default {
 	name: 'MImageSelection',
@@ -61,11 +66,12 @@ export default {
 		},
 
 		showProgressBar() {
-			return this.image.progress < 100;
+			return this.image.progress < MAX_PROGRESS;
 		},
 
 		progressContainerStyle() {
 			return {
+				// eslint-disable-next-line no-magic-numbers
 				opacity: this.showProgressBar ? 1 : 0,
 			};
 		},
@@ -139,6 +145,11 @@ export default {
 	border: 0;
 	border-radius: 50%;
 	cursor: pointer;
+}
+
+.ImageSelectionRemoveIcon {
+	width: 16px;
+	height: 16px;
 }
 
 .ImageSelectionProgressContainer {
