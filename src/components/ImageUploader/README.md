@@ -1,6 +1,6 @@
-# ImageSelector
+# ImageUploader
 
-Use ImageSelector to provide a visual wrapper for a file input. Use with an upload handler to track upload progress and trigger uploads on file selection.
+Use ImageUploader to provide a visual wrapper for a file input. Use with an upload handler to track upload progress and trigger uploads on file selection.
 
 Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with this configuration.
 
@@ -15,7 +15,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 				With Upload Handler
 			</m-heading>
 			<div>
-				<m-image-selector
+				<m-image-uploader
 					:model="uploadedImages"
 					:upload-handler="selectImage"
 					:max-size="2000000"
@@ -31,7 +31,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			>
 				Without Upload Handler
 			</m-heading>
-			<m-image-selector
+			<m-image-uploader
 				:model="normalImages"
 				@input="setNormalImages"
 			/>
@@ -42,7 +42,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 <script>
 /* eslint-disable no-magic-numbers */
 import { MHeading } from '@square/maker/components/Heading';
-import { MImageSelector, IMAGE_SELECTOR_STATUSES } from '@square/maker/components/ImageSelector';
+import { MImageUploader, IMAGE_SELECTOR_STATUSES } from '@square/maker/components/ImageUploader';
 
 const nextStatuses = [
 	IMAGE_SELECTOR_STATUSES.PENDING,
@@ -52,7 +52,7 @@ const nextStatuses = [
 
 export default {
 	components: {
-		MImageSelector,
+		MImageUploader,
 		MHeading,
 	},
 
@@ -92,6 +92,7 @@ export default {
 			});
 		},
 
+		// Pay no mind to any weirdness here, this is to simulate an image taking time to upload
 		uploadImage({
 			progress = 0,
 			resolve,
@@ -140,38 +141,17 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop           | Type     | Default                                                                    | Possible values        | Description                                                                                                   |
-| -------------- | -------- | -------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------- |
-| model          | `array`  | `[]`                                                                       | `[]`                   | An array of selected images. See below for interface details                                                  |
-| upload-handler | `func`   | `({ image, uploadProgressHandler }) => undefined` | `Function | undefined` | Function to trigger an upload on file selection, should be async. Argument is object with image file and a function to update progress |
-| max-images     | `number` | `undefined`                                                                | -                      | Maximum number of images allowed to be selected                                                               |
-| max-size       | `number` | `undefined`                                                                | -                      | Maximum size of images allowed to be selected (in bytes)                                                      |
+| Prop           | Type     | Default           | Possible values | Description |
+| -------------- | -------- | ----------------- | --------------- | ----------- |
+| model          | `array`  | `[]`              | —               | —           |
+| upload-handler | `func`   | `() => undefined` | —               | —           |
+| max-images     | `number` | `() => undefined` | —               | —           |
+| max-size       | `number` | `() => undefined` | —               | —           |
 
 
 ## Events
 
-| Event | Type | Description                             |
-| ----- | ---- | --------------------------------------- |
-| input | `[]` | Array of images when a file is selected |
-
-## Image Selection Interface
-```typescript
-interface ImageSelectionWithUpload {
-	id: number;
-	file: File | Blob;
-	url: string; // base64 representation of image to display on UI
-	status: 'pending' | 'complete' | 'error';
-	progress: number; // progress of upload, should be value from 0-100
-	apiResponse?: any; // return value from upload handler, only present when status is 'complete'
-	apiError?: any; // error from upload handler if an error is thrown, only present when status is 'error'
-}
-
-interface ImageSelectionWithoutUpload {
-	id: number;
-	file: File | Blob;
-	url: string; // base64 representation of image to display on UI
-	status: 'complete';
-	progress: 100;
-}
-```
+| Event | Type | Description |
+| ----- | ---- | ----------- |
+| input | -    | —           |
 <!-- api-tables:end -->

@@ -26,7 +26,7 @@ const ID_INCREMENT = 1;
 const NO_MORE_IMAGES_COUNT = 0;
 
 export default {
-	name: 'MImageSelector',
+	name: 'MImageUploader',
 
 	components: {
 		MImagePicker,
