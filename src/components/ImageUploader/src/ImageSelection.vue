@@ -1,6 +1,9 @@
 <template>
 	<div
-		:class="{ [$s.ImageSelectionContainer]: true, [$s.ImageSelectionContainerError]: hasError }"
+		:class="{
+			[$s.ImageSelectionContainer]: true,
+			[$s.ImageSelectionContainerError]: hasError
+		}"
 		role="img"
 		:style="bgImageStyle"
 	>
@@ -8,7 +11,7 @@
 			v-if="isUploading"
 			:class="$s.ImageSelectionLoaderContainer"
 		>
-			<m-loading :class="$s.ImageSelectionLoader" />
+			<loading :class="$s.ImageSelectionLoader" />
 		</div>
 
 		<div
@@ -37,7 +40,7 @@
 </template>
 
 <script>
-import { MLoading } from '@square/maker/components/Loading';
+import { MLoading as Loading } from '@square/maker/components/Loading';
 import XIcon from '@square/maker-icons/X';
 import { IMAGE_SELECTOR_STATUSES } from './constants';
 
@@ -47,7 +50,7 @@ export default {
 	name: 'MImageSelection',
 
 	components: {
-		MLoading,
+		Loading,
 		XIcon,
 	},
 

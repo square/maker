@@ -147,6 +147,7 @@ export default {
 | upload-handler | `func`   | `() => undefined` | —               | —           |
 | max-images     | `number` | `() => undefined` | —               | —           |
 | max-size       | `number` | `() => undefined` | —               | —           |
+| accept         | `string` | `() => 'image/*'` | —               | —           |
 
 
 ## Events
