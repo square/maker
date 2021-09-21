@@ -1,11 +1,13 @@
 <template>
 	<div :class="$s.ImageUploaderContainer">
-		<m-image-picker
+		<image-picker
 			v-if="canUploadImage"
 			:class="$s.ImageUploaderItem"
+			:multiple="canUploadMultiple"
+			:accept="accept"
 			@selectImages="selectImages"
 		/>
-		<m-image-selection
+		<image-selection
 			v-for="image of model"
 			:key="image.id"
 			:image="image"
@@ -16,9 +18,8 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import MImagePicker from './ImagePicker.vue';
-import MImageSelection from './ImageSelection.vue';
+import ImagePicker from './ImagePicker.vue';
+import ImageSelection from './ImageSelection.vue';
 import { IMAGE_SELECTOR_STATUSES } from './constants';
 
 const MAX_PROGRESS = 100;
@@ -29,8 +30,8 @@ export default {
 	name: 'MImageUploader',
 
 	components: {
-		MImagePicker,
-		MImageSelection,
+		ImagePicker,
+		ImageSelection,
 	},
 
 	props: {
@@ -49,6 +50,10 @@ export default {
 		maxSize: {
 			type: Number,
 			default: () => undefined,
+		},
+		accept: {
+			type: String,
+			default: () => 'image/*',
 		},
 	},
 
@@ -70,6 +75,11 @@ export default {
 			}
 
 			return this.maxImages - this.model.length;
+		},
+
+		canUploadMultiple() {
+			// eslint-disable-next-line no-magic-numbers
+			return !this.maxImages || this.maxImages > 1;
 		},
 	},
 
@@ -107,32 +117,32 @@ export default {
 
 		async handleImageUpload(image) {
 			if (this.maxSize && image.file.size > this.maxSize) {
-				Vue.set(image, 'progress', MAX_PROGRESS);
-				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
-				Vue.set(image, 'fileTooLarge', true);
+				this.$set(image, 'progress', MAX_PROGRESS);
+				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
+				this.$set(image, 'fileTooLarge', true);
 				return;
 			}
 
-			Vue.set(image, 'fileTooLarge', false);
+			this.$set(image, 'fileTooLarge', false);
 
 			if (!this.uploadHandler) {
-				Vue.set(image, 'progress', MAX_PROGRESS);
-				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
+				this.$set(image, 'progress', MAX_PROGRESS);
+				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
 				return;
 			}
 
 			try {
 				const response = await this.uploadHandler({
 					image: image.file,
-					uploadProgressHandler: (progress) => Vue.set(image, 'progress', progress),
+					uploadProgressHandler: (progress) => this.$set(image, 'progress', progress),
 				});
-				Vue.set(image, 'progress', MAX_PROGRESS);
-				Vue.set(image, 'apiResponse', response);
-				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
+				this.$set(image, 'progress', MAX_PROGRESS);
+				this.$set(image, 'apiResponse', response);
+				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
 			} catch (error) {
-				Vue.set(image, 'progress', MAX_PROGRESS);
-				Vue.set(image, 'apiError', error);
-				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
+				this.$set(image, 'progress', MAX_PROGRESS);
+				this.$set(image, 'apiError', error);
+				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
 			}
 		},
 
@@ -150,7 +160,7 @@ export default {
 				reader.readAsDataURL(image.file);
 			});
 
-			Vue.set(image, 'url', url);
+			this.$set(image, 'url', url);
 		},
 	},
 };
