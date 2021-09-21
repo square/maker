@@ -39,6 +39,7 @@
 </template>
 
 <script>
+/* eslint-disable no-magic-numbers */
 import { MHeading } from '@square/maker/components/Heading';
 import { MImageSelector, IMAGE_SELECTOR_STATUSES } from '@square/maker/components/ImageSelector';
 
@@ -144,16 +145,16 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop          | Type            | Default     | Possible values | Description                                      |
-| ----------    | --------------- | ----------- | --------------- | ------------------------------------------------ |
-| v-model*      | `array`         | []          | —               | selector's current value                         |
-| uploadHandler | `Function`      | —           | —               | opt. callback function to upload selected images |
-| maxImages     | `number`        | —           | —               | maximum number of images selectable              |
+| Prop           | Type     | Default           | Possible values | Description |
+| -------------- | -------- | ----------------- | --------------- | ----------- |
+| model          | `array`  | `[]`              | —               | —           |
+| upload-handler | `func`   | `() => undefined` | —               | —           |
+| max-images     | `number` | `() => undefined` | —               | —           |
 
 
 ## Events
 
-| Event  | Type     | Description             |
-| ------ | -------- | ----------------------- |
-| input  | `Array`  | updated model of images |
+| Event | Type | Description |
+| ----- | ---- | ----------- |
+| input | -    | —           |
 <!-- api-tables:end -->

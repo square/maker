@@ -17,10 +17,13 @@
 
 <script>
 import Vue from 'vue';
-import uuid from 'uuid';
 import MImagePicker from './ImagePicker.vue';
 import MImageSelection from './ImageSelection.vue';
 import { IMAGE_SELECTOR_STATUSES } from './constants';
+
+const MAX_PROGRESS = 100;
+const ID_INCREMENT = 1;
+const NO_MORE_IMAGES_COUNT = 0;
 
 export default {
 	name: 'MImageSelector',
@@ -45,6 +48,10 @@ export default {
 		},
 	},
 
+	data: () => ({
+		nextID: 0,
+	}),
+
 	computed: {
 		canUploadImage() {
 			if (this.maxImages === undefined) {
@@ -55,7 +62,7 @@ export default {
 		},
 		remainingImagesCount() {
 			if (!this.canUploadImage) {
-				return 0;
+				return NO_MORE_IMAGES_COUNT;
 			}
 
 			return this.maxImages - this.model.length;
@@ -68,13 +75,10 @@ export default {
 				return;
 			}
 
-			let imagesToUpload;
-			if (images.length > this.remainingImagesCount) {
-				// display error/warning
-				imagesToUpload = images.slice(0, this.remainingImagesCount);
-			} else {
-				imagesToUpload = images;
-			}
+			const imagesToUpload = images.length > this.remainingImagesCount
+				// eslint-disable-next-line no-magic-numbers
+				? images.slice(0, this.remainingImagesCount)
+				: images;
 
 			const formattedImages = this.formatImages(imagesToUpload);
 			this.$emit('input', [...this.model, ...formattedImages]);
@@ -84,18 +88,19 @@ export default {
 		formatImages(images) {
 			const formattedImages = images
 				.map((image) => ({
-					id: uuid(),
+					id: this.nextID,
 					file: image,
 					status: IMAGE_SELECTOR_STATUSES.PENDING,
 				}));
 			formattedImages.forEach((image) => this.buildImageURL(image));
+			this.nextID += ID_INCREMENT;
 
 			return formattedImages;
 		},
 
 		async handleImageUpload(image) {
 			if (!this.uploadHandler) {
-				Vue.set(image, 'progress', 100);
+				Vue.set(image, 'progress', MAX_PROGRESS);
 				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
 				return;
 			}
@@ -105,11 +110,11 @@ export default {
 					image: image.file,
 					uploadProgressHandler: (progress) => Vue.set(image, 'progress', progress),
 				});
-				Vue.set(image, 'progress', 100);
+				Vue.set(image, 'progress', MAX_PROGRESS);
 				Vue.set(image, 'apiResponse', response);
 				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
 			} catch (error) {
-				Vue.set(image, 'progress', 100);
+				Vue.set(image, 'progress', MAX_PROGRESS);
 				Vue.set(image, 'apiError', error);
 				Vue.set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
 			}

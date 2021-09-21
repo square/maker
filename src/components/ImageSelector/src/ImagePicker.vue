@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import PlusIcon from '@square-icons/vue/16/UI/Add';
+import PlusIcon from '@square/maker-icons/Plus';
 
 export default {
 	name: 'MImagePicker',
