@@ -5,6 +5,9 @@
 			:key="star"
 			:fill="fillForStar(star)"
 			:class="$s.Star"
+			@hover="hoverStar(star)"
+			@unhover="unhoverStar(star)"
+			@click="clickStar(star)"
 		/>
 	</div>
 </template>
@@ -43,19 +46,27 @@ export default {
 			default: 'medium',
 			validate: (size) => ['medium', 'large'].includes(size),
 		},
+
+		/**
+		 * Determines whether to bubble up click/hover events and show pointer cursor
+		 */
+		selectable: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
 		return {
 			stars,
-			sizing: {
+			styles: {
 				medium: {
 					height: 24,
-					spacing: 4,
+					spacing: 2,
 				},
 				large: {
 					height: 32,
-					spacing: 8,
+					spacing: 4,
 				},
 			},
 		};
@@ -63,11 +74,12 @@ export default {
 
 	computed: {
 		starComputedStyles() {
-			const sizing = this.sizing[this.size];
+			const styles = this.styles[this.size];
 
 			return {
-				'--star-height': `${sizing.height}px`,
-				'--star-spacing': `${sizing.spacing}px`,
+				'--star-height': `${styles.height}px`,
+				'--star-spacing': `${styles.spacing}px`,
+				'--star-cursor': this.selectable ? 'pointer' : 'default',
 			};
 		},
 	},
@@ -84,6 +96,24 @@ export default {
 
 			return 'empty';
 		},
+
+		clickStar(star) {
+			if (this.selectable) {
+				this.$emit('star-click', star);
+			}
+		},
+
+		hoverStar(star) {
+			if (this.selectable) {
+				this.$emit('star-hover', star);
+			}
+		},
+
+		unhoverStar(star) {
+			if (this.selectable) {
+				this.$emit('star-unhover', star);
+			}
+		},
 	},
 };
 </script>
@@ -91,9 +121,15 @@ export default {
 <style module="$s">
 .Star {
 	height: var(--star-height);
+	padding: 0 var(--star-spacing);
+	cursor: var(--star-cursor);
 }
 
-.Star + .Star {
-	margin-left: var(--star-spacing);
+.Star:first-of-type {
+	padding-left: 0;
+}
+
+.Star:last-of-type {
+	padding-right: 0;
 }
 </style>

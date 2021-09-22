@@ -54,24 +54,57 @@
 				/>
 			</div>
 		</div>
+
+		<div>
+			<m-heading
+				:class="$s.StarDemoHeader"
+				:size="1"
+			>
+				Star Rating Selector
+			</m-heading>
+
+			<div>
+				Rating: ({{ formRating }} Stars)
+			</div>
+
+			<div
+				v-for="size in ['medium', 'large']"
+				:key="size"
+			>
+				{{ size }}
+				<m-star-rating-selector
+					:rating="formRating"
+					:size="size"
+					@star-click="setFormRating"
+				/>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-import { MStar, MStarRating } from '@square/maker/components/StarRating';
+import { MStar, MStarRating, MStarRatingSelector } from '@square/maker/components/StarRating';
 import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
 		MStar,
 		MStarRating,
+		MStarRatingSelector,
 		MHeading,
 	},
 	data() {
 		return {
 			color: '#000',
 			avgRating: 2.5,
+			formRating: 0,
 		};
+	},
+
+	methods: {
+		setFormRating(rating) {
+			this.formRating = rating;
+		},
 	},
 };
 </script>
@@ -98,10 +131,24 @@ export default {
 <!-- api-tables:start -->
 ## Star Props
 
-| Prop | Type     | Default  | Possible values | Description |
-| ---- | -------- | -------- | --------------- | ----------- |
-| fill | `string` | `'full'` | —               | —           |
+| Prop  | Type     | Default     | Possible values | Description                                |
+| ----- | -------- | ----------- | --------------- | ------------------------------------------ |
+| fill  | `string` | `'full'`    | —               | —                                          |
+| color | `string` | `'#FFBF00'` | —               | Color of the progress bar (not background) |
 
 
+## StarRating Props
 
+| Prop   | Type     | Default    | Possible values | Description                                           |
+| ------ | -------- | ---------- | --------------- | ----------------------------------------------------- |
+| rating | `number` | `0`        | —               | Rating value from 0-5, determines fill state of stars |
+| size   | `string` | `'medium'` | —               | Size of rating component                              |
+
+
+## StarRating Props
+
+| Prop   | Type     | Default    | Possible values | Description                                           |
+| ------ | -------- | ---------- | --------------- | ----------------------------------------------------- |
+| rating | `number` | `0`        | —               | Rating value from 0-5, determines fill state of stars |
+| size   | `string` | `'medium'` | —               | Size of rating component                              |
 <!-- api-tables:end -->
