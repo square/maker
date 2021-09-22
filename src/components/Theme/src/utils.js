@@ -1,6 +1,7 @@
 import {
 	isString, isNull, isUndefined, get,
 } from 'lodash';
+import assert from '@square/maker/utils/assert';
 
 /**
  * Check if passed in value is a pointer, if so resolve the pointer to its value,
@@ -37,4 +38,34 @@ export function getPath(pointer) {
 		throw new Error(`invalid pointer ${pointer} does not point to a field that exists within the theme`);
 	}
 	return result;
+}
+
+function capitalizeFirstLetter(string) {
+	const secondLetterIndex = 1;
+	return string[0].toUpperCase() + string.slice(secondLetterIndex);
+}
+
+export function resolveThemeableProps(componentKeyInTheme, propNames) {
+	const computedResolvedProps = {};
+	for (const propName of propNames) {
+		computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
+			if (this[propName]) {
+				// if validator for this prop exists then Vue would have already validated it by this point
+				return this[propName];
+			}
+			const themeDefaultPropValue = this.theme[componentKeyInTheme][propName];
+			if (themeDefaultPropValue) {
+				const valueOrPath = themeDefaultPropValue;
+				const value = this.theme.resolve(valueOrPath);
+				const propValidator = this.$vnode.componentOptions
+					.Ctor.extendOptions.props[propName].validator;
+				if (propValidator) {
+					assert.error(propValidator(value), `Invalid value "${value}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
+				}
+				return value;
+			}
+			return undefined;
+		};
+	}
+	return computedResolvedProps;
 }

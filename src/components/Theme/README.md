@@ -180,7 +180,7 @@ export default {
 					color: '@colors.primary',
 					align: 'center',
 					fullWidth: false,
-					textColor: undefined,
+					textColor: '#ffffff',
 				},
 			},
 		};
