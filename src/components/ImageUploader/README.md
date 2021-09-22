@@ -14,6 +14,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			>
 				With Upload Handler (No errors)
 			</m-heading>
+			<p>Handler uses a simulated delay to mimic an actual upload.</p>
 			<m-image-uploader
 				:model="successImages"
 				:upload-handler="uploadSuccessfulImage"
@@ -28,6 +29,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			>
 				With Upload Handler (API errors)
 			</m-heading>
+			<p>Handler uses a simulated delay to mimic an actual upload.</p>
 			<m-image-uploader
 				:model="apiErrorImages"
 				:upload-handler="uploadErrorImage"
@@ -42,6 +44,10 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			>
 				Without Upload Handler
 			</m-heading>
+			<p>
+				If a handler is not provided, the file will be added to the list
+				and be immediately marked as 'complete'.
+			</p>
 			<m-image-uploader
 				:model="normalImages"
 				@input="setImages('normal', $event)"
@@ -55,6 +61,10 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			>
 				Max Image Size (50KB)
 			</m-heading>
+			<p>
+				If a size limit has been set, files that are too large will be
+				set to an error state before uploading.
+			</p>
 			<m-image-uploader
 				:model="maxSizeImages"
 				:max-size="50000"
@@ -67,8 +77,13 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 				:size="2"
 				:class="$s.SelectorHeader"
 			>
-				Max Number of Images
+				Max Number of Images (3)
 			</m-heading>
+			<p>
+				If an image count limit is set, the picker component will be removed
+				once it is reached. If a user selects more than the max, only the images
+				within the limited will be selected/uploaded.
+			</p>
 			<m-image-uploader
 				:model="maxNumberImages"
 				:max-images="3"
@@ -144,7 +159,6 @@ export default {
 			});
 		},
 
-		// Pay no mind to any weirdness here, this is to simulate an image taking time to upload
 		uploadImage({
 			progress = 0,
 			resolve,
