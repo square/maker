@@ -8,7 +8,7 @@
 			@selectImages="selectImages"
 		/>
 		<image-selection
-			v-for="image of model"
+			v-for="image of images"
 			:key="image.id"
 			:image="image"
 			:class="$s.ImageUploaderItem"
@@ -35,25 +35,43 @@ export default {
 	},
 
 	props: {
-		model: {
+		/**
+		 * List of images that have been selected
+		 */
+		images: {
 			type: Array,
 			default: () => [],
 		},
+		/**
+		 * Function called to trigger an upload.
+		 * Called immediately on image selection, provided max size and max number
+		 * image constraints are met.
+		*/
 		uploadHandler: {
 			type: Function,
 			default: () => undefined,
 		},
+		/**
+		 * The maximum number of images allowed to be selected.
+		 */
 		maxImages: {
 			type: Number,
 			default: () => undefined,
 		},
+		/**
+		 * The maximum file size allowed (in bytes)
+		 */
 		maxSize: {
 			type: Number,
 			default: () => undefined,
 		},
+		/**
+		 * Allowed file types, be an image type (eg image/jpeg)
+		 */
 		accept: {
 			type: String,
 			default: () => 'image/*',
+			validator: (accept) => accept.startsWith('image/'),
 		},
 	},
 
@@ -67,14 +85,14 @@ export default {
 				return true;
 			}
 
-			return this.model.length < this.maxImages;
+			return this.images.length < this.maxImages;
 		},
 		remainingImagesCount() {
 			if (!this.canUploadImage) {
 				return NO_MORE_IMAGES_COUNT;
 			}
 
-			return this.maxImages - this.model.length;
+			return this.maxImages - this.images.length;
 		},
 
 		canUploadMultiple() {
@@ -95,7 +113,7 @@ export default {
 				: images;
 
 			const formattedImages = this.formatImages(imagesToUpload);
-			this.$emit('input', [...this.model, ...formattedImages]);
+			this.$emit('input', [...this.images, ...formattedImages]);
 			formattedImages.forEach((image) => this.handleImageUpload(image));
 		},
 
@@ -147,14 +165,13 @@ export default {
 		},
 
 		removeImage(imageID) {
-			this.$emit('input', this.model.filter(({ id }) => id !== imageID));
+			this.$emit('input', this.images.filter(({ id }) => id !== imageID));
 		},
 
 		async buildImageURL(image) {
 			const url = await new Promise((resolve) => {
 				const reader = new FileReader();
 				reader.onloadend = () => resolve(reader.result);
-				// TODO: Add error logging
 				// eslint-disable-next-line unicorn/prefer-add-event-listener
 				reader.onerror = () => resolve('');
 				reader.readAsDataURL(image.file);

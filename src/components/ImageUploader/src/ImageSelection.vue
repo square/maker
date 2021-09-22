@@ -106,6 +106,7 @@ export default {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 8px;
 	transition: background-image linear 150ms;
 
