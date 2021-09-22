@@ -30,7 +30,6 @@
 			:class="$s.ImageSelectionRemoveButton"
 			@click="$emit('removeImage', image.id)"
 		>
-			<!-- TODO: Icon -->
 			<x-icon
 				inline
 				:class="$s.ImageSelectionRemoveIcon"
@@ -45,6 +44,7 @@ import XIcon from '@square/maker-icons/X';
 import { IMAGE_SELECTOR_STATUSES } from './constants';
 
 const MAX_PROGRESS = 100;
+const PROGRESS_OPACITY = { shown: 1, hidden: 0 };
 
 export default {
 	name: 'MImageSelection',
@@ -74,8 +74,7 @@ export default {
 
 		progressContainerStyle() {
 			return {
-				// eslint-disable-next-line no-magic-numbers
-				opacity: this.showProgressBar ? 1 : 0,
+				opacity: this.showProgressBar ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
 			};
 		},
 
