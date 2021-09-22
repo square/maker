@@ -29,21 +29,33 @@ export default {
 	name: 'ProgressBar',
 
 	props: {
+		/**
+		 * Size (height) of the progress bar
+		 */
 		size: {
 			type: String,
 			default: 'medium',
 			validator: (size) => ['xsmall', 'small', 'medium', 'large'].includes(size),
 		},
+		/**
+		 * Shape of the progress bar
+		 */
 		shape: {
 			type: String,
 			default: 'rounded',
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
+		/**
+		 * Color of the progress bar (not background)
+		 */
 		color: {
 			type: String,
 			default: '#000',
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * Progress/width of the bar (0-100)
+		 */
 		progress: {
 			type: Number,
 			default: 0,
@@ -93,10 +105,7 @@ export default {
 }
 
 .ProgressBarContainer.shape_rounded,
-.ProgressBar.shape_rounded {
-	border-radius: 8px;
-}
-
+.ProgressBar.shape_rounded,
 .ProgressBarContainer.shape_pill,
 .ProgressBar.shape_pill {
 	border-radius: 16px;
