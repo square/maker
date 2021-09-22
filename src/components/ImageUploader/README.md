@@ -12,16 +12,27 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 				:size="2"
 				:class="$s.SelectorHeader"
 			>
-				With Upload Handler
+				With Upload Handler (No errors)
 			</m-heading>
-			<div>
-				<m-image-uploader
-					:model="uploadedImages"
-					:upload-handler="selectImage"
-					:max-size="2000000"
-					@input="setUploadedImages"
-				/>
-			</div>
+			<m-image-uploader
+				:model="successImages"
+				:upload-handler="uploadSuccessfulImage"
+				@input="setImages('success', $event)"
+			/>
+		</div>
+
+		<div :class="$s.SelectorContainer">
+			<m-heading
+				:size="2"
+				:class="$s.SelectorHeader"
+			>
+				With Upload Handler (API errors)
+			</m-heading>
+			<m-image-uploader
+				:model="apiErrorImages"
+				:upload-handler="uploadErrorImage"
+				@input="setImages('apiError', $event)"
+			/>
 		</div>
 
 		<div :class="$s.SelectorContainer">
@@ -33,7 +44,35 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			</m-heading>
 			<m-image-uploader
 				:model="normalImages"
-				@input="setNormalImages"
+				@input="setImages('normal', $event)"
+			/>
+		</div>
+
+		<div :class="$s.SelectorContainer">
+			<m-heading
+				:size="2"
+				:class="$s.SelectorHeader"
+			>
+				Max Image Size (50KB)
+			</m-heading>
+			<m-image-uploader
+				:model="maxSizeImages"
+				:max-size="50000"
+				@input="setImages('maxSize', $event)"
+			/>
+		</div>
+
+		<div :class="$s.SelectorContainer">
+			<m-heading
+				:size="2"
+				:class="$s.SelectorHeader"
+			>
+				Max Number of Images
+			</m-heading>
+			<m-image-uploader
+				:model="maxNumberImages"
+				:max-images="3"
+				@input="setImages('maxNumber', $event)"
 			/>
 		</div>
 	</div>
@@ -42,13 +81,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 <script>
 /* eslint-disable no-magic-numbers */
 import { MHeading } from '@square/maker/components/Heading';
-import { MImageUploader, IMAGE_SELECTOR_STATUSES } from '@square/maker/components/ImageUploader';
-
-const nextStatuses = [
-	IMAGE_SELECTOR_STATUSES.PENDING,
-	IMAGE_SELECTOR_STATUSES.ERROR,
-	IMAGE_SELECTOR_STATUSES.COMPLETE,
-];
+import { MImageUploader } from '@square/maker/components/ImageUploader';
 
 export default {
 	components: {
@@ -58,8 +91,11 @@ export default {
 
 	data() {
 		return {
-			uploadedImages: [],
+			successImages: [],
+			apiErrorImages: [],
 			normalImages: [],
+			maxSizeImages: [],
+			maxNumberImages: [],
 		};
 	},
 
@@ -73,6 +109,9 @@ export default {
 	},
 
 	methods: {
+		setImages(key, images) {
+			this[`${key}Images`] = images;
+		},
 		setUploadedImages(images) {
 			this.uploadedImages = images;
 		},
@@ -81,13 +120,26 @@ export default {
 			this.normalImages = images;
 		},
 
-		async selectImage({ image, uploadProgressHandler }) {
+		async uploadSuccessfulImage({ image, uploadProgressHandler }) {
 			return new Promise((resolve, reject) => {
 				this.uploadImage({
+					image,
+					uploadProgressHandler,
+					shouldSucceed: true,
 					resolve,
 					reject,
-					uploadProgressHandler,
+				});
+			});
+		},
+
+		async uploadErrorImage({ image, uploadProgressHandler }) {
+			return new Promise((resolve, reject) => {
+				this.uploadImage({
 					image,
+					uploadProgressHandler,
+					shouldSucceed: false,
+					resolve,
+					reject,
 				});
 			});
 		},
@@ -99,28 +151,29 @@ export default {
 			reject,
 			uploadProgressHandler,
 			image,
+			shouldSucceed,
 		}) {
 			let newProgress;
-			const nextStatus = nextStatuses[Math.floor(Math.random() * 3)];
+
 			setTimeout(() => {
-				if (nextStatus === IMAGE_SELECTOR_STATUSES.PENDING || progress < 75) {
-					const remainingProgress = 100 - progress;
-					newProgress = progress + Math.min(10, Math.random() * remainingProgress);
+				if (progress < 75) {
+					newProgress = progress + 15;
 					uploadProgressHandler(newProgress);
 					this.uploadImage({
 						resolve,
 						reject,
 						uploadProgressHandler,
 						progress: newProgress,
+						shouldSucceed,
 					});
-				} else if (nextStatus === IMAGE_SELECTOR_STATUSES.COMPLETE) {
+				} else if (shouldSucceed) {
 					uploadProgressHandler(100);
 					resolve({ data: { hello: 'world!', image } });
 				} else {
 					uploadProgressHandler(100);
 					reject(new Error('Some error'));
 				}
-			}, Math.random() * 500);
+			}, 500);
 		},
 	},
 };
