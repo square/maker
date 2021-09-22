@@ -8,6 +8,7 @@ export const theme1 = {
 		background: '#fff',
 		text: '#000',
 		primary: '#e5d7cc',
+		secondary: '#000',
 		surfaces: {
 			profile1: {
 				background: '#fff',
@@ -49,7 +50,7 @@ export const theme1 = {
 				text: '#fff',
 				heading: '#e5d7cc',
 				primary: '#e5d7cc',
-				secondary: '#fff',
+				secondary: '#e5d7cc',
 			},
 		},
 	},
