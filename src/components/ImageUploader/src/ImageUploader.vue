@@ -126,6 +126,7 @@ export default {
 						id: this.nextID,
 						file: image,
 						status: IMAGE_SELECTOR_STATUSES.PENDING,
+						progress: 0,
 					};
 				});
 			formattedImages.forEach((image) => this.buildImageURL(image));
