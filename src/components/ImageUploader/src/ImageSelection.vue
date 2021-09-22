@@ -63,8 +63,16 @@ export default {
 
 	computed: {
 		bgImageStyle() {
+			const url = `url("${this.image.url}")`;
+			const loadingGradient = 'linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
+			const loadedGradient = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%)';
+			const config = 'no-repeat scroll center';
+
 			return {
-				backgroundImage: `url("${this.image.url}")`,
+				background: this.showProgressBar
+					? `${loadingGradient}, ${url} ${config}`
+					: `${loadedGradient}, ${url} ${config}`,
+				'background-size': 'cover',
 			};
 		},
 
@@ -129,7 +137,8 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+	background-position: center;
+	background-size: cover;
 }
 
 .ImageSelectionContainerError {
