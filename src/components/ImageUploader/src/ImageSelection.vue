@@ -66,13 +66,14 @@ export default {
 			const url = `url("${this.image.url}")`;
 			const loadingGradient = 'linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
 			const loadedGradient = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%)';
-			const config = 'no-repeat scroll center';
 
 			return {
-				background: this.showProgressBar
-					? `${loadingGradient}, ${url} ${config}`
-					: `${loadedGradient}, ${url} ${config}`,
-				'background-size': 'cover',
+				backgroundImage: this.showProgressBar
+					? `${loadingGradient}, ${url}`
+					: `${loadedGradient}, ${url}`,
+				backgroundRepeat: 'no-repeat',
+				backgroundPosition: 'center',
+				backgroundSize: 'cover',
 			};
 		},
 
