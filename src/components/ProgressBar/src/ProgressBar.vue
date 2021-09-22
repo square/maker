@@ -7,14 +7,8 @@
 		]"
 	>
 		<div
-			:class="[
-				$s.ProgressBar,
-				$s[`shape_${shape}`],
-			]"
-			:style="{
-				backgroundColor: color,
-				transform: `translateX(-${progressTranslate}%)`
-			}"
+			:class="$s.ProgressBar"
+			:style="barStyles"
 		/>
 	</div>
 </template>
@@ -64,8 +58,11 @@ export default {
 	},
 
 	computed: {
-		progressTranslate() {
-			return MAX_PROGRESS - this.progress;
+		barStyles() {
+			return {
+				'--bar-color': this.color,
+				'--fill-percent': `${this.progress}%`,
+			};
 		},
 	},
 };
@@ -79,8 +76,10 @@ export default {
 }
 
 .ProgressBar {
+	width: var(--fill-percent, 0);
 	height: 100%;
-	transition: transform 100ms linear;
+	background-color: var(--bar-color);
+	transition: width 100ms linear;
 }
 
 .ProgressBarContainer.size_xsmall {
@@ -100,14 +99,14 @@ export default {
 }
 
 .ProgressBarContainer.shape_squared,
-.ProgressBar.shape_squared {
+.ProgressBarContainer.shape_squared .ProgressBar {
 	border-radius: 0;
 }
 
 .ProgressBarContainer.shape_rounded,
-.ProgressBar.shape_rounded,
+.ProgressBarContainer.shape_rounded .ProgressBar,
 .ProgressBarContainer.shape_pill,
-.ProgressBar.shape_pill {
+.ProgressBarContainer.shape_pill .ProgressBar {
 	border-radius: 16px;
 }
 </style>
