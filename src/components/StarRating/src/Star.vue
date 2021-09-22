@@ -48,13 +48,16 @@ export default {
 	name: 'Star',
 
 	props: {
+		/**
+		 * Determines the fill style of the star
+		 */
 		fill: {
 			type: String,
 			default: 'full',
 			validate: (fill) => ['full', 'half', 'empty'].includes(fill),
 		},
 		/**
-		 * Color of the progress bar (not background)
+		 * Color of the star
 		 */
 		color: {
 			type: String,
