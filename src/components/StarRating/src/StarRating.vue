@@ -44,7 +44,7 @@ export default {
 		size: {
 			type: String,
 			default: 'medium',
-			validate: (size) => ['medium', 'large'].includes(size),
+			validate: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 
 		/**
@@ -60,6 +60,10 @@ export default {
 		return {
 			stars,
 			styles: {
+				small: {
+					height: 16,
+					spacing: 1,
+				},
 				medium: {
 					height: 24,
 					spacing: 2,

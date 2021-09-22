@@ -44,7 +44,7 @@
 			</div>
 
 			<div
-				v-for="size in ['medium', 'large']"
+				v-for="size in ['small', 'medium', 'large']"
 				:key="size"
 			>
 				{{ size }}
@@ -67,17 +67,11 @@
 				Rating: ({{ formRating }} Stars)
 			</div>
 
-			<div
-				v-for="size in ['medium', 'large']"
-				:key="size"
-			>
-				{{ size }}
-				<m-star-rating-selector
-					:rating="formRating"
-					:size="size"
-					@star-click="setFormRating"
-				/>
-			</div>
+			<m-star-rating-selector
+				:rating="formRating"
+				:size="size"
+				@star-click="setFormRating"
+			/>
 		</div>
 	</div>
 </template>
