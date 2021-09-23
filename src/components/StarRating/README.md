@@ -3,6 +3,13 @@
 ```vue
 <template>
 	<div :class="$s.StarDemos">
+		<label>
+			Color picker
+			<input
+				v-model="color"
+				type="color"
+			>
+		</label>
 		<div>
 			<m-heading
 				:class="$s.StarDemoHeader"
@@ -18,7 +25,10 @@
 					:class="$s.StarState"
 				>
 					{{ fill }}
-					<m-star :fill="fill" />
+					<m-star
+						:fill="fill"
+						:color="color"
+					/>
 				</div>
 			</div>
 		</div>
@@ -51,6 +61,7 @@
 				<m-star-rating
 					:rating="avgRating"
 					:size="size"
+					:color="color"
 				/>
 			</div>
 		</div>
@@ -76,6 +87,7 @@
 					:rating="formRating"
 					:size="size"
 					:editable="true"
+					:color="color"
 					@star-click="setFormRating"
 				/>
 			</div>
@@ -95,9 +107,9 @@ export default {
 	},
 	data() {
 		return {
-			color: '#000',
 			avgRating: 2.5,
 			formRating: 0,
+			color: '#FFBF00',
 		};
 	},
 
@@ -131,24 +143,35 @@ export default {
 <!-- api-tables:start -->
 ## Star Props
 
-| Prop  | Type     | Default     | Possible values | Description                                |
-| ----- | -------- | ----------- | --------------- | ------------------------------------------ |
-| fill  | `string` | `'full'`    | —               | —                                          |
-| color | `string` | `'#FFBF00'` | —               | Color of the progress bar (not background) |
+| Prop  | Type     | Default     | Possible values | Description                           |
+| ----- | -------- | ----------- | --------------- | ------------------------------------- |
+| fill  | `string` | `'full'`    | —               | Determines the fill style of the star |
+| color | `string` | `'#FFBF00'` | —               | Color of the star                     |
+
+
+## Star Events
+
+| Event   | Type | Description |
+| ------- | ---- | ----------- |
+| hover   | -    | —           |
+| unhover | -    | —           |
+| click   | -    | —           |
 
 
 ## StarRating Props
 
-| Prop   | Type     | Default    | Possible values | Description                                           |
-| ------ | -------- | ---------- | --------------- | ----------------------------------------------------- |
-| rating | `number` | `0`        | —               | Rating value from 0-5, determines fill state of stars |
-| size   | `string` | `'medium'` | —               | Size of rating component                              |
+| Prop     | Type      | Default    | Possible values | Description                                                                |
+| -------- | --------- | ---------- | --------------- | -------------------------------------------------------------------------- |
+| rating   | `number`  | `0`        | —               | Rating value from 0-5, determines fill state of stars                      |
+| size     | `string`  | `'medium'` | —               | Size of rating component                                                   |
+| editable | `boolean` | `false`    | —               | Determines whether to bubble up click/hover events and show pointer cursor |
 
 
-## StarRating Props
+## StarRating Events
 
-| Prop   | Type     | Default    | Possible values | Description                                           |
-| ------ | -------- | ---------- | --------------- | ----------------------------------------------------- |
-| rating | `number` | `0`        | —               | Rating value from 0-5, determines fill state of stars |
-| size   | `string` | `'medium'` | —               | Size of rating component                              |
+| Event        | Type | Description |
+| ------------ | ---- | ----------- |
+| star-click   | -    | —           |
+| star-hover   | -    | —           |
+| star-unhover | -    | —           |
 <!-- api-tables:end -->

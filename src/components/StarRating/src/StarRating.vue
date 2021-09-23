@@ -1,9 +1,10 @@
 <template>
 	<div :style="starComputedStyles">
 		<star
-			v-for="star in stars"
+			v-for="star in STAR_COUNT"
 			:key="star"
 			:fill="fillForStar(star)"
+			:color="color"
 			:class="$s.Star"
 			@hover="hoverStar(star)"
 			@unhover="unhoverStar(star)"
@@ -13,13 +14,14 @@
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import Star from './Star.vue';
 
 const MIN_RATING = 0;
 const MAX_RATING = 5;
 const HALF_RATING = 0.5;
 // eslint-disable-next-line no-magic-numbers
-const stars = [1, 2, 3, 4, 5];
+const STAR_COUNT = 5;
 
 const STAR_STYLES = {
 	small: {
@@ -61,6 +63,14 @@ export default {
 			default: 'medium',
 			validate: (size) => ['small', 'medium', 'large'].includes(size),
 		},
+		/**
+		 * Color of the star
+		 */
+		color: {
+			type: String,
+			default: '#FFBF00',
+			validator: (color) => chroma.valid(color),
+		},
 
 		/**
 		 * Determines whether to bubble up click/hover events and show pointer cursor
@@ -73,8 +83,7 @@ export default {
 
 	data() {
 		return {
-			stars,
-			styles: STAR_STYLES,
+			STAR_COUNT,
 			hoveredRating: undefined,
 		};
 	},
@@ -85,7 +94,7 @@ export default {
 		},
 
 		starComputedStyles() {
-			const styles = this.styles[this.size];
+			const styles = STAR_STYLES[this.size];
 
 			return {
 				'--star-height': `${styles.height}px`,
