@@ -84,7 +84,7 @@ export default {
 	data() {
 		return {
 			STAR_COUNT,
-			hoveredRating: undefined,
+			hoveredRating: 0,
 		};
 	},
 
@@ -133,7 +133,7 @@ export default {
 		unhoverStar(star) {
 			if (this.isEditable) {
 				this.$emit('star-unhover', star);
-				this.hoveredRating = undefined;
+				this.hoveredRating = 0;
 			}
 		},
 	},
