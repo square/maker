@@ -71,7 +71,7 @@
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>
-				Star Rating Selector
+				Editable Star Rating
 			</m-heading>
 
 			<div>

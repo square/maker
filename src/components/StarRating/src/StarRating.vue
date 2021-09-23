@@ -1,7 +1,7 @@
 <template>
 	<div :style="starComputedStyles">
 		<star
-			v-for="star in STAR_COUNT"
+			v-for="star in MAX_RATING"
 			:key="star"
 			:fill="fillForStarRating(star)"
 			:color="color"
@@ -20,8 +20,6 @@ import Star from './Star.vue';
 const MIN_RATING = 0;
 const MAX_RATING = 5;
 const HALF_RATING = 0.5;
-// eslint-disable-next-line no-magic-numbers
-const STAR_COUNT = 5;
 
 const STAR_STYLES = {
 	small: {
@@ -83,7 +81,7 @@ export default {
 
 	data() {
 		return {
-			STAR_COUNT,
+			MAX_RATING,
 			hoveredRating: 0,
 		};
 	},
