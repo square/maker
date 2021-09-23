@@ -52,7 +52,7 @@ export default {
 		rating: {
 			type: Number,
 			default: 0,
-			validate: (rating) => rating >= MIN_RATING && rating <= MAX_RATING,
+			validator: (rating) => rating >= MIN_RATING && rating <= MAX_RATING,
 		},
 
 		/**
@@ -61,7 +61,7 @@ export default {
 		size: {
 			type: String,
 			default: 'medium',
-			validate: (size) => ['small', 'medium', 'large'].includes(size),
+			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
 		 * Color of the star

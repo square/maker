@@ -143,10 +143,10 @@ export default {
 <!-- api-tables:start -->
 ## Star Props
 
-| Prop  | Type     | Default     | Possible values | Description                           |
-| ----- | -------- | ----------- | --------------- | ------------------------------------- |
-| fill  | `string` | `'full'`    | —               | Determines the fill style of the star |
-| color | `string` | `'#FFBF00'` | —               | Color of the star                     |
+| Prop  | Type     | Default     | Possible values         | Description                           |
+| ----- | -------- | ----------- | ----------------------- | ------------------------------------- |
+| fill  | `string` | `'full'`    | `full`, `half`, `empty` | Determines the fill style of the star |
+| color | `string` | `'#FFBF00'` | —                       | Color of the star                     |
 
 
 ## Star Events
@@ -160,12 +160,12 @@ export default {
 
 ## StarRating Props
 
-| Prop     | Type      | Default     | Possible values | Description                                                                |
-| -------- | --------- | ----------- | --------------- | -------------------------------------------------------------------------- |
-| rating   | `number`  | `0`         | —               | Rating value from 0-5, determines fill state of stars                      |
-| size     | `string`  | `'medium'`  | —               | Size of rating component                                                   |
-| color    | `string`  | `'#FFBF00'` | —               | Color of the star                                                          |
-| editable | `boolean` | `false`     | —               | Determines whether to bubble up click/hover events and show pointer cursor |
+| Prop        | Type      | Default     | Possible values            | Description                                                                |
+| ----------- | --------- | ----------- | -------------------------- | -------------------------------------------------------------------------- |
+| rating      | `number`  | `0`         | —                          | Rating value from 0-5, determines fill state of stars                      |
+| size        | `string`  | `'medium'`  | `small`, `medium`, `large` | Size of rating component                                                   |
+| color       | `string`  | `'#FFBF00'` | —                          | Color of the star                                                          |
+| is-editable | `boolean` | `false`     | —                          | Determines whether to bubble up click/hover events and show pointer cursor |
 
 
 ## StarRating Events

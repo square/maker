@@ -54,7 +54,7 @@ export default {
 		fill: {
 			type: String,
 			default: 'full',
-			validate: (fill) => ['full', 'half', 'empty'].includes(fill),
+			validator: (fill) => ['full', 'half', 'empty'].includes(fill),
 		},
 		/**
 		 * Color of the star
