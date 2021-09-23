@@ -67,24 +67,30 @@
 				Rating: ({{ formRating }} Stars)
 			</div>
 
-			<m-star-rating-selector
-				:rating="formRating"
-				:size="size"
-				@star-click="setFormRating"
-			/>
+			<div
+				v-for="size in ['small', 'medium', 'large']"
+				:key="size"
+			>
+				{{ size }}
+				<m-star-rating
+					:rating="formRating"
+					:size="size"
+					:editable="true"
+					@star-click="setFormRating"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { MStar, MStarRating, MStarRatingSelector } from '@square/maker/components/StarRating';
+import { MStar, MStarRating } from '@square/maker/components/StarRating';
 import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
 		MStar,
 		MStarRating,
-		MStarRatingSelector,
 		MHeading,
 	},
 	data() {

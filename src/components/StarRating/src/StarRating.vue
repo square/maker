@@ -21,6 +21,21 @@ const HALF_RATING = 0.5;
 // eslint-disable-next-line no-magic-numbers
 const stars = [1, 2, 3, 4, 5];
 
+const STAR_STYLES = {
+	small: {
+		height: 16,
+		spacing: 1,
+	},
+	medium: {
+		height: 24,
+		spacing: 2,
+	},
+	large: {
+		height: 32,
+		spacing: 4,
+	},
+};
+
 export default {
 	name: 'StarRating',
 
@@ -50,7 +65,7 @@ export default {
 		/**
 		 * Determines whether to bubble up click/hover events and show pointer cursor
 		 */
-		selectable: {
+		editable: {
 			type: Boolean,
 			default: false,
 		},
@@ -59,42 +74,34 @@ export default {
 	data() {
 		return {
 			stars,
-			styles: {
-				small: {
-					height: 16,
-					spacing: 1,
-				},
-				medium: {
-					height: 24,
-					spacing: 2,
-				},
-				large: {
-					height: 32,
-					spacing: 4,
-				},
-			},
+			styles: STAR_STYLES,
+			hoveredRating: undefined,
 		};
 	},
 
 	computed: {
+		displayedRating() {
+			return this.hoveredRating || this.rating;
+		},
+
 		starComputedStyles() {
 			const styles = this.styles[this.size];
 
 			return {
 				'--star-height': `${styles.height}px`,
 				'--star-spacing': `${styles.spacing}px`,
-				'--star-cursor': this.selectable ? 'pointer' : 'default',
+				'--star-cursor': this.editable ? 'pointer' : 'default',
 			};
 		},
 	},
 
 	methods: {
 		fillForStar(star) {
-			if (this.rating >= star) {
+			if (this.displayedRating >= star) {
 				return 'full';
 			}
 
-			if (this.rating >= star - HALF_RATING) {
+			if (this.displayedRating >= star - HALF_RATING) {
 				return 'half';
 			}
 
@@ -102,20 +109,22 @@ export default {
 		},
 
 		clickStar(star) {
-			if (this.selectable) {
+			if (this.editable) {
 				this.$emit('star-click', star);
 			}
 		},
 
 		hoverStar(star) {
-			if (this.selectable) {
+			if (this.editable) {
 				this.$emit('star-hover', star);
+				this.hoveredRating = star;
 			}
 		},
 
 		unhoverStar(star) {
-			if (this.selectable) {
+			if (this.editable) {
 				this.$emit('star-unhover', star);
+				this.hoveredRating = undefined;
 			}
 		},
 	},
