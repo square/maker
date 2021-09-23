@@ -14,15 +14,12 @@
 			<loading :class="$s.ImageSelectionLoader" />
 		</div>
 
-		<div
+		<progress-bar
 			:class="$s.ImageSelectionProgressContainer"
 			:style="progressContainerStyle"
-		>
-			<div
-				:class="$s.ImageSelectionProgress"
-				:style="progressStyle"
-			/>
-		</div>
+			:progress="image.progress"
+			size="xsmall"
+		/>
 
 		<button
 			v-if="!isUploading"
@@ -40,6 +37,7 @@
 
 <script>
 import { MLoading as Loading } from '@square/maker/components/Loading';
+import { MProgressBar as ProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
 import { IMAGE_SELECTOR_STATUSES } from './constants';
 
@@ -51,6 +49,7 @@ export default {
 
 	components: {
 		Loading,
+		ProgressBar,
 		XIcon,
 	},
 
@@ -171,17 +170,5 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	height: 4px;
-	overflow: hidden;
-	background-color: #f5f4f4;
-	opacity: 1;
-	transition: opacity 250ms ease;
-}
-
-.ImageSelectionProgress {
-	height: 100%;
-	background-color: #000;
-	border-radius: 4px;
-	transition: width 150ms linear;
 }
 </style>
