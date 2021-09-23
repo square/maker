@@ -42,12 +42,13 @@ export default {
 			type: Array,
 			default: () => [],
 		},
+		// Not disabling and breaking the line causes the doc generator to break.
+		/* eslint-disable max-len */
 		/**
-		 * Function called to trigger an upload.
-		 * Called immediately on image selection, provided max size and max number
-		 * image constraints are met.
+		 * Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met.
 		*/
-		uploadHandler: {
+		/* eslint-enable max-len */
+		uploadHandlerFn: {
 			type: Function,
 			default: () => undefined,
 		},
@@ -66,7 +67,7 @@ export default {
 			default: () => undefined,
 		},
 		/**
-		 * Allowed file types, be an image type (eg image/jpeg)
+		 * Allowed file types, must be an image type (eg image/jpeg)
 		 */
 		accept: {
 			type: String,
@@ -144,14 +145,14 @@ export default {
 
 			this.$set(image, 'fileTooLarge', false);
 
-			if (!this.uploadHandler) {
+			if (!this.uploadHandlerFn) {
 				this.$set(image, 'progress', MAX_PROGRESS);
 				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
 				return;
 			}
 
 			try {
-				const response = await this.uploadHandler({
+				const response = await this.uploadHandlerFn({
 					image: image.file,
 					uploadProgressHandler: (progress) => this.$set(image, 'progress', progress),
 				});

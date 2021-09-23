@@ -17,7 +17,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			<p>Handler uses a simulated delay to mimic an actual upload.</p>
 			<m-image-uploader
 				:images="successImages"
-				:upload-handler="uploadSuccessfulImage"
+				:upload-handler-fn="uploadSuccessfulImage"
 				@input="setImages('success', $event)"
 			/>
 		</div>
@@ -32,7 +32,7 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			<p>Handler uses a simulated delay to mimic an actual upload.</p>
 			<m-image-uploader
 				:images="apiErrorImages"
-				:upload-handler="uploadErrorImage"
+				:upload-handler-fn="uploadErrorImage"
 				@input="setImages('apiError', $event)"
 			/>
 		</div>
@@ -208,15 +208,13 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop           | Type     | Default           | Possible values | Description                                                                                                                              |
-| -------------- | -------- | ----------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| images         | `array`  | `[]`              | —               | List of images that have been selected                                                                                                   |
-| upload-handler | `func`   | `() => undefined` | —               | Function called to trigger an upload.
-Called immediately on image selection, provided max size and max number
-image constraints are met. |
-| max-images     | `number` | `() => undefined` | —               | The maximum number of images allowed to be selected.                                                                                     |
-| max-size       | `number` | `() => undefined` | —               | The maximum file size allowed (in bytes)                                                                                                 |
-| accept         | `string` | `() => 'image/*'` | —               | Allowed file types, be an image type (eg image/jpeg)                                                                                     |
+| Prop              | Type     | Default           | Possible values | Description                                                                                                                              |
+| ----------------- | -------- | ----------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| images            | `array`  | `[]`              | —               | List of images that have been selected                                                                                                   |
+| upload-handler-fn | `func`   | `() => undefined` | —               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
+| max-images        | `number` | `() => undefined` | —               | The maximum number of images allowed to be selected.                                                                                     |
+| max-size          | `number` | `() => undefined` | —               | The maximum file size allowed (in bytes)                                                                                                 |
+| accept            | `string` | `() => 'image/*'` | —               | Allowed file types, be an image type (eg image/jpeg)                                                                                     |
 
 
 ## Events
