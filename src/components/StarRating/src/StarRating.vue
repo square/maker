@@ -99,7 +99,7 @@ export default {
 			return {
 				'--star-height': `${styles.height}px`,
 				'--star-spacing': `${styles.spacing}px`,
-				'--star-cursor': this.editable ? 'pointer' : 'default',
+				'--star-cursor': this.isEditable ? 'pointer' : 'default',
 			};
 		},
 	},
