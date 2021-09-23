@@ -45,7 +45,6 @@ export default {
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 8px;
 	cursor: pointer;
-	transition: background-color 150ms linear;
 }
 
 .ImagePickerInputIcon {
