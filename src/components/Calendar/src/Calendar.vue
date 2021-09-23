@@ -322,8 +322,7 @@ export default {
 	font-size: var(--font-size);
 	font-family: inherit;
 	line-height: var(--line-height);
-	background-color: var(--color-white);
-	border-radius: 4px;
+	border-radius: var(--maker-radii-default, 8px);
 }
 
 .CalendarHeader {
@@ -334,7 +333,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--color-black);
+	/* color: var(--color-black); */
 	font-weight: bold;
 }
 
@@ -353,7 +352,8 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--color-black-50);
+
+	/* color: var(--color-black-50); */
 	font-weight: normal;
 	font-size: var(--font-size-minus-1);
 	line-height: var(--line-height-minus-1);
@@ -364,7 +364,8 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--color-black);
+
+	/* color: var(--color-black); */
 	text-align: center;
 }
 
@@ -372,10 +373,11 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: 0;
+	color: var(--maker-colors-text, #000);
 	font-size: inherit;
 	background-color: inherit;
 	border: none;
-	border-radius: 8px;
+	border-radius: var(--maker-radii-default, 8px);
 	outline: none;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in;
@@ -383,24 +385,26 @@ export default {
 	touch-action: manipulation;
 
 	&.selected {
-		color: var(--color-white-95);
-		background-color: var(--color-black);
+		color: var(--maker-colors-on-primary, #fff);
+		background-color: var(--maker-colors-primary, #000);
 	}
 
 	&.today {
-		border: 1px solid var(--color-black);
+		border: 1px solid var(--maker-colors-primary, #000);
 	}
 
 	&.disabled {
-		color: var(--color-black-40);
 		cursor: not-allowed;
 
+		/* color: var(--color-black-40); */
+		opacity: 0.4;
+
 		&.today {
-			color: var(--color-black-20);
+			/* color: var(--color-black-20); */
 		}
 
 		&.selected {
-			color: var(--color-white-40);
+			/* color: var(--color-white-40); */
 		}
 	}
 }

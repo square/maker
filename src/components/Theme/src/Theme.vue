@@ -93,7 +93,7 @@ export default {
 </script>
 <style module="$s">
 .Theme {
-	color: var(--maker-colors-text);
+	color: var(--maker-colors-on-background);
 	background-color: var(--maker-colors-background);
 }
 </style>

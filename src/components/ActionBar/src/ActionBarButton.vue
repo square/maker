@@ -3,7 +3,6 @@
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
-			$s[`shape_${shape}`],
 			{
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild(),
@@ -44,36 +43,7 @@
 import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
-
-// TODO: refactor the code below so it's shared with Button component
-
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
-	const isLightColorThreshold = 0.32;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLight = chromaBg.luminance() > isLightColorThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
-
-function getFocus(chromaColor) {
-	const arbitraryAlphaValue = 0.8;
-	return chromaColor.alpha(arbitraryAlphaValue);
-}
-
-function fill(tokens) {
-	const color = chroma(tokens.color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
-	const focusColor = getFocus(color);
-	return {
-		'--color-main': color.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
+import { getHighestContrast, getRGB } from '@square/maker/utils/color';
 
 /**
  * Button component
@@ -84,6 +54,10 @@ export default {
 	components: {
 		MLoading,
 		PseudoWindow,
+	},
+
+	inject: {
+		theme: { default: '' },
 	},
 
 	inheritAttrs: false,
@@ -108,7 +82,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -117,15 +91,15 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (textColor) => chroma.valid(textColor),
 		},
+
 		/**
-		 * Shape of button
+		 * Border radius of button
 		 */
-		shape: {
+		borderRadius: {
 			type: String,
-			default: 'pill',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+			default: undefined,
 		},
 		/**
 		 * Toggles button disabled state
@@ -153,10 +127,16 @@ export default {
 
 	computed: {
 		style() {
-			return fill({
-				color: this.color,
-				textColor: this.textColor,
-			});
+			const color = this.color || this.theme?.colors?.primary;
+			const radii = this.borderRadius || this.theme?.radii?.default;
+			const styles = {
+				'--color-rgb': getRGB(color),
+				'--radii': radii,
+				'--inline-background-color': color,
+				'--inline-color': getHighestContrast(color),
+			};
+
+			return styles;
 		},
 	},
 
@@ -198,17 +178,17 @@ export default {
 	min-width: 0;
 	height: var(--medium-height);
 	padding: 0 var(--medium-padding);
-	color: var(--text-color);
+	color: var(--inline-color, var(--maker-colors-on-primary, #fff));
 	font-weight: 500;
 	font-size: var(--medium-font-size);
 	font-family: inherit;
 	vertical-align: middle;
-	background-color: var(--color-main);
+	background-color: var(--inline-background-color, var(--maker-colors-primary, #000));
 	border: none;
-	border-radius: 32px;
+	border-radius: var(--radii, 8px);
 	outline: none;
 	box-shadow:
-		var(--outline-border, 0 0),
+		var(--color-rgb, 0 0),
 		var(--focus-border, 0 0);
 	cursor: pointer;
 	transition:
@@ -230,8 +210,6 @@ export default {
 		height: var(--medium-height);
 		padding: 0;
 	}
-
-	--text-color: var(--color-contrast, #000);
 
 	&.iconButton > * {
 		line-height: 0;
@@ -255,18 +233,6 @@ export default {
 	&.align_space-between {
 		flex-direction: row-reverse;
 		justify-content: space-between;
-	}
-
-	&.shape_squared {
-		border-radius: 0;
-	}
-
-	&.shape_rounded {
-		border-radius: 8px;
-	}
-
-	&.shape_pill {
-		border-radius: 32px;
 	}
 
 	&:disabled {

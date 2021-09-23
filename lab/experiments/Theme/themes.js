@@ -6,9 +6,12 @@
 export const theme1 = {
 	colors: {
 		background: '#fff',
-		text: '#000',
-		primary: '#e5d7cc',
-		secondary: '#000',
+		heading: '#333232',
+		text: '#636363',
+		primary: '#1aa93a',
+		secondary: '#333232',
+		accent: '#d3d3d3',
+		muted: '#f5f4f4',
 		surfaces: {
 			profile1: {
 				background: '#fff',
@@ -59,6 +62,6 @@ export const theme1 = {
 		text: '"Open Sans", sans-serif',
 	},
 	radii: {
-		default: '0px',
+		default: '12px',
 	},
 };
