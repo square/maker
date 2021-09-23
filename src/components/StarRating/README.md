@@ -86,7 +86,7 @@
 				<m-star-rating
 					:rating="formRating"
 					:size="size"
-					:editable="true"
+					:is-editable="true"
 					:color="color"
 					@star-click="setFormRating"
 				/>
@@ -151,20 +151,21 @@ export default {
 
 ## Star Events
 
-| Event   | Type | Description |
-| ------- | ---- | ----------- |
-| hover   | -    | —           |
-| unhover | -    | —           |
-| click   | -    | —           |
+| Event      | Type | Description |
+| ---------- | ---- | ----------- |
+| mouseenter | -    | —           |
+| mouseleave | -    | —           |
+| click      | -    | —           |
 
 
 ## StarRating Props
 
-| Prop     | Type      | Default    | Possible values | Description                                                                |
-| -------- | --------- | ---------- | --------------- | -------------------------------------------------------------------------- |
-| rating   | `number`  | `0`        | —               | Rating value from 0-5, determines fill state of stars                      |
-| size     | `string`  | `'medium'` | —               | Size of rating component                                                   |
-| editable | `boolean` | `false`    | —               | Determines whether to bubble up click/hover events and show pointer cursor |
+| Prop     | Type      | Default     | Possible values | Description                                                                |
+| -------- | --------- | ----------- | --------------- | -------------------------------------------------------------------------- |
+| rating   | `number`  | `0`         | —               | Rating value from 0-5, determines fill state of stars                      |
+| size     | `string`  | `'medium'`  | —               | Size of rating component                                                   |
+| color    | `string`  | `'#FFBF00'` | —               | Color of the star                                                          |
+| editable | `boolean` | `false`     | —               | Determines whether to bubble up click/hover events and show pointer cursor |
 
 
 ## StarRating Events

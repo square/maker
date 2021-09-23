@@ -3,11 +3,11 @@
 		<star
 			v-for="star in STAR_COUNT"
 			:key="star"
-			:fill="fillForStar(star)"
+			:fill="fillForStarRating(star)"
 			:color="color"
 			:class="$s.Star"
-			@hover="hoverStar(star)"
-			@unhover="unhoverStar(star)"
+			@mouseenter="hoverStar(star)"
+			@mouseleave="unhoverStar(star)"
 			@click="clickStar(star)"
 		/>
 	</div>
@@ -75,7 +75,7 @@ export default {
 		/**
 		 * Determines whether to bubble up click/hover events and show pointer cursor
 		 */
-		editable: {
+		isEditable: {
 			type: Boolean,
 			default: false,
 		},
@@ -105,12 +105,12 @@ export default {
 	},
 
 	methods: {
-		fillForStar(star) {
-			if (this.displayedRating >= star) {
+		fillForStarRating(rating) {
+			if (this.displayedRating >= rating) {
 				return 'full';
 			}
 
-			if (this.displayedRating >= star - HALF_RATING) {
+			if (this.displayedRating >= rating - HALF_RATING) {
 				return 'half';
 			}
 
@@ -118,20 +118,20 @@ export default {
 		},
 
 		clickStar(star) {
-			if (this.editable) {
+			if (this.isEditable) {
 				this.$emit('star-click', star);
 			}
 		},
 
 		hoverStar(star) {
-			if (this.editable) {
+			if (this.isEditable) {
 				this.$emit('star-hover', star);
 				this.hoveredRating = star;
 			}
 		},
 
 		unhoverStar(star) {
-			if (this.editable) {
+			if (this.isEditable) {
 				this.$emit('star-unhover', star);
 				this.hoveredRating = undefined;
 			}
