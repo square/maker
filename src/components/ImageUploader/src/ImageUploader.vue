@@ -103,6 +103,12 @@ export default {
 	},
 
 	methods: {
+		/**
+		 * Processes images selected by the picker, ensuring the number of images
+		 * is not above the max, passes them to the formatter, and then triggers the upload.
+		 *
+		 * @param {Array} images a list of Files
+		 */
 		selectImages(images) {
 			if (!this.canUploadImage) {
 				return;
@@ -118,6 +124,11 @@ export default {
 			formattedImages.forEach((image) => this.handleImageUpload(image));
 		},
 
+		/**
+		 * Transforms a list of image Files into a standard object with status/upload attributes
+		 *
+		 * @param {Array} images a list of Files
+		 */
 		formatImages(images) {
 			const formattedImages = images
 				.map((image) => {
@@ -135,6 +146,12 @@ export default {
 			return formattedImages;
 		},
 
+		/**
+		 * Starts the upload process for a formatted image. First checks to make sure an image
+		 * fits the filesize limit, and then calls the upload handler function (if present).
+		 *
+		 * @param {Object} image a formatted image object
+		 */
 		async handleImageUpload(image) {
 			if (this.maxSize && image.file.size > this.maxSize) {
 				this.$set(image, 'progress', MAX_PROGRESS);
@@ -166,10 +183,20 @@ export default {
 			}
 		},
 
+		/**
+		 * Removes an image from the list
+		 *
+		 * @param {String} imageID id of a formatted image object
+		 */
 		removeImage(imageID) {
 			this.$emit('input', this.images.filter(({ id }) => id !== imageID));
 		},
 
+		/**
+		 * Transforms an image File into a base64 URL. Used to display on the UI.
+		 *
+		 * @param {Object} image formatted image object
+		 */
 		async buildImageURL(image) {
 			const url = await new Promise((resolve) => {
 				const reader = new FileReader();
