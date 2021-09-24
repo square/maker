@@ -1,7 +1,10 @@
 <template>
 	<div
 		:class="$s.ImagePickerInputContainer"
+		role="button"
+		tabindex="0"
 		@click="$refs.input.click()"
+		@keydown.space.enter.prevent="$refs.input.click()"
 	>
 		<input
 			ref="input"

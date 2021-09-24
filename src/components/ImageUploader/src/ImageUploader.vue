@@ -120,7 +120,7 @@ export default {
 				: images;
 
 			const formattedImages = this.formatImages(imagesToUpload);
-			this.$emit('input', [...this.images, ...formattedImages]);
+			this.$emit('image-uploader:input', [...this.images, ...formattedImages]);
 			formattedImages.forEach((image) => this.handleImageUpload(image));
 		},
 
@@ -189,7 +189,7 @@ export default {
 		 * @param {String} imageID id of a formatted image object
 		 */
 		removeImage(imageID) {
-			this.$emit('input', this.images.filter(({ id }) => id !== imageID));
+			this.$emit('image-uploader:input', this.images.filter(({ id }) => id !== imageID));
 		},
 
 		/**
