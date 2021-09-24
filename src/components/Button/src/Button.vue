@@ -4,9 +4,9 @@
 			$s.Button,
 			$s[`size_${resolvedSize}`],
 			$s[`shape_${resolvedShape}`],
-			$s[`align_${align}`],
+			$s[`align_${resolvedAlign}`],
 			{
-				[$s.fullWidth]: fullWidth,
+				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
 			}
@@ -41,8 +41,7 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
-import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
-import assert from '@square/maker/utils/assert';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 function getContrast(chromaBg, targetChromaFg) {
 	const contrastAccessibilityThreshold = 4.5;
@@ -180,7 +179,7 @@ export default {
 		 */
 		fullWidth: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * Background color of button
@@ -226,7 +225,7 @@ export default {
 		 */
 		align: {
 			type: String,
-			default: 'center',
+			default: undefined,
 			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
 		},
 		/**
@@ -239,54 +238,11 @@ export default {
 	},
 
 	computed: {
-		resolvedSize() {
-			let sizeValueOrPointer;
-			if (this.size) {
-				sizeValueOrPointer = this.size;
-			} else {
-				sizeValueOrPointer = this.theme.button.size;
-			}
-			const sizeValue = this.theme.resolve(sizeValueOrPointer);
-			assert.error(['small', 'medium', 'large'].includes(sizeValue), `${sizeValue} resolved from ${sizeValueOrPointer} is not a valid size value and cannot be used in the size prop of Button`);
-			return sizeValue;
-		},
-		resolvedColor() {
-			let colorValueOrPointer;
-			if (this.color) {
-				colorValueOrPointer = this.color;
-			} else {
-				colorValueOrPointer = this.theme.button.color;
-			}
-			const colorValue = this.theme.resolve(colorValueOrPointer);
-			assert.error(chroma.valid(colorValue), `${colorValue} resolved from ${colorValueOrPointer} is not a valid CSS color value and cannot be used in the color prop of Button`);
-			return colorValue;
-		},
-		resolvedVariant() {
-			let variantValueOrPointer;
-			if (this.variant) {
-				variantValueOrPointer = this.variant;
-			} else {
-				variantValueOrPointer = this.theme.button.variant;
-			}
-			const variantValue = this.theme.resolve(variantValueOrPointer);
-			assert.error(['primary', 'secondary', 'tertiary'].includes(variantValue), `${variantValue} resolved from ${variantValueOrPointer} is not a valid variant value and cannot be used in the variant prop of Button`);
-			return variantValue;
-		},
-		resolvedShape() {
-			let shapeValueOrPointer;
-			if (this.shape) {
-				shapeValueOrPointer = this.shape;
-			} else {
-				shapeValueOrPointer = this.theme.button.shape;
-			}
-			const shapeValue = this.theme.resolve(shapeValueOrPointer);
-			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of Button`);
-			return shapeValue;
-		},
+		...resolveThemeableProps('button', ['color', 'size', 'textColor', 'variant', 'shape', 'align', 'fullWidth']),
 		style() {
 			return VARIANTS[this.resolvedVariant]({
 				color: this.resolvedColor,
-				textColor: this.textColor,
+				textColor: this.resolvedTextColor,
 			});
 		},
 	},
