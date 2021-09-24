@@ -4,6 +4,60 @@ Use ImageUploader to provide a visual wrapper for a file input. Use with an uplo
 
 Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with this configuration.
 
+## Upload Handler
+
+The upload hander (passed in as the `uploadHandlerFn` prop) should accept an object as the first argument. This object will contain the fields:
+
+- `image`: A `File` instance for the image to upload
+- `uploadProgressHandler`: A `Function` to push progress updates to the uploader, takes a number as an argument.
+
+The API response will be added as `apiResponse` to the image object. If an error has occurred, `apiError` will be added with the thrown error.
+
+```
+<template>
+  <m-image-uploader
+    :images="myImages"
+    :upload-handler-fn="uploadImage"
+    @image-uploader:input="setMyImages"
+  />
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'MyImageForm',
+
+  data() {
+    return {
+      myImages: [],
+    };
+  },
+
+  methods: {
+    setMyImages(images) {
+      this.myImages = images;
+    },
+
+    // The function should be async to properly reflect the status in the uploader
+		async uploadImage({ image, uploadProgressHandler }) {
+      const formData = // build form data as needed;
+      
+      // 
+			const response = await axios.post({
+        data: formData,
+        // If your API client supports it, you can push upload progress to the component using the handler
+				onUploadProgress: ({ loaded }) => uploadProgressHandler(loaded),
+      });
+
+      // This response will be added as apiResponse on the image
+      return response;
+    }
+  }
+}
+</script>
+```
+
 ```vue
 <template>
 	<div>
@@ -18,8 +72,16 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			<m-image-uploader
 				:images="successImages"
 				:upload-handler-fn="uploadSuccessfulImage"
-				@input="setImages('success', $event)"
+				@image-uploader:input="setImages('success', $event)"
 			/>
+
+			<div :class="$s.ImagePayloads">
+				<pre
+					v-for="image of successImages"
+					:key="image.id"
+					:class="$s.ImagePayload"
+				>{{ getSafeImage(image) }}</pre>
+			</div>
 		</div>
 
 		<div :class="$s.SelectorContainer">
@@ -33,8 +95,16 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			<m-image-uploader
 				:images="apiErrorImages"
 				:upload-handler-fn="uploadErrorImage"
-				@input="setImages('apiError', $event)"
+				@image-uploader:input="setImages('apiError', $event)"
 			/>
+
+			<div :class="$s.ImagePayloads">
+				<pre
+					v-for="image of apiErrorImages"
+					:key="image.id"
+					:class="$s.ImagePayload"
+				>{{ getSafeImage(image) }}</pre>
+			</div>
 		</div>
 
 		<div :class="$s.SelectorContainer">
@@ -50,8 +120,16 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			</p>
 			<m-image-uploader
 				:images="normalImages"
-				@input="setImages('normal', $event)"
+				@image-uploader:input="setImages('normal', $event)"
 			/>
+
+			<div :class="$s.ImagePayloads">
+				<pre
+					v-for="image of normalImages"
+					:key="image.id"
+					:class="$s.ImagePayload"
+				>{{ getSafeImage(image) }}</pre>
+			</div>
 		</div>
 
 		<div :class="$s.SelectorContainer">
@@ -63,13 +141,22 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			</m-heading>
 			<p>
 				If a size limit has been set, files that are too large will be
-				set to an error state before uploading.
+				set to an error state before uploading. The `fileTooLarge` flag
+				will be true if this limit is passed.
 			</p>
 			<m-image-uploader
 				:images="maxSizeImages"
 				:max-size="50000"
-				@input="setImages('maxSize', $event)"
+				@image-uploader:input="setImages('maxSize', $event)"
 			/>
+
+			<div :class="$s.ImagePayloads">
+				<pre
+					v-for="image of maxSizeImages"
+					:key="image.id"
+					:class="$s.ImagePayload"
+				>{{ getSafeImage(image) }}</pre>
+			</div>
 		</div>
 
 		<div :class="$s.SelectorContainer">
@@ -87,8 +174,16 @@ Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with th
 			<m-image-uploader
 				:images="maxNumberImages"
 				:max-images="3"
-				@input="setImages('maxNumber', $event)"
+				@image-uploader:input="setImages('maxNumber', $event)"
 			/>
+
+			<div :class="$s.ImagePayloads">
+				<pre
+					v-for="image of maxNumberImages"
+					:key="image.id"
+					:class="$s.ImagePayload"
+				>{{ getSafeImage(image) }}</pre>
+			</div>
 		</div>
 	</div>
 </template>
@@ -189,6 +284,13 @@ export default {
 				}
 			}, 500);
 		},
+
+		getSafeImage(image) {
+			return {
+				...image,
+				url: 'base64 image',
+			};
+		},
 	},
 };
 </script>
@@ -200,6 +302,18 @@ export default {
 
 .SelectorHeader {
 	margin-bottom: 16px;
+}
+
+.ImagePayloads {
+	display: flex;
+	gap: 8px;
+}
+
+.ImagePayload {
+	background-color: lightgrey;
+	font-size: 12px;
+	padding: 4px;
+	border-radius: 4px;
 }
 </style>
 
