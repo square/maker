@@ -219,7 +219,7 @@ export default {
 
 ## Events
 
-| Event | Type | Description |
-| ----- | ---- | ----------- |
-| input | -    | —           |
+| Event                | Type | Description |
+| -------------------- | ---- | ----------- |
+| image-uploader:input | -    | —           |
 <!-- api-tables:end -->
