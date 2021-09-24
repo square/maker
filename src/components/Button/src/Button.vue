@@ -41,17 +41,7 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
-
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLightThreshold = 0.32;
-		const isLight = chromaBg.luminance() > isLightThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
+import getContrast from '@square/maker/utils/get-contrast';
 
 function getFocus(chromaColor) {
 	const arbitraryAlphaValue = 0.3;
