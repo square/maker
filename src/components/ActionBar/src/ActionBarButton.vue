@@ -44,8 +44,7 @@
 import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
-import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
-import assert from '@square/maker/utils/assert';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 // TODO: refactor the code below so it's shared with Button component
 
@@ -161,61 +160,7 @@ export default {
 	},
 
 	computed: {
-		resolvedColor() {
-			let colorValueOrPointer;
-			if (this.color) {
-				colorValueOrPointer = this.color;
-			} else {
-				colorValueOrPointer = this.theme.actionbarbutton.color;
-			}
-			const colorValue = this.theme.resolve(colorValueOrPointer);
-			assert.error(chroma.valid(colorValue), `${colorValue} resolved from ${colorValueOrPointer} is not a valid CSS color value and cannot be used in the color prop of ActionBarButton`);
-			return colorValue;
-		},
-		resolvedShape() {
-			let shapeValueOrPointer;
-			if (this.shape) {
-				shapeValueOrPointer = this.shape;
-			} else {
-				shapeValueOrPointer = this.theme.actionbarbutton.shape;
-			}
-			const shapeValue = this.theme.resolve(shapeValueOrPointer);
-			assert.error(['squared', 'rounded', 'pill'].includes(shapeValue), `${shapeValue} resolved from ${shapeValueOrPointer} is not a valid shape value and cannot be used in the shape prop of ActionBarButton`);
-			return shapeValue;
-		},
-		resolvedTextColor() {
-			let textColorValueOrPointer;
-			if (this.textColor) {
-				textColorValueOrPointer = this.textColor;
-			} else {
-				textColorValueOrPointer = this.theme.actionbarbutton.textColor;
-			}
-			const textColorValue = this.theme.resolve(textColorValueOrPointer);
-			assert.error(!textColorValue || chroma.valid(textColorValue), `${textColorValue} resolved from ${textColorValueOrPointer} is not a valid CSS textColor value and cannot be used in the textColor prop of ActionBarButton`);
-			return textColorValue;
-		},
-		resolvedFullWidth() {
-			let fullWidthValueOrPointer;
-			if (this.fullWidth) {
-				fullWidthValueOrPointer = this.fullWidth;
-			} else {
-				fullWidthValueOrPointer = this.theme.actionbarbutton.fullWidth;
-			}
-			const fullWidthValue = this.theme.resolve(fullWidthValueOrPointer);
-			assert.error([true, false].includes(fullWidthValue), `${fullWidthValue} resolved from ${fullWidthValueOrPointer} is not a valid fullWidth value and cannot be used in the fullWidth prop of ActionBarButton`);
-			return fullWidthValue;
-		},
-		resolvedAlign() {
-			let alignValueOrPointer;
-			if (this.align) {
-				alignValueOrPointer = this.align;
-			} else {
-				alignValueOrPointer = this.theme.button.align;
-			}
-			const alignValue = this.theme.resolve(alignValueOrPointer);
-			assert.error(['center', 'stack', 'space-between'].includes(alignValue), `${alignValue} resolved from ${alignValueOrPointer} is not a valid align value and cannot be used in the align prop of Button`);
-			return alignValue;
-		},
+		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
 			return fill({
 				color: this.resolvedColor,
