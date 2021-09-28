@@ -153,33 +153,26 @@ export default {
 		 * @param {Object} image a formatted image object
 		 */
 		async handleImageUpload(image) {
-			if (this.maxSize && image.file.size > this.maxSize) {
-				this.$set(image, 'progress', MAX_PROGRESS);
-				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
-				this.$set(image, 'fileTooLarge', true);
+			this.validateImageSize(image);
+
+			if (!this.isImageValid(image)) {
+				this.setImageFailed(image);
 				return;
 			}
 
-			this.$set(image, 'fileTooLarge', false);
-
 			if (!this.uploadHandlerFn) {
-				this.$set(image, 'progress', MAX_PROGRESS);
-				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
+				this.setImageComplete(image);
 				return;
 			}
 
 			try {
 				const response = await this.uploadHandlerFn({
-					image: image.file,
-					uploadProgressHandler: (progress) => this.$set(image, 'progress', progress),
+					imageFile: image.file,
+					setImageProgress: (progress) => this.setImageProgress(image, progress),
 				});
-				this.$set(image, 'progress', MAX_PROGRESS);
-				this.$set(image, 'apiResponse', response);
-				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.COMPLETE);
+				this.setImageComplete(image, response);
 			} catch (error) {
-				this.$set(image, 'progress', MAX_PROGRESS);
-				this.$set(image, 'apiError', error);
-				this.$set(image, 'status', IMAGE_SELECTOR_STATUSES.ERROR);
+				this.setImageFailed(image, error);
 			}
 		},
 
@@ -207,6 +200,98 @@ export default {
 			});
 
 			this.$set(image, 'url', url);
+		},
+
+		/**
+		 * Validates image file size (if set)
+		 *
+		 * @param i{Object} mage image record to be validated
+		 */
+		validateImageSize(image) {
+			if (this.maxSize && image.file.size > this.maxSize) {
+				this.$set(image, 'fileTooLarge', true);
+			}
+		},
+
+		/**
+		 * Checks if a file meets validation (max-size)
+		 *
+		 * @param {Object} image image record to be validated
+		 *
+		 * @returns {Boolean} true if valid, false if not
+		 */
+		isImageValid(image) {
+			return !image.fileTooLarge;
+		},
+
+		/**
+		 * Sets image state after an upload is completed
+		 *
+		 * @param {Object} image image record to be updated
+		 * @param {Object} apiResponse return value of upload handler callback
+		 */
+		setImageComplete(image, apiResponse) {
+			if (apiResponse) {
+				this.setImageApiResponse(image, apiResponse);
+			}
+
+			this.setImageStatus(image, IMAGE_SELECTOR_STATUSES.COMPLETE);
+			this.setImageProgress(image, MAX_PROGRESS);
+		},
+
+		/**
+		 * Sets image state after an upload has failed
+		 *
+		 * @param {Object} image image record to be updated
+		 * @param {Object} apiResponse thrown error from upload handler callback
+		 */
+		setImageFailed(image, error) {
+			if (error) {
+				this.setImageError(image, error);
+			}
+
+			this.setImageStatus(image, IMAGE_SELECTOR_STATUSES.COMPLETE);
+			this.setImageProgress(image, MAX_PROGRESS);
+		},
+
+		/**
+		 * Sets image status
+		 *
+		 * @param {Object} image image record to be updated
+		 * @param {String} status new status for image
+		 */
+		setImageStatus(image, status) {
+			this.$set(image, 'status', status);
+		},
+
+		/**
+		 * Sets image progress
+		 *
+		 * @param {Object} image image record to be updated
+		 * @param {Number} progress new progress for image
+		 */
+		setImageProgress(image, progress) {
+			this.$set(image, 'progress', progress);
+		},
+
+		/**
+		 * Sets image API response
+		 *
+		 * @param {Object} image image record to be updated
+		 * @param {String} apiResponse API response from upload of the image
+		 */
+		setImageApiResponse(image, apiResponse) {
+			this.$set(image, 'apiResponse', apiResponse);
+		},
+
+		/**
+		 * Sets image error
+		 *
+		 * @param {Object} image image record to be updated
+		 * @param {String} error error thrown by image upload
+		 */
+		setImageError(image, error) {
+			this.$set(image, 'error', error);
 		},
 	},
 };

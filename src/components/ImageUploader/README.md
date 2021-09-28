@@ -53,10 +53,10 @@ export default {
 			this.images = images;
 		},
 
-		async uploadImage({ image, uploadProgressHandler }) {
+		async uploadImage({ imageFile, setImageProgress }) {
 			const response = await mockImageApi.uploadImage({
-				image,
-				onUploadProgress: ({ loaded }) => uploadProgressHandler(loaded),
+				image: imageFile,
+				onUploadProgress: ({ loaded }) => setImageProgress(loaded),
 			});
 
 			return response;
@@ -131,10 +131,10 @@ export default {
 			this.images = images;
 		},
 
-		async uploadImage({ image, uploadProgressHandler }) {
+		async uploadImage({ imageFile, setImageProgress }) {
 			const response = await mockImageApi.uploadImage({
-				image,
-				onUploadProgress: ({ loaded }) => uploadProgressHandler(loaded),
+				image: imageFile,
+				onUploadProgress: ({ loaded }) => setImageProgress(loaded),
 				shouldSucceed: false,
 			});
 
