@@ -3,6 +3,7 @@
 		:class="[
 			$s.Container,
 		]"
+		:style="style"
 	>
 		<slot />
 	</div>
@@ -10,6 +11,8 @@
 
 <script>
 import assert from '@square/maker/utils/assert';
+import getContrast from '@square/maker/utils/get-contrast';
+import chroma from 'chroma-js';
 import key from './key';
 
 export default {
@@ -47,6 +50,14 @@ export default {
 			default: 'single-select',
 			validator: (modeValue) => ['single-select', 'multi-select'].includes(modeValue),
 		},
+		/**
+		 * Background color of a selected option
+		 */
+		selectedColor: {
+			type: String,
+			default: '#222',
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	data() {
@@ -54,6 +65,29 @@ export default {
 			currentValue: this.selected,
 			isMultiSelect: this.mode === 'multi-select',
 		};
+	},
+
+	computed: {
+		contrastColor() {
+			const color = this.selectedColor;
+			const chromaColor = chroma(color);
+			const contrastColor = getContrast(chromaColor, '#fff');
+			return contrastColor;
+		},
+
+		disabledContrastColor() {
+			const alphaValue = 0.4;
+			const disabledTextColor = chroma(this.contrastColor).alpha(alphaValue);
+			return disabledTextColor;
+		},
+
+		style() {
+			return {
+				'--selected-background-color': this.selectedColor,
+				'--selected-text-color': this.contrastColor,
+				'--selected-disabled-text-color': this.disabledContrastColor,
+			};
+		},
 	},
 
 	watch: {

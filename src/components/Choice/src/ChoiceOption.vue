@@ -58,14 +58,18 @@ export default {
 </script>
 
 <style module="$s">
+/*
+	Defined in Choice component:
+	--selected-background-color
+	--selected-text-color
+	--selected-disabled-text-color
+*/
 .Button {
 	--border-radius: 8px;
 	--color-white: #fff;
 	--normal-text-color: #222;
 	--normal-disabled-text-color: rgba(0, 0, 0, 0.4);
-	--selected-disabled-text-color: rgba(255, 255, 255, 0.4);
 	--normal-background-color: #f2f2f2;
-	--selected-background-color: #222;
 	--color-focus: rgba(0, 0, 0, 0.3);
 	--button-padding: 12px 24px;
 
@@ -101,7 +105,7 @@ export default {
 }
 
 .selected {
-	color: var(--color-white);
+	color: var(--selected-text-color);
 	background-color: var(--selected-background-color);
 
 	&:disabled {

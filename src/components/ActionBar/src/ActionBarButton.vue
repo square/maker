@@ -45,19 +45,9 @@ import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import getContrast from '@square/maker/utils/get-contrast';
 
 // TODO: refactor the code below so it's shared with Button component
-
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
-	const isLightColorThreshold = 0.32;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLight = chromaBg.luminance() > isLightColorThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
 
 function getFocus(chromaColor) {
 	const arbitraryAlphaValue = 0.8;
