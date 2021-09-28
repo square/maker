@@ -1,3 +1,5 @@
 # https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
 
-*	@pretzelhammer @privatenumber @landondurnan
+*	@square/maker-core-contributors
+build	@square/maker-core-contributors @privatenumber
+.github	@square/maker-core-contributors @privatenumber

@@ -2,10 +2,10 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`align_${align}`],
-			$s[`shape_${shape}`],
+			$s[`align_${resolvedAlign}`],
+			$s[`shape_${resolvedShape}`],
 			{
-				[$s.fullWidth]: fullWidth,
+				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
 			}
@@ -44,19 +44,10 @@
 import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import getContrast from '@square/maker/utils/get-contrast';
 
 // TODO: refactor the code below so it's shared with Button component
-
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
-	const isLightColorThreshold = 0.32;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLight = chromaBg.luminance() > isLightColorThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
 
 function getFocus(chromaColor) {
 	const arbitraryAlphaValue = 0.8;
@@ -86,6 +77,13 @@ export default {
 		PseudoWindow,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -101,14 +99,14 @@ export default {
 		 */
 		fullWidth: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * Background color of button
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -124,7 +122,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'pill',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -139,7 +137,7 @@ export default {
 		 */
 		align: {
 			type: String,
-			default: 'center',
+			default: undefined,
 			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
 		},
 		/**
@@ -152,10 +150,11 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
 			return fill({
-				color: this.color,
-				textColor: this.textColor,
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
 			});
 		},
 	},
