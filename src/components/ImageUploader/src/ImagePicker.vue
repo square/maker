@@ -31,7 +31,7 @@ export default {
 
 	methods: {
 		selectImages(fileEvent) {
-			this.$emit('selectImages', [...fileEvent.target.files]);
+			this.$emit('image-picker:pick-images', [...fileEvent.target.files]);
 		},
 	},
 };

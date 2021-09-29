@@ -5,7 +5,7 @@
 			:class="$s.ImageUploaderItem"
 			:multiple="canUploadMultiple"
 			:accept="accept"
-			@selectImages="selectImages"
+			@image-picker:pick-images="addImages"
 		/>
 		<image-selection
 			v-for="image of images"
@@ -113,7 +113,7 @@ export default {
 		 *
 		 * @param {Array} images a list of Files
 		 */
-		selectImages(images) {
+		addImages(images) {
 			if (!this.canUploadImage) {
 				return;
 			}
