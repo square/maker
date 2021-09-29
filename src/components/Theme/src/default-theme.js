@@ -5,6 +5,11 @@ export default function defaultTheme() {
 		colors: {
 			primary: '#000000',
 		},
+		profiles: [
+			{
+				id: 'defaultProfile',
+			},
+		],
 		button: {
 			size: 'medium',
 			variant: 'primary',
