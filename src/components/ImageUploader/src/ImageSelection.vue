@@ -11,10 +11,10 @@
 			v-if="isUploading"
 			:class="$s.ImageSelectionLoaderContainer"
 		>
-			<loading :class="$s.ImageSelectionLoader" />
+			<m-loading :class="$s.ImageSelectionLoader" />
 		</div>
 
-		<progress-bar
+		<m-progress-bar
 			:class="$s.ImageSelectionProgressContainer"
 			:style="progressContainerStyle"
 			:progress="progress"
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import { MLoading as Loading } from '@square/maker/components/Loading';
-import { MProgressBar as ProgressBar } from '@square/maker/components/ProgressBar';
+import { MLoading } from '@square/maker/components/Loading';
+import { MProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
 
 const MAX_PROGRESS = 100;
@@ -47,8 +47,8 @@ export default {
 	name: 'MImageSelection',
 
 	components: {
-		Loading,
-		ProgressBar,
+		MLoading,
+		MProgressBar,
 		XIcon,
 	},
 
