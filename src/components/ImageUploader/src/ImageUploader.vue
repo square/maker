@@ -201,7 +201,7 @@ export default {
 				});
 				this.setImageComplete(image, response);
 			} catch (error) {
-				this.setImageError(image, error);
+				this.setImageFailed(image, error);
 			}
 		},
 
