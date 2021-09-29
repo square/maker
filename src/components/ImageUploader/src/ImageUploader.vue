@@ -5,7 +5,7 @@
 			:class="$s.ImageUploaderItem"
 			:multiple="canUploadMultiple"
 			:accept="accept"
-			@image-picker:pick-images="addImages"
+			@image-picker:add-images="addImages"
 		/>
 		<image-selection
 			v-for="image of images"

@@ -11,7 +11,7 @@
 			:class="$s.ImagePickerInput"
 			type="file"
 			v-bind="$attrs"
-			@change="selectImages"
+			@change="addImages"
 		>
 		<plus-icon
 			inline
@@ -30,8 +30,8 @@ export default {
 	},
 
 	methods: {
-		selectImages(fileEvent) {
-			this.$emit('image-picker:pick-images', [...fileEvent.target.files]);
+		addImages(fileEvent) {
+			this.$emit('image-picker:add-images', [...fileEvent.target.files]);
 		},
 	},
 };
