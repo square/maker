@@ -1,5 +1,5 @@
 export const IMAGE_SELECTOR_STATUSES = {
-	PENDING: 'pending',
+	UPLOADING: 'uploading',
 	ERROR: 'error',
 	COMPLETE: 'complete',
 };

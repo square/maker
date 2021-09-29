@@ -35,20 +35,13 @@ export default {
 	},
 
 	props: {
-		/**
-		 * List of images that have been selected
-		 */
-		images: {
-			type: Array,
-			default: () => [],
-		},
 		// Not disabling and breaking the line causes the doc generator to break.
 		/* eslint-disable max-len */
 		/**
 		 * Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met.
 		*/
 		/* eslint-enable max-len */
-		uploadHandlerFn: {
+		uploadHandler: {
 			type: Function,
 			default: undefined,
 		},
@@ -77,6 +70,7 @@ export default {
 	},
 
 	data: () => ({
+		images: [],
 		nextID: 0,
 	}),
 
@@ -102,6 +96,16 @@ export default {
 		},
 	},
 
+	watch: {
+		images: {
+			deep: true,
+			handler() {
+				this.updateImages();
+			},
+			immediate: true,
+		},
+	},
+
 	methods: {
 		/**
 		 * Processes images selected by the picker, ensuring the number of images
@@ -120,7 +124,7 @@ export default {
 				: images;
 
 			const formattedImages = this.formatImages(imagesToUpload);
-			this.$emit('image-uploader:input', [...this.images, ...formattedImages]);
+			this.images = [...this.images, ...formattedImages];
 			formattedImages.forEach((image) => this.handleImageUpload(image));
 		},
 
@@ -137,7 +141,7 @@ export default {
 					return {
 						id: this.nextID,
 						file: image,
-						status: IMAGE_SELECTOR_STATUSES.PENDING,
+						status: IMAGE_SELECTOR_STATUSES.UPLOADING,
 						progress: 0,
 					};
 				});
@@ -160,13 +164,13 @@ export default {
 				return;
 			}
 
-			if (!this.uploadHandlerFn) {
+			if (!this.uploadHandler) {
 				this.setImageComplete(image);
 				return;
 			}
 
 			try {
-				const response = await this.uploadHandlerFn({
+				const response = await this.uploadHandler({
 					imageFile: image.file,
 					setImageProgress: (progress) => this.setImageProgress(image, progress),
 				});
@@ -182,7 +186,7 @@ export default {
 		 * @param {String} imageID id of a formatted image object
 		 */
 		removeImage(imageID) {
-			this.$emit('image-uploader:input', this.images.filter(({ id }) => id !== imageID));
+			this.images = this.images.filter(({ id }) => id !== imageID);
 		},
 
 		/**
@@ -250,7 +254,7 @@ export default {
 				this.setImageError(image, error);
 			}
 
-			this.setImageStatus(image, IMAGE_SELECTOR_STATUSES.COMPLETE);
+			this.setImageStatus(image, IMAGE_SELECTOR_STATUSES.ERROR);
 			this.setImageProgress(image, MAX_PROGRESS);
 		},
 
@@ -292,6 +296,40 @@ export default {
 		 */
 		setImageError(image, error) {
 			this.$set(image, 'error', error);
+		},
+
+		imagesForStatus(status) {
+			return this.images.filter((image) => image.status === status);
+		},
+
+		sanitizeOutputImages(images) {
+			return images.map((image) => ({
+				status: image.status,
+				file: image.file,
+				apiResponse: image.apiResponse,
+				error: image.error,
+				fileTooLarge: image.fileTooLarge,
+			}));
+		},
+
+		updateImages(newImages) {
+			if (newImages) {
+				this.images = newImages;
+			}
+
+			this.$emit('image-uploader:change', this.sanitizeOutputImages(this.images));
+			this.$emit(
+				'image-uploader:uploading',
+				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.UPLOADING)),
+			);
+			this.$emit(
+				'image-uploader:error',
+				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.ERROR)),
+			);
+			this.$emit(
+				'image-uploader:complete',
+				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.COMPLETE)),
+			);
 		},
 	},
 };

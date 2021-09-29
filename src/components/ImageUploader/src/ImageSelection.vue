@@ -93,7 +93,7 @@ export default {
 		},
 
 		isUploading() {
-			return this.image.status === IMAGE_SELECTOR_STATUSES.PENDING;
+			return this.image.status === IMAGE_SELECTOR_STATUSES.UPLOADING;
 		},
 
 		hasError() {

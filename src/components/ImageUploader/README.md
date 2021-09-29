@@ -12,44 +12,54 @@ The upload hander (passed in as the `uploadHandlerFn` prop) should accept an obj
 
 If you require the response from your API, it will be added to the image record as the `apiResponse` field.
 
+If you want to listen for images that have completed upload, you can listen to the `@image-uploader:completed` event.
+
 ```vue
 <template>
-	<div :class="$s.SelectorContainer">
+	<div>
 		<p>Handler uses a simulated delay to mimic an actual upload.</p>
 		<m-image-uploader
-			:images="images"
-			:upload-handler-fn="uploadImage"
-			@image-uploader:input="setImages"
+			:upload-handler="uploadImage"
+			@image-uploader:change="setImages"
+			@image-uploader:complete="setCompleteImages"
 		/>
 
-		<div :class="$s.ImagePayloads">
-			<pre
-				v-for="image of images"
-				:key="image.id"
-				:class="$s.ImagePayload"
-			>{{ getSafeImage(image) }}</pre>
-		</div>
+		<demo-image-status
+			:images="images"
+			header="All Images"
+		/>
+		<demo-image-status
+			:images="completeImages"
+			header="Completed Images"
+		/>
 	</div>
 </template>
 
 <script>
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import mockImageApi from '@square/maker/components/ImageUploader/demo-api';
+import DemoImageStatus from '@square/maker/components/ImageUploader/DemoImageStatus.vue';
 
 export default {
 	components: {
 		MImageUploader,
+		DemoImageStatus,
 	},
 
 	data() {
 		return {
 			images: [],
+			completeImages: [],
 		};
 	},
 
 	methods: {
 		setImages(images) {
 			this.images = images;
+		},
+
+		setCompleteImages(images) {
+			this.completeImages = images;
 		},
 
 		async uploadImage({ imageFile, setImageProgress }) {
@@ -60,73 +70,62 @@ export default {
 
 			return response;
 		},
-
-		getSafeImage(image) {
-			return {
-				...image,
-				url: 'base64 image',
-			};
-		},
 	},
 };
 </script>
-
-<style module="$s">
-.ImagePayloads {
-	display: flex;
-	gap: 8px;
-}
-
-.ImagePayload {
-	background-color: lightgrey;
-	font-size: 12px;
-	padding: 4px;
-	border-radius: 4px;
-}
-</style>
 ```
 
 ## Errors With Upload Handler
 The upload handler tracks upload success and failure state. When the upload handler completes or throws an error, the uploader will update the state accordingly. The actual error thrown will be added as the `apiError` field.
 
+You can also listen to the `image-uploader:error` event.
+
 ```vue
 <template>
-	<div :class="$s.SelectorContainer">
+	<div>
 		<p>Handler uses a simulated delay to mimic an actual upload.</p>
 		<m-image-uploader
-			:images="images"
-			:upload-handler-fn="uploadImage"
-			@image-uploader:input="setImages"
+			:upload-handler="uploadImage"
+			@image-uploader:change="setImages"
+			@image-uploader:error="setErrorImages"
 		/>
 
-		<div :class="$s.ImagePayloads">
-			<pre
-				v-for="image of images"
-				:key="image.id"
-				:class="$s.ImagePayload"
-			>{{ getSafeImage(image) }}</pre>
-		</div>
+		<demo-image-status
+			:images="images"
+			header="All Images"
+		/>
+		<demo-image-status
+			:images="errorImages"
+			header="Error Images"
+		/>
 	</div>
 </template>
 
 <script>
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import mockImageApi from '@square/maker/components/ImageUploader/demo-api';
+import DemoImageStatus from '@square/maker/components/ImageUploader/DemoImageStatus.vue';
 
 export default {
 	components: {
 		MImageUploader,
+		DemoImageStatus,
 	},
 
 	data() {
 		return {
 			images: [],
+			errorImages: [],
 		};
 	},
 
 	methods: {
 		setImages(images) {
 			this.images = images;
+		},
+
+		setErrorImages(images) {
+			this.errorImages = images;
 		},
 
 		async uploadImage({ imageFile, setImageProgress }) {
@@ -148,20 +147,6 @@ export default {
 	},
 };
 </script>
-
-<style module="$s">
-.ImagePayloads {
-	display: flex;
-	gap: 8px;
-}
-
-.ImagePayload {
-	background-color: lightgrey;
-	font-size: 12px;
-	padding: 4px;
-	border-radius: 4px;
-}
-</style>
 ```
 
 ## Usage Without an Upload Handler
@@ -169,28 +154,23 @@ If you do not require an immediate upload for selected images, you may simply om
 
 ```vue
 <template>
-	<div :class="$s.SelectorContainer">
+	<div>
 		<m-image-uploader
-			:images="images"
-			@image-uploader:input="setImages"
+			@image-uploader:change="setImages"
 		/>
 
-		<div :class="$s.ImagePayloads">
-			<pre
-				v-for="image of images"
-				:key="image.id"
-				:class="$s.ImagePayload"
-			>{{ getSafeImage(image) }}</pre>
-		</div>
+		<demo-image-status :images="images" />
 	</div>
 </template>
 
 <script>
 import { MImageUploader } from '@square/maker/components/ImageUploader';
+import DemoImageStatus from '@square/maker/components/ImageUploader/DemoImageStatus.vue';
 
 export default {
 	components: {
 		MImageUploader,
+		DemoImageStatus,
 	},
 
 	data() {
@@ -213,20 +193,6 @@ export default {
 	},
 };
 </script>
-
-<style module="$s">
-.ImagePayloads {
-	display: flex;
-	gap: 8px;
-}
-
-.ImagePayload {
-	background-color: lightgrey;
-	font-size: 12px;
-	padding: 4px;
-	border-radius: 4px;
-}
-</style>
 ```
 
 ## Filesize Limits
@@ -236,40 +202,48 @@ Images that do not fit the limit will immediately be set to an error state (and 
 
 ```vue
 <template>
-	<div :class="$s.SelectorContainer">
+	<div>
 		<m-image-uploader
-			:images="images"
 			:max-size="50000"
-			@image-uploader:input="setImages"
+			@image-uploader:change="setImages"
+			@image-uploader:error="setErrorImages"
 		/>
 
-		<div :class="$s.ImagePayloads">
-			<pre
-				v-for="image of images"
-				:key="image.id"
-				:class="$s.ImagePayload"
-			>{{ getSafeImage(image) }}</pre>
-		</div>
+		<demo-image-status
+			:images="images"
+			header="All Images"
+		/>
+		<demo-image-status
+			:images="errorImages"
+			header="Error Images"
+		/>
 	</div>
 </template>
 
 <script>
 import { MImageUploader } from '@square/maker/components/ImageUploader';
+import DemoImageStatus from '@square/maker/components/ImageUploader/DemoImageStatus.vue';
 
 export default {
 	components: {
 		MImageUploader,
+		DemoImageStatus,
 	},
 
 	data() {
 		return {
 			images: [],
+			errorImages: [],
 		};
 	},
 
 	methods: {
 		setImages(images) {
 			this.images = images;
+		},
+
+		setErrorImages(images) {
+			this.errorImages = images;
 		},
 
 		getSafeImage(image) {
@@ -281,20 +255,6 @@ export default {
 	},
 };
 </script>
-
-<style module="$s">
-.ImagePayloads {
-	display: flex;
-	gap: 8px;
-}
-
-.ImagePayload {
-	background-color: lightgrey;
-	font-size: 12px;
-	padding: 4px;
-	border-radius: 4px;
-}
-</style>
 ```
 
 ## Max Number of Images
@@ -304,29 +264,24 @@ If a user selects more than the max from the OS prompt, images beyond the limit 
 
 ```vue
 <template>
-	<div :class="$s.SelectorContainer">
+	<div>
 		<m-image-uploader
-			:images="images"
 			:max-images="3"
-			@image-uploader:input="setImages"
+			@image-uploader:change="setImages"
 		/>
 
-		<div :class="$s.ImagePayloads">
-			<pre
-				v-for="image of images"
-				:key="image.id"
-				:class="$s.ImagePayload"
-			>{{ getSafeImage(image) }}</pre>
-		</div>
+		<demo-image-status :images="images" />
 	</div>
 </template>
 
 <script>
 import { MImageUploader } from '@square/maker/components/ImageUploader';
+import DemoImageStatus from '@square/maker/components/ImageUploader/DemoImageStatus.vue';
 
 export default {
 	components: {
 		MImageUploader,
+		DemoImageStatus,
 	},
 
 	data() {
@@ -349,20 +304,6 @@ export default {
 	},
 };
 </script>
-
-<style module="$s">
-.ImagePayloads {
-	display: flex;
-	gap: 8px;
-}
-
-.ImagePayload {
-	background-color: lightgrey;
-	font-size: 12px;
-	padding: 4px;
-	border-radius: 4px;
-}
-</style>
 ```
 
 <!-- api-tables:start -->
@@ -371,7 +312,7 @@ export default {
 | Prop              | Type     | Default           | Possible values | Description                                                                                                                              |
 | ----------------- | -------- | ----------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | images            | `array`  | `[]`              | —               | List of images that have been selected                                                                                                   |
-| upload-handler-fn | `func`   | `() => undefined` | —               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
+| upload-handler | `func`   | `() => undefined` | —               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
 | max-images        | `number` | `() => undefined` | —               | The maximum number of images allowed to be selected.                                                                                     |
 | max-size          | `number` | `() => undefined` | —               | The maximum file size allowed (in bytes)                                                                                                 |
 | accept            | `string` | `() => 'image/*'` | —               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
