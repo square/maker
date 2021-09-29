@@ -73,13 +73,13 @@ export default {
 
 Supports attributes from [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section).
 
-| Prop     | Type     | Default    | Possible values            | Description                 |
-| -------- | -------- | ---------- | -------------------------- | --------------------------- |
-| label    | `string` | —          | —                          | Section label               |
-| sublabel | `string` | —          | —                          | Section sublabel            |
-| size     | `string` | `'medium'` | `small`, `medium`, `large` | Section size                |
-| bg-color | `string` | —          | —                          | Background color of section |
-| color    | `string` | —          | —                          | Text color of section       |
+| Prop     | Type     | Default    | Possible values            | Description                   |
+| -------- | -------- | ---------- | -------------------------- | ----------------------------- |
+| label    | `string` | —          | —                          | Container label               |
+| sublabel | `string` | —          | —                          | Container sublabel            |
+| size     | `string` | `'medium'` | `small`, `medium`, `large` | Container size                |
+| bg-color | `string` | —          | —                          | Background color of container |
+| color    | `string` | —          | —                          | Text color of container       |
 
 
 ## Slots
@@ -87,7 +87,7 @@ Supports attributes from [`<section>`](https://developer.mozilla.org/en-US/docs/
 | Slot              | Description            |
 | ----------------- | ---------------------- |
 | requirement-label | requirement label slot |
-| default           | section content        |
+| default           | container content      |
 
 
 ## Events
