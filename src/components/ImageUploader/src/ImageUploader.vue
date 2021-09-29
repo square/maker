@@ -10,9 +10,12 @@
 		<image-selection
 			v-for="image of images"
 			:key="image.id"
-			:image="image"
+			:progress="image.progress"
+			:url="image.url"
+			:is-uploading="isUploadingImage(image)"
+			:is-error="isImageWithError(image)"
 			:class="$s.ImageUploaderItem"
-			@removeImage="removeImage"
+			@removeImage="removeImage(image.id)"
 		/>
 	</div>
 </template>
@@ -339,6 +342,14 @@ export default {
 				'image-uploader:complete',
 				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.COMPLETE)),
 			);
+		},
+
+		isUploadingImage(image) {
+			return image.status === IMAGE_SELECTOR_STATUSES.UPLOADING;
+		},
+
+		isImageWithError(image) {
+			return image.status === IMAGE_SELECTOR_STATUSES.ERROR;
 		},
 	},
 };

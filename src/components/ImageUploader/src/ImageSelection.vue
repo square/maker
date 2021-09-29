@@ -2,7 +2,7 @@
 	<div
 		:class="{
 			[$s.ImageSelectionContainer]: true,
-			[$s.ImageSelectionContainerError]: hasError
+			[$s.ImageSelectionContainerError]: isError
 		}"
 		role="img"
 		:style="bgImageStyle"
@@ -17,7 +17,7 @@
 		<progress-bar
 			:class="$s.ImageSelectionProgressContainer"
 			:style="progressContainerStyle"
-			:progress="image.progress"
+			:progress="progress"
 			size="xsmall"
 		/>
 
@@ -25,7 +25,7 @@
 			v-if="!isUploading"
 			type="button"
 			:class="$s.ImageSelectionRemoveButton"
-			@click="$emit('removeImage', image.id)"
+			@click="$emit('removeImage')"
 		>
 			<x-icon
 				inline
@@ -39,7 +39,6 @@
 import { MLoading as Loading } from '@square/maker/components/Loading';
 import { MProgressBar as ProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
-import { IMAGE_SELECTOR_STATUSES } from './constants';
 
 const MAX_PROGRESS = 100;
 const PROGRESS_OPACITY = { shown: 1, hidden: 0 };
@@ -54,15 +53,27 @@ export default {
 	},
 
 	props: {
-		image: {
-			type: Object,
-			required: true,
+		progress: {
+			type: Number,
+			default: 0,
+		},
+		url: {
+			type: String,
+			default: '',
+		},
+		isUploading: {
+			type: Boolean,
+			default: false,
+		},
+		isError: {
+			type: Boolean,
+			default: false,
 		},
 	},
 
 	computed: {
 		bgImageStyle() {
-			const url = `url("${this.image.url}")`;
+			const url = `url("${this.url}")`;
 			const loadingGradient = 'linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
 			const loadedGradient = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%)';
 
@@ -77,7 +88,7 @@ export default {
 		},
 
 		showProgressBar() {
-			return this.image.progress < MAX_PROGRESS;
+			return this.progress < MAX_PROGRESS;
 		},
 
 		progressContainerStyle() {
@@ -88,16 +99,8 @@ export default {
 
 		progressStyle() {
 			return {
-				width: `${this.image.progress}%`,
+				width: `${this.progress}%`,
 			};
-		},
-
-		isUploading() {
-			return this.image.status === IMAGE_SELECTOR_STATUSES.UPLOADING;
-		},
-
-		hasError() {
-			return this.image.status === IMAGE_SELECTOR_STATUSES.ERROR;
 		},
 	},
 };
