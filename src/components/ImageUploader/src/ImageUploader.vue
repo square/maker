@@ -113,7 +113,7 @@ export default {
 		 *
 		 * @param {Array} images a list of Files
 		 */
-		addImages(images) {
+		async addImages(images) {
 			if (!this.canUploadImage) {
 				return;
 			}
@@ -123,7 +123,7 @@ export default {
 				? images.slice(0, this.remainingImagesCount)
 				: images;
 
-			const formattedImages = this.formatImages(imagesToUpload);
+			const formattedImages = await this.formatImages(imagesToUpload);
 			this.images = [...this.images, ...formattedImages];
 			formattedImages.forEach((image) => this.handleImageUpload(image));
 		},
@@ -133,7 +133,7 @@ export default {
 		 *
 		 * @param {Array} images a list of Files
 		 */
-		formatImages(images) {
+		async formatImages(images) {
 			const formattedImages = images
 				.map((image) => {
 					this.nextID += ID_INCREMENT;
@@ -145,9 +145,34 @@ export default {
 						progress: 0,
 					};
 				});
-			formattedImages.forEach((image) => this.buildImageURL(image));
+
+			await this.buildImageURLs(formattedImages);
 
 			return formattedImages;
+		},
+
+		/**
+		 * Transforms an image File into a base64 URL. Used to display on the UI.
+		 *
+		 * @param {Object} image formatted image object
+		 */
+		async buildImageURLs(images) {
+			images.forEach(async (image) => {
+				try {
+					const url = await new Promise((resolve, reject) => {
+						const reader = new FileReader();
+						reader.onloadend = () => resolve(reader.result);
+						// eslint-disable-next-line unicorn/prefer-add-event-listener
+						reader.onerror = reject;
+						reader.readAsDataURL(image.file);
+					});
+
+					this.$set(image, 'url', url);
+				} catch (error) {
+					this.$set(image, 'fileReadError', true);
+					this.setImageError(image, error);
+				}
+			});
 		},
 
 		/**
@@ -176,7 +201,7 @@ export default {
 				});
 				this.setImageComplete(image, response);
 			} catch (error) {
-				this.setImageFailed(image, error);
+				this.setImageError(image, error);
 			}
 		},
 
@@ -187,23 +212,6 @@ export default {
 		 */
 		removeImage(imageID) {
 			this.images = this.images.filter(({ id }) => id !== imageID);
-		},
-
-		/**
-		 * Transforms an image File into a base64 URL. Used to display on the UI.
-		 *
-		 * @param {Object} image formatted image object
-		 */
-		async buildImageURL(image) {
-			const url = await new Promise((resolve) => {
-				const reader = new FileReader();
-				reader.onloadend = () => resolve(reader.result);
-				// eslint-disable-next-line unicorn/prefer-add-event-listener
-				reader.onerror = () => resolve('');
-				reader.readAsDataURL(image.file);
-			});
-
-			this.$set(image, 'url', url);
 		},
 
 		/**
@@ -225,7 +233,7 @@ export default {
 		 * @returns {Boolean} true if valid, false if not
 		 */
 		isImageValid(image) {
-			return !image.fileTooLarge;
+			return !image.fileTooLarge && !image.fileReadError;
 		},
 
 		/**
@@ -309,6 +317,7 @@ export default {
 				apiResponse: image.apiResponse,
 				error: image.error,
 				fileTooLarge: image.fileTooLarge,
+				fileReadError: image.fileReadError,
 			}));
 		},
 
