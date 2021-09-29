@@ -8,7 +8,7 @@
 			<m-button
 				:disabled="isCalendarNavDisabled(-1)"
 				color="#f2f2f2"
-				size="small"
+				size="medium"
 				variant="primary"
 				@click="incrementMonth(-1)"
 			>
@@ -23,7 +23,7 @@
 
 			<m-button
 				:disabled="isCalendarNavDisabled(1)"
-				size="small"
+				size="medium"
 				variant="primary"
 				color="#f2f2f2"
 				@click="incrementMonth(1)"
