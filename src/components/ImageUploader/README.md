@@ -319,10 +319,10 @@ export default {
 
 ## Events
 
-| Event                    | Type | Description |
-| ------------------------ | ---- | ----------- |
-| image-uploader:change    | -    | —           |
-| image-uploader:uploading | -    | —           |
-| image-uploader:error     | -    | —           |
-| image-uploader:complete  | -    | —           |
+| Event                    | Type    | Description                                              |
+| ------------------------ | ------- | -------------------------------------------------------- |
+| image-uploader:change    | `Array` | Update to list of images                                 |
+| image-uploader:uploading | `Array` | Update to list of images that are currently uploading    |
+| image-uploader:error     | `Array` | Update to list of images with an error                   |
+| image-uploader:complete  | `Array` | Update to list of images that have successfully uploaded |
 <!-- api-tables:end -->

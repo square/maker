@@ -324,20 +324,39 @@ export default {
 			}));
 		},
 
-		updateImages(newImages) {
-			if (newImages) {
-				this.images = newImages;
-			}
-
+		updateImages() {
+			/**
+			 * Update to list of images
+			 *
+			 * @property {Array} images list of all images in uploader
+			 */
 			this.$emit('image-uploader:change', this.sanitizeOutputImages(this.images));
+
+			/**
+			 * Update to list of images that are currently uploading
+			 *
+			 * @property {Array} images list of uploading images in uploader
+			 */
 			this.$emit(
 				'image-uploader:uploading',
 				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.UPLOADING)),
 			);
+
+			/**
+			 * Update to list of images with an error
+			 *
+			 * @property {Array} images list of failed images in uploader
+			 */
 			this.$emit(
 				'image-uploader:error',
 				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.ERROR)),
 			);
+
+			/**
+			 * Update to list of images that have successfully uploaded
+			 *
+			 * @property {Array} images list of uploaded images in uploader
+			 */
 			this.$emit(
 				'image-uploader:complete',
 				this.sanitizeOutputImages(this.imagesForStatus(IMAGE_SELECTOR_STATUSES.COMPLETE)),
