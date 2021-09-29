@@ -50,28 +50,28 @@ export default {
 		/* eslint-enable max-len */
 		uploadHandlerFn: {
 			type: Function,
-			default: () => undefined,
+			default: undefined,
 		},
 		/**
 		 * The maximum number of images allowed to be selected.
 		 */
 		maxImages: {
 			type: Number,
-			default: () => undefined,
+			default: undefined,
 		},
 		/**
 		 * The maximum file size allowed (in bytes)
 		 */
 		maxSize: {
 			type: Number,
-			default: () => undefined,
+			default: undefined,
 		},
 		/**
 		 * Allowed file types, must be an image type (eg image/jpeg)
 		 */
 		accept: {
 			type: String,
-			default: () => 'image/*',
+			default: 'image/*',
 			validator: (accept) => accept.startsWith('image/'),
 		},
 	},
