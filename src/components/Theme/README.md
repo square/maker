@@ -1,6 +1,6 @@
 # Theme
 
-Add the Theme component _anywhere_ top-level to encapsulate all library components. In this example, the Theme component wraps the entire App.
+You can add the Theme component anywhere to encapsulate a group of components you would like to theme. If you would like to theme all the components in your entire app then you would add the Theme component to the root level of your app, like so:
 
 ```vue
 <template>
@@ -28,9 +28,11 @@ export default {
 </script>
 ```
 
+Note: the Theme component is not required to be used with Maker, and all Maker components can be used standalone without a parent Theme component.
+
 ## Theming Buttons
 
-The `size`, `variant`, `shape`, `color`, and `textColor` are theme-able props in Button. If you set values for any of these props at a theme level then all Buttons within your App will inherit those values. You can still customize any individual buttons at a local level by setting prop values directly on that Button.
+`size`, `variant`, `shape`, `color`, `textColor`, `fullWidth`, and `align` are themeable props in Button. If you set values for any of these props at a theme level then all Buttons within your App will inherit those values. You can still customize any individual buttons at a local level by setting prop values directly on that Button.
 
 ```vue
 <template>
@@ -191,7 +193,7 @@ export default {
 
 ## Theming ActionBarButtons
 
-The `color` prop is theme-able in ActionBarButtons. If you set a value for the `color` prop at a theme level then all ActionBarButtons within your App will inherit those values. You can still customize any individual buttons at a local level by setting prop values directly on that ActionBarButton.
+`color`, `textColor`, `shape`, `align`, and `fullWidth` are themeable props in ActionBarButtons. If you set values for any of these props at a theme level then all Buttons within your App will inherit those values. You can still customize any individual buttons at a local level by setting prop values directly on that ActionBarButton.
 
 ```vue
 <template>
@@ -367,13 +369,144 @@ export default {
 </style>
 ```
 
+## Customizing the theme within subsets of the app
+
+Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:
+1. Providing its own theme data, which will be merged with the theme data provided by the parent or
+2. Selecting a profile from the parent theme, which will be merged with the theme data provided by the parent
+
+A "profile" is, in itself, a theme.
+
+### Option 1: Nested Themes example
+
+```vue
+<template>
+	<m-theme :theme="parentTheme">
+		pick parent theme primary color
+		<br>
+		<input
+			v-model="parentTheme.colors.primary"
+			type="color"
+		>
+		<br>
+
+		<m-button>
+			button in scope of parent theme
+		</m-button>
+
+		<m-theme :theme="childTheme">
+			pick child theme primary color
+			<br>
+			<input
+				v-model="childTheme.colors.primary"
+				type="color"
+			>
+			<br>
+
+			<m-button>
+				button in scope of child theme
+			</m-button>
+		</m-theme>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MTheme,
+		MButton,
+	},
+	data() {
+		return {
+			parentTheme: {
+				colors: {
+					primary: '#000000',
+				},
+			},
+			childTheme: {
+				colors: {
+					primary: '#ff0000',
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
+### Option 2: Theme profiles example
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick theme primary color
+		<br>
+		<input
+			v-model="theme.colors.primary"
+			type="color"
+		>
+		<br>
+
+		<m-button>
+			button in scope of theme
+		</m-button>
+
+		<m-theme :profile="theme.profiles[0].id">
+			pick {{ theme.profiles[0].id }} profile primary color
+			<br>
+			<input
+				v-model="theme.profiles[0].colors.primary"
+				type="color"
+			>
+			<br>
+
+			<m-button>
+				button in scope of theme with {{ theme.profiles[0].id }} profile selected
+			</m-button>
+		</m-theme>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MTheme,
+		MButton,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					primary: '#000000',
+				},
+				profiles: [
+					{
+						id: 'exampleProfileId',
+						colors: {
+							primary: '#ff0000',
+						},
+					},
+				],
+			},
+		};
+	},
+};
+</script>
+```
 
 <!-- api-tables:start -->
 ## Props
 
-| Prop   | Type     | Default | Possible values | Description |
-| ------ | -------- | ------- | --------------- | ----------- |
-| theme* | `object` | —       | —               | —           |
+| Prop    | Type     | Default            | Possible values | Description |
+| ------- | -------- | ------------------ | --------------- | ----------- |
+| theme*  | `object` | —                  | —               | —           |
+| profile | `string` | `'defaultProfile'` | —               | —           |
 
 
 ## Slots
