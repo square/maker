@@ -33,7 +33,6 @@ If you require the response from your API, it will be added to the image record 
 </template>
 
 <script>
-/* eslint-disable no-magic-numbers */
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import mockImageApi from '@square/maker/components/ImageUploader/demo-api';
 
@@ -111,7 +110,6 @@ The upload handler tracks upload success and failure state. When the upload hand
 </template>
 
 <script>
-/* eslint-disable no-magic-numbers */
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import mockImageApi from '@square/maker/components/ImageUploader/demo-api';
 
@@ -188,7 +186,6 @@ If you do not require an immediate upload for selected images, you may simply om
 </template>
 
 <script>
-/* eslint-disable no-magic-numbers */
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 
 export default {
@@ -257,7 +254,6 @@ Images that do not fit the limit will immediately be set to an error state (and 
 </template>
 
 <script>
-/* eslint-disable no-magic-numbers */
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 
 export default {
@@ -326,7 +322,6 @@ If a user selects more than the max from the OS prompt, images beyond the limit 
 </template>
 
 <script>
-/* eslint-disable no-magic-numbers */
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 
 export default {
