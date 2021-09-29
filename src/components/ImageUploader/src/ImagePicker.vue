@@ -83,23 +83,24 @@ export default {
 			this.dragged = dragged;
 		},
 
-		handleDrop(event) {
+		async handleDrop(event) {
 			this.setDragged(false);
 
 			if (event.dataTransfer.items) {
-				Promise.all(
+				const fileEntries = await Promise.all(
 					[...event.dataTransfer.items]
 					.map((item) => traverseEntry(item.webkitGetAsEntry && item.webkitGetAsEntry())),
-				)
-				.then((files) => Promise.all(
-					files.flat(Infinity).map(
+				);
+
+				const wBuffers = await Promise.all(
+					fileEntries.flat(Infinity).map(
 						(file) => file.arrayBuffer().then((buffer) => ({ file, buffer })),
 					),
-				))
-				.then((wBuffers) => {
-					const files = uniqWith(wBuffers, isEqual).map((f) => f.file);
-					this.validateAndEmit(files);
-				});
+				);
+
+				const files = uniqWith(wBuffers, isEqual).map((f) => f.file);
+
+				this.validateAndEmit(files);
 			} else {
 				this.validateAndEmit(event.dataTransfer.files);
 			}
@@ -121,14 +122,17 @@ export default {
 					if (acceptedType[0] === '.') {
 						return new RegExp(`${escapeRegExp(acceptedType)}$`, 'i').test(file.name);
 					}
+
 					// MIME
 					const isMime = acceptedType.match(/^.+\/.+$/);
 					if (isMime) {
 						if (acceptedType === '*/*') {
 							return true;
 						}
+
 						return new RegExp(escapeRegExp(acceptedType).replace(/\\\*/g, '.+')).test(fileType);
 					}
+
 					return acceptedType === fileType;
 				});
 		},
