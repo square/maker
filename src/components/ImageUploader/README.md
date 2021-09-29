@@ -309,18 +309,20 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop              | Type     | Default           | Possible values | Description                                                                                                                              |
-| ----------------- | -------- | ----------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| images            | `array`  | `[]`              | —               | List of images that have been selected                                                                                                   |
-| upload-handler | `func`   | `() => undefined` | —               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
-| max-images        | `number` | `() => undefined` | —               | The maximum number of images allowed to be selected.                                                                                     |
-| max-size          | `number` | `() => undefined` | —               | The maximum file size allowed (in bytes)                                                                                                 |
-| accept            | `string` | `() => 'image/*'` | —               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
+| Prop           | Type     | Default     | Possible values | Description                                                                                                                              |
+| -------------- | -------- | ----------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| upload-handler | `func`   | —           | —               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
+| max-images     | `number` | —           | —               | The maximum number of images allowed to be selected.                                                                                     |
+| max-size       | `number` | —           | —               | The maximum file size allowed (in bytes)                                                                                                 |
+| accept         | `string` | `'image/*'` | —               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
 
 
 ## Events
 
-| Event                | Type | Description |
-| -------------------- | ---- | ----------- |
-| image-uploader:input | -    | —           |
+| Event                    | Type | Description |
+| ------------------------ | ---- | ----------- |
+| image-uploader:change    | -    | —           |
+| image-uploader:uploading | -    | —           |
+| image-uploader:error     | -    | —           |
+| image-uploader:complete  | -    | —           |
 <!-- api-tables:end -->
