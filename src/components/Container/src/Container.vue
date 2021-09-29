@@ -29,7 +29,7 @@
 			</div>
 		</header>
 
-		<!-- @slot section content -->
+		<!-- @slot container content -->
 		<slot />
 	</section>
 </template>
@@ -46,21 +46,21 @@ export default {
 
 	props: {
 		/**
-		 * Section label
+		 * Container label
 		 */
 		label: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Section sublabel
+		 * Container sublabel
 		 */
 		sublabel: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Section size
+		 * Container size
 		 */
 		size: {
 			type: String,
@@ -68,7 +68,7 @@ export default {
 			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
-		 * Background color of section
+		 * Background color of container
 		 */
 		bgColor: {
 			type: String,
@@ -76,7 +76,7 @@ export default {
 			validator: (color) => chroma.valid(color) || color === 'transparent',
 		},
 		/**
-		 * Text color of section
+		 * Text color of container
 		 */
 		color: {
 			type: String,
