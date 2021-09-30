@@ -1,0 +1,53 @@
+name: New Component
+description: Provide details to help define a new component for the system
+labels: [feature request, pending triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **⚠️ This is a public repository. Please be aware of sensitive information and prefer referencing internal links.**
+
+        Please leverage this template to provide as much details about the visual and functional requirements for this new component. Doing so will help use communicate and collborate on a solution effectively.
+
+  - type: text
+    attributes:
+      label: Design File
+      description: Provide a Figma link as a reference
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: |
+        Provide as much details as possible about the visual and functional requirements.
+      placeholder: |
+        <!--
+          Consider UI/UX like affordance, user interaction, and different states
+        -->
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Research
+      description: |
+        How similar is this new component to any existing component?
+      placeholder: |
+        <!--
+          Link to any existing components from Maker or other design systems (Material, Apple, Carbon, etc.) and describe their similarities
+        -->
+      validations:
+        required: true
+  - type: textarea
+    attributes:
+      label: API
+      description: |
+        Outline considerations around props, slots, events, and other important aspects of how developers will use this component.
+  - type: textarea
+    attributes:
+      label: Theme support
+      description: |
+        How will the Theme impact this component? Describe how color, font, shape and other design levers will be used.
+      placeholder: |
+        <!--
+          Considerations around how your component will work in scenarios with different colored backgrounds and contrast is important
+        -->
