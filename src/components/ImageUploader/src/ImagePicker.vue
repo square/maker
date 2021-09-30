@@ -1,6 +1,9 @@
 <template>
 	<div
-		:class="$s.ImagePickerInputContainer"
+		:class="{
+			[$s.ImagePickerInputContainer]: true,
+			[$s.isDragged]: dragged,
+		}"
 		role="button"
 		tabindex="0"
 		@click="$refs.input.click()"
@@ -157,9 +160,15 @@ export default {
 	box-sizing: border-box;
 	width: 96px;
 	height: 96px;
+	background-color: white;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 8px;
 	cursor: pointer;
+	transition: background-color 150ms linear;
+}
+
+.ImagePickerInputContainer.isDragged {
+	background-color: #f5f4f4;
 }
 
 .ImagePickerDragIcon {
