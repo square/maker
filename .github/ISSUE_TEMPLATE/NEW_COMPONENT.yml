@@ -30,7 +30,7 @@ body:
     attributes:
       label: Prior art
       description: |
-        How similar is this new component to any existing component?
+        Are there similar Maker or 3rd party components that should be referenced? 
       placeholder: |
         <!--
           Link to any existing components from Maker or other design systems (Material, Apple, Carbon, etc.) and describe their similarities
