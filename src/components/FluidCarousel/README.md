@@ -50,7 +50,7 @@ export default {
 </style>
 ```
 
-## With Controls
+## With FluidCarouselControls
 ```vue
 <template>
 	<div class="container">
@@ -178,13 +178,13 @@ export default {
 <!-- api-tables:start -->
 ## FluidCarousel Props
 
-| Prop             | Type      | Default | Possible values | Description |
-| ---------------- | --------- | ------- | --------------- | ----------- |
-| is-draggable     | `boolean` | `false` | —               | —           |
-| item-count       | `number`  | `0`     | —               | —           |
-| is-vertical      | `boolean` | `false` | —               | —           |
-| pixels-to-scroll | `number`  | `0`     | —               | —           |
-| snap-scroll      | `boolean` | `false` | —               | —           |
+| Prop             | Type      | Default | Possible values | Description                                                        |
+| ---------------- | --------- | ------- | --------------- | ------------------------------------------------------------------ |
+| is-draggable     | `boolean` | `false` | —               | Whether the user can navigate the carousel by dragging             |
+| item-count       | `number`  | `0`     | —               | —                                                                  |
+| is-vertical      | `boolean` | `false` | —               | Whether the carousel has a vertical layout - default is horizontal |
+| pixels-to-scroll | `number`  | `0`     | —               | —                                                                  |
+| snap-scroll      | `boolean` | `false` | —               | —                                                                  |
 
 
 ## FluidCarousel Slots
@@ -209,8 +209,7 @@ export default {
 
 ## FluidCarouselControls Props
 
-| Prop        | Type      | Default | Possible values | Description |
-| ----------- | --------- | ------- | --------------- | ----------- |
-| is-enabled  | `boolean` | `true`  | —               | —           |
-| is-vertical | `boolean` | `false` | —               | —           |
+| Prop       | Type      | Default | Possible values | Description                                 |
+| ---------- | --------- | ------- | --------------- | ------------------------------------------- |
+| is-enabled | `boolean` | `true`  | —               | Whether the navigation buttons are disabled |
 <!-- api-tables:end -->

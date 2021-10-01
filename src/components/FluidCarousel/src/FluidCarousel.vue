@@ -18,7 +18,6 @@
 		<div
 			ref="sliderWindow"
 			:class="[$s.FluidCarousel, fluidCarouselClasses]"
-			:style="sliderComputedStyles"
 		>
 			<div
 				ref="slider"
@@ -43,12 +42,24 @@ import PseudoWindow from 'vue-pseudo-window';
 import { throttle } from 'lodash';
 import { CAROUSEL_BACK_EVENT, CAROUSEL_FORWARD_EVENT } from './constants';
 
+const THROTTLE_MOUSE_MOVE_MS = 20;
+
 export default {
+
 	components: {
 		PseudoWindow,
 	},
 
+	provide() {
+		return {
+			isVertical: this.isVertical,
+		};
+	},
+
 	props: {
+		/**
+		 * Whether the user can navigate the carousel by dragging
+		 */
 		isDraggable: {
 			type: Boolean,
 			default: false,
@@ -57,6 +68,9 @@ export default {
 			type: Number,
 			default: 0,
 		},
+		/**
+		 * Whether the carousel has a vertical layout - default is horizontal
+		 */
 		isVertical: {
 			type: Boolean,
 			default: false,
@@ -74,12 +88,10 @@ export default {
 	data() {
 		return {
 			shouldEmitEnd: true,
-			prevSlideForwards: 0,
-			prevSlideBack: 0,
 			prevItemCount: 0,
 			lastDragPageX: 0,
 			lastDragPageY: 0,
-			throttleMousemove: throttle(this.handleMousemove, 20),
+			throttleMousemove: throttle(this.handleMousemove, THROTTLE_MOUSE_MOVE_MS),
 			sliderWidth: 0,
 			sliderScrollWidth: 0,
 		};
@@ -111,17 +123,6 @@ export default {
 		sliderClasses() {
 			return {
 				[this.$s.VerticalFluidCarouselSlider]: this.isVertical,
-			};
-		},
-
-		sliderComputedStyles() {
-			// console.log('sliderComputedStyles', this.$refs);
-			// console.log(this.$refs.sliderHeader);
-			// const headerHeight = this.$refs.sliderHeader.getBoundingClientRect().height;
-			// const footerHeight = this.$refs.sliderFooter.getBoundingClientRect().height;
-
-			return {
-				// '--slider-computed-height': `calc(100% - ${headerHeight + footerHeight})`,
 			};
 		},
 
@@ -174,14 +175,6 @@ export default {
 		if (this.itemCount > this.prevItemCount) {
 			this.shouldEmitEnd = true;
 			this.prevItemCount = this.itemCount;
-		}
-
-		if (this.lastSlideBack !== this.prevSlideBack) {
-			this.prevSlideBack = this.lastSlideBack;
-			this.scrollBack();
-		} else if (this.lastSlideForwards !== this.prevSlideForwards) {
-			this.prevSlideForwards = this.lastSlideForwards;
-			this.scrollForwards();
 		}
 	},
 
@@ -268,7 +261,6 @@ export default {
 		handleCarouselMove() {
 			if (this.checkIsNearEnd() && this.shouldEmitEnd) {
 				this.$emit('scroll:end');
-				console.log('scroll:end');
 				this.shouldEmitEnd = false;
 			}
 			this.$emit('carousel:at-first-position', this.checkIsAtBeginning());
@@ -304,7 +296,7 @@ export default {
 		 * @param {Event} e
 		 * @param {Boolean} snapScroll
 		 */
-		scrollVertical(e = {}, snapScroll = false) {
+		scrollVertical(event = {}, snapScroll = false) {
 			if (snapScroll) {
 				const snapScrollOffset = this.getSnapScrollOffset();
 				this.scrollCarouselElement(snapScrollOffset);
@@ -312,8 +304,8 @@ export default {
 				return;
 			}
 
-			const pixelsToScroll = this.lastDragPageY - e.pageY;
-			this.lastDragPageY = e.pageY;
+			const pixelsToScroll = this.lastDragPageY - event.pageY;
+			this.lastDragPageY = event.pageY;
 			this.el.scrollTop += pixelsToScroll;
 		},
 
@@ -323,7 +315,7 @@ export default {
 		 * @param {Event} e
 		 * @param {Boolean} snapScroll
 		 */
-		scrollHorizontal(e = {}, snapScroll = false) {
+		scrollHorizontal(event = {}, snapScroll = false) {
 			if (snapScroll) {
 				const snapScrollOffset = this.getSnapScrollOffset();
 				this.scrollCarouselElement(snapScrollOffset);
@@ -331,8 +323,8 @@ export default {
 				return;
 			}
 
-			const pixelsToScroll = this.lastDragPageX - e.pageX;
-			this.lastDragPageX = e.pageX;
+			const pixelsToScroll = this.lastDragPageX - event.pageX;
+			this.lastDragPageX = event.pageX;
 			this.el.scrollLeft += pixelsToScroll;
 		},
 
@@ -342,11 +334,11 @@ export default {
 		 * @param {Event} e
 		 * @param {Boolean} snapScroll
 		 */
-		initCarouselScroll(e = {}, snapScroll = false) {
+		initCarouselScroll(event = {}, snapScroll = false) {
 			if (this.isVertical) {
-				this.scrollVertical(e, snapScroll);
+				this.scrollVertical(event, snapScroll);
 			} else {
-				this.scrollHorizontal(e, snapScroll);
+				this.scrollHorizontal(event, snapScroll);
 			}
 		},
 

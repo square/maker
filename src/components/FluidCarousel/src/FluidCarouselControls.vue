@@ -46,14 +46,18 @@ export default {
 		ChevronUp,
 		ChevronDown,
 	},
+
+	inject: [
+		'isVertical',
+	],
+
 	props: {
+		/**
+		 * Whether the navigation buttons are disabled
+		 */
 		isEnabled: {
 			type: Boolean,
 			default: true,
-		},
-		isVertical: {
-			type: Boolean,
-			default: false,
 		},
 	},
 
