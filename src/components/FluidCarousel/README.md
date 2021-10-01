@@ -19,20 +19,17 @@
 </template>
 
 <script>
-import { MFluidCarousel, CAROUSEL_BACK_EVENT } from '@square/maker/components/FluidCarousel';
+import { MFluidCarousel } from '@square/maker/components/FluidCarousel';
 
 export default {
 	components: {
 		MFluidCarousel,
 	},
-	mounted() {
-		console.log(CAROUSEL_BACK_EVENT);
-	},
 };
 </script>
 <style scoped>
 .container {
-	max-width: 600px;
+	width: 400px;
 }
 
 .carousel-controls {
@@ -91,7 +88,7 @@ export default {
 </script>
 <style scoped>
 .container {
-	max-width: 600px;
+	width: 600px;
 }
 
 .carousel-controls {
@@ -122,9 +119,8 @@ export default {
 			is-vertical
 		>
 			<template #header>
-				<m-fluid-carousel-controls is-vertical />
+				<h2>Heading</h2>
 			</template>
-
 			<div
 				v-for="i in 25"
 				:key="i"
@@ -132,6 +128,14 @@ export default {
 			>
 				{{ i }}
 			</div>
+
+			<template #footer>
+				<div
+					class="carousel-footer"
+				>
+					<m-fluid-carousel-controls is-vertical />
+				</div>
+			</template>
 		</m-fluid-carousel>
 	</div>
 </template>
@@ -148,17 +152,24 @@ export default {
 </script>
 <style scoped>
 .container {
-	max-height: 600px;
+	--carousel-width: 250px;
+	height: 600px;
+	width: var(--carousel-width);
 }
 
 .carousel-item {
-	width: 180px;
-	height: 180px;
+	width: var(--carousel-width);
+	height: var(--carousel-width);
 	background-color: rgba(0, 0, 0, 0.1);
 	margin-bottom: 10px;
 	user-select: none;
 	-webkit-user-select: none;
   -ms-user-select: none;
+}
+.carousel-footer {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 12px;
 }
 </style>
 
@@ -198,7 +209,8 @@ export default {
 
 ## FluidCarouselControls Props
 
-| Prop       | Type      | Default | Possible values | Description |
-| ---------- | --------- | ------- | --------------- | ----------- |
-| is-enabled | `boolean` | `true`  | —               | —           |
+| Prop        | Type      | Default | Possible values | Description |
+| ----------- | --------- | ------- | --------------- | ----------- |
+| is-enabled  | `boolean` | `true`  | —               | —           |
+| is-vertical | `boolean` | `false` | —               | —           |
 <!-- api-tables:end -->

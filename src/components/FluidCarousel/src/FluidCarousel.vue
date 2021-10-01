@@ -8,22 +8,21 @@
 -->
 <template>
 	<div
-		class="fluid-carousel__container"
+		:class="containerClasses"
 	>
 		<div
-			class="fluid-carousel__header"
+			ref="sliderHeader"
 		>
 			<slot name="header"	/>
 		</div>
 		<div
 			ref="sliderWindow"
-			:class="fluidCarouselClasses"
-			class="fluid-carousel"
+			:class="[$s.FluidCarousel, fluidCarouselClasses]"
+			:style="sliderComputedStyles"
 		>
 			<div
 				ref="slider"
-				:class="sliderClasses"
-				class="fluid-carousel__slider"
+				:class="[$s.FluidCarouselSlider, sliderClasses]"
 			>
 				<slot />
 			</div>
@@ -32,7 +31,7 @@
 			/>
 		</div>
 		<div
-			class="fluid-carousel__footer"
+			ref="sliderFooter"
 		>
 			<slot name="footer" />
 		</div>
@@ -91,9 +90,15 @@ export default {
 			return this.$refs.sliderWindow;
 		},
 
+		containerClasses() {
+			return {
+				[this.$s.VerticalFluidCarouselContainer]: this.isVertical,
+			};
+		},
+
 		fluidCarouselClasses() {
 			return {
-				'is-draggable': this.isDraggable,
+				[this.$s.FluidCarouselDraggable]: this.isDraggable,
 			};
 		},
 
@@ -105,7 +110,18 @@ export default {
 
 		sliderClasses() {
 			return {
-				'is-vertical': this.isVertical,
+				[this.$s.VerticalFluidCarouselSlider]: this.isVertical,
+			};
+		},
+
+		sliderComputedStyles() {
+			// console.log('sliderComputedStyles', this.$refs);
+			// console.log(this.$refs.sliderHeader);
+			// const headerHeight = this.$refs.sliderHeader.getBoundingClientRect().height;
+			// const footerHeight = this.$refs.sliderFooter.getBoundingClientRect().height;
+
+			return {
+				// '--slider-computed-height': `calc(100% - ${headerHeight + footerHeight})`,
 			};
 		},
 
@@ -404,40 +420,43 @@ export default {
 };
 </script>
 
-<style scoped>
-.fluid-carousel {
+<style module="$s">
+.VerticalFluidCarouselContainer {
+	height: inherit;
+	display: flex;
+	flex-flow: column;
+}
+
+.FluidCarousel {
 	width: 100%;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-}
 
-.fluid-carousel::-webkit-scrollbar {
-	width: 0;
-	display: none;
-	height: 0;
-	background: transparent; /* make scrollbar transparent */
-}
+	&::-webkit-scrollbar {
+		width: 0;
+		display: none;
+		height: 0;
+		background: transparent; /* make scrollbar transparent */
+	}
 
-.fluid-carousel:hover {
-	cursor: grab;
-}
+	&.FluidCarouselDraggable {
+		cursor: grab;
 
-.fluid-carousel.is-draggable {
-	cursor: grab;
-
-	&:active {
-		cursor: grabbing;
+		&:active {
+			cursor: grabbing;
+		}
 	}
 }
 
-.fluid-carousel__slider {
+.FluidCarouselSlider {
 	display: inline-flex;
 	min-width: 100%;
 
-	&.is-vertical {
+	&.VerticalFluidCarouselSlider {
 		flex-direction: column;
+		height: var(--slider-computed-height);
 	}
 }
 </style>
