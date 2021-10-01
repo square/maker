@@ -13,6 +13,7 @@
 		<div
 			ref="sliderHeader"
 		>
+			<!-- @slot FluidCarousel header items -->
 			<slot name="header"	/>
 		</div>
 		<div
@@ -23,6 +24,7 @@
 				ref="slider"
 				:class="[$s.FluidCarouselSlider, sliderClasses]"
 			>
+				<!-- @slot FluidCarousel items -->
 				<slot />
 			</div>
 			<pseudo-window
@@ -32,6 +34,7 @@
 		<div
 			ref="sliderFooter"
 		>
+			<!-- @slot FluidCarousel footer items -->
 			<slot name="footer" />
 		</div>
 	</div>
@@ -65,6 +68,9 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Number of items in the carousel. Re-enables scroll:end event when increased
+		 */
 		itemCount: {
 			type: Number,
 			default: 0,
@@ -83,6 +89,9 @@ export default {
 			type: Number,
 			default: 0,
 		},
+		/**
+		 * Whether scrolling snaps when navigating using touch controls
+		 */
 		snapScroll: {
 			type: Boolean,
 			default: false,
@@ -140,6 +149,10 @@ export default {
 
 	watch: {
 		isOverflowing(value) {
+			/**
+			 * Event emitted when carousel content overflows container
+			 * @property {boolean}
+			 */
 			this.$emit('overflowing', value);
 		},
 	},
@@ -162,6 +175,10 @@ export default {
 			this.el.addEventListener('mouseleave', this.handleMouseleave);
 			this.el.addEventListener('dragstart', this.handleDragstart, true);
 		}
+
+		/**
+		 * Event emitted during mounted lifecycle hook
+		 */
 		this.$emit('carousel:mounted');
 		this.onResize();
 	},
@@ -267,10 +284,21 @@ export default {
 
 		handleCarouselMove() {
 			if (this.checkIsNearEnd() && this.shouldEmitEnd) {
+				/**
+				 * Emitted when the scroll position is near the end
+				 */
 				this.$emit('scroll:end');
 				this.shouldEmitEnd = false;
 			}
+			/**
+			 * Emitted when carousel moves
+			 * @property {boolean}
+			 */
 			this.$emit('carousel:at-first-position', this.checkIsAtBeginning());
+			/**
+			 * Emitted when carousel moves
+			 * @property {boolean}
+			 */
 			this.$emit('carousel:at-last-position', this.checkIsAtEnd());
 		},
 

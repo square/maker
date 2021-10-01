@@ -1,5 +1,7 @@
 # FluidCarousel
 
+Carousel that adjusts to the width of the parent container
+
 ## Example
 ```vue
 <template>
@@ -174,7 +176,7 @@ export default {
 </script>
 <style scoped>
 .container {
-	height: 650px;
+	height: 700px;
 	width: var(--carousel-item-size);
 }
 
@@ -199,33 +201,33 @@ export default {
 <!-- api-tables:start -->
 ## FluidCarousel Props
 
-| Prop             | Type      | Default | Possible values | Description                                                        |
-| ---------------- | --------- | ------- | --------------- | ------------------------------------------------------------------ |
-| is-draggable     | `boolean` | `false` | —               | Whether the user can navigate the carousel by dragging             |
-| item-count       | `number`  | `0`     | —               | —                                                                  |
-| is-vertical      | `boolean` | `false` | —               | Whether the carousel has a vertical layout - default is horizontal |
-| pixels-to-scroll | `number`  | `0`     | —               | Number of pixels to scroll when using navigating using controls    |
-| snap-scroll      | `boolean` | `false` | —               | —                                                                  |
+| Prop             | Type      | Default | Possible values | Description                                                                 |
+| ---------------- | --------- | ------- | --------------- | --------------------------------------------------------------------------- |
+| is-draggable     | `boolean` | `false` | —               | Whether the user can navigate the carousel by dragging                      |
+| item-count       | `number`  | `0`     | —               | Number of items in the carousel. Re-enables scroll:end event when increased |
+| is-vertical      | `boolean` | `false` | —               | Whether the carousel has a vertical layout - default is horizontal          |
+| pixels-to-scroll | `number`  | `0`     | —               | Number of pixels to scroll when using navigating using controls             |
+| snap-scroll      | `boolean` | `false` | —               | Whether scrolling snaps when navigating using touch controls                |
 
 
 ## FluidCarousel Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| header  | —           |
-| default | —           |
-| footer  | —           |
+| Slot    | Description                |
+| ------- | -------------------------- |
+| header  | FluidCarousel header items |
+| default | FluidCarousel items        |
+| footer  | FluidCarousel footer items |
 
 
 ## FluidCarousel Events
 
-| Event                      | Type | Description |
-| -------------------------- | ---- | ----------- |
-| overflowing                | -    | —           |
-| carousel:mounted           | -    | —           |
-| scroll:end                 | -    | —           |
-| carousel:at-first-position | -    | —           |
-| carousel:at-last-position  | -    | —           |
+| Event                      | Type      | Description                                             |
+| -------------------------- | --------- | ------------------------------------------------------- |
+| overflowing                | `boolean` | Event emitted when carousel content overflows container |
+| carousel:mounted           | -         | Event emitted during mounted lifecycle hook             |
+| scroll:end                 | -         | Emitted when the scroll position is near the end        |
+| carousel:at-first-position | `boolean` | Emitted when carousel moves                             |
+| carousel:at-last-position  | `boolean` | Emitted when carousel moves                             |
 
 
 ## FluidCarouselControls Props
