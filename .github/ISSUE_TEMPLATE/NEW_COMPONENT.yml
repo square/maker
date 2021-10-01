@@ -1,6 +1,6 @@
-name: New Component
+name: Request a new component
 description: Provide details to help define a new component for the system
-labels: [feature request, pending triage]
+labels: [new component request, pending triage]
 body:
   - type: markdown
     attributes:
@@ -11,7 +11,7 @@ body:
 
   - type: text
     attributes:
-      label: Design File
+      label: Figma link
       description: Provide a Figma link as a reference
     validations:
       required: true
@@ -19,7 +19,7 @@ body:
     attributes:
       label: Description
       description: |
-        Provide as much details as possible about the visual and functional requirements.
+        Provide as much detail as possible about the visual and functional requirements.
       placeholder: |
         <!--
           Consider UI/UX like affordance, user interaction, and different states
@@ -28,7 +28,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Research
+      label: Prior art
       description: |
         How similar is this new component to any existing component?
       placeholder: |
@@ -46,7 +46,7 @@ body:
     attributes:
       label: Theme support
       description: |
-        How will the Theme impact this component? Describe how color, font, shape and other design levers will be used.
+        How will theming impact this component? Describe how color, font, shape and other design levers will be used.
       placeholder: |
         <!--
           Considerations around how your component will work in scenarios with different colored backgrounds and contrast is important
