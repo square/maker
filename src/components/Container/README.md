@@ -46,15 +46,12 @@ export default {
 </script>
 ```
 
+<br>
 Labels can also be set via slots.
 
 ```vue
 <template>
-	<m-container
-		label="container label"
-		sublabel="container sublabel"
-		requirement-label="container requirement label"
-	>
+	<m-container>
 		<template
 			#label
 		>
@@ -120,7 +117,6 @@ export default {
 
 Containers can be small, medium, or large, which affects the default typography styles within the container.
 
-
 ```vue
 <template>
 	<div>
@@ -161,85 +157,6 @@ export default {
 };
 </script>
 ```
-
-<!--
-
-```vue
-<template>
-	<div style="background-color: #F8F7F7;">
-		<m-container>
-			container content
-		</m-container>
-
-		<h4>label + content</h4>
-		<m-container label="container label">
-			container content
-		</m-container>
-
-		<h4>label + sublabel + content</h4>
-		<m-container
-			label="container label"
-			sublabel="container sublabel"
-		>
-			container content
-		</m-container>
-
-		<h4>label + sublabel + requirement label + content</h4>
-		<m-container
-			label="container label"
-			sublabel="container sublabel"
-		>
-			container content
-			<template #requirement-label>
-				container requirement label
-			</template>
-		</m-container>
-
-		<h4>size small</h4>
-		<m-container
-			label="container label"
-			sublabel="container sublabel"
-			size="small"
-		>
-			container content
-			<template #requirement-label>
-				container requirement label
-			</template>
-		</m-container>
-
-		<h4>size large</h4>
-		<m-container
-			label="container label"
-			sublabel="container sublabel"
-			size="large"
-		>
-			container content
-			<template #requirement-label>
-				container requirement label
-			</template>
-		</m-container>
-	</div>
-</template>
-
-<script>
-import { MContainer } from '@square/maker/components/Container';
-
-export default {
-	components: {
-		MContainer,
-	},
-};
-</script>
-
-<style scoped>
-.icon {
-	width: 16px;
-	height: 16px;
-}
-</style>
-```
-
--->
 
 <!-- api-tables:start -->
 ## Props

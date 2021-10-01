@@ -28,7 +28,10 @@
 				</div>
 			</div>
 
-			<div :class="$s.RequirementLabel">
+			<div
+				v-if="hasRequirementLabel"
+				:class="$s.RequirementLabel"
+			>
 				<!-- @slot container requirement label -->
 				<slot name="requirement-label">
 					{{ requirementLabel }}
@@ -112,6 +115,9 @@ export default {
 		},
 		hasSublabel() {
 			return this.$slots.sublabel || this.sublabel;
+		},
+		hasRequirementLabel() {
+			return this.$slots.requirementLabel || this.$slots['requirement-label'] || this.requirementLabel;
 		},
 	},
 
