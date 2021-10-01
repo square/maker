@@ -450,9 +450,9 @@ export default {
 
 <style module="$s">
 .VerticalFluidCarouselContainer {
-	height: inherit;
 	display: flex;
 	flex-flow: column;
+	height: inherit;
 }
 
 .FluidCarousel {
@@ -463,8 +463,8 @@ export default {
 	scrollbar-width: none;
 
 	&::-webkit-scrollbar {
-		width: 0;
 		display: none;
+		width: 0;
 		height: 0;
 		background: transparent; /* make scrollbar transparent */
 	}

@@ -113,6 +113,65 @@ export default {
 </style>
 ```
 
+## With Disabled FluidCarouselControls
+```vue
+<template>
+	<div class="container">
+		<m-fluid-carousel
+			is-draggable
+		>
+			<template #header>
+				<div
+					class="carousel-controls"
+				>
+					<m-fluid-carousel-controls disabled />
+				</div>
+			</template>
+
+			<div
+				v-for="i in 25"
+				:key="i"
+				class="carousel-item"
+			>
+				{{ i }}
+			</div>
+		</m-fluid-carousel>
+	</div>
+</template>
+
+<script>
+import { MFluidCarousel, MFluidCarouselControls } from '@square/maker/components/FluidCarousel';
+
+export default {
+	components: {
+		MFluidCarousel,
+		MFluidCarouselControls,
+	},
+};
+</script>
+<style scoped>
+.container {
+	width: 600px;
+}
+
+.carousel-controls {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 12px;
+}
+
+.carousel-item {
+	width: 180px;
+	height: 180px;
+	background-color: rgba(0, 0, 0, 0.1);
+	margin-right: 10px;
+	user-select: none;
+	-webkit-user-select: none;
+  -ms-user-select: none;
+}
+</style>
+```
+
 ## Vertical FluidCarousel
 
 ```vue
@@ -234,7 +293,7 @@ export default {
 
 ## FluidCarouselControls Props
 
-| Prop       | Type      | Default | Possible values | Description                                 |
-| ---------- | --------- | ------- | --------------- | ------------------------------------------- |
-| is-enabled | `boolean` | `true`  | —               | Whether the navigation buttons are disabled |
+| Prop     | Type      | Default | Possible values | Description                                 |
+| -------- | --------- | ------- | --------------- | ------------------------------------------- |
+| disabled | `boolean` | `false` | —               | Whether the navigation buttons are disabled |
 <!-- api-tables:end -->

@@ -55,9 +55,9 @@ export default {
 		/**
 		 * Whether the navigation buttons are disabled
 		 */
-		isEnabled: {
+		disabled: {
 			type: Boolean,
-			default: true,
+			default: false,
 		},
 	},
 
@@ -74,14 +74,14 @@ export default {
 		 */
 		carouselArrowClasses() {
 			return ({
-				[this.$s.CarouselArrowDisabled]: !this.isEnabled,
+				[this.$s.CarouselArrowDisabled]: this.disabled,
 			});
 		},
 	},
 
 	methods: {
 		handleClick(eventName) {
-			if (this.isEnabled) {
+			if (!this.disabled) {
 				this.$parent.$emit(eventName, Date.now());
 			}
 		},
@@ -91,9 +91,10 @@ export default {
 
 <style module="$s">
 .FluidCarouselControls {
-	--chevron-size: 24px;
 	display: inline-flex;
 	gap: 4px;
+
+	--chevron-size: 24px;
 }
 
 .CarouselChevronIcon {
@@ -103,13 +104,13 @@ export default {
 
 .CarouselArrow {
 	display: inline-block;
+	height: var(--chevron-size);
 	color: #70767c;
 	cursor: pointer;
-	height: var(--chevron-size);
 }
 
 .CarouselArrowDisabled {
-	opacity: 0.4;
 	cursor: default;
+	opacity: 0.4;
 }
 </style>
