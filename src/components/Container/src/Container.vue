@@ -10,22 +10,32 @@
 	>
 		<header :class="$s.Header">
 			<div
-				v-if="label"
+				v-if="hasLabel"
 				:class="$s.Label"
 			>
-				{{ label }}
-
+				<!-- @slot container label -->
+				<slot name="label">
+					{{ label }}
+				</slot>
 				<div
-					v-if="sublabel"
+					v-if="hasSublabel"
 					:class="$s.Sublabel"
 				>
-					{{ sublabel }}
+					<!-- @slot container sublabel -->
+					<slot name="sublabel">
+						{{ sublabel }}
+					</slot>
 				</div>
 			</div>
 
-			<div :class="$s.RequirementLabel">
-				<!-- @slot requirement label slot -->
-				<slot name="requirement-label" />
+			<div
+				v-if="hasRequirementLabel"
+				:class="$s.RequirementLabel"
+			>
+				<!-- @slot container requirement label -->
+				<slot name="requirement-label">
+					{{ requirementLabel }}
+				</slot>
 			</div>
 		</header>
 
@@ -36,6 +46,7 @@
 
 <script>
 import chroma from 'chroma-js';
+import assert from '@square/maker/utils/assert';
 
 /**
  * @inheritAttrs section
@@ -56,6 +67,13 @@ export default {
 		 * Container sublabel
 		 */
 		sublabel: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Container requirement label
+		 */
+		requirementLabel: {
 			type: String,
 			default: undefined,
 		},
@@ -92,6 +110,21 @@ export default {
 				'--color': this.color,
 			};
 		},
+		hasLabel() {
+			return this.$slots.label || this.label;
+		},
+		hasSublabel() {
+			return this.$slots.sublabel || this.sublabel;
+		},
+		hasRequirementLabel() {
+			return this.$slots.requirementLabel || this.$slots['requirement-label'] || this.requirementLabel;
+		},
+	},
+
+	mounted() {
+		assert.warn(!(this.$slots.label && this.label), 'Label slot cannot be used together with label prop, former overrides the latter.');
+		assert.warn(!(this.$slots.sublabel && this.sublabel), 'Sublabel slot cannot be used together with sublabel prop, former overrides the latter.');
+		assert.warn(!((this.$slots.requirementLabel || this.$slots['requirement-label']) && this.requirementLabel), 'Requirement Label slot cannot be used together with requirement label prop, former overrides the latter.');
 	},
 };
 </script>
