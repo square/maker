@@ -43,6 +43,7 @@ import { throttle } from 'lodash';
 import { CAROUSEL_BACK_EVENT, CAROUSEL_FORWARD_EVENT } from './constants';
 
 const THROTTLE_MOUSE_MOVE_MS = 20;
+const ZERO_PIXELS = 0;
 
 export default {
 
@@ -186,9 +187,9 @@ export default {
 		 */
 		scrollBack() {
 			const scrollPixelsDiff = this.getCurrentSliderOffset() - this.getScrollPixels();
-			const newScrollOffset = scrollPixelsDiff > 0
+			const newScrollOffset = scrollPixelsDiff > ZERO_PIXELS
 				? scrollPixelsDiff
-				: 0;
+				: ZERO_PIXELS;
 
 			this.scrollCarouselElement(newScrollOffset);
 		},
@@ -222,11 +223,11 @@ export default {
 				: this.el.scrollLeft;
 		},
 
-		handleMousedown(e) {
+		handleMousedown(event) {
 			if (this.isVertical) {
-				this.lastDragPageY = e.pageY;
+				this.lastDragPageY = event.pageY;
 			} else {
-				this.lastDragPageX = e.pageX;
+				this.lastDragPageX = event.pageX;
 			}
 
 			this.el.addEventListener('mousemove', this.throttleMousemove, true);
@@ -237,7 +238,7 @@ export default {
 		},
 
 		handleMouseup() {
-			if (this.pixelsToScroll > 0 && this.snapScroll) {
+			if (this.pixelsToScroll > ZERO_PIXELS && this.snapScroll) {
 				this.initCarouselScroll({}, true);
 			}
 
@@ -247,15 +248,15 @@ export default {
 		/**
 		 * Handles the mousemove when the slider is dragged
 		 *
-		 * @param {Event} e
+		 * @param {Event} event
 		 */
-		handleMousemove(e) {
-			this.initCarouselScroll(e);
+		handleMousemove(event) {
+			this.initCarouselScroll(event);
 			this.handleCarouselMove();
 		},
 
-		handleDragstart(e) {
-			e.preventDefault();
+		handleDragstart(event) {
+			event.preventDefault();
 		},
 
 		handleCarouselMove() {
@@ -272,6 +273,7 @@ export default {
 				? this.el.scrollTop
 				: this.el.scrollLeft;
 			return sliderScrollOffset > this.getSliderScrollMeasurement()
+				// eslint-disable-next-line no-magic-numbers
 				- (this.getBoundingClientRectMeasurement() * 2);
 		},
 
@@ -279,7 +281,7 @@ export default {
 			const sliderScrollOffset = this.isVertical
 				? this.el.scrollTop
 				: this.el.scrollLeft;
-			return sliderScrollOffset === 0;
+			return sliderScrollOffset === ZERO_PIXELS;
 		},
 
 		checkIsAtEnd() {
@@ -380,7 +382,7 @@ export default {
 		 */
 		getSliderScrollMeasurement() {
 			if (!this.$refs.slider) {
-				return 0;
+				return ZERO_PIXELS;
 			}
 
 			return this.isVertical
@@ -394,7 +396,7 @@ export default {
 		 * @return {Number}
 		 */
 		getScrollPixels() {
-			if (this.pixelsToScroll > 0) {
+			if (this.pixelsToScroll > ZERO_PIXELS) {
 				return this.pixelsToScroll;
 			}
 
