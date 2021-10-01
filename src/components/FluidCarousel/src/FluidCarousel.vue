@@ -13,7 +13,7 @@
 		<div
 			ref="sliderHeader"
 		>
-			<!-- @slot FluidCarousel header items -->
+			<!-- @slot Slot for items above the carousel -->
 			<slot name="header"	/>
 		</div>
 		<div
@@ -34,7 +34,7 @@
 		<div
 			ref="sliderFooter"
 		>
-			<!-- @slot FluidCarousel footer items -->
+			<!-- @slot Slot for items below the carousel -->
 			<slot name="footer" />
 		</div>
 	</div>

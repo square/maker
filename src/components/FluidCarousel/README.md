@@ -1,6 +1,8 @@
 # FluidCarousel
 
-Carousel that adjusts to the width of the parent container
+Carousel that adjusts to the width of the parent container.
+
+`FluidCarousel` listens for `CAROUSEL_BACK_EVENT` and `CAROUSEL_FORWARD_EVENT` for navigation and implementation of custom carousel controls
 
 ## Example
 ```vue
@@ -212,11 +214,11 @@ export default {
 
 ## FluidCarousel Slots
 
-| Slot    | Description                |
-| ------- | -------------------------- |
-| header  | FluidCarousel header items |
-| default | FluidCarousel items        |
-| footer  | FluidCarousel footer items |
+| Slot    | Description                       |
+| ------- | --------------------------------- |
+| header  | Slot for items above the carousel |
+| default | FluidCarousel items               |
+| footer  | Slot for items below the carousel |
 
 
 ## FluidCarousel Events
