@@ -69,6 +69,9 @@ export default {
 	},
 
 	computed: {
+		/**
+		 * Computed classes for the carousel arrow
+		 */
 		carouselArrowClasses() {
 			return ({
 				[this.$s.CarouselArrowDisabled]: !this.isEnabled,

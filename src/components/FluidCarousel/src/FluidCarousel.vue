@@ -76,6 +76,9 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Number of pixels to scroll when using navigating using controls
+		 */
 		pixelsToScroll: {
 			type: Number,
 			default: 0,
@@ -99,6 +102,9 @@ export default {
 	},
 
 	computed: {
+		/**
+		 * The slider window element
+		 */
 		el() {
 			return this.$refs.sliderWindow;
 		},

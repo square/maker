@@ -113,13 +113,17 @@ export default {
 
 ```vue
 <template>
-	<div class="container">
+	<div
+		class="container"
+		:style="containerStyles"
+	>
 		<m-fluid-carousel
 			is-draggable
 			is-vertical
+			:pixels-to-scroll="pixelsToScroll"
 		>
 			<template #header>
-				<h2>Heading</h2>
+				<h2>With pixelsToScroll</h2>
 			</template>
 			<div
 				v-for="i in 25"
@@ -143,32 +147,49 @@ export default {
 <script>
 import { MFluidCarousel, MFluidCarouselControls } from '@square/maker/components/FluidCarousel';
 
+const ITEM_SIZE = 250;
+const ITEM_MARGIN_SIZE = 10;
+const SCROLL_ITEMS = 2;
+
 export default {
 	components: {
 		MFluidCarousel,
 		MFluidCarouselControls,
 	},
+
+	computed: {
+
+		containerStyles() {
+			return {
+				'--carousel-item-size': `${ITEM_SIZE}px`,
+				'--carousel-item-margin-size': `${ITEM_MARGIN_SIZE}px`,
+			};
+		},
+
+		pixelsToScroll() {
+			return (ITEM_SIZE + ITEM_MARGIN_SIZE) * SCROLL_ITEMS;
+		},
+	},
 };
 </script>
 <style scoped>
 .container {
-	--carousel-width: 250px;
-	height: 600px;
-	width: var(--carousel-width);
+	height: 650px;
+	width: var(--carousel-item-size);
 }
 
 .carousel-item {
-	width: var(--carousel-width);
-	height: var(--carousel-width);
+	width: var(--carousel-item-size);
+	height: var(--carousel-item-size);
 	background-color: rgba(0, 0, 0, 0.1);
-	margin-bottom: 10px;
+	margin-bottom: var(--carousel-item-margin-size);
 	user-select: none;
 	-webkit-user-select: none;
   -ms-user-select: none;
 }
 .carousel-footer {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	padding-top: 12px;
 }
 </style>
@@ -183,7 +204,7 @@ export default {
 | is-draggable     | `boolean` | `false` | —               | Whether the user can navigate the carousel by dragging             |
 | item-count       | `number`  | `0`     | —               | —                                                                  |
 | is-vertical      | `boolean` | `false` | —               | Whether the carousel has a vertical layout - default is horizontal |
-| pixels-to-scroll | `number`  | `0`     | —               | —                                                                  |
+| pixels-to-scroll | `number`  | `0`     | —               | Number of pixels to scroll when using navigating using controls    |
 | snap-scroll      | `boolean` | `false` | —               | —                                                                  |
 
 
