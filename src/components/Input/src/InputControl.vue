@@ -121,30 +121,24 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: #f6f7f9;
-	--color-background-focus: rgb(255, 255, 255, 0.95);
-	--color-placeholder: rgba(0, 0, 0, 0.55);
-	--color-foreground: rgba(0, 0, 0, 0.9);
-	--color-disabled: rgba(0, 0, 0, 0.3);
-	--color-background-disabled: rgba(0, 0, 0, 0.05);
-	--color-accent: #222;
-	--color-error: rgba(206, 50, 23, 1);
-	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
+	--color-background: var(--color-100, #f6f7f9);
+	--color-placeholder: var(--color-800, rgba(0, 0, 0, 0.55));
+	--color-foreground: var(--color-800, rgba(107, 107, 107, 0.9));
+	--color-disabled: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-background-disabled: var(--color-800, rgba(0, 0, 0, 0.05));
+	--color-error: var(--color-error, rgba(206, 50, 23, 1));
 	--border-radius: 8px;
 	--border-color: transparent;
-	--border-color-hover: #222;
+	--border-color-hover: var(--color-300, #222);
 }
 
 .variant_outline {
 	--color-background: #fff;
-	--color-background-focus: #fff;
 	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-disabled: rgba(0, 0, 0, 0.3);
 	--color-background-disabled: rgba(0, 0, 0, 0.05);
-	--color-accent: #222;
 	--color-error: rgba(206, 50, 23, 1);
-	--focus-shadow: none;
 	--border-radius: 8px;
 	--border-color: rgba(0, 0, 0, 0.15);
 	--border-color-hover: rgba(0, 0, 0, 0.3);
@@ -186,7 +180,8 @@ export default {
 	border-radius: var(--border-radius);
 	transition: border-color 0.2s ease;
 
-	&:not(.disabled, .invalid):hover {
+	&:not(.disabled, .invalid):hover,
+	&:not(.disabled, .invalid):focus-within {
 		border-color: var(--border-color-hover);
 	}
 
@@ -199,16 +194,6 @@ export default {
 		& .Affix {
 			color: var(--color-disabled);
 		}
-	}
-
-	&:focus-within {
-		background-color: var(--color-background-focus);
-	}
-
-	&:focus-within:not(.invalid, .disabled) {
-		background-color: var(--color-background-focus);
-		border-color: var(--border-color-hover);
-		box-shadow: var(--focus-shadow);
 	}
 
 	&.invalid {

@@ -91,11 +91,10 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-background: rgba(255, 255, 255, 0.95);
-	--color-fill: rgba(0, 0, 0, 0.9);
-	--color-focus: rgba(0, 0, 0, 0.9);
-	--color-error: rgba(206, 50, 23, 1);
+	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--color-800, rgba(0, 0, 0, 0.9));
+	--color-focus: var(--color-800, rgba(0, 0, 0, 0.9));
+	--color-error: var(--color-error, rgba(206, 50, 23, 1));
 	--color-disabled: rgba(0, 0, 0, 0.05);
 	--color-disabled-fill: rgba(0, 0, 0, 0.15);
 }

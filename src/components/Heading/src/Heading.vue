@@ -119,6 +119,7 @@ export default {
 
 .Heading {
 	margin: 0;
+	color: var(--color-900);
 	font-family: inherit;
 }
 

@@ -6,8 +6,8 @@
 			shape="pill"
 			variant="primary"
 			:size="size"
-			:color="color"
-			:text-color="textColor"
+			:color="resolvedColor"
+			:text-color="resolvedTextColor"
 			:disabled="value === minVal"
 			@click="decrement"
 		>
@@ -20,8 +20,8 @@
 			shape="pill"
 			variant="primary"
 			:size="size"
-			:color="color"
-			:text-color="textColor"
+			:color="resolvedColor"
+			:text-color="resolvedTextColor"
 			:disabled="value === maxVal"
 			@click="increment"
 		>
@@ -32,6 +32,7 @@
 
 <script>
 import { MButton } from '@square/maker/components/Button';
+import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 import Plus from '@square/maker-icons/Plus';
 import Minus from '@square/maker-icons/Minus';
 
@@ -40,6 +41,13 @@ export default {
 		MButton,
 		Plus,
 		Minus,
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
@@ -76,14 +84,14 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#cccccc',
+			default: undefined,
 		},
 		/**
 		 * stepper button text color
 		 */
 		textColor: {
 			type: String,
-			default: '#000000',
+			default: undefined,
 		},
 
 		/**
@@ -103,6 +111,12 @@ export default {
 
 		minVal() {
 			return Number.parseInt(this.min, 10);
+		},
+		resolvedColor() {
+			return this.color || this.theme.colors.contrast['color-100'] || '#cccccc';
+		},
+		resolvedTextColor() {
+			return this.textColor || this.theme.colors.contrast['color-800'] || '#000000';
 		},
 	},
 

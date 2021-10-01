@@ -140,9 +140,9 @@ export default {
 }
 
 .type_info {
-	--color: rgba(24, 24, 24, 1);
-	--color-icon: rgba(169, 169, 169, 1);
-	--color-bg: rgba(241, 241, 241, 1);
+	--color: var(--color-800, rgba(24, 24, 24, 1));
+	--color-icon: var(--color-800, rgba(169, 169, 169, 1));
+	--color-bg: var(--color-100, rgba(241, 241, 241, 1));
 }
 
 .variant_block {
@@ -161,6 +161,6 @@ export default {
 	width: 16px;
 	height: 16px;
 	fill: var(--color-icon);
-	stroke: white;
+	stroke: var(--color-bg);
 }
 </style>
