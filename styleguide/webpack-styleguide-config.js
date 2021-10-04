@@ -12,6 +12,7 @@ const branchName = getCurrentBranch();
 const deploy = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
 
 const entry = path.resolve('./styleguide/App.vue');
+require.resolve(entry);
 
 const componentsDirectory = path.resolve('./src/components/');
 function generateRoutes() {
