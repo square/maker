@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import createRouter from './create-router';
+import './init-polyfills';
 
 function createApp(App) {
 	const router = createRouter();
