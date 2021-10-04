@@ -71,9 +71,9 @@ function fill(tokens) {
 	const contrastColorActive = getActive(contrastColor);
 	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '8px 16px',
-		'--medium-padding': '12px 24px',
-		'--large-padding': '20px 32px',
+		'--small-padding': '0 16px',
+		'--medium-padding': '0 24px',
+		'--large-padding': '0 32px',
 		'--color-main': color.hex(),
 		'--color-main-hover': colorHover.hex(),
 		'--color-main-active': colorActive.hex(),
@@ -90,9 +90,9 @@ function outline(tokens) {
 	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '8px 16px',
-		'--medium-padding': '12px 24px',
-		'--large-padding': '20px 32px',
+		'--small-padding': '0 16px',
+		'--medium-padding': '0 24px',
+		'--large-padding': '0 32px',
 		'--color-main': 'transparent',
 		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
 		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
@@ -110,9 +110,9 @@ function ghost(tokens) {
 	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '8px',
-		'--medium-padding': '12px',
-		'--large-padding': '20px',
+		'--small-padding': '0 8px',
+		'--medium-padding': '0 12px',
+		'--large-padding': '0 20px',
 		'--color-main': 'transparent',
 		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
 		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
@@ -293,6 +293,7 @@ export default {
 	}
 
 	&.size_small {
+		height: 32px;
 		padding: var(--small-padding);
 		font-size: 12px;
 
@@ -301,11 +302,13 @@ export default {
 		}
 
 		&.iconButton {
-			padding: 8px;
+			width: 32px;
+			padding: 0;
 		}
 	}
 
 	&.size_medium {
+		height: 48px;
 		padding: var(--medium-padding);
 		font-size: 14px;
 
@@ -314,11 +317,13 @@ export default {
 		}
 
 		&.iconButton {
-			padding: 12px;
+			width: 48px;
+			padding: 0;
 		}
 	}
 
 	&.size_large {
+		height: 64px;
 		padding: var(--large-padding);
 		font-size: 16px;
 
@@ -327,7 +332,8 @@ export default {
 		}
 
 		&.iconButton {
-			padding: 20px;
+			width: 64px;
+			padding: 0;
 		}
 	}
 
