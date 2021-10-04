@@ -98,7 +98,7 @@ export default {
 	},
 
 	created() {
-		assert.warn(this.$slots.default, 'TextButton should only be used with a label');
+		assert.warn(this.$slots.default, 'TextButton should be used with a label');
 	},
 
 };
