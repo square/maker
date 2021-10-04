@@ -5,7 +5,7 @@
 		<m-button
 			shape="pill"
 			variant="primary"
-			:size="size"
+			size="small"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === minVal"
@@ -19,7 +19,7 @@
 		<m-button
 			shape="pill"
 			variant="primary"
-			:size="size"
+			size="small"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === maxVal"
@@ -85,15 +85,6 @@ export default {
 			type: String,
 			default: '#000000',
 		},
-
-		/**
-		 * stepper button size
-		 */
-		size: {
-			type: String,
-			default: 'small',
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
-		},
 	},
 
 	computed: {
@@ -152,7 +143,7 @@ export default {
 }
 
 .Icon {
-	width: 24px;
-	height: 24px;
+	width: 16px;
+	height: 16px;
 }
 </style>
