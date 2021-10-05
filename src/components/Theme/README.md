@@ -374,6 +374,82 @@ export default {
 ```vue
 <template>
 	<m-theme :theme="theme">
+		pick default heading color
+		<br>
+		<input
+			v-model="theme.colors.text"
+			type="color"
+		>
+		<br>
+
+		pick default heading font family
+		<br>
+		<select v-model="theme.heading.fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+
+		pick default heading size
+		<br>
+		<input
+			v-model="theme.heading.size"
+			type="number"
+			min="-2"
+			max="7"
+		>
+		<br>
+
+		<m-heading>
+			heading content
+		</m-heading>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
+
+export default {
+	components: {
+		MTheme,
+		MHeading,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					text: '#000000',
+				},
+				heading: {
+					fontFamily: 'inherit',
+					size: 2,
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
+<br>
+
+```vue
+<template>
+	<m-theme :theme="theme">
 		pick default text color
 		<br>
 		<input
@@ -414,7 +490,7 @@ export default {
 		<br>
 
 		<m-text>
-			{{ JSON.stringify($data) }} text content
+			text content
 		</m-text>
 	</m-theme>
 </template>

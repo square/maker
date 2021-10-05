@@ -32,6 +32,11 @@ export default function defaultTheme() {
 			fontFamily: 'inherit',
 			size: 0,
 		},
+		heading: {
+			textColor: '@colors.text',
+			fontFamily: 'inherit',
+			size: 0,
+		},
 		resolve,
 		getPath,
 	};
