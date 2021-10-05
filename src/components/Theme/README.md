@@ -369,6 +369,82 @@ export default {
 </style>
 ```
 
+## Theming Headings & Texts
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick default text color
+		<br>
+		<input
+			v-model="theme.colors.text"
+			type="color"
+		>
+		<br>
+
+		pick default text font family
+		<br>
+		<select v-model="theme.text.fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+
+		pick default text size
+		<br>
+		<input
+			v-model="theme.text.size"
+			type="number"
+			min="-1"
+			max="1"
+		>
+		<br>
+
+		<m-text>
+			{{ JSON.stringify($data) }} text content
+		</m-text>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
+
+export default {
+	components: {
+		MTheme,
+		MText,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					text: '#000000',
+				},
+				text: {
+					fontFamily: 'inherit',
+					size: 0,
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
 ## Customizing the theme within subsets of the app
 
 Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:

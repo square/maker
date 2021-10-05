@@ -1,5 +1,7 @@
 <script>
-const DEFAULT_SIZE = 0;
+import chroma from 'chroma-js';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+
 const MIN_SIZE = -1;
 const MAX_SIZE = 1;
 
@@ -8,6 +10,13 @@ const MAX_SIZE = 1;
  * @inheritListeners span
  */
 export default {
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -24,30 +33,58 @@ export default {
 		 */
 		size: {
 			type: Number,
-			default: DEFAULT_SIZE,
+			default: undefined,
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
+		},
+		/**
+		 * text font family
+		 */
+		fontFamily: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * text color
+		 */
+		textColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 	},
 
 	computed: {
-		stringSize() {
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor']),
+		sizeClass() {
 			const minNonNegativeSize = 0;
-			if (this.size >= minNonNegativeSize) {
-				return this.size.toString();
+			if (this.resolvedSize >= minNonNegativeSize) {
+				return this.resolvedSize.toString();
 			}
-			return `minus-${Math.abs(this.size)}`;
+			return `minus-${Math.abs(this.resolvedSize)}`;
+		},
+		inlineStyles() {
+			return {
+				fontFamily: this.resolvedFontFamily,
+				color: this.resolvedTextColor,
+			};
 		},
 	},
 
 	render(createElement) {
-		const { $s, stringSize, element } = this;
+		const {
+			$s,
+			sizeClass,
+			element,
+			inlineStyles,
+		} = this;
 		/**
 		 * @slot text content
 		 */
 		const defaultSlot = this.$slots.default;
 		return createElement(element, {
-			class: [$s.Paragraph, $s[`size_${stringSize}`]],
+			class: [$s.Paragraph, $s[`size_${sizeClass}`]],
 			attrs: this.$attrs,
+			style: inlineStyles,
 			on: this.$listeners,
 		}, defaultSlot);
 	},
