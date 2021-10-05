@@ -270,34 +270,6 @@
 
 		<div class="section">
 			<m-heading :size="2">
-				Section
-			</m-heading>
-
-			<m-section>
-				section content
-			</m-section>
-			<m-section label="section label">
-				section content
-			</m-section>
-			<m-section
-				label="section label"
-				sublabel="section sublabel"
-			>
-				section content
-			</m-section>
-			<m-section
-				label="section label"
-				sublabel="section sublabel"
-			>
-				section content
-				<template #requirement-label>
-					section requirement label
-				</template>
-			</m-section>
-		</div>
-
-		<div class="section">
-			<m-heading :size="2">
 				Select
 			</m-heading>
 
@@ -424,7 +396,6 @@ import { MInput } from '@square/maker/components/Input';
 import { MLoading } from '@square/maker/components/Loading';
 import { MNotice } from '@square/maker/components/Notice';
 import { MRadio } from '@square/maker/components/Radio';
-import { MSection } from '@square/maker/components/Section';
 import { MSelect } from '@square/maker/components/Select';
 import { MSkeletonBlock, MSkeletonText } from '@square/maker/components/Skeleton';
 import { MStepper } from '@square/maker/components/Stepper';
@@ -447,7 +418,6 @@ export default {
 		MLoading,
 		MNotice,
 		MRadio,
-		MSection,
 		MSelect,
 		MSkeletonBlock,
 		MSkeletonText,

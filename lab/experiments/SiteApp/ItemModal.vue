@@ -6,7 +6,7 @@
 			/>
 		</div>
 
-		<m-section
+		<m-container
 			:label="item.name"
 			size="large"
 			class="section"
@@ -17,9 +17,9 @@
 			>
 				{{ item.description }}
 			</m-text>
-		</m-section>
+		</m-container>
 
-		<m-section
+		<m-container
 			v-for="oneOf in item.oneOf"
 			:key="oneOf.name"
 			:label="oneOf.name"
@@ -51,9 +51,9 @@
 				</div>
 				<m-divider v-if="i+1 !== oneOf.options.length" />
 			</div>
-		</m-section>
+		</m-container>
 
-		<m-section
+		<m-container
 			v-for="anyOf in item.anyOf"
 			:key="anyOf.name"
 			:label="anyOf.name"
@@ -85,9 +85,9 @@
 				</div>
 				<m-divider v-if="i+1 !== anyOf.options.length" />
 			</div>
-		</m-section>
+		</m-container>
 
-		<m-section
+		<m-container
 			label="Special requests"
 			class="section"
 			style="margin-bottom: 120px;"
@@ -102,7 +102,7 @@
 
 				color="rgba(160, 121, 164, 0.3)"
 			/>
-		</m-section>
+		</m-container>
 
 		<m-action-bar>
 			<m-button
@@ -134,7 +134,7 @@
 
 <script>
 /* eslint vue/no-mutating-props: 0, max-len: 0, unicorn/no-reduce: 0 */
-import { MSection } from '@square/maker/components/Section';
+import { MContainer } from '@square/maker/components/Container';
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MImage } from '@square/maker/components/Image';
 import { MText } from '@square/maker/components/Text';
@@ -151,7 +151,7 @@ export default {
 	components: {
 		MModal,
 		MImage,
-		MSection,
+		MContainer,
 		MText,
 		MRadio,
 		MDivider,
