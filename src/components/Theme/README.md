@@ -377,7 +377,7 @@ export default {
 		pick default heading color
 		<br>
 		<input
-			v-model="theme.colors.text"
+			v-model="theme.colors.heading"
 			type="color"
 		>
 		<br>
@@ -432,7 +432,7 @@ export default {
 		return {
 			theme: {
 				colors: {
-					text: '#000000',
+					heading: '#000000',
 				},
 				heading: {
 					fontFamily: 'inherit',
@@ -657,7 +657,7 @@ export default {
 
 | Prop    | Type     | Default            | Possible values | Description |
 | ------- | -------- | ------------------ | --------------- | ----------- |
-| theme*  | `object` | —                  | —               | —           |
+| theme   | `object` | `{}`               | —               | —           |
 | profile | `string` | `'defaultProfile'` | —               | —           |
 
 

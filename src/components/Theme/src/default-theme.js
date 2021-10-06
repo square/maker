@@ -5,6 +5,7 @@ export default function defaultTheme() {
 		colors: {
 			primary: '#000000',
 			text: '#000000',
+			heading: '#000000',
 		},
 		profiles: [
 			{
@@ -33,9 +34,9 @@ export default function defaultTheme() {
 			size: 0,
 		},
 		heading: {
-			textColor: '@colors.text',
+			textColor: '@colors.heading',
 			fontFamily: 'inherit',
-			size: 0,
+			size: 2,
 		},
 		resolve,
 		getPath,

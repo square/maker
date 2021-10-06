@@ -60,7 +60,7 @@ export default {
 			if (this.resolvedSize >= minNonNegativeSize) {
 				return this.resolvedSize.toString();
 			}
-			return `minus-${Math.abs(this.resolvedSize)}`;
+			return `minus${this.resolvedSize}`;
 		},
 		inlineStyles() {
 			return {
