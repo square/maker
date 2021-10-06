@@ -17,7 +17,7 @@ function resolveTheme(data, parentTheme, theme, profileId) {
 	merge(data, parentTheme, theme);
 	merge(data, find(data.profiles, { id: profileId }));
 
-	const backgroundColor = get(theme, 'colors.background', '#ffffff');
+	const backgroundColor = get(data, 'colors.background', '#ffffff');
 	const contrast = contrastColors(backgroundColor);
 
 	data.colors = {
