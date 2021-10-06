@@ -88,7 +88,7 @@ export default {
 
 		progressContainerStyle() {
 			return {
-				opacity: this.isUploading ? PROGRESS_OPACITY.hidden : PROGRESS_OPACITY.shown,
+				opacity: this.isUploading ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
 			};
 		},
 
@@ -168,5 +168,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	transition: opacity 150ms linear;
 }
 </style>
