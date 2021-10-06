@@ -369,6 +369,158 @@ export default {
 </style>
 ```
 
+## Theming Headings & Texts
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick default heading color
+		<br>
+		<input
+			v-model="theme.colors.heading"
+			type="color"
+		>
+		<br>
+
+		pick default heading font family
+		<br>
+		<select v-model="theme.heading.fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+
+		pick default heading size
+		<br>
+		<input
+			v-model="theme.heading.size"
+			type="number"
+			min="-2"
+			max="7"
+		>
+		<br>
+
+		<m-heading>
+			heading content
+		</m-heading>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
+
+export default {
+	components: {
+		MTheme,
+		MHeading,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					heading: '#000000',
+				},
+				heading: {
+					fontFamily: 'inherit',
+					size: 2,
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
+<br>
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick default text color
+		<br>
+		<input
+			v-model="theme.colors.text"
+			type="color"
+		>
+		<br>
+
+		pick default text font family
+		<br>
+		<select v-model="theme.text.fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+
+		pick default text size
+		<br>
+		<input
+			v-model="theme.text.size"
+			type="number"
+			min="-1"
+			max="1"
+		>
+		<br>
+
+		<m-text>
+			text content
+		</m-text>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
+
+export default {
+	components: {
+		MTheme,
+		MText,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					text: '#000000',
+				},
+				text: {
+					fontFamily: 'inherit',
+					size: 0,
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
 ## Customizing the theme within subsets of the app
 
 Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:
@@ -505,7 +657,7 @@ export default {
 
 | Prop    | Type     | Default            | Possible values | Description |
 | ------- | -------- | ------------------ | --------------- | ----------- |
-| theme*  | `object` | —                  | —               | —           |
+| theme   | `object` | `{}`               | —               | —           |
 | profile | `string` | `'defaultProfile'` | —               | —           |
 
 

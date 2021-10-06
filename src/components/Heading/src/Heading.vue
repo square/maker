@@ -1,5 +1,7 @@
 <script>
-const DEFAULT_SIZE = 0;
+import chroma from 'chroma-js';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+
 const MAX_SIZE = 7;
 const MIN_SIZE = -2;
 
@@ -9,6 +11,13 @@ const MIN_SIZE = -2;
  * @inheritListeners h1
  */
 export default {
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -17,7 +26,7 @@ export default {
 		 */
 		size: {
 			type: Number,
-			default: DEFAULT_SIZE,
+			default: undefined,
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
@@ -28,9 +37,25 @@ export default {
 			default: undefined,
 			validator: (element) => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'].includes(element),
 		},
+		/**
+		 * Heading font family
+		 */
+		fontFamily: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Heading text color
+		 */
+		textColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	computed: {
+		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor']),
 		tag() {
 			if (this.element) {
 				return this.element;
@@ -40,39 +65,55 @@ export default {
 			const h3Threshold = 2;
 			const h4Threshold = 1;
 			const h5Threshold = 0;
-			if (this.size >= h1Threshold) {
+			if (this.resolvedSize >= h1Threshold) {
 				return 'h1';
 			}
-			if (this.size >= h2Threshold) {
+			if (this.resolvedSize >= h2Threshold) {
 				return 'h2';
 			}
-			if (this.size >= h3Threshold) {
+			if (this.resolvedSize >= h3Threshold) {
 				return 'h3';
 			}
-			if (this.size >= h4Threshold) {
+			if (this.resolvedSize >= h4Threshold) {
 				return 'h4';
 			}
-			if (this.size >= h5Threshold) {
+			if (this.resolvedSize >= h5Threshold) {
 				return 'h5';
 			}
 			return 'h6';
 		},
-		stringSize() {
+		sizeClass() {
 			const minNonNegativeSize = 0;
-			if (this.size >= minNonNegativeSize) {
-				return this.size.toString();
+			if (this.resolvedSize >= minNonNegativeSize) {
+				return this.resolvedSize.toString();
 			}
-			return `minus-${Math.abs(this.size)}`;
+			return `minus${this.resolvedSize}`;
+		},
+		inlineStyles() {
+			return {
+				fontFamily: this.resolvedFontFamily,
+				color: this.resolvedTextColor,
+			};
 		},
 	},
 
 	render(createElement) {
-		const { $s, stringSize, tag } = this;
+		const {
+			$s,
+			sizeClass,
+			tag,
+			inlineStyles,
+		} = this;
+		/**
+		 * @slot heading content
+		 */
+		const defaultSlot = this.$slots.default;
 		return createElement(tag, {
-			class: [$s.Heading, $s[`size_${stringSize}`]],
+			class: [$s.Heading, $s[`size_${sizeClass}`]],
+			style: inlineStyles,
 			attrs: this.$attrs,
 			on: this.$listeners,
-		}, this.$slots.default);
+		}, defaultSlot);
 	},
 };
 </script>
