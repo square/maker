@@ -42,22 +42,25 @@ import {
 
 const getEntryFile = (entry) => new Promise((resolve) => entry.file(resolve));
 const readEntries = (reader) => new Promise((resolve) => reader.readEntries(resolve));
-const getAllEntries = (reader, aggregated = []) => readEntries(reader).then((entries) => {
+const getAllEntries = async (reader, aggregated = []) => {
+	const entries = await readEntries(reader);
 	// eslint-disable-next-line unicorn/explicit-length-check
 	if (!entries.length) {
 		return aggregated;
 	}
-	return getAllEntries(reader, aggregated.concat(entries));
-});
-function traverseEntry(entry) {
+
+	return await getAllEntries(reader, aggregated.concat(entries));
+};
+
+async function traverseEntry(entry) {
 	if (entry) {
 		if (entry.isFile) {
-			return getEntryFile(entry);
+			return await getEntryFile(entry);
 		}
 		if (entry.isDirectory) {
-			return getAllEntries(entry.createReader()).then(
-				(entries) => Promise.all(entries.map((innerEntry) => traverseEntry(innerEntry))),
-			);
+			const entries = await getAllEntries(entry.createReader());
+
+			return await Promise.all(entries.map((innerEntry) => traverseEntry(innerEntry)));
 		}
 	}
 
