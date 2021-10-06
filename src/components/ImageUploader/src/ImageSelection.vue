@@ -40,7 +40,6 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
 
-const MAX_PROGRESS = 100;
 const PROGRESS_OPACITY = { shown: 1, hidden: 0 };
 
 export default {
@@ -87,13 +86,9 @@ export default {
 			};
 		},
 
-		showProgressBar() {
-			return this.progress < MAX_PROGRESS;
-		},
-
 		progressContainerStyle() {
 			return {
-				opacity: this.showProgressBar ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
+				opacity: this.isUploading ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
 			};
 		},
 
@@ -145,7 +140,7 @@ export default {
 }
 
 .ImageSelectionContainerError {
-	border: 2px solid var(--color-error);
+	border: 1px solid var(--color-error);
 }
 
 .ImageSelectionRemoveButton {
@@ -173,5 +168,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	transition: opacity 150ms linear;
 }
 </style>

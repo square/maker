@@ -5,10 +5,10 @@ Use ImageUploader to provide a visual wrapper for a file input. Use with an uplo
 Allows JPEG, PNG, and GIF file formats. HEIC is converted to JPEG by iOS with this configuration.
 
 ## Basic Usage With Upload Handler
-The upload hander (passed in as the `uploadHandlerFn` prop) should accept an object as the first argument. This object will contain the fields:
+The upload hander (passed in as the `uploadHandler` prop) should accept an object as the first argument. This object will contain the fields:
 
-- `image`: A `File` instance for the image to upload
-- `uploadProgressHandler`: A `Function` to push progress updates to the uploader, takes a number as an argument.
+- `imageFile`: A `File` instance for the image to upload
+- `setImageProgress`: A `Function` to push progress updates to the uploader, takes a number as an argument.
 
 If you require the response from your API, it will be added to the image record as the `apiResponse` field.
 
