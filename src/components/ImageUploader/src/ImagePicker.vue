@@ -40,8 +40,13 @@ import {
 	isEqual, uniqWith, escapeRegExp, partition,
 } from 'lodash';
 
-const getEntryFile = (entry) => new Promise((resolve) => entry.file(resolve));
-const readEntries = (reader) => new Promise((resolve) => reader.readEntries(resolve));
+const getEntryFile = (entry) => new Promise((resolve, reject) => {
+	entry.file(resolve, reject);
+});
+const readEntries =	(reader) => new Promise((resolve, reject) => {
+	reader.readEntries(resolve, reject);
+});
+
 const getAllEntries = async (reader, aggregated = []) => {
 	const entries = await readEntries(reader);
 	// eslint-disable-next-line unicorn/explicit-length-check
@@ -49,18 +54,23 @@ const getAllEntries = async (reader, aggregated = []) => {
 		return aggregated;
 	}
 
-	return await getAllEntries(reader, aggregated.concat(entries));
+	return getAllEntries(reader, aggregated.concat(entries));
 };
 
 async function traverseEntry(entry) {
 	if (entry) {
-		if (entry.isFile) {
-			return await getEntryFile(entry);
-		}
-		if (entry.isDirectory) {
-			const entries = await getAllEntries(entry.createReader());
+		try {
+			if (entry.isFile) {
+				return await getEntryFile(entry);
+			}
 
-			return await Promise.all(entries.map((innerEntry) => traverseEntry(innerEntry)));
+			if (entry.isDirectory) {
+				const entries = await getAllEntries(entry.createReader());
+
+				return Promise.all(entries.map((innerEntry) => traverseEntry(innerEntry)));
+			}
+		} catch {
+			return undefined;
 		}
 	}
 
@@ -95,13 +105,15 @@ export default {
 			if (event.dataTransfer.items) {
 				const fileEntries = await Promise.all(
 					[...event.dataTransfer.items]
-					.map((item) => traverseEntry(item.webkitGetAsEntry && item.webkitGetAsEntry())),
+						.map((item) => traverseEntry(item.webkitGetAsEntry && item.webkitGetAsEntry())),
 				);
 
 				const wBuffers = await Promise.all(
-					fileEntries.flat(Infinity).map(
-						(file) => file.arrayBuffer().then((buffer) => ({ file, buffer })),
-					),
+					fileEntries
+						.filter((entry) => Boolean(entry))
+						.flat(Infinity).map(
+							(file) => file.arrayBuffer().then((buffer) => ({ file, buffer })),
+						),
 				);
 
 				const files = uniqWith(wBuffers, isEqual).map((f) => f.file);
