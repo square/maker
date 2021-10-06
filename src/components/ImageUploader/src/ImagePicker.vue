@@ -40,6 +40,18 @@ import {
 	isEqual, uniqWith, escapeRegExp, partition,
 } from 'lodash';
 
+const getEntry = (item) => {
+	if (item.getAsEntry) {
+		return item.getAsEntry();
+	}
+
+	if (item.webkitGetAsEntry) {
+		return item.webkitGetAsEntry();
+	}
+
+	return undefined;
+};
+
 const getEntryFile = (entry) => new Promise((resolve, reject) => {
 	entry.file(resolve, reject);
 });
@@ -105,7 +117,7 @@ export default {
 			if (event.dataTransfer.items) {
 				const fileEntries = await Promise.all(
 					[...event.dataTransfer.items]
-						.map((item) => traverseEntry(item.webkitGetAsEntry && item.webkitGetAsEntry())),
+						.map((item) => traverseEntry(getEntry(item))),
 				);
 
 				const wBuffers = await Promise.all(
