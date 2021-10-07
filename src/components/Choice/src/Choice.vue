@@ -55,7 +55,7 @@ export default {
 		 */
 		selectedColor: {
 			type: String,
-			default: '#222',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 	},
@@ -69,6 +69,9 @@ export default {
 
 	computed: {
 		contrastColor() {
+			if (!this.selectedColor) {
+				return 'var(--color-100)';
+			}
 			const color = this.selectedColor;
 			const chromaColor = chroma(color);
 			const contrastColor = getContrast(chromaColor, '#fff');
@@ -76,6 +79,9 @@ export default {
 		},
 
 		disabledContrastColor() {
+			if (!this.selectedColor) {
+				return 'var(--color-300)';
+			}
 			const alphaValue = 0.4;
 			const disabledTextColor = chroma(this.contrastColor).alpha(alphaValue);
 			return disabledTextColor;
@@ -83,7 +89,7 @@ export default {
 
 		style() {
 			return {
-				'--selected-background-color': this.selectedColor,
+				'--selected-background-color': this.selectedColor || 'var(--color-900)',
 				'--selected-text-color': this.contrastColor,
 				'--selected-disabled-text-color': this.disabledContrastColor,
 			};
