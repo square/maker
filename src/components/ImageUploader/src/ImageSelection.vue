@@ -111,18 +111,10 @@ export default {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	border: 1px solid rgba(0, 0, 0, 0.15);
+	border: 1px solid var(--color-300, rgba(0, 0, 0, 0.15));
 	border-radius: 8px;
 	transition: background-image linear 150ms;
 
-	/* these should later be pulled from
-	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-border-active: rgba(0, 0, 0, 0.9);
-	--color-background: rgba(0, 0, 0, 0.9);
-	--color-foreground: rgba(255, 255, 255, 0.95);
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-checked: rgba(0, 0, 0, 0.15);
 	--color-error: #ff3b30;
 }
 

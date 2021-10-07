@@ -92,8 +92,8 @@ export default {
 	/* these should later be pulled from
 	the ThemeProvider component */
 	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
-	--color-border-active: var(--color-800, rgba(0, 0, 0, 0.9));
-	--color-background-active: var(--color-800, rgba(0, 0, 0, 0.9));
+	--color-border-active: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-background-active: var(--color-900, rgba(0, 0, 0, 0.9));
 	--color-foreground: var(--color-100, rgba(255, 255, 255, 0.95));
 	--color-disabled: rgba(0, 0, 0, 0.05);
 	--color-disabled-checked: rgba(0, 0, 0, 0.15);

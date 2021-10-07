@@ -3,9 +3,14 @@ import { resolve, getPath } from './utils';
 export default function defaultTheme() {
 	return {
 		colors: {
+			background: '#ffffff',
 			primary: '#000000',
-			text: '#000000',
-			heading: '#000000',
+			text: '#636363',
+			heading: '#303030',
+			'color-100': '#f1f1f1',
+			'color-300': '#d7d7d7',
+			'color-800': '#636363',
+			'color-900': '#303030',
 		},
 		profiles: [
 			{
@@ -39,8 +44,8 @@ export default function defaultTheme() {
 			size: 2,
 		},
 		stepper: {
-			color: '#cccccc',
-			textColor: '#000000',
+			color: '@colors["color-100"]',
+			textColor: '@colors["color-900"]',
 		},
 		resolve,
 		getPath,

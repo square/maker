@@ -278,8 +278,8 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 2px #fff,
-			0 0 0 4px var(--color-focus);
+			0 0 0 1px var(--color-300, #fff),
+			0 0 0 3px var(--color-focus);
 	}
 
 	&:active {
