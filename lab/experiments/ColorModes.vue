@@ -20,7 +20,16 @@
 				<m-heading
 					:size="0"
 				>
-					Select a color
+					Select a primary color
+				</m-heading>
+				<input
+					v-model="primaryColor"
+					type="color"
+				>
+				<m-heading
+					:size="0"
+				>
+					Select a background color
 				</m-heading>
 				<input
 					v-model="backgroundColor"
@@ -75,11 +84,45 @@
 					</div>
 					<m-divider />
 					<div>
+						<m-choice
+							v-model="choice"
+						>
+							<m-choice-option value="choice-1">
+								Choice 1
+							</m-choice-option>
+							<m-choice-option value="choice-2">
+								Choice 2
+							</m-choice-option>
+							<m-choice-option value="choice-3">
+								Choice 3
+							</m-choice-option>
+						</m-choice>
+					</div>
+					<div>
+						<m-choice
+							v-model="choice"
+							:selected-color="primaryColor"
+						>
+							<m-choice-option value="choice-1">
+								Choice 1
+							</m-choice-option>
+							<m-choice-option value="choice-2">
+								Choice 2
+							</m-choice-option>
+							<m-choice-option value="choice-3">
+								Choice 3
+							</m-choice-option>
+						</m-choice>
+					</div>
+
+					<m-divider />
+					<div>
 						<m-button
 							full-width
+							variant="primary"
 							:color="contrastColor"
 						>
-							Button
+							Primary
 						</m-button>
 					</div>
 				</div>
@@ -138,6 +181,7 @@
 import chroma from 'chroma-js';
 
 import { MTheme } from '@square/maker/components/Theme';
+import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
@@ -157,6 +201,8 @@ const IS_LIGHT_THRESHOLD = 0.32;
 export default {
 	components: {
 		MTheme,
+		MChoice,
+		MChoiceOption,
 		MDivider,
 		MHeading,
 		MText,
@@ -173,7 +219,9 @@ export default {
 
 	data() {
 		return {
-			backgroundColor: '#9effd5',
+			choice: 'choice-1',
+			primaryColor: '#0073F9',
+			backgroundColor: '#fff',
 			number: 0,
 			options: [
 				{
@@ -192,6 +240,7 @@ export default {
 		theme() {
 			return {
 				colors: {
+					primary: this.primaryColor,
 					background: this.backgroundColor,
 				},
 			};
