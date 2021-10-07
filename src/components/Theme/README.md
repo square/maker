@@ -521,6 +521,60 @@ export default {
 </script>
 ```
 
+## Theming Steppers
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick default stepper color
+		<br>
+		<input
+			v-model="theme.stepper.color"
+			type="color"
+		>
+		<br>
+
+		pick default stepper text color
+		<br>
+		<input
+			v-model="theme.stepper.textColor"
+			type="color"
+		>
+		<br>
+
+		<m-stepper
+			v-model="number"
+			min="0"
+			max="10"
+		/>
+		stepper number: {{ number }}
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MStepper } from '@square/maker/components/Stepper';
+
+export default {
+	components: {
+		MTheme,
+		MStepper,
+	},
+	data() {
+		return {
+			number: 5,
+			theme: {
+				stepper: {
+					color: '#cccccc',
+					textColor: '#000000',
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
 ## Customizing the theme within subsets of the app
 
 Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:

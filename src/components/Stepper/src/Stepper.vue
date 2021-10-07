@@ -31,8 +31,9 @@
 </template>
 
 <script>
+import chroma from 'chroma-js';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MButton } from '@square/maker/components/Button';
-import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 import Plus from '@square/maker-icons/Plus';
 import Minus from '@square/maker-icons/Minus';
 
@@ -85,6 +86,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 		/**
 		 * stepper button text color
@@ -92,10 +94,13 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 	},
 
 	computed: {
+		...resolveThemeableProps('stepper', ['color', 'textColor']),
+
 		maxVal() {
 			return Number.parseInt(this.max, 10);
 		},

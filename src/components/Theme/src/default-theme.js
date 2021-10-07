@@ -38,6 +38,10 @@ export default function defaultTheme() {
 			fontFamily: 'inherit',
 			size: 2,
 		},
+		stepper: {
+			color: '#cccccc',
+			textColor: '#000000',
+		},
 		resolve,
 		getPath,
 	};
