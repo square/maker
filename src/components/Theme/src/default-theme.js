@@ -20,6 +20,7 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		textbutton: {
+			color: undefined,
 			size: 'medium',
 		},
 		actionbarbutton: {
