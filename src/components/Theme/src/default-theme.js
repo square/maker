@@ -4,8 +4,6 @@ export default function defaultTheme() {
 	return {
 		colors: {
 			primary: '#000000',
-			text: '#000000',
-			heading: '#000000',
 		},
 		profiles: [
 			{
