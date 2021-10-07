@@ -29,10 +29,12 @@ export default {
 
 Supports attributes from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
 
-| Prop    | Type     | Default        | Possible values | Description                              |
-| ------- | -------- | -------------- | --------------- | ---------------------------------------- |
-| element | `string` | `'p'`          | `p`, `span`     | which HTML element to wrap the text with |
-| size    | `number` | `DEFAULT_SIZE` | —               | size of text                             |
+| Prop        | Type     | Default | Possible values | Description                              |
+| ----------- | -------- | ------- | --------------- | ---------------------------------------- |
+| element     | `string` | `'p'`   | `p`, `span`     | which HTML element to wrap the text with |
+| size        | `number` | —       | —               | size of text                             |
+| font-family | `string` | —       | —               | text font family                         |
+| text-color  | `string` | —       | —               | text color                               |
 
 
 ## Slots

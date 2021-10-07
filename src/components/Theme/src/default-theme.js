@@ -4,6 +4,8 @@ export default function defaultTheme() {
 	return {
 		colors: {
 			primary: '#000000',
+			text: '#000000',
+			heading: '#000000',
 		},
 		profiles: [
 			{
@@ -25,6 +27,16 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+		},
+		text: {
+			textColor: '@colors.text',
+			fontFamily: 'inherit',
+			size: 0,
+		},
+		heading: {
+			textColor: '@colors.heading',
+			fontFamily: 'inherit',
+			size: 2,
 		},
 		resolve,
 		getPath,

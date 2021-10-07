@@ -46,7 +46,7 @@ export default {
 	props: {
 		theme: {
 			type: Object,
-			required: true,
+			default: () => ({}),
 		},
 		profile: {
 			type: String,
