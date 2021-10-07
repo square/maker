@@ -9,19 +9,20 @@ const packageJson = require('../../package.json');
 
 	for (const peerDepName in peerDependencies) {
 		if (!devDependencies.hasOwnProperty(peerDepName)) {
-			errors.push(`Missing "${peerDepName}" from devDependencies`);
+			errors.push(`Missing required peer dependency ${peerDepName} in devDependencies`);
 			continue;
 		}
 
-		const peerDepSemver = peerDependencies[peerDepName];
-		if (semver.satisfies(devDependencies[peerDepName], peerDepSemver)) {
-			errors.push(`Expected dev-dependency "${peerDepName}" to be in range "${peerDependencies[peerDepName]}"`);
+		const peerDepRangeOrVer = peerDependencies[peerDepName];
+		const devDepRangeOrVer = devDependencies[peerDepName];
+		if (devDepRangeOrVer !== peerDepRangeOrVer && !semver.satisfies(devDepRangeOrVer, peerDepRangeOrVer)) {
+			errors.push(`Dev dependency ${peerDepName}@${devDepRangeOrVer} does not satisfy peer dependency requiment: ${peerDepRangeOrVer}`);
 			continue;
 		}
 	}
 
 	if (errors.length > 0) {
-		console.error(`Error:\n${errors.join('\n')}`);
+		console.error(`Error(s):\n${errors.join('\n')}`);
 		process.exit(1);
 	}
 })(packageJson);
