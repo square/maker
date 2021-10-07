@@ -81,6 +81,9 @@
 						>
 							Button
 						</m-button>
+						<m-text-button>
+							<info :class="$s.Icon" />  Learn more
+						</m-text-button>
 					</div>
 				</div>
 			</div>
@@ -148,9 +151,10 @@ import { MTextarea } from '@square/maker/components/Textarea';
 import { MStepper } from '@square/maker/components/Stepper';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MRadio } from '@square/maker/components/Radio';
-import { MButton } from '@square/maker/components/Button';
+import { MButton, MTextButton } from '@square/maker/components/Button';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
+import Info from '@square/maker-icons/Info';
 
 const IS_LIGHT_THRESHOLD = 0.32;
 
@@ -168,7 +172,9 @@ export default {
 		MCheckbox,
 		MRadio,
 		MButton,
+		MTextButton,
 		CheckCircle,
+		Info,
 	},
 
 	data() {

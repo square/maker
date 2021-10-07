@@ -4,6 +4,8 @@ export default function defaultTheme() {
 	return {
 		colors: {
 			primary: '#000000',
+			text: '#000000',
+			heading: '#000000',
 		},
 		profiles: [
 			{
@@ -18,6 +20,9 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+		},
+		textbutton: {
+			size: 'medium',
 		},
 		actionbarbutton: {
 			color: '@colors.primary',
