@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import assert from '@square/maker/utils/assert';
 import getContrast from '@square/maker/utils/get-contrast';
 import chroma from 'chroma-js';
@@ -20,6 +21,13 @@ export default {
 		return {
 			[key]: this.$data,
 		};
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	model: {
@@ -68,18 +76,19 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('choice', ['selectedColor']),
 		contrastColor() {
-			if (!this.selectedColor) {
+			if (!this.resolvedSelectedColor) {
 				return 'var(--color-100)';
 			}
-			const color = this.selectedColor;
+			const color = this.resolvedSelectedColor;
 			const chromaColor = chroma(color);
 			const contrastColor = getContrast(chromaColor, '#fff');
 			return contrastColor;
 		},
 
 		disabledContrastColor() {
-			if (!this.selectedColor) {
+			if (!this.resolvedSelectedColor) {
 				return 'var(--color-300)';
 			}
 			const alphaValue = 0.4;
@@ -89,7 +98,7 @@ export default {
 
 		style() {
 			return {
-				'--selected-background-color': this.selectedColor || 'var(--color-900)',
+				'--selected-background-color': this.resolvedSelectedColor || 'var(--color-900)',
 				'--selected-text-color': this.contrastColor,
 				'--selected-disabled-text-color': this.disabledContrastColor,
 			};

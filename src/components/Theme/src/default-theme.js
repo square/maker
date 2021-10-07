@@ -26,6 +26,9 @@ export default function defaultTheme() {
 			fullWidth: false,
 			align: 'center',
 		},
+		choice: {
+			selectedColor: 'undefined',
+		},
 		resolve,
 		getPath,
 	};
