@@ -100,11 +100,11 @@ export default {
 .variant_fill {
 	--color-background: var(--color-100, #f6f7f9);
 	--color-placeholder: var(--color-800, rgba(0, 0, 0, 0.55));
-	--color-foreground: var(--color-800, rgba(0, 0, 0, 0.9));
-	--color-disabled: var(--color-300, rgba(0, 0, 0, 0.3));
-	--color-background-disabled: var(--color-800, rgba(0, 0, 0, 0.05));
+	--color-foreground: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-disabled: var(--color-700, rgba(0, 0, 0, 0.3));
 	--color-border: transparent;
-	--color-border-active: var(--color-300, #222);
+	--color-border-disabled: var(--color-300, #222);
+	--color-border-active: var(--color-800, #222);
 	--border-radius: 8px;
 	--color-error: var(--color-error, rgba(206, 50, 23, 1));
 }
@@ -114,7 +114,6 @@ export default {
 	--color-foreground: rgba(0, 0, 0, 0.9);
 	--color-placeholder: rgba(0, 0, 0, 0.55);
 	--color-disabled: rgba(0, 0, 0, 0.3);
-	--color-background-disabled: rgb(0, 0, 0, 0.03);
 	--color-border: rgb(0, 0, 0, 0.15);
 	--color-border-active: rgb(0, 0, 0, 0.3);
 	--border-radius: 8px;
@@ -149,7 +148,7 @@ export default {
 
 	&:disabled {
 		color: var(--color-disabled);
-		background-color: var(--color-background-disabled);
+		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
 
 		&::placeholder {

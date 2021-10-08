@@ -47,11 +47,12 @@
 					Generated contrast colors
 				</m-heading>
 				<m-text :size="-1">
-					--color-100, --color-300, --color-800, --color-900
+					color-100, color-300, color-700, color-800, color-900
 				</m-text>
 				<div>
 					<span :style="{ backgroundColor : 'var(--color-100)' }" />
 					<span :style="{ backgroundColor : 'var(--color-300)' }" />
+					<span :style="{ backgroundColor : 'var(--color-700)' }" />
 					<span :style="{ backgroundColor : 'var(--color-800)' }" />
 					<span :style="{ backgroundColor : 'var(--color-900)' }" />
 				</div>
@@ -132,6 +133,9 @@
 					<m-text-button>
 						<info :class="$s.Icon" />  Learn more
 					</m-text-button>
+					<m-image-uploader
+						@image-uploader:change="setImages"
+					/>
 				</div>
 			</div>
 			<div
@@ -143,9 +147,6 @@
 					>
 						House special wings
 					</m-heading>
-					<m-image-uploader
-						@image-uploader:change="setImages"
-					/>
 					<m-radio value="1">
 						Buffalo
 					</m-radio>
@@ -178,6 +179,10 @@
 						Provide compostable utensils
 					</m-checkbox>
 					<m-textarea placeholder="Additional requests" />
+					<m-textarea
+						placeholder="Additional requests"
+						disabled
+					/>
 				</div>
 				<m-divider :class="$s.Divider" />
 				<div>
@@ -268,14 +273,16 @@ const RATIOS = {
 	light: {
 		100: 0.05,
 		300: 0.14,
+		700: 0.35,
 		800: 0.58,
 		900: 0.8,
 	},
 	dark: {
 		100: 0.1,
 		300: 0.3,
+		700: 0.5,
 		800: 0.8,
-		900: 0.95,
+		900: 0.9,
 	},
 };
 
@@ -324,8 +331,6 @@ export default {
 	data() {
 		return {
 			backgroundColor: '#ffffff',
-			hasCustomPrimaryColor: false,
-			primaryColor: '#0073F8',
 			choice: '10am',
 			number: 0,
 			options: [

@@ -9,6 +9,7 @@ export default function defaultTheme() {
 			heading: '#303030',
 			'color-100': '#f1f1f1',
 			'color-300': '#d7d7d7',
+			'color-700': '#9e9e9e',
 			'color-800': '#636363',
 			'color-900': '#303030',
 		},
