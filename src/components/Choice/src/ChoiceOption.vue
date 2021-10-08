@@ -103,11 +103,11 @@ export default {
 }
 
 .selected {
-	color: var(--selected-text-color, --color-100);
-	background-color: var(--selected-background-color, --color-900);
+	color: var(--selected-text-color, var(--color-100, #f1f1f1));
+	background-color: var(--selected-background-color, var(--color-900, #222));
 
 	&:disabled {
-		color: var(--selected-disabled-text-color, --color-300);
+		color: var(--selected-disabled-text-color, var(--color-300, #666));
 	}
 }
 </style>

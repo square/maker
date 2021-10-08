@@ -78,9 +78,6 @@ export default {
 	computed: {
 		...resolveThemeableProps('choice', ['selectedColor']),
 		contrastColor() {
-			if (!this.resolvedSelectedColor) {
-				return 'var(--color-100)';
-			}
 			const color = this.resolvedSelectedColor;
 			const chromaColor = chroma(color);
 			const contrastColor = getContrast(chromaColor, '#fff');
@@ -88,20 +85,20 @@ export default {
 		},
 
 		disabledContrastColor() {
-			if (!this.resolvedSelectedColor) {
-				return 'var(--color-300)';
-			}
 			const alphaValue = 0.4;
 			const disabledTextColor = chroma(this.contrastColor).alpha(alphaValue);
 			return disabledTextColor;
 		},
 
 		style() {
-			return {
-				'--selected-background-color': this.resolvedSelectedColor || 'var(--color-900)',
-				'--selected-text-color': this.contrastColor,
-				'--selected-disabled-text-color': this.disabledContrastColor,
-			};
+			if (this.resolvedSelectedColor) {
+				return {
+					'--selected-background-color': this.resolvedSelectedColor,
+					'--selected-text-color': this.contrastColor,
+					'--selected-disabled-text-color': this.disabledContrastColor,
+				};
+			}
+			return {};
 		},
 	},
 
