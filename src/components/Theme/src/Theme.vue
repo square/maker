@@ -7,22 +7,17 @@
 </template>
 
 <script>
-import { merge, find, get } from 'lodash';
+import { merge, find } from 'lodash';
 import key from './key';
 import defaultTheme from './default-theme';
-import contrastColors from './contrast-colors';
 import { resolve, getPath } from './utils';
 
 function resolveTheme(data, parentTheme, theme, profileId) {
 	merge(data, parentTheme, theme);
 	merge(data, find(data.profiles, { id: profileId }));
 
-	const backgroundColor = get(data, 'colors.background', '#ffffff');
-	const contrast = contrastColors(backgroundColor);
-
 	data.colors = {
 		...data.colors,
-		contrast,
 	};
 
 	data.resolve = resolve;
@@ -46,7 +41,7 @@ export default {
 	props: {
 		theme: {
 			type: Object,
-			required: true,
+			default: () => ({}),
 		},
 		profile: {
 			type: String,
@@ -61,17 +56,15 @@ export default {
 	computed: {
 		styles() {
 			const { colors } = this;
-			const { contrast } = colors;
-			const contrastVariables = {};
-
-			Object.entries(contrast).forEach(([name, hex]) => {
-				contrastVariables[`--${name}`] = hex;
-			});
 
 			return {
+				color: colors['color-800'],
 				'--color-background': colors.background,
-				color: contrast['color-800'],
-				...contrastVariables,
+				'--color-100': colors['color-100'],
+				'--color-300': colors['color-300'],
+				'--color-800': colors['color-800'],
+				'--color-900': colors['color-900'],
+				'--color-elevation': colors['color-elevation'],
 			};
 		},
 	},

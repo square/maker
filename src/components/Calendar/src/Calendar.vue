@@ -6,8 +6,8 @@
 	>
 		<div :class="$s.CalendarHeader">
 			<m-button
+				v-bind="calendarNavButtons"
 				:disabled="isCalendarNavDisabled(-1)"
-				color="#f2f2f2"
 				size="medium"
 				variant="primary"
 				@click="incrementMonth(-1)"
@@ -22,10 +22,10 @@
 			</span>
 
 			<m-button
+				v-bind="calendarNavButtons"
 				:disabled="isCalendarNavDisabled(1)"
 				size="medium"
 				variant="primary"
-				color="#f2f2f2"
 				@click="incrementMonth(1)"
 			>
 				<chevron-right
@@ -89,6 +89,7 @@ import {
 import { MButton } from '@square/maker/components/Button';
 import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
+import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 const formatISOdate = (dateObject) => formatISO(dateObject, { representation: 'date' });
 const isIsoFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); // YYYY-MM-DD
@@ -98,6 +99,13 @@ export default {
 		MButton,
 		ChevronLeft,
 		ChevronRight,
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
@@ -202,6 +210,13 @@ export default {
 		minDateObject() {
 			return this.minDate && parseISO(this.minDate);
 		},
+
+		calendarNavButtons() {
+			return {
+				color: this.theme.colors['color-100'] || '#f2f2f2',
+				textColor: this.theme.colors['color-900'] || '#f2f2f2',
+			};
+		},
 	},
 
 	watch: {
@@ -301,19 +316,11 @@ export default {
 
 <style module="$s">
 .Calendar {
-	--color-white: #fff;
-	--color-white-40: rgba(255, 255, 255, 0.4);
-	--color-white-95: rgba(255, 255, 255, 0.95);
-	--color-black: #000;
-	--color-black-10: rgba(0, 0, 0, 0.1);
-	--color-black-20: rgba(0, 0, 0, 0.2);
-	--color-black-40: rgba(0, 0, 0, 0.4);
-	--color-black-50: rgba(0, 0, 0, 0.5);
 	--font-size: 16px;
 	--font-size-minus-1: 12px;
 	--line-height: 24px;
 	--line-height-minus-1: 16px;
-	--chevron-size: 32px;
+	--chevron-size: 24px;
 	--cell-size: 40px;
 	--cell-padding: 4px;
 
@@ -322,7 +329,7 @@ export default {
 	font-size: var(--font-size);
 	font-family: inherit;
 	line-height: var(--line-height);
-	background-color: var(--color-white);
+	background-color: var(--color-background, #fff);
 	border-radius: 4px;
 }
 
@@ -334,7 +341,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--color-black);
+	color: var(--color-900, #000);
 	font-weight: bold;
 }
 
@@ -353,7 +360,7 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--color-black-50);
+	color: var(--color-800, rgba(0, 0, 0, 0.5));
 	font-weight: normal;
 	font-size: var(--font-size-minus-1);
 	line-height: var(--line-height-minus-1);
@@ -364,7 +371,7 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--color-black);
+	color: var(--color-900, #000);
 	text-align: center;
 }
 
@@ -372,6 +379,7 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: 0;
+	color: inherit;
 	font-size: inherit;
 	background-color: inherit;
 	border: none;
@@ -383,29 +391,29 @@ export default {
 	touch-action: manipulation;
 
 	&.selected {
-		color: var(--color-white-95);
-		background-color: var(--color-black);
+		color: var(--color-background, #fff);
+		background-color: var(--color-900, #000);
 	}
 
 	&.today {
-		border: 1px solid var(--color-black);
+		border: 1px solid var(--color-900, #000);
 	}
 
 	&.disabled {
-		color: var(--color-black-40);
+		color: var(--color-300, rgba(0, 0, 0, 0.4));
 		cursor: not-allowed;
 
 		&.today {
-			color: var(--color-black-20);
+			color: var(--color-100, rgba(0, 0, 0, 0.2));
 		}
 
 		&.selected {
-			color: var(--color-white-40);
+			color: var(--color-300, rgba(0, 0, 0, 0.4));
 		}
 	}
 }
 
 .DateCell:hover .DateCellButton:not(.selected):not(.disabled) {
-	background-color: var(--color-black-10);
+	background-color: var(--color-100, rgba(0, 0, 0, 0.1));
 }
 </style>

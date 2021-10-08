@@ -369,98 +369,211 @@ export default {
 </style>
 ```
 
-## Theming Choice options
-
-`selectedColor` is the themeable prop on Choice.
+## Theming Headings & Texts
 
 ```vue
 <template>
-	<div>
-		<h3>no theme</h3>
-		<m-choice
-			v-model="theChosenOne"
-		>
-			<m-choice-option value="choice-1">
-				Choice 1
-			</m-choice-option>
-			<m-choice-option value="choice-2">
-				Choice 2
-			</m-choice-option>
-			<m-choice-option value="choice-3">
-				Choice 3
-			</m-choice-option>
-		</m-choice>
-		<br>
-
-		<h3>theme</h3>
-		pick theme default selectedColor
+	<m-theme :theme="theme">
+		pick default heading color
 		<br>
 		<input
-			v-model="theme.choice.selectedColor"
+			v-model="theme.colors.heading"
 			type="color"
 		>
-		<br><br>
+		<br>
 
-		<m-theme :theme="theme">
-			Default themed choice options
-			<m-choice
-				v-model="theChosenOne"
-				:selected-color="theme.choice.selectedColor"
-			>
-				<m-choice-option value="choice-1">
-					Choice 1
-				</m-choice-option>
-				<m-choice-option value="choice-2">
-					Choice 2
-				</m-choice-option>
-				<m-choice-option value="choice-3">
-					Choice 3
-				</m-choice-option>
-			</m-choice>
+		pick default heading font family
+		<br>
+		<select v-model="theme.heading.fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
 
-			Always black
-			<m-choice
-				v-model="theChosenOne"
-				selected-color="black"
-			>
-				<m-choice-option value="choice-1">
-					Choice 1
-				</m-choice-option>
-				<m-choice-option value="choice-2">
-					Choice 2
-				</m-choice-option>
-				<m-choice-option value="choice-3">
-					Choice 3
-				</m-choice-option>
-			</m-choice>
-		</m-theme>
-	</div>
+		pick default heading size
+		<br>
+		<input
+			v-model="theme.heading.size"
+			type="number"
+			min="-2"
+			max="7"
+		>
+		<br>
+
+		<m-heading>
+			heading content
+		</m-heading>
+	</m-theme>
 </template>
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
+import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
 		MTheme,
-		MChoice,
-		MChoiceOption,
+		MHeading,
 	},
 	data() {
 		return {
 			theme: {
-				choice: {
-					selectedColor: undefined,
+				colors: {
+					heading: '#000000',
+				},
+				heading: {
+					fontFamily: 'inherit',
+					size: 2,
 				},
 			},
-			theChosenOne: 'choice-1',
 		};
 	},
 };
 </script>
 ```
 
+<br>
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick default text color
+		<br>
+		<input
+			v-model="theme.colors.text"
+			type="color"
+		>
+		<br>
+
+		pick default text font family
+		<br>
+		<select v-model="theme.text.fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+
+		pick default text size
+		<br>
+		<input
+			v-model="theme.text.size"
+			type="number"
+			min="-1"
+			max="1"
+		>
+		<br>
+
+		<m-text>
+			text content
+		</m-text>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
+
+export default {
+	components: {
+		MTheme,
+		MText,
+	},
+	data() {
+		return {
+			theme: {
+				colors: {
+					text: '#000000',
+				},
+				text: {
+					fontFamily: 'inherit',
+					size: 0,
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
+## Theming Steppers
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		pick default stepper color
+		<br>
+		<input
+			v-model="theme.stepper.color"
+			type="color"
+		>
+		<br>
+
+		pick default stepper text color
+		<br>
+		<input
+			v-model="theme.stepper.textColor"
+			type="color"
+		>
+		<br>
+
+		<m-stepper
+			v-model="number"
+			min="0"
+			max="10"
+		/>
+		stepper number: {{ number }}
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MStepper } from '@square/maker/components/Stepper';
+
+export default {
+	components: {
+		MTheme,
+		MStepper,
+	},
+	data() {
+		return {
+			number: 5,
+			theme: {
+				stepper: {
+					color: '#cccccc',
+					textColor: '#000000',
+				},
+			},
+		};
+	},
+};
+</script>
+```
 
 ## Customizing the theme within subsets of the app
 
@@ -598,7 +711,7 @@ export default {
 
 | Prop    | Type     | Default            | Possible values | Description |
 | ------- | -------- | ------------------ | --------------- | ----------- |
-| theme*  | `object` | —                  | —               | —           |
+| theme   | `object` | `{}`               | —               | —           |
 | profile | `string` | `'defaultProfile'` | —               | —           |
 
 
