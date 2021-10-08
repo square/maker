@@ -17,17 +17,32 @@
 				<m-text :size="-1">
 					Creating a consistent UI experience against any background color
 				</m-text>
-				<m-heading
-					:size="0"
+
+				<m-divider />
+				<br>
+
+				<m-checkbox
+					v-model="hasCustomPrimaryColor"
 				>
-					Select a color
+					Custom primary color
+				</m-checkbox>
+
+				<input
+					v-if="hasCustomPrimaryColor"
+					v-model="primaryColor"
+					type="color"
+				>
+				<m-heading
+					:size="1"
+				>
+					Choose a background color
 				</m-heading>
 				<input
 					v-model="backgroundColor"
 					type="color"
 				>
 				<m-heading
-					:size="0"
+					:size="1"
 				>
 					Generated contrast colors
 				</m-heading>
@@ -71,7 +86,10 @@
 							<m-choice-option value="1pm">
 								1 PM
 							</m-choice-option>
-							<m-choice-option value="2pm">
+							<m-choice-option
+								value="2pm"
+								disabled
+							>
 								2 PM
 							</m-choice-option>
 						</m-choice>
@@ -101,16 +119,19 @@
 					/>
 					<m-input
 						placeholder="Apt, floor, Suite, etc. (Optional)"
+						disabled
 					/>
 				</div>
 				<m-divider />
 				<div>
 					<m-button
 						full-width
-						:color="contrastColor"
 					>
-						Button
+						Checkout
 					</m-button>
+					<m-text-button>
+						<info :class="$s.Icon" />  Learn more
+					</m-text-button>
 				</div>
 			</div>
 			<div
@@ -133,8 +154,13 @@
 						Ginger soy
 					</m-radio>
 					<m-select
+						placeholder="Select dip"
+						:options="options"
+					/>
+					<m-select
 						placeholder="Select quantity"
 						:options="options"
+						disabled
 					/>
 					<m-stepper
 						v-model="number"
@@ -148,15 +174,23 @@
 					<m-checkbox>
 						Include cutlery and utensils
 					</m-checkbox>
+					<m-checkbox disabled>
+						Provide compostable utensils
+					</m-checkbox>
 					<m-textarea placeholder="Additional requests" />
 				</div>
 				<m-divider :class="$s.Divider" />
 				<div>
 					<m-button
 						full-width
-						:color="contrastColor"
 					>
 						Button
+					</m-button>
+					<m-button
+						full-width
+						disabled
+					>
+						Schedule for later
 					</m-button>
 				</div>
 			</div>
@@ -214,12 +248,13 @@ import { MTextarea } from '@square/maker/components/Textarea';
 import { MStepper } from '@square/maker/components/Stepper';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MRadio } from '@square/maker/components/Radio';
-import { MButton } from '@square/maker/components/Button';
+import { MButton, MTextButton } from '@square/maker/components/Button';
 import { MCalendar } from '@square/maker/components/Calendar';
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
+import Info from '@square/maker-icons/Info';
 
 import {
 	addDays,
@@ -278,25 +313,29 @@ export default {
 		MRadio,
 		MButton,
 		CheckCircle,
+		Info,
 		MCalendar,
 		MImageUploader,
 		MSegmentedControl,
 		MSegment,
+		MTextButton,
 	},
 
 	data() {
 		return {
-			backgroundColor: '#9effd5',
+			backgroundColor: '#ffffff',
+			hasCustomPrimaryColor: false,
+			primaryColor: '#0073F8',
 			choice: '10am',
 			number: 0,
 			options: [
 				{
-					value: '6',
-					label: '6 piece',
+					value: 'island',
+					label: 'Thousand Island',
 				},
 				{
-					value: '12',
-					label: '12 piece',
+					value: 'ranch',
+					label: 'Ranch',
 				},
 			],
 			selectedDate: '',
@@ -333,6 +372,7 @@ export default {
 			const contrastingColors = contrastColors(this.backgroundColor);
 			return {
 				colors: {
+					primary: this.hasCustomPrimaryColor ? this.primaryColor : undefined,
 					background: this.backgroundColor,
 					heading: contrastingColors['color-900'],
 					text: contrastingColors['color-800'],
