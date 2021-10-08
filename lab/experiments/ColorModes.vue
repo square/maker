@@ -61,6 +61,21 @@
 							Shipping
 						</m-segment>
 					</m-segmented-control>
+					<div>
+						<m-choice
+							v-model="choice"
+						>
+							<m-choice-option value="10am">
+								10 AM
+							</m-choice-option>
+							<m-choice-option value="1pm">
+								1 PM
+							</m-choice-option>
+							<m-choice-option value="2pm">
+								2 PM
+							</m-choice-option>
+						</m-choice>
+					</div>
 					<m-heading
 						:size="-1"
 					>
@@ -188,6 +203,7 @@
 import chroma from 'chroma-js';
 
 import { MTheme } from '@square/maker/components/Theme';
+import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
@@ -248,6 +264,8 @@ function contrastColors(bgHex) {
 export default {
 	components: {
 		MTheme,
+		MChoice,
+		MChoiceOption,
 		MDivider,
 		MHeading,
 		MText,
@@ -269,6 +287,7 @@ export default {
 	data() {
 		return {
 			backgroundColor: '#9effd5',
+			choice: '10am',
 			number: 0,
 			options: [
 				{

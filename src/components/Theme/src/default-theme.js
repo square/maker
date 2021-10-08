@@ -43,6 +43,9 @@ export default function defaultTheme() {
 			fontFamily: 'inherit',
 			size: 2,
 		},
+		choice: {
+			selectedColor: undefined,
+		},
 		stepper: {
 			color: '@colors["color-100"]',
 			textColor: '@colors["color-900"]',
