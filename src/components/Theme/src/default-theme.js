@@ -26,6 +26,10 @@ export default function defaultTheme() {
 			fullWidth: false,
 			align: 'center',
 		},
+		textbutton: {
+			color: undefined,
+			size: 'medium',
+		},
 		actionbarbutton: {
 			color: '@colors.primary',
 			shape: 'pill',
