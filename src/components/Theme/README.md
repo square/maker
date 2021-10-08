@@ -369,6 +369,99 @@ export default {
 </style>
 ```
 
+## Theming Choice options
+
+`selectedColor` is the themeable prop on Choice.
+
+```vue
+<template>
+	<div>
+		<h3>no theme</h3>
+		<m-choice
+			v-model="theChosenOne"
+		>
+			<m-choice-option value="choice-1">
+				Choice 1
+			</m-choice-option>
+			<m-choice-option value="choice-2">
+				Choice 2
+			</m-choice-option>
+			<m-choice-option value="choice-3">
+				Choice 3
+			</m-choice-option>
+		</m-choice>
+		<br>
+
+		<h3>theme</h3>
+		pick theme default selectedColor
+		<br>
+		<input
+			v-model="theme.choice.selectedColor"
+			type="color"
+		>
+		<br><br>
+
+		<m-theme :theme="theme">
+			Default themed choice options
+			<m-choice
+				v-model="theChosenOne"
+				:selected-color="theme.choice.selectedColor"
+			>
+				<m-choice-option value="choice-1">
+					Choice 1
+				</m-choice-option>
+				<m-choice-option value="choice-2">
+					Choice 2
+				</m-choice-option>
+				<m-choice-option value="choice-3">
+					Choice 3
+				</m-choice-option>
+			</m-choice>
+
+			Always black
+			<m-choice
+				v-model="theChosenOne"
+				selected-color="black"
+			>
+				<m-choice-option value="choice-1">
+					Choice 1
+				</m-choice-option>
+				<m-choice-option value="choice-2">
+					Choice 2
+				</m-choice-option>
+				<m-choice-option value="choice-3">
+					Choice 3
+				</m-choice-option>
+			</m-choice>
+		</m-theme>
+	</div>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
+
+export default {
+	components: {
+		MTheme,
+		MChoice,
+		MChoiceOption,
+	},
+	data() {
+		return {
+			theme: {
+				choice: {
+					selectedColor: undefined,
+				},
+			},
+			theChosenOne: 'choice-1',
+		};
+	},
+};
+</script>
+```
+
+
 ## Customizing the theme within subsets of the app
 
 Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:
