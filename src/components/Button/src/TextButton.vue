@@ -69,7 +69,7 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'medium',
+			default: undefined,
 			validator: (size) => ['medium', 'large'].includes(size),
 		},
 		/**
