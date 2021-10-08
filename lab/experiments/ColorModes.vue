@@ -273,15 +273,15 @@ const RATIOS = {
 	light: {
 		100: 0.05,
 		300: 0.14,
-		700: 0.35,
-		800: 0.58,
+		700: 0.405,
+		800: 0.525,
 		900: 0.8,
 	},
 	dark: {
-		100: 0.1,
-		300: 0.3,
-		700: 0.5,
-		800: 0.8,
+		100: 0.09,
+		300: 0.15,
+		700: 0.41,
+		800: 0.55,
 		900: 0.9,
 	},
 };
@@ -331,6 +331,8 @@ export default {
 	data() {
 		return {
 			backgroundColor: '#ffffff',
+			hasCustomPrimaryColor: false,
+			primaryColor: '#0073F8',
 			choice: '10am',
 			number: 0,
 			options: [
