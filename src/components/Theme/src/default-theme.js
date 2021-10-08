@@ -27,7 +27,7 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		choice: {
-			selectedColor: 'undefined',
+			selectedColor: undefined,
 		},
 		resolve,
 		getPath,
