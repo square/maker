@@ -41,96 +41,143 @@
 					<span :style="{ backgroundColor : 'var(--color-900)' }" />
 				</div>
 			</div>
-			<div>
-				<div
-					:class="$s.Preview"
-				>
-					<div>
-						<m-heading
-							:size="0"
-						>
-							Enter delivery address
-						</m-heading>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
-						</m-text>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
-						</m-text>
-						<m-notice
-							type="info"
-							variant="block"
-						>
-							Switching to shipping will change the scheduled time you selected
-						</m-notice>
-					</div>
-					<m-divider />
-					<div>
-						<m-input
-							placeholder="Delivery address"
-						/>
-						<m-input
-							placeholder="Apt, floor, Suite, etc. (Optional)"
-						/>
-					</div>
-					<m-divider />
-					<div>
-						<m-button
-							full-width
-							:color="contrastColor"
-						>
-							Button
-						</m-button>
-						<m-text-button>
-							<info :class="$s.Icon" />  Learn more
-						</m-text-button>
-					</div>
+			<div
+				:class="$s.Preview"
+			>
+				<div>
+					<m-heading
+						:size="0"
+					>
+						Enter delivery address
+					</m-heading>
+					<m-segmented-control v-model="selected">
+						<m-segment value="short">
+							Pickup
+						</m-segment>
+						<m-segment value="medium">
+							Delivery
+						</m-segment>
+						<m-segment value="long">
+							Shipping
+						</m-segment>
+					</m-segmented-control>
+					<m-heading
+						:size="-1"
+					>
+						Enter delivery address
+					</m-heading>
+					<m-text :size="-1">
+						<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
+					</m-text>
+					<m-text :size="-1">
+						<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
+					</m-text>
+					<m-notice
+						type="info"
+						variant="block"
+					>
+						Switching to shipping will change the scheduled time you selected
+					</m-notice>
+				</div>
+				<m-divider />
+				<div>
+					<m-input
+						placeholder="Delivery address"
+					/>
+					<m-input
+						placeholder="Apt, floor, Suite, etc. (Optional)"
+					/>
+				</div>
+				<m-divider />
+				<div>
+					<m-button
+						full-width
+						:color="contrastColor"
+					>
+						Button
+					</m-button>
 				</div>
 			</div>
-			<div>
-				<div
-					:class="$s.Preview"
-				>
-					<div>
-						<m-heading
-							:size="0"
-						>
-							House special wings
-						</m-heading>
-						<m-radio value="1">
-							Buffalo
-						</m-radio>
-						<br>
-						<m-radio value="2">
-							Ginger soy
-						</m-radio>
-						<m-select
-							placeholder="Select quantity"
-							:options="options"
-						/>
-						<m-stepper
-							v-model="number"
-							min="0"
-							max="2"
-							style="justify-content: flex-start;"
-						/>
-					</div>
-					<m-divider />
-					<div>
-						<m-checkbox>
-							Include cutlery and utensils
-						</m-checkbox>
-						<m-textarea placeholder="Additional requests" />
-					</div>
-					<m-divider :class="$s.Divider" />
-					<div>
-						<m-button
-							full-width
-							:color="contrastColor"
-						>
-							Button
-						</m-button>
-					</div>
+			<div
+				:class="$s.Preview"
+			>
+				<div>
+					<m-heading
+						:size="0"
+					>
+						House special wings
+					</m-heading>
+					<m-image-uploader
+						@image-uploader:change="setImages"
+					/>
+					<m-radio value="1">
+						Buffalo
+					</m-radio>
+					<br>
+					<m-radio value="2">
+						Ginger soy
+					</m-radio>
+					<m-select
+						placeholder="Select quantity"
+						:options="options"
+					/>
+					<m-stepper
+						v-model="number"
+						min="0"
+						max="2"
+						style="justify-content: flex-start;"
+					/>
+				</div>
+				<m-divider />
+				<div>
+					<m-checkbox>
+						Include cutlery and utensils
+					</m-checkbox>
+					<m-textarea placeholder="Additional requests" />
+				</div>
+				<m-divider :class="$s.Divider" />
+				<div>
+					<m-button
+						full-width
+						:color="contrastColor"
+					>
+						Button
+					</m-button>
+				</div>
+			</div>
+			<div
+				:class="$s.Preview"
+			>
+				<div>
+					<m-heading
+						:size="0"
+					>
+						Schedule order
+					</m-heading>
+					<m-text :size="-1">
+						<check-circle :class="$s.Icon" /> No minimum
+					</m-text>
+					<m-text :size="-1">
+						<check-circle :class="$s.Icon" /> No fees
+					</m-text>
+				</div>
+				<m-divider />
+				<div>
+					<m-heading
+						:size="0"
+					>
+						Select date and time
+					</m-heading>
+					<m-text :size="-1">
+						Choose from the availble timeslots for your order
+					</m-text>
+					<m-calendar
+						v-model="selectedDate"
+						:locale="locale"
+						:min-date="minDate"
+						:max-date="maxDate"
+						:disabled-dates="disabledDates"
+					/>
 				</div>
 			</div>
 		</m-theme>
@@ -151,12 +198,52 @@ import { MTextarea } from '@square/maker/components/Textarea';
 import { MStepper } from '@square/maker/components/Stepper';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MRadio } from '@square/maker/components/Radio';
-import { MButton, MTextButton } from '@square/maker/components/Button';
+import { MButton } from '@square/maker/components/Button';
+import { MCalendar } from '@square/maker/components/Calendar';
+import { MImageUploader } from '@square/maker/components/ImageUploader';
+import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
-import Info from '@square/maker-icons/Info';
 
+import {
+	addDays,
+	addMonths,
+	formatISO,
+} from 'date-fns';
+
+// Below will be supplied by website-springboard
 const IS_LIGHT_THRESHOLD = 0.32;
+const RATIOS = {
+	light: {
+		100: 0.05,
+		300: 0.14,
+		800: 0.58,
+		900: 0.8,
+	},
+	dark: {
+		100: 0.1,
+		300: 0.3,
+		800: 0.8,
+		900: 0.95,
+	},
+};
+
+function contrastColors(bgHex) {
+	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
+	const contrastColor = isLight ? '#000000' : '#ffffff';
+	const levels = isLight ? RATIOS.light : RATIOS.dark;
+	const colors = {};
+
+	Object.entries(levels).forEach(([name, level]) => {
+		colors[`color-${name}`] = chroma.mix(bgHex, contrastColor, level, 'lab').hex();
+	});
+
+	return {
+		...colors,
+		'color-elevation': isLight ? '#ffffff' : colors['color-300'],
+	};
+}
+// Above will be supplied by website-springboard
 
 export default {
 	components: {
@@ -172,9 +259,11 @@ export default {
 		MCheckbox,
 		MRadio,
 		MButton,
-		MTextButton,
 		CheckCircle,
-		Info,
+		MCalendar,
+		MImageUploader,
+		MSegmentedControl,
+		MSegment,
 	},
 
 	data() {
@@ -191,14 +280,44 @@ export default {
 					label: '12 piece',
 				},
 			],
+			selectedDate: '',
+			minDate: '',
+			maxDate: '',
+			disabledDates: [],
+			locale: undefined,
+			localeSelection: [
+				'en-US',
+				'da',
+				'de',
+				'es',
+				'fr',
+				'it',
+				'ja',
+				'nl',
+				'nb',
+				'pl',
+				'pt',
+				'ru',
+				'sv',
+				'tr',
+				'zh-CN',
+				'zh-TW',
+				'ko',
+			],
+			selected: 'medium',
+			images: [],
 		};
 	},
 
 	computed: {
 		theme() {
+			const contrastingColors = contrastColors(this.backgroundColor);
 			return {
 				colors: {
 					background: this.backgroundColor,
+					heading: contrastingColors['color-900'],
+					text: contrastingColors['color-800'],
+					...contrastingColors,
 				},
 			};
 		},
@@ -207,9 +326,31 @@ export default {
 			return chroma(this.backgroundColor).luminance() > IS_LIGHT_THRESHOLD
 				? '#000000' : '#ffffff';
 		},
+	},
 
-		luminance() {
-			return chroma(this.backgroundColor).luminance();
+	mounted() {
+		const today = new Date();
+		const arbitraryAddMonths = 4;
+		const maxDate = formatISO(addMonths(today, arbitraryAddMonths), {
+			representation: 'date',
+		});
+		const arbitraryAddDays = -1;
+		const minDate = formatISO(addDays(today, arbitraryAddDays), {
+			representation: 'date',
+		});
+		const arbitraryRelativeDisabledDate = 5;
+		const disabledDate = formatISO(addDays(today, arbitraryRelativeDisabledDate), {
+			representation: 'date',
+		});
+
+		this.minDate = minDate;
+		this.maxDate = maxDate;
+		this.disabledDates.push(disabledDate);
+	},
+
+	methods: {
+		setImages(images) {
+			this.images = images;
 		},
 	},
 };
@@ -218,10 +359,10 @@ export default {
 <style module="$s">
 .Surface {
 	display: flex;
-	justify-content: space-between;
+	gap: 25px;
+	justify-content: center;
 	box-sizing: border-box;
 	width: 100%;
-	max-width: 1400px;
 	min-height: 100vh;
 	margin: auto;
 	padding: 25px 50px;
@@ -229,7 +370,12 @@ export default {
 	font-family: Arial, Helvetica, sans-serif;
 
 	& > div {
-		width: 30%;
+		flex: 1;
+
+		&:not(:first-child) {
+			flex: 2;
+			max-width: 460px;
+		}
 	}
 }
 
@@ -248,6 +394,7 @@ export default {
 .Preview {
 	border: 1px solid var(--color-300);
 
+	/* stylelint-disable-next-line no-descending-specificity */
 	& > div {
 		padding: 24px 36px;
 	}

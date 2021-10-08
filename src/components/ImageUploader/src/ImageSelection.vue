@@ -40,7 +40,6 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
 
-const MAX_PROGRESS = 100;
 const PROGRESS_OPACITY = { shown: 1, hidden: 0 };
 
 export default {
@@ -87,13 +86,9 @@ export default {
 			};
 		},
 
-		showProgressBar() {
-			return this.progress < MAX_PROGRESS;
-		},
-
 		progressContainerStyle() {
 			return {
-				opacity: this.showProgressBar ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
+				opacity: this.isUploading ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
 			};
 		},
 
@@ -116,18 +111,10 @@ export default {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	border: 1px solid rgba(0, 0, 0, 0.15);
+	border: 1px solid var(--color-300, rgba(0, 0, 0, 0.15));
 	border-radius: 8px;
 	transition: background-image linear 150ms;
 
-	/* these should later be pulled from
-	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-border-active: rgba(0, 0, 0, 0.9);
-	--color-background: rgba(0, 0, 0, 0.9);
-	--color-foreground: rgba(255, 255, 255, 0.95);
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-checked: rgba(0, 0, 0, 0.15);
 	--color-error: #ff3b30;
 }
 
@@ -145,7 +132,7 @@ export default {
 }
 
 .ImageSelectionContainerError {
-	border: 2px solid var(--color-error);
+	border: 1px solid var(--color-error);
 }
 
 .ImageSelectionRemoveButton {
@@ -173,5 +160,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	transition: opacity 150ms linear;
 }
 </style>
