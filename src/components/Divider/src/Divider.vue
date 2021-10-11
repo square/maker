@@ -26,7 +26,7 @@ hr.Divider {
 	height: 1px;
 	margin: 0;
 	padding: 0;
-	background-color: rgba(0, 0, 0, 0.08);
+	background-color: var(--color-300, rgba(0, 0, 0, 0.08));
 	border: none;
 }
 </style>

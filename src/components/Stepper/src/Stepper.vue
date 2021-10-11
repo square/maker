@@ -148,7 +148,7 @@ export default {
 
 .Quantity {
 	margin: 0 16px;
-	color: inherit;
+	color: var(--color-900, inherit);
 	font-weight: 500;
 	font-family: inherit;
 	font-feature-settings: "tnum";

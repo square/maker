@@ -1,5 +1,5 @@
 import {
-	isString, isNull, isUndefined, get,
+	isString, isNil, get,
 } from 'lodash';
 import assert from '@square/maker/utils/assert';
 
@@ -34,7 +34,7 @@ export function getPath(pointer) {
 	const firstCharacterIndex = 1;
 	const path = pointer.slice(firstCharacterIndex); // remove first character
 	const result = get(this, path);
-	if (isUndefined(result) || isNull(result)) {
+	if (isNil(result)) {
 		throw new Error(`invalid pointer ${pointer} does not point to a field that exists within the theme`);
 	}
 	return result;
@@ -49,7 +49,7 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
 		computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
-			if (this[propName]) {
+			if (!isNil(this[propName])) {
 				// if validator for this prop exists then Vue would have already validated it by this point
 				return this[propName];
 			}

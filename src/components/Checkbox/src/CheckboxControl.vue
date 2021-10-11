@@ -91,13 +91,13 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-border-active: rgba(0, 0, 0, 0.9);
-	--color-background: rgba(0, 0, 0, 0.9);
-	--color-foreground: rgba(255, 255, 255, 0.95);
+	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-border-active: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-background-active: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-foreground: var(--color-100, rgba(255, 255, 255, 0.95));
 	--color-disabled: rgba(0, 0, 0, 0.05);
 	--color-disabled-checked: rgba(0, 0, 0, 0.15);
-	--color-error: rgba(206, 50, 23, 1);
+	--color-error: var(--color-error, rgba(206, 50, 23, 1));
 }
 
 .Checkbox {
@@ -106,7 +106,7 @@ export default {
 	height: 20px;
 	margin: 0;
 	padding: 0;
-	background-color: #fff;
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
 	outline: none;
@@ -125,7 +125,7 @@ export default {
 	}
 
 	&:checked {
-		background-color: var(--color-background);
+		background-color: var(--color-background-active);
 		border-color: var(--color-border-active);
 	}
 

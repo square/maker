@@ -191,6 +191,77 @@ export default {
 </script>
 ```
 
+
+## Theming Text Buttons
+
+`size`, and `color`,are themeable props on TextButton.
+
+```vue
+<template>
+	<div>
+		<h3>no theme</h3>
+		<m-text-button>theme-less textbutton</m-text-button>
+		<br>
+
+		<h3>theme</h3>
+		pick theme textbutton color
+		<br>
+		<input
+			v-model="theme.textbutton.color"
+			type="color"
+		>
+		<br>
+
+		pick theme textbutton size
+		<br>
+		<select v-model="theme.textbutton.size">
+			<option value="medium">
+				medium
+			</option>
+			<option value="large">
+				large
+			</option>
+		</select>
+		<br><br>
+
+		<m-theme :theme="theme">
+			<m-text-button>default themed text button</m-text-button>
+			<br><br>
+			<m-text-button color="#000000">
+				always black textbutton
+			</m-text-button>
+			<br><br>
+			<m-text-button size="medium">
+				always medium button
+			</m-text-button>
+			<br><br>
+		</m-theme>
+	</div>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MTextButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MTheme,
+		MTextButton,
+	},
+	data() {
+		return {
+			theme: {
+				textbutton: {
+					size: 'medium',
+					color: undefined,
+				},
+			},
+		};
+	},
+};
+</script>
+```
+
 ## Theming ActionBarButtons
 
 `color`, `textColor`, `shape`, `align`, and `fullWidth` are themeable props in ActionBarButtons. If you set values for any of these props at a theme level then all Buttons within your App will inherit those values. You can still customize any individual buttons at a local level by setting prop values directly on that ActionBarButton.
@@ -515,6 +586,98 @@ export default {
 					size: 0,
 				},
 			},
+		};
+	},
+};
+</script>
+```
+
+## Theming Choice options
+
+`selectedColor` is the themeable prop on Choice.
+
+```vue
+<template>
+	<div>
+		<h3>no theme</h3>
+		<m-choice
+			v-model="theChosenOne"
+		>
+			<m-choice-option value="choice-1">
+				Choice 1
+			</m-choice-option>
+			<m-choice-option value="choice-2">
+				Choice 2
+			</m-choice-option>
+			<m-choice-option value="choice-3">
+				Choice 3
+			</m-choice-option>
+		</m-choice>
+		<br>
+
+		<h3>theme</h3>
+		pick theme default selectedColor
+		<br>
+		<input
+			v-model="theme.choice.selectedColor"
+			type="color"
+		>
+		<br><br>
+
+		<m-theme :theme="theme">
+			Default themed choice options
+			<m-choice
+				v-model="theChosenOne"
+				:selected-color="theme.choice.selectedColor"
+			>
+				<m-choice-option value="choice-1">
+					Choice 1
+				</m-choice-option>
+				<m-choice-option value="choice-2">
+					Choice 2
+				</m-choice-option>
+				<m-choice-option value="choice-3">
+					Choice 3
+				</m-choice-option>
+			</m-choice>
+
+			Always black
+			<m-choice
+				v-model="theChosenOne"
+				selected-color="black"
+			>
+				<m-choice-option value="choice-1">
+					Choice 1
+				</m-choice-option>
+				<m-choice-option value="choice-2">
+					Choice 2
+				</m-choice-option>
+				<m-choice-option value="choice-3">
+					Choice 3
+				</m-choice-option>
+			</m-choice>
+		</m-theme>
+	</div>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
+
+export default {
+	components: {
+		MTheme,
+		MChoice,
+		MChoiceOption,
+	},
+	data() {
+		return {
+			theme: {
+				choice: {
+					selectedColor: undefined,
+				},
+			},
+			theChosenOne: 'choice-1',
 		};
 	},
 };

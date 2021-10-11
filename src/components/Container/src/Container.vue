@@ -131,16 +131,15 @@ export default {
 
 <style module="$s">
 .Container {
-	--opacity-sublabel: 0.7;
-
 	padding: 16px 24px;
-	color: var(--color, inherit);
+	color: var(--color, var(--color-800, inherit));
 	font-family: inherit;
 	background-color: var(--bg-color, inherit);
 }
 
 .Label {
 	margin-bottom: 16px;
+	color: var(--color, var(--color-900, inherit));
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
@@ -175,7 +174,6 @@ export default {
 	line-height: 24px;
 	letter-spacing: normal;
 	text-transform: none;
-	opacity: var(--opacity-sublabel);
 }
 
 .RequirementLabel {
@@ -183,7 +181,6 @@ export default {
 	font-size: 14px;
 	line-height: 24px;
 	white-space: nowrap;
-	opacity: var(--opacity-sublabel);
 }
 
 .Header {

@@ -1,5 +1,7 @@
 <template>
-	<div>
+	<div
+		:style="styles"
+	>
 		<slot />
 	</div>
 </template>
@@ -13,6 +15,11 @@ import { resolve, getPath } from './utils';
 function resolveTheme(data, parentTheme, theme, profileId) {
 	merge(data, parentTheme, theme);
 	merge(data, find(data.profiles, { id: profileId }));
+
+	data.colors = {
+		...data.colors,
+	};
+
 	data.resolve = resolve;
 	data.getPath = getPath;
 }
@@ -45,6 +52,21 @@ export default {
 		const data = {};
 		resolveTheme(data, this.parentTheme, this.theme, this.profile);
 		return data;
+	},
+	computed: {
+		styles() {
+			const { colors } = this;
+
+			return {
+				'--color-100': colors['color-100'],
+				'--color-300': colors['color-300'],
+				'--color-700': colors['color-700'],
+				'--color-800': colors['color-800'],
+				'--color-900': colors['color-900'],
+				'--color-background': colors.background,
+				'--color-elevation': colors['color-elevation'],
+			};
+		},
 	},
 	beforeUpdate() {
 		// update theme on prop changes

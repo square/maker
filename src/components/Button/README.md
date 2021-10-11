@@ -663,7 +663,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | Prop     | Type      | Default    | Possible values   | Description                   |
 | -------- | --------- | ---------- | ----------------- | ----------------------------- |
 | type     | `string`  | `'button'` | —                 | Type of the button            |
-| size     | `string`  | `'medium'` | `medium`, `large` | Size of the button label text |
+| size     | `string`  | —          | `medium`, `large` | Size of the button label text |
 | color    | `string`  | —          | —                 | Text color of button          |
 | disabled | `boolean` | `false`    | —                 | Toggles button disabled state |
 | loading  | `boolean` | `false`    | —                 | Toggles button loading state  |

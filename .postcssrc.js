@@ -5,6 +5,7 @@ module.exports = {
 			preserve: false,
 			features: {
 				'custom-properties': false,
+				'focus-within-pseudo-class': false,
 			},
 		}),
 	],
