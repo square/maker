@@ -58,13 +58,12 @@ export default {
 			const { colors } = this;
 
 			return {
-				color: colors['color-800'],
-				'--color-background': colors.background,
 				'--color-100': colors['color-100'],
 				'--color-300': colors['color-300'],
 				'--color-700': colors['color-700'],
 				'--color-800': colors['color-800'],
 				'--color-900': colors['color-900'],
+				'--color-background': colors.background,
 				'--color-elevation': colors['color-elevation'],
 			};
 		},

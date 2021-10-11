@@ -381,8 +381,6 @@ export default {
 				colors: {
 					primary: this.hasCustomPrimaryColor ? this.primaryColor : undefined,
 					background: this.backgroundColor,
-					heading: contrastingColors['color-900'],
-					text: contrastingColors['color-800'],
 					...contrastingColors,
 				},
 			};

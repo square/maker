@@ -5,8 +5,6 @@ export default function defaultTheme() {
 		colors: {
 			background: '#ffffff',
 			primary: '#000000',
-			text: '#636363',
-			heading: '#303030',
 			'color-100': '#f1f1f1',
 			'color-300': '#d7d7d7',
 			'color-700': '#9e9e9e',
@@ -39,12 +37,10 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		text: {
-			textColor: '@colors.text',
 			fontFamily: 'inherit',
 			size: 0,
 		},
 		heading: {
-			textColor: '@colors.heading',
 			fontFamily: 'inherit',
 			size: 2,
 		},
