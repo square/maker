@@ -12,10 +12,6 @@
 
 <style module="$s">
 .Container {
-	--color-foreground: rgba(0, 0, 0, 0.9);
-	--color-sublabel: rgba(0, 0, 0, 0.55);
-
-	color: var(--color-foreground);
 	font-size: 14px;
 	line-height: 24px;
 	cursor: pointer;

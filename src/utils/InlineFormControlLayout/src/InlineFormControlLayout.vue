@@ -27,8 +27,6 @@ export default {
 
 <style module="$s">
 .LayoutContainer {
-	--opacity-sublabel: 0.55;
-
 	display: inline-flex;
 	color: var(--color-900, inherit);
 	font-size: 14px;
