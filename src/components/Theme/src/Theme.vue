@@ -65,6 +65,7 @@ export default {
 				'--color-900': colors['color-900'],
 				'--color-background': colors.background,
 				'--color-elevation': colors['color-elevation'],
+				'--color-error': colors['color-error'],
 			};
 		},
 	},

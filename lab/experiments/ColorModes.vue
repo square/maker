@@ -122,6 +122,9 @@
 						placeholder="Apt, floor, Suite, etc. (Optional)"
 						disabled
 					/>
+					<m-notice type="error">
+						I am an error notice
+					</m-notice>
 				</div>
 				<m-divider />
 				<div>
@@ -278,13 +281,18 @@ const RATIOS = {
 		900: 0.8,
 	},
 	dark: {
-		100: 0.09,
-		300: 0.15,
+		100: 0.1,
+		300: 0.255,
 		700: 0.41,
 		800: 0.55,
 		900: 0.9,
 	},
 };
+function errorColorIsRed(bgHex) {
+	const lowerBound = 0.15;
+	const upperBound = 0.85;
+	return chroma(bgHex).hsl()[2] < lowerBound || chroma(bgHex).hsl()[2] > upperBound;
+}
 
 function contrastColors(bgHex) {
 	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
@@ -299,6 +307,7 @@ function contrastColors(bgHex) {
 	return {
 		...colors,
 		'color-elevation': isLight ? '#ffffff' : colors['color-300'],
+		'color-error': errorColorIsRed(bgHex) ? '#a12712' : colors['color-900'],
 	};
 }
 // Above will be supplied by website-springboard
@@ -330,7 +339,7 @@ export default {
 
 	data() {
 		return {
-			backgroundColor: '#ffffff',
+			backgroundColor: '#000000',
 			hasCustomPrimaryColor: false,
 			primaryColor: '#0073F8',
 			choice: '10am',
