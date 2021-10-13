@@ -4,6 +4,8 @@
 			$s.Notice,
 			$s[`type_${type}`],
 			$s[`variant_${variant}`],
+			$s[resolvedIsMonochrome ? 'monochrome' : ''],
+
 		]"
 		v-bind="$attrs"
 		v-on="$listeners"
@@ -37,6 +39,7 @@ import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
 import assert from '@square/maker/utils/assert';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
  * @inheritAttrs div
@@ -48,6 +51,13 @@ export default {
 		AlertCircle,
 		CheckCircle,
 		Info,
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
@@ -69,9 +79,17 @@ export default {
 			default: 'inline',
 			validator: (variant) => ['inline', 'block'].includes(variant),
 		},
+		/**
+		 * monochrome notices
+		 */
+		isMonochrome: {
+			type: Boolean,
+			default: undefined,
+		},
 	},
 
 	computed: {
+		...resolveThemeableProps('notice', ['isMonochrome']),
 		iconComponent() {
 			if (this.type === 'error') {
 				return AlertCircle;
@@ -122,24 +140,32 @@ export default {
 }
 
 .type_error {
-	--color: var(--color-error, rgba(161, 39, 18, 1));
+	--color: #a12712;
+	--color-icon: #d83e3b;
 }
 
 .type_warning {
-	--color: rgba(77, 59, 0, 1);
+	--color: #584400;
+	--color-icon: #f2bd0d;
 }
 
 .type_success {
-	--color: rgba(8, 69, 8, 1);
-}
-
-.type_info {
-	--color: var(--color-800, rgba(24, 24, 24, 1));
+	--color: #035203;
+	--color-icon: #1fad1f;
 }
 
 .variant_block {
 	padding: 16px;
 	background-color: var(--color-100, rgba(238, 93, 93, 0.1));
+}
+
+.type_info,
+.monochrome,
+.monochrome.type_error,
+.monochrome.type_warning,
+.monochrome.type_success {
+	--color: var(--color-800, rgba(24, 24, 24, 1));
+	--color-icon: var(--color-900, rgba(24, 24, 24, 1));
 }
 
 .IconAligner {
@@ -152,7 +178,7 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
-	fill: transparent;
-	stroke: currentColor;
+	fill: var(--color-background);
+	stroke: var(--color-icon);
 }
 </style>
