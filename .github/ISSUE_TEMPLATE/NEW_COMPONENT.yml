@@ -28,20 +28,15 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Prior art
+      label: API
       description: |
-        Are there similar Maker or 3rd party components that should be referenced? 
+        Sample code of the component in use. Consider all necessary props, events, and slots. Simple examples are fine.
       placeholder: |
         <!--
-          Link to any existing components from Maker or other design systems (Material, Apple, Carbon, etc.) and describe their similarities
+          We recommend looking at similar components in Maker (and/or other design systems like Orbit, Material, Carbon) and referencing those if relevant. 
         -->
       validations:
         required: true
-  - type: textarea
-    attributes:
-      label: API
-      description: |
-        Outline considerations around props, slots, events, and other important aspects of how developers will use this component.
   - type: textarea
     attributes:
       label: Theme support
