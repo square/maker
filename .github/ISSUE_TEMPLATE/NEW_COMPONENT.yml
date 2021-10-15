@@ -41,8 +41,8 @@ body:
     attributes:
       label: Theme support
       description: |
-        How will theming impact this component? Describe how color, font, shape and other design levers will be used.
+        How will Maker theming impact this component?
       placeholder: |
         <!--
-          Considerations around how your component will work in scenarios with different colored backgrounds and contrast is important
+          Design elements like color and color contrast, font-families, border radius are customizable in the Theme. Describe how this component may react to a theme.
         -->
