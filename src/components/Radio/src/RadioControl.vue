@@ -94,9 +94,9 @@ export default {
 	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
 	--color-fill: var(--color-900, rgba(0, 0, 0, 0.9));
 	--color-focus: var(--color-900, rgba(0, 0, 0, 0.9));
-	--color-error: var(--color-error, rgba(206, 50, 23, 1));
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-fill: rgba(0, 0, 0, 0.15);
+	--color-error: rgba(206, 50, 23, 1);
+	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
+	--color-border-disabled: var(--color-300, #222);
 }
 
 .Radio {
@@ -135,7 +135,7 @@ export default {
 
 	&:disabled {
 		background-color: var(--color-disabled);
-		border-color: var(--color-disabled);
+		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
 	}
 
@@ -146,6 +146,11 @@ export default {
 	&:checked:invalid {
 		background-color: var(--color-error);
 		border-color: var(--color-error);
+	}
+
+	&:checked:disabled {
+		background-color: var(--color-border-disabled);
+		border-color: var(--color-border-disabled);
 	}
 
 	&:hover:not(:disabled, :invalid),

@@ -66,9 +66,6 @@ export default {
 */
 .Button {
 	--border-radius: 8px;
-	--normal-text-color: #222;
-	--normal-disabled-text-color: rgba(0, 0, 0, 0.4);
-	--color-focus: rgba(0, 0, 0, 0.3);
 	--button-padding: 12px 24px;
 
 	flex-shrink: 0;
@@ -97,7 +94,7 @@ export default {
 	}
 
 	&:disabled {
-		color: var(--normal-disabled-text-color);
+		color: var(--color-700, rgba(0, 0, 0, 0.4));
 		cursor: initial;
 	}
 }

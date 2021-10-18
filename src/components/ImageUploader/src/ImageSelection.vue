@@ -115,7 +115,7 @@ export default {
 	border-radius: 8px;
 	transition: background-image linear 150ms;
 
-	--color-error: #ff3b30;
+	--color-error: rgba(206, 50, 23, 1);
 }
 
 .ImageSelectionLoaderContainer {
