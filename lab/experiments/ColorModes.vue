@@ -312,7 +312,7 @@ const RATIOS = {
 		900: 0.95,
 	},
 };
-function isNoticeMonochrome(bgHex) {
+function isNoticeContrastColor(bgHex) {
 	const lowerBound = 0.15;
 	const upperBound = 0.85;
 	return chroma(bgHex).hsl()[2] > lowerBound && chroma(bgHex).hsl()[2] < upperBound;
@@ -408,14 +408,15 @@ export default {
 
 	computed: {
 		theme() {
+			const colors = contrastColors(this.backgroundColor);
 			return {
 				colors: {
 					primary: this.hasCustomPrimaryColor ? this.primaryColor : undefined,
 					background: this.backgroundColor,
-					...contrastColors(this.backgroundColor),
+					...colors,
 				},
 				notice: {
-					isMonochrome: isNoticeMonochrome(this.backgroundColor),
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['color-900'] : '',
 				},
 			};
 		},

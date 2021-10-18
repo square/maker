@@ -4,9 +4,8 @@
 			$s.Notice,
 			$s[`type_${type}`],
 			$s[`variant_${variant}`],
-			$s[resolvedIsMonochrome ? 'monochrome' : ''],
-
 		]"
+		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -34,6 +33,7 @@
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import AlertTriangle from '@square/maker-icons/AlertTriangle';
 import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
@@ -80,16 +80,17 @@ export default {
 			validator: (variant) => ['inline', 'block'].includes(variant),
 		},
 		/**
-		 * monochrome notices
+		 * notice color
 		 */
-		isMonochrome: {
-			type: Boolean,
+		color: {
+			type: String,
 			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 	},
 
 	computed: {
-		...resolveThemeableProps('notice', ['isMonochrome']),
+		...resolveThemeableProps('notice', ['color']),
 		iconComponent() {
 			if (this.type === 'error') {
 				return AlertCircle;
@@ -104,6 +105,12 @@ export default {
 		},
 		showActions() {
 			return this.$slots.actions && this.variant === 'block';
+		},
+		style() {
+			return {
+				'--color': this.resolvedColor,
+				'--color-icon': this.resolvedColor,
+			};
 		},
 	},
 
@@ -159,11 +166,7 @@ export default {
 	background-color: var(--color-100, rgba(238, 93, 93, 0.1));
 }
 
-.type_info,
-.monochrome,
-.monochrome.type_error,
-.monochrome.type_warning,
-.monochrome.type_success {
+.type_info {
 	--color: var(--color-800, rgba(24, 24, 24, 1));
 	--color-icon: var(--color-900, rgba(24, 24, 24, 1));
 }
