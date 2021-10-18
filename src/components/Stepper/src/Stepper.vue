@@ -3,11 +3,11 @@
 		:class="$s.Stepper"
 	>
 		<m-button
-			shape="pill"
 			variant="primary"
 			size="small"
 			:color="resolvedColor"
 			:text-color="resolvedTextColor"
+			:shape="resolvedShape"
 			:disabled="value === minVal"
 			@click="decrement"
 		>
@@ -17,11 +17,11 @@
 			{{ value }}
 		</span>
 		<m-button
-			shape="pill"
 			variant="primary"
 			size="small"
 			:color="resolvedColor"
 			:text-color="resolvedTextColor"
+			:shape="resolvedShape"
 			:disabled="value === maxVal"
 			@click="increment"
 		>
@@ -96,10 +96,18 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * stepper button shape
+		 */
+		shape: {
+			type: String,
+			default: 'pill',
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
 	},
 
 	computed: {
-		...resolveThemeableProps('stepper', ['color', 'textColor']),
+		...resolveThemeableProps('stepper', ['color', 'textColor', 'shape']),
 
 		maxVal() {
 			return Number.parseInt(this.max, 10);
