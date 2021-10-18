@@ -47,12 +47,20 @@
 <script>
 import chroma from 'chroma-js';
 import assert from '@square/maker/utils/assert';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
  * @inheritAttrs section
  * @inheritListeners section
  */
 export default {
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -104,10 +112,11 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('container', ['bgColor', 'color']),
 		style() {
 			return {
-				'--bg-color': this.bgColor,
-				'--color': this.color,
+				'--bg-color': this.resolvedBgColor,
+				'--color': this.resolvedColor,
 			};
 		},
 		hasLabel() {
