@@ -3,9 +3,9 @@
 		:class="$s.Stepper"
 	>
 		<m-button
-			shape="pill"
 			variant="primary"
 			size="small"
+			:shape="shape"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === minVal"
@@ -17,9 +17,9 @@
 			{{ value }}
 		</span>
 		<m-button
-			shape="pill"
 			variant="primary"
 			size="small"
+			:shape="shape"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === maxVal"
@@ -84,6 +84,14 @@ export default {
 		textColor: {
 			type: String,
 			default: '#000000',
+		},
+		/**
+		 * stepper button shape
+		 */
+		shape: {
+			type: String,
+			default: 'pill',
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 	},
 

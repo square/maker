@@ -34,13 +34,14 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop       | Type            | Default     | Possible values | Description                     |
-| ---------- | --------------- | ----------- | --------------- | ------------------------------- |
-| v-model*   | `number`        | —           | —               | stepper's current value         |
-| min        | `number|string` | —           | —               | stepper min value               |
-| max        | `number|string` | —           | —               | stepper max value               |
-| color      | `string`        | `'#cccccc'` | —               | stepper button background color |
-| text-color | `string`        | `'#000000'` | —               | stepper button text color       |
+| Prop       | Type            | Default     | Possible values              | Description                     |
+| ---------- | --------------- | ----------- | ---------------------------- | ------------------------------- |
+| v-model*   | `number`        | —           | —                            | stepper's current value         |
+| min        | `number|string` | —           | —                            | stepper min value               |
+| max        | `number|string` | —           | —                            | stepper max value               |
+| color      | `string`        | `'#cccccc'` | —                            | stepper button background color |
+| text-color | `string`        | `'#000000'` | —                            | stepper button text color       |
+| shape      | `string`        | `'pill'`    | `squared`, `rounded`, `pill` | stepper button shape            |
 
 
 ## Events
