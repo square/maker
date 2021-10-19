@@ -51,6 +51,17 @@ export default function defaultTheme() {
 			color: '@colors["color-100"]',
 			textColor: '@colors["color-900"]',
 		},
+		notice: {
+			color: undefined,
+		},
+		modal: {
+			color: undefined,
+			textColor: undefined,
+		},
+		container: {
+			color: undefined,
+			textColor: undefined,
+		},
 		resolve,
 		getPath,
 	};

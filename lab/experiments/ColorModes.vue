@@ -66,7 +66,10 @@
 						>
 							Enter delivery address
 						</m-heading>
-						<m-segmented-control v-model="selected">
+						<m-segmented-control
+							v-model="selected"
+							size="small"
+						>
 							<m-segment value="short">
 								Pickup
 							</m-segment>
@@ -119,6 +122,10 @@
 							placeholder="Delivery address"
 						/>
 						<m-input
+							variant="outline"
+							placeholder="Delivery address"
+						/>
+						<m-input
 							placeholder="Disabled text input"
 							disabled
 						/>
@@ -136,15 +143,16 @@
 					<div>
 						<m-button
 							full-width
+							@click="openItemModal(item)"
 						>
-							Checkout
+							Open modal
 						</m-button>
-						<m-text-button>
-							<info :class="$s.Icon" />  Learn more
-						</m-text-button>
-						<m-image-uploader
-							@image-uploader:change="setImages"
-						/>
+						<m-button
+							full-width
+							disabled
+						>
+							Schedule for later
+						</m-button>
 					</div>
 				</div>
 				<div
@@ -179,6 +187,11 @@
 							:options="options"
 						/>
 						<m-select
+							placeholder="Select dip"
+							:options="options"
+							variant="outline"
+						/>
+						<m-select
 							placeholder="Disabled select"
 							:options="options"
 							disabled
@@ -207,24 +220,13 @@
 						</m-checkbox>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea
+							placeholder="Additional requests"
+							variant="outline"
+						/>
+						<m-textarea
 							placeholder="Disabled textbox"
 							disabled
 						/>
-					</div>
-					<m-divider :class="$s.Divider" />
-					<div>
-						<m-button
-							full-width
-							@click="openItemModal(item)"
-						>
-							Open modal
-						</m-button>
-						<m-button
-							full-width
-							disabled
-						>
-							Schedule for later
-						</m-button>
 					</div>
 				</div>
 				<div
@@ -259,6 +261,15 @@
 							:min-date="minDate"
 							:max-date="maxDate"
 							:disabled-dates="disabledDates"
+						/>
+					</div>
+					<m-divider />
+					<div>
+						<m-text-button>
+							<info :class="$s.Icon" />  Learn more
+						</m-text-button>
+						<m-image-uploader
+							@image-uploader:change="setImages"
 						/>
 					</div>
 				</div>
@@ -319,7 +330,7 @@ const RATIOS = {
 		900: 0.95,
 	},
 };
-function isNoticeMonochrome(bgHex) {
+function isNoticeContrastColor(bgHex) {
 	const lowerBound = 0.15;
 	const upperBound = 0.85;
 	return chroma(bgHex).hsl()[2] > lowerBound && chroma(bgHex).hsl()[2] < upperBound;
@@ -338,6 +349,7 @@ function contrastColors(bgHex) {
 	return {
 		...colors,
 		'color-elevation': isLight ? '#ffffff' : colors['color-300'],
+		'color-overlay': isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
 	};
 }
 // Above will be supplied by website-springboard
@@ -429,13 +441,13 @@ export default {
 					...colors,
 				},
 				notice: {
-					isMonochrome: isNoticeMonochrome(this.backgroundColor),
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['color-900'] : '',
 				},
 				modal: {
-					bgColor: colors['color-100'],
-				},
-				container: {
 					bgColor: this.backgroundColor,
+				},
+				actionbarbutton: {
+					shape: 'rounded',
 				},
 			};
 		},

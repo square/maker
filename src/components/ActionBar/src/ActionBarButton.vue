@@ -152,6 +152,12 @@ export default {
 	computed: {
 		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
+			if (this.isSingleChild()) {
+				return fill({
+					color: this.color || this.theme.colors['color-elevation'] || '#000',
+					textColor: this.resolvedColor,
+				});
+			}
 			return fill({
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,

@@ -122,25 +122,12 @@ export default {
 */
 .variant_fill {
 	--color-background: var(--color-100, #f6f7f9);
-	--color-placeholder: var(--color-800, rgba(0, 0, 0, 0.55));
-	--color-foreground: var(--color-900, rgba(107, 107, 107, 0.9));
-	--color-disabled: var(--color-700, rgba(0, 0, 0, 0.3));
 	--color-border: transparent;
-	--color-border-disabled: var(--color-300, #222);
-	--color-border-active: var(--color-800, #222);
-	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
 }
 
 .variant_outline {
-	--color-background: #fff;
-	--color-placeholder: rgba(0, 0, 0, 0.55);
-	--color-foreground: rgba(0, 0, 0, 0.9);
-	--color-disabled: rgba(0, 0, 0, 0.3);
-	--color-border: rgba(0, 0, 0, 0.15);
-	--color-border-active: rgba(0, 0, 0, 0.3);
-	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
+	--color-background: transparent;
+	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
 }
 
 .Affix {
@@ -164,6 +151,15 @@ export default {
 }
 
 .InputContainer {
+	--color-background-disabled: var(--color-100, #f6f7f9);
+	--color-placeholder: var(--color-800, rgba(0, 0, 0, 0.55));
+	--color-foreground: var(--color-900, rgba(107, 107, 107, 0.9));
+	--color-disabled: var(--color-700, rgba(0, 0, 0, 0.3));
+	--color-border-disabled: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-border-active: var(--color-800, #222);
+	--color-error: rgba(206, 50, 23, 1);
+	--border-radius: 8px;
+
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -186,6 +182,7 @@ export default {
 
 	&.disabled {
 		color: var(--color-disabled);
+		background-color: var(--color-background-disabled);
 		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
 

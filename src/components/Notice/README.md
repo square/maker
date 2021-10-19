@@ -249,11 +249,11 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop         | Type      | Default    | Possible values                       | Description       |
-| ------------ | --------- | ---------- | ------------------------------------- | ----------------- |
-| type         | `string`  | `'info'`   | `error`, `success`, `warning`, `info` | type of notice    |
-| variant      | `string`  | `'inline'` | `inline`, `block`                     | notice variant    |
-| isMonochrome | `boolean` |            | —                                     | monochrome colors |
+| Prop    | Type     | Default    | Possible values                       | Description    |
+| ------- | -------- | ---------- | ------------------------------------- | -------------- |
+| type    | `string` | `'info'`   | `error`, `success`, `warning`, `info` | type of notice |
+| variant | `string` | `'inline'` | `inline`, `block`                     | notice variant |
+| color   | `string` | —          | —                                     | notice color   |
 
 
 ## Slots
