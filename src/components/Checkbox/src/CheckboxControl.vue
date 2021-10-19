@@ -95,9 +95,10 @@ export default {
 	--color-border-active: var(--color-900, rgba(0, 0, 0, 0.9));
 	--color-background-active: var(--color-900, rgba(0, 0, 0, 0.9));
 	--color-foreground: var(--color-100, rgba(255, 255, 255, 0.95));
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-checked: rgba(0, 0, 0, 0.15);
-	--color-error: var(--color-error, rgba(206, 50, 23, 1));
+	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
+	--color-border-disabled: var(--color-300, #222);
+	--color-disabled-checked: var(--color-300, rgba(0, 0, 0, 0.15));
+	--color-error: rgba(206, 50, 23, 1);
 }
 
 .Checkbox {
@@ -120,7 +121,7 @@ export default {
 
 	&:disabled {
 		background-color: var(--color-disabled);
-		border-color: var(--color-disabled);
+		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
 	}
 
@@ -135,7 +136,7 @@ export default {
 
 	&:checked:disabled {
 		background-color: var(--color-disabled-checked);
-		border-color: var(--color-disabled);
+		border-color: var(--color-border-disabled);
 	}
 
 	&:checked:invalid {

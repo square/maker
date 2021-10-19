@@ -5,6 +5,7 @@
 			$s[`type_${type}`],
 			$s[`variant_${variant}`],
 		]"
+		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -32,11 +33,13 @@
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import AlertTriangle from '@square/maker-icons/AlertTriangle';
 import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
 import assert from '@square/maker/utils/assert';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
  * @inheritAttrs div
@@ -48,6 +51,13 @@ export default {
 		AlertCircle,
 		CheckCircle,
 		Info,
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
@@ -69,9 +79,18 @@ export default {
 			default: 'inline',
 			validator: (variant) => ['inline', 'block'].includes(variant),
 		},
+		/**
+		 * notice color
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	computed: {
+		...resolveThemeableProps('notice', ['color']),
 		iconComponent() {
 			if (this.type === 'error') {
 				return AlertCircle;
@@ -86,6 +105,12 @@ export default {
 		},
 		showActions() {
 			return this.$slots.actions && this.variant === 'block';
+		},
+		style() {
+			return {
+				'--color': this.resolvedColor,
+				'--color-icon': this.resolvedColor,
+			};
 		},
 	},
 
@@ -122,32 +147,28 @@ export default {
 }
 
 .type_error {
-	--color: rgba(161, 39, 18, 1);
-	--color-icon: rgba(206, 51, 22, 1);
-	--color-bg: rgba(252, 235, 232, 1);
+	--color: #a12712;
+	--color-icon: #d83e3b;
 }
 
 .type_warning {
-	--color: rgba(77, 59, 0, 1);
-	--color-icon: rgba(242, 189, 13, 1);
-	--color-bg: rgba(252, 242, 207, 1);
+	--color: #584400;
+	--color-icon: #f2bd0d;
 }
 
 .type_success {
-	--color: rgba(8, 69, 8, 1);
-	--color-icon: rgba(33, 172, 30, 1);
-	--color-bg: rgba(233, 251, 233, 1);
-}
-
-.type_info {
-	--color: var(--color-800, rgba(24, 24, 24, 1));
-	--color-icon: var(--color-800, rgba(169, 169, 169, 1));
-	--color-bg: var(--color-100, rgba(241, 241, 241, 1));
+	--color: #035203;
+	--color-icon: #1fad1f;
 }
 
 .variant_block {
 	padding: 16px;
-	background-color: var(--color-bg);
+	background-color: var(--color-100, rgba(238, 93, 93, 0.1));
+}
+
+.type_info {
+	--color: var(--color-800, rgba(24, 24, 24, 1));
+	--color-icon: var(--color-900, rgba(24, 24, 24, 1));
 }
 
 .IconAligner {
@@ -160,7 +181,7 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
-	fill: var(--color-icon);
-	stroke: var(--color-bg);
+	fill: var(--color-background);
+	stroke: var(--color-icon);
 }
 </style>

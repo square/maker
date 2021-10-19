@@ -119,9 +119,18 @@
 						placeholder="Delivery address"
 					/>
 					<m-input
-						placeholder="Apt, floor, Suite, etc. (Optional)"
+						placeholder="Disabled text input"
 						disabled
 					/>
+					<m-notice type="error">
+						There has been error notice
+					</m-notice>
+					<m-notice type="warning">
+						Warning please take note
+					</m-notice>
+					<m-notice type="success">
+						Action has been successfully completed
+					</m-notice>
 				</div>
 				<m-divider />
 				<div>
@@ -151,15 +160,26 @@
 						Buffalo
 					</m-radio>
 					<br>
-					<m-radio value="2">
+					<m-radio
+						value="2"
+						disabled
+					>
 						Ginger soy
+					</m-radio>
+					<br>
+					<m-radio
+						value="2"
+						selected="2"
+						disabled
+					>
+						Disabled and selected
 					</m-radio>
 					<m-select
 						placeholder="Select dip"
 						:options="options"
 					/>
 					<m-select
-						placeholder="Select quantity"
+						placeholder="Disabled select"
 						:options="options"
 						disabled
 					/>
@@ -178,9 +198,16 @@
 					<m-checkbox disabled>
 						Provide compostable utensils
 					</m-checkbox>
+					<br>
+					<m-checkbox
+						disabled
+						checked
+					>
+						Disabled and selected
+					</m-checkbox>
 					<m-textarea placeholder="Additional requests" />
 					<m-textarea
-						placeholder="Additional requests"
+						placeholder="Disabled textbox"
 						disabled
 					/>
 				</div>
@@ -272,19 +299,24 @@ const IS_LIGHT_THRESHOLD = 0.32;
 const RATIOS = {
 	light: {
 		100: 0.05,
-		300: 0.14,
-		700: 0.405,
-		800: 0.525,
-		900: 0.8,
-	},
-	dark: {
-		100: 0.09,
-		300: 0.15,
-		700: 0.41,
-		800: 0.55,
+		300: 0.155,
+		700: 0.43,
+		800: 0.527,
 		900: 0.9,
 	},
+	dark: {
+		100: 0.1,
+		300: 0.255,
+		700: 0.42,
+		800: 0.55,
+		900: 0.95,
+	},
 };
+function isNoticeContrastColor(bgHex) {
+	const lowerBound = 0.15;
+	const upperBound = 0.85;
+	return chroma(bgHex).hsl()[2] > lowerBound && chroma(bgHex).hsl()[2] < upperBound;
+}
 
 function contrastColors(bgHex) {
 	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
@@ -330,7 +362,7 @@ export default {
 
 	data() {
 		return {
-			backgroundColor: '#ffffff',
+			backgroundColor: '#000000',
 			hasCustomPrimaryColor: false,
 			primaryColor: '#0073F8',
 			choice: '10am',
@@ -376,12 +408,15 @@ export default {
 
 	computed: {
 		theme() {
-			const contrastingColors = contrastColors(this.backgroundColor);
+			const colors = contrastColors(this.backgroundColor);
 			return {
 				colors: {
 					primary: this.hasCustomPrimaryColor ? this.primaryColor : undefined,
 					background: this.backgroundColor,
-					...contrastingColors,
+					...colors,
+				},
+				notice: {
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['color-900'] : '',
 				},
 			};
 		},

@@ -106,7 +106,7 @@ export default {
 	--color-border-disabled: var(--color-300, #222);
 	--color-border-active: var(--color-800, #222);
 	--border-radius: 8px;
-	--color-error: var(--color-error, rgba(206, 50, 23, 1));
+	--color-error: rgba(206, 50, 23, 1);
 }
 
 .variant_outline {
