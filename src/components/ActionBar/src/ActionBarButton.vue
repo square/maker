@@ -155,7 +155,7 @@ export default {
 			if (this.isSingleChild()) {
 				return fill({
 					color: this.color || this.theme.colors['color-elevation'] || '#000',
-					textColor: this.resolvedColor,
+					textColor: this.textColor || this.resolvedColor,
 				});
 			}
 			return fill({
