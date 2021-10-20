@@ -99,27 +99,19 @@
 				v-model="item.quantity"
 				style="margin-top: 16px;"
 				:min="1"
-
-				color="rgba(160, 121, 164, 0.3)"
 			/>
 		</m-container>
 
-		<m-action-bar>
-			<m-button
+		<m-inline-action-bar>
+			<m-action-bar-button
 				key="close"
-				size="large"
-				shape="pill"
-				:color="closeColor"
 				@click="modalApi.close()"
 			>
 				<x-icon class="icon" />
-			</m-button>
-			<m-button
+			</m-action-bar-button>
+			<m-action-bar-button
 				key="primary"
-				size="large"
-				shape="pill"
-				:color="addColor"
-				:disabled="!canPlaceOrder"
+				align="center"
 				full-width
 				@click="modalApi.close()"
 			>
@@ -127,8 +119,8 @@
 				<template #information>
 					{{ formatCost(addAmount) }}
 				</template>
-			</m-button>
-		</m-action-bar>
+			</m-action-bar-button>
+		</m-inline-action-bar>
 	</m-modal>
 </template>
 
@@ -142,8 +134,7 @@ import { MRadio } from '@square/maker/components/Radio';
 import { MDivider } from '@square/maker/components/Divider';
 import { MInput } from '@square/maker/components/Input';
 import { MStepper } from '@square/maker/components/Stepper';
-import { MActionBar } from '@square/maker/components/ActionBar';
-import { MButton } from '@square/maker/components/Button';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import XIcon from '@square/maker-icons/X';
 
@@ -157,8 +148,8 @@ export default {
 		MDivider,
 		MInput,
 		MStepper,
-		MActionBar,
-		MButton,
+		MInlineActionBar,
+		MActionBarButton,
 		MCheckbox,
 		XIcon,
 	},
@@ -175,18 +166,6 @@ export default {
 	},
 
 	computed: {
-		closeColor() {
-			if (this.canPlaceOrder) {
-				return '#f6f6f6';
-			}
-			return 'rgb(160, 121, 164)';
-		},
-		addColor() {
-			if (this.canPlaceOrder) {
-				return 'rgb(160, 121, 164)';
-			}
-			return '#f6f6f6';
-		},
 		addAmount() {
 			let baseCost = Number.NaN;
 			if (this.item.cost) {

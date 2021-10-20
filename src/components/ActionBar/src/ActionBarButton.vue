@@ -152,6 +152,17 @@ export default {
 	computed: {
 		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
+			/**
+			 * Return different default theme colors for icon buttons
+			 * This can be removed if the action bar icon button ever
+			 * becomes its own component or if we add theming for variants
+			 */
+			if (this.isSingleChild()) {
+				return fill({
+					color: this.color || this.theme.colors['color-elevation'] || '#000',
+					textColor: this.textColor || this.resolvedColor,
+				});
+			}
 			return fill({
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,

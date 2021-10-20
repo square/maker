@@ -3,264 +3,278 @@
 		:style="{ backgroundColor }"
 	>
 		<m-theme
-			:class="$s.Surface"
 			:theme="theme"
 		>
-			<div
-				:class="$s.Scale"
-			>
-				<m-heading
-					:size="1"
+			<div :class="$s.Surface">
+				<div
+					:class="$s.Scale"
 				>
-					Color modes
-				</m-heading>
-				<m-text :size="-1">
-					Creating a consistent UI experience against any background color
-				</m-text>
-
-				<m-divider />
-				<br>
-
-				<m-checkbox
-					v-model="hasCustomPrimaryColor"
-				>
-					Custom primary color
-				</m-checkbox>
-
-				<input
-					v-if="hasCustomPrimaryColor"
-					v-model="primaryColor"
-					type="color"
-				>
-				<m-heading
-					:size="1"
-				>
-					Choose a background color
-				</m-heading>
-				<input
-					v-model="backgroundColor"
-					type="color"
-				>
-				<m-heading
-					:size="1"
-				>
-					Generated contrast colors
-				</m-heading>
-				<m-text :size="-1">
-					color-100, color-300, color-700, color-800, color-900
-				</m-text>
-				<div>
-					<span :style="{ backgroundColor : 'var(--color-100)' }" />
-					<span :style="{ backgroundColor : 'var(--color-300)' }" />
-					<span :style="{ backgroundColor : 'var(--color-700)' }" />
-					<span :style="{ backgroundColor : 'var(--color-800)' }" />
-					<span :style="{ backgroundColor : 'var(--color-900)' }" />
-				</div>
-			</div>
-			<div
-				:class="$s.Preview"
-			>
-				<div>
 					<m-heading
-						:size="0"
+						:size="1"
 					>
-						Enter delivery address
-					</m-heading>
-					<m-segmented-control v-model="selected">
-						<m-segment value="short">
-							Pickup
-						</m-segment>
-						<m-segment value="medium">
-							Delivery
-						</m-segment>
-						<m-segment value="long">
-							Shipping
-						</m-segment>
-					</m-segmented-control>
-					<div>
-						<m-choice
-							v-model="choice"
-						>
-							<m-choice-option value="10am">
-								10 AM
-							</m-choice-option>
-							<m-choice-option value="1pm">
-								1 PM
-							</m-choice-option>
-							<m-choice-option
-								value="2pm"
-								disabled
-							>
-								2 PM
-							</m-choice-option>
-						</m-choice>
-					</div>
-					<m-heading
-						:size="-1"
-					>
-						Enter delivery address
+						Color modes
 					</m-heading>
 					<m-text :size="-1">
-						<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
+						Creating a consistent UI experience against any background color
 					</m-text>
-					<m-text :size="-1">
-						<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
-					</m-text>
-					<m-notice
-						type="info"
-						variant="block"
-					>
-						Switching to shipping will change the scheduled time you selected
-					</m-notice>
-				</div>
-				<m-divider />
-				<div>
-					<m-input
-						placeholder="Delivery address"
-					/>
-					<m-input
-						placeholder="Disabled text input"
-						disabled
-					/>
-					<m-notice type="error">
-						There has been error notice
-					</m-notice>
-					<m-notice type="warning">
-						Warning please take note
-					</m-notice>
-					<m-notice type="success">
-						Action has been successfully completed
-					</m-notice>
-				</div>
-				<m-divider />
-				<div>
-					<m-button
-						full-width
-					>
-						Checkout
-					</m-button>
-					<m-text-button>
-						<info :class="$s.Icon" />  Learn more
-					</m-text-button>
-					<m-image-uploader
-						@image-uploader:change="setImages"
-					/>
-				</div>
-			</div>
-			<div
-				:class="$s.Preview"
-			>
-				<div>
-					<m-heading
-						:size="0"
-					>
-						House special wings
-					</m-heading>
-					<m-radio value="1">
-						Buffalo
-					</m-radio>
+
+					<m-divider />
 					<br>
-					<m-radio
-						value="2"
-						disabled
-					>
-						Ginger soy
-					</m-radio>
-					<br>
-					<m-radio
-						value="2"
-						selected="2"
-						disabled
-					>
-						Disabled and selected
-					</m-radio>
-					<m-select
-						placeholder="Select dip"
-						:options="options"
-					/>
-					<m-select
-						placeholder="Disabled select"
-						:options="options"
-						disabled
-					/>
-					<m-stepper
-						v-model="number"
-						min="0"
-						max="2"
-						style="justify-content: flex-start;"
-					/>
-				</div>
-				<m-divider />
-				<div>
-					<m-checkbox>
-						Include cutlery and utensils
-					</m-checkbox>
-					<m-checkbox disabled>
-						Provide compostable utensils
-					</m-checkbox>
-					<br>
+
 					<m-checkbox
-						disabled
-						checked
+						v-model="hasCustomPrimaryColor"
 					>
-						Disabled and selected
+						Custom primary color
 					</m-checkbox>
-					<m-textarea placeholder="Additional requests" />
-					<m-textarea
-						placeholder="Disabled textbox"
-						disabled
-					/>
-				</div>
-				<m-divider :class="$s.Divider" />
-				<div>
-					<m-button
-						full-width
+
+					<input
+						v-if="hasCustomPrimaryColor"
+						v-model="primaryColor"
+						type="color"
 					>
-						Button
-					</m-button>
-					<m-button
-						full-width
-						disabled
-					>
-						Schedule for later
-					</m-button>
-				</div>
-			</div>
-			<div
-				:class="$s.Preview"
-			>
-				<div>
 					<m-heading
-						:size="0"
+						:size="1"
 					>
-						Schedule order
+						Choose a background color
+					</m-heading>
+					<input
+						v-model="backgroundColor"
+						type="color"
+					>
+					<m-heading
+						:size="1"
+					>
+						Generated contrast colors
 					</m-heading>
 					<m-text :size="-1">
-						<check-circle :class="$s.Icon" /> No minimum
+						color-100, color-300, color-700, color-800, color-900
 					</m-text>
-					<m-text :size="-1">
-						<check-circle :class="$s.Icon" /> No fees
-					</m-text>
+					<div>
+						<span :style="{ backgroundColor : 'var(--color-100)' }" />
+						<span :style="{ backgroundColor : 'var(--color-300)' }" />
+						<span :style="{ backgroundColor : 'var(--color-700)' }" />
+						<span :style="{ backgroundColor : 'var(--color-800)' }" />
+						<span :style="{ backgroundColor : 'var(--color-900)' }" />
+					</div>
 				</div>
-				<m-divider />
-				<div>
-					<m-heading
-						:size="0"
-					>
-						Select date and time
-					</m-heading>
-					<m-text :size="-1">
-						Choose from the availble timeslots for your order
-					</m-text>
-					<m-calendar
-						v-model="selectedDate"
-						:locale="locale"
-						:min-date="minDate"
-						:max-date="maxDate"
-						:disabled-dates="disabledDates"
-					/>
+				<div
+					:class="$s.Preview"
+				>
+					<div>
+						<m-heading
+							:size="0"
+						>
+							Enter delivery address
+						</m-heading>
+						<m-segmented-control
+							v-model="selected"
+							size="small"
+						>
+							<m-segment value="short">
+								Pickup
+							</m-segment>
+							<m-segment value="medium">
+								Delivery
+							</m-segment>
+							<m-segment value="long">
+								Shipping
+							</m-segment>
+						</m-segmented-control>
+						<div>
+							<m-choice
+								v-model="choice"
+							>
+								<m-choice-option value="10am">
+									10 AM
+								</m-choice-option>
+								<m-choice-option value="1pm">
+									1 PM
+								</m-choice-option>
+								<m-choice-option
+									value="2pm"
+									disabled
+								>
+									2 PM
+								</m-choice-option>
+							</m-choice>
+						</div>
+						<m-heading
+							:size="-1"
+						>
+							Enter delivery address
+						</m-heading>
+						<m-text :size="-1">
+							<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
+						</m-text>
+						<m-text :size="-1">
+							<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
+						</m-text>
+						<m-notice
+							type="info"
+							variant="block"
+						>
+							Switching to shipping will change the scheduled time you selected
+						</m-notice>
+					</div>
+					<m-divider />
+					<div>
+						<m-input
+							placeholder="Delivery address"
+						/>
+						<m-input
+							variant="outline"
+							placeholder="Delivery address"
+						/>
+						<m-input
+							placeholder="Disabled text input"
+							disabled
+						/>
+						<m-notice type="error">
+							There has been error notice
+						</m-notice>
+						<m-notice type="warning">
+							Warning please take note
+						</m-notice>
+						<m-notice type="success">
+							Action has been successfully completed
+						</m-notice>
+					</div>
+					<m-divider />
+					<div>
+						<m-button
+							full-width
+							@click="openItemModal(item)"
+						>
+							Open modal
+						</m-button>
+						<m-button
+							full-width
+							disabled
+						>
+							Schedule for later
+						</m-button>
+					</div>
+				</div>
+				<div
+					:class="$s.Preview"
+				>
+					<div>
+						<m-heading
+							:size="0"
+						>
+							House special wings
+						</m-heading>
+						<m-radio value="1">
+							Buffalo
+						</m-radio>
+						<br>
+						<m-radio
+							value="2"
+							disabled
+						>
+							Ginger soy
+						</m-radio>
+						<br>
+						<m-radio
+							value="2"
+							selected="2"
+							disabled
+						>
+							Disabled and selected
+						</m-radio>
+						<m-select
+							placeholder="Select dip"
+							:options="options"
+						/>
+						<m-select
+							placeholder="Select dip"
+							:options="options"
+							variant="outline"
+						/>
+						<m-select
+							placeholder="Disabled select"
+							:options="options"
+							disabled
+						/>
+						<m-stepper
+							v-model="number"
+							min="0"
+							max="2"
+							style="justify-content: flex-start;"
+						/>
+					</div>
+					<m-divider />
+					<div>
+						<m-checkbox>
+							Include cutlery and utensils
+						</m-checkbox>
+						<m-checkbox disabled>
+							Provide compostable utensils
+						</m-checkbox>
+						<br>
+						<m-checkbox
+							disabled
+							checked
+						>
+							Disabled and selected
+						</m-checkbox>
+						<m-textarea placeholder="Additional requests" />
+						<m-textarea
+							placeholder="Additional requests"
+							variant="outline"
+						/>
+						<m-textarea
+							placeholder="Disabled textbox"
+							disabled
+						/>
+					</div>
+				</div>
+				<div
+					:class="$s.Preview"
+				>
+					<div>
+						<m-heading
+							:size="0"
+						>
+							Schedule order
+						</m-heading>
+						<m-text :size="-1">
+							<check-circle :class="$s.Icon" /> No minimum
+						</m-text>
+						<m-text :size="-1">
+							<check-circle :class="$s.Icon" /> No fees
+						</m-text>
+					</div>
+					<m-divider />
+					<div>
+						<m-heading
+							:size="0"
+						>
+							Select date and time
+						</m-heading>
+						<m-text :size="-1">
+							Choose from the availble timeslots for your order
+						</m-text>
+						<m-calendar
+							v-model="selectedDate"
+							:locale="locale"
+							:min-date="minDate"
+							:max-date="maxDate"
+							:disabled-dates="disabledDates"
+						/>
+					</div>
+					<m-divider />
+					<div>
+						<m-text-button>
+							<info :class="$s.Icon" />  Learn more
+						</m-text-button>
+						<m-image-uploader
+							@image-uploader:change="setImages"
+						/>
+					</div>
 				</div>
 			</div>
+			<m-modal-layer />
 		</m-theme>
 	</div>
 </template>
@@ -284,6 +298,7 @@ import { MButton, MTextButton } from '@square/maker/components/Button';
 import { MCalendar } from '@square/maker/components/Calendar';
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
+import { MModalLayer } from '@square/maker/components/Modal';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
@@ -293,6 +308,9 @@ import {
 	addMonths,
 	formatISO,
 } from 'date-fns';
+
+import ItemModal from './SiteApp/ItemModal.vue';
+import storeData from './SiteApp/data';
 
 // Below will be supplied by website-springboard
 const IS_LIGHT_THRESHOLD = 0.32;
@@ -331,6 +349,7 @@ function contrastColors(bgHex) {
 	return {
 		...colors,
 		'color-elevation': isLight ? '#ffffff' : colors['color-300'],
+		'color-overlay': isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
 	};
 }
 // Above will be supplied by website-springboard
@@ -358,11 +377,16 @@ export default {
 		MSegmentedControl,
 		MSegment,
 		MTextButton,
+		MModalLayer,
 	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
 
 	data() {
 		return {
-			backgroundColor: '#000000',
+			backgroundColor: '#d1ffff',
 			hasCustomPrimaryColor: false,
 			primaryColor: '#0073F8',
 			choice: '10am',
@@ -403,6 +427,7 @@ export default {
 			],
 			selected: 'medium',
 			images: [],
+			item: storeData.items[0],
 		};
 	},
 
@@ -417,6 +442,12 @@ export default {
 				},
 				notice: {
 					color: isNoticeContrastColor(this.backgroundColor) ? colors['color-900'] : '',
+				},
+				modal: {
+					bgColor: this.backgroundColor,
+				},
+				actionbarbutton: {
+					shape: 'rounded',
 				},
 			};
 		},
@@ -450,6 +481,17 @@ export default {
 	methods: {
 		setImages(images) {
 			this.images = images;
+		},
+
+		openItemModal(item) {
+			this.modalApi.open((h) => h(
+				ItemModal,
+				{
+					props: {
+						item,
+					},
+				},
+			));
 		},
 	},
 };

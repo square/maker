@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 
 function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 4.5;
+	const contrastAccessibilityThreshold = 3;
 	if (!targetChromaFg
 		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
 		const isLightThreshold = 0.32;
