@@ -178,6 +178,7 @@ export default {
 }
 
 .Sublabel {
+	color: var(--color, var(--color-800, inherit));
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 24px;
