@@ -3,9 +3,9 @@
 		:class="$s.Stepper"
 	>
 		<m-button
-			shape="pill"
 			variant="primary"
-			:size="size"
+			size="small"
+			:shape="shape"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === minVal"
@@ -17,9 +17,9 @@
 			{{ value }}
 		</span>
 		<m-button
-			shape="pill"
 			variant="primary"
-			:size="size"
+			size="small"
+			:shape="shape"
 			:color="color"
 			:text-color="textColor"
 			:disabled="value === maxVal"
@@ -85,14 +85,13 @@ export default {
 			type: String,
 			default: '#000000',
 		},
-
 		/**
-		 * stepper button size
+		 * stepper button shape
 		 */
-		size: {
+		shape: {
 			type: String,
-			default: 'small',
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
+			default: 'pill',
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 	},
 
@@ -152,7 +151,7 @@ export default {
 }
 
 .Icon {
-	width: 24px;
-	height: 24px;
+	width: 16px;
+	height: 16px;
 }
 </style>
