@@ -10,6 +10,8 @@ export default function defaultTheme() {
 			'color-700': '#9e9e9e',
 			'color-800': '#636363',
 			'color-900': '#303030',
+			'color-elevation': '#ffffff',
+			'color-overlay': 'rgba(0, 0, 0, 0.3)',
 		},
 		profiles: [
 			{
@@ -39,10 +41,12 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
+			textColor: undefined,
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
+			textColor: undefined,
 		},
 		choice: {
 			selectedColor: undefined,
@@ -50,17 +54,18 @@ export default function defaultTheme() {
 		stepper: {
 			color: '@colors["color-100"]',
 			textColor: '@colors["color-900"]',
+			shape: 'pill',
 		},
 		notice: {
 			color: undefined,
 		},
 		modal: {
 			color: undefined,
-			textColor: undefined,
+			bgColor: undefined,
 		},
 		container: {
 			color: undefined,
-			textColor: undefined,
+			bgColor: undefined,
 		},
 		resolve,
 		getPath,
