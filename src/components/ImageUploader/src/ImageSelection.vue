@@ -6,9 +6,7 @@
 		}"
 		role="img"
 		:style="{
-			'--filter-gradient': gradient,
 			'--progress-width': `${progress}%`,
-			'--progress-opacity': progressOpacity,
 		}"
 	>
 		<!-- Icon Background -->
@@ -26,7 +24,10 @@
 
 		<!-- Filter (greyed if loading, gradient when loaded) -->
 		<div
-			:class="$s.ImageFilter"
+			:class="{
+				[$s.ImageFilter]: true,
+				[$s.IsLoading]: isUploading
+			}"
 		/>
 
 		<div
@@ -37,7 +38,10 @@
 		</div>
 
 		<m-progress-bar
-			:class="$s.ImageSelectionProgressContainer"
+			:class="{
+				[$s.ImageSelectionProgressContainer]: true,
+				[$s.IsLoading]: isUploading,
+			}"
 			:progress="progress"
 			size="xsmall"
 		/>
@@ -61,11 +65,6 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
 import ImageIcon from '@square/maker-icons/Image';
-
-const PROGRESS_OPACITY = { shown: 1, hidden: 0 };
-
-const LOADING_GRADIENT = 'linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
-const LOADED_GRADIENT = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%)';
 
 export default {
 	name: 'MImageSelection',
@@ -104,14 +103,6 @@ export default {
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 			};
-		},
-
-		gradient() {
-			return this.isUploading ? LOADING_GRADIENT : LOADED_GRADIENT;
-		},
-
-		progressOpacity() {
-			return this.isUploading ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden;
 		},
 	},
 };
@@ -154,7 +145,6 @@ export default {
 }
 
 .ImageIconContainer {
-	z-index: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -165,17 +155,15 @@ export default {
 	opacity: 0.95;
 }
 
-.ImageDisplay {
-	z-index: 1;
-}
-
 .ImageFilter {
-	z-index: 1;
-	background-image: var(--filter-gradient);
+	background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%);
+
+	&.IsLoading {
+		background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+	}
 }
 
 .ImageSelectionLoaderContainer {
-	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -214,7 +202,11 @@ export default {
 	bottom: 0;
 	left: 0;
 	z-index: 3;
-	opacity: var(--progress-opacity);
+	opacity: 0;
 	transition: opacity 150ms linear;
+
+	&.IsLoading {
+		opacity: 1;
+	}
 }
 </style>
