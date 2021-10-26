@@ -307,6 +307,7 @@ export default {
 
 		sanitizeOutputImages(images) {
 			return images.map((image) => ({
+				id: image.id,
 				status: image.status,
 				file: image.file,
 				apiResponse: image.apiResponse,
