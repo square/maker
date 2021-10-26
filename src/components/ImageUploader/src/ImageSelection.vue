@@ -5,8 +5,30 @@
 			[$s.ImageSelectionContainerError]: isError
 		}"
 		role="img"
-		:style="bgImageStyle"
+		:style="{
+			'--filter-gradient': gradient,
+			'--progress-width': `${progress}%`,
+			'--progress-opacity': progressOpacity,
+		}"
 	>
+		<!-- Icon Background -->
+		<div
+			:class="$s.ImageIconContainer"
+		>
+			<image-icon :class="$s.ImageIcon" />
+		</div>
+
+		<!-- Actual Image (hidden if not displayable) -->
+		<div
+			:class="$s.ImageDisplay"
+			:style="imageDisplayStyles"
+		/>
+
+		<!-- Filter (greyed if loading, gradient when loaded) -->
+		<div
+			:class="$s.ImageFilter"
+		/>
+
 		<div
 			v-if="isUploading"
 			:class="$s.ImageSelectionLoaderContainer"
@@ -16,7 +38,6 @@
 
 		<m-progress-bar
 			:class="$s.ImageSelectionProgressContainer"
-			:style="progressContainerStyle"
 			:progress="progress"
 			size="xsmall"
 		/>
@@ -39,8 +60,12 @@
 import { MLoading } from '@square/maker/components/Loading';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
 import XIcon from '@square/maker-icons/X';
+import ImageIcon from '@square/maker-icons/Image';
 
 const PROGRESS_OPACITY = { shown: 1, hidden: 0 };
+
+const LOADING_GRADIENT = 'linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
+const LOADED_GRADIENT = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%)';
 
 export default {
 	name: 'MImageSelection',
@@ -49,6 +74,7 @@ export default {
 		MLoading,
 		MProgressBar,
 		XIcon,
+		ImageIcon,
 	},
 
 	props: {
@@ -71,31 +97,21 @@ export default {
 	},
 
 	computed: {
-		bgImageStyle() {
-			const url = `url("${this.url}")`;
-			const loadingGradient = 'linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
-			const loadedGradient = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%)';
-
+		imageDisplayStyles() {
 			return {
-				backgroundImage: this.showProgressBar
-					? `${loadingGradient}, ${url}`
-					: `${loadedGradient}, ${url}`,
+				backgroundImage: `url("${this.url}")`,
 				backgroundRepeat: 'no-repeat',
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 			};
 		},
 
-		progressContainerStyle() {
-			return {
-				opacity: this.isUploading ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden,
-			};
+		gradient() {
+			return this.isUploading ? LOADING_GRADIENT : LOADED_GRADIENT;
 		},
 
-		progressStyle() {
-			return {
-				width: `${this.progress}%`,
-			};
+		progressOpacity() {
+			return this.isUploading ? PROGRESS_OPACITY.shown : PROGRESS_OPACITY.hidden;
 		},
 	},
 };
@@ -126,12 +142,40 @@ export default {
 	--color-error: #ff3b30;
 }
 
+.ImageIconContainer,
+.ImageDisplay,
+.ImageFilter,
 .ImageSelectionLoaderContainer {
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+}
+
+.ImageIconContainer {
+	z-index: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ImageIcon {
+	height: 65%;
+	opacity: 0.3;
+}
+
+.ImageDisplay {
+	z-index: 1;
+}
+
+.ImageFilter {
+	z-index: 1;
+	background-image: var(--filter-gradient);
+}
+
+.ImageSelectionLoaderContainer {
+	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -147,6 +191,7 @@ export default {
 	position: absolute;
 	top: 8px;
 	right: 8px;
+	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -168,6 +213,8 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 3;
+	opacity: var(--progress-opacity);
 	transition: opacity 150ms linear;
 }
 </style>
