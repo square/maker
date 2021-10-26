@@ -162,7 +162,7 @@ export default {
 
 .ImageIcon {
 	height: 65%;
-	opacity: 0.3;
+	opacity: 0.95;
 }
 
 .ImageDisplay {
