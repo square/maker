@@ -9,7 +9,7 @@ body:
 
         Please leverage this template to provide as much details about the visual and functional requirements for this new component. Doing so will help use communicate and collborate on a solution effectively.
 
-  - type: text
+  - type: input
     attributes:
       label: Figma link
       description: Provide a Figma link as a reference
