@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="$s.Menu">
 		<slot
 			v-for="(option, idx) in options"
 			v-bind="option"
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { isEqual } from 'lodash';
 import MMenuOption from './MenuOption.vue';
 import MMenuOptionLabel from './MenuOptionLabel.vue';
@@ -35,6 +36,13 @@ export default {
 		return {
 			[MenuKey]: this.menuAPI,
 		};
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	model: {
@@ -64,6 +72,10 @@ export default {
 				isOptionSelected: this.isOptionSelected,
 			},
 		};
+	},
+
+	computed: {
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor']),
 	},
 
 	created() {
@@ -107,6 +119,9 @@ export default {
 };
 </script>
 
-<style>
-/* Keep */
+<style module="$s">
+.Menu {
+	display: flex;
+	flex-direction: column;
+}
 </style>
