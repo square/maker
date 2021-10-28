@@ -859,9 +859,11 @@ export default {
 <!-- api-tables:start -->
 ## Modal Props
 
-| Prop         | Type   | Default | Possible values | Description                          |
-| ------------ | ------ | ------- | --------------- | ------------------------------------ |
-| before-close | `func` | —       | —               | Before close hook, can block closing |
+| Prop         | Type     | Default | Possible values | Description                          |
+| ------------ | -------- | ------- | --------------- | ------------------------------------ |
+| before-close | `func`   | —       | —               | Before close hook, can block closing |
+| bg-color     | `string` | —       | —               | Background color of container        |
+| color        | `string` | —       | —               | Text color of container              |
 
 
 ## Modal Slots
