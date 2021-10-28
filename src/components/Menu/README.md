@@ -1,21 +1,40 @@
 # Menu
 
+
 ```vue
 <template>
 	<m-container
-		label="Simple Data (Single Select)"
+		label="Simple Data"
 		size="large"
 	>
-		<m-card>
-			<div>
-				Selected Value: {{ value }}
-			</div>
+		<div :class="$s.GridContainer">
+			<m-card>
+				<m-container
+					label="Single Select"
+					:sublabel="'Value: ' + value"
+					size="medium"
+				>
+					<m-menu
+						v-model="value"
+						:options="options"
+					/>
+				</m-container>
+			</m-card>
 
-			<m-menu
-				v-model="value"
-				:options="options"
-			/>
-		</m-card>
+			<m-card>
+				<m-container
+					label="Multiple Select"
+					:sublabel="'Value: ' + JSON.stringify(multiValue)"
+					size="medium"
+				>
+					<m-menu
+						v-model="multiValue"
+						:options="options"
+						is-multiselect
+					/>
+				</m-container>
+			</m-card>
+		</div>
 	</m-container>
 </template>
 
@@ -36,40 +55,76 @@ export default {
 	data() {
 		return {
 			value: undefined,
+			multiValue: undefined,
 			options: ['Option 1', 'Option 2', 'Option 3'],
 		};
 	},
 };
 </script>
+
+<style module="$s">
+.GridContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+}
+</style>
 ```
 
 ```vue
 <template>
 	<m-container
-		label="Complex Data (Single Select)"
+		label="Complex Data"
 		size="large"
 	>
-		<m-card>
-			<div>
-				Selected Value: {{ value }}
-			</div>
-
-			<m-menu
-				v-model="value"
-				:options="options"
-			>
-				<template #default="{ option, isSelected }">
-					<m-menu-option
-						:option="option.value"
-						:is-selected="isSelected"
+		<div :class="$s.GridContainer">
+			<m-card>
+				<m-container
+					label="Single Select"
+					:sublabel="'Value: ' + JSON.stringify(value)"
+					size="medium"
+				>
+					<m-menu
+						v-model="value"
+						:options="options"
 					>
-						<m-menu-option-label>
-							{{ option.label }}
-						</m-menu-option-label>
-					</m-menu-option>
-				</template>
-			</m-menu>
-		</m-card>
+						<template #default="option">
+							<m-menu-option
+								:option="option.value"
+							>
+								<m-menu-option-label>
+									{{ option.label }}
+								</m-menu-option-label>
+							</m-menu-option>
+						</template>
+					</m-menu>
+				</m-container>
+			</m-card>
+
+			<m-card>
+				<m-container
+					label="Multiple Select"
+					:sublabel="'Value: ' + JSON.stringify(multiValue)"
+					size="medium"
+				>
+					<m-menu
+						v-model="multiValue"
+						:options="options"
+						is-multiselect
+					>
+						<template #default="option">
+							<m-menu-option
+								:option="option.value"
+							>
+								<m-menu-option-label>
+									{{ option.label }}
+								</m-menu-option-label>
+							</m-menu-option>
+						</template>
+					</m-menu>
+				</m-container>
+			</m-card>
+		</div>
 	</m-container>
 </template>
 
@@ -92,24 +147,68 @@ export default {
 	data() {
 		return {
 			value: undefined,
+			multiValue: undefined,
 			options: [
-				{ label: 'Option 1', value: 1 },
-				{ label: 'Option 2', value: 2 },
-				{ label: 'Option 3', value: 3 },
+				{ label: 'Option 1 (foo)', value: { data: 'foo' } },
+				{ label: 'Option 2 (bar)', value: { data: 'bar' } },
+				{ label: 'Option 3 (baz)', value: { data: 'baz' } },
 			],
 		};
 	},
 };
 </script>
+
+<style module="$s">
+.GridContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+}
+</style>
 ```
 
 
 <!-- api-tables:start -->
+## Menu Props
+
+| Prop           | Type        | Default | Possible values | Description |
+| -------------- | ----------- | ------- | --------------- | ----------- |
+| value          | `undefined` | —       | —               | —           |
+| options*       | `array`     | —       | —               | —           |
+| is-multiselect | `boolean`   | `false` | —               | —           |
 
 
+## Menu Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
 
 
+## Menu Events
+
+| Event | Type | Description |
+| ----- | ---- | ----------- |
+| input | -    | —           |
 
 
+## MenuOption Props
 
+| Prop    | Type        | Default | Possible values | Description |
+| ------- | ----------- | ------- | --------------- | ----------- |
+| option* | `undefined` | —       | —               | —           |
+
+
+## MenuOption Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
+
+
+## MenuOptionLabel Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
 <!-- api-tables:end -->
