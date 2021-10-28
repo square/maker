@@ -187,9 +187,9 @@ export default {
 
 ## Menu Events
 
-| Event | Type | Description |
-| ----- | ---- | ----------- |
-| input | -    | —           |
+| Event       | Type | Description |
+| ----------- | ---- | ----------- |
+| menu:update | -    | —           |
 
 
 ## MenuOption Props
