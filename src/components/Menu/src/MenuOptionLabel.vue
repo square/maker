@@ -1,10 +1,10 @@
 <template>
-	<div>Menu Option Label</div>
+	<div><slot /></div>
 </template>
 
 <script>
 export default {
-	name: 'MenuOption',
+	name: 'MenuOptionLabel',
 };
 </script>
 

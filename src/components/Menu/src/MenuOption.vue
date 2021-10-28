@@ -1,5 +1,5 @@
 <template>
-	<div>Menu Option</div>
+	<div><slot /></div>
 </template>
 
 <script>
