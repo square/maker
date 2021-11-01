@@ -73,65 +73,68 @@ export default {
 
 ```vue
 <template>
-	<m-container
-		label="Complex Data"
-		size="large"
-	>
-		<div :class="$s.GridContainer">
-			<m-card>
-				<m-container
-					label="Single Select"
-					:sublabel="'Value: ' + JSON.stringify(value)"
-					size="medium"
-				>
-					<m-menu
-						v-model="value"
-						:options="options"
+	<m-theme>
+		<m-container
+			label="Complex Data"
+			size="large"
+		>
+			<div :class="$s.GridContainer">
+				<m-card>
+					<m-container
+						label="Single Select"
+						:sublabel="'Value: ' + JSON.stringify(value)"
+						size="medium"
 					>
-						<template #default="option">
-							<m-menu-option
-								:option="option.value"
-							>
-								<m-menu-option-label>
-									{{ option.label }}
-								</m-menu-option-label>
-							</m-menu-option>
-						</template>
-					</m-menu>
-				</m-container>
-			</m-card>
+						<m-menu
+							v-model="value"
+							:options="options"
+						>
+							<template #default="option">
+								<m-menu-option
+									:option="option.value"
+								>
+									<m-menu-option-label>
+										{{ option.label }}
+									</m-menu-option-label>
+								</m-menu-option>
+							</template>
+						</m-menu>
+					</m-container>
+				</m-card>
 
-			<m-card>
-				<m-container
-					label="Multiple Select"
-					:sublabel="'Value: ' + JSON.stringify(multiValue)"
-					size="medium"
-				>
-					<m-menu
-						v-model="multiValue"
-						:options="options"
-						is-multiselect
+				<m-card>
+					<m-container
+						label="Multiple Select"
+						:sublabel="'Value: ' + JSON.stringify(multiValue)"
+						size="medium"
 					>
-						<template #default="option">
-							<m-menu-option
-								:option="option.value"
-							>
-								<m-menu-option-label>
-									{{ option.label }}
-								</m-menu-option-label>
-							</m-menu-option>
-						</template>
-					</m-menu>
-				</m-container>
-			</m-card>
-		</div>
-	</m-container>
+						<m-menu
+							v-model="multiValue"
+							:options="options"
+							is-multiselect
+						>
+							<template #default="option">
+								<m-menu-option
+									:option="option.value"
+								>
+									<m-menu-option-label>
+										{{ option.label }}
+									</m-menu-option-label>
+								</m-menu-option>
+							</template>
+						</m-menu>
+					</m-container>
+				</m-card>
+			</div>
+		</m-container>
+	</m-theme>
 </template>
 
 <script>
 import { MCard } from '@square/maker/components/Card';
 import { MContainer } from '@square/maker/components/Container';
 import { MMenu, MMenuOption, MMenuOptionLabel } from '@square/maker/components/Menu';
+import { MTheme } from '@square/maker/components/Theme';
 
 export default {
 	name: 'DemoSetup',
@@ -142,6 +145,7 @@ export default {
 		MMenu,
 		MMenuOption,
 		MMenuOptionLabel,
+		MTheme,
 	},
 
 	data() {
