@@ -27,7 +27,7 @@ import MMenuOption from './MenuOption.vue';
 import MMenuOptionLabel from './MenuOptionLabel.vue';
 import MenuKey from './key';
 
-const HOVER_COLOR_SCALE = 0.95;
+const HOVER_COLOR_SCALE = 0.85;
 
 export default {
 	name: 'Menu',
@@ -62,13 +62,13 @@ export default {
 			default: false,
 		},
 
-		textColor: {
+		color: {
 			type: String,
 			default: '#000',
 			validator: (color) => chroma.valid(color),
 		},
 
-		backgroundColor: {
+		bgColor: {
 			type: String,
 			default: '#fff',
 			validator: (color) => chroma.valid(color),
@@ -86,13 +86,13 @@ export default {
 
 	computed: {
 		colorScale() {
-			return chroma.scale([this.textColor, this.backgroundColor]);
+			return chroma.scale([this.color, this.bgColor]);
 		},
 
 		computedStyles() {
 			return {
-				'--menu-text': this.textColor,
-				'--menu-background': this.backgroundColor,
+				'--menu-text': this.color,
+				'--menu-background': this.bgColor,
 				'--menu-hover': this.colorScale(HOVER_COLOR_SCALE),
 			};
 		},
