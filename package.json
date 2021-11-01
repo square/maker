@@ -122,5 +122,8 @@
   },
   "release": {
     "preset": "conventionalcommits"
+  },
+  "dependencies": {
+    "popper.js": "^1.16.1"
   }
 }
