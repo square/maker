@@ -147,6 +147,22 @@
 						>
 							Schedule for later
 						</m-button>
+
+						<m-button
+							full-width
+							variant="secondary"
+						>
+							Secondary
+						</m-button>
+						<m-button
+							full-width
+							variant="tertiary"
+						>
+							Tertiary
+						</m-button>
+						<m-text-button>
+							Text button
+						</m-text-button>
 					</div>
 				</div>
 				<div

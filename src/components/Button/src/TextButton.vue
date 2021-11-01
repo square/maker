@@ -118,7 +118,7 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-900);
+	color: #000;
 	font-weight: 500;
 	font-family: inherit;
 	vertical-align: middle;
