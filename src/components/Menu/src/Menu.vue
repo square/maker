@@ -1,5 +1,8 @@
 <template>
-	<div :class="$s.Menu">
+	<div
+		:class="$s.Menu"
+		:style="computedStyles"
+	>
 		<slot
 			v-for="(option, idx) in options"
 			v-bind="option"
@@ -18,11 +21,13 @@
 </template>
 
 <script>
-import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import chroma from 'chroma-js';
 import { isEqual } from 'lodash';
 import MMenuOption from './MenuOption.vue';
 import MMenuOptionLabel from './MenuOptionLabel.vue';
 import MenuKey from './key';
+
+const HOVER_COLOR_SCALE = 0.95;
 
 export default {
 	name: 'Menu',
@@ -36,13 +41,6 @@ export default {
 		return {
 			[MenuKey]: this.menuAPI,
 		};
-	},
-
-	inject: {
-		theme: {
-			default: defaultTheme(),
-			from: MThemeKey,
-		},
 	},
 
 	model: {
@@ -63,6 +61,18 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+
+		textColor: {
+			type: String,
+			default: '#000',
+			validator: (color) => chroma.valid(color),
+		},
+
+		backgroundColor: {
+			type: String,
+			default: '#fff',
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	data() {
@@ -75,7 +85,17 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor']),
+		colorScale() {
+			return chroma.scale([this.textColor, this.backgroundColor]);
+		},
+
+		computedStyles() {
+			return {
+				'--menu-text': this.textColor,
+				'--menu-background': this.backgroundColor,
+				'--menu-hover': this.colorScale(HOVER_COLOR_SCALE),
+			};
+		},
 	},
 
 	created() {
