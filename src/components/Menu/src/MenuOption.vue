@@ -1,7 +1,10 @@
 <template>
 	<div
-		:class="$s.MenuOption"
-		@mousedown.prevent="selectOption"
+		:class="{
+			[$s.MenuOption]: true,
+			[$s.isDisabled]: disabled,
+		}"
+		@click.prevent="selectOption"
 	>
 		<div :class="$s.MenuOptionIconContainer">
 			<check-icon
@@ -12,20 +15,34 @@
 			/>
 		</div>
 		<div :class="$s.MenuOptionIconContent">
-			<slot />
+			<slot>
+				<menu-option-label>
+					{{ option }}
+				</menu-option-label>
+			</slot>
 		</div>
 	</div>
 </template>
 
 <script>
 import CheckIcon from '@square/maker-icons/Check';
-import MenuKey from './key';
+import { MenuKey, MenuOptionKey } from './key';
+import MenuOptionLabel from './MenuOptionLabel.vue';
 
 export default {
 	name: 'MenuOption',
 
 	components: {
 		CheckIcon,
+		MenuOptionLabel,
+	},
+
+	provide() {
+		return {
+			[MenuOptionKey]: {
+				disabled: () => this.disabled,
+			},
+		};
 	},
 
 	inject: {
@@ -33,9 +50,20 @@ export default {
 	},
 
 	props: {
+		/**
+		 * The value of this option. Default slot displays this.
+		 */
 		option: {
 			type: undefined,
 			required: true,
+		},
+
+		/**
+		 * Blocks selection
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 	},
 
@@ -47,6 +75,10 @@ export default {
 
 	methods: {
 		selectOption() {
+			if (this.disabled) {
+				return;
+			}
+
 			this.menu.selectOption(this.option);
 		},
 	},
@@ -63,7 +95,11 @@ export default {
 	transition: background-color 75ms linear;
 }
 
-.MenuOption:hover {
+.MenuOption.isDisabled {
+	cursor: not-allowed;
+}
+
+.MenuOption:not(.isDisabled):hover {
 	background-color: var(--menu-hover);
 }
 

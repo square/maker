@@ -3,6 +3,7 @@
 		:class="$s.Menu"
 		:style="computedStyles"
 	>
+		<!-- Content for each option -->
 		<slot
 			v-for="(option, idx) in options"
 			v-bind="option"
@@ -11,11 +12,7 @@
 				:key="idx"
 				:is-selected="false"
 				:option="option"
-			>
-				<m-menu-option-label>
-					{{ option }}
-				</m-menu-option-label>
-			</m-menu-option>
+			/>
 		</slot>
 	</div>
 </template>
@@ -24,17 +21,16 @@
 import chroma from 'chroma-js';
 import { isEqual } from 'lodash';
 import MMenuOption from './MenuOption.vue';
-import MMenuOptionLabel from './MenuOptionLabel.vue';
-import MenuKey from './key';
+import { MenuKey } from './key';
 
 const HOVER_COLOR_SCALE = 0.85;
+const DISABLED_TEXT_COLOR_SCALE = 0.5;
 
 export default {
 	name: 'Menu',
 
 	components: {
 		MMenuOption,
-		MMenuOptionLabel,
 	},
 
 	provide() {
@@ -48,26 +44,42 @@ export default {
 	},
 
 	props: {
+		/**
+		 * Component value
+		 */
 		value: {
 			type: undefined,
 			default: undefined,
 		},
+
+		/**
+		 * List of available options for menu
+		 */
 		options: {
 			type: Array,
 			required: true,
 		},
 
+		/**
+		 * Toggles whether the value is a list of selected options
+		 */
 		isMultiselect: {
 			type: Boolean,
 			default: false,
 		},
 
+		/**
+		 * Text color for options
+		 */
 		color: {
 			type: String,
 			default: '#000',
 			validator: (color) => chroma.valid(color),
 		},
 
+		/**
+		 * Background color for options
+		 */
 		bgColor: {
 			type: String,
 			default: '#fff',
@@ -85,6 +97,9 @@ export default {
 	},
 
 	computed: {
+		/**
+		 * Chroma scale to calculate colors between background and text
+		 */
 		colorScale() {
 			return chroma.scale([this.color, this.bgColor]);
 		},
@@ -92,24 +107,40 @@ export default {
 		computedStyles() {
 			return {
 				'--menu-text': this.color,
+				'--menu-text-disabled': this.colorScale(DISABLED_TEXT_COLOR_SCALE),
 				'--menu-background': this.bgColor,
 				'--menu-hover': this.colorScale(HOVER_COLOR_SCALE),
 			};
 		},
 	},
 
-	created() {
-		if (this.isMultiselect && !Array.isArray(this.value)) {
-			if (this.value === undefined) {
-				this.updateValue([]);
-			} else {
-				this.updateValue([this.value]);
-			}
-		}
+	watch: {
+		isMultiselect: {
+			immediate: true,
+			handler(isMultiselect, previousValue) {
+				if (previousValue === isMultiselect) {
+					return;
+				}
+
+				if (isMultiselect && !Array.isArray(this.value)) {
+					if (this.value === undefined) {
+						this.updateValue([]);
+					} else {
+						this.updateValue([this.value]);
+					}
+				} else if (!isMultiselect && Array.isArray(this.value)) {
+					const [newValue] = this.value;
+					this.updateValue(newValue);
+				}
+			},
+		},
 	},
 
 	methods: {
 		updateValue(value) {
+			/**
+			 * Value update for the menu selection
+			 */
 			this.$emit('menu:update', value);
 		},
 
