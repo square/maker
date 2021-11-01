@@ -140,6 +140,7 @@ export default {
 						<template #default="option">
 							<m-menu-option
 								:option="option.value"
+								:disabled="option.disabled"
 							>
 								<m-menu-option-label>
 									{{ option.label }}
@@ -166,6 +167,7 @@ export default {
 						<template #default="option">
 							<m-menu-option
 								:option="option.value"
+								:disabled="option.disabled"
 							>
 								<m-menu-option-label>
 									{{ option.label }}
@@ -202,7 +204,7 @@ export default {
 			options: [
 				{ label: 'Option 1 (foo)', value: { data: 'foo' } },
 				{ label: 'Option 2 (bar)', value: { data: 'bar' } },
-				{ label: 'Option 3 (baz)', value: { data: 'baz' } },
+				{ label: 'Option 3 (baz) [Disabled]', value: { data: 'baz' }, disabled: true },
 			],
 			color: '#000000',
 			bgColor: '#ffffff',
@@ -231,13 +233,13 @@ export default {
 <!-- api-tables:start -->
 ## Menu Props
 
-| Prop             | Type        | Default  | Possible values | Description |
-| ---------------- | ----------- | -------- | --------------- | ----------- |
-| value            | `undefined` | —        | —               | —           |
-| options*         | `array`     | —        | —               | —           |
-| is-multiselect   | `boolean`   | `false`  | —               | —           |
-| text-color       | `string`    | `'#000'` | —               | —           |
-| background-color | `string`    | `'#fff'` | —               | —           |
+| Prop           | Type        | Default  | Possible values | Description                                             |
+| -------------- | ----------- | -------- | --------------- | ------------------------------------------------------- |
+| value          | `undefined` | —        | —               | Component value                                         |
+| options*       | `array`     | —        | —               | List of available options for menu                      |
+| is-multiselect | `boolean`   | `false`  | —               | Toggles whether the value is a list of selected options |
+| color          | `string`    | `'#000'` | —               | Text color for options                                  |
+| bg-color       | `string`    | `'#fff'` | —               | Background color for options                            |
 
 
 ## Menu Slots
@@ -249,16 +251,17 @@ export default {
 
 ## Menu Events
 
-| Event       | Type | Description |
-| ----------- | ---- | ----------- |
-| menu:update | -    | —           |
+| Event       | Type | Description                         |
+| ----------- | ---- | ----------------------------------- |
+| menu:update | -    | Value update for the menu selection |
 
 
 ## MenuOption Props
 
-| Prop    | Type        | Default | Possible values | Description |
-| ------- | ----------- | ------- | --------------- | ----------- |
-| option* | `undefined` | —       | —               | —           |
+| Prop     | Type        | Default | Possible values | Description                                           |
+| -------- | ----------- | ------- | --------------- | ----------------------------------------------------- |
+| option*  | `undefined` | —       | —               | The value of this option. Default slot displays this. |
+| disabled | `boolean`   | `false` | —               | Blocks selection                                      |
 
 
 ## MenuOption Slots

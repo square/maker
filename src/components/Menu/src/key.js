@@ -1,1 +1,2 @@
-export default Symbol('Menu');
+export const MenuKey = Symbol('Menu');
+export const MenuOptionKey = Symbol('MenuOption');
