@@ -19,7 +19,6 @@
 
 <script>
 import CheckIcon from '@square/maker-icons/Check';
-import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 import MenuKey from './key';
 
 export default {
@@ -31,10 +30,6 @@ export default {
 
 	inject: {
 		menu: MenuKey,
-		theme: {
-			default: defaultTheme(),
-			from: MThemeKey,
-		},
 	},
 
 	props: {
@@ -63,7 +58,13 @@ export default {
 	display: flex;
 	align-items: center;
 	padding: 12px;
+	background-color: var(--menu-background);
 	cursor: pointer;
+	transition: background-color 75ms linear;
+}
+
+.MenuOption:hover {
+	background-color: var(--menu-hover);
 }
 
 .MenuOptionIconContainer {
@@ -78,11 +79,12 @@ export default {
 .MenuOptionIcon {
 	width: 16px;
 	height: 16px;
+	color: var(--menu-text);
 	opacity: 0;
 	transition: opacity 75ms linear;
+}
 
-	&.isShown {
-		opacity: 1;
-	}
+.MenuOptionIcon.isShown {
+	opacity: 1;
 }
 </style>

@@ -1,13 +1,18 @@
 <template>
-	<div><slot /></div>
+	<div :class="$s.MenuOptionLabel">
+		<slot />
+	</div>
 </template>
 
 <script>
+
 export default {
 	name: 'MenuOptionLabel',
 };
 </script>
 
-<style>
-/* Keep */
+<style module="$s">
+.MenuOptionLabel {
+	color: var(--menu-text);
+}
 </style>
