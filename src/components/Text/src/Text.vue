@@ -118,7 +118,7 @@ export default {
 }
 
 .Paragraph {
-	color: var(--color-800);
+	color: #000;
 	font-family: inherit;
 }
 

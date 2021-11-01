@@ -5,6 +5,8 @@ export default function defaultTheme() {
 		colors: {
 			background: '#ffffff',
 			primary: '#000000',
+			heading: '#000000',
+			text: '#000000',
 			'color-100': '#f1f1f1',
 			'color-300': '#d7d7d7',
 			'color-700': '#9e9e9e',
@@ -28,7 +30,7 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		textbutton: {
-			color: undefined,
+			color: '@colors.primary',
 			size: 'medium',
 		},
 		actionbarbutton: {
@@ -41,12 +43,12 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
-			textColor: undefined,
+			textColor: '@colors.text',
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
-			textColor: undefined,
+			textColor: '@colors.heading',
 		},
 		choice: {
 			selectedColor: undefined,
