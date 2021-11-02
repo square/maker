@@ -3,19 +3,18 @@ import chroma from 'chroma-js';
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
+import { validatePlacement } from './utils';
 
 const MAX_ACTION_VNODE = 1;
 
 const createPopperConfig = (placement, offset) => ({
 	placement,
-	modifiers: {
-		offset: {
-			offset,
+	modifiers: [
+		{
+			name: 'offset',
+			options: { offset },
 		},
-		preventOverflow: {
-			boundariesElement: 'viewport',
-		},
-	},
+	],
 });
 
 export default {
@@ -51,10 +50,29 @@ export default {
 			type: Object,
 			default: undefined,
 		},
+
+		placement: {
+			type: String,
+			default: 'bottom-start',
+			validator: validatePlacement,
+		},
+
+		distanceOffset: {
+			type: Number,
+			default: 8,
+		},
+
+		skiddingOffset: {
+			type: Number,
+			default: 0,
+		},
 	},
 
 	data() {
 		const vm = this;
+
+		const popperConfig = this.popoverConfig.config
+			|| createPopperConfig(this.placement, [this.skiddingOffset, this.distanceOffset]);
 
 		return {
 			popoverData: {
@@ -63,8 +81,7 @@ export default {
 				props: {
 					tetherEl: undefined,
 					flush: this.flush,
-					popperConfig:
-						this.popoverConfig.config || createPopperConfig(this.placement, this.offset),
+					popperConfig,
 				},
 			},
 

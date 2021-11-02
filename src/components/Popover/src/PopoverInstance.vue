@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Popper from './utils';
+import { createPopper } from '@popperjs/core';
 
 export default {
 	name: 'PopoverInstance',
@@ -20,12 +20,7 @@ export default {
 	},
 
 	mounted() {
-		this.popper = new Popper(
-			this.tetherEl,
-			this.$el,
-			this.popoverConfig,
-		);
-
+		this.popper = createPopper(this.tetherEl, this.$el, this.popperConfig);
 		this.resizeObserver = this.followPopoverAction();
 	},
 
@@ -38,7 +33,7 @@ export default {
 	methods: {
 		followPopoverAction() {
 			const resizeObserver = new ResizeObserver(() => {
-				this.popper.scheduleUpdate();
+				this.popper.update();
 				this.$emit('resize');
 			});
 

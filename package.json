@@ -124,6 +124,6 @@
     "preset": "conventionalcommits"
   },
   "dependencies": {
-    "popper.js": "^1.16.1"
+    "@popperjs/core": "^2.10.2"
   }
 }

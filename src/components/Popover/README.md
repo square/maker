@@ -5,11 +5,14 @@
 	<div id="a">
 		<m-popover-layer />
 
-		<div>
+		<div style="padding: 30rem 10rem;">
 			<m-popover>
 				<template #action="popover">
-					<m-button @click="popover.toggle()">
-						{{ popover.isOpen ? 'Close' : 'Open' }} Me!
+					<m-button
+						:variant="popover.isOpen ? 'primary' : 'secondary'"
+						@click="popover.toggle()"
+					>
+						Popover Toggle
 					</m-button>
 				</template>
 
@@ -47,11 +50,14 @@ export default {
 <!-- api-tables:start -->
 ## Popover Props
 
-| Prop           | Type     | Default  | Possible values | Description |
-| -------------- | -------- | -------- | --------------- | ----------- |
-| text-color     | `string` | `'#000'` | —               | —           |
-| bg-color       | `string` | `'#fff'` | —               | —           |
-| tether-element | `object` | —        | —               | —           |
+| Prop            | Type     | Default     | Possible values | Description |
+| --------------- | -------- | ----------- | --------------- | ----------- |
+| text-color      | `string` | `'#000'`    | —               | —           |
+| bg-color        | `string` | `'#fff'`    | —               | —           |
+| tether-element  | `object` | —           | —               | —           |
+| placement       | `string` | `'top-end'` | —               | —           |
+| distance-offset | `number` | `8`         | —               | —           |
+| skidding-offset | `number` | `0`         | —               | —           |
 
 
 ## Popover Events
@@ -60,6 +66,14 @@ export default {
 | ----- | ---- | ----------- |
 | open  | -    | —           |
 | close | -    | —           |
+
+
+## PopoverBubble Props
+
+| Prop     | Type     | Default  | Possible values | Description |
+| -------- | -------- | -------- | --------------- | ----------- |
+| color    | `string` | `'#000'` | —               | —           |
+| bg-color | `string` | `'#fff'` | —               | —           |
 
 
 ## PopoverBubble Slots

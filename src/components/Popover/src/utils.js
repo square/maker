@@ -1,5 +1,3 @@
-import Popper from 'popper.js';
-
 const MAX_OFFSET = 2;
 
 export const popoverPlacements = Object.freeze([
@@ -38,5 +36,3 @@ export function validateOverflowElement(element) {
 export function validateOffset(offset) {
 	return !!offset && offset.split(',').length <= MAX_OFFSET;
 }
-
-export default Popper;
