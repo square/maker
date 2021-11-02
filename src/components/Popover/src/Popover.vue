@@ -1,5 +1,4 @@
 <script>
-import chroma from 'chroma-js';
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
@@ -7,12 +6,30 @@ import { validatePlacement } from './utils';
 
 const MAX_ACTION_VNODE = 1;
 
-const createPopperConfig = (placement, offset) => ({
+const createPopperConfig = ({ placement, offset, minWidth }) => ({
 	placement,
 	modifiers: [
 		{
 			name: 'offset',
 			options: { offset },
+		},
+		{
+			name: 'preventOverflow',
+			options: {
+				padding: 24,
+			},
+		},
+		{
+			name: 'minWidth',
+			enabled: minWidth,
+			phase: 'beforeWrite',
+			requires: ['computeStyles'],
+			fn({ state: { styles, rects } }) {
+				styles.popper.minWidth = `${rects.reference.offsetWidth}px`;
+			},
+			effect({ state: { elements } }) {
+				elements.popper.style.minWidth = `${elements.reference.offsetWidth}px`;
+			},
 		},
 	],
 });
@@ -35,20 +52,14 @@ export default {
 	},
 
 	props: {
-		textColor: {
-			type: String,
-			default: '#000',
-			validator: (color) => chroma.valid(color),
-		},
-		bgColor: {
-			type: String,
-			default: '#fff',
-			validator: (color) => chroma.valid(color),
+		// eslint-disable-next-line vue/require-prop-types
+		tetherElement: {
+			default: undefined,
 		},
 
-		tetherElement: {
-			type: Object,
-			default: undefined,
+		ignoreElements: {
+			type: Array,
+			default: () => [],
 		},
 
 		placement: {
@@ -66,13 +77,21 @@ export default {
 			type: Number,
 			default: 0,
 		},
+
+		minWidth: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	data() {
 		const vm = this;
 
-		const popperConfig = this.popoverConfig.config
-			|| createPopperConfig(this.placement, [this.skiddingOffset, this.distanceOffset]);
+		const popperConfig = this.popoverConfig.config || createPopperConfig({
+			placement: this.placement,
+			offset: [this.skiddingOffset, this.distanceOffset],
+			minWidth: this.minWidth,
+		});
 
 		return {
 			popoverData: {
@@ -80,6 +99,7 @@ export default {
 				on: this.$listeners,
 				props: {
 					tetherEl: undefined,
+					ignoreEls: [],
 					flush: this.flush,
 					popperConfig,
 				},
@@ -94,6 +114,7 @@ export default {
 					}
 
 					vm.popoverData.props.tetherEl = vm.tetherElement || vm.$el;
+					vm.popoverData.props.ignoreEls = vm.ignoreElements;
 
 					const whenClosed = vm.popoverAPI.setPopover(vm.popoverData);
 					vm.actionAPI.isOpen = true;
@@ -129,7 +150,8 @@ export default {
 
 	methods: {
 		getActionVnode(actionSlot) {
-			let actionVnode = actionSlot(this.actionAPI);
+			// eslint-disable-next-line max-len
+			let actionVnode = actionSlot({ ...this.actionAPI, refs: [this.tetherElement, this.ignoreElements] });
 
 			if (!Array.isArray(actionVnode)) {
 				return actionVnode;
@@ -162,12 +184,10 @@ export default {
 			action: actionSlot,
 		} = this.$scopedSlots;
 
-		// TODO: Remove this check
-		assert.error(actionSlot, 'You must pass in an element into the `action` scoped-slot to trigger the Popover with', 'Popover');
+		// eslint-disable-next-line max-len
+		this.popoverData.contentSlot = (contentSlotScoped || contentSlot)?.({ refs: [this.tetherElement, this.ignoreElements] });
 
-		this.popoverData.contentSlot = contentSlotScoped || contentSlot;
-
-		return this.getActionVnode(actionSlot);
+		return actionSlot && this.getActionVnode(actionSlot);
 	},
 };
 </script>

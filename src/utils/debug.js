@@ -7,7 +7,6 @@ const logPrefix = (componentName) => [`%c @square/maker${componentNamespace(comp
 const errorPrefix = (componentName) => `[@square/maker]${componentNamespace(componentName)}`;
 
 export const throwError = (message, componentName) => {
-	console.log({ message, componentName });
 	console.error(...logPrefix(componentName), message);
 	throw new Error(`${errorPrefix(componentName)} ${message}`);
 };
