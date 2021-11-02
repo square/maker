@@ -86,7 +86,7 @@ export default {
 				},
 
 				close() {
-					vm.popoverAPI.setPopover();
+					vm.popoverAPI.closePopover();
 				},
 
 				toggle() {

@@ -117,8 +117,8 @@ export default {
 				return;
 			}
 
-			const clickInBubble = $instance && $instance.$el.contains(this.clickSrc);
-			const clickInAction = this.actionEl && this.actionEl.contains(this.clickSrc);
+			const clickInBubble = $instance.$el?.contains(this.popoverAPI.clickSrc);
+			const clickInAction = this.popoverAPI.tetherEl?.contains(this.popoverAPI.clickSrc);
 
 			if (!clickInBubble && !clickInAction) {
 				this.popoverAPI.closePopover();
