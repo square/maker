@@ -2,7 +2,7 @@
 import chroma from 'chroma-js';
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
-import { PopoverConfigKey, PopoverLayerKey } from './keys';
+import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
 const MAX_ACTION_VNODE = 1;
 
@@ -22,8 +22,8 @@ export default {
 	name: 'Popover',
 
 	inject: {
-		popoverLayer: {
-			from: PopoverLayerKey,
+		popoverAPI: {
+			from: PopoverAPIKey,
 			default: () => throwError('No popover layer detected', 'Popover'),
 		},
 
@@ -63,7 +63,8 @@ export default {
 				props: {
 					tetherEl: undefined,
 					flush: this.flush,
-					popperConfig: this.popoverConfig.config || createPopperConfig,
+					popperConfig:
+						this.popoverConfig.config || createPopperConfig(this.placement, this.offset),
 				},
 			},
 
@@ -77,7 +78,7 @@ export default {
 
 					vm.popoverData.props.tetherEl = vm.tetherElement || vm.$el;
 
-					const whenClosed = vm.popoverLayer.setPopover(vm.popoverData);
+					const whenClosed = vm.popoverAPI.setPopover(vm.popoverData);
 					vm.actionAPI.isOpen = true;
 					whenClosed.then(() => {
 						vm.actionAPI.isOpen = false;
@@ -85,7 +86,7 @@ export default {
 				},
 
 				close() {
-					this.popoverLayer.setPopover();
+					vm.popoverAPI.setPopover();
 				},
 
 				toggle() {

@@ -1,13 +1,17 @@
 <template>
 	<m-transition-fade-in>
-		<pseudo-window @blur.passive="handleBlur">
+		<pseudo-window @blur="handleBlur">
 			<pseudo-window>
-				{{ { currentInstance, tetherEl, clickSrc } }}
+				{{ {
+					currentInstance: !!popoverAPI.currentInstance,
+					tetherEl: !!popoverAPI.tetherEl,
+					clickSrc: !!popoverAPI.clickSrc,
+				} }}
 				<component
-					:is="currentInstance"
-					v-if="currentInstance"
+					:is="popoverAPI.currentInstance"
+					v-if="popoverAPI.currentInstance"
 					ref="instance"
-					@close="closePopover"
+					@close="popoverAPI.closePopover"
 				/>
 			</pseudo-window>
 		</pseudo-window>
@@ -17,8 +21,9 @@
 <script>
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import PseudoWindow from 'vue-pseudo-window';
+import Vue from 'vue';
 import PopoverInstance from './PopoverInstance.vue';
-import { PopoverLayerKey } from './keys';
+import { PopoverAPIKey } from './keys';
 
 const newPopover = (popoverData, onDestroy) => ({
 	render() {
@@ -39,35 +44,44 @@ const newPopover = (popoverData, onDestroy) => ({
 });
 
 const popoverMixin = {
-	provide() {
-		return {
-			[PopoverLayerKey]: this.API,
-		};
+	inject: {
+		layer: {
+			default: undefined,
+			from: PopoverAPIKey,
+		},
 	},
 
-	data() {
-		const vm = this;
-
-		return {
+	provide() {
+		const api = Vue.observable({
 			currentInstance: undefined,
 			tetherEl: undefined,
 			clickSrc: undefined,
-			API: {
-				setPopover: (popoverData) => {
-					if (!popoverData) {
-						return undefined;
-					}
+			setPopover(popoverData) {
+				if (!popoverData) {
+					return undefined;
+				}
 
-					if (vm.currentInstance) {
-						vm.closePopover();
-					}
+				if (this.currentInstance) {
+					this.closePopover();
+				}
 
-					return new Promise((resolve) => {
-						vm.tetherEl = popoverData.props.tetherEl;
-						vm.currentInstance = newPopover(popoverData, resolve);
-					});
-				},
+				return new Promise((resolve) => {
+					this.tetherEl = popoverData.props.tetherEl;
+					this.currentInstance = newPopover(popoverData, resolve);
+				});
 			},
+
+			closePopover() {
+				this.currentInstance = undefined;
+			},
+		});
+
+		if (!this.popoverAPI) {
+			this.popoverAPI = api;
+		}
+
+		return {
+			[PopoverAPIKey]: api,
 		};
 	},
 };
@@ -80,15 +94,17 @@ export default {
 		PseudoWindow,
 	},
 
-	mixins: [
-		popoverMixin,
-	],
+	inject: {
+		popoverAPI: PopoverAPIKey,
+	},
 
 	popoverMixin,
 
 	methods: {
 		handleBlur() {
-			// keep
+			if (document.activeElement !== document.body) {
+				this.popoverAPI.closePopover();
+			}
 		},
 	},
 };

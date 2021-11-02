@@ -8,14 +8,27 @@
 		<div>
 			<m-popover>
 				<template #action="popover">
-					<m-button @click="popover.open()">
-						Open {{ popover || '[MISSING POPOVER]' }}
+					<m-button @click="popover.toggle()">
+						Open 1 {{ popover || '[MISSING POPOVER]' }}
 					</m-button>
 				</template>
 
 				<template #content>
 					<m-popover-bubble>
-						I'm some content!
+						Content 1
+					</m-popover-bubble>
+				</template>
+			</m-popover>
+			<m-popover>
+				<template #action="popover">
+					<m-button @click="popover.toggle()">
+						Open 2 {{ popover || '[MISSING POPOVER]' }}
+					</m-button>
+				</template>
+
+				<template #content>
+					<m-popover-bubble>
+						Content 2
 					</m-popover-bubble>
 				</template>
 			</m-popover>
