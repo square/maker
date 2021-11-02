@@ -1,12 +1,12 @@
 <template>
-	<m-transition-fade-in>
-		<pseudo-window @blur="handleBlur">
-			<pseudo-window>
-				{{ {
-					currentInstance: !!popoverAPI.currentInstance,
-					tetherEl: !!popoverAPI.tetherEl,
-					clickSrc: !!popoverAPI.clickSrc,
-				} }}
+	<span>
+		<pseudo-window @blur.passive="handleBlur">
+			<pseudo-window
+				@mousedown="trackClickSrc"
+				@touchstart="trackClickSrc"
+				@click.capture="handleClick"
+				@touchend="handleClick"
+			>
 				<component
 					:is="popoverAPI.currentInstance"
 					v-if="popoverAPI.currentInstance"
@@ -15,7 +15,7 @@
 				/>
 			</pseudo-window>
 		</pseudo-window>
-	</m-transition-fade-in>
+	</span>
 </template>
 
 <script>
@@ -57,12 +57,12 @@ const popoverMixin = {
 			tetherEl: undefined,
 			clickSrc: undefined,
 			setPopover(popoverData) {
-				if (!popoverData) {
-					return undefined;
-				}
-
 				if (this.currentInstance) {
 					this.closePopover();
+				}
+
+				if (!popoverData) {
+					return undefined;
 				}
 
 				return new Promise((resolve) => {
@@ -105,6 +105,26 @@ export default {
 			if (document.activeElement !== document.body) {
 				this.popoverAPI.closePopover();
 			}
+		},
+
+		trackClickSrc({ target }) {
+			this.popoverAPI.clickSrc = target;
+		},
+
+		handleClick() {
+			const $instance = this.$refs.instance;
+			if (!$instance || !this.popoverAPI.clickSrc) {
+				return;
+			}
+
+			const clickInBubble = $instance && $instance.$el.contains(this.clickSrc);
+			const clickInAction = this.actionEl && this.actionEl.contains(this.clickSrc);
+
+			if (!clickInBubble && !clickInAction) {
+				this.popoverAPI.closePopover();
+			}
+
+			this.popoverAPI.clickSrc = undefined;
 		},
 	},
 };
