@@ -1,3 +1,73 @@
+# Popover
+
+```vue
+<template>
+	<div id="a">
+		<m-popover-layer />
+
+		<div>
+			<m-popover>
+				<template #action="popover">
+					<m-button @click="popover.open()">
+						Open {{ popover || '[MISSING POPOVER]' }}
+					</m-button>
+				</template>
+
+				<template #content>
+					<m-popover-bubble>
+						I'm some content!
+					</m-popover-bubble>
+				</template>
+			</m-popover>
+		</div>
+	</div>
+</template>
+
+<script>
+import { MPopoverLayer, MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	name: 'DemoA',
+
+	components: {
+		MPopoverLayer,
+		MPopover,
+		MPopoverBubble,
+		MButton,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+};
+</script>
+```
+
+<!-- api-tables:start -->
+## Popover Props
+
+| Prop           | Type     | Default  | Possible values | Description |
+| -------------- | -------- | -------- | --------------- | ----------- |
+| text-color     | `string` | `'#000'` | —               | —           |
+| bg-color       | `string` | `'#fff'` | —               | —           |
+| tether-element | `object` | —        | —               | —           |
 
 
-<!-- api-tables:start --><!-- api-tables:end -->
+## Popover Events
+
+| Event | Type | Description |
+| ----- | ---- | ----------- |
+| open  | -    | —           |
+| close | -    | —           |
+
+
+## PopoverBubble Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
+
+
+
+<!-- api-tables:end -->
