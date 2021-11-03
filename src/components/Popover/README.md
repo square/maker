@@ -8,7 +8,7 @@
 
 		<div style="padding: 5rem;">
 			<m-popover>
-				<template #action="popover">
+				<template #tether="popover">
 					<m-button
 						:variant="popover.isOpen ? 'primary' : 'secondary'"
 						@click="popover.toggle()"
@@ -48,7 +48,7 @@ export default {
 </script>
 ```
 
-## Detached Action
+## External Trigger
 ```vue
 <template>
 	<div>
@@ -57,21 +57,18 @@ export default {
 		<m-button
 			ref="externalTrigger"
 			:variant="false ? 'primary' : 'secondary'"
-			@click="$refs.popover.toggle()"
+			@click="$refs.popover.toggle($refs.externalTrigger.$el)"
 		>
-			Popover Toggle
+			Popover Open
 		</m-button>
 
 		<div style="padding: 5rem;">
-			<div ref="tether">
-				It will open on me
-			</div>
-
-			<m-popover
-				ref="popover"
-				:tether-element="$refs.tether"
-				:ignore-elements="[$refs.externalTrigger]"
-			>
+			<m-popover ref="popover">
+				<template #tether>
+					<span ref="tether">
+						It will open on me
+					</span>
+				</template>
 				<template #content>
 					<m-popover-bubble>
 						Content 1
@@ -167,7 +164,7 @@ _DemoModal.vue_
 			</m-heading>
 
 			<m-popover>
-				<template #action="popover">
+				<template #tether="popover">
 					<m-button
 						size="small"
 						@click="popover.toggle()"

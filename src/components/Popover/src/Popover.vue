@@ -53,11 +53,6 @@ export default {
 	},
 
 	props: {
-		// eslint-disable-next-line vue/require-prop-types
-		tetherElement: {
-			default: undefined,
-		},
-
 		ignoreElements: {
 			type: Array,
 			default: () => [],
@@ -109,13 +104,13 @@ export default {
 			actionAPI: {
 				isOpen: false,
 
-				open() {
+				open(...ignoreElements) {
 					if (vm.actionAPI.isOpen) {
 						return;
 					}
 
-					vm.popoverData.props.tetherEl = vm.tetherElement || vm.$el;
-					vm.popoverData.props.ignoreEls = vm.ignoreElements;
+					vm.popoverData.props.tetherEl = vm.$el;
+					vm.popoverData.props.ignoreEls = ignoreElements;
 
 					const whenClosed = vm.popoverAPI.setPopover(vm.popoverData);
 					vm.actionAPI.isOpen = true;
@@ -128,11 +123,11 @@ export default {
 					vm.popoverAPI.closePopover();
 				},
 
-				toggle() {
+				toggle(...ignoreElements) {
 					if (vm.actionAPI.isOpen) {
 						vm.actionAPI.close();
 					} else {
-						vm.actionAPI.open();
+						vm.actionAPI.open(...ignoreElements);
 					}
 				},
 			},
@@ -154,30 +149,30 @@ export default {
 	},
 
 	methods: {
-		getActionVnode(actionSlot) {
-			let actionVnode = actionSlot(this.actionAPI);
+		getTetherVNode(tetherSlot) {
+			let tetherVnode = tetherSlot(this.actionAPI);
 
-			if (!Array.isArray(actionVnode)) {
-				return actionVnode;
+			if (!Array.isArray(tetherVnode)) {
+				return tetherVnode;
 			}
 
-			actionVnode = actionVnode.flat(Infinity).filter((vnode) => vnode.tag);
+			tetherVnode = tetherVnode.flat(Infinity).filter((vnode) => vnode.tag);
 
-			assert.error(actionVnode.length === MAX_ACTION_VNODE, 'Popover', 'You must only pass in one element into the `action` scoped-slot');
+			assert.error(tetherVnode.length === MAX_ACTION_VNODE, 'Popover', 'You must only pass in one element into the `action` scoped-slot');
 
-			return actionVnode[0];
+			return tetherVnode[0];
 		},
 
-		open() {
-			this.actionAPI.open();
+		open(...ignoreElements) {
+			this.actionAPI.open(...ignoreElements);
 		},
 
 		close() {
 			this.actionAPI.close();
 		},
 
-		toggle() {
-			this.actionAPI.toggle();
+		toggle(...ignoreElements) {
+			this.actionAPI.toggle(...ignoreElements);
 		},
 	},
 
@@ -185,12 +180,14 @@ export default {
 		const { content: contentSlot } = this.$slots;
 		const {
 			content: contentSlotScoped,
-			action: actionSlot,
+			tether: tetherSlot,
 		} = this.$scopedSlots;
+
+		assert.error(tetherSlot, 'Popover', 'You must provide an action slot');
 
 		this.popoverData.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
 
-		return actionSlot && this.getActionVnode(actionSlot);
+		return tetherSlot && this.getTetherVNode(tetherSlot);
 	},
 };
 </script>
