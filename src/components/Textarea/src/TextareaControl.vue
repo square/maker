@@ -98,34 +98,24 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: #f6f7f9;
-	--color-background-focus: rgba(255, 255, 255, 0.95);
-	--color-foreground: rgba(0, 0, 0, 0.9);
-	--color-placeholder: rgba(0, 0, 0, 0.55);
-	--color-disabled: rgba(0, 0, 0, 0.3);
-	--color-background-disabled: rgba(0, 0, 0, 0.05);
+	--color-background: var(--color-100, #f6f7f9);
 	--color-border: transparent;
-	--color-border-active: #222;
-	--border-radius: 8px;
-	--color-error: rgba(206, 50, 23, 1);
-	--focus-shadow: 0 0 0 2px rgba(34, 34, 34, 0.3);
 }
 
 .variant_outline {
-	--color-background: #fff;
-	--color-background-focus: #fff;
-	--color-foreground: rgba(0, 0, 0, 0.9);
-	--color-placeholder: rgba(0, 0, 0, 0.55);
-	--color-disabled: rgba(0, 0, 0, 0.3);
-	--color-background-disabled: rgb(0, 0, 0, 0.03);
-	--color-border: rgb(0, 0, 0, 0.15);
-	--color-border-active: rgb(0, 0, 0, 0.3);
-	--border-radius: 8px;
-	--color-error: rgba(206, 50, 23, 1);
-	--focus-shadow: none;
+	--color-background: transparent;
+	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
 }
 
 .Textarea {
+	--color-placeholder: var(--color-800, rgba(0, 0, 0, 0.55));
+	--color-foreground: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-disabled: var(--color-700, rgba(0, 0, 0, 0.3));
+	--color-border-disabled: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-border-active: var(--color-800, #222);
+	--color-error: rgba(206, 50, 23, 1);
+	--border-radius: 8px;
+
 	box-sizing: border-box;
 	width: 100%;
 
@@ -153,7 +143,7 @@ export default {
 
 	&:disabled {
 		color: var(--color-disabled);
-		background-color: var(--color-background-disabled);
+		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
 
 		&::placeholder {
@@ -171,14 +161,7 @@ export default {
 
 	&:active:not(:disabled, :invalid),
 	&:focus:not(:disabled, :invalid) {
-		background-color: var(--color-background-focus);
 		border-color: var(--color-border-active);
-		box-shadow: var(--focus-shadow);
-	}
-
-	&:active:not(:disabled),
-	&:focus:not(:disabled) {
-		background-color: var(--color-background-focus);
 	}
 
 	&.resizable {

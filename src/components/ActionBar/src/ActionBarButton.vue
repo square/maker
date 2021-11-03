@@ -2,10 +2,10 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`align_${align}`],
-			$s[`shape_${shape}`],
+			$s[`align_${resolvedAlign}`],
+			$s[`shape_${resolvedShape}`],
 			{
-				[$s.fullWidth]: fullWidth,
+				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild(),
 				[$s.loading]: loading,
 			}
@@ -44,6 +44,7 @@
 import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import getContrast from '@square/maker/utils/get-contrast';
 
 // TODO: refactor the code below so it's shared with Button component
@@ -76,6 +77,13 @@ export default {
 		PseudoWindow,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -91,14 +99,14 @@ export default {
 		 */
 		fullWidth: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * Background color of button
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -114,7 +122,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'pill',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -129,7 +137,7 @@ export default {
 		 */
 		align: {
 			type: String,
-			default: 'center',
+			default: undefined,
 			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
 		},
 		/**
@@ -142,10 +150,22 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
+			/**
+			 * Return different default theme colors for icon buttons
+			 * This can be removed if the action bar icon button ever
+			 * becomes its own component or if we add theming for variants
+			 */
+			if (this.isSingleChild()) {
+				return fill({
+					color: this.color || this.theme.colors['color-elevation'] || '#000',
+					textColor: this.textColor || this.resolvedColor,
+				});
+			}
 			return fill({
-				color: this.color,
-				textColor: this.textColor,
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
 			});
 		},
 	},
@@ -269,8 +289,8 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 2px #fff,
-			0 0 0 4px var(--color-focus);
+			0 0 0 1px var(--color-300, #fff),
+			0 0 0 3px var(--color-focus);
 	}
 
 	&:active {

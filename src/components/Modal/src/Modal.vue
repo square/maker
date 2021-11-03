@@ -1,11 +1,17 @@
 <template>
-	<div :class="$s.Modal">
+	<div
+		:class="$s.Modal"
+		:style="style"
+	>
 		<!-- @slot Modal content -->
 		<slot />
 	</div>
 </template>
 
 <script>
+import chroma from 'chroma-js';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+
 import modalApi from './modal-api';
 
 export default {
@@ -13,6 +19,10 @@ export default {
 
 	inject: {
 		modalApi,
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	props: {
@@ -23,6 +33,33 @@ export default {
 			type: Function,
 			required: false,
 			default: undefined,
+		},
+		/**
+		 * Background color of container
+		 */
+		bgColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
+		/**
+		 * Text color of container
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
+	},
+
+	computed: {
+		...resolveThemeableProps('modal', ['bgColor', 'color']),
+
+		style() {
+			return {
+				'--bg-color': this.resolvedBgColor,
+				'--color': this.resolvedColor,
+			};
 		},
 	},
 
@@ -41,7 +78,8 @@ export default {
 .Modal {
 	height: 100%;
 	overflow: scroll;
-	background: #f5f6f7;
+	color: var(--color, inherit);
+	background: var(--bg-color, #f5f6f7);
 }
 
 @media screen and (min-width: 840px) {

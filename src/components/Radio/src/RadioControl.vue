@@ -91,13 +91,10 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-background: rgba(255, 255, 255, 0.95);
-	--color-fill: rgba(0, 0, 0, 0.9);
-	--color-focus: rgba(0, 0, 0, 0.9);
+	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
 	--color-error: rgba(206, 50, 23, 1);
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-fill: rgba(0, 0, 0, 0.15);
 }
 
 .Radio {
@@ -136,7 +133,6 @@ export default {
 
 	&:disabled {
 		background-color: var(--color-disabled);
-		border-color: var(--color-disabled);
 		cursor: not-allowed;
 	}
 
@@ -149,10 +145,15 @@ export default {
 		border-color: var(--color-error);
 	}
 
+	&:checked:disabled {
+		background-color: var(--color-border);
+		border-color: var(--color-border);
+	}
+
 	&:hover:not(:disabled, :invalid),
 	&:focus:not(:disabled, :invalid),
 	&:active:not(:disabled, :invalid) {
-		border-color: var(--color-focus);
+		border-color: var(--color-fill);
 	}
 }
 </style>

@@ -91,12 +91,9 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-border-active: rgba(0, 0, 0, 0.9);
-	--color-background: rgba(0, 0, 0, 0.9);
-	--color-foreground: rgba(255, 255, 255, 0.95);
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-checked: rgba(0, 0, 0, 0.15);
+	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--color-900, rgba(0, 0, 0, 0.9));
+	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -106,7 +103,7 @@ export default {
 	height: 20px;
 	margin: 0;
 	padding: 0;
-	background-color: #fff;
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
 	outline: none;
@@ -120,22 +117,21 @@ export default {
 
 	&:disabled {
 		background-color: var(--color-disabled);
-		border-color: var(--color-disabled);
 		cursor: not-allowed;
 	}
 
 	&:checked {
-		background-color: var(--color-background);
-		border-color: var(--color-border-active);
+		background-color: var(--color-fill);
+		border-color: var(--color-fill);
 	}
 
 	&:hover:not(:disabled, :invalid) {
-		border-color: var(--color-border-active);
+		border-color: var(--color-fill);
 	}
 
 	&:checked:disabled {
-		background-color: var(--color-disabled-checked);
-		border-color: var(--color-disabled);
+		background-color: var(--color-border);
+		border-color: var(--color-border);
 	}
 
 	&:checked:invalid {
@@ -154,7 +150,7 @@ export default {
 	transition: opacity 0.2s ease;
 	pointer-events: none;
 	fill: none;
-	stroke: var(--color-foreground);
+	stroke: var(--color-background);
 	stroke-width: 2px;
 	stroke-linecap: round;
 	stroke-linejoin: round;

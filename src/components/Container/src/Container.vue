@@ -47,12 +47,20 @@
 <script>
 import chroma from 'chroma-js';
 import assert from '@square/maker/utils/assert';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
  * @inheritAttrs section
  * @inheritListeners section
  */
 export default {
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -104,10 +112,11 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('container', ['bgColor', 'color']),
 		style() {
 			return {
-				'--bg-color': this.bgColor,
-				'--color': this.color,
+				'--bg-color': this.resolvedBgColor,
+				'--color': this.resolvedColor,
 			};
 		},
 		hasLabel() {
@@ -131,16 +140,15 @@ export default {
 
 <style module="$s">
 .Container {
-	--opacity-sublabel: 0.7;
-
 	padding: 16px 24px;
-	color: var(--color, inherit);
+	color: var(--color, var(--color-800, inherit));
 	font-family: inherit;
 	background-color: var(--bg-color, inherit);
 }
 
 .Label {
 	margin-bottom: 16px;
+	color: var(--color, var(--color-900, inherit));
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
@@ -170,12 +178,12 @@ export default {
 }
 
 .Sublabel {
+	color: var(--color, var(--color-800, inherit));
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: normal;
 	text-transform: none;
-	opacity: var(--opacity-sublabel);
 }
 
 .RequirementLabel {
@@ -183,7 +191,6 @@ export default {
 	font-size: 14px;
 	line-height: 24px;
 	white-space: nowrap;
-	opacity: var(--opacity-sublabel);
 }
 
 .Header {
