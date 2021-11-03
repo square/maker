@@ -19,7 +19,7 @@
 
 				<template #content>
 					<m-popover-bubble>
-						Content 1
+						<demo-popover />
 					</m-popover-bubble>
 				</template>
 			</m-popover>
@@ -30,6 +30,7 @@
 <script>
 import { MPopoverLayer, MPopover, MPopoverBubble } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
+import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
 	name: 'SimpleDemo',
@@ -39,6 +40,7 @@ export default {
 		MPopover,
 		MPopoverBubble,
 		MButton,
+		DemoPopover,
 	},
 
 	mixins: [
@@ -71,7 +73,7 @@ export default {
 				</template>
 				<template #content>
 					<m-popover-bubble>
-						Content 1
+						<demo-popover />
 					</m-popover-bubble>
 				</template>
 			</m-popover>
@@ -82,6 +84,7 @@ export default {
 <script>
 import { MPopoverLayer, MPopover, MPopoverBubble } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
+import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
 	name: 'SimpleDemo',
@@ -91,6 +94,7 @@ export default {
 		MPopover,
 		MPopoverBubble,
 		MButton,
+		DemoPopover,
 	},
 
 	mixins: [
@@ -175,11 +179,11 @@ _DemoModal.vue_
 
 				<template #content>
 					<m-popover-bubble>
-						<div style="padding: 10rem 2rem;">
+						<demo-popover>
 							<m-button @click="closeModal()">
 								Close Modal
 							</m-button>
-						</div>
+						</demo-popover>
 					</m-popover-bubble>
 				</template>
 			</m-popover>
@@ -192,6 +196,7 @@ import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
 	name: 'DemoModal',
@@ -203,6 +208,7 @@ export default {
 		MButton,
 		MHeading,
 		MModalContent,
+		DemoPopover,
 	},
 
 	inject: {
@@ -216,6 +222,58 @@ export default {
 	},
 };
 </script>
+```
+
+_DemoPopoverContent.vue_
+
+```vue
+<template>
+	<div :class="$s.DemoPopoverContent">
+		<m-heading
+			:class="$s.DemoPopoverHeader"
+			:size="0"
+		>
+			Hello, I'm a popover
+		</m-heading>
+
+		<div :class="$s.DemoPopoverText">
+			This is some popover content
+		</div>
+
+		<div
+			v-if="$slots.default"
+			:class="$s.DemoPopoverCustom"
+		>
+			<slot />
+		</div>
+	</div>
+</template>
+
+<script>
+import { MHeading } from '@square/maker/components/Heading';
+
+export default {
+	name: 'DemoPopoverContent',
+
+	components: {
+		MHeading,
+	},
+};
+</script>
+
+<style module="$s">
+.DemoPopoverContent {
+	padding: 0 8px;
+}
+
+.DemoPopoverHeader + .DemoPopoverText {
+	margin-top: 8px;
+}
+
+.DemoPopoverText + .DemoPopoverCustom {
+	margin-top: 4px;
+}
+</style>
 ```
 
 <!-- api-tables:start -->

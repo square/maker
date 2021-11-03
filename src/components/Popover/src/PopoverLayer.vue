@@ -45,7 +45,7 @@ const newPopover = (popoverData, onDestroy) => ({
 
 const popoverMixin = {
 	inject: {
-		layer: {
+		currentPopoverLayer: {
 			default: undefined,
 			from: PopoverAPIKey,
 		},
@@ -126,7 +126,7 @@ export default {
 			const clickInBubble = $instance.$el?.contains(this.popoverAPI.clickSrc);
 			const clickInAction = this.popoverAPI.tetherEl?.contains(this.popoverAPI.clickSrc);
 			const clickInIgnores = this.popoverAPI.ignoreEls?.some(
-				(element) => element?.contains?.(this.popoverAPI.clickSrc),
+				(element) => element.contains?.(this.popoverAPI.clickSrc),
 			);
 
 			if (!clickInBubble && !clickInAction && !clickInIgnores) {
