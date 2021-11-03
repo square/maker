@@ -148,6 +148,10 @@ export default {
 		},
 	},
 
+	beforeDestroy() {
+		this.close();
+	},
+
 	methods: {
 		getActionVnode(actionSlot) {
 			// eslint-disable-next-line max-len

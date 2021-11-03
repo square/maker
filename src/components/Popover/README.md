@@ -103,6 +103,124 @@ export default {
 </script>
 ```
 
+## Modal/Dialog Usage
+```vue
+<template>
+	<div>
+		<m-modal-layer />
+		<m-popover-layer />
+
+		<m-button
+			@click="openModal()"
+		>
+			Open Modal
+		</m-button>
+	</div>
+</template>
+
+<script>
+import { MPopoverLayer } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoModal from 'doc/DemoModal.vue';
+
+export default {
+	name: 'ModalDemo',
+
+	components: {
+		MPopoverLayer,
+		MButton,
+		MModalLayer,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(
+				() => <DemoModal />,
+				{
+					closeOnClickOutside: true,
+				},
+			);
+		},
+	},
+};
+</script>
+```
+
+_DemoModal.vue_
+
+```vue
+<template>
+	<m-modal>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<m-modal-content>
+			<m-heading>
+				Popover in a modal
+			</m-heading>
+
+			<m-popover>
+				<template #action="popover">
+					<m-button
+						size="small"
+						@click="popover.toggle()"
+					>
+						Toggle Popover
+					</m-button>
+				</template>
+
+				<template #content>
+					<m-popover-bubble>
+						<div style="padding: 10rem 2rem;">
+							<m-button @click="closeModal()">
+								Close Modal
+							</m-button>
+						</div>
+					</m-popover-bubble>
+				</template>
+			</m-popover>
+		</m-modal-content>
+	</m-modal>
+</template>
+
+<script>
+import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
+
+export default {
+	name: 'DemoModal',
+
+	components: {
+		MPopover,
+		MPopoverBubble,
+		MModal,
+		MButton,
+		MHeading,
+		MModalContent,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	methods: {
+		closeModal() {
+			this.modalApi.close();
+		},
+	},
+};
+</script>
+```
+
 <!-- api-tables:start -->
 ## Popover Props
 

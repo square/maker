@@ -1,5 +1,5 @@
 <template>
-	<span>
+	<div :class="$s.PopoverLayer">
 		<pseudo-window @blur.passive="handleBlur">
 			<pseudo-window
 				@mousedown="trackClickSrc"
@@ -15,7 +15,7 @@
 				/>
 			</pseudo-window>
 		</pseudo-window>
-	</span>
+	</div>
 </template>
 
 <script>
@@ -111,6 +111,10 @@ export default {
 
 	popoverMixin,
 
+	beforeDestroy() {
+		this.popoverAPI.closePopover();
+	},
+
 	methods: {
 		handleBlur() {
 			if (document.activeElement !== document.body) {
@@ -144,6 +148,8 @@ export default {
 };
 </script>
 
-<style>
-/* keep */
+<style module="$s">
+.PopoverLayer {
+	overflow: hidden;
+}
 </style>
