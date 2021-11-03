@@ -30,6 +30,10 @@ export default {
 		this.$emit('destroy');
 	},
 
+	updated() {
+		this.popper.update();
+	},
+
 	methods: {
 		followPopoverAction() {
 			const resizeObserver = new ResizeObserver(() => {
