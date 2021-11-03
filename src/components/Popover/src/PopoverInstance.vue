@@ -1,5 +1,7 @@
 <template>
-	<div><slot /></div>
+	<div :class="$s.PopoverInstance">
+		<slot />
+	</div>
 </template>
 
 <script>
@@ -30,6 +32,10 @@ export default {
 		this.$emit('destroy');
 	},
 
+	updated() {
+		this.popper.update();
+	},
+
 	methods: {
 		followPopoverAction() {
 			const resizeObserver = new ResizeObserver(() => {
@@ -46,6 +52,9 @@ export default {
 };
 </script>
 
-<style>
-/* keep */
+<style module="$s">
+.PopoverInstance[data-popper-reference-hidden] {
+	visibility: hidden;
+	pointer-events: none;
+}
 </style>

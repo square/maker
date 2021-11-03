@@ -17,6 +17,7 @@ const createPopperConfig = ({ placement, offset, minWidth }) => ({
 			name: 'preventOverflow',
 			options: {
 				padding: 24,
+				altBoundary: true,
 			},
 		},
 		{
@@ -154,8 +155,7 @@ export default {
 
 	methods: {
 		getActionVnode(actionSlot) {
-			// eslint-disable-next-line max-len
-			let actionVnode = actionSlot({ ...this.actionAPI, refs: [this.tetherElement, this.ignoreElements] });
+			let actionVnode = actionSlot(this.actionAPI);
 
 			if (!Array.isArray(actionVnode)) {
 				return actionVnode;
@@ -188,8 +188,7 @@ export default {
 			action: actionSlot,
 		} = this.$scopedSlots;
 
-		// eslint-disable-next-line max-len
-		this.popoverData.contentSlot = (contentSlotScoped || contentSlot)?.({ refs: [this.tetherElement, this.ignoreElements] });
+		this.popoverData.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
 
 		return actionSlot && this.getActionVnode(actionSlot);
 	},

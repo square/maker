@@ -26,10 +26,10 @@
 				>
 					<v :nodes="currentLayer.state.vnode" />
 				</div>
+				<m-popover-layer />
 			</div>
 		</m-transition-responsive>
 		<modal-layer v-if="currentLayer.state.vnode" />
-		<m-popover-layer />
 	</div>
 </template>
 

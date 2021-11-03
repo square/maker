@@ -224,14 +224,14 @@ export default {
 <!-- api-tables:start -->
 ## Popover Props
 
-| Prop            | Type     | Default          | Possible values | Description |
-| --------------- | -------- | ---------------- | --------------- | ----------- |
-| text-color      | `string` | `'#000'`         | —               | —           |
-| bg-color        | `string` | `'#fff'`         | —               | —           |
-| tether-element  | `object` | —                | —               | —           |
-| placement       | `string` | `'bottom-start'` | —               | —           |
-| distance-offset | `number` | `8`              | —               | —           |
-| skidding-offset | `number` | `0`              | —               | —           |
+| Prop            | Type        | Default          | Possible values | Description |
+| --------------- | ----------- | ---------------- | --------------- | ----------- |
+| tether-element  | `undefined` | —                | —               | —           |
+| ignore-elements | `array`     | `[]`             | —               | —           |
+| placement       | `string`    | `'bottom-start'` | —               | —           |
+| distance-offset | `number`    | `8`              | —               | —           |
+| skidding-offset | `number`    | `0`              | —               | —           |
+| min-width       | `boolean`   | `true`           | —               | —           |
 
 
 ## Popover Events
