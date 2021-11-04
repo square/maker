@@ -61,7 +61,7 @@ export default {
 			:variant="false ? 'primary' : 'secondary'"
 			@click="$refs.popover.toggle($refs.externalTrigger.$el)"
 		>
-			Popover Open
+			Popover Toggle
 		</m-button>
 
 		<div style="padding: 5rem;">
