@@ -109,12 +109,18 @@ export default {
 <template>
 	<div>
 		<m-modal-layer />
+		<m-dialog-layer />
 		<m-popover-layer />
 
 		<m-button
 			@click="openModal()"
 		>
 			Open Modal
+		</m-button>
+		<m-button
+			@click="openDialog()"
+		>
+			Open Dialog
 		</m-button>
 	</div>
 </template>
@@ -124,6 +130,8 @@ import { MPopoverLayer } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
 import DemoModal from 'doc/DemoModal.vue';
+import { MDialogLayer } from '@square/maker/components/Dialog';
+import DemoDialog from 'doc/DemoDialog.vue';
 
 export default {
 	name: 'ModalDemo',
@@ -132,11 +140,13 @@ export default {
 		MPopoverLayer,
 		MButton,
 		MModalLayer,
+		MDialogLayer,
 	},
 
 	mixins: [
 		MPopoverLayer.popoverMixin,
 		MModalLayer.apiMixin,
+		MDialogLayer.apiMixin,
 	],
 
 	methods: {
@@ -147,6 +157,9 @@ export default {
 					closeOnClickOutside: true,
 				},
 			);
+		},
+		openDialog() {
+			this.dialogApi.open(() => <DemoDialog />);
 		},
 	},
 };
@@ -218,6 +231,77 @@ export default {
 	methods: {
 		closeModal() {
 			this.modalApi.close();
+		},
+	},
+};
+</script>
+```
+
+_DemoDialog.vue_
+
+```vue
+<template>
+	<m-dialog>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/800/300"
+		>
+		<m-dialog-content>
+			<m-heading>
+				Popover in a dialog
+			</m-heading>
+
+			<m-popover>
+				<template #tether="popover">
+					<m-button
+						size="small"
+						@click="popover.toggle()"
+					>
+						Toggle Popover
+					</m-button>
+				</template>
+
+				<template #content>
+					<m-popover-bubble>
+						<demo-popover>
+							<m-button @click="closeDialog()">
+								Close Dialog
+							</m-button>
+						</demo-popover>
+					</m-popover-bubble>
+				</template>
+			</m-popover>
+		</m-dialog-content>
+	</m-dialog>
+</template>
+
+<script>
+import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
+import DemoPopover from 'doc/DemoPopoverContent.vue';
+
+export default {
+	name: 'DemoDialog',
+
+	components: {
+		MPopover,
+		MPopoverBubble,
+		MDialog,
+		MButton,
+		MHeading,
+		MDialogContent,
+		DemoPopover,
+	},
+
+	inject: {
+		dialogApi,
+	},
+
+	methods: {
+		closeDialog() {
+			this.dialogApi.close();
 		},
 	},
 };

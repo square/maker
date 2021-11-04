@@ -44,13 +44,6 @@ const newPopover = (popoverData, onDestroy) => ({
 });
 
 const popoverMixin = {
-	inject: {
-		currentPopoverLayer: {
-			default: undefined,
-			from: PopoverAPIKey,
-		},
-	},
-
 	provide() {
 		const api = Vue.observable({
 			currentInstance: undefined,

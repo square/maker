@@ -53,6 +53,10 @@ export default {
 </script>
 
 <style module="$s">
+.PopoverInstance {
+	z-index: 1;
+}
+
 .PopoverInstance[data-popper-reference-hidden] {
 	visibility: hidden;
 	pointer-events: none;
