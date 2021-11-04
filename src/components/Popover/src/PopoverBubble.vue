@@ -3,6 +3,7 @@
 		:class="$s.PopoverBubble"
 		:style="computedStyles"
 	>
+		<!-- @slot Popover bubble content -->
 		<slot />
 	</div>
 </template>
@@ -14,11 +15,17 @@ export default {
 	name: 'PopoverBubble',
 
 	props: {
+		/**
+		 * Text color within the popover
+		 */
 		color: {
 			type: String,
 			default: '#000',
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * Background color of the popover
+		 */
 		bgColor: {
 			type: String,
 			default: '#fff',

@@ -1,28 +1,45 @@
 # Popover
 
+Use the popover to provide the user with more context or options.
+
 ## Simple Usage
 ```vue
 <template>
 	<div>
 		<m-popover-layer />
 
-		<div style="padding: 24px;">
-			<m-popover>
-				<template #tether="popover">
-					<m-button
-						:variant="popover.isOpen ? 'primary' : 'secondary'"
-						@click="popover.toggle()"
-					>
-						Popover Toggle
-					</m-button>
-				</template>
+		<div :class="$s.DemoGrid">
+			<div :class="$s.DemoConfig">
+				<label>
+					Placement
+					<m-select
+						v-model="placement"
+						placeholder="Placeholder"
+						:options="placementOptions"
+					/>
+				</label>
+			</div>
 
-				<template #content>
-					<m-popover-bubble>
-						<demo-popover />
-					</m-popover-bubble>
-				</template>
-			</m-popover>
+			<div :class="$s.DemoPopover">
+				<m-popover
+					:placement="placement"
+				>
+					<template #tether="popover">
+						<m-button
+							:variant="popover.isOpen ? 'primary' : 'secondary'"
+							@click="popover.toggle()"
+						>
+							Popover Toggle
+						</m-button>
+					</template>
+
+					<template #content>
+						<m-popover-bubble>
+							<demo-popover />
+						</m-popover-bubble>
+					</template>
+				</m-popover>
+			</div>
 		</div>
 	</div>
 </template>
@@ -30,6 +47,7 @@
 <script>
 import { MPopoverLayer, MPopover, MPopoverBubble } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
+import { MSelect } from '@square/maker/components/Select';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
@@ -40,14 +58,51 @@ export default {
 		MPopover,
 		MPopoverBubble,
 		MButton,
+		MSelect,
 		DemoPopover,
 	},
 
 	mixins: [
 		MPopoverLayer.popoverMixin,
 	],
+
+	data() {
+		return {
+			placement: 'bottom-start',
+			placementOptions: [
+				'auto', 'auto-start', 'auto-end',
+				'top', 'top-start', 'top-end',
+				'right', 'right-start', 'right-end',
+				'bottom', 'bottom-start', 'bottom-end',
+				'left', 'left-start', 'left-end',
+			].map((p) => ({ label: p, value: p })),
+		};
+	},
 };
 </script>
+
+<style module="$s">
+.DemoGrid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+}
+
+.DemoPopover {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 350px;
+	padding: 100px 24px;
+}
+
+.DemoConfig {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 300px;
+}
+</style>
 ```
 
 ## External Trigger
@@ -65,7 +120,10 @@ export default {
 		</m-button>
 		<m-popover ref="popover">
 			<template #tether>
-				<span ref="tether">
+				<span
+					ref="tether"
+					style="margin: 0 24px;"
+				>
 					It will open on me
 				</span>
 			</template>
@@ -428,37 +486,36 @@ export default {
 <!-- api-tables:start -->
 ## Popover Props
 
-| Prop            | Type        | Default          | Possible values | Description |
-| --------------- | ----------- | ---------------- | --------------- | ----------- |
-| tether-element  | `undefined` | —                | —               | —           |
-| ignore-elements | `array`     | `[]`             | —               | —           |
-| placement       | `string`    | `'bottom-start'` | —               | —           |
-| distance-offset | `number`    | `8`              | —               | —           |
-| skidding-offset | `number`    | `0`              | —               | —           |
-| min-width       | `boolean`   | `true`           | —               | —           |
+| Prop             | Type      | Default          | Possible values                                                                                                                                                                | Description                                                                        |
+| ---------------- | --------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| placement        | `string`  | `'bottom-start'` | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Starting position of the popover. Not guaranteed if too close to overflow.         |
+| distance-offset  | `number`  | `8`              | —                                                                                                                                                                              | Distance from tether element                                                       |
+| skidding-offset  | `number`  | `0`              | —                                                                                                                                                                              | Offset from base position (Y for left/right placement, X for top/bottom placement) |
+| min-width        | `number`  | `0`              | —                                                                                                                                                                              | Absolute min width of popover, overrides tetherMinWidth                            |
+| tether-min-width | `boolean` | `true`           | —                                                                                                                                                                              | Set min width of popover to tether width, overridden by minWidth                   |
 
 
 ## Popover Events
 
-| Event | Type | Description |
-| ----- | ---- | ----------- |
-| open  | -    | —           |
-| close | -    | —           |
+| Event | Type | Description             |
+| ----- | ---- | ----------------------- |
+| open  | -    | Popover has been opened |
+| close | -    | Popover has been closed |
 
 
 ## PopoverBubble Props
 
-| Prop     | Type     | Default  | Possible values | Description |
-| -------- | -------- | -------- | --------------- | ----------- |
-| color    | `string` | `'#000'` | —               | —           |
-| bg-color | `string` | `'#fff'` | —               | —           |
+| Prop     | Type     | Default  | Possible values | Description                     |
+| -------- | -------- | -------- | --------------- | ------------------------------- |
+| color    | `string` | `'#000'` | —               | Text color within the popover   |
+| bg-color | `string` | `'#fff'` | —               | Background color of the popover |
 
 
 ## PopoverBubble Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description            |
+| ------- | ---------------------- |
+| default | Popover bubble content |
 
 
 

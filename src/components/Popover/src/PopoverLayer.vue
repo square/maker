@@ -49,6 +49,7 @@ const popoverMixin = {
 			currentInstance: undefined,
 			tetherEl: undefined,
 			ignoreEls: [],
+			popperConfig: undefined,
 			clickSrc: undefined,
 			setPopover(popoverData) {
 				if (this.currentInstance) {
@@ -62,6 +63,7 @@ const popoverMixin = {
 				return new Promise((resolve) => {
 					this.tetherEl = popoverData.props.tetherEl;
 					this.ignoreEls = popoverData.props.ignoreEls;
+					this.popperConfig = popoverData.props.popperConfig;
 					this.currentInstance = newPopover(popoverData, resolve);
 				});
 			},

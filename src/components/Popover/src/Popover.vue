@@ -2,11 +2,23 @@
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
-import { validatePlacement } from './utils';
 
 const MAX_ACTION_VNODE = 1;
 
-const createPopperConfig = ({ placement, offset, minWidth }) => ({
+const getMinWidth = (minWidth, tetherMinWidth, reference) => {
+	if (!tetherMinWidth) {
+		return minWidth;
+	}
+
+	return minWidth || reference.offsetWidth;
+};
+
+const createPopperConfig = ({
+	placement,
+	offset,
+	tetherMinWidth,
+	minWidth,
+}) => ({
 	placement,
 	modifiers: [
 		{
@@ -22,14 +34,16 @@ const createPopperConfig = ({ placement, offset, minWidth }) => ({
 		},
 		{
 			name: 'minWidth',
-			enabled: minWidth,
+			enabled: tetherMinWidth || !!minWidth,
 			phase: 'beforeWrite',
 			requires: ['computeStyles'],
 			fn({ state: { styles, rects } }) {
-				styles.popper.minWidth = `${rects.reference.offsetWidth}px`;
+				const popoverMinWidth = getMinWidth(minWidth, tetherMinWidth, rects.reference);
+				styles.popper.minWidth = `${popoverMinWidth}px`;
 			},
 			effect({ state: { elements } }) {
-				elements.popper.style.minWidth = `${elements.reference.offsetWidth}px`;
+				const popoverMinWidth = getMinWidth(minWidth, tetherMinWidth, elements.reference);
+				elements.popper.style.minWidth = `${popoverMinWidth}px`;
 			},
 		},
 	],
@@ -53,28 +67,49 @@ export default {
 	},
 
 	props: {
-		ignoreElements: {
-			type: Array,
-			default: () => [],
-		},
-
+		/**
+		 * Starting position of the popover. Not guaranteed if too close to overflow.
+		 */
 		placement: {
 			type: String,
 			default: 'bottom-start',
-			validator: validatePlacement,
+			validator: (placement) => [
+				'auto', 'auto-start', 'auto-end',
+				'top', 'top-start', 'top-end',
+				'right', 'right-start', 'right-end',
+				'bottom', 'bottom-start', 'bottom-end',
+				'left', 'left-start', 'left-end',
+			].includes(placement),
 		},
 
+		/**
+		 * Distance from tether element
+		 */
 		distanceOffset: {
 			type: Number,
 			default: 8,
 		},
 
+		/**
+		 * Offset from base position (Y for left/right placement, X for top/bottom placement)
+		 */
 		skiddingOffset: {
 			type: Number,
 			default: 0,
 		},
 
+		/**
+		 * Absolute min width of popover, overrides tetherMinWidth
+		 */
 		minWidth: {
+			type: Number,
+			default: 0,
+		},
+
+		/**
+		 * Set min width of popover to tether width, overridden by minWidth
+		 */
+		tetherMinWidth: {
 			type: Boolean,
 			default: true,
 		},
@@ -83,23 +118,8 @@ export default {
 	data() {
 		const vm = this;
 
-		const popperConfig = this.popoverConfig.config || createPopperConfig({
-			placement: this.placement,
-			offset: [this.skiddingOffset, this.distanceOffset],
-			minWidth: this.minWidth,
-		});
-
 		return {
-			popoverData: {
-				contentSlot: undefined,
-				on: this.$listeners,
-				props: {
-					tetherEl: undefined,
-					ignoreEls: [],
-					flush: this.flush,
-					popperConfig,
-				},
-			},
+			contentSlot: undefined,
 
 			actionAPI: {
 				isOpen: false,
@@ -109,10 +129,24 @@ export default {
 						return;
 					}
 
-					vm.popoverData.props.tetherEl = vm.$el;
-					vm.popoverData.props.ignoreEls = ignoreElements;
+					const popperConfig = vm.popoverConfig?.config || createPopperConfig({
+						placement: vm.placement,
+						offset: [vm.skiddingOffset, vm.distanceOffset],
+						tetherMinWidth: vm.tetherMinWidth,
+						minWidth: vm.minWidth,
+					});
 
-					const whenClosed = vm.popoverAPI.setPopover(vm.popoverData);
+					const popoverData = {
+						props: {
+							tetherEl: vm.$el,
+							ignoreEls: ignoreElements,
+							popperConfig,
+						},
+						contentSlot: vm.contentSlot,
+						on: vm.$listeners,
+					};
+
+					const whenClosed = vm.popoverAPI.setPopover(popoverData);
 					vm.actionAPI.isOpen = true;
 					whenClosed.then(() => {
 						vm.actionAPI.isOpen = false;
@@ -137,8 +171,14 @@ export default {
 	watch: {
 		'actionAPI.isOpen': function emitEvent(isOpen) {
 			if (isOpen) {
+				/**
+				 * Popover has been opened
+				 */
 				this.$emit('open');
 			} else {
+				/**
+				 * Popover has been closed
+				 */
 				this.$emit('close');
 			}
 		},
@@ -185,7 +225,7 @@ export default {
 
 		assert.error(tetherSlot, 'Popover', 'You must provide an action slot');
 
-		this.popoverData.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
+		this.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
 
 		return tetherSlot && this.getTetherVNode(tetherSlot);
 	},

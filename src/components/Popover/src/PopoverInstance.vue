@@ -1,5 +1,6 @@
 <template>
 	<div :class="$s.PopoverInstance">
+		<!-- @slot Popover content -->
 		<slot />
 	</div>
 </template>
@@ -29,6 +30,10 @@ export default {
 	beforeDestroy() {
 		this.resizeObserver.disconnect();
 		this.popper.destroy();
+
+		/**
+		 * Popover has been removed
+		 */
 		this.$emit('destroy');
 	},
 
