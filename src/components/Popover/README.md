@@ -6,7 +6,7 @@
 	<div>
 		<m-popover-layer />
 
-		<div style="padding: 5rem;">
+		<div style="padding: 24px;">
 			<m-popover>
 				<template #tether="popover">
 					<m-button
@@ -53,7 +53,7 @@ export default {
 ## External Trigger
 ```vue
 <template>
-	<div>
+	<div style="padding: 24px;">
 		<m-popover-layer />
 
 		<m-button
@@ -63,21 +63,18 @@ export default {
 		>
 			Popover Toggle
 		</m-button>
-
-		<div style="padding: 5rem;">
-			<m-popover ref="popover">
-				<template #tether>
-					<span ref="tether">
-						It will open on me
-					</span>
-				</template>
-				<template #content>
-					<m-popover-bubble>
-						<demo-popover />
-					</m-popover-bubble>
-				</template>
-			</m-popover>
-		</div>
+		<m-popover ref="popover">
+			<template #tether>
+				<span ref="tether">
+					It will open on me
+				</span>
+			</template>
+			<template #content>
+				<m-popover-bubble>
+					<demo-popover />
+				</m-popover-bubble>
+			</template>
+		</m-popover>
 	</div>
 </template>
 
@@ -107,7 +104,7 @@ export default {
 ## Modal/Dialog Usage
 ```vue
 <template>
-	<div>
+	<div style="padding: 24px;">
 		<m-modal-layer />
 		<m-dialog-layer />
 		<m-popover-layer />
@@ -164,6 +161,74 @@ export default {
 	},
 };
 </script>
+```
+
+## Custom 'Bubble'
+```vue
+<template>
+	<div>
+		<m-popover-layer />
+
+		<div style="padding: 24px;">
+			<m-popover>
+				<template #tether="popover">
+					<m-button
+						:variant="popover.isOpen ? 'primary' : 'secondary'"
+						@click="popover.toggle()"
+					>
+						Popover Toggle
+					</m-button>
+				</template>
+
+				<template #content>
+					<div :class="$s.CustomBubble">
+						<demo-popover />
+					</div>
+				</template>
+			</m-popover>
+		</div>
+	</div>
+</template>
+
+<script>
+import { MPopoverLayer, MPopover } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+import DemoPopover from 'doc/DemoPopoverContent.vue';
+
+export default {
+	name: 'SimpleDemo',
+
+	components: {
+		MPopoverLayer,
+		MPopover,
+		MButton,
+		DemoPopover,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+};
+</script>
+
+<style module="$s">
+.CustomBubble {
+  animation: bgColor 5s infinite linear;
+	border-radius: 16px;
+	padding: 24px;
+}
+
+@keyframes bgColor {
+	0% { background-color: red; color: white; }
+  14.29% { background-color: orange; color: white; }
+  28.57% { background-color: yellow; color: black; }
+  42.86% { background-color: green; color: black; }
+  57.14% { background-color: blue; color: white; }
+  71.43% { background-color: indigo; color: white; }
+  85.71% { background-color: violet; color: white; }
+  100% { background-color: red; color: white; }
+}
+</style>
 ```
 
 _DemoModal.vue_
