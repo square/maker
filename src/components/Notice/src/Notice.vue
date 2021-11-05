@@ -181,7 +181,7 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
-	fill: var(--color-background);
+	fill: transparent;
 	stroke: var(--color-icon);
 }
 </style>
