@@ -1,9 +1,25 @@
+<template>
+	<div style="display: contents;">
+		<slot
+			name="tether"
+			v-bind="actionAPI"
+		/>
+
+		<portal :to="id">
+			<slot name="content" />
+		</portal>
+	</div>
+</template>
+
 <script>
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
+import { Portal } from 'portal-vue';
+import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
 const MAX_ACTION_VNODE = 1;
+const EXPECTED_HTML_CHILDREN = 2;
 
 const getMinWidth = (minWidth, tetherMinWidth, reference) => {
 	if (!tetherMinWidth) {
@@ -51,6 +67,10 @@ const createPopperConfig = ({
 
 export default {
 	name: 'Popover',
+
+	components: {
+		Portal,
+	},
 
 	inject: {
 		popoverAPI: {
@@ -113,14 +133,17 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+
+		id: {
+			type: String,
+			default: () => uuid(),
+		},
 	},
 
 	data() {
 		const vm = this;
 
 		return {
-			contentSlot: undefined,
-
 			actionAPI: {
 				isOpen: false,
 
@@ -138,11 +161,11 @@ export default {
 
 					const popoverData = {
 						props: {
-							tetherEl: vm.$el,
+							tetherEl: vm.tetherEl,
 							ignoreEls: ignoreElements,
 							popperConfig,
 						},
-						contentSlot: vm.contentSlot,
+						popperId: vm.id,
 						on: vm.$listeners,
 					};
 
@@ -166,6 +189,16 @@ export default {
 				},
 			},
 		};
+	},
+
+	computed: {
+		tetherEl() {
+			if (this.$el.children.length !== EXPECTED_HTML_CHILDREN) {
+				return undefined;
+			}
+
+			return this.$el.children[0];
+		},
 	},
 
 	watch: {
@@ -214,20 +247,6 @@ export default {
 		toggle(...ignoreElements) {
 			this.actionAPI.toggle(...ignoreElements);
 		},
-	},
-
-	render() {
-		const { content: contentSlot } = this.$slots;
-		const {
-			content: contentSlotScoped,
-			tether: tetherSlot,
-		} = this.$scopedSlots;
-
-		assert.error(tetherSlot, 'Popover', 'You must provide an action slot');
-
-		this.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
-
-		return tetherSlot && this.getTetherVNode(tetherSlot);
 	},
 };
 </script>
