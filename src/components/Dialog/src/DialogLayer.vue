@@ -16,6 +16,7 @@
 					:class="$s.disableScroll"
 				/>
 				<v :nodes="dialogApi.state.vnode" />
+				<!-- <m-popover-layer /> -->
 			</div>
 		</m-transition-responsive>
 	</div>
@@ -51,13 +52,19 @@ const apiMixin = {
 				// function that only closes this specific Dialog
 				return () => {
 					if (this.state.vnode === vnode) {
-						this.state.vnode = undefined;
+						this.close();
 					}
 				};
 			},
 
 			close() {
-				this.state.vnode = undefined;
+				// Close the open popover (if present) and then close the dialog in the next tick.
+				// Closing at the same time will result in the popover content becoming inline and
+				// causes a weird content shift as the dialog fades away.
+				vm.popoverAPI?.closePopover();
+				vm.$nextTick(() => {
+					this.state.vnode = undefined;
+				});
 			},
 		};
 

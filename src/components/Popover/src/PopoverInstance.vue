@@ -1,5 +1,8 @@
 <template>
-	<div><slot /></div>
+	<div :class="$s.PopoverInstance">
+		<!-- @slot Popover content -->
+		<slot />
+	</div>
 </template>
 
 <script>
@@ -27,6 +30,10 @@ export default {
 	beforeDestroy() {
 		this.resizeObserver.disconnect();
 		this.popper.destroy();
+
+		/**
+		 * Popover has been removed
+		 */
 		this.$emit('destroy');
 	},
 
@@ -50,6 +57,13 @@ export default {
 };
 </script>
 
-<style>
-/* keep */
+<style module="$s">
+.PopoverInstance {
+	z-index: 1;
+}
+
+.PopoverInstance[data-popper-reference-hidden] {
+	visibility: hidden;
+	pointer-events: none;
+}
 </style>

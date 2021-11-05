@@ -20,13 +20,10 @@
 
 <script>
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
-import assert from '@square/maker/utils/assert';
 import PseudoWindow from 'vue-pseudo-window';
 import Vue from 'vue';
 import PopoverInstance from './PopoverInstance.vue';
 import { PopoverAPIKey } from './keys';
-
-const COMMENT_NODE_TYPE = 8;
 
 const newPopover = (popoverData, onDestroy) => ({
 	render() {
@@ -47,18 +44,12 @@ const newPopover = (popoverData, onDestroy) => ({
 });
 
 const popoverMixin = {
-	inject: {
-		layer: {
-			default: undefined,
-			from: PopoverAPIKey,
-		},
-	},
-
 	provide() {
 		const api = Vue.observable({
 			currentInstance: undefined,
 			tetherEl: undefined,
 			ignoreEls: [],
+			popperConfig: undefined,
 			clickSrc: undefined,
 			setPopover(popoverData) {
 				if (this.currentInstance) {
@@ -69,15 +60,10 @@ const popoverMixin = {
 					return undefined;
 				}
 
-				assert.error(
-					popoverData.props.tetherEl && popoverData.props.tetherEl.nodeType !== COMMENT_NODE_TYPE,
-					'You must either provide an #action slot or provide a tetherElement prop',
-					'Popover',
-				);
-
 				return new Promise((resolve) => {
 					this.tetherEl = popoverData.props.tetherEl;
 					this.ignoreEls = popoverData.props.ignoreEls;
+					this.popperConfig = popoverData.props.popperConfig;
 					this.currentInstance = newPopover(popoverData, resolve);
 				});
 			},
