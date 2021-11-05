@@ -41,7 +41,7 @@ export default {
 <style module="$s">
 .Button {
 	flex: 1 0 0;
-	color: var(--color-900, black);
+	color: var(--neutral-90, black);
 	font-weight: 500;
 	font-size: inherit;
 	font-family: inherit;
@@ -62,7 +62,7 @@ export default {
 }
 
 .selected {
-	color: var(--color-900, black);
+	color: var(--neutral-90, black);
 	background-color: var(--color-elevation, white);
 	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
 }

@@ -7,11 +7,11 @@
 		>
 			<div :class="$s.Surface">
 				<div
-					:class="$s.Scale"
+					:class="$s.Editor"
 				>
 					<m-heading
 						:size="1"
-						style="margin-bottom: 20px;"
+						style="margin-bottom: 16px;"
 					>
 						Maker Theme
 					</m-heading>
@@ -35,27 +35,20 @@
 							>
 							Primary
 						</label>
-						<m-divider />
-						<div :class="$s.palette">
-							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
-							</div>
-							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-10)' }" /> Neutral 10
-							</div>
-							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-20)' }" /> Neutral 20
-							</div>
-							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-80)' }" /> Neutral 80
-							</div>
-							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-90)' }" /> Neutral 90
-							</div>
-							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
-							</div>
-						</div>
+						<label>
+							<input
+								v-model="headingColor"
+								type="color"
+							>
+							Heading
+						</label>
+						<label>
+							<input
+								v-model="textColor"
+								type="color"
+							>
+							Text
+						</label>
 					</div>
 				</div>
 				<div
@@ -154,6 +147,22 @@
 						>
 							Schedule for later
 						</m-button>
+
+						<m-button
+							full-width
+							variant="secondary"
+						>
+							Secondary
+						</m-button>
+						<m-button
+							full-width
+							variant="tertiary"
+						>
+							Tertiary
+						</m-button>
+						<m-text-button>
+							Text button
+						</m-text-button>
 					</div>
 				</div>
 				<div
@@ -317,16 +326,18 @@ import storeData from './SiteApp/data';
 const IS_LIGHT_THRESHOLD = 0.32;
 const RATIOS = {
 	light: {
-		10: 0.05,
-		20: 0.155,
-		80: 0.527,
-		90: 0.9,
+		100: 0.05,
+		300: 0.155,
+		700: 0.43,
+		800: 0.527,
+		900: 0.9,
 	},
 	dark: {
-		10: 0.1,
-		30: 0.255,
-		80: 0.55,
-		90: 0.95,
+		100: 0.1,
+		300: 0.255,
+		700: 0.42,
+		800: 0.55,
+		900: 0.95,
 	},
 };
 function isNoticeContrastColor(bgHex) {
@@ -339,30 +350,15 @@ function contrastColors(bgHex) {
 	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
 	const contrastColor = isLight ? '#000000' : '#ffffff';
 	const levels = isLight ? RATIOS.light : RATIOS.dark;
-	const colors = {
-		'neutral-0': isLight ? '#ffffff' : '#000000',
-		'neutral-100': !isLight ? '#ffffff' : '#000000',
-	};
-
-	// if (isLight) {
-	// 	colors['neutral-90'] = 'rgb(142, 142, 147)';
-	// 	colors['neutral-80'] = 'rgb(174, 174, 178)';
-	// 	colors['neutral-20'] = 'rgb(229, 229, 234)';
-	// 	colors['neutral-10'] = 'rgb(242, 242, 247)';
-	// } else {
-	// 	colors['neutral-10'] = 'rgb(44, 44, 46)';
-	// 	colors['neutral-20'] = 'rgb(58, 58, 60)';
-	// 	colors['neutral-80'] = 'rgb(99, 99, 102)';
-	// 	colors['neutral-90'] = 'rgb(142, 142, 147)';
-	// }
+	const colors = {};
 
 	Object.entries(levels).forEach(([name, level]) => {
-		colors[`neutral-${name}`] = chroma.mix(bgHex, contrastColor, level, 'lab').hex();
+		colors[`color-${name}`] = chroma.mix(bgHex, contrastColor, level, 'lab').hex();
 	});
 
 	return {
 		...colors,
-		'color-elevation': isLight ? '#ffffff' : colors['neutral-30'],
+		'color-elevation': isLight ? '#ffffff' : colors['color-300'],
 		'color-overlay': isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
 	};
 }
@@ -400,8 +396,10 @@ export default {
 
 	data() {
 		return {
-			backgroundColor: '#fffbeb',
-			primaryColor: '#14433d',
+			backgroundColor: '#ffffff',
+			primaryColor: '#000000',
+			headingColor: '#000000',
+			textColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -451,6 +449,8 @@ export default {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
+					heading: this.headingColor,
+					text: this.textColor,
 					...colors,
 				},
 				notice: {
@@ -511,6 +511,7 @@ export default {
 </script>
 
 <style module="$s">
+
 .Surface {
 	display: flex;
 	gap: 25px;
@@ -544,25 +545,6 @@ export default {
 	& input {
 		margin-right: 16px;
 	}
-}
-
-.palette {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	margin-top: 16px;
-}
-
-.palette > .color {
-	display: flex;
-	align-items: center;
-}
-
-.palette > .color span {
-	display: inline-block;
-	width: 50px;
-	height: 24px;
-	margin-right: 16px;
 }
 
 .Preview {

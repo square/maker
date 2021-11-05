@@ -28,7 +28,7 @@ export default {
 <style module="$s">
 .LayoutContainer {
 	display: inline-flex;
-	color: var(--color-900, inherit);
+	color: var(--neutral-90, inherit);
 	font-size: 14px;
 	font-family: inherit;
 	line-height: 24px;
@@ -43,6 +43,6 @@ export default {
 }
 
 .SubLabel {
-	color: var(--color-800, inherit);
+	color: var(--neutral-80, inherit);
 }
 </style>

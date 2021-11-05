@@ -91,9 +91,9 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
-	--color-fill: var(--color-900, rgba(0, 0, 0, 0.9));
-	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
+	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--neutral-90, rgba(0, 0, 0, 0.9));
+	--color-disabled: var(--neutral-10, rgba(0, 0, 0, 0.05));
 	--color-error: rgba(206, 50, 23, 1);
 }
 

@@ -289,7 +289,7 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--color-300, #fff),
+			0 0 0 1px var(--neutral-20, #fff),
 			0 0 0 3px var(--color-focus);
 	}
 
