@@ -1,26 +1,14 @@
-## SelectMenu
+# SelectMenu
 
+## Single Select
 ```vue
 <template>
 	<div>
+		Selected Value: {{ value }}
 		<div>
-			{{ value }}
-
 			<m-select-menu
 				v-model="value"
 				:options="options"
-			>
-				Test
-			</m-select-menu>
-		</div>
-
-		<div>
-			{{ multiValue }}
-
-			<m-select-menu
-				v-model="multiValue"
-				:options="options"
-				is-multiselect
 			>
 				Test
 			</m-select-menu>
@@ -47,7 +35,48 @@ export default {
 	data() {
 		return {
 			value: undefined,
-			multiValue: undefined,
+			options: ['Option 1', 'Option 2', 'Option 3'],
+		};
+	},
+};
+</script>
+```
+## Multiple Select
+```vue
+<template>
+	<div>
+		Selected Value: {{ value }}
+		<div>
+			<m-select-menu
+				v-model="value"
+				:options="options"
+				is-multiselect
+			>
+				Test ({{ value && value.length || 0 }} selected)
+			</m-select-menu>
+		</div>
+
+		<m-popover-layer />
+	</div>
+</template>
+
+<script>
+import { MSelectMenu } from '@square/maker/components/SelectMenu';
+import { MPopoverLayer } from '@square/maker/components/Popover';
+
+export default {
+	components: {
+		MPopoverLayer,
+		MSelectMenu,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+
+	data() {
+		return {
+			value: undefined,
 			options: ['Option 1', 'Option 2', 'Option 3'],
 		};
 	},
