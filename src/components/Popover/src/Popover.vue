@@ -73,7 +73,7 @@ export default {
 	},
 
 	inject: {
-		popoverAPI: {
+		popoverApi: {
 			from: PopoverAPIKey,
 			default: () => throwError('No popover layer detected', 'Popover'),
 		},
@@ -169,7 +169,7 @@ export default {
 						on: vm.$listeners,
 					};
 
-					const whenClosed = vm.popoverAPI.setPopover(popoverData);
+					const whenClosed = vm.popoverApi.setPopover(popoverData);
 					vm.actionAPI.isOpen = true;
 					whenClosed.then(() => {
 						vm.actionAPI.isOpen = false;
@@ -177,7 +177,7 @@ export default {
 				},
 
 				close() {
-					vm.popoverAPI.closePopover();
+					vm.popoverApi.closePopover();
 				},
 
 				toggle(...ignoreElements) {

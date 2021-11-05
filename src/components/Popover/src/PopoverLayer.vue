@@ -8,10 +8,10 @@
 				@touchend="handleClick"
 			>
 				<component
-					:is="popoverAPI.currentInstance"
-					v-if="popoverAPI.currentInstance"
+					:is="popoverApi.currentInstance"
+					v-if="popoverApi.currentInstance"
 					ref="instance"
-					@close="popoverAPI.closePopover"
+					@close="popoverApi.closePopover"
 				/>
 			</pseudo-window>
 		</pseudo-window>
@@ -75,8 +75,8 @@ const popoverMixin = {
 			},
 		});
 
-		if (!this.popoverAPI) {
-			this.popoverAPI = api;
+		if (!this.popoverApi) {
+			this.popoverApi = api;
 		}
 
 		return {
@@ -94,43 +94,43 @@ export default {
 	},
 
 	inject: {
-		popoverAPI: PopoverAPIKey,
+		popoverApi: PopoverAPIKey,
 	},
 
 	popoverMixin,
 
 	beforeDestroy() {
-		this.popoverAPI.closePopover();
+		this.popoverApi.closePopover();
 	},
 
 	methods: {
 		handleBlur() {
 			if (document.activeElement !== document.body) {
-				this.popoverAPI.closePopover();
+				this.popoverApi.closePopover();
 			}
 		},
 
 		trackClickSrc({ target }) {
-			this.popoverAPI.clickSrc = target;
+			this.popoverApi.clickSrc = target;
 		},
 
 		handleClick() {
 			const $instance = this.$refs.instance;
-			if (!$instance || !this.popoverAPI.clickSrc) {
+			if (!$instance || !this.popoverApi.clickSrc) {
 				return;
 			}
 
-			const clickInBubble = $instance.$el?.contains(this.popoverAPI.clickSrc);
-			const clickInAction = this.popoverAPI.tetherEl?.contains(this.popoverAPI.clickSrc);
-			const clickInIgnores = this.popoverAPI.ignoreEls?.some(
-				(element) => element.contains?.(this.popoverAPI.clickSrc),
+			const clickInBubble = $instance.$el?.contains(this.popoverApi.clickSrc);
+			const clickInAction = this.popoverApi.tetherEl?.contains(this.popoverApi.clickSrc);
+			const clickInIgnores = this.popoverApi.ignoreEls?.some(
+				(element) => element.contains?.(this.popoverApi.clickSrc),
 			);
 
 			if (!clickInBubble && !clickInAction && !clickInIgnores) {
-				this.popoverAPI.closePopover();
+				this.popoverApi.closePopover();
 			}
 
-			this.popoverAPI.clickSrc = undefined;
+			this.popoverApi.clickSrc = undefined;
 		},
 	},
 };

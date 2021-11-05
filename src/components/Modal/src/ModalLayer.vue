@@ -98,7 +98,7 @@ const apiMixin = {
 					// Close the open popover (if present) and then close the modal in the next tick.
 					// Closing at the same time will result in the popover content becoming inline and
 					// causes a weird content shift as the modal fades away.
-					vm.popoverAPI.closePopover();
+					vm.popoverApi.closePopover();
 					vm.$nextTick(() => {
 						vm.currentModalLayer.state.vnode = undefined;
 					});
