@@ -89,7 +89,7 @@ export default {
 .MenuOption {
 	display: flex;
 	align-items: center;
-	padding: 12px;
+	padding: 12px 24px 12px 12px;
 	background-color: var(--menu-background);
 	cursor: pointer;
 	transition: background-color 75ms linear;

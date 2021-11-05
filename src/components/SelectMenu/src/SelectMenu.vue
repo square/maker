@@ -1,34 +1,37 @@
 <template>
-	<m-popover
-		ref="popover"
-		:distance-offset="popoverDistanceOffset"
-		:skidding-offset="popoverSkiddingOffset"
-		:min-width="popoverMinWidth"
-	>
-		<template #action="popover">
-			<m-button
-				@click="popover.toggle()"
-			>
-				<slot />
-			</m-button>
-		</template>
+	<div>
+		<m-popover
+			ref="popover"
+			:distance-offset="popoverDistanceOffset"
+			:skidding-offset="popoverSkiddingOffset"
+			:tether-min-width="popoverTetherMinWidth"
+			:min-width="popoverMinWidth"
+		>
+			<template #tether="popover">
+				<m-button
+					@click="popover.toggle()"
+				>
+					<slot />
+				</m-button>
+			</template>
 
-		<template #content>
-			<m-popover-bubble
-				:color="menuColor"
-				:bg-color="menuBgColor"
-			>
-				<m-menu
-					:value="value"
-					:options="options"
-					:is-multiselect="isMultiselect"
+			<template #content>
+				<m-popover-bubble
 					:color="menuColor"
 					:bg-color="menuBgColor"
-					@menu:update="updateSelection"
-				/>
-			</m-popover-bubble>
-		</template>
-	</m-popover>
+				>
+					<m-menu
+						:value="value"
+						:options="options"
+						:is-multiselect="isMultiselect"
+						:color="menuColor"
+						:bg-color="menuBgColor"
+						@menu:update="updateValue"
+					/>
+				</m-popover-bubble>
+			</template>
+		</m-popover>
+	</div>
 </template>
 
 <script>
@@ -107,13 +110,40 @@ export default {
 		},
 
 		popoverMinWidth: {
+			type: Number,
+			default: 0,
+		},
+
+		popoverTetherMinWidth: {
 			type: Boolean,
 			default: true,
 		},
 	},
 
+	watch: {
+		isMultiselect: {
+			immediate: true,
+			handler(isMultiselect, previousValue) {
+				if (previousValue === isMultiselect) {
+					return;
+				}
+
+				if (isMultiselect && !Array.isArray(this.value)) {
+					if (this.value === undefined) {
+						this.updateValue([]);
+					} else {
+						this.updateValue([this.value]);
+					}
+				} else if (!isMultiselect && Array.isArray(this.value)) {
+					const [newValue] = this.value;
+					this.updateValue(newValue);
+				}
+			},
+		},
+	},
+
 	methods: {
-		updateSelection(value) {
+		updateValue(value) {
 			this.$emit('select:update', value);
 
 			if (!this.isMultiselect) {
