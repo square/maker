@@ -1,8 +1,10 @@
 <template>
-	<m-action-bar-layer>
-		<router-view />
+	<div>
+		<m-action-bar-layer>
+			<router-view />
+		</m-action-bar-layer>
 		<m-modal-layer />
-	</m-action-bar-layer>
+	</div>
 </template>
 
 <script>

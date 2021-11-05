@@ -1,10 +1,14 @@
 <template>
 	<m-modal>
-		<div class="cover-photo">
-			<m-image
-				src="https://i.picsum.photos/id/507/900/900.jpg?hmac=NDltE7xXtFlZjUoyDqGjehzY5ORPtj4-d42qbFgAFkk"
-			/>
-		</div>
+		<template
+			#dismiss
+		>
+			<div class="cover-photo">
+				<m-image
+					src="https://i.picsum.photos/id/507/900/900.jpg?hmac=NDltE7xXtFlZjUoyDqGjehzY5ORPtj4-d42qbFgAFkk"
+				/>
+			</div>
+		</template>
 
 		<div>
 			<h1>Cart modal content</h1>
