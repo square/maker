@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="display: contents;">
 		<slot
 			name="tether"
 			v-bind="actionAPI"
@@ -19,6 +19,7 @@ import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
 const MAX_ACTION_VNODE = 1;
+const EXPECTED_HTML_CHILDREN = 2;
 
 const getMinWidth = (minWidth, tetherMinWidth, reference) => {
 	if (!tetherMinWidth) {
@@ -72,7 +73,7 @@ export default {
 	},
 
 	inject: {
-		popoverAPI: {
+		popoverApi: {
 			from: PopoverAPIKey,
 			default: () => throwError('No popover layer detected', 'Popover'),
 		},
@@ -143,8 +144,6 @@ export default {
 		const vm = this;
 
 		return {
-			contentSlot: undefined,
-
 			actionAPI: {
 				isOpen: false,
 
@@ -162,7 +161,7 @@ export default {
 
 					const popoverData = {
 						props: {
-							tetherEl: vm.$el,
+							tetherEl: vm.tetherEl,
 							ignoreEls: ignoreElements,
 							popperConfig,
 						},
@@ -170,7 +169,7 @@ export default {
 						on: vm.$listeners,
 					};
 
-					const whenClosed = vm.popoverAPI.setPopover(popoverData);
+					const whenClosed = vm.popoverApi.setPopover(popoverData);
 					vm.actionAPI.isOpen = true;
 					whenClosed.then(() => {
 						vm.actionAPI.isOpen = false;
@@ -178,7 +177,7 @@ export default {
 				},
 
 				close() {
-					vm.popoverAPI.closePopover();
+					vm.popoverApi.closePopover();
 				},
 
 				toggle(...ignoreElements) {
@@ -190,6 +189,16 @@ export default {
 				},
 			},
 		};
+	},
+
+	computed: {
+		tetherEl() {
+			if (this.$el.children.length !== EXPECTED_HTML_CHILDREN) {
+				return undefined;
+			}
+
+			return this.$el.children[0];
+		},
 	},
 
 	watch: {
@@ -239,20 +248,6 @@ export default {
 			this.actionAPI.toggle(...ignoreElements);
 		},
 	},
-
-	// render() {
-	// 	const { content: contentSlot } = this.$slots;
-	// 	const {
-	// 		content: contentSlotScoped,
-	// 		tether: tetherSlot,
-	// 	} = this.$scopedSlots;
-
-	// 	assert.error(tetherSlot, 'Popover', 'You must provide an action slot');
-
-	// 	this.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
-
-	// 	return tetherSlot && this.getTetherVNode(tetherSlot);
-	// },
 };
 </script>
 
