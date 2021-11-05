@@ -22,14 +22,14 @@
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import PseudoWindow from 'vue-pseudo-window';
 import Vue from 'vue';
+import { PortalTarget } from 'portal-vue';
 import PopoverInstance from './PopoverInstance.vue';
 import { PopoverAPIKey } from './keys';
 
 const newPopover = (popoverData, onDestroy) => ({
 	render() {
-		const { contentSlot, props, on } = popoverData;
+		const { props, on } = popoverData;
 		const onClose = () => this.$emit('close');
-		const content = typeof contentSlot === 'function' ? contentSlot({ close: onClose }) : contentSlot;
 
 		return (
 			<PopoverInstance
@@ -37,7 +37,7 @@ const newPopover = (popoverData, onDestroy) => ({
 				onClose={onClose}
 				{...{ props, on }}
 			>
-				{ content }
+				<PortalTarget name={popoverData.popperId} />
 			</PopoverInstance>
 		);
 	},
@@ -50,6 +50,7 @@ const popoverMixin = {
 			tetherEl: undefined,
 			ignoreEls: [],
 			popperConfig: undefined,
+			popperId: undefined,
 			clickSrc: undefined,
 			setPopover(popoverData) {
 				if (this.currentInstance) {
@@ -64,6 +65,7 @@ const popoverMixin = {
 					this.tetherEl = popoverData.props.tetherEl;
 					this.ignoreEls = popoverData.props.ignoreEls;
 					this.popperConfig = popoverData.props.popperConfig;
+					this.popperId = popoverData.props.popperId;
 					this.currentInstance = newPopover(popoverData, resolve);
 				});
 			},

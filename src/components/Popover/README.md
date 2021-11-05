@@ -493,6 +493,15 @@ export default {
 | skidding-offset  | `number`  | `0`              | —                                                                                                                                                                              | Offset from base position (Y for left/right placement, X for top/bottom placement) |
 | min-width        | `number`  | `0`              | —                                                                                                                                                                              | Absolute min width of popover, overrides tetherMinWidth                            |
 | tether-min-width | `boolean` | `true`           | —                                                                                                                                                                              | Set min width of popover to tether width, overridden by minWidth                   |
+| id               | `string`  | `() => uuid()`   | —                                                                                                                                                                              | —                                                                                  |
+
+
+## Popover Slots
+
+| Slot    | Description |
+| ------- | ----------- |
+| tether  | —           |
+| content | —           |
 
 
 ## Popover Events

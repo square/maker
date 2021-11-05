@@ -1,6 +1,21 @@
+<template>
+	<div>
+		<slot
+			name="tether"
+			v-bind="actionAPI"
+		/>
+
+		<portal :to="id">
+			<slot name="content" />
+		</portal>
+	</div>
+</template>
+
 <script>
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
+import { Portal } from 'portal-vue';
+import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
 const MAX_ACTION_VNODE = 1;
@@ -51,6 +66,10 @@ const createPopperConfig = ({
 
 export default {
 	name: 'Popover',
+
+	components: {
+		Portal,
+	},
 
 	inject: {
 		popoverAPI: {
@@ -113,6 +132,11 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+
+		id: {
+			type: String,
+			default: () => uuid(),
+		},
 	},
 
 	data() {
@@ -142,7 +166,7 @@ export default {
 							ignoreEls: ignoreElements,
 							popperConfig,
 						},
-						contentSlot: vm.contentSlot,
+						popperId: vm.id,
 						on: vm.$listeners,
 					};
 
@@ -216,19 +240,19 @@ export default {
 		},
 	},
 
-	render() {
-		const { content: contentSlot } = this.$slots;
-		const {
-			content: contentSlotScoped,
-			tether: tetherSlot,
-		} = this.$scopedSlots;
+	// render() {
+	// 	const { content: contentSlot } = this.$slots;
+	// 	const {
+	// 		content: contentSlotScoped,
+	// 		tether: tetherSlot,
+	// 	} = this.$scopedSlots;
 
-		assert.error(tetherSlot, 'Popover', 'You must provide an action slot');
+	// 	assert.error(tetherSlot, 'Popover', 'You must provide an action slot');
 
-		this.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
+	// 	this.contentSlot = (contentSlotScoped || contentSlot)?.(this.actionAPI);
 
-		return tetherSlot && this.getTetherVNode(tetherSlot);
-	},
+	// 	return tetherSlot && this.getTetherVNode(tetherSlot);
+	// },
 };
 </script>
 
