@@ -35,6 +35,20 @@
 							>
 							Primary
 						</label>
+						<label>
+							<input
+								v-model="headingColor"
+								type="color"
+							>
+							Heading
+						</label>
+						<label>
+							<input
+								v-model="textColor"
+								type="color"
+							>
+							Text
+						</label>
 						<m-divider />
 						<div :class="$s.palette">
 							<div :class="$s.color">
@@ -402,6 +416,8 @@ export default {
 		return {
 			backgroundColor: '#fffbeb',
 			primaryColor: '#14433d',
+			headingColor: '#000000',
+			textColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -451,10 +467,12 @@ export default {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
+					heading: this.headingColor,
+					text: this.textColor,
 					...colors,
 				},
 				notice: {
-					color: isNoticeContrastColor(this.backgroundColor) ? colors['color-900'] : '',
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
 				},
 				modal: {
 					bgColor: this.backgroundColor,

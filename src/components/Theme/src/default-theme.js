@@ -9,9 +9,9 @@ export default function defaultTheme() {
 			'neutral-80': '#707070',
 			'neutral-90': '#1b1b1b',
 			'neutral-100': '#000000',
-			background: '@colors.neutral-100',
-			heading: '@colors.neutral-100',
-			text: '@colors.neutral-100',
+			background: '#ffffff',
+			heading: '#000000',
+			text: '#000000',
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
@@ -44,12 +44,10 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
-			textColor: '@colors.neutral-100',
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
-			textColor: '@colors.neutral-100',
 		},
 		choice: {
 			selectedColor: undefined,

@@ -213,8 +213,8 @@ export default {
 
 		calendarNavButtons() {
 			return {
-				color: this.theme.colors['color-100'] || '#f2f2f2',
-				textColor: this.theme.colors['color-900'] || '#f2f2f2',
+				color: this.theme.colors['neutral-10'] || '#f2f2f2',
+				textColor: this.theme.colors['neutral-90'] || '#f2f2f2',
 			};
 		},
 	},

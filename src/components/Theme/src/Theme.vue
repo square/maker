@@ -66,7 +66,8 @@ export default {
 				'--neutral-90': colors['neutral-90'],
 				'--neutral-100': colors['neutral-100'],
 				'--color-background': colors.background,
-				'--color-text': colors['neutral-100'],
+				'--color-heading': colors.heading,
+				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
 			};
