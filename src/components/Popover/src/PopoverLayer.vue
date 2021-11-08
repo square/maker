@@ -1,24 +1,28 @@
 <template>
 	<div :class="$s.PopoverLayer">
-		<pseudo-window @blur.passive="handleBlur">
-			<pseudo-window
-				@mousedown="trackClickSrc"
-				@touchstart="trackClickSrc"
-				@click.capture="handleClick"
-				@touchend="handleClick"
-			>
-				<component
-					:is="popoverApi.currentInstance"
-					v-if="popoverApi.currentInstance"
-					ref="instance"
-					@close="popoverApi.closePopover"
-				/>
+		<m-transition-fade-in>
+			<pseudo-window @blur.passive="handleBlur">
+				<pseudo-window
+					@mousedown="trackClickSrc"
+					@touchstart="trackClickSrc"
+					@click.capture="handleClick"
+					@touchend="handleClick"
+				>
+					<component
+						:is="popoverApi.currentInstance"
+						v-if="popoverApi.currentInstance"
+						ref="instance"
+						@close="popoverApi.closePopover"
+					/>
+				</pseudo-window>
 			</pseudo-window>
-		</pseudo-window>
+		</m-transition-fade-in>
 	</div>
 </template>
 
 <script>
+import { MTransition } from '@square/maker/utils/Transition';
+import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import PseudoWindow from 'vue-pseudo-window';
 import Vue from 'vue';
@@ -104,12 +108,20 @@ export default {
 	name: 'PopoverLayer',
 
 	components: {
-		MTransitionFadeIn,
 		PseudoWindow,
+		MTransition,
+		MTransitionFadeIn,
 	},
 
 	inject: {
 		popoverApi: PopoverAPIKey,
+	},
+
+	data() {
+		return {
+			fadeInFn,
+			fadeOutFn,
+		};
 	},
 
 	popoverMixin,

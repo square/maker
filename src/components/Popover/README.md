@@ -26,7 +26,7 @@ Use the popover to provide the user with more context or options.
 				>
 					<template #tether="popover">
 						<m-button
-							:variant="popover.isOpen ? 'primary' : 'secondary'"
+							:variant="'primary'"
 							@click="popover.toggle()"
 						>
 							Popover Toggle
