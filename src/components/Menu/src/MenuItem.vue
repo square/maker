@@ -67,6 +67,7 @@ export default {
 }
 
 .MenuItem.isDisabled {
+	color: var(--menu-text-disabled);
 	cursor: not-allowed;
 }
 
@@ -81,5 +82,6 @@ export default {
 	width: 24px;
 	height: 24px;
 	margin-right: 8px;
+	padding: 4px;
 }
 </style>
