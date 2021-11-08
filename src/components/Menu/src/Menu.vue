@@ -5,11 +5,7 @@
 		v-on="$listeners"
 	>
 		<template #tether="popover">
-			<m-button
-				@click="popover.toggle()"
-			>
-				<slot />
-			</m-button>
+			<slot v-bind="popover" />
 		</template>
 
 		<template #content>
@@ -21,17 +17,7 @@
 					:class="$s.Menu"
 					:style="computedStyles"
 				>
-					<slot
-						v-for="(item, idx) in items"
-						v-bind="{ item, clickItem, index: idx }"
-						name="item"
-					>
-						<m-menu-item
-							:key="idx"
-							:item="item"
-							@menu-item:click="clickItem(item)"
-						/>
-					</slot>
+					<slot name="items" />
 				</div>
 			</m-popover-bubble>
 		</template>
@@ -39,10 +25,9 @@
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
 import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
 import chroma from 'chroma-js';
-import MMenuItem from './MenuItem.vue';
+import { MenuKey } from './key';
 
 const HOVER_COLOR_SCALE = 0.85;
 const DISABLED_TEXT_COLOR_SCALE = 0.5;
@@ -53,27 +38,15 @@ export default {
 	components: {
 		MPopover,
 		MPopoverBubble,
-		MButton,
-		MMenuItem,
+	},
+
+	provide() {
+		return {
+			[MenuKey]: this.menuApi,
+		};
 	},
 
 	props: {
-		/**
-		 * Component value
-		 */
-		value: {
-			type: undefined,
-			default: undefined,
-		},
-
-		/**
-		 * List of available items for menu
-		 */
-		items: {
-			type: Array,
-			required: true,
-		},
-
 		/**
 		 * Toggles whether the popover should close when an item is clicked
 		 */
@@ -101,6 +74,14 @@ export default {
 		},
 	},
 
+	data() {
+		return {
+			menuApi: {
+				clickMenuItem: this.clickMenuItem,
+			},
+		};
+	},
+
 	computed: {
 		/**
 		 * Chroma scale to calculate colors between background and text
@@ -120,11 +101,11 @@ export default {
 	},
 
 	methods: {
-		clickItem(item) {
+		clickMenuItem(item) {
 			/**
 			 * Emitted when one of the menu items is clicked
 			 */
-			this.$emit('menu:click', item);
+			this.$emit('menu:click-item', item);
 
 			if (this.shouldCloseOnClick) {
 				this.$refs.popoverContainer.close();
