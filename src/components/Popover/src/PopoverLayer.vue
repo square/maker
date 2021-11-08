@@ -22,11 +22,10 @@
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import PseudoWindow from 'vue-pseudo-window';
 import Vue from 'vue';
-import { PortalTarget } from 'portal-vue';
 import PopoverInstance from './PopoverInstance.vue';
 import { PopoverAPIKey } from './keys';
 
-const newPopover = (popoverData, onDestroy) => ({
+const newPopover = (popoverData, layerName, onDestroy) => ({
 	render() {
 		const { props, on } = popoverData;
 		const onClose = () => this.$emit('close');
@@ -37,14 +36,27 @@ const newPopover = (popoverData, onDestroy) => ({
 				onClose={onClose}
 				{...{ props, on }}
 			>
-				<PortalTarget name={popoverData.popperId} />
+				<div id={layerName}></div>
 			</PopoverInstance>
 		);
 	},
 });
 
 const popoverMixin = {
+	inject: {
+		currentPopoverLayer: {
+			from: PopoverAPIKey,
+			default: undefined,
+		},
+	},
+
 	provide() {
+		const startingLayer = 0;
+		const layerIncrement = 1;
+
+		const layerDepth = (this.currentPopoverLayer?.layerDepth || startingLayer) + layerIncrement;
+		const target = `portal-${layerDepth}`;
+
 		const api = Vue.observable({
 			currentInstance: undefined,
 			tetherEl: undefined,
@@ -52,6 +64,9 @@ const popoverMixin = {
 			popperConfig: undefined,
 			popperId: undefined,
 			clickSrc: undefined,
+			layerDepth,
+			target,
+			targetSelector: `#${target}`,
 			setPopover(popoverData) {
 				if (this.currentInstance) {
 					this.closePopover();
@@ -66,7 +81,7 @@ const popoverMixin = {
 					this.ignoreEls = popoverData.props.ignoreEls;
 					this.popperConfig = popoverData.props.popperConfig;
 					this.popperId = popoverData.props.popperId;
-					this.currentInstance = newPopover(popoverData, resolve);
+					this.currentInstance = newPopover(popoverData, this.target, resolve);
 				});
 			},
 

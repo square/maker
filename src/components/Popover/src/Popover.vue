@@ -5,7 +5,10 @@
 			v-bind="actionAPI"
 		/>
 
-		<portal :to="id">
+		<portal
+			v-if="actionAPI.isOpen"
+			:selector="popoverApi.targetSelector"
+		>
 			<slot name="content" />
 		</portal>
 	</div>
@@ -14,12 +17,11 @@
 <script>
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
-import { Portal } from 'portal-vue';
+import { Portal } from '@linusborg/vue-simple-portal';
 import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
-const MAX_ACTION_VNODE = 1;
-const EXPECTED_HTML_CHILDREN = 2;
+const MAX_TETHER_VNODE = 1;
 
 const getMinWidth = (minWidth, tetherMinWidth, reference) => {
 	if (!tetherMinWidth) {
@@ -193,7 +195,7 @@ export default {
 
 	computed: {
 		tetherEl() {
-			if (this.$el.children.length !== EXPECTED_HTML_CHILDREN) {
+			if (this.$el.children.length !== MAX_TETHER_VNODE) {
 				return undefined;
 			}
 
@@ -231,7 +233,7 @@ export default {
 
 			tetherVnode = tetherVnode.flat(Infinity).filter((vnode) => vnode.tag);
 
-			assert.error(tetherVnode.length === MAX_ACTION_VNODE, 'Popover', 'You must only pass in one element into the `action` scoped-slot');
+			assert.error(tetherVnode.length === MAX_TETHER_VNODE, 'Popover', 'You must only pass in one element into the `action` scoped-slot');
 
 			return tetherVnode[0];
 		},
