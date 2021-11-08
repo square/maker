@@ -25,8 +25,8 @@
 					:class="$s.Container"
 				>
 					<v :nodes="currentModalLayer.state.vnode" />
-					<m-popover-layer />
 				</div>
+				<m-popover-layer />
 			</div>
 		</m-transition-responsive>
 		<modal-layer v-if="currentModalLayer.state.vnode" />
