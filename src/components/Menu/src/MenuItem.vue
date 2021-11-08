@@ -23,8 +23,16 @@
 </template>
 
 <script>
+import { MenuKey } from './key';
+
 export default {
 	name: 'MenuItem',
+
+	inject: {
+		menuApi: {
+			from: MenuKey,
+		},
+	},
 
 	props: {
 		item: {
@@ -41,7 +49,7 @@ export default {
 	methods: {
 		clickMenuItem() {
 			if (!this.isDisabled) {
-				this.$emit('menu-item:click', this.item);
+				this.menuApi.clickMenuItem(this.item);
 			}
 		},
 	},

@@ -36,14 +36,25 @@
 						<hr>
 					</div>
 					<m-menu
-						v-model="value"
 						:items="options"
 						:color="color"
 						:bg-color="bgColor"
 						:should-close-on-click="shouldCloseOnClick"
-						@menu:click="setValue"
+						@menu:click-item="setValue"
 					>
-						Option
+						<template #default="menu">
+							<m-button @click="menu.toggle()">
+								Open Me
+							</m-button>
+						</template>
+
+						<template #items>
+							<m-menu-item
+								v-for="item in options"
+								:key="item"
+								:item="item"
+							/>
+						</template>
 					</m-menu>
 				</m-card>
 			</div>
@@ -53,9 +64,10 @@
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MCard } from '@square/maker/components/Card';
 import { MContainer } from '@square/maker/components/Container';
-import { MMenu } from '@square/maker/components/Menu';
+import { MMenu, MMenuItem } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 import { MToggle } from '@square/maker/components/Toggle';
 
@@ -68,6 +80,8 @@ export default {
 		MMenu,
 		MPopoverLayer,
 		MToggle,
+		MButton,
+		MMenuItem,
 	},
 
 	mixins: [
@@ -107,13 +121,11 @@ export default {
 <!-- api-tables:start -->
 ## Menu Props
 
-| Prop                  | Type        | Default  | Possible values | Description                                                      |
-| --------------------- | ----------- | -------- | --------------- | ---------------------------------------------------------------- |
-| value                 | `undefined` | —        | —               | Component value                                                  |
-| items*                | `array`     | —        | —               | List of available items for menu                                 |
-| should-close-on-click | `boolean`   | `true`   | —               | Toggles whether the popover should close when an item is clicked |
-| color                 | `string`    | `'#000'` | —               | Text color for items                                             |
-| bg-color              | `string`    | `'#fff'` | —               | Background color for items                                       |
+| Prop                  | Type      | Default  | Possible values | Description                                                      |
+| --------------------- | --------- | -------- | --------------- | ---------------------------------------------------------------- |
+| should-close-on-click | `boolean` | `true`   | —               | Toggles whether the popover should close when an item is clicked |
+| color                 | `string`  | `'#000'` | —               | Text color for items                                             |
+| bg-color              | `string`  | `'#fff'` | —               | Background color for items                                       |
 
 
 ## Menu Slots
@@ -121,21 +133,21 @@ export default {
 | Slot    | Description |
 | ------- | ----------- |
 | default | —           |
-| item    | —           |
+| items   | —           |
 
 
 ## Menu Events
 
-| Event      | Type | Description                                   |
-| ---------- | ---- | --------------------------------------------- |
-| menu:click | -    | Emitted when one of the menu items is clicked |
+| Event           | Type | Description                                   |
+| --------------- | ---- | --------------------------------------------- |
+| menu:click-item | -    | Emitted when one of the menu items is clicked |
 
 
 ## MenuItem Props
 
 | Prop        | Type        | Default | Possible values | Description |
 | ----------- | ----------- | ------- | --------------- | ----------- |
-| option*     | `undefined` | —       | —               | —           |
+| item*       | `undefined` | —       | —               | —           |
 | is-disabled | `boolean`   | `false` | —               | —           |
 
 
