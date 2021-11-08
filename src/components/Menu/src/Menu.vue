@@ -1,7 +1,8 @@
 <template>
 	<m-popover
 		ref="popoverContainer"
-		:min-width="200"
+		:min-width="minWidth"
+		:placement="placement"
 		v-on="$listeners"
 	>
 		<template #tether="popover">
@@ -71,6 +72,29 @@ export default {
 			type: String,
 			default: '#fff',
 			validator: (color) => chroma.valid(color),
+		},
+
+		/**
+		 * Placement of popover menu items
+		 */
+		placement: {
+			type: String,
+			default: 'bottom-start',
+			validator: (placement) => [
+				'auto', 'auto-start', 'auto-end',
+				'top', 'top-start', 'top-end',
+				'right', 'right-start', 'right-end',
+				'bottom', 'bottom-start', 'bottom-end',
+				'left', 'left-start', 'left-end',
+			].includes(placement),
+		},
+
+		/**
+		 * Minimum width of popover items
+		 */
+		minWidth: {
+			type: Number,
+			default: 200,
 		},
 	},
 
