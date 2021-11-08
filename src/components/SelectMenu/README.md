@@ -88,20 +88,24 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop           | Type        | Default  | Possible values | Description                                             |
-| -------------- | ----------- | -------- | --------------- | ------------------------------------------------------- |
-| value          | `undefined` | —        | —               | Component value                                         |
-| options*       | `array`     | —        | —               | List of available options for menu                      |
-| is-multiselect | `boolean`   | `false`  | —               | Toggles whether the value is a list of selected options |
-| menu-color     | `string`    | `'#000'` | —               | Text color for options                                  |
-| menu-bg-color  | `string`    | `'#fff'` | —               | Background color for options                            |
+| Prop                    | Type        | Default          | Possible values | Description                                             |
+| ----------------------- | ----------- | ---------------- | --------------- | ------------------------------------------------------- |
+| value                   | `undefined` | —                | —               | Component value                                         |
+| options*                | `array`     | —                | —               | List of available options for menu                      |
+| is-multiselect          | `boolean`   | `false`          | —               | Toggles whether the value is a list of selected options |
+| menu-color              | `string`    | `'#000'`         | —               | Text color for options                                  |
+| menu-bg-color           | `string`    | `'#fff'`         | —               | Background color for options                            |
+| popover-placement       | `string`    | `'bottom-start'` | —               | —                                                       |
+| popover-distance-offset | `number`    | —                | —               | —                                                       |
+| popover-skidding-offset | `number`    | —                | —               | —                                                       |
+| popover-min-width       | `number`    | `200`            | —               | —                                                       |
 
 
 ## Slots
 
-| Slot  | Description |
-| ----- | ----------- |
-| label | —           |
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
 
 
 ## Events
