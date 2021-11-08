@@ -83,13 +83,20 @@ export default {
 	background-color: var(--menu-hover);
 }
 
+.MenuItemContent {
+	display: flex;
+	height: 24px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 .MenuItemIconContainer {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 24px;
-	height: 24px;
+	width: 16px;
+	height: 16px;
 	margin-right: 8px;
-	padding: 4px;
 }
 </style>
