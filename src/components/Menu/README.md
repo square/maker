@@ -339,6 +339,162 @@ export default {
 </script>
 ```
 
+# Menu Select
+
+Menu-based `select` replacement that supports single- and multi-select.
+
+## Basic Usage
+
+If the data you are working are basic strings, you can use `MMenuSelect` with minimal overhead:
+
+```vue
+<template>
+	<div>
+		<m-container>
+			<m-card>
+				<div>
+					Selected Value: {{ value }}
+				</div>
+				<m-menu-select
+					v-model="value"
+					:options="options"
+				>
+					<template #default="menu">
+						<m-button @click="menu.toggle()">
+							Select an Option
+						</m-button>
+					</template>
+				</m-menu-select>
+
+				<hr>
+
+				<div>
+					Selected Values: {{ multiValue }}
+				</div>
+				<m-menu-select
+					v-model="multiValue"
+					:options="options"
+					is-multiselect
+				>
+					<template #default="menu">
+						<m-button @click="menu.toggle()">
+							Select Options
+						</m-button>
+					</template>
+				</m-menu-select>
+			</m-card>
+		</m-container>
+		<m-popover-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MCard } from '@square/maker/components/Card';
+import { MContainer } from '@square/maker/components/Container';
+import { MMenuSelect } from '@square/maker/components/Menu';
+import { MPopoverLayer } from '@square/maker/components/Popover';
+
+export default {
+	name: 'DemoSetup',
+
+	components: {
+		MCard,
+		MContainer,
+		MMenuSelect,
+		MPopoverLayer,
+		MButton,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+
+	data() {
+		return {
+			value: undefined,
+			multiValue: undefined,
+			options: ['Option 1', 'Option 2', 'Option 3'],
+		};
+	},
+};
+</script>
+```
+
+## Advanced Usage
+
+If you are working with more complicated data structures, you can easily use the `option` slot on `MMenuSelect` to unlock more functionality and flexibility:
+
+```vue
+<template>
+	<div>
+		<m-container>
+			<m-card>
+				<div>
+					Selected Value: {{ value }}
+				</div>
+				<m-menu-select
+					v-model="value"
+					:options="options"
+				>
+					<template #default="menu">
+						<m-button @click="menu.toggle()">
+							Make a Donation
+						</m-button>
+					</template>
+
+					<template #options="option">
+						<m-menu-select-option
+							:value="option.value"
+							:is-disabled="option.disabled"
+						>
+							{{ option.label }}
+						</m-menu-select-option>
+					</template>
+				</m-menu-select>
+			</m-card>
+		</m-container>
+		<m-popover-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MCard } from '@square/maker/components/Card';
+import { MContainer } from '@square/maker/components/Container';
+import { MMenuSelect, MMenuSelectOption } from '@square/maker/components/Menu';
+import { MPopoverLayer } from '@square/maker/components/Popover';
+
+export default {
+	name: 'DemoSetup',
+
+	components: {
+		MCard,
+		MContainer,
+		MMenuSelect,
+		MMenuSelectOption,
+		MPopoverLayer,
+		MButton,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+
+	data() {
+		return {
+			value: undefined,
+			options: [
+				{ label: '$100', value: 100, disabled: false },
+				{ label: '$200', value: 200, disabled: false },
+				{ label: '$300 (Not Available)', value: 300, disabled: true },
+			],
+		};
+	},
+};
+</script>
+```
+
 
 <!-- api-tables:start -->
 ## Menu Props
@@ -381,4 +537,49 @@ export default {
 | ------- | ----------------------- |
 | icon    | 16x16 Square Maker Icon |
 | default | —                       |
+
+
+## MenuSelect Props
+
+| Prop           | Type        | Default          | Possible values                                                                                                                                                                | Description                                                                             |
+| -------------- | ----------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| value          | `undefined` | —                | —                                                                                                                                                                              | Selected value (is array when isMultiselect is true)                                    |
+| options*       | `array`     | —                | —                                                                                                                                                                              | List of available options to select                                                     |
+| is-multiselect | `boolean`   | `false`          | —                                                                                                                                                                              | Toggles selected value to array with multiple options. Menu will not autoclose if true. |
+| color          | `string`    | `'#000'`         | —                                                                                                                                                                              | Text color for items                                                                    |
+| bg-color       | `string`    | `'#fff'`         | —                                                                                                                                                                              | Background color for items                                                              |
+| placement      | `string`    | `'bottom-start'` | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Placement of popover menu items                                                         |
+| min-width      | `number`    | `200`            | —                                                                                                                                                                              | Minimum width of popover items                                                          |
+
+
+## MenuSelect Slots
+
+| Slot        | Description                                                |
+| ----------- | ---------------------------------------------------------- |
+| default     | content that the menu popover will tether to               |
+| options     | custom template for individual menu options                |
+| select-icon | custom 16x16 icon (use only if 'options' slot is not used) |
+
+
+## MenuSelect Events
+
+| Event              | Type | Description                         |
+| ------------------ | ---- | ----------------------------------- |
+| menu-select:update | -    | Value update for the menu selection |
+
+
+## MenuSelectOption Props
+
+| Prop        | Type        | Default | Possible values | Description |
+| ----------- | ----------- | ------- | --------------- | ----------- |
+| value*      | `undefined` | —       | —               | —           |
+| is-disabled | `boolean`   | `false` | —               | —           |
+
+
+## MenuSelectOption Slots
+
+| Slot        | Description                                                                |
+| ----------- | -------------------------------------------------------------------------- |
+| select-icon | custom 16x16 icon (use only if using custom 'options' slot in MMenuSelect) |
+| default     | text label for option                                                      |
 <!-- api-tables:end -->

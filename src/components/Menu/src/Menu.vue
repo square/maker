@@ -135,6 +135,18 @@ export default {
 				this.$refs.popoverContainer.close();
 			}
 		},
+
+		open() {
+			this.$refs.popoverContainer.open();
+		},
+
+		close() {
+			this.$refs.popoverContainer.close();
+		},
+
+		toggle() {
+			this.$refs.popoverContainer.toggle();
+		},
 	},
 };
 </script>
