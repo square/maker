@@ -317,11 +317,12 @@ export default {
 <!-- api-tables:start -->
 ## Menu Props
 
-| Prop                  | Type      | Default  | Possible values | Description                                                      |
-| --------------------- | --------- | -------- | --------------- | ---------------------------------------------------------------- |
-| should-close-on-click | `boolean` | `true`   | —               | Toggles whether the popover should close when an item is clicked |
-| color                 | `string`  | `'#000'` | —               | Text color for items                                             |
-| bg-color              | `string`  | `'#fff'` | —               | Background color for items                                       |
+| Prop                  | Type      | Default          | Possible values                                                                                                                                                                | Description                                                      |
+| --------------------- | --------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| should-close-on-click | `boolean` | `true`           | —                                                                                                                                                                              | Toggles whether the popover should close when an item is clicked |
+| color                 | `string`  | `'#000'`         | —                                                                                                                                                                              | Text color for items                                             |
+| bg-color              | `string`  | `'#fff'`         | —                                                                                                                                                                              | Background color for items                                       |
+| placement             | `string`  | `'bottom-start'` | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Placement of popover menu items                                  |
 
 
 ## Menu Slots
@@ -352,12 +353,5 @@ export default {
 | Slot    | Description |
 | ------- | ----------- |
 | icon    | —           |
-| default | —           |
-
-
-## MenuOptionLabel Slots
-
-| Slot    | Description |
-| ------- | ----------- |
 | default | —           |
 <!-- api-tables:end -->
