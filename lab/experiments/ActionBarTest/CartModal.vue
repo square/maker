@@ -3,23 +3,36 @@
 		<template
 			#dismiss
 		>
-			<div class="cover-photo">
+			<div
+				v-if="showImage"
+				class="cover-photo"
+			>
 				<m-image
 					src="https://i.picsum.photos/id/507/900/900.jpg?hmac=NDltE7xXtFlZjUoyDqGjehzY5ORPtj4-d42qbFgAFkk"
 				/>
 			</div>
-		</template>
-
-		<div>
-			<h1>Cart modal content</h1>
-			<div
-				v-for="i in 100"
-				:key="i"
+			<m-segmented-control
+				v-else
+				v-model="selected"
 			>
-				Long text {{ i }}
-			</div>
+				<m-segment value="short">
+					Local Delivery
+				</m-segment>
+				<m-segment value="medium">
+					Pickup
+				</m-segment>
+				<m-segment value="long">
+					Ship
+				</m-segment>
+			</m-segmented-control>
+			<h2>Cart modal content</h2>
+		</template>
+		<div
+			v-for="i in 100"
+			:key="i"
+		>
+			Long text {{ i }}
 		</div>
-
 		<m-inline-action-bar>
 			<m-action-bar-button
 				key="close"
@@ -47,6 +60,7 @@
 import { MModal, modalApi } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import { MImage } from '@square/maker/components/Image';
+import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
 import X from '@square/maker-icons/X';
 
 export default {
@@ -54,11 +68,27 @@ export default {
 		MModal,
 		MInlineActionBar,
 		MActionBarButton,
+		MSegmentedControl,
+		MSegment,
 		MImage,
 		X,
 	},
+
 	inject: {
 		modalApi,
+	},
+
+	props: {
+		showImage: {
+			type: Boolean,
+			default: true,
+		},
+	},
+
+	data() {
+		return {
+			selected: 'short',
+		};
 	},
 };
 </script>
