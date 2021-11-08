@@ -26,6 +26,15 @@
 				<m-toggle v-model="shouldCloseOnClick">
 					Close on item click
 				</m-toggle>
+
+				<label>
+					Placement
+					<m-select
+						v-model="placement"
+						placeholder="Placeholder"
+						:options="placementOptions"
+					/>
+				</label>
 			</div>
 
 			<m-card>
@@ -33,27 +42,30 @@
 					Last clicked item: {{ value }}
 					<hr>
 				</div>
-				<m-menu
-					:items="options"
-					:color="color"
-					:bg-color="bgColor"
-					:should-close-on-click="shouldCloseOnClick"
-					@menu:click-item="setValue"
-				>
-					<template #default="menu">
-						<m-button @click="menu.toggle()">
-							Open Me
-						</m-button>
-					</template>
+				<div :class="$s.MenuContainer">
+					<m-menu
+						:items="options"
+						:color="color"
+						:bg-color="bgColor"
+						:should-close-on-click="shouldCloseOnClick"
+						:placement="placement"
+						@menu:click-item="setValue"
+					>
+						<template #default="menu">
+							<m-button @click="menu.toggle()">
+								Open Me
+							</m-button>
+						</template>
 
-					<template #items>
-						<m-menu-item
-							v-for="item in options"
-							:key="item"
-							:item="item"
-						/>
-					</template>
-				</m-menu>
+						<template #items>
+							<m-menu-item
+								v-for="item in options"
+								:key="item"
+								:item="item"
+							/>
+						</template>
+					</m-menu>
+				</div>
 			</m-card>
 		</m-container>
 		<m-popover-layer />
@@ -67,6 +79,7 @@ import { MContainer } from '@square/maker/components/Container';
 import { MMenu, MMenuItem } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 import { MToggle } from '@square/maker/components/Toggle';
+import { MSelect } from '@square/maker/components/Select';
 
 export default {
 	name: 'DemoSetup',
@@ -79,6 +92,7 @@ export default {
 		MToggle,
 		MButton,
 		MMenuItem,
+		MSelect,
 	},
 
 	mixins: [
@@ -93,6 +107,14 @@ export default {
 			color: '#000000',
 			bgColor: '#ffffff',
 			shouldCloseOnClick: true,
+			placement: 'bottom-start',
+			placementOptions: [
+				'auto', 'auto-start', 'auto-end',
+				'top', 'top-start', 'top-end',
+				'right', 'right-start', 'right-end',
+				'bottom', 'bottom-start', 'bottom-end',
+				'left', 'left-start', 'left-end',
+			].map((p) => ({ label: p, value: p })),
 		};
 	},
 
@@ -110,6 +132,13 @@ export default {
 	flex-direction: column;
 	gap: 1rem;
 	padding-bottom: 2rem;
+}
+
+.MenuContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 3rem;
 }
 </style>
 ```
