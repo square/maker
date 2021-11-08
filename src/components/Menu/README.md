@@ -44,7 +44,6 @@
 				</div>
 				<div :class="$s.MenuContainer">
 					<m-menu
-						:items="options"
 						:color="color"
 						:bg-color="bgColor"
 						:should-close-on-click="shouldCloseOnClick"
@@ -61,7 +60,7 @@
 							<m-menu-item
 								v-for="item in options"
 								:key="item"
-								:item="item"
+								:value="item"
 							/>
 						</template>
 					</m-menu>
@@ -155,7 +154,6 @@ export default {
 					<hr>
 				</div>
 				<m-menu
-					:items="options"
 					:color="color"
 					:bg-color="bgColor"
 					:should-close-on-click="shouldCloseOnClick"
@@ -169,7 +167,7 @@ export default {
 
 					<template #items>
 						<m-menu-item
-							item="approve"
+							value="approve"
 						>
 							<template #icon>
 								<check-icon />
@@ -179,7 +177,7 @@ export default {
 						</m-menu-item>
 
 						<m-menu-item
-							item="reject"
+							value="reject"
 						>
 							<template #icon>
 								<x-icon />
@@ -189,7 +187,7 @@ export default {
 						</m-menu-item>
 
 						<m-menu-item
-							item="download"
+							value="download"
 						>
 							<template #icon>
 								<download-icon />
@@ -266,7 +264,6 @@ export default {
 					<hr>
 				</div>
 				<m-menu
-					:items="options"
 					:color="color"
 					:bg-color="bgColor"
 					:should-close-on-click="shouldCloseOnClick"
@@ -280,13 +277,13 @@ export default {
 
 					<template #items>
 						<m-menu-item
-							item="enabled"
+							value="enabled"
 						>
 							Enabled
 						</m-menu-item>
 
 						<m-menu-item
-							item="disabled"
+							value="disabled"
 							is-disabled
 						>
 							Disabled
@@ -352,6 +349,7 @@ export default {
 | color                 | `string`  | `'#000'`         | —                                                                                                                                                                              | Text color for items                                             |
 | bg-color              | `string`  | `'#fff'`         | —                                                                                                                                                                              | Background color for items                                       |
 | placement             | `string`  | `'bottom-start'` | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Placement of popover menu items                                  |
+| min-width             | `number`  | `200`            | —                                                                                                                                                                              | Minimum width of popover items                                   |
 
 
 ## Menu Slots
@@ -371,16 +369,16 @@ export default {
 
 ## MenuItem Props
 
-| Prop        | Type        | Default | Possible values | Description |
-| ----------- | ----------- | ------- | --------------- | ----------- |
-| item*       | `undefined` | —       | —               | —           |
-| is-disabled | `boolean`   | `false` | —               | —           |
+| Prop        | Type        | Default | Possible values | Description                        |
+| ----------- | ----------- | ------- | --------------- | ---------------------------------- |
+| value*      | `undefined` | —       | —               | The value that is emitted on click |
+| is-disabled | `boolean`   | `false` | —               | Blocks clicking of the item        |
 
 
 ## MenuItem Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| icon    | —           |
-| default | —           |
+| Slot    | Description             |
+| ------- | ----------------------- |
+| icon    | 16x16 Square Maker Icon |
+| default | —                       |
 <!-- api-tables:end -->

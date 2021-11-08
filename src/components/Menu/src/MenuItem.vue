@@ -10,10 +10,12 @@
 			v-if="$slots.icon"
 			:class="$s.MenuItemIconContainer"
 		>
+			<!-- @slot 16x16 Square Maker Icon -->
 			<slot name="icon" />
 		</div>
 
 		<div :class="$s.MenuItemContent">
+			<!-- Content for item label, defaults to raw output of item prop -->
 			<slot v-if="$slots.default" />
 			<template v-else>
 				{{ item }}
@@ -35,11 +37,17 @@ export default {
 	},
 
 	props: {
-		item: {
+		/**
+		 * The value that is emitted on click
+		 */
+		value: {
 			type: undefined,
 			required: true,
 		},
 
+		/**
+		 * Blocks clicking of the item
+		 */
 		isDisabled: {
 			type: Boolean,
 			default: false,
