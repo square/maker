@@ -18,7 +18,7 @@
 			<!-- Content for item label, defaults to raw output of item prop -->
 			<slot v-if="$slots.default" />
 			<template v-else>
-				{{ item }}
+				{{ value }}
 			</template>
 		</div>
 	</div>
@@ -57,7 +57,7 @@ export default {
 	methods: {
 		clickMenuItem() {
 			if (!this.isDisabled) {
-				this.menuApi.clickMenuItem(this.item);
+				this.menuApi.clickMenuItem(this.value);
 			}
 		},
 	},
