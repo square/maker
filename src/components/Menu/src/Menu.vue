@@ -1,27 +1,48 @@
 <template>
-	<div
-		:class="$s.Menu"
-		:style="computedStyles"
+	<m-popover
+		ref="popoverContainer"
+		:min-width="200"
+		v-on="$listeners"
 	>
-		<!-- Content for each option -->
-		<slot
-			v-for="(option, idx) in options"
-			v-bind="option"
-		>
-			<m-menu-option
-				:key="idx"
-				:is-selected="false"
-				:option="option"
-			/>
-		</slot>
-	</div>
+		<template #tether="popover">
+			<m-button
+				@click="popover.toggle()"
+			>
+				<slot />
+			</m-button>
+		</template>
+
+		<template #content>
+			<m-popover-bubble
+				:color="color"
+				:bg-color="bgColor"
+			>
+				<div
+					:class="$s.Menu"
+					:style="computedStyles"
+				>
+					<slot
+						v-for="(item, idx) in items"
+						v-bind="{ item, clickItem, index: idx }"
+						name="item"
+					>
+						<m-menu-item
+							:key="idx"
+							:item="item"
+							@menu-item:click="clickItem(item)"
+						/>
+					</slot>
+				</div>
+			</m-popover-bubble>
+		</template>
+	</m-popover>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
+import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
 import chroma from 'chroma-js';
-import { isEqual } from 'lodash';
-import MMenuOption from './MenuOption.vue';
-import { MenuKey } from './key';
+import MMenuItem from './MenuItem.vue';
 
 const HOVER_COLOR_SCALE = 0.85;
 const DISABLED_TEXT_COLOR_SCALE = 0.5;
@@ -30,17 +51,10 @@ export default {
 	name: 'Menu',
 
 	components: {
-		MMenuOption,
-	},
-
-	provide() {
-		return {
-			[MenuKey]: this.menuAPI,
-		};
-	},
-
-	model: {
-		event: 'menu:update',
+		MPopover,
+		MPopoverBubble,
+		MButton,
+		MMenuItem,
 	},
 
 	props: {
@@ -53,23 +67,23 @@ export default {
 		},
 
 		/**
-		 * List of available options for menu
+		 * List of available items for menu
 		 */
-		options: {
+		items: {
 			type: Array,
 			required: true,
 		},
 
 		/**
-		 * Toggles whether the value is a list of selected options
+		 * Toggles whether the popover should close when an item is clicked
 		 */
-		isMultiselect: {
+		shouldCloseOnClick: {
 			type: Boolean,
-			default: false,
+			default: true,
 		},
 
 		/**
-		 * Text color for options
+		 * Text color for items
 		 */
 		color: {
 			type: String,
@@ -78,22 +92,13 @@ export default {
 		},
 
 		/**
-		 * Background color for options
+		 * Background color for items
 		 */
 		bgColor: {
 			type: String,
 			default: '#fff',
 			validator: (color) => chroma.valid(color),
 		},
-	},
-
-	data() {
-		return {
-			menuAPI: {
-				selectOption: this.selectOption,
-				isOptionSelected: this.isOptionSelected,
-			},
-		};
 	},
 
 	computed: {
@@ -114,57 +119,16 @@ export default {
 		},
 	},
 
-	watch: {
-		isMultiselect: {
-			immediate: true,
-			handler(isMultiselect, previousValue) {
-				if (previousValue === isMultiselect) {
-					return;
-				}
-
-				if (isMultiselect && !Array.isArray(this.value)) {
-					if (this.value === undefined) {
-						this.updateValue([]);
-					} else {
-						this.updateValue([this.value]);
-					}
-				} else if (!isMultiselect && Array.isArray(this.value)) {
-					const [newValue] = this.value;
-					this.updateValue(newValue);
-				}
-			},
-		},
-	},
-
 	methods: {
-		updateValue(value) {
+		clickItem(item) {
 			/**
-			 * Value update for the menu selection
+			 * Emitted when one of the menu items is clicked
 			 */
-			this.$emit('menu:update', value);
-		},
+			this.$emit('menu:click', item);
 
-		selectOption(option) {
-			if (this.isMultiselect) {
-				this.updateMultiselectValue(option);
-			} else {
-				this.updateValue(option);
+			if (this.shouldCloseOnClick) {
+				this.$refs.popoverContainer.close();
 			}
-		},
-
-		updateMultiselectValue(option) {
-			const filteredValue = this.value.filter((innerValue) => !isEqual(option, innerValue));
-			const newValue = filteredValue.length === this.value.length
-				? [...this.value, option]
-				: filteredValue;
-
-			this.updateValue(newValue);
-		},
-
-		isOptionSelected(option) {
-			return this.isMultiselect
-				? this.value?.some?.((innerValue) => isEqual(option, innerValue))
-				: isEqual(option, this.value);
 		},
 	},
 };

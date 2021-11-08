@@ -4,7 +4,7 @@
 			ref="popover"
 			:distance-offset="popoverDistanceOffset"
 			:skidding-offset="popoverSkiddingOffset"
-			:tether-min-width="popoverTetherMinWidth"
+			:tether-min-width="false"
 			:min-width="popoverMinWidth"
 		>
 			<template #tether="popover">
@@ -111,12 +111,7 @@ export default {
 
 		popoverMinWidth: {
 			type: Number,
-			default: 0,
-		},
-
-		popoverTetherMinWidth: {
-			type: Boolean,
-			default: true,
+			default: 200,
 		},
 	},
 

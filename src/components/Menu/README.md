@@ -3,66 +3,61 @@
 
 ```vue
 <template>
-	<m-container
-		label="Simple Data"
-		size="large"
-	>
-		<div :class="$s.ColorContainer">
-			<label>
-				Text Color
-				<input
-					v-model="color"
-					type="color"
-				>
-			</label>
-			<label>
-				Background Color
-				<input
-					v-model="bgColor"
-					type="color"
-				>
-			</label>
-		</div>
+	<div>
+		<m-container
+			label="Basic Usage"
+			size="large"
+		>
+			<div :class="$s.ColorContainer">
+				<label>
+					Text Color
+					<input
+						v-model="color"
+						type="color"
+					>
+				</label>
+				<label>
+					Background Color
+					<input
+						v-model="bgColor"
+						type="color"
+					>
+				</label>
 
-		<div :class="$s.GridContainer">
-			<m-card>
-				<m-container
-					label="Single Select"
-					:sublabel="'Value: ' + value"
-					size="medium"
-				>
+				<m-toggle v-model="shouldCloseOnClick">
+					Close on item click
+				</m-toggle>
+			</div>
+
+			<div :class="$s.GridContainer">
+				<m-card>
+					<div v-if="value">
+						Last clicked item: {{ value }}
+						<hr>
+					</div>
 					<m-menu
 						v-model="value"
-						:options="options"
+						:items="options"
 						:color="color"
 						:bg-color="bgColor"
-					/>
-				</m-container>
-			</m-card>
-
-			<m-card>
-				<m-container
-					label="Multiple Select"
-					:sublabel="'Value: ' + JSON.stringify(multiValue)"
-					size="medium"
-				>
-					<m-menu
-						v-model="multiValue"
-						:options="options"
-						is-multiselect
-						:color="color"
-						:bg-color="bgColor"
-					/>
-				</m-container>
-			</m-card>
-		</div>
-	</m-container>
+						:should-close-on-click="shouldCloseOnClick"
+						@menu:click="setValue"
+					>
+						Option
+					</m-menu>
+				</m-card>
+			</div>
+		</m-container>
+		<m-popover-layer />
+	</div>
 </template>
 
 <script>
 import { MCard } from '@square/maker/components/Card';
 import { MContainer } from '@square/maker/components/Container';
 import { MMenu } from '@square/maker/components/Menu';
+import { MPopoverLayer } from '@square/maker/components/Popover';
+import { MToggle } from '@square/maker/components/Toggle';
 
 export default {
 	name: 'DemoSetup',
@@ -71,7 +66,13 @@ export default {
 		MCard,
 		MContainer,
 		MMenu,
+		MPopoverLayer,
+		MToggle,
 	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
 
 	data() {
 		return {
@@ -80,7 +81,14 @@ export default {
 			options: ['Option 1', 'Option 2', 'Option 3'],
 			color: '#000000',
 			bgColor: '#ffffff',
+			shouldCloseOnClick: true,
 		};
+	},
+
+	methods: {
+		setValue(value) {
+			this.value = value;
+		},
 	},
 };
 </script>
@@ -91,140 +99,6 @@ export default {
 	flex-direction: column;
 	gap: 1rem;
 	padding-bottom: 2rem;
-}
-
-.GridContainer {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 2rem;
-}
-</style>
-```
-
-```vue
-<template>
-	<m-container
-		label="Complex Data"
-		size="large"
-	>
-		<div :class="$s.ColorContainer">
-			<label>
-				Text Color
-				<input
-					v-model="color"
-					type="color"
-				>
-			</label>
-			<label>
-				Background Color
-				<input
-					v-model="bgColor"
-					type="color"
-				>
-			</label>
-		</div>
-
-		<div :class="$s.GridContainer">
-			<m-card>
-				<m-container
-					label="Single Select"
-					:sublabel="'Value: ' + JSON.stringify(value)"
-					size="medium"
-				>
-					<m-menu
-						v-model="value"
-						:options="options"
-						:color="color"
-						:bg-color="bgColor"
-					>
-						<template #default="option">
-							<m-menu-option
-								:option="option.value"
-								:disabled="option.disabled"
-							>
-								<m-menu-option-label>
-									{{ option.label }}
-								</m-menu-option-label>
-							</m-menu-option>
-						</template>
-					</m-menu>
-				</m-container>
-			</m-card>
-
-			<m-card>
-				<m-container
-					label="Multiple Select"
-					:sublabel="'Value: ' + JSON.stringify(multiValue)"
-					size="medium"
-				>
-					<m-menu
-						v-model="multiValue"
-						:options="options"
-						is-multiselect
-						:color="color"
-						:bg-color="bgColor"
-					>
-						<template #default="option">
-							<m-menu-option
-								:option="option.value"
-								:disabled="option.disabled"
-							>
-								<m-menu-option-label>
-									{{ option.label }}
-								</m-menu-option-label>
-							</m-menu-option>
-						</template>
-					</m-menu>
-				</m-container>
-			</m-card>
-		</div>
-	</m-container>
-</template>
-
-<script>
-import { MCard } from '@square/maker/components/Card';
-import { MContainer } from '@square/maker/components/Container';
-import { MMenu, MMenuOption, MMenuOptionLabel } from '@square/maker/components/Menu';
-
-export default {
-	name: 'DemoSetup',
-
-	components: {
-		MCard,
-		MContainer,
-		MMenu,
-		MMenuOption,
-		MMenuOptionLabel,
-	},
-
-	data() {
-		return {
-			value: undefined,
-			multiValue: undefined,
-			options: [
-				{ label: 'Option 1 (foo)', value: { data: 'foo' } },
-				{ label: 'Option 2 (bar)', value: { data: 'bar' } },
-				{ label: 'Option 3 (baz) [Disabled]', value: { data: 'baz' }, disabled: true },
-			],
-			color: '#000000',
-			bgColor: '#ffffff',
-		};
-	},
-};
-</script>
-
-<style module="$s">
-.ColorContainer {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	padding-bottom: 2rem;
-}
-
-.GridContainer {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 2rem;
 }
 </style>
 ```
@@ -233,13 +107,13 @@ export default {
 <!-- api-tables:start -->
 ## Menu Props
 
-| Prop           | Type        | Default  | Possible values | Description                                             |
-| -------------- | ----------- | -------- | --------------- | ------------------------------------------------------- |
-| value          | `undefined` | —        | —               | Component value                                         |
-| options*       | `array`     | —        | —               | List of available options for menu                      |
-| is-multiselect | `boolean`   | `false`  | —               | Toggles whether the value is a list of selected options |
-| color          | `string`    | `'#000'` | —               | Text color for options                                  |
-| bg-color       | `string`    | `'#fff'` | —               | Background color for options                            |
+| Prop                  | Type        | Default  | Possible values | Description                                                      |
+| --------------------- | ----------- | -------- | --------------- | ---------------------------------------------------------------- |
+| value                 | `undefined` | —        | —               | Component value                                                  |
+| items*                | `array`     | —        | —               | List of available items for menu                                 |
+| should-close-on-click | `boolean`   | `true`   | —               | Toggles whether the popover should close when an item is clicked |
+| color                 | `string`    | `'#000'` | —               | Text color for items                                             |
+| bg-color              | `string`    | `'#fff'` | —               | Background color for items                                       |
 
 
 ## Menu Slots
@@ -247,27 +121,29 @@ export default {
 | Slot    | Description |
 | ------- | ----------- |
 | default | —           |
+| item    | —           |
 
 
 ## Menu Events
 
-| Event       | Type | Description                         |
-| ----------- | ---- | ----------------------------------- |
-| menu:update | -    | Value update for the menu selection |
+| Event      | Type | Description                                   |
+| ---------- | ---- | --------------------------------------------- |
+| menu:click | -    | Emitted when one of the menu items is clicked |
 
 
-## MenuOption Props
+## MenuItem Props
 
-| Prop     | Type        | Default | Possible values | Description                                           |
-| -------- | ----------- | ------- | --------------- | ----------------------------------------------------- |
-| option*  | `undefined` | —       | —               | The value of this option. Default slot displays this. |
-| disabled | `boolean`   | `false` | —               | Blocks selection                                      |
+| Prop        | Type        | Default | Possible values | Description |
+| ----------- | ----------- | ------- | --------------- | ----------- |
+| option*     | `undefined` | —       | —               | —           |
+| is-disabled | `boolean`   | `false` | —               | —           |
 
 
-## MenuOption Slots
+## MenuItem Slots
 
 | Slot    | Description |
 | ------- | ----------- |
+| icon    | —           |
 | default | —           |
 
 
