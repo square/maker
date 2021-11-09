@@ -1,5 +1,10 @@
 <template>
-	<div :class="$s.PopoverInstance">
+	<div
+		:class="{
+			[$s.PopoverInstance]: true,
+			[$s.shouldHide]: shouldHideOnOverflow,
+		}"
+	>
 		<!-- @slot Popover content -->
 		<slot />
 	</div>
@@ -15,6 +20,10 @@ export default {
 		tetherEl: {
 			type: undefined,
 			required: true,
+		},
+		shouldHideOnOverflow: {
+			type: Boolean,
+			default: true,
 		},
 		popperConfig: {
 			type: Object,
@@ -62,7 +71,7 @@ export default {
 	z-index: 1;
 }
 
-.PopoverInstance[data-popper-reference-hidden] {
+.PopoverInstance.shouldHide[data-popper-reference-hidden] {
 	visibility: hidden;
 	pointer-events: none;
 }

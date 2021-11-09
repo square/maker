@@ -136,9 +136,28 @@ export default {
 			default: true,
 		},
 
+		/**
+		 * Configures the popover to hide itself if the tether element goes out of view
+		 */
+		shouldHideOnOverflow: {
+			type: Boolean,
+			default: true,
+		},
+
+		/**
+		 * ID of popper
+		 */
 		id: {
 			type: String,
 			default: () => uuid(),
+		},
+
+		/**
+		 * Custom popover config
+		 */
+		customConfig: {
+			type: Object,
+			default: undefined,
 		},
 	},
 
@@ -154,7 +173,7 @@ export default {
 						return;
 					}
 
-					const popperConfig = vm.popoverConfig?.config || createPopperConfig({
+					const popperConfig = vm.customConfig || vm.popoverConfig?.config || createPopperConfig({
 						placement: vm.placement,
 						offset: [vm.skiddingOffset, vm.distanceOffset],
 						tetherMinWidth: vm.tetherMinWidth,
@@ -166,6 +185,7 @@ export default {
 							tetherEl: vm.tetherEl,
 							ignoreEls: ignoreElements,
 							popperConfig,
+							shouldHideOnOverflow: vm.shouldHideOnOverflow,
 						},
 						popperId: vm.id,
 						on: vm.$listeners,
