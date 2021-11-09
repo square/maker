@@ -1,32 +1,28 @@
 <template>
 	<m-modal>
-		<template
-			#dismiss
+		<div
+			v-if="showImage"
+			class="cover-photo"
 		>
-			<div
-				v-if="showImage"
-				class="cover-photo"
-			>
-				<m-image
-					src="https://i.picsum.photos/id/507/900/900.jpg?hmac=NDltE7xXtFlZjUoyDqGjehzY5ORPtj4-d42qbFgAFkk"
-				/>
-			</div>
-			<m-segmented-control
-				v-else
-				v-model="selected"
-			>
-				<m-segment value="short">
-					Local Delivery
-				</m-segment>
-				<m-segment value="medium">
-					Pickup
-				</m-segment>
-				<m-segment value="long">
-					Ship
-				</m-segment>
-			</m-segmented-control>
-			<h2>Cart modal content</h2>
-		</template>
+			<m-image
+				src="https://i.picsum.photos/id/507/900/900.jpg?hmac=NDltE7xXtFlZjUoyDqGjehzY5ORPtj4-d42qbFgAFkk"
+			/>
+		</div>
+		<m-segmented-control
+			v-else
+			v-model="selected"
+		>
+			<m-segment value="short">
+				Local Delivery
+			</m-segment>
+			<m-segment value="medium">
+				Pickup
+			</m-segment>
+			<m-segment value="long">
+				Ship
+			</m-segment>
+		</m-segmented-control>
+		<h1>Cart modal content</h1>
 		<div
 			v-for="i in 100"
 			:key="i"

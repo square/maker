@@ -1,23 +1,20 @@
 <template>
 	<div
-		@touchstart="touchEvent"
-		@touchmove="touchEvent"
-		@touchend="touchEvent"
+		@touchstart="handleTouchEvent"
+		@touchmove="handleTouchEvent"
+		@touchend="handleTouchEvent"
 	>
 		<slot />
 	</div>
 </template>
 
 <script>
-import { throttle } from 'lodash';
-
-const eventThrottle = 50;
 const touchPointsDrag = 1;
 const touchPointsSwipe = 1;
 const initialValues = {
 	touchStarted: false,
 	touchEnded: false,
-	touchPoints: 0,
+	touchPoints: [],
 	timeStart: 0,
 	clientXStart: 0,
 	clientYStart: 0,
@@ -30,28 +27,19 @@ export default {
 	name: 'TouchCapture',
 
 	props: {
-		minDragDistance: {
-			type: Number,
-			default: 10,
-		},
-		minDragDuration: {
-			type: Number,
-			default: 100,
-		},
 		minSwipeDistance: {
 			type: Number,
 			default: 30,
 		},
 		maxSwipeDuration: {
 			type: Number,
-			default: 400,
+			default: 300,
 		},
 	},
 
 	data() {
 		return {
 			...initialValues,
-			touchEvent: throttle(this.handleTouchEvent, eventThrottle),
 		};
 	},
 
@@ -61,11 +49,11 @@ export default {
 		},
 
 		changeY() {
-			return Math.round(this.clientYCurrent - this.clientYStart);
+			return this.clientYCurrent - this.clientYStart;
 		},
 
 		changeX() {
-			return Math.round(this.clientXCurrent - this.clientXStart);
+			return this.clientXCurrent - this.clientXStart;
 		},
 
 		direction() {
@@ -84,26 +72,27 @@ export default {
 			};
 		},
 
-		isDragGesture() {
-			if (this.touchPoints !== touchPointsDrag) {
-				return false;
-			}
-			return this.timeElapsed > this.minDragDuration
-				&& (Math.abs(this.changeY) > this.minDragDistance
-				|| Math.abs(this.changeX) > this.minDragDistance);
-		},
-
 		isSwipeGesture() {
-			if (this.touchPoints !== touchPointsSwipe) {
-				return false;
-			}
-			return this.timeElapsed > this.minSwipeDuration
+			const invalidTouchPoints = this.touchPoints.filter((value) => value !== touchPointsSwipe);
+			return invalidTouchPoints.length === 0
+				&& this.timeElapsed < this.maxSwipeDuration
 				&& (Math.abs(this.changeY) > this.minSwipeDistance
 				|| Math.abs(this.changeX) > this.minSwipeDistance);
+		},
+
+		isDragGesture() {
+			const invalidTouchPoints = this.touchPoints.filter((value) => value !== touchPointsDrag);
+			return invalidTouchPoints.length === 0;
 		},
 	},
 
 	watch: {
+		timeCurrent() {
+			if (this.isDragGesture) {
+				this.$emit(`on-drag-${this.direction}`, this.gesture);
+			}
+		},
+
 		touchEnded(completed) {
 			if (completed) {
 				if (this.isSwipeGesture) {
@@ -114,11 +103,6 @@ export default {
 				this.resetGesture();
 			}
 		},
-		timeCurrent() {
-			if (this.isDragGesture) {
-				this.$emit(`on-drag-${this.direction}`, this.gesture);
-			}
-		},
 	},
 
 	methods: {
@@ -126,22 +110,20 @@ export default {
 			switch (event.type) {
 			case 'touchstart':
 				this.touchStarted = true;
-				this.clientYStart = event.changedTouches[0].clientY;
 				this.clientXStart = event.changedTouches[0].clientX;
+				this.clientYStart = event.changedTouches[0].clientY;
 				this.timeStart = event.timeStamp;
-				this.touchPoints = event.changedTouches.length;
 				break;
 			case 'touchmove':
-				this.clientYCurrent = event.changedTouches[0].clientY;
+				this.touchPoints.push(event.changedTouches.length);
 				this.clientXCurrent = event.changedTouches[0].clientX;
+				this.clientYCurrent = event.changedTouches[0].clientY;
 				this.timeCurrent = event.timeStamp;
-				this.touchPoints = event.changedTouches.length;
 				break;
 			case 'touchend':
-				this.clientYCurrent = event.changedTouches[0].clientY;
-				this.clientXCurrent = event.changedTouches[0].clientX;
-				this.timeCurrent = event.timeStamp;
 				this.touchEnded = true;
+				this.clientXCurrent = event.changedTouches[0].clientX;
+				this.clientYCurrent = event.changedTouches[0].clientY;
 				break;
 			default:
 				break;

@@ -1,34 +1,19 @@
 <template>
-	<div
+	<m-touch-capture
+		ref="modal"
 		:class="$s.Modal"
 		:style="modalStyles"
+		@scroll.native="onScroll"
+		@on-drag-down="onDragDown"
+		@on-drag-end="onDragEnd"
+		@on-swipe-down="onSwipeDown"
 	>
-		<template v-if="$slots.dismiss">
-			<m-touch-capture
-				:class="$s.DismissMobile"
-				@on-drag-down="onDragDown"
-				@on-drag-end="onDragEnd"
-				@on-swipe-down="onSwipeDown"
-			>
-				<slot name="dismiss" />
-			</m-touch-capture>
-			<div :class="$s.DismissDesktop">
-				<slot name="dismiss" />
-			</div>
-		</template>
-		<!-- @slot Modal content -->
 		<slot />
-		<m-touch-capture
-			v-if="!$slots.dismiss"
-			:class="$s.Dismiss"
-			@on-drag-down="onDragDown"
-			@on-drag-end="onDragEnd"
-			@on-swipe-down="onSwipeDown"
-		/>
-	</div>
+	</m-touch-capture>
 </template>
 
 <script>
+import { throttle } from 'lodash';
 import { MTouchCapture } from '@square/maker/components/TouchCapture';
 import modalApi from './modal-api';
 
@@ -55,8 +40,11 @@ export default {
 	},
 
 	data() {
+		const scrollCheckDelay = 800;
 		return {
 			modalStyles: {},
+			isScrolledToTop: true,
+			onScroll: throttle(this.setScrollTop, scrollCheckDelay),
 		};
 	},
 
@@ -70,22 +58,33 @@ export default {
 	},
 
 	methods: {
+		setScrollTop() {
+			this.isScrolledToTop = this.$refs.modal.$el.scrollTop <= 0;
+		},
+
 		onSwipeDown() {
-			this.modalApi.close();
+			if (this.isScrolledToTop) {
+				this.modalApi.close();
+			}
 		},
 
 		onDragDown(gesture) {
-			const transform = `translateY(${gesture.changeY}px)`;
-			this.modalStyles = {
-				transform,
-				'backface-visibility': 'hidden',
-				overflow: 'hidden',
-			};
+			if (this.isScrolledToTop) {
+				const transform = `translateY(${gesture.changeY}px)`;
+				this.modalStyles = {
+					transform,
+					'backface-visibility': 'hidden',
+					overflow: 'hidden',
+					transition: 'none',
+				};
+			}
 		},
 
 		onDragEnd(gesture) {
-			const minDragCloseDistance = 100;
-			if (gesture.changeY > minDragCloseDistance) {
+			// percent of window height modal must be dragged to close on release
+			const minDragCloseDistance = 0.3;
+			if (this.isScrolledToTop
+			&& gesture.changeY > (window.innerHeight * minDragCloseDistance)) {
 				this.modalApi.close();
 			} else {
 				this.modalStyles = {};
@@ -103,29 +102,11 @@ export default {
 	transition: transform 0.2s linear;
 }
 
-@media screen and (max-width: 839px) {
-	.Dismiss {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100px;
-	}
-
-	.DismissDesktop {
-		display: none;
-	}
-}
-
 @media screen and (min-width: 840px) {
 	.Modal {
 		width: 600px;
 		min-height: 180px;
 		max-height: calc(100vh - 64px);
-	}
-
-	.DismissMobile {
-		display: none;
 	}
 }
 </style>
