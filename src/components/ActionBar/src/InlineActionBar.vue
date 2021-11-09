@@ -1,16 +1,23 @@
 <template>
 	<div :class="$s.ActionBarWrapper">
-		<atomic-action-bar
-			v-bind="$attrs"
-			v-on="$listeners"
+		<m-transition
+			:enter="enterAnimation"
+			:leave="leaveAnimation"
 		>
-			<!-- @slot ActionBar items -->
-			<slot />
-		</atomic-action-bar>
+			<atomic-action-bar
+				v-if="loaded"
+				v-bind="$attrs"
+				v-on="$listeners"
+			>
+				<slot />
+			</atomic-action-bar>
+		</m-transition>
 	</div>
 </template>
 
 <script>
+import { MTransition } from '@square/maker/utils/Transition';
+import { springUpBounceFn, springDownBounceFn } from '@square/maker/utils/transitions';
 import AtomicActionBar from './AtomicActionBar.vue';
 
 /**
@@ -21,9 +28,37 @@ import AtomicActionBar from './AtomicActionBar.vue';
 export default {
 	components: {
 		AtomicActionBar,
+		MTransition,
 	},
 
 	inheritAttrs: false,
+
+	props: {
+		enterAnimation: {
+			type: Function,
+			default: springUpBounceFn,
+		},
+		leaveAnimation: {
+			type: Function,
+			default: springDownBounceFn,
+		},
+		enterDelay: {
+			type: Number,
+			default: 800,
+		},
+	},
+
+	data() {
+		return {
+			loaded: false,
+		};
+	},
+
+	mounted() {
+		setTimeout(() => {
+			this.loaded = !!this.$slots.default;
+		}, this.enterDelay);
+	},
 };
 </script>
 
