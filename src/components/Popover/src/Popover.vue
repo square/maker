@@ -93,7 +93,7 @@ export default {
 		},
 
 		/**
-		 * Custom popover config
+		 * Popper.js modifier list. Overrides default configuration if present.
 		 */
 		modifiers: {
 			type: Array,
