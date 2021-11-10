@@ -2,16 +2,16 @@
 	<div :class="$s.Layer">
 		<m-transition-fade-in>
 			<div
-				v-if="currentModalLayer.state.vnode"
+				v-if="currentLayer.state.vnode"
 				:class="[
 					$s.Translucent,
-					{ [$s.Transparent]: currentModalLayer.state.isStacked },
+					{ [$s.Transparent]: currentLayer.state.isStacked },
 				]"
 			/>
 		</m-transition-fade-in>
 		<m-transition-responsive :transitions="transitions">
 			<div
-				v-if="currentModalLayer.state.vnode"
+				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
 				@click.capture="closeOnClickOutside"
@@ -24,12 +24,12 @@
 					ref="modal"
 					:class="$s.Container"
 				>
-					<v :nodes="currentModalLayer.state.vnode" />
+					<v :nodes="currentLayer.state.vnode" />
 				</div>
 				<m-popover-layer />
 			</div>
 		</m-transition-responsive>
-		<modal-layer v-if="currentModalLayer.state.vnode" />
+		<modal-layer v-if="currentLayer.state.vnode" />
 	</div>
 </template>
 
@@ -56,7 +56,7 @@ import modalApi from './modal-api';
 
 const apiMixin = {
 	inject: {
-		currentModalLayer: {
+		currentLayer: {
 			default: undefined,
 			from: modalApi,
 		},
@@ -68,9 +68,9 @@ const apiMixin = {
 			state: Vue.observable({
 				vnode: undefined,
 				options: {},
-				isStacked: !!vm.currentModalLayer,
+				isStacked: !!vm.currentLayer,
 				// return parent modal to allow to close child and parent modals at the same time
-				parentModal: vm.currentModalLayer,
+				parentModal: vm.currentLayer,
 			}),
 
 			open(renderFn, options = {}) {
@@ -88,7 +88,7 @@ const apiMixin = {
 			async close() {
 				const isModalActive = !this.state.vnode; // Verify there's no modal on top
 
-				if (isModalActive && vm.currentModalLayer) {
+				if (isModalActive && vm.currentLayer) {
 					if (typeof this.state.options.beforeCloseHook === 'function') {
 						if (!(await this.state.options.beforeCloseHook())) {
 							return; // cancel
@@ -100,7 +100,7 @@ const apiMixin = {
 					// causes a weird content shift as the modal fades away.
 					vm.popoverApi.closePopover();
 					vm.$nextTick(() => {
-						vm.currentModalLayer.state.vnode = undefined;
+						vm.currentLayer.state.vnode = undefined;
 					});
 				}
 			},
@@ -139,7 +139,7 @@ export default {
 	data() {
 		let tabletEnterFn = floatUpFn;
 		let tabletLeaveFn = floatDownFn;
-		if (this.currentModalLayer.state.isStacked) {
+		if (this.currentLayer.state.isStacked) {
 			tabletEnterFn = delayedFloatUpFn;
 			tabletLeaveFn = floatDownFn;
 		}
@@ -193,7 +193,7 @@ export default {
 
 	methods: {
 		closeOnClickOutside(event) {
-			const { closeOnClickOutside } = this.currentModalLayer.state.options;
+			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
 			if (modal && closeOnClickOutside && !modal.contains(event.target)) {
 				this.modalApi.close();
