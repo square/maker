@@ -486,10 +486,10 @@ export default {
 <!-- api-tables:start -->
 ## Popover Props
 
-| Prop      | Type     | Default          | Possible values                                                                                                                                                                | Description                                                                |
-| --------- | -------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| placement | `string` | `'bottom-start'` | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Starting position of the popover. Not guaranteed if too close to overflow. |
-| modifiers | `array`  | —                | —                                                                                                                                                                              | Popper.js modifier list. Overrides default configuration if present.       |
+| Prop      | Type     | Default                   | Possible values                                                                                                                                                                | Description                                                                |
+| --------- | -------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| placement | `string` | `'bottom-start'`          | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Starting position of the popover. Not guaranteed if too close to overflow. |
+| modifiers | `array`  | `() => DEFAULT_MODIFIERS` | —                                                                                                                                                                              | Popper.js modifier list. Overrides default configuration if present.       |
 
 
 ## Popover Slots

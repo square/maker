@@ -1,22 +1,24 @@
 <template>
-	<div :class="$s.PopoverLayer">
-		<m-transition-fade-in>
-			<pseudo-window @blur.passive="handleBlur">
-				<pseudo-window
-					@mousedown="trackClickSrc"
-					@touchstart="trackClickSrc"
-					@click.capture="handleClick"
-					@touchend="handleClick"
-				>
-					<component
-						:is="popoverApi.currentInstance"
-						v-if="popoverApi.currentInstance"
-						ref="instance"
-						@close="popoverApi.closePopover"
-					/>
+	<div>
+		<div :class="$s.PopoverLayer">
+			<m-transition-fade-in>
+				<pseudo-window @blur.passive="handleBlur">
+					<pseudo-window
+						@mousedown="trackClickSrc"
+						@touchstart="trackClickSrc"
+						@click.capture="handleClick"
+						@touchend="handleClick"
+					>
+						<component
+							:is="popoverApi.currentInstance"
+							v-if="popoverApi.currentInstance"
+							ref="instance"
+							@close="popoverApi.closePopover"
+						/>
+					</pseudo-window>
 				</pseudo-window>
-			</pseudo-window>
-		</m-transition-fade-in>
+			</m-transition-fade-in>
+		</div>
 	</div>
 </template>
 
@@ -59,7 +61,7 @@ const popoverMixin = {
 		const layerIncrement = 1;
 
 		const layerDepth = (this.currentPopoverLayer?.layerDepth || startingLayer) + layerIncrement;
-		const target = `portal-${layerDepth}`;
+		const target = `popover-portal-${layerDepth}`;
 
 		const api = Vue.observable({
 			currentInstance: undefined,

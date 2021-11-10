@@ -29,6 +29,9 @@ export default {
 
 	beforeDestroy() {
 		this.resizeObserver.disconnect();
+	},
+
+	destroyed() {
 		this.popper.destroy();
 
 		/**

@@ -92,7 +92,7 @@ export default {
 		 */
 		modifiers: {
 			type: Array,
-			default: DEFAULT_MODIFIERS,
+			default: () => DEFAULT_MODIFIERS,
 		},
 	},
 
