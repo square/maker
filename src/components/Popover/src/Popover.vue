@@ -50,11 +50,6 @@ const DEFAULT_MODIFIERS = [
 	},
 ];
 
-const createPopperConfig = (placement, modifiers) => ({
-	placement,
-	modifiers: modifiers || DEFAULT_MODIFIERS,
-});
-
 export default {
 	name: 'Popover',
 
@@ -97,7 +92,7 @@ export default {
 		 */
 		modifiers: {
 			type: Array,
-			default: undefined,
+			default: DEFAULT_MODIFIERS,
 		},
 	},
 
@@ -113,16 +108,14 @@ export default {
 						return;
 					}
 
-					const popperConfig = vm.popoverConfig?.config || createPopperConfig(
-						vm.placement,
-						vm.modifiers,
-					);
-
 					const popoverData = {
 						props: {
 							tetherEl: vm.tetherEl,
 							ignoreEls: ignoreElements,
-							popperConfig,
+							popperConfig: {
+								placement: vm.placement,
+								modifiers: vm.modifiers,
+							},
 						},
 						on: vm.$listeners,
 					};
