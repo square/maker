@@ -93,14 +93,6 @@ export default {
 		},
 
 		/**
-		 * Configures the popover to hide itself if the tether element goes out of view
-		 */
-		shouldHideOnOverflow: {
-			type: Boolean,
-			default: true,
-		},
-
-		/**
 		 * Custom popover config
 		 */
 		modifiers: {
@@ -131,7 +123,6 @@ export default {
 							tetherEl: vm.tetherEl,
 							ignoreEls: ignoreElements,
 							popperConfig,
-							shouldHideOnOverflow: vm.shouldHideOnOverflow,
 						},
 						on: vm.$listeners,
 					};
