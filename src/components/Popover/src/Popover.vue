@@ -18,7 +18,6 @@
 import { throwError } from '@square/maker/utils/debug';
 import assert from '@square/maker/utils/assert';
 import { Portal } from '@linusborg/vue-simple-portal';
-import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
 const MAX_TETHER_VNODE = 1;
@@ -145,14 +144,6 @@ export default {
 		},
 
 		/**
-		 * ID of popper
-		 */
-		id: {
-			type: String,
-			default: () => uuid(),
-		},
-
-		/**
 		 * Custom popover config
 		 */
 		customConfig: {
@@ -187,7 +178,6 @@ export default {
 							popperConfig,
 							shouldHideOnOverflow: vm.shouldHideOnOverflow,
 						},
-						popperId: vm.id,
 						on: vm.$listeners,
 					};
 

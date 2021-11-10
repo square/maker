@@ -66,7 +66,6 @@ const popoverMixin = {
 			tetherEl: undefined,
 			ignoreEls: [],
 			popperConfig: undefined,
-			popperId: undefined,
 			clickSrc: undefined,
 			layerDepth,
 			target,
@@ -84,7 +83,6 @@ const popoverMixin = {
 					this.tetherEl = popoverData.props.tetherEl;
 					this.ignoreEls = popoverData.props.ignoreEls;
 					this.popperConfig = popoverData.props.popperConfig;
-					this.popperId = popoverData.props.popperId;
 					this.currentInstance = newPopover(popoverData, this.target, resolve);
 				});
 			},
