@@ -68,6 +68,7 @@ export default {
 .MenuItem {
 	display: flex;
 	align-items: center;
+	min-width: 200px;
 	padding: 12px;
 	background-color: var(--menu-background);
 	cursor: pointer;

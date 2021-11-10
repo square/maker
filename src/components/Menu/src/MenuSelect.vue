@@ -4,7 +4,7 @@
 		:color="color"
 		:bg-color="bgColor"
 		:placement="placement"
-		:min-width="minWidth"
+		:poover-modifiers="popoverModifiers"
 		:should-close-on-click="!isMultiselect"
 		@menu:click-item="selectOption"
 	>
@@ -121,9 +121,9 @@ export default {
 		/**
 		 * Minimum width of popover items
 		 */
-		minWidth: {
-			type: Number,
-			default: 200,
+		popoverModifiers: {
+			type: Array,
+			default: () => undefined,
 		},
 	},
 

@@ -1,8 +1,8 @@
 <template>
 	<m-popover
 		ref="popoverContainer"
-		:min-width="minWidth"
 		:placement="placement"
+		:modifiers="popoverModifiers"
 		v-on="$listeners"
 	>
 		<template #tether="popover">
@@ -10,7 +10,7 @@
 		</template>
 
 		<template #content>
-			<m-popover-bubble
+			<m-popover-container
 				:color="color"
 				:bg-color="bgColor"
 			>
@@ -20,13 +20,13 @@
 				>
 					<slot name="items" />
 				</div>
-			</m-popover-bubble>
+			</m-popover-container>
 		</template>
 	</m-popover>
 </template>
 
 <script>
-import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
 import chroma from 'chroma-js';
 import { MenuKey } from './key';
 
@@ -38,7 +38,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverBubble,
+		MPopoverContainer,
 	},
 
 	provide() {
@@ -90,11 +90,11 @@ export default {
 		},
 
 		/**
-		 * Minimum width of popover items
+		 * List of modifiers for the popover
 		 */
-		minWidth: {
-			type: Number,
-			default: 200,
+		popoverModifiers: {
+			type: Array,
+			default: () => undefined,
 		},
 	},
 
