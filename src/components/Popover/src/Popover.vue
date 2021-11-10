@@ -21,49 +21,38 @@ import { Portal } from '@linusborg/vue-simple-portal';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 
 const MAX_TETHER_VNODE = 1;
+const SKIDDING_OFFSET = 0;
+const DISTANCE_OFFSET = 8;
 
-const getMinWidth = (minWidth, tetherMinWidth, reference) => {
-	if (!tetherMinWidth) {
-		return minWidth;
-	}
+const DEFAULT_MODIFIERS = [
+	{
+		name: 'offset',
+		options: { offset: [SKIDDING_OFFSET, DISTANCE_OFFSET] },
+	},
+	{
+		name: 'preventOverflow',
+		options: {
+			padding: 24,
+			altBoundary: true,
+		},
+	},
+	{
+		name: 'minWidth',
+		enabled: true,
+		phase: 'beforeWrite',
+		requires: ['computeStyles'],
+		fn({ state: { styles, rects } }) {
+			styles.popper.minWidth = `${rects.reference.offsetWidth}px`;
+		},
+		effect({ state: { elements } }) {
+			elements.popper.style.minWidth = `${elements.reference.offsetWidth}px`;
+		},
+	},
+];
 
-	return minWidth || reference.offsetWidth;
-};
-
-const createPopperConfig = ({
+const createPopperConfig = (placement, modifiers) => ({
 	placement,
-	offset,
-	tetherMinWidth,
-	minWidth,
-}) => ({
-	placement,
-	modifiers: [
-		{
-			name: 'offset',
-			options: { offset },
-		},
-		{
-			name: 'preventOverflow',
-			options: {
-				padding: 24,
-				altBoundary: true,
-			},
-		},
-		{
-			name: 'minWidth',
-			enabled: tetherMinWidth || !!minWidth,
-			phase: 'beforeWrite',
-			requires: ['computeStyles'],
-			fn({ state: { styles, rects } }) {
-				const popoverMinWidth = getMinWidth(minWidth, tetherMinWidth, rects.reference);
-				styles.popper.minWidth = `${popoverMinWidth}px`;
-			},
-			effect({ state: { elements } }) {
-				const popoverMinWidth = getMinWidth(minWidth, tetherMinWidth, elements.reference);
-				elements.popper.style.minWidth = `${popoverMinWidth}px`;
-			},
-		},
-	],
+	modifiers: modifiers || DEFAULT_MODIFIERS,
 });
 
 export default {
@@ -104,38 +93,6 @@ export default {
 		},
 
 		/**
-		 * Distance from tether element
-		 */
-		distanceOffset: {
-			type: Number,
-			default: 8,
-		},
-
-		/**
-		 * Offset from base position (Y for left/right placement, X for top/bottom placement)
-		 */
-		skiddingOffset: {
-			type: Number,
-			default: 0,
-		},
-
-		/**
-		 * Absolute min width of popover, overrides tetherMinWidth
-		 */
-		minWidth: {
-			type: Number,
-			default: 0,
-		},
-
-		/**
-		 * Set min width of popover to tether width, overridden by minWidth
-		 */
-		tetherMinWidth: {
-			type: Boolean,
-			default: true,
-		},
-
-		/**
 		 * Configures the popover to hide itself if the tether element goes out of view
 		 */
 		shouldHideOnOverflow: {
@@ -146,8 +103,8 @@ export default {
 		/**
 		 * Custom popover config
 		 */
-		customConfig: {
-			type: Object,
+		modifiers: {
+			type: Array,
 			default: undefined,
 		},
 	},
@@ -164,12 +121,10 @@ export default {
 						return;
 					}
 
-					const popperConfig = vm.customConfig || vm.popoverConfig?.config || createPopperConfig({
-						placement: vm.placement,
-						offset: [vm.skiddingOffset, vm.distanceOffset],
-						tetherMinWidth: vm.tetherMinWidth,
-						minWidth: vm.minWidth,
-					});
+					const popperConfig = vm.popoverConfig?.config || createPopperConfig(
+						vm.placement,
+						vm.modifiers,
+					);
 
 					const popoverData = {
 						props: {
