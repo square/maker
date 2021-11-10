@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="$s.PopoverBubble"
+		:class="$s.PopoverContainer"
 		:style="computedStyles"
 	>
 		<!-- @slot Popover bubble content -->
@@ -12,7 +12,7 @@
 import chroma from 'chroma-js';
 
 export default {
-	name: 'PopoverBubble',
+	name: 'PopoverContainer',
 
 	props: {
 		/**
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style module="$s">
-.PopoverBubble {
+.PopoverContainer {
 	padding: 8px 0;
 	color: var(--popover-color);
 	background-color: var(--popover-bg-color);

@@ -34,9 +34,9 @@ Use the popover to provide the user with more context or options.
 					</template>
 
 					<template #content>
-						<m-popover-bubble>
+						<m-popover-container>
 							<demo-popover />
-						</m-popover-bubble>
+						</m-popover-container>
 					</template>
 				</m-popover>
 			</div>
@@ -45,7 +45,7 @@ Use the popover to provide the user with more context or options.
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MSelect } from '@square/maker/components/Select';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
@@ -56,7 +56,7 @@ export default {
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverBubble,
+		MPopoverContainer,
 		MButton,
 		MSelect,
 		DemoPopover,
@@ -128,16 +128,16 @@ export default {
 				</span>
 			</template>
 			<template #content>
-				<m-popover-bubble>
+				<m-popover-container>
 					<demo-popover />
-				</m-popover-bubble>
+				</m-popover-container>
 			</template>
 		</m-popover>
 	</div>
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
@@ -147,7 +147,7 @@ export default {
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverBubble,
+		MPopoverContainer,
 		MButton,
 		DemoPopover,
 	},
@@ -314,13 +314,13 @@ _DemoModal.vue_
 				</template>
 
 				<template #content>
-					<m-popover-bubble>
+					<m-popover-container>
 						<demo-popover>
 							<m-button @click="closeModal()">
 								Close Modal
 							</m-button>
 						</demo-popover>
-					</m-popover-bubble>
+					</m-popover-container>
 				</template>
 			</m-popover>
 		</m-modal-content>
@@ -328,7 +328,7 @@ _DemoModal.vue_
 </template>
 
 <script>
-import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
@@ -339,7 +339,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverBubble,
+		MPopoverContainer,
 		MModal,
 		MButton,
 		MHeading,
@@ -385,13 +385,13 @@ _DemoDialog.vue_
 				</template>
 
 				<template #content>
-					<m-popover-bubble>
+					<m-popover-container>
 						<demo-popover>
 							<m-button @click="closeDialog()">
 								Close Dialog
 							</m-button>
 						</demo-popover>
-					</m-popover-bubble>
+					</m-popover-container>
 				</template>
 			</m-popover>
 		</m-dialog-content>
@@ -399,7 +399,7 @@ _DemoDialog.vue_
 </template>
 
 <script>
-import { MPopover, MPopoverBubble } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
@@ -410,7 +410,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverBubble,
+		MPopoverContainer,
 		MDialog,
 		MButton,
 		MHeading,
@@ -512,7 +512,7 @@ export default {
 | close | -    | Popover has been closed |
 
 
-## PopoverBubble Props
+## PopoverContainer Props
 
 | Prop     | Type     | Default  | Possible values | Description                     |
 | -------- | -------- | -------- | --------------- | ------------------------------- |
@@ -520,7 +520,7 @@ export default {
 | bg-color | `string` | `'#fff'` | —               | Background color of the popover |
 
 
-## PopoverBubble Slots
+## PopoverContainer Slots
 
 | Slot    | Description            |
 | ------- | ---------------------- |
