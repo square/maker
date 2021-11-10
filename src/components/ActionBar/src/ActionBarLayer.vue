@@ -81,17 +81,9 @@ export default {
 
 <style module="$s">
 .ActionBarLayer {
-	--regular-bottom-padding: 32px;
-	--extra-bottom-padding-for-deadclick: 32px;
-	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
-	--actionbar-bottom-padding:
-		calc(
-			var(--regular-bottom-padding)
-			+ var(--extra-bottom-padding-for-deadclick)
-			+ var(--safe-area-inset-padding)
-		);
+	--actionbar-top-padding: 24px;
 	--actionbar-size: 64px;
-	--actionbar-top-padding: 32px;
+	--actionbar-bottom-padding: calc(24px + env(safe-area-inset-bottom));
 
 	padding-bottom:
 		calc(
@@ -101,12 +93,6 @@ export default {
 		);
 
 	&.NoActionBar {
-		padding-bottom: 0;
-	}
-}
-
-@media screen and (min-width: 840px) {
-	.ActionBarLayer {
 		padding-bottom: 0;
 	}
 }

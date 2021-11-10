@@ -41,13 +41,11 @@ export default {
 
 <style module="$s">
 .ActionBar {
-	--regular-bottom-padding: 32px;
-	--extra-bottom-padding-for-deadclick: 32px;
-	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
+	--regular-bottom-padding: 24px;
+	--safe-area-inset-padding: env(safe-area-inset-bottom, 24px);
 	--mobile-bottom-padding:
 		calc(
 			var(--regular-bottom-padding)
-			+ var(--extra-bottom-padding-for-deadclick)
 			+ var(--safe-area-inset-padding)
 		);
 
