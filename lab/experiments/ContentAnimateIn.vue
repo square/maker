@@ -30,7 +30,7 @@
 					:src="`https://picsum.photos/600/300?${i}`"
 					height="200px"
 				>
-				<div>This is item number {{ Math.random() }}</div>
+				<div>This is item number {{ i }}</div>
 			</div>
 		</transition-group>
 	</div>
