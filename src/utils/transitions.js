@@ -19,9 +19,17 @@ export const spring = {
 	mass,
 };
 
+export const springSubtle = {
+	type,
+	stiffness: 200,
+	damping: 30,
+	mass: 1,
+};
+
 const START_VALUE = 0;
 const END_VALUE = 100;
 const MINI_END_VALUE = 40;
+const MICRO_END_VALUE = 20;
 
 export const animateUp = {
 	from: START_VALUE,
@@ -67,9 +75,14 @@ const toOpacity = styleFactory(START_VALUE, END_VALUE, 'opacity', '%');
 const toRelativeY = styleFactory(START_VALUE, END_VALUE, 'y', '%');
 const toRelativeX = styleFactory(START_VALUE, END_VALUE, 'x', '%');
 const toMiniSlideY = styleFactory(MINI_END_VALUE, START_VALUE, 'y', 'px');
+const toMicroSlideY = styleFactory(MICRO_END_VALUE, START_VALUE, 'y', 'px');
 const toFloatyY = (progress) => ({
 	...toOpacity(progress),
 	...toMiniSlideY(progress),
+});
+const toSubtleFloatyY = (progress) => ({
+	...toOpacity(progress),
+	...toMicroSlideY(progress),
 });
 
 export function fadeInFn({ element, onComplete }) {
@@ -219,6 +232,26 @@ export function delayedFloatUpFn({ element, onComplete }) {
 			onComplete,
 		});
 	}, springDelay);
+}
+
+export function staggeredFloatUpFn({ element, onComplete }) {
+	const elementStyler = styler(element);
+	const styleFn = toSubtleFloatyY;
+	const animationDirection = animateUp;
+	const delay = 50;
+	const staggerDelay = element.dataset.loadIndex * delay;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	setTimeout(() => {
+		animate({
+			...animationDirection,
+			...springSubtle,
+			onUpdate(number) {
+				elementStyler.set(styleFn(number));
+			},
+			onComplete,
+		});
+	}, staggerDelay);
 }
 
 export function floatDownFn({ element, onComplete }) {
