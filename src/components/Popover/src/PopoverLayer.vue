@@ -147,13 +147,13 @@ export default {
 				return;
 			}
 
-			const clickInBubble = $instance.$el?.contains(this.popoverApi.clickSrc);
+			const clickInContainer = $instance.$el?.contains(this.popoverApi.clickSrc);
 			const clickInAction = this.popoverApi.tetherEl?.contains(this.popoverApi.clickSrc);
 			const clickInIgnores = this.popoverApi.ignoreEls?.some(
 				(element) => element.contains?.(this.popoverApi.clickSrc),
 			);
 
-			if (!clickInBubble && !clickInAction && !clickInIgnores) {
+			if (!clickInContainer && !clickInAction && !clickInIgnores) {
 				this.popoverApi.closePopover();
 			}
 

@@ -14,9 +14,29 @@ Use the popover to provide the user with more context or options.
 					Placement
 					<m-select
 						v-model="placement"
-						placeholder="Placeholder"
 						:options="placementOptions"
 					/>
+				</label>
+				<label>
+					Padding
+					<m-select
+						v-model="padding"
+						:options="paddingOptions"
+					/>
+				</label>
+				<label>
+					Text Color
+					<input
+						v-model="color"
+						type="color"
+					>
+				</label>
+				<label>
+					Background Color
+					<input
+						v-model="bgColor"
+						type="color"
+					>
 				</label>
 			</div>
 
@@ -34,7 +54,11 @@ Use the popover to provide the user with more context or options.
 					</template>
 
 					<template #content>
-						<m-popover-container>
+						<m-popover-container
+							:padding="padding"
+							:color="color"
+							:bg-color="bgColor"
+						>
 							<demo-popover />
 						</m-popover-container>
 					</template>
@@ -76,6 +100,15 @@ export default {
 				'bottom', 'bottom-start', 'bottom-end',
 				'left', 'left-start', 'left-end',
 			].map((p) => ({ label: p, value: p })),
+			padding: 'medium',
+			paddingOptions: [
+				{ label: 'minimal (8px 0px)', value: 'minimal' },
+				{ label: 'small (8px)', value: 'small' },
+				{ label: 'medium (16px)', value: 'medium' },
+				{ label: 'large (24px)', value: 'large' },
+			],
+			color: '#000000',
+			bgColor: '#ffffff',
 		};
 	},
 };
@@ -221,7 +254,7 @@ export default {
 </script>
 ```
 
-## Custom 'Bubble'
+## Custom Container
 ```vue
 <template>
 	<div>
@@ -239,7 +272,7 @@ export default {
 				</template>
 
 				<template #content>
-					<div :class="$s.CustomBubble">
+					<div :class="$s.CustomContainer">
 						<demo-popover />
 					</div>
 				</template>
@@ -270,7 +303,7 @@ export default {
 </script>
 
 <style module="$s">
-.CustomBubble {
+.CustomContainer {
   animation: bgColor 5s infinite linear;
 	border-radius: 16px;
 	padding: 24px;
@@ -469,10 +502,6 @@ export default {
 </script>
 
 <style module="$s">
-.DemoPopoverContent {
-	padding: 0 8px;
-}
-
 .DemoPopoverHeader + .DemoPopoverText {
 	margin-top: 8px;
 }
@@ -510,17 +539,18 @@ export default {
 
 ## PopoverContainer Props
 
-| Prop     | Type     | Default  | Possible values | Description                     |
-| -------- | -------- | -------- | --------------- | ------------------------------- |
-| color    | `string` | `'#000'` | —               | Text color within the popover   |
-| bg-color | `string` | `'#fff'` | —               | Background color of the popover |
+| Prop     | Type     | Default    | Possible values                       | Description                     |
+| -------- | -------- | ---------- | ------------------------------------- | ------------------------------- |
+| color    | `string` | `'#000'`   | —                                     | Text color within the popover   |
+| bg-color | `string` | `'#fff'`   | —                                     | Background color of the popover |
+| padding  | `string` | `'medium'` | `minimal`, `small`, `medium`, `large` | Padding of container            |
 
 
 ## PopoverContainer Slots
 
-| Slot    | Description            |
-| ------- | ---------------------- |
-| default | Popover bubble content |
+| Slot    | Description               |
+| ------- | ------------------------- |
+| default | Popover container content |
 
 
 
