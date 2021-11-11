@@ -1,52 +1,28 @@
 <template>
 	<div>
-		<div :class="$s.PopoverLayer">
-			<m-transition-fade-in>
-				<pseudo-window @blur.passive="handleBlur">
-					<pseudo-window
-						@mousedown="trackClickSrc"
-						@touchstart="trackClickSrc"
-						@click.capture="handleClick"
-						@touchend="handleClick"
-					>
-						<component
-							:is="popoverApi.currentInstance"
-							v-if="popoverApi.currentInstance"
-							ref="instance"
-							@close="popoverApi.closePopover"
-						/>
-					</pseudo-window>
-				</pseudo-window>
-			</m-transition-fade-in>
-		</div>
+		<pseudo-window @blur.passive="handleBlur">
+			<pseudo-window
+				@mousedown="trackClickSrc"
+				@touchstart="trackClickSrc"
+				@click.capture="handleClick"
+				@touchend="handleClick"
+			>
+				<div
+					:id="popoverApi.target"
+					ref="portal"
+					:class="$s.PopoverLayer"
+				/>
+			</pseudo-window>
+		</pseudo-window>
 	</div>
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
 import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
-import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import PseudoWindow from 'vue-pseudo-window';
 import Vue from 'vue';
-import PopoverInstance from './PopoverInstance.vue';
+import { v4 as uuid } from 'uuid';
 import { PopoverAPIKey } from './keys';
-
-const newPopover = (popoverData, layerName, onDestroy) => ({
-	render() {
-		const { props, on } = popoverData;
-		const onClose = () => this.$emit('close');
-
-		return (
-			<PopoverInstance
-				onDestroy={onDestroy}
-				onClose={onClose}
-				{...{ props, on }}
-			>
-				<div id={layerName}></div>
-			</PopoverInstance>
-		);
-	},
-});
 
 const popoverMixin = {
 	inject: {
@@ -57,19 +33,19 @@ const popoverMixin = {
 	},
 
 	provide() {
-		const startingLayer = 0;
-		const layerIncrement = 1;
-
-		const layerDepth = (this.currentPopoverLayer?.layerDepth || startingLayer) + layerIncrement;
-		const target = `popover-portal-${layerDepth}`;
+		/**
+		 * This is to avoid name collisions for the popover portal if
+		 * multiple exist at the same 'level'.
+		 */
+		const layerId = uuid();
+		const target = `popover-portal-${layerId}`;
 
 		const api = Vue.observable({
 			currentInstance: undefined,
 			tetherEl: undefined,
 			ignoreEls: [],
-			popperConfig: undefined,
 			clickSrc: undefined,
-			layerDepth,
+			layerId,
 			target,
 			targetSelector: `#${target}`,
 			setPopover(popoverData) {
@@ -77,16 +53,13 @@ const popoverMixin = {
 					this.closePopover();
 				}
 
-				if (!popoverData || !popoverData.props?.tetherEl) {
-					return undefined;
+				if (!popoverData || !popoverData.tetherEl) {
+					return;
 				}
 
-				return new Promise((resolve) => {
-					this.tetherEl = popoverData.props.tetherEl;
-					this.ignoreEls = popoverData.props.ignoreEls;
-					this.popperConfig = popoverData.props.popperConfig;
-					this.currentInstance = newPopover(popoverData, this.target, resolve);
-				});
+				this.tetherEl = popoverData.tetherEl;
+				this.ignoreEls = popoverData.ignoreEls;
+				this.currentInstance = popoverData.id;
 			},
 
 			closePopover() {
@@ -109,8 +82,6 @@ export default {
 
 	components: {
 		PseudoWindow,
-		MTransition,
-		MTransitionFadeIn,
 	},
 
 	inject: {
@@ -142,12 +113,12 @@ export default {
 		},
 
 		handleClick() {
-			const $instance = this.$refs.instance;
-			if (!$instance || !this.popoverApi.clickSrc) {
+			const $portal = this.$refs.portal;
+			if (!$portal || !this.popoverApi.clickSrc) {
 				return;
 			}
 
-			const clickInContainer = $instance.$el?.contains(this.popoverApi.clickSrc);
+			const clickInContainer = $portal.$el?.contains(this.popoverApi.clickSrc);
 			const clickInAction = this.popoverApi.tetherEl?.contains(this.popoverApi.clickSrc);
 			const clickInIgnores = this.popoverApi.ignoreEls?.some(
 				(element) => element.contains?.(this.popoverApi.clickSrc),

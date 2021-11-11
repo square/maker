@@ -5,20 +5,28 @@
 			v-bind="actionAPI"
 		/>
 
-		<portal
-			v-if="actionAPI.isOpen"
-			:selector="popoverApi.targetSelector"
-		>
-			<slot name="content" />
+		<portal :selector="popoverApi.targetSelector">
+			<m-transition-fade-in @after-leave="destroyPopper">
+				<popover-instance
+					v-if="isOpen"
+					:tether-el="tetherEl"
+					:popper-config="popperConfig"
+					@popover-instance:new-popper="setPopper"
+				>
+					<slot name="content" />
+				</popover-instance>
+			</m-transition-fade-in>
 		</portal>
 	</div>
 </template>
 
 <script>
 import { throwError } from '@square/maker/utils/debug';
-import assert from '@square/maker/utils/assert';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { Portal } from '@linusborg/vue-simple-portal';
+import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
+import PopoverInstance from './PopoverInstance.vue';
 
 const MAX_TETHER_VNODE = 1;
 const SKIDDING_OFFSET = 0;
@@ -55,6 +63,8 @@ export default {
 
 	components: {
 		Portal,
+		PopoverInstance,
+		MTransitionFadeIn,
 	},
 
 	inject: {
@@ -100,30 +110,22 @@ export default {
 		const vm = this;
 
 		return {
+			/**
+			 * This is used to track which popover is open. When opening, this
+			 * will be pushed into the popoverApi state as the opened popover.
+			 */
+			id: uuid(),
+			popper: undefined,
 			actionAPI: {
-				isOpen: false,
-
 				open(...ignoreElements) {
-					if (vm.actionAPI.isOpen) {
+					if (vm.isOpen) {
 						return;
 					}
 
-					const popoverData = {
-						props: {
-							tetherEl: vm.tetherEl,
-							ignoreEls: ignoreElements,
-							popperConfig: {
-								placement: vm.placement,
-								modifiers: vm.modifiers,
-							},
-						},
-						on: vm.$listeners,
-					};
-
-					const whenClosed = vm.popoverApi.setPopover(popoverData);
-					vm.actionAPI.isOpen = true;
-					whenClosed.then(() => {
-						vm.actionAPI.isOpen = false;
+					vm.popoverApi.setPopover({
+						tetherEl: vm.tetherEl,
+						ignoreEls: ignoreElements,
+						id: vm.id,
 					});
 				},
 
@@ -132,7 +134,7 @@ export default {
 				},
 
 				toggle(...ignoreElements) {
-					if (vm.actionAPI.isOpen) {
+					if (vm.isOpen) {
 						vm.actionAPI.close();
 					} else {
 						vm.actionAPI.open(...ignoreElements);
@@ -150,10 +152,21 @@ export default {
 
 			return this.$el.children[0];
 		},
+
+		popperConfig() {
+			return {
+				placement: this.placement,
+				modifiers: this.modifiers,
+			};
+		},
+
+		isOpen() {
+			return this.popoverApi.currentInstance === this.id;
+		},
 	},
 
 	watch: {
-		'actionAPI.isOpen': function emitEvent(isOpen) {
+		isOpen: function emitEvent(isOpen) {
 			if (isOpen) {
 				/**
 				 * Popover has been opened
@@ -168,25 +181,7 @@ export default {
 		},
 	},
 
-	beforeDestroy() {
-		this.close();
-	},
-
 	methods: {
-		getTetherVNode(tetherSlot) {
-			let tetherVnode = tetherSlot(this.actionAPI);
-
-			if (!Array.isArray(tetherVnode)) {
-				return tetherVnode;
-			}
-
-			tetherVnode = tetherVnode.flat(Infinity).filter((vnode) => vnode.tag);
-
-			assert.error(tetherVnode.length === MAX_TETHER_VNODE, 'Popover', 'You must only pass in one element into the `action` scoped-slot');
-
-			return tetherVnode[0];
-		},
-
 		open(...ignoreElements) {
 			this.actionAPI.open(...ignoreElements);
 		},
@@ -197,6 +192,15 @@ export default {
 
 		toggle(...ignoreElements) {
 			this.actionAPI.toggle(...ignoreElements);
+		},
+
+		setPopper(popper) {
+			this.popper = popper;
+		},
+
+		destroyPopper() {
+			this.popper?.destroy();
+			this.popper = undefined;
 		},
 	},
 };

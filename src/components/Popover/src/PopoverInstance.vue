@@ -25,19 +25,12 @@ export default {
 	mounted() {
 		this.popper = createPopper(this.tetherEl, this.$el, this.popperConfig);
 		this.resizeObserver = this.followPopoverAction();
+
+		this.$emit('popover-instance:new-popper', this.popper);
 	},
 
 	beforeDestroy() {
 		this.resizeObserver.disconnect();
-	},
-
-	destroyed() {
-		this.popper.destroy();
-
-		/**
-		 * Popover has been removed
-		 */
-		this.$emit('destroy');
 	},
 
 	updated() {
