@@ -30,9 +30,9 @@
 import { throwError } from '@square/maker/utils/debug';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { Portal } from '@linusborg/vue-simple-portal';
-import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 import PopoverInstance from './PopoverInstance.vue';
+import { generateRandomId } from './utils';
 
 const MAX_TETHER_VNODE = 1;
 const SKIDDING_OFFSET = 0;
@@ -120,7 +120,7 @@ export default {
 			 * This is used to track which popover is open. When opening, this
 			 * will be pushed into the popoverApi state as the opened popover.
 			 */
-			id: uuid(),
+			id: generateRandomId(),
 			currentPopper: undefined,
 			popperToDestroy: undefined,
 			actionAPI: {
@@ -214,7 +214,3 @@ export default {
 	},
 };
 </script>
-
-<style>
-/* Keep */
-</style>
