@@ -16,7 +16,6 @@
 					:class="$s.disableScroll"
 				/>
 				<v :nodes="dialogApi.state.vnode" />
-				<!-- <m-popover-layer /> -->
 			</div>
 		</m-transition-responsive>
 	</div>
