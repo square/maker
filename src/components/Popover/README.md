@@ -3,6 +3,9 @@
 Use the popover to provide the user with more context or options.
 
 ## Simple Usage
+
+In order to use Popovers, you must include the `MPopoverLayer` component.
+
 ```vue
 <template>
 	<div>
@@ -139,6 +142,9 @@ export default {
 ```
 
 ## External Trigger
+
+If you need to trigger a popover to be opened from outside the `Popover` component, you can access the `open`, `close`, and `trigger` methods via a `ref`.
+
 ```vue
 <template>
 	<div style="padding: 24px;">
@@ -175,7 +181,7 @@ import { MButton } from '@square/maker/components/Button';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'SimpleDemo',
+	name: 'ExternalTriggerDemo',
 
 	components: {
 		MPopoverLayer,
@@ -193,6 +199,15 @@ export default {
 ```
 
 ## Modal/Dialog Usage
+
+### Modals
+
+Each Modal layer will include it's own Popover layer, so Popovers will work out of the box without extra configuration.
+
+### Dialogs
+
+The Dialog layer shares the root-level Popover layer. In order for popovers to appear on top of the Dialogs, make sure to include the `MPopoverLayer` component _after_ the `MDialogLayer` component in your template. Otherwise, Popovers will work inside Dialogs without extra configuration.
+
 ```vue
 <template>
 	<div style="padding: 24px;">
@@ -255,6 +270,9 @@ export default {
 ```
 
 ## Custom Container
+
+If you need to display something other than the built-in `MPopoverContainer` component in your Popover, you can pass custom content into the `content` slot.
+
 ```vue
 <template>
 	<div>
@@ -287,7 +305,7 @@ import { MButton } from '@square/maker/components/Button';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'SimpleDemo',
+	name: 'CustomContainerDemo',
 
 	components: {
 		MPopoverLayer,
