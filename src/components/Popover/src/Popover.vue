@@ -5,17 +5,21 @@
 			v-bind="actionAPI"
 		/>
 
-		<portal :selector="popoverApi.targetSelector">
-			<m-transition-fade-in @after-leave="destroyPopper">
-				<popover-instance
-					v-if="isOpen"
-					:tether-el="tetherEl"
-					:popper-config="popperConfig"
-					@popover-instance:new-popper="setPopper"
-				>
-					<slot name="content" />
-				</popover-instance>
-			</m-transition-fade-in>
+		<portal
+			:selector="popoverApi.targetSelector"
+		>
+			<div>
+				<m-transition-fade-in @after-leave="destroyPopper">
+					<popover-instance
+						v-if="isOpen"
+						:tether-el="tetherEl"
+						:popper-config="popperConfig"
+						@popover-instance:new-popper="setPopper"
+					>
+						<slot name="content" />
+					</popover-instance>
+				</m-transition-fade-in>
+			</div>
 		</portal>
 	</div>
 </template>
@@ -166,7 +170,7 @@ export default {
 	},
 
 	watch: {
-		isOpen: function emitEvent(isOpen) {
+		isOpen(isOpen) {
 			if (isOpen) {
 				/**
 				 * Popover has been opened

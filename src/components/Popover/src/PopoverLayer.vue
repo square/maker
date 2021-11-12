@@ -114,11 +114,11 @@ export default {
 
 		handleClick() {
 			const $portal = this.$refs.portal;
-			if (!$portal || !this.popoverApi.clickSrc) {
+			if (!$portal || !this.popoverApi.clickSrc || !this.popoverApi.currentInstance) {
 				return;
 			}
 
-			const clickInContainer = $portal.$el?.contains(this.popoverApi.clickSrc);
+			const clickInContainer = $portal.contains(this.popoverApi.clickSrc);
 			const clickInAction = this.popoverApi.tetherEl?.contains(this.popoverApi.clickSrc);
 			const clickInIgnores = this.popoverApi.ignoreEls?.some(
 				(element) => element.contains?.(this.popoverApi.clickSrc),
