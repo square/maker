@@ -46,7 +46,7 @@ const DEFAULT_MODIFIERS = [
 	{
 		name: 'preventOverflow',
 		options: {
-			padding: 24,
+			padding: 0,
 			altBoundary: true,
 		},
 	},
