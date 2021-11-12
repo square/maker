@@ -1,11 +1,57 @@
 # Popover
 
-Use the popover to provide the user with more context or options.
+Use the popover to provide the user with more context or options. The Popover Layer should be placed at the root of your application.
 
-## Simple Usage
+## Basic Popover
+```vue
+<template>
+	<div>
+		<m-popover-layer />
 
-In order to use Popovers, you must include the `MPopoverLayer` component.
+		<m-popover
+			:placement="placement"
+		>
+			<template #tether="popover">
+				<m-button
+					:variant="'primary'"
+					@click="popover.toggle()"
+				>
+					Popover Toggle
+				</m-button>
+			</template>
 
+			<template #content>
+				<m-popover-content>
+					Content for a basic popover
+				</m-popover-content>
+			</template>
+		</m-popover>
+	</div>
+</template>
+
+<script>
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	name: 'BasicDemo',
+
+	components: {
+		MPopoverLayer,
+		MPopover,
+		MPopoverContent,
+		MButton,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+};
+</script>
+```
+
+
+## Other Configurations
 ```vue
 <template>
 	<div>
@@ -18,13 +64,6 @@ In order to use Popovers, you must include the `MPopoverLayer` component.
 					<m-select
 						v-model="placement"
 						:options="placementOptions"
-					/>
-				</label>
-				<label>
-					Padding
-					<m-select
-						v-model="padding"
-						:options="paddingOptions"
 					/>
 				</label>
 				<label>
@@ -58,7 +97,6 @@ In order to use Popovers, you must include the `MPopoverLayer` component.
 
 					<template #content>
 						<m-popover-content
-							:padding="padding"
 							:color="color"
 							:bg-color="bgColor"
 						>
@@ -103,13 +141,6 @@ export default {
 				'bottom', 'bottom-start', 'bottom-end',
 				'left', 'left-start', 'left-end',
 			].map((p) => ({ label: p, value: p })),
-			padding: 'medium',
-			paddingOptions: [
-				{ label: 'minimal (8px 0px)', value: 'minimal' },
-				{ label: 'small (8px)', value: 'small' },
-				{ label: 'medium (16px)', value: 'medium' },
-				{ label: 'large (24px)', value: 'large' },
-			],
 			color: '#000000',
 			bgColor: '#ffffff',
 		};
@@ -147,12 +178,11 @@ If you need to trigger a popover to be opened from outside the `Popover` compone
 
 ```vue
 <template>
-	<div style="padding: 24px;">
+	<div>
 		<m-popover-layer />
 
 		<m-button
 			ref="externalTrigger"
-			:variant="false ? 'primary' : 'secondary'"
 			@click="$refs.popover.toggle($refs.externalTrigger.$el)"
 		>
 			Popover Toggle
@@ -210,7 +240,7 @@ The Dialog layer shares the root-level Popover layer. In order for popovers to a
 
 ```vue
 <template>
-	<div style="padding: 24px;">
+	<div>
 		<m-modal-layer />
 		<m-dialog-layer />
 		<m-popover-layer />
@@ -267,77 +297,6 @@ export default {
 	},
 };
 </script>
-```
-
-## Custom Container
-
-If you need to display something other than the built-in `MPopoverContent` component in your Popover, you can pass custom content into the `content` slot.
-
-```vue
-<template>
-	<div>
-		<m-popover-layer />
-
-		<div style="padding: 24px;">
-			<m-popover>
-				<template #tether="popover">
-					<m-button
-						:variant="popover.isOpen ? 'primary' : 'secondary'"
-						@click="popover.toggle()"
-					>
-						Popover Toggle
-					</m-button>
-				</template>
-
-				<template #content>
-					<div :class="$s.CustomContainer">
-						<demo-popover />
-					</div>
-				</template>
-			</m-popover>
-		</div>
-	</div>
-</template>
-
-<script>
-import { MPopoverLayer, MPopover } from '@square/maker/components/Popover';
-import { MButton } from '@square/maker/components/Button';
-import DemoPopover from 'doc/DemoPopoverContent.vue';
-
-export default {
-	name: 'CustomContainerDemo',
-
-	components: {
-		MPopoverLayer,
-		MPopover,
-		MButton,
-		DemoPopover,
-	},
-
-	mixins: [
-		MPopoverLayer.popoverMixin,
-	],
-};
-</script>
-
-<style module="$s">
-.CustomContainer {
-  animation: bgColor 5s infinite linear;
-	border-radius: 16px;
-	padding: 24px;
-}
-
-@keyframes bgColor {
-	0% { background-color: red; color: white; }
-  14.29% { background-color: orange; color: white; }
-  28.57% { background-color: yellow; color: black; }
-  42.86% { background-color: green; color: black; }
-  57.14% { background-color: blue; color: white; }
-  71.43% { background-color: indigo; color: white; }
-  85.71% { background-color: violet; color: white; }
-  100% { background-color: red; color: white; }
-}
-</style>
 ```
 
 _DemoModal.vue_
@@ -416,10 +375,6 @@ _DemoDialog.vue_
 ```vue
 <template>
 	<m-dialog>
-		<img
-			class="cover-photo"
-			src="https://picsum.photos/800/300"
-		>
 		<m-dialog-content>
 			<m-heading>
 				Popover in a dialog
@@ -561,7 +516,6 @@ export default {
 | -------- | -------- | ---------- | ------------------------------------- | ------------------------------- |
 | color    | `string` | `'#000'`   | —                                     | Text color within the popover   |
 | bg-color | `string` | `'#fff'`   | —                                     | Background color of the popover |
-| padding  | `string` | `'medium'` | `minimal`, `small`, `medium`, `large` | Padding of container            |
 
 
 ## PopoverContent Slots
