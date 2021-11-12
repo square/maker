@@ -29,13 +29,15 @@ Use the popover to provide the user with more context or options.
 							:variant="popover.isOpen ? 'primary' : 'secondary'"
 							@click="popover.toggle()"
 						>
-							Popover Toggle
+							Popover Toggle ({{ count }})
 						</m-button>
 					</template>
 
 					<template #content>
 						<m-popover-bubble>
-							<demo-popover />
+							<demo-popover>
+								Count: {{ count }}
+							</demo-popover>
 						</m-popover-bubble>
 					</template>
 				</m-popover>
@@ -76,8 +78,13 @@ export default {
 				'bottom', 'bottom-start', 'bottom-end',
 				'left', 'left-start', 'left-end',
 			].map((p) => ({ label: p, value: p })),
+			count: 0,
 		};
 	},
+
+	mounted() {
+		setInterval(() => this.count += 1, 1000);
+	}
 };
 </script>
 
