@@ -1,6 +1,6 @@
 <template>
 	<div style="display: contents;">
-		<!-- @slot Element popover is tied or 'tethered' to. Must be a single node. -->
+		<!-- @slot Element that the popover is tied or 'tethered' to. Must be a single node. -->
 		<slot
 			name="tether"
 			v-bind="actionAPI"
@@ -17,7 +17,7 @@
 						:popper-config="popperConfig"
 						@popover-instance:new-popper="setPopper"
 					>
-						<!-- @slot content that will appear in the floating popover -->
+						<!-- @slot Content that will appear in the floating popover -->
 						<slot name="content" />
 					</popover-instance>
 				</m-transition-fade-in>

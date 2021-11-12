@@ -523,10 +523,10 @@ export default {
 
 ## Popover Slots
 
-| Slot    | Description                                                      |
-| ------- | ---------------------------------------------------------------- |
-| tether  | Element popover is tied or 'tethered' to. Must be a single node. |
-| content | content that will appear in the floating popover                 |
+| Slot    | Description                                                               |
+| ------- | ------------------------------------------------------------------------- |
+| tether  | Element that the popover is tied or 'tethered' to. Must be a single node. |
+| content | Content that will appear in the floating popover                          |
 
 
 ## Popover Events
