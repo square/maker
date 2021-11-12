@@ -119,7 +119,8 @@ export default {
 			 * will be pushed into the popoverApi state as the opened popover.
 			 */
 			id: uuid(),
-			popper: undefined,
+			currentPopper: undefined,
+			popperToDestroy: undefined,
 			actionAPI: {
 				open(...ignoreElements) {
 					if (vm.isOpen) {
@@ -134,6 +135,8 @@ export default {
 				},
 
 				close() {
+					this.popperToDestroy = this.currentPopper;
+					this.currentPopper = undefined;
 					vm.popoverApi.closePopover();
 				},
 
@@ -199,12 +202,12 @@ export default {
 		},
 
 		setPopper(popper) {
-			this.popper = popper;
+			this.currentPopper = popper;
 		},
 
 		destroyPopper() {
-			this.popper?.destroy();
-			this.popper = undefined;
+			this.popperToDestroy?.destroy();
+			this.popperToDestroy = undefined;
 		},
 	},
 };
