@@ -21,16 +21,16 @@ Use the popover to provide the user with more context or options. The Popover La
 			</template>
 
 			<template #content>
-				<m-popover-container>
+				<m-popover-content>
 					Content for a basic popover
-				</m-popover-container>
+				</m-popover-content>
 			</template>
 		</m-popover>
 	</div>
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
@@ -39,7 +39,7 @@ export default {
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MButton,
 	},
 
@@ -96,12 +96,12 @@ export default {
 					</template>
 
 					<template #content>
-						<m-popover-container
+						<m-popover-content
 							:color="color"
 							:bg-color="bgColor"
 						>
 							<demo-popover />
-						</m-popover-container>
+						</m-popover-content>
 					</template>
 				</m-popover>
 			</div>
@@ -110,7 +110,7 @@ export default {
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MSelect } from '@square/maker/components/Select';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
@@ -121,7 +121,7 @@ export default {
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MButton,
 		MSelect,
 		DemoPopover,
@@ -173,6 +173,9 @@ export default {
 ```
 
 ## External Trigger
+
+If you need to trigger a popover to be opened from outside the `Popover` component, you can access the `open`, `close`, and `trigger` methods via a `ref`.
+
 ```vue
 <template>
 	<div>
@@ -194,26 +197,26 @@ export default {
 				</span>
 			</template>
 			<template #content>
-				<m-popover-container>
+				<m-popover-content>
 					<demo-popover />
-				</m-popover-container>
+				</m-popover-content>
 			</template>
 		</m-popover>
 	</div>
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'SimpleDemo',
+	name: 'ExternalTriggerDemo',
 
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MButton,
 		DemoPopover,
 	},
@@ -226,6 +229,15 @@ export default {
 ```
 
 ## Modal/Dialog Usage
+
+### Modals
+
+Each Modal layer will include it's own Popover layer, so Popovers will work out of the box without extra configuration.
+
+### Dialogs
+
+The Dialog layer shares the root-level Popover layer. In order for popovers to appear on top of the Dialogs, make sure to include the `MPopoverLayer` component _after_ the `MDialogLayer` component in your template. Otherwise, Popovers will work inside Dialogs without extra configuration.
+
 ```vue
 <template>
 	<div>
@@ -312,13 +324,13 @@ _DemoModal.vue_
 				</template>
 
 				<template #content>
-					<m-popover-container>
+					<m-popover-content>
 						<demo-popover>
 							<m-button @click="closeModal()">
 								Close Modal
 							</m-button>
 						</demo-popover>
-					</m-popover-container>
+					</m-popover-content>
 				</template>
 			</m-popover>
 		</m-modal-content>
@@ -326,7 +338,7 @@ _DemoModal.vue_
 </template>
 
 <script>
-import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
@@ -337,7 +349,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MModal,
 		MButton,
 		MHeading,
@@ -379,13 +391,13 @@ _DemoDialog.vue_
 				</template>
 
 				<template #content>
-					<m-popover-container>
+					<m-popover-content>
 						<demo-popover>
 							<m-button @click="closeDialog()">
 								Close Dialog
 							</m-button>
 						</demo-popover>
-					</m-popover-container>
+					</m-popover-content>
 				</template>
 			</m-popover>
 		</m-dialog-content>
@@ -393,7 +405,7 @@ _DemoDialog.vue_
 </template>
 
 <script>
-import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
@@ -404,7 +416,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MDialog,
 		MButton,
 		MHeading,
@@ -484,10 +496,10 @@ export default {
 
 ## Popover Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| tether  | —           |
-| content | —           |
+| Slot    | Description                                                               |
+| ------- | ------------------------------------------------------------------------- |
+| tether  | Element that the popover is tied or 'tethered' to. Must be a single node. |
+| content | Content that will appear in the floating popover                          |
 
 
 ## Popover Events
@@ -498,7 +510,7 @@ export default {
 | close | -    | Popover has been closed |
 
 
-## PopoverContainer Props
+## PopoverContent Props
 
 | Prop     | Type     | Default    | Possible values                       | Description                     |
 | -------- | -------- | ---------- | ------------------------------------- | ------------------------------- |
@@ -506,7 +518,7 @@ export default {
 | bg-color | `string` | `'#fff'`   | —                                     | Background color of the popover |
 
 
-## PopoverContainer Slots
+## PopoverContent Slots
 
 | Slot    | Description               |
 | ------- | ------------------------- |

@@ -21,8 +21,8 @@
 import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
 import PseudoWindow from 'vue-pseudo-window';
 import Vue from 'vue';
-import { v4 as uuid } from 'uuid';
 import { PopoverAPIKey } from './keys';
+import { generateRandomId } from './utils';
 
 const popoverMixin = {
 	inject: {
@@ -37,7 +37,7 @@ const popoverMixin = {
 		 * This is to avoid name collisions for the popover portal if
 		 * multiple exist at the same 'level'.
 		 */
-		const layerId = uuid();
+		const layerId = generateRandomId();
 		const target = `popover-portal-${layerId}`;
 
 		const api = Vue.observable({

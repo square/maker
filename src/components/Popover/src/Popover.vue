@@ -1,5 +1,6 @@
 <template>
 	<div style="display: contents;">
+		<!-- @slot Element that the popover is tied or 'tethered' to. Must be a single node. -->
 		<slot
 			name="tether"
 			v-bind="actionAPI"
@@ -16,6 +17,7 @@
 						:popper-config="popperConfig"
 						@popover-instance:new-popper="setPopper"
 					>
+						<!-- @slot Content that will appear in the floating popover -->
 						<slot name="content" />
 					</popover-instance>
 				</m-transition-fade-in>
@@ -28,9 +30,9 @@
 import { throwError } from '@square/maker/utils/debug';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { Portal } from '@linusborg/vue-simple-portal';
-import { v4 as uuid } from 'uuid';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 import PopoverInstance from './PopoverInstance.vue';
+import { generateRandomId } from './utils';
 
 const MAX_TETHER_VNODE = 1;
 const SKIDDING_OFFSET = 0;
@@ -44,7 +46,7 @@ const DEFAULT_MODIFIERS = [
 	{
 		name: 'preventOverflow',
 		options: {
-			padding: 24,
+			padding: 0,
 			altBoundary: true,
 		},
 	},
@@ -118,8 +120,9 @@ export default {
 			 * This is used to track which popover is open. When opening, this
 			 * will be pushed into the popoverApi state as the opened popover.
 			 */
-			id: uuid(),
-			popper: undefined,
+			id: generateRandomId(),
+			currentPopper: undefined,
+			popperToDestroy: undefined,
 			actionAPI: {
 				open(...ignoreElements) {
 					if (vm.isOpen) {
@@ -134,6 +137,8 @@ export default {
 				},
 
 				close() {
+					this.popperToDestroy = this.currentPopper;
+					this.currentPopper = undefined;
 					vm.popoverApi.closePopover();
 				},
 
@@ -199,17 +204,13 @@ export default {
 		},
 
 		setPopper(popper) {
-			this.popper = popper;
+			this.currentPopper = popper;
 		},
 
 		destroyPopper() {
-			this.popper?.destroy();
-			this.popper = undefined;
+			this.popperToDestroy?.destroy();
+			this.popperToDestroy = undefined;
 		},
 	},
 };
 </script>
-
-<style>
-/* Keep */
-</style>
