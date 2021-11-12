@@ -1,9 +1,6 @@
 <template>
 	<div
-		:class="[
-			$s.PopoverContent,
-			$s[`padding_${padding}`],
-		]"
+		:class="$s.PopoverContent"
 		:style="computedStyles"
 	>
 		<!-- @slot Popover container content -->
@@ -34,15 +31,6 @@ export default {
 			default: '#fff',
 			validator: (color) => chroma.valid(color),
 		},
-
-		/**
-		 * Padding of container
-		 */
-		padding: {
-			type: String,
-			default: 'medium',
-			validator: (size) => ['minimal', 'small', 'medium', 'large'].includes(size),
-		},
 	},
 
 	computed: {
@@ -58,26 +46,10 @@ export default {
 
 <style module="$s">
 .PopoverContent {
-	padding: 8px 0;
+	padding: 24px;
 	color: var(--popover-color);
 	background-color: var(--popover-bg-color);
 	border-radius: 8px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
-}
-
-.PopoverContent.padding_minimal {
-	padding: 8px 0;
-}
-
-.PopoverContent.padding_small {
-	padding: 8px;
-}
-
-.PopoverContent.padding_medium {
-	padding: 16px;
-}
-
-.PopoverContent.padding_large {
-	padding: 24px;
 }
 </style>

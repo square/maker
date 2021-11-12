@@ -512,10 +512,10 @@ export default {
 
 ## PopoverContent Props
 
-| Prop     | Type     | Default    | Possible values                       | Description                     |
-| -------- | -------- | ---------- | ------------------------------------- | ------------------------------- |
-| color    | `string` | `'#000'`   | —                                     | Text color within the popover   |
-| bg-color | `string` | `'#fff'`   | —                                     | Background color of the popover |
+| Prop     | Type     | Default  | Possible values | Description                     |
+| -------- | -------- | -------- | --------------- | ------------------------------- |
+| color    | `string` | `'#000'` | —               | Text color within the popover   |
+| bg-color | `string` | `'#fff'` | —               | Background color of the popover |
 
 
 ## PopoverContent Slots
