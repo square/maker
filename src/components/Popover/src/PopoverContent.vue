@@ -1,7 +1,7 @@
 <template>
 	<div
 		:class="[
-			$s.PopoverContainer,
+			$s.PopoverContent,
 			$s[`padding_${padding}`],
 		]"
 		:style="computedStyles"
@@ -15,7 +15,7 @@
 import chroma from 'chroma-js';
 
 export default {
-	name: 'PopoverContainer',
+	name: 'PopoverContent',
 
 	props: {
 		/**
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style module="$s">
-.PopoverContainer {
+.PopoverContent {
 	padding: 8px 0;
 	color: var(--popover-color);
 	background-color: var(--popover-bg-color);
@@ -65,19 +65,19 @@ export default {
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
 }
 
-.PopoverContainer.padding_minimal {
+.PopoverContent.padding_minimal {
 	padding: 8px 0;
 }
 
-.PopoverContainer.padding_small {
+.PopoverContent.padding_small {
 	padding: 8px;
 }
 
-.PopoverContainer.padding_medium {
+.PopoverContent.padding_medium {
 	padding: 16px;
 }
 
-.PopoverContainer.padding_large {
+.PopoverContent.padding_large {
 	padding: 24px;
 }
 </style>

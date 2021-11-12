@@ -57,13 +57,13 @@ In order to use Popovers, you must include the `MPopoverLayer` component.
 					</template>
 
 					<template #content>
-						<m-popover-container
+						<m-popover-content
 							:padding="padding"
 							:color="color"
 							:bg-color="bgColor"
 						>
 							<demo-popover />
-						</m-popover-container>
+						</m-popover-content>
 					</template>
 				</m-popover>
 			</div>
@@ -72,7 +72,7 @@ In order to use Popovers, you must include the `MPopoverLayer` component.
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MSelect } from '@square/maker/components/Select';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
@@ -83,7 +83,7 @@ export default {
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MButton,
 		MSelect,
 		DemoPopover,
@@ -167,16 +167,16 @@ If you need to trigger a popover to be opened from outside the `Popover` compone
 				</span>
 			</template>
 			<template #content>
-				<m-popover-container>
+				<m-popover-content>
 					<demo-popover />
-				</m-popover-container>
+				</m-popover-content>
 			</template>
 		</m-popover>
 	</div>
 </template>
 
 <script>
-import { MPopoverLayer, MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
@@ -186,7 +186,7 @@ export default {
 	components: {
 		MPopoverLayer,
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MButton,
 		DemoPopover,
 	},
@@ -271,7 +271,7 @@ export default {
 
 ## Custom Container
 
-If you need to display something other than the built-in `MPopoverContainer` component in your Popover, you can pass custom content into the `content` slot.
+If you need to display something other than the built-in `MPopoverContent` component in your Popover, you can pass custom content into the `content` slot.
 
 ```vue
 <template>
@@ -365,13 +365,13 @@ _DemoModal.vue_
 				</template>
 
 				<template #content>
-					<m-popover-container>
+					<m-popover-content>
 						<demo-popover>
 							<m-button @click="closeModal()">
 								Close Modal
 							</m-button>
 						</demo-popover>
-					</m-popover-container>
+					</m-popover-content>
 				</template>
 			</m-popover>
 		</m-modal-content>
@@ -379,7 +379,7 @@ _DemoModal.vue_
 </template>
 
 <script>
-import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
@@ -390,7 +390,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MModal,
 		MButton,
 		MHeading,
@@ -436,13 +436,13 @@ _DemoDialog.vue_
 				</template>
 
 				<template #content>
-					<m-popover-container>
+					<m-popover-content>
 						<demo-popover>
 							<m-button @click="closeDialog()">
 								Close Dialog
 							</m-button>
 						</demo-popover>
-					</m-popover-container>
+					</m-popover-content>
 				</template>
 			</m-popover>
 		</m-dialog-content>
@@ -450,7 +450,7 @@ _DemoDialog.vue_
 </template>
 
 <script>
-import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MHeading } from '@square/maker/components/Heading';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
@@ -461,7 +461,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 		MDialog,
 		MButton,
 		MHeading,
@@ -555,7 +555,7 @@ export default {
 | close | -    | Popover has been closed |
 
 
-## PopoverContainer Props
+## PopoverContent Props
 
 | Prop     | Type     | Default    | Possible values                       | Description                     |
 | -------- | -------- | ---------- | ------------------------------------- | ------------------------------- |
@@ -564,7 +564,7 @@ export default {
 | padding  | `string` | `'medium'` | `minimal`, `small`, `medium`, `large` | Padding of container            |
 
 
-## PopoverContainer Slots
+## PopoverContent Slots
 
 | Slot    | Description               |
 | ------- | ------------------------- |
