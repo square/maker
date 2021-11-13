@@ -538,7 +538,6 @@ export default {
 	min-height: 100vh;
 	margin: auto;
 	padding: 25px 50px;
-	color: var(--neutral-90);
 	font-family: Arial, Helvetica, sans-serif;
 
 	& > div {

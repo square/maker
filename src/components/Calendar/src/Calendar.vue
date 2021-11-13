@@ -341,7 +341,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--neutral-90, #000);
+	color: var(--color-heading, #000);
 	font-weight: bold;
 }
 
@@ -371,7 +371,7 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--neutral-90, #000);
+	color: var(--color-text, #000);
 	text-align: center;
 }
 

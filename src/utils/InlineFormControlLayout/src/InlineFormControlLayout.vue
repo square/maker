@@ -28,7 +28,6 @@ export default {
 <style module="$s">
 .LayoutContainer {
 	display: inline-flex;
-	color: var(--neutral-90, inherit);
 	font-size: 14px;
 	font-family: inherit;
 	line-height: 24px;
