@@ -17,54 +17,63 @@
 			</div>
 		</m-container>
 
-		<m-inline-action-bar
-			:enter-animation="springUpFn"
-			:leave-animation="springDownFn"
-			:enter-delay="enterDelay"
-		>
-			<m-action-bar-button
-				key="close"
-				color="#f6f6f6"
-				@click="modalApi.close()"
+		<div :class="$s.ActionBarWrapper">
+			<m-transition
+				:enter="springUpFn"
+				:leave="springDownFn"
 			>
-				<x class="icon" />
-			</m-action-bar-button>
-			<m-action-bar-button
-				key="primary"
-				align="center"
-				full-width
-				@click="modalApi.close()"
-			>
-				Add to Cart
-				<template #information>
-					$10.00
-				</template>
-			</m-action-bar-button>
-		</m-inline-action-bar>
+				<atomic-action-bar
+					v-if="loaded"
+					v-bind="$attrs"
+					v-on="$listeners"
+				>
+					<m-action-bar-button
+						key="close"
+						color="#f6f6f6"
+						@click="modalApi.close()"
+					>
+						<x class="icon" />
+					</m-action-bar-button>
+					<m-action-bar-button
+						key="primary"
+						align="center"
+						full-width
+						@click="modalApi.close()"
+					>
+						Add to Cart
+						<template #information>
+							$10.00
+						</template>
+					</m-action-bar-button>
+				</atomic-action-bar>
+			</m-transition>
+		</div>
 	</m-modal>
 </template>
 
 <script>
 import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MActionBarButton } from '@square/maker/components/ActionBar';
 import { MContainer } from '@square/maker/components/Container';
 import { MImage } from '@square/maker/components/Image';
+import { MTransition } from '@square/maker/utils/Transition';
 import X from '@square/maker-icons/X';
-
 import styler from 'stylefire';
 import { animate } from 'popmotion';
 import {
 	styleFactory, animateUp, animateDown,
 } from '@square/maker/utils/transitions';
+import AtomicActionBar from '../../../src/components/ActionBar/src/AtomicActionBar.vue';
 
 export default {
 	components: {
 		MModal,
-		MInlineActionBar,
 		MActionBarButton,
 		MImage,
 		MContainer,
 		X,
+		MTransition,
+		AtomicActionBar,
 	},
 
 	inject: {
@@ -133,7 +142,14 @@ export default {
 					onComplete,
 				});
 			},
+			loaded: false,
 		};
+	},
+
+	mounted() {
+		setTimeout(() => {
+			this.loaded = true;
+		}, this.enterDelay);
 	},
 };
 </script>
@@ -151,5 +167,38 @@ export default {
 .icon {
 	width: 16px;
 	height: 16px;
+}
+</style>
+
+<style module="$s">
+.ActionBarWrapper {
+	--regular-bottom-padding: 32px;
+	--extra-bottom-padding-for-deadclick: 32px;
+	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
+	--actionbar-bottom-padding:
+		calc(
+			var(--regular-bottom-padding)
+			+ var(--extra-bottom-padding-for-deadclick)
+			+ var(--safe-area-inset-padding)
+		);
+	--actionbar-size: 64px;
+	--actionbar-top-padding: 32px;
+
+	padding-bottom:
+		calc(
+			var(--actionbar-top-padding)
+			+ var(--actionbar-size)
+			+ var(--actionbar-bottom-padding)
+		);
+}
+
+@media screen and (min-width: 840px) {
+	.ActionBarWrapper {
+		--actionbar-size: 48px;
+		--actionbar-top-padding: 24px;
+
+		/* no safe-area or deadclick issues on non-mobile resolutions */
+		--actionbar-bottom-padding: var(--regular-bottom-padding);
+	}
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
 	<div :class="$s.ActionBarWrapper">
 		<m-transition
-			:enter="enterAnimation"
-			:leave="leaveAnimation"
+			:enter="springUpBounceFn"
+			:leave="springDownBounceFn"
 		>
 			<atomic-action-bar
 				v-if="loaded"
@@ -33,31 +33,19 @@ export default {
 
 	inheritAttrs: false,
 
-	props: {
-		enterAnimation: {
-			type: Function,
-			default: springUpBounceFn,
-		},
-		leaveAnimation: {
-			type: Function,
-			default: springDownBounceFn,
-		},
-		enterDelay: {
-			type: Number,
-			default: 800,
-		},
-	},
-
 	data() {
 		return {
 			loaded: false,
+			springUpBounceFn,
+			springDownBounceFn,
 		};
 	},
 
 	mounted() {
+		const enterDelay = 800;
 		setTimeout(() => {
 			this.loaded = !!this.$slots.default;
-		}, this.enterDelay);
+		}, enterDelay);
 	},
 };
 </script>
