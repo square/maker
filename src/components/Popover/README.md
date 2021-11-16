@@ -8,9 +8,7 @@ Use the popover to provide the user with more context or options. The Popover La
 	<div>
 		<m-popover-layer />
 
-		<m-popover
-			:placement="placement"
-		>
+		<m-popover>
 			<template #tether="popover">
 				<m-button
 					:variant="'primary'"

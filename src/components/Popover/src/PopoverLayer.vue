@@ -25,13 +25,6 @@ import { PopoverAPIKey } from './keys';
 import { generateRandomId } from './utils';
 
 const popoverMixin = {
-	inject: {
-		currentPopoverLayer: {
-			from: PopoverAPIKey,
-			default: undefined,
-		},
-	},
-
 	provide() {
 		/**
 		 * This is to avoid name collisions for the popover portal if

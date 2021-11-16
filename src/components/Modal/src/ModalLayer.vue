@@ -26,7 +26,6 @@
 				>
 					<v :nodes="currentLayer.state.vnode" />
 				</div>
-				<m-popover-layer />
 			</div>
 		</m-transition-responsive>
 		<modal-layer v-if="currentLayer.state.vnode" />
@@ -38,7 +37,6 @@ import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
-import { MPopoverLayer } from '@square/maker/components/Popover';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
 	fadeOutFn,
@@ -53,6 +51,7 @@ import {
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
 import modalApi from './modal-api';
+import { PopoverAPIKey } from '../../Popover/src/keys';
 
 const apiMixin = {
 	inject: {
@@ -124,13 +123,15 @@ export default {
 		PseudoWindow,
 		MTransitionFadeIn,
 		MTransitionResponsive,
-		MPopoverLayer,
 	},
 
 	mixins: [
 		apiMixin,
-		MPopoverLayer.popoverMixin,
 	],
+
+	inject: {
+		popoverApi: PopoverAPIKey,
+	},
 
 	inheritAttrs: false,
 
