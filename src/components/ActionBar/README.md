@@ -38,7 +38,7 @@ There are 2 versions of ActionBar:
 							key="confirm"
 							full-width
 						>
-							Confirm Action
+							Confirm action
 						</m-action-bar-button>
 					</m-inline-action-bar>
 				</div>
@@ -99,7 +99,7 @@ export default {
 	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
 		<div class="showOnMobile">
 			<button @click="showActionBar = !showActionBar">
-				toggle actionbar
+				Toggle actionbar
 			</button>
 			<demo-action-bar v-if="showActionBar" />
 		</div>
@@ -164,7 +164,7 @@ _DemoActionBar.vue_
 				key="confirm"
 				full-width
 			>
-				Confirm Action
+				Confirm action
 			</m-action-bar-button>
 		</m-action-bar>
 	</div>
