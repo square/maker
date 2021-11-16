@@ -65,8 +65,6 @@ const DEFAULT_MODIFIERS = [
 ];
 
 export default {
-	name: 'Popover',
-
 	components: {
 		Portal,
 		PopoverInstance,

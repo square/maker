@@ -12,8 +12,6 @@
 import chroma from 'chroma-js';
 
 export default {
-	name: 'PopoverContent',
-
 	props: {
 		/**
 		 * Text color within the popover

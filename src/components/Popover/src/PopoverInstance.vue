@@ -9,8 +9,6 @@
 import { createPopper } from '@popperjs/core';
 
 export default {
-	name: 'PopoverInstance',
-
 	props: {
 		tetherEl: {
 			type: undefined,

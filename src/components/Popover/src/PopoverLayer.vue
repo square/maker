@@ -78,8 +78,6 @@ const popoverMixin = {
 };
 
 export default {
-	name: 'PopoverLayer',
-
 	components: {
 		PseudoWindow,
 	},
