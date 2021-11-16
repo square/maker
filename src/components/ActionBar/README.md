@@ -38,7 +38,7 @@ There are 2 versions of ActionBar:
 							key="confirm"
 							full-width
 						>
-							Confirm or whatever
+							Confirm Action
 						</m-action-bar-button>
 					</m-inline-action-bar>
 				</div>
@@ -164,7 +164,7 @@ _DemoActionBar.vue_
 				key="confirm"
 				full-width
 			>
-				Confirm or whatever
+				Confirm Action
 			</m-action-bar-button>
 		</m-action-bar>
 	</div>
