@@ -2,9 +2,8 @@
 const isProduction = (typeof process === 'object') && (typeof process.env === 'object') && (process.env.NODE_ENV === 'production');
 const logStyles = 'background:#212121; padding:2px; border: 1px solid #646464; border-radius:3px; color:#fff';
 
-const componentNamespace = (componentName) => (componentName?.trim() ? ` [${componentName}]` : '');
-const logPrefix = (componentName) => [`%c @square/maker${componentNamespace(componentName)}`, logStyles];
-const errorPrefix = (componentName) => `[@square/maker]${componentNamespace(componentName)}`;
+const logPrefix = (componentName) => [`%c @square/maker${componentName}`, logStyles];
+const errorPrefix = (componentName) => `[@square/maker]${componentName}`;
 
 export const throwError = (message, componentName) => {
 	console.error(...logPrefix(componentName), message);
