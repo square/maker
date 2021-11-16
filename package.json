@@ -46,12 +46,16 @@
     "popmotion": "^9.3.1",
     "stylefire": "^7.0.3",
     "vue": "^2.6.12",
-    "@square/maker-icons": "^2.0.0"
+    "@square/maker-icons": "^2.0.0",
+    "@linusborg/vue-simple-portal": "^0.1.5",
+    "@popperjs/core": "^2.10.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.10",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@linusborg/vue-simple-portal": "^0.1.5",
+    "@popperjs/core": "^2.10.2",
     "@square/maker-icons": "^2.0.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
@@ -122,9 +126,5 @@
   },
   "release": {
     "preset": "conventionalcommits"
-  },
-  "dependencies": {
-    "@linusborg/vue-simple-portal": "^0.1.5",
-    "@popperjs/core": "^2.10.2"
   }
 }
