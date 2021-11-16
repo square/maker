@@ -31,6 +31,7 @@ module.exports = {
 			ignoreArrayIndexes: true,
 			ignoreDefaultValues: true,
 			enforceConst: true,
+			ignore: [0],
 		}],
 
 		// As a library, dependencies are packaged in and can be in devDeps
