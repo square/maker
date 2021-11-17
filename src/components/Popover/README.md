@@ -228,13 +228,7 @@ export default {
 
 ## Modal/Dialog Usage
 
-### Modals
-
-Each Modal layer will include it's own Popover layer, so Popovers will work out of the box without extra configuration.
-
-### Dialogs
-
-The Dialog layer shares the root-level Popover layer. In order for popovers to appear on top of the Dialogs, make sure to include the `MPopoverLayer` component _after_ the `MDialogLayer` component in your template. Otherwise, Popovers will work inside Dialogs without extra configuration.
+The Dialog and Modal layers share the root-level Popover layer. In order for popovers to appear on top of the Dialogs and Modals, make sure to include the `MPopoverLayer` component _after_ the `MDialogLayer`/`MModalLayer` components in your template. Otherwise, Popovers will work inside Dialogs and Modals without extra configuration.
 
 ```vue
 <template>
