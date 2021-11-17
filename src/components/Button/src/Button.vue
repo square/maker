@@ -359,11 +359,8 @@ export default {
 	}
 
 	&:disabled {
-		cursor: initial;
-
-		& > * {
-			opacity: 0.4;
-		}
+		cursor: not-allowed;
+		opacity: 0.4;
 	}
 
 	&:focus {

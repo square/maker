@@ -94,8 +94,8 @@ export default {
 	}
 
 	&:disabled {
-		color: var(--neutral-20, rgba(0, 0, 0, 0.4));
-		cursor: initial;
+		cursor: not-allowed;
+		opacity: 0.4;
 	}
 }
 
