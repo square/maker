@@ -1,5 +1,8 @@
-const radix = 36;
-const startIdx = 2;
-const endIdx = 12;
+/* eslint-disable no-magic-numbers */
+let currentPopoverId = 0;
 
-export const generateRandomId = () => Math.random().toString(radix).slice(startIdx, endIdx);
+export const getPopoverId = () => {
+	currentPopoverId += 1;
+
+	return currentPopoverId;
+};
