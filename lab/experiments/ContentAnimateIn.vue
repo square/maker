@@ -1,55 +1,66 @@
 <template>
 	<div :class="$s.ProductLoad">
-		<div :class="$s.ProductGrid">
+		<div
+			v-show="!reveal"
+			:class="$s.ProductGrid"
+		>
 			<div
-				v-for="i in 12"
-				v-show="!reveal"
-				:key="i"
+				v-for="index in 12"
+				:key="index"
 				:class="$s.Product"
 			>
 				<m-skeleton-block :class="$s.ProductImage" />
 				<m-skeleton-text />
 			</div>
 		</div>
-		<transition-group
+		<m-transition-staggered
+			:stagger-item-count="staggerItemCount"
 			:class="$s.ProductGrid"
-			v-bind="$attrs"
-			tag="div"
-			@enter="handleEnter"
-			@leave="handleLeave"
 		>
-			<div
-				v-for="i in 12"
-				v-show="reveal"
-				:key="i"
-				:data-load-index="[i % columns > 0 ? i % columns : columns]"
-				:class="$s.Product"
-			>
-				<img
-					:class="$s.ProductImage"
-					:src="`https://picsum.photos/600/300?${i}`"
-					height="200px"
+			<template #default="{ dataLoadIndex }">
+				<div
+					v-for="index in 12"
+					v-show="reveal"
+					:key="index"
+					:data-load-index="dataLoadIndex(index)"
+					:class="$s.Product"
 				>
-				<div>This is item number {{ i }}</div>
-			</div>
-		</transition-group>
+					<img
+						:class="$s.ProductImage"
+						:src="`https://picsum.photos/600/300?${index}`"
+						height="200px"
+					>
+					<div>This is item number {{ index }}</div>
+				</div>
+			</template>
+		</m-transition-staggered>
 	</div>
 </template>
 
 <script>
 import { MSkeletonBlock, MSkeletonText } from '@square/maker/components/Skeleton';
-import { staggeredFloatUpFn, floatDownFn } from '@square/maker/utils/transitions';
+import { MTransitionStaggered } from '@square/maker/components/TransitionStaggered';
 
 export default {
 	components: {
 		MSkeletonBlock,
 		MSkeletonText,
+		MTransitionStaggered,
 	},
 
 	data() {
 		return {
-			columns: 4,
 			reveal: false,
+			staggerItemCount: [
+				{
+					minWidth: 0,
+					itemCount: 1,
+				},
+				{
+					minWidth: 840,
+					itemCount: 4,
+				},
+			],
 		};
 	},
 
@@ -58,16 +69,6 @@ export default {
 		setTimeout(() => {
 			this.reveal = true;
 		}, loadDelay);
-	},
-
-	methods: {
-		handleEnter(element, onComplete) {
-			staggeredFloatUpFn({ element, onComplete });
-		},
-
-		handleLeave(element, onComplete) {
-			floatDownFn({ element, onComplete });
-		},
 	},
 };
 </script>
