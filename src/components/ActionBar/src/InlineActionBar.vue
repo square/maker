@@ -29,6 +29,6 @@ export default {
 
 <style module="$s">
 .ActionBarWrapper {
-	padding: 24px 24px calc(24px + env(safe-area-inset-bottom)) 24px;
+	padding: 24px 24px calc(24px + env(safe-area-inset-bottom, 24px)) 24px;
 }
 </style>

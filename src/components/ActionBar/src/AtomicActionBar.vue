@@ -44,6 +44,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
+	padding: 24px;
 	pointer-events: none;
 }
 
