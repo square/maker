@@ -26,6 +26,13 @@ export const springSubtle = {
 	mass: 1,
 };
 
+export const springBounce = {
+	type,
+	stiffness: 400,
+	damping: 30,
+	mass: 2,
+};
+
 const START_VALUE = 0;
 const END_VALUE = 100;
 const MINI_END_VALUE = 40;
@@ -263,6 +270,38 @@ export function floatDownFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
+		},
+		onComplete,
+	});
+}
+
+export function springUpBounceFn({ element, onComplete }) {
+	const elementStyler = styler(element);
+	const styleFn = toRelativeY;
+	const animationDirection = animateDown;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...springBounce,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number));
+		},
+		onComplete,
+	});
+}
+
+export function springDownBounceFn({ element, onComplete }) {
+	const elementStyler = styler(element);
+	const styleFn = toRelativeY;
+	const animationDirection = animateUp;
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...springBounce,
 		onUpdate(number) {
 			elementStyler.set(styleFn(number));
 		},
