@@ -151,11 +151,8 @@ export default {
 }
 
 .InputContainer {
-	--color-background-disabled: var(--neutral-10, #f6f7f9);
 	--color-placeholder: var(--neutral-80, rgba(0, 0, 0, 0.55));
 	--color-foreground: var(--neutral-90, rgba(107, 107, 107, 0.9));
-	--color-disabled: var(--neutral-20, rgba(0, 0, 0, 0.3));
-	--color-border-disabled: var(--neutral-20, rgba(0, 0, 0, 0.3));
 	--color-border-active: var(--neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
 	--border-radius: 8px;
@@ -181,14 +178,8 @@ export default {
 	}
 
 	&.disabled {
-		color: var(--color-disabled);
-		background-color: var(--color-background-disabled);
-		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
-
-		& .Affix {
-			color: var(--color-disabled);
-		}
+		opacity: 0.4;
 	}
 
 	&.invalid {
@@ -213,14 +204,6 @@ export default {
 
 	&::placeholder {
 		color: var(--color-placeholder);
-	}
-
-	&:disabled {
-		color: var(--color-disabled);
-
-		&::placeholder {
-			color: var(--color-disabled);
-		}
 	}
 
 	&.align_left {

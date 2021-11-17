@@ -116,7 +116,9 @@ export default {
 	border-radius: 50%;
 	outline: none;
 	cursor: pointer;
-	transition: background-color 0.2s ease;
+	transition:
+		border 0.2s ease,
+		background-color 0.2s ease;
 	appearance: none;
 	user-select: none;
 

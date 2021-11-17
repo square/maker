@@ -110,8 +110,6 @@ export default {
 .Textarea {
 	--color-placeholder: var(--neutral-80, rgba(0, 0, 0, 0.55));
 	--color-foreground: var(--neutral-90, rgba(0, 0, 0, 0.9));
-	--color-disabled: var(--neutral-20, rgba(0, 0, 0, 0.3));
-	--color-border-disabled: var(--neutral-20, rgba(0, 0, 0, 0.3));
 	--color-border-active: var(--neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
 	--border-radius: 8px;
@@ -142,13 +140,8 @@ export default {
 	}
 
 	&:disabled {
-		color: var(--color-disabled);
-		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
-
-		&::placeholder {
-			color: var(--color-disabled);
-		}
+		opacity: 0.4;
 	}
 
 	&:invalid {

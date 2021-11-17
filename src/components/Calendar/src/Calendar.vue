@@ -400,16 +400,8 @@ export default {
 	}
 
 	&.disabled {
-		color: var(--neutral-20, rgba(0, 0, 0, 0.4));
 		cursor: not-allowed;
-
-		&.today {
-			color: var(--neutral-10, rgba(0, 0, 0, 0.2));
-		}
-
-		&.selected {
-			color: var(--neutral-20, rgba(0, 0, 0, 0.4));
-		}
+		opacity: 0.4;
 	}
 }
 
