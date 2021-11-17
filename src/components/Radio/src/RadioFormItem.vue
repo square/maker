@@ -1,8 +1,9 @@
 <template>
-	<m-inline-form-control-layout>
+	<m-inline-form-control-layout :disabled="disabled">
 		<template #control>
 			<radio-control
 				v-bind="$attrs"
+				:disabled="disabled"
 				v-on="$listeners"
 			/>
 		</template>
@@ -39,6 +40,16 @@ export default {
 	model: {
 		prop: 'selected',
 		event: 'radio:update',
+	},
+
+	props: {
+		/**
+		 * Toggles radio disabled state
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 	},
 };
 </script>
