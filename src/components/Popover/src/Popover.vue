@@ -1,8 +1,9 @@
 <template>
 	<div style="display: contents;">
-		<!-- @slot Element that the popover is tied or 'tethered' to. Must be a single node. -->
+		<!-- eslint-disable-next-line max-len -->
+		<!-- @slot Element that the popover is tied to, usually the trigger for the popover. Must be a single node. -->
 		<slot
-			name="tether"
+			name="action"
 			v-bind="actionAPI"
 		/>
 
@@ -13,7 +14,7 @@
 				<m-transition-fade-in @after-leave="destroyPopper">
 					<popover-instance
 						v-if="isOpen"
-						:tether-el="tetherEl"
+						:action-el="actionEl"
 						:popper-config="popperConfig"
 						@popover-instance:new-popper="setPopper"
 					>
@@ -34,7 +35,7 @@ import { PopoverConfigKey, PopoverAPIKey } from './keys';
 import PopoverInstance from './PopoverInstance.vue';
 import { getPopoverId } from './utils';
 
-const MAX_TETHER_VNODE = 1;
+const MAX_ACTION_VNODE = 1;
 const SKIDDING_OFFSET = 0;
 const DISTANCE_OFFSET = 8;
 
@@ -128,7 +129,7 @@ export default {
 					}
 
 					vm.popoverApi.setPopover({
-						tetherEl: vm.tetherEl,
+						actionEl: vm.actionEl,
 						ignoreEls: ignoreElements,
 						id: vm.id,
 					});
@@ -152,8 +153,8 @@ export default {
 	},
 
 	computed: {
-		tetherEl() {
-			if (this.$el.children.length !== MAX_TETHER_VNODE) {
+		actionEl() {
+			if (this.$el.children.length !== MAX_ACTION_VNODE) {
 				return undefined;
 			}
 

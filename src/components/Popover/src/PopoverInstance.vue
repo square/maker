@@ -10,7 +10,7 @@ import { createPopper } from '@popperjs/core';
 
 export default {
 	props: {
-		tetherEl: {
+		actionEl: {
 			type: undefined,
 			required: true,
 		},
@@ -21,7 +21,7 @@ export default {
 	},
 
 	mounted() {
-		this.popper = createPopper(this.tetherEl, this.$el, this.popperConfig);
+		this.popper = createPopper(this.actionEl, this.$el, this.popperConfig);
 		this.resizeObserver = this.followPopoverAction();
 
 		this.$emit('popover-instance:new-popper', this.popper);
@@ -42,7 +42,7 @@ export default {
 				this.$emit('resize');
 			});
 
-			resizeObserver.observe(this.tetherEl);
+			resizeObserver.observe(this.actionEl);
 			resizeObserver.observe(document.body);
 
 			return resizeObserver;

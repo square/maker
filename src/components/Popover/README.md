@@ -9,7 +9,7 @@ Use the popover to provide the user with more context or options. The Popover La
 		<m-popover-layer />
 
 		<m-popover>
-			<template #tether="popover">
+			<template #action="popover">
 				<m-button
 					:variant="'primary'"
 					@click="popover.toggle()"
@@ -84,7 +84,7 @@ export default {
 				<m-popover
 					:placement="placement"
 				>
-					<template #tether="popover">
+					<template #action="popover">
 						<m-button
 							:variant="'primary'"
 							@click="popover.toggle()"
@@ -186,9 +186,9 @@ If you need to trigger a popover to be opened from outside the `Popover` compone
 			Popover Toggle
 		</m-button>
 		<m-popover ref="popover">
-			<template #tether>
+			<template #action>
 				<span
-					ref="tether"
+					ref="action"
 					style="margin: 0 24px;"
 				>
 					It will open on me
@@ -306,7 +306,7 @@ _DemoModal.vue_
 			</m-heading>
 
 			<m-popover>
-				<template #tether="popover">
+				<template #action="popover">
 					<m-button
 						size="small"
 						@click="popover.toggle()"
@@ -373,7 +373,7 @@ _DemoDialog.vue_
 			</m-heading>
 
 			<m-popover>
-				<template #tether="popover">
+				<template #action="popover">
 					<m-button
 						size="small"
 						@click="popover.toggle()"
@@ -488,10 +488,10 @@ export default {
 
 ## Popover Slots
 
-| Slot    | Description                                                               |
-| ------- | ------------------------------------------------------------------------- |
-| tether  | Element that the popover is tied or 'tethered' to. Must be a single node. |
-| content | Content that will appear in the floating popover                          |
+| Slot    | Description                                                                                      |
+| ------- | ------------------------------------------------------------------------------------------------ |
+| action  | Element that the popover is tied to, usually the trigger for the popover. Must be a single node. |
+| content | Content that will appear in the floating popover                                                 |
 
 
 ## Popover Events

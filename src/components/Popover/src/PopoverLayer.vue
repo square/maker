@@ -35,7 +35,7 @@ const popoverMixin = {
 
 		const api = Vue.observable({
 			currentInstance: undefined,
-			tetherEl: undefined,
+			actionEl: undefined,
 			ignoreEls: [],
 			clickSrc: undefined,
 			layerId,
@@ -46,11 +46,11 @@ const popoverMixin = {
 					this.closePopover();
 				}
 
-				if (!popoverData || !popoverData.tetherEl) {
+				if (!popoverData || !popoverData.actionEl) {
 					return;
 				}
 
-				this.tetherEl = popoverData.tetherEl;
+				this.actionEl = popoverData.actionEl;
 				this.ignoreEls = popoverData.ignoreEls;
 				this.currentInstance = popoverData.id;
 			},
@@ -110,7 +110,7 @@ export default {
 			}
 
 			const clickInContainer = $portal.contains(this.popoverApi.clickSrc);
-			const clickInAction = this.popoverApi.tetherEl?.contains(this.popoverApi.clickSrc);
+			const clickInAction = this.popoverApi.actionEl?.contains(this.popoverApi.clickSrc);
 			const clickInIgnores = this.popoverApi.ignoreEls?.some(
 				(element) => element.contains?.(this.popoverApi.clickSrc),
 			);
