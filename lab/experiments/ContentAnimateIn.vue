@@ -5,7 +5,7 @@
 			:class="$s.ProductGrid"
 		>
 			<div
-				v-for="index in 12"
+				v-for="index in 16"
 				:key="index"
 				:class="$s.Product"
 			>
@@ -19,7 +19,7 @@
 		>
 			<template #default="{ dataLoadIndex }">
 				<div
-					v-for="index in 12"
+					v-for="index in 16"
 					v-show="reveal"
 					:key="index"
 					:data-load-index="dataLoadIndex(index)"
