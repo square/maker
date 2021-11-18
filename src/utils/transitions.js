@@ -22,7 +22,7 @@ export const spring = {
 export const springSubtle = {
 	type,
 	stiffness: 200,
-	damping: 30,
+	damping: 60,
 	mass: 1,
 };
 
@@ -245,7 +245,7 @@ export function staggeredFloatUpFn({ element, onComplete }) {
 	const elementStyler = styler(element);
 	const styleFn = toSubtleFloatyY;
 	const animationDirection = animateUp;
-	const delay = 50;
+	const delay = 125;
 	const staggerDelay = element.dataset.loadIndex * delay;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
