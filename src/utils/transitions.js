@@ -22,7 +22,7 @@ export const spring = {
 export const springSubtle = {
 	type,
 	stiffness: 200,
-	damping: 30,
+	damping: 60,
 	mass: 1,
 };
 
@@ -36,7 +36,6 @@ export const springBounce = {
 const START_VALUE = 0;
 const END_VALUE = 100;
 const MINI_END_VALUE = 40;
-const MICRO_END_VALUE = 20;
 
 export const animateUp = {
 	from: START_VALUE,
@@ -82,15 +81,17 @@ const toOpacity = styleFactory(START_VALUE, END_VALUE, 'opacity', '%');
 const toRelativeY = styleFactory(START_VALUE, END_VALUE, 'y', '%');
 const toRelativeX = styleFactory(START_VALUE, END_VALUE, 'x', '%');
 const toMiniSlideY = styleFactory(MINI_END_VALUE, START_VALUE, 'y', 'px');
-const toMicroSlideY = styleFactory(MICRO_END_VALUE, START_VALUE, 'y', 'px');
 const toFloatyY = (progress) => ({
 	...toOpacity(progress),
 	...toMiniSlideY(progress),
 });
-const toSubtleFloatyY = (progress) => ({
-	...toOpacity(progress),
-	...toMicroSlideY(progress),
-});
+const toStaggeredFloatyY = (distance, progress) => {
+	const toCustomSlideY = styleFactory(distance, START_VALUE, 'y', 'px');
+	return {
+		...toOpacity(progress),
+		...toCustomSlideY(progress),
+	};
+};
 
 export function fadeInFn({ element, onComplete }) {
 	const elementStyler = styler(element);
@@ -243,22 +244,21 @@ export function delayedFloatUpFn({ element, onComplete }) {
 
 export function staggeredFloatUpFn({ element, onComplete }) {
 	const elementStyler = styler(element);
-	const styleFn = toSubtleFloatyY;
+	const styleFn = toStaggeredFloatyY;
 	const animationDirection = animateUp;
-	const delay = 50;
-	const staggerDelay = element.dataset.loadIndex * delay;
+	const distanceBase = 20;
+	const distanceMultiplier = 10;
+	const endValue = distanceBase + (element.dataset.loadIndex * distanceMultiplier);
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
-	setTimeout(() => {
-		animate({
-			...animationDirection,
-			...springSubtle,
-			onUpdate(number) {
-				elementStyler.set(styleFn(number));
-			},
-			onComplete,
-		});
-	}, staggerDelay);
+	animate({
+		...animationDirection,
+		...springSubtle,
+		onUpdate(number) {
+			elementStyler.set(styleFn(endValue, number));
+		},
+		onComplete,
+	});
 }
 
 export function floatDownFn({ element, onComplete }) {
