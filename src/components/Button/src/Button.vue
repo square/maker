@@ -360,7 +360,7 @@ export default {
 
 	&:disabled {
 		cursor: not-allowed;
-		opacity: 0.4;
+		opacity: 0.5;
 	}
 
 	&:focus {

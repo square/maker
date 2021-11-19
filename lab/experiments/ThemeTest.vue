@@ -137,11 +137,16 @@
 							placeholder="Delivery address"
 						/>
 						<m-input
+							placeholder="Disabled text input"
+							disabled
+						/>
+						<m-input
 							variant="outline"
 							placeholder="Delivery address"
 						/>
 						<m-input
 							placeholder="Disabled text input"
+							variant="outline"
 							disabled
 						/>
 						<m-notice type="error">
@@ -202,13 +207,19 @@
 							:options="options"
 						/>
 						<m-select
+							placeholder="Disabled select"
+							:options="options"
+							disabled
+						/>
+						<m-select
 							placeholder="Select dip"
 							:options="options"
 							variant="outline"
 						/>
 						<m-select
-							placeholder="Disabled select"
+							placeholder="Select dip"
 							:options="options"
+							variant="outline"
 							disabled
 						/>
 						<m-stepper
@@ -235,11 +246,16 @@
 						</m-checkbox>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea
+							placeholder="Disabled textbox"
+							disabled
+						/>
+						<m-textarea
 							placeholder="Additional requests"
 							variant="outline"
 						/>
 						<m-textarea
 							placeholder="Disabled textbox"
+							variant="outline"
 							disabled
 						/>
 					</div>
@@ -337,8 +353,8 @@ const RATIOS = {
 		90: 0.9,
 	},
 	dark: {
-		10: 0.1,
-		20: 0.255,
+		10: 0.255,
+		20: 0.37,
 		80: 0.55,
 		90: 0.95,
 	},
@@ -414,7 +430,7 @@ export default {
 
 	data() {
 		return {
-			backgroundColor: '#fffbeb',
+			backgroundColor: '#ffffff',
 			primaryColor: '#14433d',
 			headingColor: '#000000',
 			textColor: '#000000',
