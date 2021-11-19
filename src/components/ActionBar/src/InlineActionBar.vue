@@ -29,33 +29,6 @@ export default {
 
 <style module="$s">
 .ActionBarWrapper {
-	--regular-bottom-padding: 32px;
-	--extra-bottom-padding-for-deadclick: 32px;
-	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
-	--actionbar-bottom-padding:
-		calc(
-			var(--regular-bottom-padding)
-			+ var(--extra-bottom-padding-for-deadclick)
-			+ var(--safe-area-inset-padding)
-		);
-	--actionbar-size: 64px;
-	--actionbar-top-padding: 32px;
-
-	padding-bottom:
-		calc(
-			var(--actionbar-top-padding)
-			+ var(--actionbar-size)
-			+ var(--actionbar-bottom-padding)
-		);
-}
-
-@media screen and (min-width: 840px) {
-	.ActionBarWrapper {
-		--actionbar-size: 48px;
-		--actionbar-top-padding: 24px;
-
-		/* no safe-area or deadclick issues on non-mobile resolutions */
-		--actionbar-bottom-padding: var(--regular-bottom-padding);
-	}
+	padding: 24px 24px calc(24px + env(safe-area-inset-bottom, 24px)) 24px;
 }
 </style>
