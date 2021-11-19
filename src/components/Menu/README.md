@@ -1,13 +1,63 @@
 # Menu
 
+Use the Menu to provide contextual actions to users. Requires a PopoverLayer at the root of your application.
 
-## Basic Usage
+## Basic Popover
+```vue
+<template>
+	<div>
+		<m-popover-layer />
+
+		<m-menu>
+			<template #default="menu">
+				<m-button @click="menu.toggle()">
+					Menu
+				</m-button>
+			</template>
+
+			<template #items>
+				<m-menu-item :value="1">
+					Menu Item #1
+				</m-menu-item>
+				<m-menu-item :value="2">
+					Menu Item #2
+				</m-menu-item>
+			</template>
+		</m-menu>
+	</div>
+</template>
+
+<script>
+import { MPopoverLayer } from '@square/maker/components/Popover';
+import { MMenu, MMenuItem } from '@square/maker/components/Menu';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	name: 'BasicDemo',
+
+	components: {
+		MPopoverLayer,
+		MMenu,
+		MMenuItem,
+		MButton,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+};
+</script>
+```
+
+## Other Configurations
 
 ```vue
 <template>
 	<div>
-		<m-container>
-			<div :class="$s.ColorContainer">
+		<m-popover-layer />
+
+		<div :class="$s.DemoGrid">
+			<div :class="$s.DemoConfig">
 				<label>
 					Text Color
 					<input
@@ -37,44 +87,38 @@
 				</label>
 			</div>
 
-			<m-card>
+			<div :class="$s.DemoMenu">
+				<m-menu
+					:color="color"
+					:bg-color="bgColor"
+					:should-close-on-click="shouldCloseOnClick"
+					:placement="placement"
+					@menu:click-item="setValue"
+				>
+					<template #default="menu">
+						<m-button @click="menu.toggle()">
+							Open Me
+						</m-button>
+					</template>
+
+					<template #items>
+						<m-menu-item
+							v-for="item in options"
+							:key="item"
+							:value="item"
+						/>
+					</template>
+				</m-menu>
 				<div v-if="value">
 					Last clicked item: {{ value }}
-					<hr>
 				</div>
-				<div :class="$s.MenuContainer">
-					<m-menu
-						:color="color"
-						:bg-color="bgColor"
-						:should-close-on-click="shouldCloseOnClick"
-						:placement="placement"
-						@menu:click-item="setValue"
-					>
-						<template #default="menu">
-							<m-button @click="menu.toggle()">
-								Open Me
-							</m-button>
-						</template>
-
-						<template #items>
-							<m-menu-item
-								v-for="item in options"
-								:key="item"
-								:value="item"
-							/>
-						</template>
-					</m-menu>
-				</div>
-			</m-card>
-		</m-container>
-		<m-popover-layer />
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MCard } from '@square/maker/components/Card';
-import { MContainer } from '@square/maker/components/Container';
 import { MMenu, MMenuItem } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 import { MToggle } from '@square/maker/components/Toggle';
@@ -84,8 +128,6 @@ export default {
 	name: 'DemoSetup',
 
 	components: {
-		MCard,
-		MContainer,
 		MMenu,
 		MPopoverLayer,
 		MToggle,
@@ -126,18 +168,25 @@ export default {
 </script>
 
 <style module="$s">
-.ColorContainer {
+.DemoGrid {
 	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	padding-bottom: 2rem;
+	flex-wrap: wrap;
+	gap: 24px;
 }
 
-.MenuContainer {
+.DemoMenu {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 3rem;
+	min-width: 350px;
+	padding: 100px 24px;
+}
+
+.DemoConfig {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 300px;
 }
 </style>
 ```
@@ -147,66 +196,60 @@ export default {
 ```vue
 <template>
 	<div>
-		<m-container>
-			<m-card>
-				<div v-if="value">
-					Last clicked item: {{ value }}
-					<hr>
-				</div>
-				<m-menu
-					:color="color"
-					:bg-color="bgColor"
-					:should-close-on-click="shouldCloseOnClick"
-					@menu:click-item="setValue"
+		<div v-if="value">
+			Last clicked item: {{ value }}
+			<hr>
+		</div>
+		<m-menu
+			:color="color"
+			:bg-color="bgColor"
+			:should-close-on-click="shouldCloseOnClick"
+			@menu:click-item="setValue"
+		>
+			<template #default="menu">
+				<m-button @click="menu.toggle()">
+					Actions
+				</m-button>
+			</template>
+
+			<template #items>
+				<m-menu-item
+					value="approve"
 				>
-					<template #default="menu">
-						<m-button @click="menu.toggle()">
-							Actions
-						</m-button>
+					<template #icon>
+						<check-icon />
 					</template>
 
-					<template #items>
-						<m-menu-item
-							value="approve"
-						>
-							<template #icon>
-								<check-icon />
-							</template>
+					Approve
+				</m-menu-item>
 
-							Approve
-						</m-menu-item>
-
-						<m-menu-item
-							value="reject"
-						>
-							<template #icon>
-								<x-icon />
-							</template>
-
-							Reject
-						</m-menu-item>
-
-						<m-menu-item
-							value="download"
-						>
-							<template #icon>
-								<download-icon />
-							</template>
-
-							Download
-						</m-menu-item>
+				<m-menu-item
+					value="reject"
+				>
+					<template #icon>
+						<x-icon />
 					</template>
-				</m-menu>
-			</m-card>
-		</m-container>
+
+					Reject
+				</m-menu-item>
+
+				<m-menu-item
+					value="download"
+				>
+					<template #icon>
+						<download-icon />
+					</template>
+
+					Download
+				</m-menu-item>
+			</template>
+		</m-menu>
 		<m-popover-layer />
 	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MCard } from '@square/maker/components/Card';
-import { MContainer } from '@square/maker/components/Container';
 import { MMenu, MMenuItem } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 import CheckIcon from '@square/maker-icons/Check';
@@ -217,8 +260,6 @@ export default {
 	name: 'DemoSetup',
 
 	components: {
-		MCard,
-		MContainer,
 		MMenu,
 		MPopoverLayer,
 		MButton,
@@ -257,49 +298,43 @@ export default {
 ```vue
 <template>
 	<div>
-		<m-container>
-			<m-card>
-				<div v-if="value">
-					Last clicked item: {{ value }}
-					<hr>
-				</div>
-				<m-menu
-					:color="color"
-					:bg-color="bgColor"
-					:should-close-on-click="shouldCloseOnClick"
-					@menu:click-item="setValue"
+		<div v-if="value">
+			Last clicked item: {{ value }}
+			<hr>
+		</div>
+		<m-menu
+			:color="color"
+			:bg-color="bgColor"
+			:should-close-on-click="shouldCloseOnClick"
+			@menu:click-item="setValue"
+		>
+			<template #default="menu">
+				<m-button @click="menu.toggle()">
+					Actions
+				</m-button>
+			</template>
+
+			<template #items>
+				<m-menu-item
+					value="enabled"
 				>
-					<template #default="menu">
-						<m-button @click="menu.toggle()">
-							Actions
-						</m-button>
-					</template>
+					Enabled
+				</m-menu-item>
 
-					<template #items>
-						<m-menu-item
-							value="enabled"
-						>
-							Enabled
-						</m-menu-item>
-
-						<m-menu-item
-							value="disabled"
-							is-disabled
-						>
-							Disabled
-						</m-menu-item>
-					</template>
-				</m-menu>
-			</m-card>
-		</m-container>
+				<m-menu-item
+					value="disabled"
+					is-disabled
+				>
+					Disabled
+				</m-menu-item>
+			</template>
+		</m-menu>
 		<m-popover-layer />
 	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MCard } from '@square/maker/components/Card';
-import { MContainer } from '@square/maker/components/Container';
 import { MMenu, MMenuItem } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 
@@ -307,8 +342,6 @@ export default {
 	name: 'DemoSetup',
 
 	components: {
-		MCard,
-		MContainer,
 		MMenu,
 		MPopoverLayer,
 		MButton,
@@ -350,48 +383,42 @@ If the data you are working are basic strings, you can use `MMenuSelect` with mi
 ```vue
 <template>
 	<div>
-		<m-container>
-			<m-card>
-				<div>
-					Selected Value: {{ value }}
-				</div>
-				<m-menu-select
-					v-model="value"
-					:options="options"
-				>
-					<template #default="menu">
-						<m-button @click="menu.toggle()">
-							Select an Option
-						</m-button>
-					</template>
-				</m-menu-select>
+		<div>
+			Selected Value: {{ value }}
+		</div>
+		<m-menu-select
+			v-model="value"
+			:options="options"
+		>
+			<template #default="menu">
+				<m-button @click="menu.toggle()">
+					Select an Option
+				</m-button>
+			</template>
+		</m-menu-select>
 
-				<hr>
+		<hr>
 
-				<div>
-					Selected Values: {{ multiValue }}
-				</div>
-				<m-menu-select
-					v-model="multiValue"
-					:options="options"
-					is-multiselect
-				>
-					<template #default="menu">
-						<m-button @click="menu.toggle()">
-							Select Options
-						</m-button>
-					</template>
-				</m-menu-select>
-			</m-card>
-		</m-container>
+		<div>
+			Selected Values: {{ multiValue }}
+		</div>
+		<m-menu-select
+			v-model="multiValue"
+			:options="options"
+			is-multiselect
+		>
+			<template #default="menu">
+				<m-button @click="menu.toggle()">
+					Select Options
+				</m-button>
+			</template>
+		</m-menu-select>
 		<m-popover-layer />
 	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MCard } from '@square/maker/components/Card';
-import { MContainer } from '@square/maker/components/Container';
 import { MMenuSelect } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 
@@ -399,8 +426,6 @@ export default {
 	name: 'DemoSetup',
 
 	components: {
-		MCard,
-		MContainer,
 		MMenuSelect,
 		MPopoverLayer,
 		MButton,
@@ -428,40 +453,34 @@ If you are working with more complicated data structures, you can easily use the
 ```vue
 <template>
 	<div>
-		<m-container>
-			<m-card>
-				<div>
-					Selected Value: {{ value }}
-				</div>
-				<m-menu-select
-					v-model="value"
-					:options="options"
-				>
-					<template #default="menu">
-						<m-button @click="menu.toggle()">
-							Make a Donation
-						</m-button>
-					</template>
+		<div>
+			Selected Value: {{ value }}
+		</div>
+		<m-menu-select
+			v-model="value"
+			:options="options"
+		>
+			<template #default="menu">
+				<m-button @click="menu.toggle()">
+					Make a Donation
+				</m-button>
+			</template>
 
-					<template #options="option">
-						<m-menu-select-option
-							:value="option.value"
-							:is-disabled="option.disabled"
-						>
-							{{ option.label }}
-						</m-menu-select-option>
-					</template>
-				</m-menu-select>
-			</m-card>
-		</m-container>
+			<template #options="option">
+				<m-menu-select-option
+					:value="option.value"
+					:is-disabled="option.disabled"
+				>
+					{{ option.label }}
+				</m-menu-select-option>
+			</template>
+		</m-menu-select>
 		<m-popover-layer />
 	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MCard } from '@square/maker/components/Card';
-import { MContainer } from '@square/maker/components/Container';
 import { MMenuSelect, MMenuSelectOption } from '@square/maker/components/Menu';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 
@@ -469,8 +488,6 @@ export default {
 	name: 'DemoSetup',
 
 	components: {
-		MCard,
-		MContainer,
 		MMenuSelect,
 		MMenuSelectOption,
 		MPopoverLayer,
