@@ -5,14 +5,15 @@
 		:modifiers="popoverModifiers"
 		v-on="$listeners"
 	>
-		<template #tether="popover">
+		<template #action="popover">
 			<slot v-bind="popover" />
 		</template>
 
 		<template #content>
-			<m-popover-container
+			<m-popover-content
 				:color="color"
 				:bg-color="bgColor"
+				:class="$s.MenuPopoverContent"
 			>
 				<div
 					:class="$s.Menu"
@@ -20,13 +21,13 @@
 				>
 					<slot name="items" />
 				</div>
-			</m-popover-container>
+			</m-popover-content>
 		</template>
 	</m-popover>
 </template>
 
 <script>
-import { MPopover, MPopoverContainer } from '@square/maker/components/Popover';
+import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import chroma from 'chroma-js';
 import { MenuKey } from './key';
 
@@ -38,7 +39,7 @@ export default {
 
 	components: {
 		MPopover,
-		MPopoverContainer,
+		MPopoverContent,
 	},
 
 	provide() {
@@ -155,5 +156,9 @@ export default {
 .Menu {
 	display: flex;
 	flex-direction: column;
+}
+
+.MenuPopoverContent {
+	padding: 8px 0;
 }
 </style>
