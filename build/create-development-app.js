@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Meta from 'vue-meta';
+import VuePortal from '@linusborg/vue-simple-portal';
 
 Vue.use(Meta);
+Vue.use(VuePortal);
 
 function createApp(RootComponent) {
 	const app = new Vue({
