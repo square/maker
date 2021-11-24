@@ -1,14 +1,13 @@
 <template>
-	<transition-group
+	<transition
 		v-bind="$attrs"
-		tag="div"
 		@enter="handleEnter"
 		@leave="handleLeave"
 	>
 		<slot
 			:data-load-index="loadIndex"
 		/>
-	</transition-group>
+	</transition>
 </template>
 
 <script>
@@ -51,6 +50,10 @@ export default {
 					|| itemCount.minWidth === 0)
 					&& itemCount.itemCount);
 			},
+		},
+		index: {
+			type: Number,
+			default: 1,
 		},
 	},
 

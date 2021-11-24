@@ -1,7 +1,6 @@
 <template>
 	<div :class="$s.ProductLoad">
 		<div
-			v-show="!reveal"
 			:class="$s.ProductGrid"
 		>
 			<div
@@ -9,31 +8,32 @@
 				:key="index"
 				:class="$s.Product"
 			>
-				<m-skeleton-block :class="$s.ProductImage" />
-				<m-skeleton-text />
+				<template
+					v-if="!reveal"
+				>
+					<m-skeleton-block :class="$s.ProductImage" />
+					<m-skeleton-text />
+				</template>
+				<m-transition-staggered
+					:stagger-item-count="staggerItemCount"
+					:index="index"
+				>
+					<template #default="{ dataLoadIndex }">
+						<div
+							v-show="reveal"
+							:data-load-index="dataLoadIndex(index)"
+						>
+							<img
+								:class="$s.ProductImage"
+								:src="`https://picsum.photos/600/300?${index}`"
+								height="200px"
+							>
+							<div>This is item number {{ index }}</div>
+						</div>
+					</template>
+				</m-transition-staggered>
 			</div>
 		</div>
-		<m-transition-staggered
-			:stagger-item-count="staggerItemCount"
-			:class="$s.ProductGrid"
-		>
-			<template #default="{ dataLoadIndex }">
-				<div
-					v-for="index in 16"
-					v-show="reveal"
-					:key="index"
-					:data-load-index="dataLoadIndex(index)"
-					:class="$s.Product"
-				>
-					<img
-						:class="$s.ProductImage"
-						:src="`https://picsum.photos/600/300?${index}`"
-						height="200px"
-					>
-					<div>This is item number {{ index }}</div>
-				</div>
-			</template>
-		</m-transition-staggered>
 	</div>
 </template>
 
