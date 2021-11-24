@@ -51,10 +51,6 @@ export default {
 					&& itemCount.itemCount);
 			},
 		},
-		index: {
-			type: Number,
-			default: 1,
-		},
 	},
 
 	data() {

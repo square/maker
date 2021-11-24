@@ -85,7 +85,7 @@ const toFloatyY = (progress) => ({
 	...toOpacity(progress),
 	...toMiniSlideY(progress),
 });
-const toStaggeredFloatyY = (distance, progress) => {
+const toStaggeredFloatyY = (progress, distance) => {
 	const toCustomSlideY = styleFactory(distance, START_VALUE, 'y', 'px');
 	return {
 		...toOpacity(progress),
@@ -255,7 +255,7 @@ export function staggeredFloatUpFn({ element, onComplete }) {
 		...animationDirection,
 		...springSubtle,
 		onUpdate(number) {
-			elementStyler.set(styleFn(endValue, number));
+			elementStyler.set(styleFn(number, endValue));
 		},
 		onComplete,
 	});

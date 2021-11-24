@@ -16,7 +16,6 @@
 				</template>
 				<m-transition-staggered
 					:stagger-item-count="staggerItemCount"
-					:index="index"
 				>
 					<template #default="{ dataLoadIndex }">
 						<div
