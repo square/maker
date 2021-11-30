@@ -14,10 +14,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: npm ci
       - name: Lint code
-        shell: bash -e -l {0}
-        run: |
-          nvm i
-          npm ci
-          npm run lint
-          node .github/dep-version-check
+        run: npm run lint
+      - name: Lint package dependencies
+        run: node .github/dep-version-check
