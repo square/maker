@@ -22,7 +22,7 @@ export const spring = {
 export const springSubtle = {
 	type,
 	stiffness: 400,
-	damping,
+	damping: 40,
 	mass,
 };
 

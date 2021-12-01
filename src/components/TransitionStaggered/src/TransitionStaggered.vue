@@ -83,9 +83,8 @@ export default {
 			if (items === singleItem) {
 				return index;
 			}
-			const row = Math.ceil(index / items);
 			const rowIndex = index % items > 0 ? index % items : items;
-			return row * rowIndex;
+			return rowIndex;
 		},
 	},
 };
