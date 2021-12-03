@@ -72,16 +72,15 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop                 | Type     | Default | Possible values | Description |
-| -------------------- | -------- | ------- | --------------- | ----------- |
-| items-per-row-mobile | `number` | `1`     | —               | —           |
-| items-per-row-tablet | `number` | `1`     | —               | —           |
-| item-index           | `number` | `1`     | —               | —           |
-
+| Prop                 | Type     | Default | Possible values | Description                         |
+| -------------------- | -------- | ------- | --------------- | ----------------------------------- |
+| items-per-row-mobile | `number` | `1`     | —               | Items to stagger per row on mobile  |
+| items-per-row-tablet | `number` | `1`     | —               | Items to stagger per row on tablet  |
+| item-index           | `number` | `1`     | —               | The index of the item within a list |
 
 ## Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description        |
+| ------- | ------------------ |
+| default | content to animate |
 <!-- api-tables:end -->
