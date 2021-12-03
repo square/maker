@@ -1,5 +1,7 @@
 # Transition Staggered
 
+MTransitionStaggered creates a staggered load animation on a group of items (in a list or grid layout). It wraps each individual item and calculates its animation distance through an item-index prop.
+
 ```vue
 <template>
 	<div class="grid">
@@ -84,15 +86,15 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop                 | Type     | Default | Possible values                    | Description                           |
-| -------------------- | -------- | ------- | ---------------------------------- | ------------------------------------- |
-| items-per-row-mobile | `number` | `1`     | —                                  | items to stagger per row on mobile    |
-| items-per-row-tablet | `number` | `1`     | —                                  | items to stagger per row on tablet    |
-| item-index           | `number` | `1`     | —                                  | the index of the item within a list   |
+| Prop                 | Type     | Default | Possible values | Description                         |
+| -------------------- | -------- | ------- | --------------- | ----------------------------------- |
+| items-per-row-mobile | `number` | `1`     | —               | Items to stagger per row on mobile  |
+| items-per-row-tablet | `number` | `1`     | —               | Items to stagger per row on tablet  |
+| item-index           | `number` | `1`     | —               | The index of the item within a list |
 
 ## Slots
 
-| Slot    | Description          |
-| ------- | -------------------- |
-| default | content to spring up |
+| Slot    | Description        |
+| ------- | ------------------ |
+| default | content to animate |
 <!-- api-tables:end -->
