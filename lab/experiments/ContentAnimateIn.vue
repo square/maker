@@ -49,16 +49,6 @@ export default {
 	data() {
 		return {
 			reveal: false,
-			itemsPerRow: [
-				{
-					minWidth: 0,
-					itemCount: 1,
-				},
-				{
-					minWidth: 840,
-					itemCount: 4,
-				},
-			],
 		};
 	},
 
