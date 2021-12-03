@@ -96,4 +96,10 @@ export default {
 		padding-bottom: 0;
 	}
 }
+
+@media screen and (min-width: 840px) {
+	.ActionBarLayer {
+		padding-bottom: 0;
+	}
+}
 </style>
