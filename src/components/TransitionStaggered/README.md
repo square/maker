@@ -5,22 +5,20 @@ MTransitionStaggered creates a staggered load animation on a group of items (in 
 ```vue
 <template>
 	<div class="grid">
-		<div
+		<m-transition-staggered
 			v-for="index in 12"
 			:key="index"
-			class="grid-column"
+			:items-per-row-mobile="1"
+			:items-per-row-tablet="4"
+			:item-index="index"
 		>
-			<m-transition-staggered
-				:items-per-row-mobile="1"
-				:items-per-row-tablet="4"
-				:item-index="index"
+			<div
+				v-show="visible"
+				class="grid-item"
 			>
-				<div
-					v-show="visible"
-					class="grid-item"
-				/>
-			</m-transition-staggered>
-		</div>
+				{{ index }}
+			</div>
+		</m-transition-staggered>
 	</div>
 </template>
 
@@ -47,54 +45,43 @@ export default {
 };
 </script>
 
-<style scoped>
-.grid {
-	display: flex;
-	flex-wrap: wrap;
-	min-height: 624px;
+<style>
+:root {
+	--item-height: 100px;
+	--min-rows: 3;
+	--gap: 16px;
 }
 
-.grid-column {
-	width: 100%;
-	height: 40px;
-	margin: 0 auto 12px;
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	grid-gap: var(--gap);
+	height: calc((var(--item-height) + var(--gap)) * var(--min-rows));
 }
 
 .grid-item {
-	width: 100%;
-	height: 40px;
+	height: var(--item-height);
 	background-color: #999;
+	color: white;
+	font-size: 32px;
 }
 
-@media screen and (min-width: 840px) {
-	.grid {
-		min-height: 372px;
-	}
-
-	.grid-column {
-		width: calc(25% - 24px);
-		height: 100px;
-		margin: 0 12px 24px;
-	}
-	.grid-item {
-		height: 100px;
-	}
-}
 </style>
 ```
 
 <!-- api-tables:start -->
 ## Props
 
-| Prop                 | Type     | Default | Possible values | Description                         |
-| -------------------- | -------- | ------- | --------------- | ----------------------------------- |
-| items-per-row-mobile | `number` | `1`     | —               | Items to stagger per row on mobile  |
-| items-per-row-tablet | `number` | `1`     | —               | Items to stagger per row on tablet  |
-| item-index           | `number` | `1`     | —               | The index of the item within a list |
+| Prop                 | Type     | Default | Possible values | Description |
+| -------------------- | -------- | ------- | --------------- | ----------- |
+| items-per-row-mobile | `number` | `1`     | —               | —           |
+| items-per-row-tablet | `number` | `1`     | —               | —           |
+| item-index           | `number` | `1`     | —               | —           |
+
 
 ## Slots
 
-| Slot    | Description        |
-| ------- | ------------------ |
-| default | content to animate |
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
 <!-- api-tables:end -->
