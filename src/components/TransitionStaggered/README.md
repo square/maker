@@ -49,6 +49,7 @@ export default {
 .grid {
 	display: flex;
 	flex-wrap: wrap;
+	height: 530px;
 }
 
 .grid-column {
@@ -64,7 +65,9 @@ export default {
 }
 
 .grid-item {
-	background-color: #333;
+	background-color: #999;
+	width: 100%;
+	height: 100px;
 }
 </style>
 ```
