@@ -4,52 +4,28 @@
 		@enter="handleEnter"
 		@leave="handleLeave"
 	>
-		<slot
-			:data-load-index="loadIndex"
-		/>
+		<slot />
 	</transition>
 </template>
 
 <script>
-import { staggeredFloatUpFn, floatDownFn } from '@square/maker/utils/transitions';
+import { staggeredFloatUpFn, floatDownFn, tabletMinWidth } from '@square/maker/utils/transitions';
 
 const singleItem = 1;
-const defaultItemCount = [
-	{
-		minWidth: 0,
-		itemCount: singleItem,
-	},
-];
 
 export default {
 	props: {
-		// Number of items to stagger at a time for a viewport
-		// E.g. [
-		// 	{
-		// 		minWidth: 0,
-		// 		staggerItemCount: 1,
-		// 	},
-		// 	{
-		// 		minWidth: 840,
-		// 		staggerItemCount: 4,
-		// 	},
-		// ]
-		staggerItemCount: {
-			type: Array,
-			default: () => defaultItemCount,
-			validator: (staggerItemCount) => {
-				// cannot be empty
-				if (staggerItemCount.length === 0) {
-					return false;
-				}
-				// must have default catch-all count
-				if (staggerItemCount[0].minWidth !== 0) {
-					return false;
-				}
-				return staggerItemCount.every((itemCount) => (itemCount.minWidth
-					|| itemCount.minWidth === 0)
-					&& itemCount.itemCount);
-			},
+		itemsPerRowMobile: {
+			type: Number,
+			default: 1,
+		},
+		itemsPerRowTablet: {
+			type: Number,
+			default: 1,
+		},
+		itemIndex: {
+			type: Number,
+			default: 1,
 		},
 	},
 
@@ -59,32 +35,34 @@ export default {
 		};
 	},
 
+	computed: {
+		loadIndex() {
+			const { itemIndex } = this;
+			const { itemsPerRowMobile, itemsPerRowTablet, viewportWidth } = this;
+			const items = viewportWidth < tabletMinWidth ? itemsPerRowMobile : itemsPerRowTablet;
+
+			if (items === singleItem) {
+				return itemIndex;
+			}
+
+			const row = Math.ceil(itemIndex / items);
+			const rowIndex = itemIndex % items > 0 ? itemIndex % items : items;
+			return row * rowIndex;
+		},
+	},
+
 	mounted() {
 		this.viewportWidth = window.innerWidth;
 	},
 
 	methods: {
 		handleEnter(element, onComplete) {
+			element.dataset.loadIndex = this.loadIndex;
 			staggeredFloatUpFn({ element, onComplete });
 		},
 
 		handleLeave(element, onComplete) {
 			floatDownFn({ element, onComplete });
-		},
-
-		loadIndex(index) {
-			const { staggerItemCount, viewportWidth } = this;
-			let items;
-			staggerItemCount.forEach((count) => {
-				if (count.minWidth < viewportWidth) {
-					items = count.itemCount;
-				}
-			});
-			if (items === singleItem) {
-				return index;
-			}
-			const rowIndex = index % items > 0 ? index % items : items;
-			return rowIndex;
 		},
 	},
 };

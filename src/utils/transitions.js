@@ -246,9 +246,9 @@ export function staggeredFloatUpFn({ element, onComplete }) {
 	const elementStyler = styler(element);
 	const styleFn = toStaggeredFloatyY;
 	const animationDirection = animateUp;
-	const distanceBase = 20;
-	const distanceMultiplier = 5;
-	const endValue = distanceBase + (element.dataset.loadIndex * distanceMultiplier);
+	const distanceYBase = 20;
+	const distanceYMultiplier = 5;
+	const endValue = distanceYBase + (element.dataset.loadIndex * distanceYMultiplier);
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
 	animate({

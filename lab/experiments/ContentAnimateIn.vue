@@ -15,21 +15,20 @@
 					<m-skeleton-text />
 				</template>
 				<m-transition-staggered
-					:stagger-item-count="staggerItemCount"
+					:items-per-row-mobile="1"
+					:items-per-row-tablet="4"
+					:item-index="index"
 				>
-					<template #default="{ dataLoadIndex }">
-						<div
-							v-show="reveal"
-							:data-load-index="dataLoadIndex(index)"
+					<div
+						v-show="reveal"
+					>
+						<img
+							:class="$s.ProductImage"
+							:src="`https://picsum.photos/600/300?${index}`"
+							height="200px"
 						>
-							<img
-								:class="$s.ProductImage"
-								:src="`https://picsum.photos/600/300?${index}`"
-								height="200px"
-							>
-							<div>This is item number {{ index }}</div>
-						</div>
-					</template>
+						<div>This is item number {{ index }}</div>
+					</div>
 				</m-transition-staggered>
 			</div>
 		</div>
@@ -50,7 +49,7 @@ export default {
 	data() {
 		return {
 			reveal: false,
-			staggerItemCount: [
+			itemsPerRow: [
 				{
 					minWidth: 0,
 					itemCount: 1,
