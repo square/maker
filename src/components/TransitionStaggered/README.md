@@ -4,7 +4,7 @@
 <template>
 	<div class="grid">
 		<div
-			v-for="index in 16"
+			v-for="index in 12"
 			:key="index"
 			class="grid-column"
 		>
@@ -49,25 +49,34 @@ export default {
 .grid {
 	display: flex;
 	flex-wrap: wrap;
-	height: 530px;
+	min-height: 624px;
 }
 
 .grid-column {
 	width: 100%;
-	margin: 0 auto 24px;
-}
-
-@media screen and (min-width: 840px) {
-	.grid-column {
-		width: calc(25% - 24px);
-		margin: 0 12px 24px;
-	}
+	height: 40px;
+	margin: 0 auto 12px;
 }
 
 .grid-item {
-	background-color: #999;
 	width: 100%;
-	height: 100px;
+	height: 40px;
+	background-color: #999;
+}
+
+@media screen and (min-width: 840px) {
+	.grid {
+		min-height: 372px;
+	}
+
+	.grid-column {
+		width: calc(25% - 24px);
+		height: 100px;
+		margin: 0 12px 24px;
+	}
+	.grid-item {
+		height: 100px;
+	}
 }
 </style>
 ```
