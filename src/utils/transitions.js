@@ -19,6 +19,13 @@ export const spring = {
 	mass,
 };
 
+export const springSubtle = {
+	type,
+	stiffness: 400,
+	damping: 40,
+	mass,
+};
+
 export const springBounce = {
 	type,
 	stiffness: 400,
@@ -78,6 +85,13 @@ const toFloatyY = (progress) => ({
 	...toOpacity(progress),
 	...toMiniSlideY(progress),
 });
+const toStaggeredFloatyY = (progress, distance) => {
+	const toCustomSlideY = styleFactory(distance, START_VALUE, 'y', 'px');
+	return {
+		...toOpacity(progress),
+		...toCustomSlideY(progress),
+	};
+};
 
 export function fadeInFn({ element, onComplete }) {
 	const elementStyler = styler(element);
@@ -226,6 +240,25 @@ export function delayedFloatUpFn({ element, onComplete }) {
 			onComplete,
 		});
 	}, springDelay);
+}
+
+export function staggeredFloatUpFn({ element, onComplete }) {
+	const elementStyler = styler(element);
+	const styleFn = toStaggeredFloatyY;
+	const animationDirection = animateUp;
+	const distanceYBase = 20;
+	const distanceYMultiplier = 5;
+	const endValue = distanceYBase + (element.dataset.loadIndex * distanceYMultiplier);
+	elementStyler.set(styleFn(animationDirection.from));
+	elementStyler.render();
+	animate({
+		...animationDirection,
+		...springSubtle,
+		onUpdate(number) {
+			elementStyler.set(styleFn(number, endValue));
+		},
+		onComplete,
+	});
 }
 
 export function floatDownFn({ element, onComplete }) {
