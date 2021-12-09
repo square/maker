@@ -3,6 +3,7 @@
 		ref="modal"
 		:class="$s.Modal"
 		:style="modalStyles"
+		:prevent-default="preventDefault"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
@@ -45,6 +46,7 @@ export default {
 			modalStyles: {},
 			isScrolledToTop: true,
 			onScroll: throttle(this.setScrollTop, scrollCheckDelay),
+			preventDefault: false,
 		};
 	},
 
@@ -59,17 +61,21 @@ export default {
 
 	methods: {
 		setScrollTop() {
-			this.isScrolledToTop = this.$refs.modal.$el.scrollTop <= 0;
+			if (this.$refs.modal.$el) {
+				this.isScrolledToTop = this.$refs.modal.$el.scrollTop <= 0;
+			}
 		},
 
 		onSwipeDown() {
 			if (this.isScrolledToTop) {
+				this.preventDefault = true;
 				this.modalApi.close();
 			}
 		},
 
 		onDragDown(gesture) {
 			if (this.isScrolledToTop) {
+				this.preventDefault = true;
 				const transform = `translateY(${gesture.changeY}px)`;
 				this.modalStyles = {
 					transform,
@@ -83,10 +89,12 @@ export default {
 		onDragEnd(gesture) {
 			// percent of window height modal must be dragged to close on release
 			const minDragCloseDistance = 0.3;
+			const minDragThreshold = window.innerHeight * minDragCloseDistance;
 			if (this.isScrolledToTop
-			&& gesture.changeY > (window.innerHeight * minDragCloseDistance)) {
+			&& gesture.changeY > minDragThreshold) {
 				this.modalApi.close();
 			} else {
+				this.preventDefault = false;
 				this.modalStyles = {};
 			}
 		},

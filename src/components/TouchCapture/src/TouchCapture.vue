@@ -27,6 +27,10 @@ export default {
 	name: 'TouchCapture',
 
 	props: {
+		preventDefault: {
+			type: Boolean,
+			default: false,
+		},
 		minSwipeDistance: {
 			type: Number,
 			default: 30,
@@ -107,6 +111,9 @@ export default {
 
 	methods: {
 		handleTouchEvent(event) {
+			if (this.preventDefault) {
+				event.preventDefault();
+			}
 			switch (event.type) {
 			case 'touchstart':
 				this.touchStarted = true;

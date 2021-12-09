@@ -4,6 +4,12 @@
 		<button @click="openCart(false)">
 			Open modal without image
 		</button>
+		<div
+			v-for="i in 100"
+			:key="i"
+		>
+			Long text {{ i }}
+		</div>
 		<m-action-bar>
 			<m-action-bar-button
 				key="primary"
