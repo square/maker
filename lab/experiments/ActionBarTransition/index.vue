@@ -118,7 +118,7 @@ export default {
 			enterDelay: 600,
 			springStiffness: 400,
 			springDamping: 30,
-			springMass: 2,
+			springMass: 1.5,
 		};
 	},
 

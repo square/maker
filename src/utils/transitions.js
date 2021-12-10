@@ -30,7 +30,7 @@ export const springBounce = {
 	type,
 	stiffness: 400,
 	damping: 30,
-	mass: 2,
+	mass: 1.5,
 };
 
 const START_VALUE = 0;
