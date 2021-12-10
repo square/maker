@@ -115,7 +115,7 @@ export default {
 
 	data() {
 		return {
-			enterDelay: 800,
+			enterDelay: 600,
 			springStiffness: 400,
 			springDamping: 30,
 			springMass: 2,

@@ -42,7 +42,7 @@ export default {
 	},
 
 	mounted() {
-		const enterDelay = 800;
+		const enterDelay = 600;
 		setTimeout(() => {
 			this.loaded = !!this.$slots.default;
 		}, enterDelay);
