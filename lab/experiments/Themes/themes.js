@@ -9,9 +9,12 @@ export const theme1 = {
 		heading: '#333232',
 		text: '#636363',
 		primary: '#1aa93a',
-		secondary: '#333232',
-		accent: '#d3d3d3',
-		muted: '#f5f4f4',
+		'neutral-0': '#ffffff',
+		'neutral-10': '#f1f1f1',
+		'neutral-20': '#d3d3d3',
+		'neutral-80': '#707070',
+		'neutral-90': '#1b1b1b',
+		'neutral-100': '#000000',
 		surfaces: {
 			profile1: {
 				background: '#fff',

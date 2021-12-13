@@ -63,24 +63,136 @@
 			<div :class="$s.Notch" />
 			<div :class="$s.Page">
 				<m-image
-					src="https://source.unsplash.com/random/400x400"
+					src="https://source.unsplash.com/900x600/?cappuccino"
 					class="detail-image"
 				/>
 				<div :class="$s.Section">
 					<m-heading
-						:size="1"
+						:size="2"
 						class="item-title"
 					>
 						Cappuccino
 					</m-heading>
+					<m-heading
+						:size="1"
+						class="item-price"
+					>
+						$4.00
+					</m-heading>
 					<m-text
-						:size="0"
+						:size="-1"
 						class="item-description"
 					>
 						The essence of handcrafting. Our rich espresso is artfully
 						marbled with freshly micro-foamed milk.
 					</m-text>
+					<m-stepper
+						v-model="quantity"
+						min="1"
+						max="10"
+					/>
 				</div>
+				<m-container>
+					<template
+						#label
+					>
+						<m-heading
+							:size="-1"
+						>
+							Size
+						</m-heading>
+					</template>
+					<div class="option">
+						<m-radio
+							v-model="size"
+							value="sm"
+						>
+							Small
+						</m-radio>
+						<m-text
+							:size="-1"
+						>
+							$3.00
+						</m-text>
+					</div>
+					<m-divider />
+					<div class="option">
+						<m-radio
+							v-model="size"
+							value="md"
+						>
+							Medium
+						</m-radio>
+						<m-text
+							:size="-1"
+						>
+							$3.50
+						</m-text>
+					</div>
+					<m-divider />
+					<div class="option">
+						<m-radio
+							v-model="size"
+							value="lg"
+						>
+							Large
+						</m-radio>
+						<m-text
+							:size="-1"
+						>
+							$4.00
+						</m-text>
+					</div>
+				</m-container>
+				<m-container>
+					<template
+						#label
+					>
+						<m-heading
+							:size="-1"
+						>
+							Modifiers
+						</m-heading>
+					</template>
+					<template #required-label>
+						Optional
+					</template>
+					<div class="option">
+						<m-checkbox>
+							Add Cream
+						</m-checkbox>
+					</div>
+					<m-divider />
+					<div class="option">
+						<m-checkbox>
+							Add Sugar
+						</m-checkbox>
+					</div>
+					<m-divider />
+					<div class="option">
+						<m-checkbox>
+							Add Cinnamon
+						</m-checkbox>
+					</div>
+				</m-container>
+				<m-container>
+					<template
+						#label
+					>
+						<m-heading
+							:size="-1"
+						>
+							Notes
+						</m-heading>
+					</template>
+					<template #required-label>
+						Optional
+					</template>
+					<m-input
+						variant="outline"
+						placeholder="Details"
+					/>
+				</m-container>
 				<m-inline-action-bar>
 					<m-action-bar-button
 						key="close"
@@ -107,6 +219,143 @@
 						<shopping-bag-icon class="icon" />
 					</div>
 				</div>
+				<div :class="[$s.Section, $s.Cart]">
+					<m-heading
+						:size="1"
+					>
+						Shopping Cart
+					</m-heading>
+					<div
+						class="cart-item"
+					>
+						<div class="cart-content">
+							<div class="cart-text">
+								<m-heading
+									:size="-1"
+									class="item-title"
+								>
+									Holiday Spice Latte
+								</m-heading>
+								<m-text
+									:size="-1"
+									class="cart-price"
+									element="span"
+								>
+									$6.00
+								</m-text>
+							</div>
+							<div class="cart-controls">
+								<m-stepper
+									v-model="quantity"
+									min="1"
+									max="10"
+								/>
+								<m-text-button>
+									<trash class="icon-sm" />
+								</m-text-button>
+							</div>
+						</div>
+						<m-image
+							src="https://source.unsplash.com/900x600/?latte"
+							class="cart-media"
+						/>
+					</div>
+					<m-divider />
+					<div
+						class="cart-item"
+					>
+						<div class="cart-content">
+							<div class="cart-text">
+								<m-heading
+									:size="-1"
+									class="item-title"
+								>
+									Blonde Latte
+								</m-heading>
+								<m-text
+									:size="-1"
+									class="cart-price"
+									element="span"
+								>
+									$5.00
+								</m-text>
+							</div>
+							<div class="cart-controls">
+								<m-stepper
+									v-model="quantity"
+									min="1"
+									max="10"
+								/>
+								<m-text-button>
+									<trash class="icon-sm" />
+								</m-text-button>
+							</div>
+						</div>
+						<m-image
+							src="https://source.unsplash.com/900x600/?latte"
+							class="cart-media"
+						/>
+					</div>
+					<m-button
+						variant="secondary"
+						full-width
+					>
+						Add more items
+					</m-button>
+					<m-divider style="margin: 24px 0;" />
+					<m-heading
+						:size="0"
+					>
+						Add a tip
+					</m-heading>
+					<m-text :size="-1">
+						100% of the tip goes to the kitchen
+					</m-text>
+					<m-choice
+						v-model="selected"
+						style="font-size: 12px; line-height: 1.2;"
+					>
+						<m-choice-option value="choice-1">
+							<strong>10%</strong><br>
+							$1.00
+						</m-choice-option>
+						<m-choice-option value="choice-2">
+							<strong>15%</strong><br>
+							$3.00
+						</m-choice-option>
+						<m-choice-option value="choice-3">
+							<strong>20%</strong><br>
+							$5.00
+						</m-choice-option>
+						<m-choice-option
+							value="choice-4"
+						>
+							Other
+						</m-choice-option>
+					</m-choice>
+					<m-divider style="margin: 24px 0;" />
+					<m-input
+						placeholder="Add gift card or coupon"
+						variant="outline"
+					/>
+					<m-divider style="margin: 24px 0;" />
+					<div class="row">
+						<strong>Subtotal (2 items)</strong>
+						<span class="side-label"><strong>$14.00</strong></span>
+					</div>
+					<div class="row">
+						Taxes
+						<span class="side-label">$1.56</span>
+					</div>
+					<div class="row">
+						Tip (10%)
+						<span class="side-label">$1.36</span>
+					</div>
+					<m-text :size="-1">
+						Total will be calculated at checkout
+					</m-text>
+					<m-divider style="margin: 24px 0;" />
+				</div>
 				<m-inline-action-bar>
 					<m-action-bar-button
 						key="confirm"
@@ -123,11 +372,18 @@
 import MenuIcon from '@square/maker-icons/Menu';
 import ShoppingBagIcon from '@square/maker-icons/ShoppingBag';
 import XIcon from '@square/maker-icons/X';
+import Trash from '@square/maker-icons/Trash';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MImage } from '@square/maker/components/Image';
-// import { MButton } from '@square/maker/components/Button';
+import { MStepper } from '@square/maker/components/Stepper';
+import { MContainer } from '@square/maker/components/Container';
+import { MRadio } from '@square/maker/components/Radio';
+import { MCheckbox } from '@square/maker/components/Checkbox';
+import { MInput } from '@square/maker/components/Input';
+import { MButton, MTextButton } from '@square/maker/components/Button';
+import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 
 export default {
@@ -135,10 +391,20 @@ export default {
 		MenuIcon,
 		ShoppingBagIcon,
 		XIcon,
+		Trash,
 		MHeading,
 		MText,
 		MDivider,
 		MImage,
+		MStepper,
+		MContainer,
+		MRadio,
+		MCheckbox,
+		MInput,
+		MButton,
+		MTextButton,
+		MChoice,
+		MChoiceOption,
 		MInlineActionBar,
 		MActionBarButton,
 	},
@@ -179,6 +445,9 @@ export default {
 					],
 				},
 			],
+			quantity: 1,
+			size: 'sm',
+			selected: 'choice-1',
 		};
 	},
 
@@ -210,6 +479,11 @@ export default {
 	height: 24px;
 }
 
+.icon-sm {
+	width: 16px;
+	height: 16px;
+}
+
 .banner {
 	min-height: 200px;
 	background-image: url(https://source.unsplash.com/Kwdp-0pok-I/400x250);
@@ -217,17 +491,20 @@ export default {
 	background-size: cover;
 }
 
-.item {
+.item,
+.cart-item {
 	display: flex;
 	gap: 20px;
 	padding: 20px 0;
 }
 
-.item-title {
-	margin-bottom: 8px;
+.item-title,
+.item-price,
+.item-description {
+	margin-bottom: 16px;
 }
 
-.item-description {
+.item .item-description {
 	display: -webkit-box;
 	margin: 0;
 	-webkit-line-clamp: 3;
@@ -247,6 +524,63 @@ export default {
 .detail-image {
 	height: 250px;
 }
+
+.option {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 44px;
+}
+
+.cart-item {
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 20px;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.cart-item .item-title {
+	margin: 0;
+}
+
+.cart-content {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 3;
+	gap: 30px;
+	align-content: space-between;
+	height: 84px;
+}
+
+.cart-text,
+.cart-controls {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cart-text {
+	align-items: center;
+}
+
+.cart-media {
+	order: 1;
+	width: 84px;
+	height: 84px;
+	overflow: hidden;
+	border-radius: 16px;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	line-height: 1.5;
+}
+
+.row .side-label {
+	text-align: right;
+}
+
 </style>
 <style module="$s">
 .Preview {

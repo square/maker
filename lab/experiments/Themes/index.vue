@@ -16,6 +16,60 @@
 				Colors
 			</m-heading>
 			<div :class="$s.Profile">
+				<label>
+					<input
+						v-model="theme.colors.background"
+						type="color"
+					>
+					Background
+				</label>
+				<label>
+					<input
+						v-model="theme.primaryColor"
+						type="color"
+					>
+					Primary
+				</label>
+				<label>
+					<input
+						v-model="theme.colors.heading"
+						type="color"
+					>
+					Heading
+				</label>
+				<label>
+					<input
+						v-model="theme.colors.text"
+						type="color"
+					>
+					Text
+				</label>
+				<m-heading
+					:size="0"
+					style="color: gray;"
+				>
+					Neutrals
+				</m-heading>
+				<div :class="$s.palette">
+					<div :class="$s.color">
+						<span :style="{ backgroundColor : 'var(--neutral-0)' }" />
+					</div>
+					<div :class="$s.color">
+						<span :style="{ backgroundColor : 'var(--neutral-10)' }" />
+					</div>
+					<div :class="$s.color">
+						<span :style="{ backgroundColor : 'var(--neutral-20)' }" />
+					</div>
+					<div :class="$s.color">
+						<span :style="{ backgroundColor : 'var(--neutral-80)' }" />
+					</div>
+					<div :class="$s.color">
+						<span :style="{ backgroundColor : 'var(--neutral-90)' }" />
+					</div>
+					<div :class="$s.color">
+						<span :style="{ backgroundColor : 'var(--neutral-100)' }" />
+					</div>
+				</div>
 				<div :class="$s.Profiles">
 					<div
 						v-for="(set, index) in profiles"
@@ -37,54 +91,6 @@
 						</div>
 					</div>
 				</div>
-				<label>
-					<input
-						v-model="backgroundColor"
-						type="color"
-					>
-					Background
-				</label>
-				<label>
-					<input
-						v-model="primaryColor"
-						type="color"
-					>
-					Primary
-				</label>
-				<label>
-					<input
-						v-model="headingColor"
-						type="color"
-					>
-					Heading
-				</label>
-				<label>
-					<input
-						v-model="textColor"
-						type="color"
-					>
-					Text
-				</label>
-				<div :class="$s.palette">
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
-					</div>
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-10)' }" /> Neutral 10
-					</div>
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-20)' }" /> Neutral 20
-					</div>
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-80)' }" /> Neutral 80
-					</div>
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-90)' }" /> Neutral 90
-					</div>
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
-					</div>
-				</div>
 			</div>
 		</div>
 		<preview />
@@ -98,6 +104,18 @@ import { MHeading } from '@square/maker/components/Heading';
 import Preview from './preview.vue';
 import { theme1 } from './themes'; // this should probably be a json request, but enough for testing
 
+const store = {
+	debug: true,
+	state: {
+		theme: theme1,
+	},
+	getters: {
+		primaryColor() {
+			return this.state.theme.colors.primary;
+		},
+	},
+};
+
 export default {
 	components: {
 		MTheme,
@@ -107,7 +125,7 @@ export default {
 
 	data() {
 		return {
-			theme: theme1,
+			theme: store.state.theme,
 			profiles: [
 				'profile1',
 				'profile2',
@@ -116,10 +134,6 @@ export default {
 				'profile5',
 				'profile6',
 			],
-			backgroundColor: '#ffffff',
-			primaryColor: '#14433d',
-			headingColor: '#000000',
-			textColor: '#000000',
 		};
 	},
 
@@ -199,22 +213,16 @@ export default {
 }
 
 .palette {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	margin-top: 16px;
-}
-
-.palette > .color {
-	display: flex;
-	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+	gap: 8px;
+	margin-bottom: 24px;
 }
 
 .palette > .color span {
 	display: inline-block;
-	width: 50px;
-	height: 24px;
-	margin-right: 16px;
+	width: 30px;
+	height: 30px;
 	outline: 1px solid rgba(0, 0, 0, 0.2);
 }
 </style>
