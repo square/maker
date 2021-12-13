@@ -9,7 +9,10 @@
 	>
 		<slot />
 
-		<m-transition-spring-up>
+		<m-transition
+			:enter="springUpBounceFn"
+			:leave="springDownBounceFn"
+		>
 			<atomic-action-bar
 				v-if="actionBarVnodes"
 				hide-on="tablet"
@@ -17,20 +20,21 @@
 			>
 				<v :nodes="actionBarVnodes" />
 			</atomic-action-bar>
-		</m-transition-spring-up>
+		</m-transition>
 	</div>
 </template>
 
 <script>
 import { throttle } from 'lodash';
 import V from 'vue-v';
-import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
+import { MTransition } from '@square/maker/utils/Transition';
+import { springUpBounceFn, springDownBounceFn } from '@square/maker/utils/transitions';
 import AtomicActionBar from './AtomicActionBar.vue';
 
 export default {
 	components: {
 		V,
-		MTransitionSpringUp,
+		MTransition,
 		AtomicActionBar,
 	},
 
@@ -57,6 +61,8 @@ export default {
 		return {
 			registeredBy: undefined,
 			actionBarVnodes: undefined,
+			springUpBounceFn,
+			springDownBounceFn,
 		};
 	},
 

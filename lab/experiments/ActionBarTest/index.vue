@@ -1,12 +1,21 @@
 <template>
 	<div>
 		<h1>root index</h1>
+		<button @click="openCart(false)">
+			Open modal without image
+		</button>
+		<div
+			v-for="i in 100"
+			:key="i"
+		>
+			Long text {{ i }}
+		</div>
 		<m-action-bar>
 			<m-action-bar-button
 				key="primary"
 				align="center"
 				full-width
-				@click="openCart"
+				@click="openCart(true)"
 			>
 				View Cart
 				<template #information>
@@ -33,8 +42,12 @@ export default {
 	},
 
 	methods: {
-		openCart() {
-			this.modalApi.open(() => <CartModal />);
+		openCart(showImage) {
+			this.modalApi.open((h) => h(CartModal, {
+				props: {
+					showImage,
+				},
+			}));
 		},
 	},
 };
