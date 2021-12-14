@@ -126,5 +126,9 @@
   },
   "release": {
     "preset": "conventionalcommits"
+  },
+  "dependencies": {
+    "@vue/composition-api": "^1.4.1",
+    "pinia": "^2.0.6"
   }
 }

@@ -445,9 +445,9 @@ export default {
 					],
 				},
 			],
-			quantity: 1,
 			size: 'sm',
 			selected: 'choice-1',
+			quantity: 1,
 		};
 	},
 

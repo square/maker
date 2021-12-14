@@ -6,12 +6,13 @@
 		<div :class="$s.Editor">
 			<m-heading
 				:size="1"
-				style="margin-bottom: 20px;"
+				style="margin-bottom: 20px; color: #000;"
 			>
 				Maker Theme
 			</m-heading>
 			<m-heading
 				:size="0"
+				style="color: #000;"
 			>
 				Colors
 			</m-heading>
@@ -25,7 +26,7 @@
 				</label>
 				<label>
 					<input
-						v-model="theme.primaryColor"
+						v-model="theme.colors.primary"
 						type="color"
 					>
 					Primary
@@ -52,7 +53,7 @@
 				</m-heading>
 				<div :class="$s.palette">
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-0)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-0'] }" />
 					</div>
 					<div :class="$s.color">
 						<span :style="{ backgroundColor : 'var(--neutral-10)' }" />
@@ -72,13 +73,13 @@
 				</div>
 				<div :class="$s.Profiles">
 					<div
-						v-for="(set, index) in profiles"
+						v-for="(value, name, index) in surfaces"
 						:key="index"
 						:class="[
 							$s.ProfileSet,
-							set,
+							name,
 						]"
-						@click="changeMode(set)"
+						@click="changeMode(name)"
 					>
 						<div>
 							<div
@@ -98,23 +99,16 @@
 </template>
 
 <script>
-
+import chroma from 'chroma-js';
+import { mapStores, mapState } from 'pinia';
 import { MTheme } from '@square/maker/components/Theme';
 import { MHeading } from '@square/maker/components/Heading';
 import Preview from './preview.vue';
 import { theme1 } from './themes'; // this should probably be a json request, but enough for testing
+import { useThemeStore } from './stores/theme';
+import { generateNeutralColors } from './utils/colors';
 
-const store = {
-	debug: true,
-	state: {
-		theme: theme1,
-	},
-	getters: {
-		primaryColor() {
-			return this.state.theme.colors.primary;
-		},
-	},
-};
+const themeStore = useThemeStore();
 
 export default {
 	components: {
@@ -123,32 +117,35 @@ export default {
 		MHeading,
 	},
 
-	data() {
-		return {
-			theme: store.state.theme,
-			profiles: [
-				'profile1',
-				'profile2',
-				'profile3',
-				'profile4',
-				'profile5',
-				'profile6',
-			],
-		};
+	computed: {
+		...mapStores(useThemeStore),
+		...mapState(useThemeStore, ['theme']),
+		surfaces: (store) => store.theme.colors.surfaces,
+		background: (store) => store.theme.colors.background,
 	},
 
-	// computed: {
-	// 	theme() {
-	// 		return {
-	// 			colors: {
-	// 				primary: this.primaryColor,
-	// 				background: this.backgroundColor,
-	// 				heading: this.headingColor,
-	// 				text: this.textColor,
-	// 			},
-	// 		};
-	// 	},
-	// },
+	watch: {
+		background(newValue) {
+			const neutrals = generateNeutralColors(newValue);
+			const headingColor = themeStore.$state.theme.colors.heading;
+			const textColor = themeStore.$state.theme.colors.text;
+			const contrastRatio = 4.5;
+
+			themeStore.$state.theme.colors = Object.assign(themeStore.$state.theme.colors, neutrals);
+
+			if (chroma.contrast(newValue, headingColor) < contrastRatio) {
+				themeStore.$state.theme.colors.heading = neutrals['neutral-100'];
+			}
+
+			if (chroma.contrast(newValue, textColor) < contrastRatio) {
+				themeStore.$state.theme.colors.text = neutrals['neutral-100'];
+			}
+		},
+	},
+
+	created: () => {
+		themeStore.theme = theme1;
+	},
 
 };
 </script>
@@ -162,6 +159,7 @@ export default {
 
 .Editor {
 	padding: 20px;
+	color: #000;
 	background-color: #fff;
 }
 
