@@ -50,6 +50,13 @@ export default {
 		};
 	},
 
+	computed: {
+		scrollTop() {
+			return this.$refs.modal && this.$refs.modal.$el
+				? this.$refs.modal.$el.scrollTop : 0;
+		},
+	},
+
 	watch: {
 		beforeClose: {
 			immediate: true,
@@ -61,9 +68,7 @@ export default {
 
 	methods: {
 		setScrollTop() {
-			if (this.$refs.modal.$el) {
-				this.isScrolledToTop = this.$refs.modal.$el.scrollTop <= 0;
-			}
+			this.isScrolledToTop = this.scrollTop <= 0;
 		},
 
 		onSwipeDown() {
