@@ -55,7 +55,7 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor']),
+		...resolveThemeableProps('heading', ['size', 'textColor']),
 		tag() {
 			if (this.element) {
 				return this.element;
@@ -91,7 +91,6 @@ export default {
 		},
 		inlineStyles() {
 			return {
-				fontFamily: this.resolvedFontFamily,
 				color: this.resolvedTextColor,
 			};
 		},
@@ -119,49 +118,12 @@ export default {
 </script>
 
 <style module="$s">
-:root {
-	--font-size-scale: 1.17;
-	--font-size: 16px;
-	--line-height: 1.5em;
-	--line-height-scale: 0.95;
-}
-
-@media (min-width: 600px) {
-	:root {
-		--font-size-scale: 1.28;
-		--font-size: 16px;
-	}
-}
-
-/* stylelint-disable-next-line no-duplicate-selectors */
-:root {
-	--font-step-minus-2-size: 12px;
-	--font-step-minus-2-line-height: var(--line-height);
-	--font-step-minus-1-size: 14px;
-	--font-step-minus-1-line-height: var(--line-height);
-	--font-step-0-size: var(--font-size);
-	--font-step-0-line-height: var(--line-height);
-	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
-	--font-step-1-line-height: calc(var(--font-step-0-line-height) * var(--line-height-scale));
-	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
-	--font-step-2-line-height: calc(var(--font-step-1-line-height) * var(--line-height-scale));
-	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
-	--font-step-3-line-height: calc(var(--font-step-2-line-height) * var(--line-height-scale));
-	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
-	--font-step-4-line-height: calc(var(--font-step-3-line-height) * var(--line-height-scale));
-	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
-	--font-step-5-line-height: calc(var(--font-step-4-line-height) * var(--line-height-scale));
-	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
-	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
-	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
-	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
-	--font-step-1-size: 19px; /* Override Step 1 - Calculated value was too large for body text */
-}
 
 .Heading {
 	margin: 0;
 	color: var(--color-heading);
-	font-family: inherit;
+	font-weight: var(--font-weights-heading, bold);
+	font-family: var(--font-heading, inherit);
 }
 
 .Heading.size_minus-2 {

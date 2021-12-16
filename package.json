@@ -129,6 +129,7 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.1",
-    "pinia": "^2.0.6"
+    "pinia": "^2.0.6",
+    "webfontloader": "^1.6.28"
   }
 }

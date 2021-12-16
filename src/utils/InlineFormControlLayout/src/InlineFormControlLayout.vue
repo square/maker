@@ -45,9 +45,10 @@ export default {
 <style module="$s">
 .LayoutContainer {
 	display: inline-flex;
-	font-size: 14px;
-	font-family: inherit;
-	line-height: 24px;
+	font-weight: var(--font-weights-text, bold);
+	font-size: var(--font-step-minus-1-size);
+	font-family: var(--font-text, inherit);
+	line-height: var(--font-step-minus-1-line-height);
 	cursor: pointer;
 }
 

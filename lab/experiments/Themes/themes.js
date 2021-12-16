@@ -63,6 +63,8 @@ export const theme1 = {
 	fonts: {
 		heading: '"Merriweather", serif',
 		text: '"Open Sans", sans-serif',
+		baseSize: '16px',
+		scaleRatio: 1.15,
 	},
 	radii: {
 		default: '12px',

@@ -5,14 +5,12 @@
 	>
 		<div :class="$s.Editor">
 			<m-heading
-				:size="1"
-				style="margin-bottom: 20px; color: #000;"
+				:size="2"
 			>
 				Maker Theme
 			</m-heading>
 			<m-heading
-				:size="0"
-				style="color: #000;"
+				:size="1"
 			>
 				Colors
 			</m-heading>
@@ -71,7 +69,7 @@
 						<span :style="{ backgroundColor : 'var(--neutral-100)' }" />
 					</div>
 				</div>
-				<div :class="$s.Profiles">
+				<!-- <div :class="$s.Profiles">
 					<div
 						v-for="(value, name, index) in surfaces"
 						:key="index"
@@ -91,10 +89,103 @@
 							/>
 						</div>
 					</div>
+				</div> -->
+				<m-heading
+					:size="1"
+				>
+					Fonts
+				</m-heading>
+				<m-heading
+					:size="0"
+				>
+					Heading
+				</m-heading>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="headingFont"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="headingWeight"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
 				</div>
+				<m-heading
+					:size="0"
+				>
+					Text
+				</m-heading>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="bodyFont"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="bodyWeight"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
+				</div>
+				<label>
+					<input
+						v-model="baseFontSize"
+						type="range"
+						min="16"
+						max="22"
+						step="1"
+					>
+					Base font size
+				</label>
+				<label>
+					<input
+						v-model="theme.fonts.scaleRatio"
+						type="range"
+						min="1"
+						max="2"
+						step="0.01"
+					>
+					Contrast
+				</label>
 			</div>
 		</div>
-		<preview />
+		<preview :style="fontStyle" />
 	</m-theme>
 </template>
 
@@ -107,8 +198,11 @@ import Preview from './preview.vue';
 import { theme1 } from './themes'; // this should probably be a json request, but enough for testing
 import { useThemeStore } from './stores/theme';
 import { generateNeutralColors } from './utils/colors';
+import { fontOptions } from './utils/fonts';
 
 const themeStore = useThemeStore();
+
+const WebFont = require('webfontloader');
 
 export default {
 	components: {
@@ -117,11 +211,43 @@ export default {
 		MHeading,
 	},
 
+	data() {
+		return {
+			fontOptions,
+			headingFont: 'Open Sans',
+			headingWeight: 400,
+			bodyFont: 'Open Sans',
+			bodyWeight: 400,
+			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
+			baseFontSize: 16,
+		};
+	},
+
 	computed: {
 		...mapStores(useThemeStore),
 		...mapState(useThemeStore, ['theme']),
 		surfaces: (store) => store.theme.colors.surfaces,
 		background: (store) => store.theme.colors.background,
+		fontLoad() {
+			const fonts = [];
+			fonts.push(`${this.headingFont}:${this.headingWeight}`);
+
+			if (this.bodyFont !== this.headingFont) {
+				fonts.push(`${this.bodyFont}:${this.bodyWeight}`);
+			}
+			return fonts;
+		},
+		fontStyle() {
+			const styles = {
+				'--font-heading': `${this.headingFont}, sans-serif`,
+				'--font-text': `${this.bodyFont}, sans-serif`,
+				'--font-weights-heading': `${this.headingWeight}`,
+				'--font-weights-text': `${this.bodyWeight}`,
+				'--font-base-size': `${this.baseFontSize}px`,
+				'--font-scale-ratio': themeStore.$state.theme.fonts.scaleRatio,
+			};
+			return styles;
+		},
 	},
 
 	watch: {
@@ -147,6 +273,28 @@ export default {
 		themeStore.theme = theme1;
 	},
 
+	mounted() {
+		this.updateFont();
+	},
+
+	methods: {
+		loadWebFont(fonts) {
+			// eslint-disable-next-line no-console
+			console.log(fonts);
+			WebFont.load({
+				google: {
+					families: fonts,
+				},
+			});
+		},
+		updateFont() {
+			this.loadWebFont(this.fontLoad);
+		},
+		updateFontStyles() {
+
+		},
+	},
+
 };
 </script>
 <style module="$s">
@@ -154,14 +302,23 @@ export default {
 	display: grid;
 	grid-template-columns: minmax(300px, 1fr) 4fr;
 	height: 100vh;
-	font-family: -apple-system, “Helvetica Neue”, sans-serif;
 }
 
 .Editor {
 	padding: 20px;
 	color: #000;
+	font-family: -apple-system, 'Helvetica Neue', sans-serif;
 	background-color: #fff;
 }
+
+.Editor h3,
+.Editor h4,
+.Editor h5 {
+	margin-bottom: 20px;
+	color: #000;
+}
+
+.Editor h5 { margin-bottom: 8px; }
 
 .Profile {
 	display: flex;
@@ -180,6 +337,7 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 8px;
+	margin-bottom: 24px;
 }
 
 .ProfileSet {
@@ -214,7 +372,7 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
 	gap: 8px;
-	margin-bottom: 24px;
+	margin-bottom: 20px;
 }
 
 .palette > .color span {
@@ -222,5 +380,19 @@ export default {
 	width: 30px;
 	height: 30px;
 	outline: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.fontChoice {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 20px;
+}
+
+.familyChoice {
+	flex-grow: 2;
+}
+
+.fontChoice > select {
+	padding: 8px;
 }
 </style>

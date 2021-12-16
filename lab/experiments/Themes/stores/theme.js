@@ -13,9 +13,4 @@ export const useThemeStore = defineStore('theme', {
 			shape: {},
 		},
 	}),
-	actions: {
-		async init(themeData) {
-			this.theme = themeData;
-		},
-	},
 });
