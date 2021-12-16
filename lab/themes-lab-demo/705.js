@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_square_maker=self.webpackChunk_square_maker||[]).push([[705],{3705:function(e,t,r){r.r(t),r.d(t,{useThemeStore:function(){return s}});const s=(0,r(5743).Q_)("theme",{state:()=>({theme:{colors:{background:"#ffffff",text:"#000000",heading:"#000000",primary:"#000000"},fonts:{},shape:{}}})})}}]);
