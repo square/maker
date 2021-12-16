@@ -589,9 +589,9 @@ export default {
 	--font-size: var(--font-base-size, 16px);
 	--line-height: 1.5em;
 	--line-height-scale: 0.95;
-	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) / var(--font-size-scale));
+	--font-step-minus-2-size: max(12px, calc(var(--font-step-minus-1-size) / var(--font-size-scale)));
 	--font-step-minus-2-line-height: calc(var(--font-step-1-line-height) / var(--line-height-scale));
-	--font-step-minus-1-size: calc(var(--font-size) / var(--font-size-scale));
+	--font-step-minus-1-size: max(14px, calc(var(--font-size) / var(--font-size-scale)));
 	--font-step-minus-1-line-height: calc(var(--font-step-0-line-height) / var(--line-height-scale));
 	--font-step-0-size: var(--font-size);
 	--font-step-0-line-height: var(--line-height);
@@ -633,6 +633,7 @@ export default {
 	overflow: hidden;
 	color: var(--color-text);
 	font-weight: var(--font-weights-text, normal);
+	font-size: var(--font-base-size);
 	font-family: var(--font-text, inherit);
 	background-color: var(--color-background);
 	border-radius: 30px;

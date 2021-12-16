@@ -177,8 +177,8 @@
 					<input
 						v-model="theme.fonts.scaleRatio"
 						type="range"
-						min="1"
-						max="2"
+						min="1.067"
+						max="1.618"
 						step="0.01"
 					>
 					Contrast
