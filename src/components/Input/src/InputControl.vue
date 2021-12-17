@@ -169,7 +169,7 @@ export default {
 	font-family: var(--font-family);
 	background-color: var(--color-background);
 	border: 1px solid var(--color-border);
-	border-radius: var(--border-radius);
+	border-radius: min(32px, var(--radii-default, 8px));
 	transition: border-color 0.2s ease;
 
 	&:not(.disabled, .invalid):hover,

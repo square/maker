@@ -45,6 +45,7 @@ export default {
 <style module="$s">
 .LayoutContainer {
 	display: inline-flex;
+	color: var(--color-text, #000);
 	font-weight: var(--font-weights-text, bold);
 	font-size: var(--font-step-minus-1-size);
 	font-family: var(--font-text, inherit);

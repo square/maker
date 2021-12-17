@@ -215,7 +215,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 32px;
+	border-radius: var(--radii-default, 32px);
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -265,18 +265,6 @@ export default {
 	&.align_space-between {
 		flex-direction: row-reverse;
 		justify-content: space-between;
-	}
-
-	&.shape_squared {
-		border-radius: 0;
-	}
-
-	&.shape_rounded {
-		border-radius: 8px;
-	}
-
-	&.shape_pill {
-		border-radius: 32px;
 	}
 
 	&:disabled {
