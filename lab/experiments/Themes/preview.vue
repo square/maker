@@ -519,7 +519,7 @@ export default {
 	width: 96px;
 	height: 96px;
 	overflow: hidden;
-	border-radius: 16px;
+	border-radius: var(--radii-default, 16px);
 }
 
 .detail-image {
@@ -569,7 +569,7 @@ export default {
 	width: 84px;
 	height: 84px;
 	overflow: hidden;
-	border-radius: 16px;
+	border-radius: var(--radii-default, 16px);
 }
 
 .row {

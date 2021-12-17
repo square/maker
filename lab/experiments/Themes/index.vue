@@ -1,14 +1,51 @@
+/* eslint-disable vue/no-textarea-mustache */
 <template>
 	<m-theme
 		:theme="theme"
 		:class="$s.App"
 	>
 		<div :class="$s.Editor">
-			<m-heading
-				:size="2"
-			>
+			<h1 style="font-size: 20px;">
 				Maker Theme
-			</m-heading>
+			</h1>
+			<div :class="$s.ThemeList">
+				<div
+					:class="[$s.Card, $s.ThemeModern]"
+					@click="changeTheme('modern')"
+				>
+					<span>Modern</span>
+				</div>
+				<div
+					:class="[$s.Card, $s.ThemeMidnight]"
+					@click="changeTheme('midnight')"
+				>
+					Midnight
+					<div :class="$s.Swatch">
+						<span />
+						<span />
+					</div>
+				</div>
+				<div
+					:class="[$s.Card, $s.ThemeSpaces]"
+					@click="changeTheme('spaces')"
+				>
+					Spaces
+					<div :class="$s.Swatch">
+						<span />
+						<span />
+					</div>
+				</div>
+				<div
+					:class="[$s.Card, $s.ThemeSanta]"
+					@click="changeTheme('santa')"
+				>
+					Santa
+					<div :class="$s.Swatch">
+						<span />
+						<span />
+					</div>
+				</div>
+			</div>
 			<m-heading
 				:size="1"
 			>
@@ -102,7 +139,7 @@
 				</m-heading>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="headingFont"
+						v-model="theme.fonts.heading"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -116,7 +153,7 @@
 						</template>
 					</select>
 					<select
-						v-model="headingWeight"
+						v-model="theme.fontWeights.heading"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -136,7 +173,7 @@
 				</m-heading>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="bodyFont"
+						v-model="theme.fonts.text"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -150,7 +187,7 @@
 						</template>
 					</select>
 					<select
-						v-model="bodyWeight"
+						v-model="theme.fontWeights.text"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -165,7 +202,7 @@
 				</div>
 				<label>
 					<input
-						v-model="baseFontSize"
+						v-model="theme.fonts.baseSize"
 						type="range"
 						min="16"
 						max="22"
@@ -183,9 +220,28 @@
 					>
 					Contrast
 				</label>
+				<m-heading
+					:size="1"
+				>
+					Shape
+				</m-heading>
+				<label>
+					<input
+						v-model="theme.radii.default"
+						type="range"
+						min="0"
+						max="60"
+						step="2"
+					>
+					Shape
+				</label>
+				<!-- eslint-disable vue/no-textarea-mustache -->
+				<textarea rows="20">
+{{ theme }}
+				</textarea>
 			</div>
 		</div>
-		<preview :style="fontStyle" />
+		<preview :style="styleOverride" />
 	</m-theme>
 </template>
 
@@ -195,7 +251,7 @@ import { mapStores, mapState } from 'pinia';
 import { MTheme } from '@square/maker/components/Theme';
 import { MHeading } from '@square/maker/components/Heading';
 import Preview from './preview.vue';
-import { theme1 } from './themes'; // this should probably be a json request, but enough for testing
+import * as themes from './themes'; // this should probably be a json request, but enough for testing
 import { useThemeStore } from './stores/theme';
 import { generateNeutralColors } from './utils/colors';
 import { fontOptions } from './utils/fonts';
@@ -214,12 +270,7 @@ export default {
 	data() {
 		return {
 			fontOptions,
-			headingFont: 'Open Sans',
-			headingWeight: 400,
-			bodyFont: 'Open Sans',
-			bodyWeight: 400,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
-			baseFontSize: 16,
 		};
 	},
 
@@ -230,21 +281,27 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			fonts.push(`${this.headingFont}:${this.headingWeight}`);
+			const fontHeading = themeStore.$state.theme.fonts.heading;
+			const fontWeightsHeading = themeStore.$state.theme.fontWeights.heading;
+			const fontText = themeStore.$state.theme.fonts.text;
+			const fontWeightsText = themeStore.$state.theme.fontWeights.text;
 
-			if (this.bodyFont !== this.headingFont) {
-				fonts.push(`${this.bodyFont}:${this.bodyWeight}`);
-			}
+			// Can optimize this later
+			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
+			fonts.push(`${fontText}:${fontWeightsText}`);
+
 			return fonts;
 		},
-		fontStyle() {
+		styleOverride() {
+			const { theme } = themeStore.$state;
 			const styles = {
-				'--font-heading': `${this.headingFont}, sans-serif`,
-				'--font-text': `${this.bodyFont}, sans-serif`,
-				'--font-weights-heading': `${this.headingWeight}`,
-				'--font-weights-text': `${this.bodyWeight}`,
-				'--font-base-size': `${this.baseFontSize}px`,
-				'--font-scale-ratio': themeStore.$state.theme.fonts.scaleRatio,
+				'--font-heading': `${theme.fonts.heading}, sans-serif`,
+				'--font-text': `${theme.fonts.text}, sans-serif`,
+				'--font-weights-heading': `${theme.fontWeights.heading}`,
+				'--font-weights-text': `${theme.fontWeights.text}`,
+				'--font-base-size': `${theme.fonts.baseSize}px`,
+				'--font-scale-ratio': theme.fonts.scaleRatio,
+				'--radii-default': `${theme.radii.default}px`,
 			};
 			return styles;
 		},
@@ -270,7 +327,7 @@ export default {
 	},
 
 	created: () => {
-		themeStore.theme = theme1;
+		themeStore.theme = themes.modern;
 	},
 
 	mounted() {
@@ -290,8 +347,11 @@ export default {
 		updateFont() {
 			this.loadWebFont(this.fontLoad);
 		},
-		updateFontStyles() {
-
+		changeTheme(theme) {
+			// eslint-disable-next-line no-console
+			console.log(theme);
+			themeStore.theme = themes[theme];
+			this.updateFont();
 		},
 	},
 
@@ -306,6 +366,7 @@ export default {
 
 .Editor {
 	padding: 20px;
+	overflow-y: scroll;
 	color: #000;
 	font-family: -apple-system, 'Helvetica Neue', sans-serif;
 	background-color: #fff;
@@ -319,6 +380,98 @@ export default {
 }
 
 .Editor h5 { margin-bottom: 8px; }
+
+.ThemeList {
+	display: grid;
+	gap: 8px;
+	margin-bottom: 20px;
+}
+
+.Card {
+	display: grid;
+	grid-template-rows: 2fr 1fr;
+	gap: 8px;
+	align-items: flex-end;
+	justify-items: center;
+	width: 100%;
+	height: 100px;
+	font-size: 21px;
+	background-color: white;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	cursor: pointer;
+	transition: box-shadow 0.2s ease-out;
+}
+
+.Card:hover {
+	box-shadow: 0 6px 15px -10px rgba(0, 0, 0, 0.71);
+}
+
+.Swatch {
+	align-self: flex-start;
+	width: 50%;
+	height: 10px;
+}
+
+.ThemeModern {
+	grid-template-rows: 2fr;
+	align-items: center;
+	font-weight: 600;
+}
+
+.ThemeModern > *:first-child {
+	padding: 10px 20px;
+	border: 1px solid black;
+}
+
+.ThemeMidnight {
+	color: #fff;
+	font-weight: 200;
+	background-color: #31353f;
+}
+
+.ThemeMidnight .Swatch {
+	background-color: #d5e2fb;
+}
+
+.ThemeSpaces {
+	position: relative;
+	overflow: hidden;
+	color: #0b474b;
+	font-weight: 800;
+	background-color: #fff9f2;
+}
+
+.ThemeSpaces .Swatch {
+	position: absolute;
+	bottom: -20px;
+	width: 100%;
+	padding: 10px;
+	border: 2px solid #0b474b;
+	border-radius: 100%;
+}
+
+.ThemeSanta {
+	position: relative;
+	overflow: hidden;
+	color: #fff;
+	font-weight: 800;
+	background-color: #ef233c;
+}
+
+.ThemeSanta .Swatch {
+	width: 80%;
+	height: 0;
+}
+
+.ThemeSanta .Swatch::after {
+	display: block;
+	width: 100%;
+	height: 200px;
+	background-color: #003e1f;
+	border-radius: 500px;
+	content: '';
+}
 
 .Profile {
 	display: flex;
