@@ -5,10 +5,14 @@
 		:class="$s.App"
 	>
 		<div :class="$s.Editor">
-			<h1 style="font-size: 20px;">
-				Maker Theme
-			</h1>
-			<div :class="$s.ThemeList">
+			<div :class="$s.EditorHeader">
+				<h1>Maker Theme</h1>
+				<a @click="toggleThemes">Themes</a>
+			</div>
+			<div
+				v-if="showThemes"
+				:class="$s.ThemeList"
+			>
 				<div
 					:class="[$s.Card, $s.ThemeModern]"
 					@click="changeTheme('modern')"
@@ -271,6 +275,7 @@ export default {
 		return {
 			fontOptions,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
+			showThemes: false,
 		};
 	},
 
@@ -353,6 +358,9 @@ export default {
 			themeStore.theme = themes[theme];
 			this.updateFont();
 		},
+		toggleThemes() {
+			this.showThemes = !this.showThemes;
+		},
 	},
 
 };
@@ -380,6 +388,23 @@ export default {
 }
 
 .Editor h5 { margin-bottom: 8px; }
+
+.EditorHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.EditorHeader h1 {
+	display: inline-block;
+	font-size: 20px;
+}
+
+.EditorHeader a {
+	color: #006aff;
+	cursor: pointer;
+}
 
 .ThemeList {
 	display: grid;
