@@ -14,6 +14,7 @@
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
+				:style="modalLayerStyles"
 				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
@@ -157,6 +158,7 @@ export default {
 				enter: tabletEnterFn,
 				leave: tabletLeaveFn,
 			}],
+			modalLayerStyles: {},
 		};
 	},
 
@@ -189,6 +191,12 @@ export default {
 				element.style.removeProperty('opacity');
 			}
 		});
+
+		this.modalLayerStyles = {
+			height: `${window.innerHeight}px`,
+		};
+
+		console.log('this.modalLayerStyles', this.modalLayerStyles); // eslint-disable-line no-console
 	},
 
 	destroyed() {
