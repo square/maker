@@ -30,7 +30,10 @@
 				</div>
 			</div>
 		</m-transition-responsive>
-		<modal-layer v-if="currentLayer.state.vnode" />
+		<modal-layer
+			v-if="currentLayer.state.vnode"
+			class="modal-layer-test2"
+		/>
 	</div>
 </template>
 
