@@ -15,6 +15,7 @@
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
 				:style="modalLayerStyles"
+				class="modal-layer-test"
 				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
