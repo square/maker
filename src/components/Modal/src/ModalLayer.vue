@@ -206,9 +206,8 @@ export default {
 	methods: {
 		setModalLayerHeight() {
 			if (window.navigator.userAgent.match('CriOS')) {
-				const minHeight = Math.min(window.innerHeight, document.body.clientHeight);
 				this.modalLayerStyles = {
-					height: `${minHeight}px`,
+					height: `${window.innerHeight}px`,
 				};
 				console.log('window.navigator.userAgent', window.navigator.userAgent); // eslint-disable-line no-console
 				console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
