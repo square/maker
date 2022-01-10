@@ -17,6 +17,7 @@
 				:style="modalLayerStyles"
 				class="modal-layer-test"
 				@click.capture="closeOnClickOutside"
+				@touchmove="setModalLayerHeight"
 			>
 				<pseudo-window
 					:class="$s.disableScroll"
