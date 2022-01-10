@@ -20,7 +20,7 @@
 			>
 				<pseudo-window
 					:class="$s.disableScroll"
-					@resize.passive="onWindowResize"
+					@resize.passive="setModalLayerHeight"
 				/>
 				<div
 					ref="modal"
@@ -196,9 +196,7 @@ export default {
 			}
 		});
 
-		this.modalLayerStyles = {
-			height: `${window.innerHeight}px`,
-		};
+		this.setModalLayerHeight();
 	},
 
 	destroyed() {
@@ -206,14 +204,17 @@ export default {
 	},
 
 	methods: {
-		onWindowResize() {
-			this.modalLayerStyles = {
-				height: `${window.innerHeight}px`,
-			};
-			console.log('window.navigator.userAgent', window.navigator.userAgent); // eslint-disable-line no-console
-			console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
-			console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
-			console.log('here', this.modalLayerStyles); // eslint-disable-line no-console
+		setModalLayerHeight() {
+			if (window.navigator.userAgent.match('CriOS')) {
+				const minHeight = Math.min(window.innerHeight, document.body.clientHeight);
+				this.modalLayerStyles = {
+					height: `${minHeight}px`,
+				};
+				console.log('window.navigator.userAgent', window.navigator.userAgent); // eslint-disable-line no-console
+				console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
+				console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
+				console.log('here', this.modalLayerStyles); // eslint-disable-line no-console
+			}
 		},
 
 		closeOnClickOutside(event) {
