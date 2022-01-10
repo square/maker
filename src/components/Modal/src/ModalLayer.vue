@@ -17,11 +17,10 @@
 				:style="modalLayerStyles"
 				class="modal-layer-test"
 				@click.capture="closeOnClickOutside"
-				@touchmove="onTouchMove"
 			>
 				<pseudo-window
+					body
 					:class="$s.disableScroll"
-					@resize.passive="onWindowResize"
 				/>
 				<div
 					ref="modal"
@@ -163,8 +162,21 @@ export default {
 				enter: tabletEnterFn,
 				leave: tabletLeaveFn,
 			}],
-			modalLayerStyles: {},
+			// modalLayerStyles: {},
 		};
+	},
+
+	computed: {
+		modalLayerStyles() {
+			if (window.navigator.userAgent.match('CriOS')) {
+				console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
+				console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
+				return {
+					height: `${document.body.clientHeight}px`,
+				};
+			}
+			return {};
+		},
 	},
 
 	mounted() {
