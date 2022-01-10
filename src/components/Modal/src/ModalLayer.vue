@@ -16,12 +16,11 @@
 				:class="$s.ModalLayer"
 				:style="modalLayerStyles"
 				class="modal-layer-test"
-				@scroll.native="onScroll"
 				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
-					body
 					:class="$s.disableScroll"
+					@resize.passive="onWindowResize"
 				/>
 				<div
 					ref="modal"
@@ -200,16 +199,15 @@ export default {
 		this.modalLayerStyles = {
 			height: `${window.innerHeight}px`,
 		};
-
-		console.log('this.modalLayerStyles', this.modalLayerStyles); // eslint-disable-line no-console
 	},
 
 	destroyed() {
 		this.unwatchStackedModal();
+		this.resizeObserver.disconnect();
 	},
 
 	methods: {
-		onScroll() {
+		onWindowResize() {
 			this.modalLayerStyles = {
 				height: `${window.innerHeight}px`,
 			};
