@@ -16,6 +16,7 @@
 				:class="$s.ModalLayer"
 				:style="modalLayerStyles"
 				class="modal-layer-test"
+				@scroll.native="onScroll"
 				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
@@ -208,6 +209,13 @@ export default {
 	},
 
 	methods: {
+		onScroll() {
+			this.modalLayerStyles = {
+				height: `${window.innerHeight}px`,
+			};
+			console.log('here', this.modalLayerStyles); // eslint-disable-line no-console
+		},
+
 		closeOnClickOutside(event) {
 			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
