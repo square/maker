@@ -211,6 +211,9 @@ export default {
 			this.modalLayerStyles = {
 				height: `${window.innerHeight}px`,
 			};
+			console.log('window.navigator.userAgent', window.navigator.userAgent); // eslint-disable-line no-console
+			console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
+			console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
 			console.log('here', this.modalLayerStyles); // eslint-disable-line no-console
 		},
 
