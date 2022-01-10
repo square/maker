@@ -203,7 +203,6 @@ export default {
 
 	destroyed() {
 		this.unwatchStackedModal();
-		this.resizeObserver.disconnect();
 	},
 
 	methods: {
