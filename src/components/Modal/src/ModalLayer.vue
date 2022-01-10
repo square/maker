@@ -208,8 +208,6 @@ export default {
 				element.style.removeProperty('opacity');
 			}
 		});
-
-		this.setModalLayerHeight();
 	},
 
 	destroyed() {
@@ -229,9 +227,9 @@ export default {
 
 		setModalLayerHeight() {
 			if (window.navigator.userAgent.match('CriOS')) {
-				this.modalLayerStyles = {
-					height: `${window.innerHeight}px`,
-				};
+				// this.modalLayerStyles = {
+				// 	height: `${window.innerHeight}px`,
+				// };
 				console.log('window.navigator.userAgent', window.navigator.userAgent); // eslint-disable-line no-console
 				console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
 				console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
