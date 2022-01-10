@@ -17,11 +17,11 @@
 				:style="modalLayerStyles"
 				class="modal-layer-test"
 				@click.capture="closeOnClickOutside"
-				@touchmove="setModalLayerHeight"
+				@touchmove="onTouchMove"
 			>
 				<pseudo-window
 					:class="$s.disableScroll"
-					@resize.passive="setModalLayerHeight"
+					@resize.passive="onWindowResize"
 				/>
 				<div
 					ref="modal"
@@ -205,6 +205,16 @@ export default {
 	},
 
 	methods: {
+		onTouchMove() {
+			console.log('touch move'); // eslint-disable-line no-console
+			this.setModalLayerHeight();
+		},
+
+		onWindowResize() {
+			console.log('resize'); // eslint-disable-line no-console
+			this.setModalLayerHeight();
+		},
+
 		setModalLayerHeight() {
 			if (window.navigator.userAgent.match('CriOS')) {
 				this.modalLayerStyles = {
