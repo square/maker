@@ -1,21 +1,32 @@
 <template>
-	<div
+	<m-touch-capture
+		ref="modal"
 		:class="$s.Modal"
 		:style="style"
+		:prevent-default="preventDefault"
+		@scroll.native="onScroll"
+		@on-drag-down="onDragDown"
+		@on-drag-end="onDragEnd"
+		@on-swipe-down="onSwipeDown"
 	>
 		<!-- @slot Modal content -->
 		<slot />
-	</div>
+	</m-touch-capture>
 </template>
 
 <script>
 import chroma from 'chroma-js';
+import { throttle } from 'lodash';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-
+import { MTouchCapture } from '@square/maker/components/TouchCapture';
 import modalApi from './modal-api';
 
 export default {
 	name: 'Modal',
+
+	components: {
+		MTouchCapture,
+	},
 
 	inject: {
 		modalApi,
@@ -52,6 +63,16 @@ export default {
 		},
 	},
 
+	data() {
+		const scrollCheckDelay = 800;
+		return {
+			modalStyles: {},
+			isScrolledToTop: true,
+			onScroll: throttle(this.setScrollTop, scrollCheckDelay),
+			preventDefault: false,
+		};
+	},
+
 	computed: {
 		...resolveThemeableProps('modal', ['bgColor', 'color']),
 
@@ -59,7 +80,13 @@ export default {
 			return {
 				'--bg-color': this.resolvedBgColor,
 				'--color': this.resolvedColor,
+				...this.modalStyles,
 			};
+		},
+
+		scrollTop() {
+			return this.$refs.modal && this.$refs.modal.$el
+				? this.$refs.modal.$el.scrollTop : 0;
 		},
 	},
 
@@ -71,6 +98,45 @@ export default {
 			},
 		},
 	},
+
+	methods: {
+		setScrollTop() {
+			this.isScrolledToTop = this.scrollTop <= 0;
+		},
+
+		onSwipeDown() {
+			if (this.isScrolledToTop) {
+				this.preventDefault = true;
+				this.modalApi.close();
+			}
+		},
+
+		onDragDown(gesture) {
+			if (this.isScrolledToTop) {
+				this.preventDefault = true;
+				const transform = `translateY(${gesture.changeY}px)`;
+				this.modalStyles = {
+					transform,
+					'backface-visibility': 'hidden',
+					overflow: 'hidden',
+					transition: 'none',
+				};
+			}
+		},
+
+		onDragEnd(gesture) {
+			// percent of window height modal must be dragged to close on release
+			const minDragCloseDistance = 0.3;
+			const minDragThreshold = window.innerHeight * minDragCloseDistance;
+			if (this.isScrolledToTop
+			&& gesture.changeY > minDragThreshold) {
+				this.modalApi.close();
+			} else {
+				this.preventDefault = false;
+				this.modalStyles = {};
+			}
+		},
+	},
 };
 </script>
 
@@ -80,6 +146,7 @@ export default {
 	overflow: scroll;
 	color: var(--color, inherit);
 	background: var(--bg-color, #f5f6f7);
+	transition: transform 0.2s linear;
 }
 
 @media screen and (min-width: 840px) {

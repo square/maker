@@ -38,7 +38,7 @@ There are 2 versions of ActionBar:
 							key="confirm"
 							full-width
 						>
-							Confirm or whatever
+							Confirm action
 						</m-action-bar-button>
 					</m-inline-action-bar>
 				</div>
@@ -99,7 +99,7 @@ export default {
 	<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
 		<div class="showOnMobile">
 			<button @click="showActionBar = !showActionBar">
-				toggle actionbar
+				Toggle actionbar
 			</button>
 			<demo-action-bar v-if="showActionBar" />
 		</div>
@@ -164,7 +164,7 @@ _DemoActionBar.vue_
 				key="confirm"
 				full-width
 			>
-				Confirm or whatever
+				Confirm action
 			</m-action-bar-button>
 		</m-action-bar>
 	</div>
@@ -256,7 +256,7 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 ## InlineActionBar Slots
 
-| Slot    | Description     |
-| ------- | --------------- |
-| default | ActionBar items |
+| Slot    | Description |
+| ------- | ----------- |
+| default | —           |
 <!-- api-tables:end -->
