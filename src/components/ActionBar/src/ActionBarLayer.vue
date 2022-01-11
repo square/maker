@@ -1,5 +1,6 @@
 <template>
 	<div
+		:style="styles"
 		:class="[
 			$s.ActionBarLayer,
 			{ [$s.NoActionBar]: !hasActionBar },
@@ -56,6 +57,13 @@ export default {
 	},
 
 	inheritAttrs: false,
+
+	props: {
+		styles: {
+			type: Object,
+			default: () => ({}),
+		},
+	},
 
 	data() {
 		return {

@@ -10,6 +10,7 @@
 				<div
 					:id="popoverApi.target"
 					ref="portal"
+					:style="styles"
 					:class="$s.PopoverLayer"
 				/>
 			</pseudo-window>
@@ -77,6 +78,13 @@ export default {
 
 	inject: {
 		popoverApi: PopoverAPIKey,
+	},
+
+	props: {
+		styles: {
+			type: Object,
+			default: () => ({}),
+		},
 	},
 
 	data() {
