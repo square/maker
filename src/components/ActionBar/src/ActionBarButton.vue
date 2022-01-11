@@ -343,7 +343,7 @@ export default {
 .TruncateText {
 	max-width: 100%;
 	overflow: hidden;
-	line-height: 1;
+	line-height: 1.1;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }

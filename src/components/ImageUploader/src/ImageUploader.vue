@@ -149,7 +149,7 @@ export default {
 					};
 				});
 
-			await this.buildImageURLs(formattedImages);
+			this.buildImageURLs(formattedImages);
 
 			return formattedImages;
 		},
@@ -159,18 +159,10 @@ export default {
 		 *
 		 * @param {Object} image formatted image object
 		 */
-		async buildImageURLs(images) {
-			images.forEach(async (image) => {
+		buildImageURLs(images) {
+			images.forEach((image) => {
 				try {
-					const url = await new Promise((resolve, reject) => {
-						const reader = new FileReader();
-						reader.onloadend = () => resolve(reader.result);
-						// eslint-disable-next-line unicorn/prefer-add-event-listener
-						reader.onerror = reject;
-						reader.readAsDataURL(image.file);
-					});
-
-					this.$set(image, 'url', url);
+					this.$set(image, 'url', window.URL.createObjectURL(image.file));
 				} catch (error) {
 					this.$set(image, 'fileReadError', true);
 					this.setImageError(image, error);
@@ -315,6 +307,7 @@ export default {
 
 		sanitizeOutputImages(images) {
 			return images.map((image) => ({
+				id: image.id,
 				status: image.status,
 				file: image.file,
 				apiResponse: image.apiResponse,

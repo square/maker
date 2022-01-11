@@ -41,20 +41,10 @@ export default {
 
 <style module="$s">
 .ActionBar {
-	--regular-bottom-padding: 32px;
-	--extra-bottom-padding-for-deadclick: 32px;
-	--safe-area-inset-padding: env(safe-area-inset-bottom, 0);
-	--mobile-bottom-padding:
-		calc(
-			var(--regular-bottom-padding)
-			+ var(--extra-bottom-padding-for-deadclick)
-			+ var(--safe-area-inset-padding)
-		);
-
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px var(--mobile-bottom-padding) 24px;
+	padding: 24px;
 	pointer-events: none;
 }
 
@@ -67,10 +57,6 @@ export default {
 @media screen and (min-width: 840px) {
 	.hide-on_tablet {
 		display: none;
-	}
-
-	.ActionBar {
-		padding: 24px 24px var(--regular-bottom-padding) 24px;
 	}
 }
 
