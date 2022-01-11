@@ -14,7 +14,7 @@
 				v-if="currentLayer.state.vnode"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
-				:style="modalLayerStyles"
+				:style="styles"
 				class="modal-layer-test"
 				@click.capture="closeOnClickOutside"
 			>
@@ -145,6 +145,13 @@ export default {
 
 	apiMixin,
 
+	props: {
+		styles: {
+			type: Object,
+			default: () => ({}),
+		},
+	},
+
 	data() {
 		let tabletEnterFn = floatUpFn;
 		let tabletLeaveFn = floatDownFn;
@@ -162,22 +169,20 @@ export default {
 				enter: tabletEnterFn,
 				leave: tabletLeaveFn,
 			}],
-			// modalLayerStyles: {},
 		};
 	},
 
-	computed: {
-		modalLayerStyles() {
-			if (window.navigator.userAgent.match('CriOS')) {
-				console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
-				console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
-				return {
-					height: `${document.body.clientHeight}px`,
-				};
-			}
-			return {};
-		},
-	},
+	// computed: {
+	// 	modalLayerStyles() {
+	// 		if (window.navigator.userAgent.match('CriOS')) {
+	// 			console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
+	// 			return {
+	// 				height: `${document.body.clientHeight}px`,
+	// 			};
+	// 		}
+	// 		return {};
+	// 	},
+	// },
 
 	mounted() {
 		const vm = this;
@@ -215,27 +220,25 @@ export default {
 	},
 
 	methods: {
-		onTouchMove() {
-			console.log('touch move'); // eslint-disable-line no-console
-			this.setModalLayerHeight();
-		},
+		// onTouchMove() {
+		// 	console.log('touch move'); // eslint-disable-line no-console
+		// 	this.setModalLayerHeight();
+		// },
 
-		onWindowResize() {
-			console.log('resize'); // eslint-disable-line no-console
-			this.setModalLayerHeight();
-		},
+		// onWindowResize() {
+		// 	console.log('resize'); // eslint-disable-line no-console
+		// 	this.setModalLayerHeight();
+		// },
 
-		setModalLayerHeight() {
-			if (window.navigator.userAgent.match('CriOS')) {
-				// this.modalLayerStyles = {
-				// 	height: `${window.innerHeight}px`,
-				// };
-				console.log('window.navigator.userAgent', window.navigator.userAgent); // eslint-disable-line no-console
-				console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
-				console.log('document.body.clientHeight', document.body.clientHeight); // eslint-disable-line no-console
-				console.log('here', this.modalLayerStyles); // eslint-disable-line no-console
-			}
-		},
+		// setModalLayerHeight() {
+		// 	if (window.navigator.userAgent.match('CriOS')) {
+		// 		// this.modalLayerStyles = {
+		// 		// 	height: `${window.innerHeight}px`,
+		// 		// };
+		// 		console.log('window.innerHeight', window.innerHeight); // eslint-disable-line no-console
+		// 		console.log('here', this.modalLayerStyles); // eslint-disable-line no-console
+		// 	}
+		// },
 
 		closeOnClickOutside(event) {
 			const { closeOnClickOutside } = this.currentLayer.state.options;

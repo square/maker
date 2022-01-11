@@ -11,7 +11,9 @@ Use the modal component to enter the user into a new _mode_.
 		>
 			Open modal
 		</m-button>
-		<m-modal-layer />
+		<m-modal-layer
+			:styles="{ height: '100px' }"
+		/>
 	</div>
 </template>
 
