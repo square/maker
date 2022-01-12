@@ -160,7 +160,6 @@ export default {
 
 .Heading {
 	margin: 0;
-	color: var(--color-heading);
 	font-family: inherit;
 }
 

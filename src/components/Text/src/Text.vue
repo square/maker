@@ -118,7 +118,6 @@ export default {
 }
 
 .Paragraph {
-	color: var(--color-text);
 	font-family: inherit;
 }
 
