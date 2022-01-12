@@ -6,6 +6,7 @@
 			:value="value"
 			type="checkbox"
 			:class="$s.Checkbox"
+			:disabled="disabled"
 			v-bind="$attrs"
 			v-on="$listeners"
 		>
@@ -51,6 +52,13 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Toggles checkbox disabled state
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	computed: {
@@ -91,9 +99,8 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
-	--color-fill: var(--color-900, rgba(0, 0, 0, 0.9));
-	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
+	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--neutral-90, rgba(0, 0, 0, 0.9));
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -108,16 +115,13 @@ export default {
 	border-radius: 4px;
 	outline: none;
 	cursor: inherit;
-	transition: background-color 0.2s ease;
+	transition:
+		border 0.2s ease,
+		background-color 0.2s ease;
 	appearance: none;
 
 	&:invalid {
 		border-color: var(--color-error);
-	}
-
-	&:disabled {
-		background-color: var(--color-disabled);
-		cursor: not-allowed;
 	}
 
 	&:checked {
@@ -127,11 +131,6 @@ export default {
 
 	&:hover:not(:disabled, :invalid) {
 		border-color: var(--color-fill);
-	}
-
-	&:checked:disabled {
-		background-color: var(--color-border);
-		border-color: var(--color-border);
 	}
 
 	&:checked:invalid {

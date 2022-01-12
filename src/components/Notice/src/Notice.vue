@@ -163,12 +163,12 @@ export default {
 
 .variant_block {
 	padding: 16px;
-	background-color: var(--color-100, rgba(238, 93, 93, 0.1));
+	background-color: var(--neutral-10, rgba(238, 93, 93, 0.1));
 }
 
 .type_info {
-	--color: var(--color-800, rgba(24, 24, 24, 1));
-	--color-icon: var(--color-900, rgba(24, 24, 24, 1));
+	--color: var(--neutral-80, rgba(24, 24, 24, 1));
+	--color-icon: var(--neutral-90, rgba(24, 24, 24, 1));
 }
 
 .IconAligner {
@@ -181,7 +181,7 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
-	fill: var(--color-background);
+	fill: transparent;
 	stroke: var(--color-icon);
 }
 </style>

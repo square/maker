@@ -11,50 +11,65 @@
 				>
 					<m-heading
 						:size="1"
+						style="margin-bottom: 20px;"
 					>
-						Color modes
+						Maker Theme
 					</m-heading>
-					<m-text :size="-1">
-						Creating a consistent UI experience against any background color
-					</m-text>
-
-					<m-divider />
-					<br>
-
-					<m-checkbox
-						v-model="hasCustomPrimaryColor"
-					>
-						Custom primary color
-					</m-checkbox>
-
-					<input
-						v-if="hasCustomPrimaryColor"
-						v-model="primaryColor"
-						type="color"
-					>
 					<m-heading
-						:size="1"
+						:size="0"
 					>
-						Choose a background color
+						Colors
 					</m-heading>
-					<input
-						v-model="backgroundColor"
-						type="color"
-					>
-					<m-heading
-						:size="1"
-					>
-						Generated contrast colors
-					</m-heading>
-					<m-text :size="-1">
-						color-100, color-300, color-700, color-800, color-900
-					</m-text>
-					<div>
-						<span :style="{ backgroundColor : 'var(--color-100)' }" />
-						<span :style="{ backgroundColor : 'var(--color-300)' }" />
-						<span :style="{ backgroundColor : 'var(--color-700)' }" />
-						<span :style="{ backgroundColor : 'var(--color-800)' }" />
-						<span :style="{ backgroundColor : 'var(--color-900)' }" />
+					<div :class="$s.Profile">
+						<label>
+							<input
+								v-model="backgroundColor"
+								type="color"
+							>
+							Background
+						</label>
+						<label>
+							<input
+								v-model="primaryColor"
+								type="color"
+							>
+							Primary
+						</label>
+						<label>
+							<input
+								v-model="headingColor"
+								type="color"
+							>
+							Heading
+						</label>
+						<label>
+							<input
+								v-model="textColor"
+								type="color"
+							>
+							Text
+						</label>
+						<m-divider />
+						<div :class="$s.palette">
+							<div :class="$s.color">
+								<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
+							</div>
+							<div :class="$s.color">
+								<span :style="{ backgroundColor : 'var(--neutral-10)' }" /> Neutral 10
+							</div>
+							<div :class="$s.color">
+								<span :style="{ backgroundColor : 'var(--neutral-20)' }" /> Neutral 20
+							</div>
+							<div :class="$s.color">
+								<span :style="{ backgroundColor : 'var(--neutral-80)' }" /> Neutral 80
+							</div>
+							<div :class="$s.color">
+								<span :style="{ backgroundColor : 'var(--neutral-90)' }" /> Neutral 90
+							</div>
+							<div :class="$s.color">
+								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
+							</div>
+						</div>
 					</div>
 				</div>
 				<div
@@ -122,11 +137,16 @@
 							placeholder="Delivery address"
 						/>
 						<m-input
+							placeholder="Disabled text input"
+							disabled
+						/>
+						<m-input
 							variant="outline"
 							placeholder="Delivery address"
 						/>
 						<m-input
 							placeholder="Disabled text input"
+							variant="outline"
 							disabled
 						/>
 						<m-notice type="error">
@@ -187,13 +207,19 @@
 							:options="options"
 						/>
 						<m-select
+							placeholder="Disabled select"
+							:options="options"
+							disabled
+						/>
+						<m-select
 							placeholder="Select dip"
 							:options="options"
 							variant="outline"
 						/>
 						<m-select
-							placeholder="Disabled select"
+							placeholder="Select dip"
 							:options="options"
+							variant="outline"
 							disabled
 						/>
 						<m-stepper
@@ -220,11 +246,16 @@
 						</m-checkbox>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea
+							placeholder="Disabled textbox"
+							disabled
+						/>
+						<m-textarea
 							placeholder="Additional requests"
 							variant="outline"
 						/>
 						<m-textarea
 							placeholder="Disabled textbox"
+							variant="outline"
 							disabled
 						/>
 					</div>
@@ -316,18 +347,16 @@ import storeData from './SiteApp/data';
 const IS_LIGHT_THRESHOLD = 0.32;
 const RATIOS = {
 	light: {
-		100: 0.05,
-		300: 0.155,
-		700: 0.43,
-		800: 0.527,
-		900: 0.9,
+		10: 0.05,
+		20: 0.155,
+		80: 0.527,
+		90: 0.9,
 	},
 	dark: {
-		100: 0.1,
-		300: 0.255,
-		700: 0.42,
-		800: 0.55,
-		900: 0.95,
+		10: 0.255,
+		20: 0.37,
+		80: 0.55,
+		90: 0.95,
 	},
 };
 function isNoticeContrastColor(bgHex) {
@@ -340,15 +369,30 @@ function contrastColors(bgHex) {
 	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
 	const contrastColor = isLight ? '#000000' : '#ffffff';
 	const levels = isLight ? RATIOS.light : RATIOS.dark;
-	const colors = {};
+	const colors = {
+		'neutral-0': isLight ? '#ffffff' : '#000000',
+		'neutral-100': !isLight ? '#ffffff' : '#000000',
+	};
+
+	// if (isLight) {
+	// 	colors['neutral-90'] = 'rgb(142, 142, 147)';
+	// 	colors['neutral-80'] = 'rgb(174, 174, 178)';
+	// 	colors['neutral-20'] = 'rgb(229, 229, 234)';
+	// 	colors['neutral-10'] = 'rgb(242, 242, 247)';
+	// } else {
+	// 	colors['neutral-10'] = 'rgb(44, 44, 46)';
+	// 	colors['neutral-20'] = 'rgb(58, 58, 60)';
+	// 	colors['neutral-80'] = 'rgb(99, 99, 102)';
+	// 	colors['neutral-90'] = 'rgb(142, 142, 147)';
+	// }
 
 	Object.entries(levels).forEach(([name, level]) => {
-		colors[`color-${name}`] = chroma.mix(bgHex, contrastColor, level, 'lab').hex();
+		colors[`neutral-${name}`] = chroma.mix(bgHex, contrastColor, level, 'lab').hex();
 	});
 
 	return {
 		...colors,
-		'color-elevation': isLight ? '#ffffff' : colors['color-300'],
+		'color-elevation': isLight ? '#ffffff' : colors['neutral-20'],
 		'color-overlay': isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
 	};
 }
@@ -386,9 +430,10 @@ export default {
 
 	data() {
 		return {
-			backgroundColor: '#d1ffff',
-			hasCustomPrimaryColor: false,
-			primaryColor: '#0073F8',
+			backgroundColor: '#ffffff',
+			primaryColor: '#14433d',
+			headingColor: '#000000',
+			textColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -436,12 +481,14 @@ export default {
 			const colors = contrastColors(this.backgroundColor);
 			return {
 				colors: {
-					primary: this.hasCustomPrimaryColor ? this.primaryColor : undefined,
+					primary: this.primaryColor,
 					background: this.backgroundColor,
+					heading: this.headingColor,
+					text: this.textColor,
 					...colors,
 				},
 				notice: {
-					color: isNoticeContrastColor(this.backgroundColor) ? colors['color-900'] : '',
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
 				},
 				modal: {
 					bgColor: this.backgroundColor,
@@ -507,7 +554,6 @@ export default {
 	min-height: 100vh;
 	margin: auto;
 	padding: 25px 50px;
-	color: var(--color-900);
 	font-family: Arial, Helvetica, sans-serif;
 
 	& > div {
@@ -520,20 +566,40 @@ export default {
 	}
 }
 
-.Scale {
-	& > * {
-		margin-bottom: 16px;
+.Profile {
+	display: flex;
+	flex-direction: column;
+
+	& label {
+		margin-bottom: 8px;
 	}
 
-	& span {
-		display: inline-block;
-		width: 40px;
-		height: 32px;
+	& input {
+		margin-right: 16px;
 	}
 }
 
+.palette {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-top: 16px;
+}
+
+.palette > .color {
+	display: flex;
+	align-items: center;
+}
+
+.palette > .color span {
+	display: inline-block;
+	width: 50px;
+	height: 24px;
+	margin-right: 16px;
+}
+
 .Preview {
-	border: 1px solid var(--color-300);
+	border: 1px solid var(--neutral-20);
 
 	/* stylelint-disable-next-line no-descending-specificity */
 	& > div {

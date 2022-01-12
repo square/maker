@@ -118,7 +118,7 @@ export default {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	border: 1px solid var(--color-300, rgba(0, 0, 0, 0.15));
+	border: 1px solid var(--neutral-20, rgba(0, 0, 0, 0.15));
 	border-radius: 8px;
 	transition: background-image linear 150ms;
 

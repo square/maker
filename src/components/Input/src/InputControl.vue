@@ -121,13 +121,13 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: var(--color-100, #f6f7f9);
+	--color-background: var(--neutral-10, #f6f7f9);
 	--color-border: transparent;
 }
 
 .variant_outline {
 	--color-background: transparent;
-	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
+	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
 }
 
 .Affix {
@@ -151,12 +151,9 @@ export default {
 }
 
 .InputContainer {
-	--color-background-disabled: var(--color-100, #f6f7f9);
-	--color-placeholder: var(--color-800, rgba(0, 0, 0, 0.55));
-	--color-foreground: var(--color-900, rgba(107, 107, 107, 0.9));
-	--color-disabled: var(--color-700, rgba(0, 0, 0, 0.3));
-	--color-border-disabled: var(--color-300, rgba(0, 0, 0, 0.3));
-	--color-border-active: var(--color-800, #222);
+	--color-placeholder: var(--neutral-80, rgba(0, 0, 0, 0.55));
+	--color-foreground: var(--neutral-90, rgba(107, 107, 107, 0.9));
+	--color-border-active: var(--neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
 	--border-radius: 8px;
 
@@ -181,14 +178,8 @@ export default {
 	}
 
 	&.disabled {
-		color: var(--color-disabled);
-		background-color: var(--color-background-disabled);
-		border-color: var(--color-border-disabled);
 		cursor: not-allowed;
-
-		& .Affix {
-			color: var(--color-disabled);
-		}
+		opacity: 0.5;
 	}
 
 	&.invalid {
@@ -213,14 +204,6 @@ export default {
 
 	&::placeholder {
 		color: var(--color-placeholder);
-	}
-
-	&:disabled {
-		color: var(--color-disabled);
-
-		&::placeholder {
-			color: var(--color-disabled);
-		}
 	}
 
 	&.align_left {

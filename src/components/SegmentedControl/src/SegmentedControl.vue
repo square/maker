@@ -71,7 +71,7 @@ export default {
 	padding: 4px;
 	font-size: 14px;
 	line-height: 24px;
-	background-color: var(--color-100, #f6f7f9);
+	background-color: var(--neutral-10, #f6f7f9);
 	border-radius: 4px;
 }
 

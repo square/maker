@@ -213,8 +213,8 @@ export default {
 
 		calendarNavButtons() {
 			return {
-				color: this.theme.colors['color-100'] || '#f2f2f2',
-				textColor: this.theme.colors['color-900'] || '#f2f2f2',
+				color: this.theme.colors['neutral-10'] || '#f2f2f2',
+				textColor: this.theme.colors['neutral-90'] || '#f2f2f2',
 			};
 		},
 	},
@@ -341,7 +341,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--color-900, #000);
+	color: var(--color-heading, #000);
 	font-weight: bold;
 }
 
@@ -360,7 +360,7 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--color-800, rgba(0, 0, 0, 0.5));
+	color: var(--neutral-80, rgba(0, 0, 0, 0.5));
 	font-weight: normal;
 	font-size: var(--font-size-minus-1);
 	line-height: var(--line-height-minus-1);
@@ -371,7 +371,7 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--color-900, #000);
+	color: var(--color-text, #000);
 	text-align: center;
 }
 
@@ -392,28 +392,20 @@ export default {
 
 	&.selected {
 		color: var(--color-background, #fff);
-		background-color: var(--color-900, #000);
+		background-color: var(--neutral-90, #000);
 	}
 
 	&.today {
-		border: 1px solid var(--color-900, #000);
+		border: 1px solid var(--neutral-90, #000);
 	}
 
 	&.disabled {
-		color: var(--color-300, rgba(0, 0, 0, 0.4));
 		cursor: not-allowed;
-
-		&.today {
-			color: var(--color-100, rgba(0, 0, 0, 0.2));
-		}
-
-		&.selected {
-			color: var(--color-300, rgba(0, 0, 0, 0.4));
-		}
+		opacity: 0.5;
 	}
 }
 
 .DateCell:hover .DateCellButton:not(.selected):not(.disabled) {
-	background-color: var(--color-100, rgba(0, 0, 0, 0.1));
+	background-color: var(--neutral-10, rgba(0, 0, 0, 0.1));
 }
 </style>

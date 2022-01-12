@@ -359,16 +359,13 @@ export default {
 	}
 
 	&:disabled {
-		cursor: initial;
-
-		& > * {
-			opacity: 0.4;
-		}
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--color-300, #fff),
+			0 0 0 1px var(--neutral-20, #fff),
 			0 0 0 3px var(--color-focus);
 	}
 

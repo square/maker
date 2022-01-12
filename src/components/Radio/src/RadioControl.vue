@@ -7,6 +7,7 @@
 			:class="$s.Radio"
 			:value="value"
 			:checked="isChecked"
+			:disabled="disabled"
 			v-bind="$attrs"
 			v-on="$listeners"
 		>
@@ -46,6 +47,13 @@ export default {
 		 * Toggles radio's invalid state
 		 */
 		invalid: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * Toggles radio disabled state
+		 */
+		disabled: {
 			type: Boolean,
 			default: false,
 		},
@@ -91,9 +99,8 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: var(--color-300, rgba(0, 0, 0, 0.3));
-	--color-fill: var(--color-900, rgba(0, 0, 0, 0.9));
-	--color-disabled: var(--color-100, rgba(0, 0, 0, 0.05));
+	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--neutral-90, rgba(0, 0, 0, 0.9));
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -109,7 +116,9 @@ export default {
 	border-radius: 50%;
 	outline: none;
 	cursor: pointer;
-	transition: background-color 0.2s ease;
+	transition:
+		border 0.2s ease,
+		background-color 0.2s ease;
 	appearance: none;
 	user-select: none;
 
@@ -131,11 +140,6 @@ export default {
 		}
 	}
 
-	&:disabled {
-		background-color: var(--color-disabled);
-		cursor: not-allowed;
-	}
-
 	&:invalid {
 		border-color: var(--color-error);
 	}
@@ -143,11 +147,6 @@ export default {
 	&:checked:invalid {
 		background-color: var(--color-error);
 		border-color: var(--color-error);
-	}
-
-	&:checked:disabled {
-		background-color: var(--color-border);
-		border-color: var(--color-border);
 	}
 
 	&:hover:not(:disabled, :invalid),

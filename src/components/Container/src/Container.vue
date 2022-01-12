@@ -141,14 +141,14 @@ export default {
 <style module="$s">
 .Container {
 	padding: 16px 24px;
-	color: var(--color, var(--color-800, inherit));
+	color: var(--color, var(--neutral-80, inherit));
 	font-family: inherit;
 	background-color: var(--bg-color, inherit);
 }
 
 .Label {
 	margin-bottom: 16px;
-	color: var(--color, var(--color-900, inherit));
+	color: var(--color, var(--neutral-90, inherit));
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
@@ -178,7 +178,7 @@ export default {
 }
 
 .Sublabel {
-	color: var(--color, var(--color-800, inherit));
+	color: var(--color, var(--neutral-80, inherit));
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 24px;

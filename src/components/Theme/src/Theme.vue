@@ -1,5 +1,6 @@
 <template>
 	<div
+		:class="$s.Theme"
 		:style="styles"
 	>
 		<slot />
@@ -58,12 +59,15 @@ export default {
 			const { colors } = this;
 
 			return {
-				'--color-100': colors['color-100'],
-				'--color-300': colors['color-300'],
-				'--color-700': colors['color-700'],
-				'--color-800': colors['color-800'],
-				'--color-900': colors['color-900'],
+				'--neutral-0': colors['neutral-0'],
+				'--neutral-10': colors['neutral-10'],
+				'--neutral-20': colors['neutral-20'],
+				'--neutral-80': colors['neutral-80'],
+				'--neutral-90': colors['neutral-90'],
+				'--neutral-100': colors['neutral-100'],
 				'--color-background': colors.background,
+				'--color-heading': colors.heading,
+				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
 			};
@@ -75,3 +79,10 @@ export default {
 	},
 };
 </script>
+
+<style module="$s">
+.Theme {
+	color: var(--color-text);
+	background-color: var(--color-background);
+}
+</style>

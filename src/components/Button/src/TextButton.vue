@@ -118,7 +118,7 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-900);
+	color: var(--neutral-90);
 	font-weight: 500;
 	font-family: inherit;
 	vertical-align: middle;
@@ -154,7 +154,7 @@ export default {
 		cursor: initial;
 
 		& > * {
-			opacity: 0.4;
+			opacity: 0.5;
 		}
 	}
 
@@ -173,7 +173,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-900);
+	color: var(--neutral-90);
 	background-color: transparent;
 }
 

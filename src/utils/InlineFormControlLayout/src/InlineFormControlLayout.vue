@@ -1,5 +1,12 @@
 <template>
-	<label :class="$s.LayoutContainer">
+	<label
+		:class="[
+			$s.LayoutContainer,
+			{
+				[$s.disabled]: disabled,
+			}
+		]"
+	>
 		<div :class="$s.ControlAligner">
 			<slot name="control" />
 		</div>
@@ -19,6 +26,16 @@
 import assert from '@square/maker/utils/assert';
 
 export default {
+
+	props: {
+		/**
+		 * Toggles inline disabled styles
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
+	},
 	mounted() {
 		assert.error(this.$slots.label, 'Missing "label" slot in inline form control');
 	},
@@ -28,11 +45,15 @@ export default {
 <style module="$s">
 .LayoutContainer {
 	display: inline-flex;
-	color: var(--color-900, inherit);
 	font-size: 14px;
 	font-family: inherit;
 	line-height: 24px;
 	cursor: pointer;
+}
+
+.disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
 }
 
 .ControlAligner {
@@ -43,6 +64,6 @@ export default {
 }
 
 .SubLabel {
-	color: var(--color-800, inherit);
+	color: var(--neutral-80, inherit);
 }
 </style>

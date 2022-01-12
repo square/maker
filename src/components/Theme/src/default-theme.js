@@ -3,15 +3,18 @@ import { resolve, getPath } from './utils';
 export default function defaultTheme() {
 	return {
 		colors: {
+			'neutral-0': '#ffffff',
+			'neutral-10': '#f1f1f1',
+			'neutral-20': '#d3d3d3',
+			'neutral-80': '#707070',
+			'neutral-90': '#1b1b1b',
+			'neutral-100': '#000000',
 			background: '#ffffff',
+			heading: '#000000',
+			text: '#000000',
+			elevation: '#ffffff',
+			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
-			'color-100': '#f1f1f1',
-			'color-300': '#d7d7d7',
-			'color-700': '#9e9e9e',
-			'color-800': '#636363',
-			'color-900': '#303030',
-			'color-elevation': '#ffffff',
-			'color-overlay': 'rgba(0, 0, 0, 0.3)',
 		},
 		profiles: [
 			{
@@ -28,7 +31,7 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		textbutton: {
-			color: undefined,
+			color: '@colors.primary',
 			size: 'medium',
 		},
 		actionbarbutton: {
@@ -41,19 +44,19 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
-			textColor: undefined,
+			textColor: '@colors.text',
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
-			textColor: undefined,
+			textColor: '@colors.heading',
 		},
 		choice: {
 			selectedColor: undefined,
 		},
 		stepper: {
-			color: '@colors["color-100"]',
-			textColor: '@colors["color-900"]',
+			color: '@colors["neutral-10"]',
+			textColor: '@colors["neutral-90"]',
 			shape: 'pill',
 		},
 		notice: {
