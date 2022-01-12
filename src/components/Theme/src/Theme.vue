@@ -1,5 +1,6 @@
 <template>
 	<div
+		:class="$s.Theme"
 		:style="styles"
 	>
 		<slot />
@@ -78,3 +79,10 @@ export default {
 	},
 };
 </script>
+
+<style module="$s">
+.Theme {
+	color: var(--color-text);
+	background-color: var(--color-background);
+}
+</style>
