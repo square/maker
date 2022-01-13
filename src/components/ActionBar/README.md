@@ -239,6 +239,13 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 | window-esc | `string` | ESC keyup event on window |
 
 
+## ActionBarLayer Props
+
+| Prop   | Type     | Default | Possible values | Description |
+| ------ | -------- | ------- | --------------- | ----------- |
+| styles | `object` | `{}`    | —               | —           |
+
+
 ## ActionBarLayer Slots
 
 | Slot    | Description |

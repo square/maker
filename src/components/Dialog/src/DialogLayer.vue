@@ -10,6 +10,7 @@
 			<div
 				v-if="dialogApi.state.vnode"
 				:class="$s.DialogLayer"
+				:style="styles"
 			>
 				<pseudo-window
 					body
@@ -94,6 +95,13 @@ export default {
 	inheritAttrs: false,
 
 	apiMixin,
+
+	props: {
+		styles: {
+			type: Object,
+			default: () => ({}),
+		},
+	},
 
 	data() {
 		return {

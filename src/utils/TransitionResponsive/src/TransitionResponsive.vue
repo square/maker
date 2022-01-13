@@ -61,6 +61,7 @@ export default {
 			this.transitions.forEach((transition) => {
 				if (viewportWidth >= transition.minWidth) {
 					responsiveTransition = transition;
+					responsiveTransition.maxHeight = window.visualViewport.height;
 				}
 			});
 			return responsiveTransition;

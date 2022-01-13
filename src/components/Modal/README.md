@@ -167,6 +167,40 @@ Modals must always be created in its own Single File Component (SFC) file to sep
 <template>
 	<m-modal>
 		Modal content
+		Modal content
+		Modal content
+		Modal content
+		Modal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal content
 
 		<!-- modalApi is provided by the injected the modalApi key below -->
 		<button @click="modalApi.close()">
@@ -254,6 +288,40 @@ The function must return a boolean - true to close the modal or false to block c
 		:before-close="beforeCloseHook"
 	>
 		Modal content
+		Modal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal content
 
 		<!-- modalApi is provided by the injected the modalApi key below -->
 		<m-action-bar-button
@@ -324,6 +392,10 @@ export default {
 		MModalLayer.apiMixin,
 	],
 
+	mounted() {
+		this.openModal();
+	},
+
 	methods: {
 		openModal() {
 			this.modalApi.open(() => <ActionBarDemoModal />);
@@ -347,7 +419,58 @@ _ActionBarDemoModal.vue_
 				Modal heading
 			</m-heading>
 			<m-text>
-				modal content
+				modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal contentModal content
+		Modal content
+		Modal content
+		Modal content
 			</m-text>
 			<m-inline-action-bar>
 				<m-action-bar-button
@@ -407,6 +530,11 @@ export default {
 .icon {
 	width: 24px;
 	height: 24px;
+}
+
+html,
+body {
+	height: 100%;
 }
 </style>
 ```
@@ -880,5 +1008,9 @@ export default {
 | default | Modal Content content (gets correct padding) |
 
 
+## ModalLayer Props
 
+| Prop   | Type     | Default | Possible values | Description |
+| ------ | -------- | ------- | --------------- | ----------- |
+| styles | `object` | `{}`    | —               | —           |
 <!-- api-tables:end -->

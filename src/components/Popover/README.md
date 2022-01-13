@@ -517,5 +517,9 @@ export default {
 | default | Popover container content |
 
 
+## PopoverLayer Props
 
+| Prop   | Type     | Default | Possible values | Description |
+| ------ | -------- | ------- | --------------- | ----------- |
+| styles | `object` | `{}`    | —               | —           |
 <!-- api-tables:end -->

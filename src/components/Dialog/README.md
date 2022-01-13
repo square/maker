@@ -491,5 +491,9 @@ export default {
 | default | Dialog Content content (gets correct padding) |
 
 
+## DialogLayer Props
 
+| Prop   | Type     | Default | Possible values | Description |
+| ------ | -------- | ------- | --------------- | ----------- |
+| styles | `object` | `{}`    | —               | —           |
 <!-- api-tables:end -->

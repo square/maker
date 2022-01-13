@@ -144,12 +144,13 @@ export function fadeOutFn({ element, onComplete }) {
 	});
 }
 
-export function springUpFn({ element, onComplete }) {
+export function springUpFn({ element, onComplete, winHeight }) {
 	const elementStyler = styler(element);
 	const styleFn = toRelativeY;
 	const animationDirection = animateDown;
 	elementStyler.set(styleFn(animationDirection.from));
 	elementStyler.render();
+	console.log(winHeight); // eslint-disable-line no-console
 	animate({
 		...animationDirection,
 		...spring,
