@@ -41,10 +41,17 @@ export default {
 
 <style module="$s">
 .ActionBar {
+	--actionbar-bottom-padding:
+		calc(
+			24px
+			+ env(safe-area-inset-bottom, 24px)
+			+ var(--chrome-bottom-offset, 0)
+		);
+
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px;
+	padding: 24px 24px var(--actionbar-bottom-padding) 24px;
 	pointer-events: none;
 }
 
