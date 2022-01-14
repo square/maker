@@ -89,7 +89,12 @@ export default {
 .ActionBarLayer {
 	--actionbar-top-padding: 24px;
 	--actionbar-size: 64px;
-	--actionbar-bottom-padding: calc(24px + env(safe-area-inset-bottom, 24px));
+	--actionbar-bottom-padding:
+		calc(
+			24px
+			+ env(safe-area-inset-bottom, 24px)
+			+ var(--chrome-bottom-offset, 0)
+		);
 
 	padding-bottom:
 		calc(

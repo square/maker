@@ -52,6 +52,13 @@ export default {
 
 <style module="$s">
 .ActionBarWrapper {
-	padding: 24px 24px calc(24px + env(safe-area-inset-bottom, 24px)) 24px;
+	--actionbar-bottom-padding:
+		calc(
+			24px
+			+ env(safe-area-inset-bottom, 24px)
+			+ var(--chrome-bottom-offset, 0)
+		);
+
+	padding: 24px 24px var(--actionbar-bottom-padding) 24px;
 }
 </style>

@@ -180,6 +180,7 @@ export default {
 			var(--regular-bottom-padding)
 			+ var(--extra-bottom-padding-for-deadclick)
 			+ var(--safe-area-inset-padding)
+			+ var(--chrome-bottom-offset, 0)
 		);
 	--actionbar-size: 64px;
 	--actionbar-top-padding: 32px;
