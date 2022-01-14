@@ -10,12 +10,18 @@
 			<div
 				v-if="dialogApi.state.vnode"
 				:class="$s.DialogLayer"
+				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="dialogApi.state.vnode" />
+				<div
+					ref="dialog"
+					:class="$s.DialogContent"
+				>
+					<v :nodes="dialogApi.state.vnode" />
+				</div>
 			</div>
 		</m-transition-responsive>
 	</div>
@@ -43,11 +49,16 @@ const apiMixin = {
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
+				options: {},
 			}),
 
-			open(renderFn) {
+			open(renderFn, options) {
 				const vnode = renderFn(vm.$createElement);
 				this.state.vnode = vnode;
+				this.state.options = {
+					closeOnClickOutside: false,
+					...options,
+				};
 				// function that only closes this specific Dialog
 				return () => {
 					if (this.state.vnode === vnode) {
@@ -107,6 +118,17 @@ export default {
 				leave: floatDownFn,
 			}],
 		};
+	},
+
+	methods: {
+		closeOnClickOutside(event) {
+			const { closeOnClickOutside } = this.dialogApi.state.options;
+			const { dialog } = this.$refs;
+
+			if (dialog && closeOnClickOutside && !dialog.contains(event.target)) {
+				this.dialogApi.close();
+			}
+		},
 	},
 };
 </script>
