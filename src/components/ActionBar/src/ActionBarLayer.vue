@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style module="$s">
-/* tempfix: chrome-bottom-offset */
+/* tempfix: chrome-bottom-offset - value set outside of maker */
 /* stylelint-disable length-zero-no-unit */
 .ActionBarLayer {
 	--actionbar-top-padding: 24px;
