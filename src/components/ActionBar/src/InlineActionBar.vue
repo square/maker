@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style module="$s">
+/* tempfix: chrome-bottom-offset */
 /* stylelint-disable length-zero-no-unit */
 .ActionBarWrapper {
 	--actionbar-bottom-padding:
