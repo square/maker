@@ -2,7 +2,33 @@
 
 ```vue
 <template>
-	<div class="container">
+	<m-theme>
+		<m-text
+			v-for="size in [-1, 0, 1]"
+			:key="size"
+			:size="size"
+		>
+			Size {{ size }}
+		</m-text>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
+
+export default {
+	components: {
+		MText,
+		MTheme,
+	},
+};
+</script>
+```
+
+```vue
+<template>
+	<div>
 		<m-text
 			v-for="size in [-1, 0, 1]"
 			:key="size"

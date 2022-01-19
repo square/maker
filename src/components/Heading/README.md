@@ -2,6 +2,39 @@
 
 ```vue
 <template>
+	<m-theme>
+		<m-heading
+			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
+			:key="size"
+			:size="size"
+			class="heading"
+		>
+			Size {{ size }}
+		</m-heading>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
+
+export default {
+	components: {
+		MHeading,
+		MTheme,
+	},
+};
+</script>
+
+<style scoped>
+.heading {
+	color: #24292e;
+}
+</style>
+```
+
+```vue
+<template>
 	<div>
 		<m-heading
 			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
