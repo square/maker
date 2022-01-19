@@ -40,19 +40,11 @@ export default {
 </script>
 
 <style module="$s">
-/* stylelint-disable length-zero-no-unit */
 .ActionBar {
-	--actionbar-bottom-padding:
-		calc(
-			24px
-			+ env(safe-area-inset-bottom, 24px)
-			+ var(--chrome-bottom-offset, 0px)
-		);
-
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 24px 24px var(--actionbar-bottom-padding) 24px;
+	padding: 24px;
 	pointer-events: none;
 }
 
