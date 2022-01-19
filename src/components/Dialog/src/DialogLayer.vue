@@ -10,12 +10,18 @@
 			<div
 				v-if="dialogApi.state.vnode"
 				:class="$s.DialogLayer"
+				@click.capture="closeOnClickOutside"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="dialogApi.state.vnode" />
+				<div
+					ref="dialog"
+					:class="$s.DialogContent"
+				>
+					<v :nodes="dialogApi.state.vnode" />
+				</div>
 			</div>
 		</m-transition-responsive>
 	</div>
@@ -43,11 +49,18 @@ const apiMixin = {
 		const api = {
 			state: Vue.observable({
 				vnode: undefined,
+				options: {},
 			}),
 
-			open(renderFn) {
+			open(renderFn, options = {}) {
 				const vnode = renderFn(vm.$createElement);
 				this.state.vnode = vnode;
+				this.state.options = {
+					closeOnClickOutside: false,
+					beforeCloseHook: async () => true,
+					...options,
+				};
+
 				// function that only closes this specific Dialog
 				return () => {
 					if (this.state.vnode === vnode) {
@@ -56,10 +69,17 @@ const apiMixin = {
 				};
 			},
 
-			close() {
+			async close() {
 				// Close the open popover (if present) and then close the dialog in the next tick.
 				// Closing at the same time will result in the popover content becoming inline and
 				// causes a weird content shift as the dialog fades away.
+
+				if (this.state.vnode && typeof this.state.options.beforeCloseHook === 'function') {
+					if (!(await this.state.options.beforeCloseHook())) {
+						return; // cancel
+					}
+				}
+
 				vm.popoverApi?.closePopover();
 				vm.$nextTick(() => {
 					this.state.vnode = undefined;
@@ -107,6 +127,17 @@ export default {
 				leave: floatDownFn,
 			}],
 		};
+	},
+
+	methods: {
+		closeOnClickOutside(event) {
+			const { closeOnClickOutside } = this.dialogApi.state.options;
+			const { dialog } = this.$refs;
+
+			if (dialog && closeOnClickOutside && !dialog.contains(event.target)) {
+				this.dialogApi.close();
+			}
+		},
 	},
 };
 </script>
