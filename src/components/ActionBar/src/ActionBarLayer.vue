@@ -86,16 +86,10 @@ export default {
 </script>
 
 <style module="$s">
-/* stylelint-disable length-zero-no-unit */
 .ActionBarLayer {
 	--actionbar-top-padding: 24px;
 	--actionbar-size: 64px;
-	--actionbar-bottom-padding:
-		calc(
-			24px
-			+ env(safe-area-inset-bottom, 24px)
-			+ var(--chrome-bottom-offset, 0px)
-		);
+	--actionbar-bottom-padding: calc(24px + env(safe-area-inset-bottom, 24px));
 
 	padding-bottom:
 		calc(

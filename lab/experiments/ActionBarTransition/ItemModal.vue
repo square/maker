@@ -171,7 +171,6 @@ export default {
 </style>
 
 <style module="$s">
-/* stylelint-disable length-zero-no-unit */
 .ActionBarWrapper {
 	--regular-bottom-padding: 32px;
 	--extra-bottom-padding-for-deadclick: 32px;
@@ -181,7 +180,6 @@ export default {
 			var(--regular-bottom-padding)
 			+ var(--extra-bottom-padding-for-deadclick)
 			+ var(--safe-area-inset-padding)
-			+ var(--chrome-bottom-offset, 0px)
 		);
 	--actionbar-size: 64px;
 	--actionbar-top-padding: 32px;
