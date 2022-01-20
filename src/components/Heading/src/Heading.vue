@@ -2,8 +2,17 @@
 import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
-const MAX_SIZE = 7;
-const MIN_SIZE = -1;
+const sizeToTag = Object.freeze({
+	'title-small': 'h6',
+	'title-medium': 'h5',
+	'title-large': 'h4',
+	'title-xlarge': 'h3',
+	'title-xxlarge': 'h2',
+	headline: 'h1',
+});
+
+const MIN_WEIGHT = 100;
+const MAX_WEIGHT = 900;
 
 /**
  * Heading
@@ -25,9 +34,9 @@ export default {
 		 * Size of heading. Influences which element is used.
 		 */
 		size: {
-			type: Number,
+			type: String,
 			default: undefined,
-			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
+			validator: (size) => ['title-small', 'title-medium', 'title-large', 'title-xlarge', 'title-xxlarge', 'headline'].includes(size),
 		},
 		/**
 		 * Override Heading element. By default, the element is derived from size.
@@ -52,48 +61,30 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * font weight
+		 */
+		weight: {
+			type: Number,
+			default: undefined,
+			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
+		},
 	},
 
 	computed: {
-		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor']),
+		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor', 'weight']),
 		tag() {
 			if (this.element) {
 				return this.element;
 			}
-			const h1Threshold = 4;
-			const h2Threshold = 3;
-			const h3Threshold = 2;
-			const h4Threshold = 1;
-			const h5Threshold = 0;
-			if (this.resolvedSize >= h1Threshold) {
-				return 'h1';
-			}
-			if (this.resolvedSize >= h2Threshold) {
-				return 'h2';
-			}
-			if (this.resolvedSize >= h3Threshold) {
-				return 'h3';
-			}
-			if (this.resolvedSize >= h4Threshold) {
-				return 'h4';
-			}
-			if (this.resolvedSize >= h5Threshold) {
-				return 'h5';
-			}
-			return 'h6';
-		},
-		sizeClass() {
-			const minNonNegativeSize = 0;
-			if (this.resolvedSize >= minNonNegativeSize) {
-				return this.resolvedSize.toString();
-			}
-			return `minus${this.resolvedSize}`;
+			return sizeToTag[this.resolvedSize];
 		},
 		inlineStyles() {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
 				color: this.resolvedTextColor,
+				fontWeight: this.resolvedWeight,
 				'--font-size': fonts.baseSize,
 				'--font-size-scale': fonts.sizeScale,
 			};
@@ -103,7 +94,7 @@ export default {
 	render(createElement) {
 		const {
 			$s,
-			sizeClass,
+			resolvedSize,
 			tag,
 			inlineStyles,
 		} = this;
@@ -112,7 +103,7 @@ export default {
 		 */
 		const defaultSlot = this.$slots.default;
 		return createElement(tag, {
-			class: [$s.Heading, $s[`size_${sizeClass}`]],
+			class: [$s.Heading, $s[`size_${resolvedSize}`]],
 			style: inlineStyles,
 			attrs: this.$attrs,
 			on: this.$listeners,
@@ -126,60 +117,59 @@ export default {
 	margin: 0;
 	line-height: 1.5em;
 
-	/* derived minus sizes */
-	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) / var(--font-size-scale));
+	/* title - small */
 	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
-	/* base sizes */
+	/* title - medium, body - medium */
 	--font-step-0-size: var(--font-size);
 
-	/* derived larger sizes */
+	/* body - large */
 	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
+
+	/* title - large */
 	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
+
+	/* skipped step */
 	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
+
+	/* title - xlarge */
 	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
+
+	/* skipped step */
 	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
+
+	/* title - xxlarge */
 	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
+
+	/* skipped steps */
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
+	--font-step-8-size: calc(var(--font-step-7-size) * var(--font-size-scale));
+
+	/* headline */
+	--font-step-9-size: calc(var(--font-step-8-size) * var(--font-size-scale));
 }
 
-.Heading.size_minus-2 {
-	font-size: var(--font-step-minus-2-size);
-}
-
-.Heading.size_minus-1 {
+.Heading.size_title-small {
 	font-size: var(--font-step-minus-1-size);
 }
 
-.Heading.size_0 {
+.Heading.size_title-medium {
 	font-size: var(--font-step-0-size);
 }
 
-.Heading.size_1 {
-	font-size: var(--font-step-1-size);
-}
-
-.Heading.size_2 {
+.Heading.size_title-large {
 	font-size: var(--font-step-2-size);
 }
 
-.Heading.size_3 {
-	font-size: var(--font-step-3-size);
-}
-
-.Heading.size_4 {
+.Heading.size_title-xlarge {
 	font-size: var(--font-step-4-size);
 }
 
-.Heading.size_5 {
-	font-size: var(--font-step-5-size);
-}
-
-.Heading.size_6 {
+.Heading.size_title-xxlarge {
 	font-size: var(--font-step-6-size);
 }
 
-.Heading.size_7 {
-	font-size: var(--font-step-7-size);
+.Heading.size_headline {
+	font-size: var(--font-step-9-size);
 }
 </style>

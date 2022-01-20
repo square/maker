@@ -17,7 +17,7 @@ export default function defaultTheme() {
 			primary: '#000000',
 		},
 		fonts: {
-			baseSize: '16px',
+			baseSize: '14px',
 			sizeScale: 1.15,
 		},
 		profiles: [
@@ -52,8 +52,9 @@ export default function defaultTheme() {
 		},
 		heading: {
 			fontFamily: 'inherit',
-			size: 2,
+			size: 'title-large',
 			textColor: '@colors.heading',
+			weight: 700,
 		},
 		choice: {
 			selectedColor: undefined,
