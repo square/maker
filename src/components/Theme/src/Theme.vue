@@ -70,14 +70,10 @@ export default {
 				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
-				'--mobile-base-font-size': fonts.mobileBaseSize,
-				'--mobile-font-size-scale': fonts.mobileSizeScale,
-				'--mobile-base-line-height': fonts.mobileBaseLineHeight,
-				'--mobile-line-height-scale': fonts.mobileLineHeightScale,
-				'--desktop-base-font-size': fonts.desktopBaseSize,
-				'--desktop-font-size-scale': fonts.desktopSizeScale,
-				'--desktop-base-line-height': fonts.desktopBaseLineHeight,
-				'--desktop-line-height-scale': fonts.desktopLineHeightScale,
+				'--font-size': fonts.baseSize,
+				'--font-size-scale': fonts.sizeScale,
+				'--line-height': fonts.baseLineHeight,
+				'--line-height-scale': fonts.lineHeightScale,
 			};
 		},
 	},
@@ -92,11 +88,6 @@ export default {
 .Theme {
 	color: var(--color-text);
 	background-color: var(--color-background);
-
-	--font-size: var(--mobile-base-font-size);
-	--font-size-scale: var(--mobile-font-size-scale);
-	--line-height: var(--mobile-base-line-height);
-	--line-height-scale: var(--mobile-line-height-scale);
 
 	/* derived minus scales */
 	--minus-font-size-scale: calc(2 - var(--font-size-scale));
@@ -133,14 +124,5 @@ export default {
 	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
-}
-
-@media (min-width: 600px) {
-	.Theme {
-		--font-size: var(--desktop-base-font-size);
-		--font-size-scale: var(--desktop-font-size-scale);
-		--line-height: var(--desktop-base-line-height);
-		--line-height-scale: var(--desktop-line-height-scale);
-	}
 }
 </style>
