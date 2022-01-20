@@ -3,7 +3,7 @@ import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 const MAX_SIZE = 7;
-const MIN_SIZE = -2;
+const MIN_SIZE = -1;
 
 /**
  * Heading

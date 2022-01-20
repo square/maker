@@ -99,7 +99,6 @@ export default {
 	line-height: 1.5em;
 
 	/* derived minus sizes */
-	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) / var(--font-size-scale));
 	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
 	/* base sizes */
