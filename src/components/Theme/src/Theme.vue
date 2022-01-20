@@ -72,8 +72,6 @@ export default {
 				'--color-overlay': colors['color-overlay'],
 				'--font-size': fonts.baseSize,
 				'--font-size-scale': fonts.sizeScale,
-				'--line-height': fonts.baseLineHeight,
-				'--line-height-scale': fonts.lineHeightScale,
 			};
 		},
 	},
@@ -91,38 +89,21 @@ export default {
 
 	/* derived minus scales */
 	--minus-font-size-scale: calc(2 - var(--font-size-scale));
-	--minus-line-height-scale: calc(2 - var(--line-height-scale));
 
 	/* derived minus sizes */
 	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) * var(--minus-font-size-scale));
-	--font-step-minus-2-line-height:
-		calc(
-			var(--font-step-mins-1-line-height) * var(--minus-line-height-scale)
-		);
 	--font-step-minus-1-size: calc(var(--font-step-0-size) * var(--minus-font-size-scale));
-	--font-step-minus-1-line-height:
-		calc(
-			var(--font-step-0-line-height) * var(--mins-line-height-scale)
-		);
 
 	/* base sizes */
 	--font-step-0-size: var(--font-size);
-	--font-step-0-line-height: var(--line-height);
 
 	/* derived larger sizes */
 	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
-	--font-step-1-line-height: calc(var(--font-step-0-line-height) * var(--line-height-scale));
 	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
-	--font-step-2-line-height: calc(var(--font-step-1-line-height) * var(--line-height-scale));
 	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
-	--font-step-3-line-height: calc(var(--font-step-2-line-height) * var(--line-height-scale));
 	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
-	--font-step-4-line-height: calc(var(--font-step-3-line-height) * var(--line-height-scale));
 	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
-	--font-step-5-line-height: calc(var(--font-step-4-line-height) * var(--line-height-scale));
 	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
-	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
-	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
 }
 </style>

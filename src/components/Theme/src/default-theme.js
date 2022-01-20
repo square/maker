@@ -19,8 +19,6 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: '16px',
 			sizeScale: 1.15,
-			baseLineHeight: '1.5em',
-			lineHeightScale: 0.95,
 		},
 		profiles: [
 			{
