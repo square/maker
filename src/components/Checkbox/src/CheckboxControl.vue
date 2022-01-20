@@ -149,7 +149,7 @@ export default {
 	transition: opacity 0.2s ease;
 	pointer-events: none;
 	fill: none;
-	stroke: var(--color-background);
+	stroke: var(--color-background, #fff);
 	stroke-width: 2px;
 	stroke-linecap: round;
 	stroke-linejoin: round;
