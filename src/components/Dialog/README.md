@@ -234,6 +234,21 @@ export default {
 </script>
 ```
 
+### Configurable options
+The `dialogApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
+
+```ts
+{
+	// Dialog will close when clicked outside of it - default false
+	closeOnClickOutside: boolean;
+
+	// Dialog will call this async function to determine if it should close
+	beforeCloseHook: () => Promise<boolean>;
+}
+```
+
+To hook into the close function, add the `beforeCloseHook` property on the options object when opening the dialog.
+The function must be an async function that returns a boolean - true to close the modal or false to block closing.
 
 
 ## Examples

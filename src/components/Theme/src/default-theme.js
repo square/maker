@@ -44,10 +44,12 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
+			textColor: '@colors.text',
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
+			textColor: '@colors.heading',
 		},
 		choice: {
 			selectedColor: undefined,

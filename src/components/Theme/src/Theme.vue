@@ -81,8 +81,8 @@ export default {
 </script>
 
 <style module="$s">
-	.Theme {
-		color: var(--color-text);
-		background-color: var(--color-background);
-	}
+.Theme {
+	color: var(--color-text);
+	background-color: var(--color-background);
+}
 </style>

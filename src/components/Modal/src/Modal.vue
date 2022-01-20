@@ -2,13 +2,14 @@
 	<m-touch-capture
 		ref="modal"
 		:class="$s.Modal"
-		:style="modalStyles"
+		:style="style"
 		:prevent-default="preventDefault"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
 	>
+		<!-- @slot Modal content -->
 		<slot />
 	</m-touch-capture>
 </template>
@@ -79,7 +80,13 @@ export default {
 			return {
 				'--bg-color': this.resolvedBgColor,
 				'--color': this.resolvedColor,
+				...this.modalStyles,
 			};
+		},
+
+		scrollTop() {
+			return this.$refs.modal && this.$refs.modal.$el
+				? this.$refs.modal.$el.scrollTop : 0;
 		},
 	},
 
@@ -94,9 +101,7 @@ export default {
 
 	methods: {
 		setScrollTop() {
-			if (this.$refs.modal.$el) {
-				this.isScrolledToTop = this.$refs.modal.$el.scrollTop <= 0;
-			}
+			this.isScrolledToTop = this.scrollTop <= 0;
 		},
 
 		onSwipeDown() {
@@ -141,6 +146,7 @@ export default {
 	overflow: scroll;
 	color: var(--color, inherit);
 	background: var(--bg-color, #f5f6f7);
+	transition: transform 0.2s linear;
 }
 
 @media screen and (min-width: 840px) {
