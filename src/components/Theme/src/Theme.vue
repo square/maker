@@ -87,12 +87,9 @@ export default {
 	color: var(--color-text);
 	background-color: var(--color-background);
 
-	/* derived minus scales */
-	--minus-font-size-scale: calc(2 - var(--font-size-scale));
-
 	/* derived minus sizes */
-	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) * var(--minus-font-size-scale));
-	--font-step-minus-1-size: calc(var(--font-step-0-size) * var(--minus-font-size-scale));
+	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) / var(--font-size-scale));
+	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
 	/* base sizes */
 	--font-step-0-size: var(--font-size);
