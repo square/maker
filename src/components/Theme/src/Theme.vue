@@ -87,35 +87,35 @@ export default {
 	color: var(--color-text);
 	background-color: var(--color-background);
 
-	/* title - small */
+	/* heading - small, text - small */
 	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
-	/* title - medium, body - medium */
+	/* heading - medium, text - medium */
 	--font-step-0-size: var(--font-size);
 
-	/* body - large */
+	/* text - large */
 	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
 
-	/* title - large */
+	/* heading - large */
 	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
 
 	/* skipped step */
 	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
 
-	/* title - xlarge */
+	/* heading - xlarge */
 	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
 
 	/* skipped step */
 	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
 
-	/* title - xxlarge */
+	/* heading - xxlarge */
 	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
 
 	/* skipped steps */
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 	--font-step-8-size: calc(var(--font-step-7-size) * var(--font-size-scale));
 
-	/* headline */
+	/* heading - headline */
 	--font-step-9-size: calc(var(--font-step-8-size) * var(--font-size-scale));
 }
 </style>

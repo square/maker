@@ -3,11 +3,11 @@ import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 const sizeToTag = Object.freeze({
-	'title-small': 'h6',
-	'title-medium': 'h5',
-	'title-large': 'h4',
-	'title-xlarge': 'h3',
-	'title-xxlarge': 'h2',
+	small: 'h6',
+	medium: 'h5',
+	large: 'h4',
+	xlarge: 'h3',
+	xxlarge: 'h2',
 	headline: 'h1',
 });
 
@@ -36,7 +36,7 @@ export default {
 		size: {
 			type: String,
 			default: undefined,
-			validator: (size) => ['title-small', 'title-medium', 'title-large', 'title-xlarge', 'title-xxlarge', 'headline'].includes(size),
+			validator: (size) => ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'headline'].includes(size),
 		},
 		/**
 		 * Override Heading element. By default, the element is derived from size.
@@ -117,55 +117,55 @@ export default {
 	margin: 0;
 	line-height: 1.5em;
 
-	/* title - small */
+	/* heading - small, text - small */
 	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
-	/* title - medium, body - medium */
+	/* heading - medium, text - medium */
 	--font-step-0-size: var(--font-size);
 
-	/* body - large */
+	/* text - large */
 	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
 
-	/* title - large */
+	/* heading - large */
 	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
 
 	/* skipped step */
 	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
 
-	/* title - xlarge */
+	/* heading - xlarge */
 	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
 
 	/* skipped step */
 	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
 
-	/* title - xxlarge */
+	/* heading - xxlarge */
 	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
 
 	/* skipped steps */
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 	--font-step-8-size: calc(var(--font-step-7-size) * var(--font-size-scale));
 
-	/* headline */
+	/* heading - headline */
 	--font-step-9-size: calc(var(--font-step-8-size) * var(--font-size-scale));
 }
 
-.Heading.size_title-small {
+.Heading.size_small {
 	font-size: var(--font-step-minus-1-size);
 }
 
-.Heading.size_title-medium {
+.Heading.size_medium {
 	font-size: var(--font-step-0-size);
 }
 
-.Heading.size_title-large {
+.Heading.size_large {
 	font-size: var(--font-step-2-size);
 }
 
-.Heading.size_title-xlarge {
+.Heading.size_xlarge {
 	font-size: var(--font-step-4-size);
 }
 
-.Heading.size_title-xxlarge {
+.Heading.size_xxlarge {
 	font-size: var(--font-step-6-size);
 }
 

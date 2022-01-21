@@ -87,7 +87,7 @@ export default {
 	},
 	data() {
 		return {
-			sizes: ['title-small', 'title-medium', 'title-large', 'title-xlarge', 'title-xxlarge', 'headline'],
+			sizes: ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'headline'],
 			baseFontSize: 14,
 			fontSizeScale: 1.15,
 			fontFamily: 'inherit',
@@ -182,7 +182,7 @@ export default {
 	},
 	data() {
 		return {
-			sizes: ['title-small', 'title-medium', 'title-large', 'title-xlarge', 'title-xxlarge', 'headline'],
+			sizes: ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'headline'],
 			fontFamily: 'inherit',
 			fontWeight: 700,
 			textColor: '#000000',
@@ -198,13 +198,13 @@ export default {
 
 Supports attributes from [`<h1>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h1).
 
-| Prop        | Type     | Default | Possible values                                                                           | Description                                                             |
-| ----------- | -------- | ------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| size        | `string` | —       | `title-small`, `title-medium`, `title-large`, `title-xlarge`, `title-xxlarge`, `headline` | Size of heading. Influences which element is used.                      |
-| element     | `string` | —       | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `div`                                                 | Override Heading element. By default, the element is derived from size. |
-| font-family | `string` | —       | —                                                                                         | Heading font family                                                     |
-| text-color  | `string` | —       | —                                                                                         | Heading text color                                                      |
-| weight      | `number` | —       | —                                                                                         | font weight                                                             |
+| Prop        | Type     | Default | Possible values                                             | Description                                                             |
+| ----------- | -------- | ------- | ----------------------------------------------------------- | ----------------------------------------------------------------------- |
+| size        | `string` | —       | `small`, `medium`, `large`, `xlarge`, `xxlarge`, `headline` | Size of heading. Influences which element is used.                      |
+| element     | `string` | —       | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `div`                   | Override Heading element. By default, the element is derived from size. |
+| font-family | `string` | —       | —                                                           | Heading font family                                                     |
+| text-color  | `string` | —       | —                                                           | Heading text color                                                      |
+| weight      | `number` | —       | —                                                           | font weight                                                             |
 
 
 ## Slots

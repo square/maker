@@ -87,7 +87,7 @@ export default {
 	},
 	data() {
 		return {
-			sizes: ['body-small', 'body-medium', 'body-large'],
+			sizes: ['small', 'medium', 'large'],
 			baseFontSize: 14,
 			fontSizeScale: 1.15,
 			fontFamily: 'inherit',
@@ -182,7 +182,7 @@ export default {
 	},
 	data() {
 		return {
-			sizes: ['body-small', 'body-medium', 'body-large'],
+			sizes: ['small', 'medium', 'large'],
 			fontFamily: 'inherit',
 			fontWeight: 300,
 			textColor: '#000000',
@@ -197,13 +197,13 @@ export default {
 
 Supports attributes from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
 
-| Prop        | Type     | Default | Possible values | Description                              |
-| ----------- | -------- | ------- | --------------- | ---------------------------------------- |
-| element     | `string` | `'p'`   | `p`, `span`     | which HTML element to wrap the text with |
-| size        | `string` | —       | —               | size of text                             |
-| font-family | `string` | —       | —               | text font family                         |
-| text-color  | `string` | —       | —               | text color                               |
-| weight      | `number` | —       | —               | font weight                              |
+| Prop        | Type     | Default | Possible values            | Description                              |
+| ----------- | -------- | ------- | -------------------------- | ---------------------------------------- |
+| element     | `string` | `'p'`   | `p`, `span`                | which HTML element to wrap the text with |
+| size        | `string` | —       | `small`, `medium`, `large` | size of text                             |
+| font-family | `string` | —       | —                          | text font family                         |
+| text-color  | `string` | —       | —                          | text color                               |
+| weight      | `number` | —       | —                          | font weight                              |
 
 
 ## Slots

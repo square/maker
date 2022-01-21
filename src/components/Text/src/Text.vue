@@ -34,7 +34,7 @@ export default {
 		size: {
 			type: String,
 			default: undefined,
-			validator: (size) => ['body-small', 'body-medium', 'body-large'].includes(size),
+			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
 		 * text font family
@@ -100,25 +100,25 @@ export default {
 .Paragraph {
 	line-height: 1.5em;
 
-	/* title - small */
+	/* heading - small, text - small */
 	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
-	/* title - medium, body - medium */
+	/* heading - medium, text - medium */
 	--font-step-0-size: var(--font-size);
 
-	/* body - large */
+	/* text - large */
 	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
 }
 
-.Paragraph.size_body-small {
+.Paragraph.size_small {
 	font-size: var(--font-step-minus-1-size);
 }
 
-.Paragraph.size_body-medium {
+.Paragraph.size_medium {
 	font-size: var(--font-step-0-size);
 }
 
-.Paragraph.size_body-large {
+.Paragraph.size_large {
 	font-size: var(--font-step-1-size);
 }
 </style>

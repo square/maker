@@ -47,13 +47,13 @@ export default function defaultTheme() {
 		},
 		text: {
 			fontFamily: 'inherit',
-			size: 'body-large',
+			size: 'large',
 			textColor: '@colors.text',
 			weight: 300,
 		},
 		heading: {
 			fontFamily: 'inherit',
-			size: 'title-large',
+			size: 'large',
 			textColor: '@colors.heading',
 			weight: 700,
 		},
