@@ -47,8 +47,9 @@ export default function defaultTheme() {
 		},
 		text: {
 			fontFamily: 'inherit',
-			size: 0,
+			size: 'body-large',
 			textColor: '@colors.text',
+			weight: 300,
 		},
 		heading: {
 			fontFamily: 'inherit',

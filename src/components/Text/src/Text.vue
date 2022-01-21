@@ -2,8 +2,8 @@
 import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
-const MIN_SIZE = -1;
-const MAX_SIZE = 1;
+const MIN_WEIGHT = 100;
+const MAX_WEIGHT = 900;
 
 /**
  * @inheritAttrs span
@@ -32,9 +32,9 @@ export default {
 		 * size of text
 		 */
 		size: {
-			type: Number,
+			type: String,
 			default: undefined,
-			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
+			validator: (size) => ['body-small', 'body-medium', 'body-large'].includes(size),
 		},
 		/**
 		 * text font family
@@ -51,22 +51,24 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * font weight
+		 */
+		weight: {
+			type: Number,
+			default: undefined,
+			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
+		},
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor']),
-		sizeClass() {
-			const minNonNegativeSize = 0;
-			if (this.resolvedSize >= minNonNegativeSize) {
-				return this.resolvedSize.toString();
-			}
-			return `minus${this.resolvedSize}`;
-		},
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor', 'weight']),
 		inlineStyles() {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
 				color: this.resolvedTextColor,
+				fontWeight: this.resolvedWeight,
 				'--font-size': fonts.baseSize,
 				'--font-size-scale': fonts.sizeScale,
 			};
@@ -76,7 +78,7 @@ export default {
 	render(createElement) {
 		const {
 			$s,
-			sizeClass,
+			resolvedSize,
 			element,
 			inlineStyles,
 		} = this;
@@ -85,7 +87,7 @@ export default {
 		 */
 		const defaultSlot = this.$slots.default;
 		return createElement(element, {
-			class: [$s.Paragraph, $s[`size_${sizeClass}`]],
+			class: [$s.Paragraph, $s[`size_${resolvedSize}`]],
 			attrs: this.$attrs,
 			style: inlineStyles,
 			on: this.$listeners,
@@ -98,31 +100,25 @@ export default {
 .Paragraph {
 	line-height: 1.5em;
 
-	/* derived minus sizes */
+	/* title - small */
 	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 
-	/* base sizes */
+	/* title - medium, body - medium */
 	--font-step-0-size: var(--font-size);
 
-	/* derived larger sizes */
+	/* body - large */
 	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
-	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
-	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
-	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
-	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
-	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
-	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 }
 
-.Paragraph.size_minus-1 {
+.Paragraph.size_body-small {
 	font-size: var(--font-step-minus-1-size);
 }
 
-.Paragraph.size_0 {
+.Paragraph.size_body-medium {
 	font-size: var(--font-step-0-size);
 }
 
-.Paragraph.size_1 {
+.Paragraph.size_body-large {
 	font-size: var(--font-step-1-size);
 }
 </style>
