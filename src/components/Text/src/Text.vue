@@ -101,7 +101,7 @@ export default {
 	line-height: 1.5em;
 
 	/* heading - small, text - small */
-	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
+	--font-step-minus-1-size: max(12px, calc(var(--font-step-0-size) / var(--font-size-scale)));
 
 	/* heading - medium, text - medium */
 	--font-step-0-size: var(--font-size);
