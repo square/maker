@@ -2,8 +2,10 @@
 import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
-const MAX_SIZE = 7;
+const MAX_SIZE = 9;
 const MIN_SIZE = -2;
+const MIN_WEIGHT = 100;
+const MAX_WEIGHT = 900;
 
 /**
  * Heading
@@ -52,10 +54,18 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * font weight
+		 */
+		weight: {
+			type: Number,
+			default: undefined,
+			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
+		},
 	},
 
 	computed: {
-		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor']),
+		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor', 'weight']),
 		tag() {
 			if (this.element) {
 				return this.element;
@@ -94,6 +104,7 @@ export default {
 			return {
 				fontFamily: this.resolvedFontFamily,
 				color: this.resolvedTextColor,
+				fontWeight: this.resolvedWeight,
 				'--mobile-base-font-size': fonts.mobileBaseSize,
 				'--mobile-font-size-scale': fonts.mobileSizeScale,
 				'--mobile-base-line-height': fonts.mobileBaseLineHeight,
@@ -136,20 +147,16 @@ export default {
 	--line-height: var(--mobile-base-line-height);
 	--line-height-scale: var(--mobile-line-height-scale);
 
-	/* derived minus scales */
-	--minus-font-size-scale: calc(2 - var(--font-size-scale));
-	--minus-line-height-scale: calc(2 - var(--line-height-scale));
-
 	/* derived minus sizes */
-	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) * var(--minus-font-size-scale));
+	--font-step-minus-2-size: calc(var(--font-step-minus-1-size) / var(--font-size-scale));
 	--font-step-minus-2-line-height:
 		calc(
-			var(--font-step-mins-1-line-height) * var(--minus-line-height-scale)
+			var(--font-step-mins-1-line-height) / var(--line-height-scale)
 		);
-	--font-step-minus-1-size: calc(var(--font-step-0-size) * var(--minus-font-size-scale));
+	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
 	--font-step-minus-1-line-height:
 		calc(
-			var(--font-step-0-line-height) * var(--mins-line-height-scale)
+			var(--font-step-0-line-height) / var(--line-height-scale)
 		);
 
 	/* base sizes */
@@ -171,6 +178,10 @@ export default {
 	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
+	--font-step-8-size: calc(var(--font-step-7-size) * var(--font-size-scale));
+	--font-step-8-line-height: calc(var(--font-step-7-line-height) * var(--line-height-scale));
+	--font-step-9-size: calc(var(--font-step-8-size) * var(--font-size-scale));
+	--font-step-9-line-height: calc(var(--font-step-8-line-height) * var(--line-height-scale));
 }
 
 @media (min-width: 600px) {
@@ -230,5 +241,15 @@ export default {
 .Heading.size_7 {
 	font-size: var(--font-step-7-size);
 	line-height: var(--font-step-7-line-height);
+}
+
+.Heading.size_8 {
+	font-size: var(--font-step-8-size);
+	line-height: var(--font-step-8-line-height);
+}
+
+.Heading.size_9 {
+	font-size: var(--font-step-9-size);
+	line-height: var(--font-step-9-line-height);
 }
 </style>

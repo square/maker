@@ -18,11 +18,11 @@ export default function defaultTheme() {
 		},
 		fonts: {
 			mobileBaseSize: '16px',
-			mobileSizeScale: 1.28,
+			mobileSizeScale: 1.17,
 			mobileBaseLineHeight: '1.5em',
 			mobileLineHeightScale: 0.95,
 			desktopBaseSize: '16px',
-			desktopSizeScale: 1.17,
+			desktopSizeScale: 1.28,
 			desktopBaseLineHeight: '1.5em',
 			desktopLineHeightScale: 0.95,
 		},
@@ -60,6 +60,7 @@ export default function defaultTheme() {
 			fontFamily: 'inherit',
 			size: 2,
 			textColor: '@colors.heading',
+			weight: 700,
 		},
 		choice: {
 			selectedColor: undefined,
