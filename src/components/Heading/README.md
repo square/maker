@@ -164,9 +164,9 @@ export default {
 			desktopFontSizeScale: defaults.fonts.desktopSizeScale,
 			desktopBaseLineHeight: Number.parseFloat(defaults.fonts.desktopBaseLineHeight),
 			desktopLineHeightScale: defaults.fonts.desktopLineHeightScale,
-			fontFamily: 'inherit',
-			fontWeight: 700,
-			textColor: '#000000',
+			fontFamily: defaults.heading.fontFamily,
+			fontWeight: defaults.heading.weight,
+			textColor: defaults.resolve(defaults.heading.textColor),
 		};
 	},
 	computed: {
@@ -265,7 +265,7 @@ It's possible to use the Heading component without a parent Theme component, how
 			:key="size"
 			:size="size"
 			:font-family="fontFamily"
-			:weight="fontWeight"
+			:weight="Number.parseInt(fontWeight, 10)"
 			:text-color="textColor"
 		>
 			Size {{ size }}
@@ -284,9 +284,9 @@ export default {
 	data() {
 		const defaults = defaultTheme();
 		return {
-			fontFamily: 'inherit',
+			fontFamily: defaults.heading.fontFamily,
 			fontWeight: defaults.heading.weight,
-			textColor: '#000000',
+			textColor: defaults.resolve(defaults.heading.textColor),
 		};
 	},
 };

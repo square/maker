@@ -2,8 +2,8 @@
 import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
-const MAX_SIZE = 9;
 const MIN_SIZE = -2;
+const MAX_SIZE = 9;
 const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
 
