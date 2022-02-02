@@ -3,7 +3,7 @@ import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 const MIN_SIZE = -2;
-const MAX_SIZE = 9;
+const MAX_SIZE = 7;
 const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
 
@@ -178,10 +178,6 @@ export default {
 	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
-	--font-step-8-size: calc(var(--font-step-7-size) * var(--font-size-scale));
-	--font-step-8-line-height: calc(var(--font-step-7-line-height) * var(--line-height-scale));
-	--font-step-9-size: calc(var(--font-step-8-size) * var(--font-size-scale));
-	--font-step-9-line-height: calc(var(--font-step-8-line-height) * var(--line-height-scale));
 }
 
 @media (min-width: 600px) {
@@ -241,15 +237,5 @@ export default {
 .Heading.size_7 {
 	font-size: var(--font-step-7-size);
 	line-height: var(--font-step-7-line-height);
-}
-
-.Heading.size_8 {
-	font-size: var(--font-step-8-size);
-	line-height: var(--font-step-8-line-height);
-}
-
-.Heading.size_9 {
-	font-size: var(--font-step-9-size);
-	line-height: var(--font-step-9-line-height);
 }
 </style>

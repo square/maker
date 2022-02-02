@@ -129,10 +129,6 @@ export default {
 	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
 	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
 	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
-	--font-step-8-size: calc(var(--font-step-7-size) * var(--font-size-scale));
-	--font-step-8-line-height: calc(var(--font-step-7-line-height) * var(--line-height-scale));
-	--font-step-9-size: calc(var(--font-step-8-size) * var(--font-size-scale));
-	--font-step-9-line-height: calc(var(--font-step-8-line-height) * var(--line-height-scale));
 }
 
 @media (min-width: 600px) {

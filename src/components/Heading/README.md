@@ -135,7 +135,7 @@
 		<br>
 		<br>
 		<m-heading
-			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
 			:key="size"
 			:size="size"
 		>
@@ -261,7 +261,7 @@ It's possible to use the Heading component without a parent Theme component, how
 		<br>
 		<br>
 		<m-heading
-			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
 			:key="size"
 			:size="size"
 			:font-family="fontFamily"
