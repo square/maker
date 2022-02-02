@@ -119,7 +119,7 @@ export default {
 	--line-height-scale: var(--mobile-line-height-scale);
 
 	/* derived minus sizes */
-	--font-step-minus-1-size: calc(var(--font-step-0-size) / var(--font-size-scale));
+	--font-step-minus-1-size: max(14px, calc(var(--font-step-0-size) / var(--font-size-scale)));
 	--font-step-minus-1-line-height:
 		calc(
 			var(--font-step-0-line-height) / var(--line-height-scale)
