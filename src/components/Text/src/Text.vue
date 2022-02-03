@@ -86,7 +86,7 @@ export default {
 
 .Paragraph.size_minus-1 {
 	font-size: var(--font-step-minus-1-size);
-	line-height: var(--font-ste-minus-1-line-height);
+	line-height: var(--font-step-minus-1-line-height);
 }
 
 .Paragraph.size_0 {
