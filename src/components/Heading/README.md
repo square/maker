@@ -23,8 +23,8 @@
 				v-model="mobileFontSizeScale"
 				type="range"
 				min="1"
-				max="2"
-				step="0.05"
+				max="1.62"
+				step="0.01"
 			>
 			{{ mobileFontSizeScale }}
 			<br>
@@ -34,10 +34,10 @@
 				v-model="mobileBaseLineHeight"
 				type="range"
 				min="1"
-				max="2"
-				step="0.05"
+				max="1.62"
+				step="0.01"
 			>
-			{{ mobileBaseLineHeight }}em
+			{{ mobileBaseLineHeight }}
 			<br>
 			mobile line height scale
 			<br>
@@ -46,7 +46,7 @@
 				type="range"
 				min="0.95"
 				max="1.05"
-				step="0.05"
+				step="0.01"
 			>
 			{{ mobileLineHeightScale }}
 		</div>
@@ -68,8 +68,8 @@
 				v-model="desktopFontSizeScale"
 				type="range"
 				min="1"
-				max="2"
-				step="0.05"
+				max="1.62"
+				step="0.01"
 			>
 			{{ desktopFontSizeScale }}
 			<br>
@@ -79,10 +79,10 @@
 				v-model="desktopBaseLineHeight"
 				type="range"
 				min="1"
-				max="2"
-				step="0.05"
+				max="1.62"
+				step="0.01"
 			>
-			{{ desktopBaseLineHeight }}em
+			{{ desktopBaseLineHeight }}
 			<br>
 			desktop line height scale
 			<br>
@@ -91,7 +91,7 @@
 				type="range"
 				min="0.95"
 				max="1.05"
-				step="0.05"
+				step="0.01"
 			>
 			{{ desktopLineHeightScale }}
 		</div>
@@ -175,11 +175,11 @@ export default {
 				fonts: {
 					mobileBaseSize: `${this.mobileBaseFontSize}px`,
 					mobileSizeScale: this.mobileFontSizeScale,
-					mobileBaseLineHeight: `${this.mobileBaseLineHeight}em`,
+					mobileBaseLineHeight: this.mobileBaseLineHeight,
 					mobileLineHeightScale: this.mobileLineHeightScale,
 					desktopBaseSize: `${this.desktopBaseFontSize}px`,
 					desktopSizeScale: this.desktopFontSizeScale,
-					desktopBaseLineHeight: `${this.desktopBaseLineHeight}em`,
+					desktopBaseLineHeight: this.desktopBaseLineHeight,
 					desktopLineHeightScale: this.desktopLineHeightScale,
 				},
 				heading: {

@@ -19,11 +19,11 @@ export default function defaultTheme() {
 		fonts: {
 			mobileBaseSize: '16px',
 			mobileSizeScale: 1.17,
-			mobileBaseLineHeight: '1.5em',
+			mobileBaseLineHeight: 1.5,
 			mobileLineHeightScale: 0.95,
 			desktopBaseSize: '16px',
 			desktopSizeScale: 1.28,
-			desktopBaseLineHeight: '1.5em',
+			desktopBaseLineHeight: 1.5,
 			desktopLineHeightScale: 0.95,
 		},
 		profiles: [
