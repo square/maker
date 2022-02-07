@@ -197,6 +197,186 @@ export default {
 </style>
 ```
 
+### ActionBar Buttons
+
+```vue
+<template>
+	<div>
+		<div class="grid">
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="close"
+						color="#f6f6f6"
+					>
+						<x-icon class="icon" />
+					</m-action-bar-button>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+					>
+						Confirm
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="close"
+						color="#f6f6f6"
+					>
+						<x-icon class="icon" />
+					</m-action-bar-button>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+					>
+						Confirm
+						<template #information>
+							Label
+						</template>
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="close"
+						color="#f6f6f6"
+					>
+						<search-icon class="icon" />
+					</m-action-bar-button>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+						align="space-between"
+					>
+						Confirm
+						<template #information>
+							Label
+						</template>
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+					>
+						Confirm
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+					>
+						Confirm
+						<template #information>
+							Label
+						</template>
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+						align="space-between"
+					>
+						Confirm
+						<template #information>
+							Label
+						</template>
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="action"
+						color="#f6f6f6"
+						full-width
+					>
+						Action
+					</m-action-bar-button>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+					>
+						Confirm
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="close"
+						color="#f6f6f6"
+					>
+						<x-icon class="icon" />
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="close"
+						color="#f6f6f6"
+					>
+						<search-icon class="icon" />
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import XIcon from '@square/maker-icons/X';
+import SearchIcon from '@square/maker-icons/Search';
+
+export default {
+	name: 'InlineDemo',
+	components: {
+		MInlineActionBar,
+		MActionBarButton,
+		XIcon,
+		SearchIcon,
+	},
+};
+</script>
+
+<style scoped>
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 1px;
+}
+
+@media screen and (min-width: 840px) {
+	.grid {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+.grid > div {
+	position: relative;
+	height: 96px;
+	background: #e4e7eb;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+</style>
+```
 
 <!-- api-tables:start -->
 ## ActionBar Slots
