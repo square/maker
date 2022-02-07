@@ -70,14 +70,10 @@ export default {
 				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
-				'--mobile-base-font-size': fonts.mobileBaseSize,
-				'--mobile-font-size-scale': fonts.mobileSizeScale,
-				'--mobile-base-line-height': fonts.mobileBaseLineHeight,
-				'--mobile-line-height-scale': fonts.mobileLineHeightScale,
-				'--desktop-base-font-size': fonts.desktopBaseSize,
-				'--desktop-font-size-scale': fonts.desktopSizeScale,
-				'--desktop-base-line-height': fonts.desktopBaseLineHeight,
-				'--desktop-line-height-scale': fonts.desktopLineHeightScale,
+				'--mobile-base-font-size': fonts.baseSize,
+				'--mobile-font-size-scale': fonts.sizeScale,
+				'--mobile-base-line-height': fonts.baseLineHeight,
+				'--mobile-line-height-scale': fonts.lineHeightScale,
 			};
 		},
 	},
@@ -133,10 +129,7 @@ export default {
 
 @media (min-width: 600px) {
 	.Theme {
-		--font-size: var(--desktop-base-font-size);
-		--font-size-scale: var(--desktop-font-size-scale);
-		--line-height: var(--desktop-base-line-height);
-		--line-height-scale: var(--desktop-line-height-scale);
+		--font-size-scale: calc(var(--mobile-font-size-scale) + 0.13);
 	}
 }
 </style>

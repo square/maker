@@ -17,14 +17,10 @@ export default function defaultTheme() {
 			primary: '#000000',
 		},
 		fonts: {
-			mobileBaseSize: '16px',
-			mobileSizeScale: 1.17,
-			mobileBaseLineHeight: 1.5,
-			mobileLineHeightScale: 0.95,
-			desktopBaseSize: '16px',
-			desktopSizeScale: 1.28,
-			desktopBaseLineHeight: 1.5,
-			desktopLineHeightScale: 0.95,
+			baseSize: '16px',
+			sizeScale: 1.15,
+			baseLineHeight: 1.5,
+			lineHeightScale: 0.95,
 		},
 		profiles: [
 			{

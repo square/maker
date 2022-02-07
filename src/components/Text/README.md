@@ -5,96 +5,50 @@
 ```vue
 <template>
 	<m-theme :theme="theme">
-		<div class="mobileControls">
-			mobile base font size
-			<br>
-			<input
-				v-model="mobileBaseFontSize"
-				type="range"
-				min="16"
-				max="24"
-				step="1"
-			>
-			{{ mobileBaseFontSize }}px
-			<br>
-			mobile font size scale
-			<br>
-			<input
-				v-model="mobileFontSizeScale"
-				type="range"
-				min="1"
-				max="1.62"
-				step="0.01"
-			>
-			{{ mobileFontSizeScale }}
-			<br>
-			mobile base line height
-			<br>
-			<input
-				v-model="mobileBaseLineHeight"
-				type="range"
-				min="1"
-				max="1.62"
-				step="0.01"
-			>
-			{{ mobileBaseLineHeight }}
-			<br>
-			mobile line height scale
-			<br>
-			<input
-				v-model="mobileLineHeightScale"
-				type="range"
-				min="0.95"
-				max="1.05"
-				step="0.01"
-			>
-			{{ mobileLineHeightScale }}
-		</div>
-		<div class="desktopControls">
-			desktop base font size
-			<br>
-			<input
-				v-model="desktopBaseFontSize"
-				type="range"
-				min="16"
-				max="24"
-				step="1"
-			>
-			{{ desktopBaseFontSize }}px
-			<br>
-			desktop font size scale
-			<br>
-			<input
-				v-model="desktopFontSizeScale"
-				type="range"
-				min="1"
-				max="1.62"
-				step="0.01"
-			>
-			{{ desktopFontSizeScale }}
-			<br>
-			desktop base line height
-			<br>
-			<input
-				v-model="desktopBaseLineHeight"
-				type="range"
-				min="1"
-				max="1.62"
-				step="0.01"
-			>
-			{{ desktopBaseLineHeight }}
-			<br>
-			desktop line height scale
-			<br>
-			<input
-				v-model="desktopLineHeightScale"
-				type="range"
-				min="0.95"
-				max="1.05"
-				step="0.01"
-			>
-			{{ desktopLineHeightScale }}
-		</div>
+		base font size
+		<br>
+		<input
+			v-model="baseFontSize"
+			type="range"
+			min="16"
+			max="24"
+			step="1"
+		>
+		{{ baseFontSize }}px
+		<br>
+		font size scale
+		<br>
+		<input
+			v-model="fontSizeScale"
+			type="range"
+			min="1"
+			max="1.62"
+			step="0.01"
+		>
+		{{ fontSizeScale }}
+		<br>
+		base line height
+		<br>
+		<input
+			v-model="baseLineHeight"
+			type="range"
+			min="1"
+			max="1.62"
+			step="0.01"
+		>
+		{{ baseLineHeight }}
+		<br>
+		line height scale
+		<br>
+		<input
+			v-model="lineHeightScale"
+			type="range"
+			min="0.95"
+			max="1.05"
+			step="0.01"
+		>
+		{{ lineHeightScale }}
+		<br>
 		font family
 		<br>
 		<select v-model="fontFamily">
@@ -156,14 +110,10 @@ export default {
 	data() {
 		const defaults = defaultTheme();
 		return {
-			mobileBaseFontSize: Number.parseInt(defaults.fonts.mobileBaseSize, 10),
-			mobileFontSizeScale: defaults.fonts.mobileSizeScale,
-			mobileBaseLineHeight: Number.parseFloat(defaults.fonts.mobileBaseLineHeight),
-			mobileLineHeightScale: defaults.fonts.mobileLineHeightScale,
-			desktopBaseFontSize: Number.parseInt(defaults.fonts.desktopBaseSize, 10),
-			desktopFontSizeScale: defaults.fonts.desktopSizeScale,
-			desktopBaseLineHeight: Number.parseFloat(defaults.fonts.desktopBaseLineHeight),
-			desktopLineHeightScale: defaults.fonts.desktopLineHeightScale,
+			baseFontSize: Number.parseInt(defaults.fonts.baseSize, 10),
+			fontSizeScale: defaults.fonts.sizeScale,
+			baseLineHeight: Number.parseFloat(defaults.fonts.baseLineHeight),
+			lineHeightScale: defaults.fonts.lineHeightScale,
 			fontFamily: defaults.text.fontFamily,
 			fontWeight: defaults.text.weight,
 			textColor: defaults.resolve(defaults.text.textColor),
@@ -173,14 +123,10 @@ export default {
 		theme() {
 			return {
 				fonts: {
-					mobileBaseSize: `${this.mobileBaseFontSize}px`,
-					mobileSizeScale: this.mobileFontSizeScale,
-					mobileBaseLineHeight: this.mobileBaseLineHeight,
-					mobileLineHeightScale: this.mobileLineHeightScale,
-					desktopBaseSize: `${this.desktopBaseFontSize}px`,
-					desktopSizeScale: this.desktopFontSizeScale,
-					desktopBaseLineHeight: this.desktopBaseLineHeight,
-					desktopLineHeightScale: this.desktopLineHeightScale,
+					baseSize: `${this.baseFontSize}px`,
+					sizeScale: this.fontSizeScale,
+					baseLineHeight: this.baseLineHeight,
+					lineHeightScale: this.lineHeightScale,
 				},
 				text: {
 					fontFamily: this.fontFamily,
@@ -192,26 +138,6 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-.mobileControls {
-	display: block;
-}
-
-.desktopControls {
-	display: none;
-}
-
-@media (min-width: 600px) {
-	.mobileControls {
-		display: none;
-	}
-
-	.desktopControls {
-		display: block;
-	}
-}
-</style>
 ```
 
 ## Unthemed
