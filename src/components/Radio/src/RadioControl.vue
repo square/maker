@@ -111,7 +111,7 @@ export default {
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;
-	background-color: var(--color-background);
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
 	outline: none;
@@ -127,7 +127,7 @@ export default {
 		width: 6px;
 		height: 6px;
 		margin: 6px;
-		background-color: var(--color-background);
+		background-color: var(--color-background, #fff);
 		border-radius: 50%;
 	}
 

@@ -103,7 +103,6 @@ export default {
 }
 
 .variant_outline {
-	--color-background: transparent;
 	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
 }
 
@@ -125,7 +124,7 @@ export default {
 	font-family: inherit;
 	font-family: var(--font-family);
 	line-height: 24px;
-	background-color: var(--color-background);
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: var(--border-radius);
 	outline: none;
