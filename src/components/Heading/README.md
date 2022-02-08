@@ -88,12 +88,31 @@
 		>
 		<br>
 		<br>
+		type scale
+		<br>
+		<br>
 		<m-heading
 			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
 			:key="size"
 			:size="size"
 		>
-			Size {{ size }}
+			Size {{ size }} -
+			<span
+				class="showSize"
+				:mobileSize="stepToMobilePx(size)"
+				:desktopSize="stepToDesktopPx(size)"
+			/>
+		</m-heading>
+		<br>
+		named sizes
+		<br>
+		<br>
+		<m-heading
+			v-for="namedSize in namedSizes"
+			:key="namedSize.name"
+			:size="namedSize.size"
+		>
+			{{ namedSize.name }}
 		</m-heading>
 	</m-theme>
 </template>
@@ -111,12 +130,58 @@ export default {
 		const defaults = defaultTheme();
 		return {
 			baseFontSize: Number.parseInt(defaults.fonts.baseSize, 10),
-			fontSizeScale: defaults.fonts.sizeScale,
+			fontSizeScale: Number.parseFloat(defaults.fonts.sizeScale),
 			baseLineHeight: Number.parseFloat(defaults.fonts.baseLineHeight),
-			lineHeightScale: defaults.fonts.lineHeightScale,
+			lineHeightScale: Number.parseFloat(defaults.fonts.lineHeightScale),
 			fontFamily: defaults.heading.fontFamily,
 			fontWeight: defaults.heading.weight,
 			textColor: defaults.resolve(defaults.heading.textColor),
+			namedSizes: [
+				{
+					name: 'headline-1',
+					size: 7,
+				},
+				{
+					name: 'headline-2',
+					size: 6,
+				},
+				{
+					name: 'headline-3',
+					size: 5,
+				},
+				{
+					name: 'headline-4',
+					size: 4,
+				},
+				{
+					name: 'headline-5',
+					size: 3,
+				},
+				{
+					name: 'title-1',
+					size: 4,
+				},
+				{
+					name: 'title-2',
+					size: 3,
+				},
+				{
+					name: 'title-3',
+					size: 2,
+				},
+				{
+					name: 'title-4',
+					size: 1,
+				},
+				{
+					name: 'title-5',
+					size: -1,
+				},
+				{
+					name: 'title-6',
+					size: -2,
+				},
+			],
 		};
 	},
 	computed: {
@@ -124,9 +189,9 @@ export default {
 			return {
 				fonts: {
 					baseSize: `${this.baseFontSize}px`,
-					sizeScale: this.fontSizeScale,
-					baseLineHeight: this.baseLineHeight,
-					lineHeightScale: this.lineHeightScale,
+					sizeScale: Number.parseFloat(this.fontSizeScale),
+					baseLineHeight: Number.parseFloat(this.baseLineHeight),
+					lineHeightScale: Number.parseFloat(this.lineHeightScale),
 				},
 				heading: {
 					fontFamily: this.fontFamily,
@@ -136,8 +201,50 @@ export default {
 			};
 		},
 	},
+	methods: {
+		stepToMobilePx(step) {
+			return this.adjustRawPx(
+				Number.parseFloat(this.baseFontSize)
+				* Number.parseFloat((this.fontSizeScale) ** step),
+				step,
+			);
+		},
+		stepToDesktopPx(step) {
+			const DESKTOP_ADJUST = 0.13;
+			return this.adjustRawPx(
+				Number.parseFloat(this.baseFontSize)
+				* ((Number.parseFloat(this.fontSizeScale) + DESKTOP_ADJUST) ** step),
+				step,
+			);
+		},
+		adjustRawPx(rawPx, step) {
+			const MINUS_ONE_STEP = -1;
+			const MINUS_TWO_STEP = -2;
+			const MINUS_ONE_MIN_CLAMP = 14;
+			const MINUS_TWO_MIN_CLAMP = 12;
+			let adjustedPx = Math.round(rawPx);
+			if (step === MINUS_ONE_STEP) {
+				adjustedPx = Math.max(MINUS_ONE_MIN_CLAMP, adjustedPx);
+			} else if (step === MINUS_TWO_STEP) {
+				adjustedPx = Math.max(MINUS_TWO_MIN_CLAMP, adjustedPx);
+			}
+			return `${adjustedPx}px`;
+		},
+	},
 };
 </script>
+
+<style scoped>
+.showSize::before {
+	content: attr(mobileSize);
+}
+
+@media (min-width: 600px) {
+	.showSize::before {
+		content: attr(desktopSize);
+	}
+}
+</style>
 ```
 
 ## Unthemed
