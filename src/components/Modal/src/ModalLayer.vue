@@ -248,7 +248,7 @@ export default {
 	overflow: hidden;
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.Container {
 		display: inline-block;
 		width: auto;

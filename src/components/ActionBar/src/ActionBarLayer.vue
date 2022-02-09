@@ -110,7 +110,7 @@ export default {
 	}
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.ActionBarLayer {
 		padding-bottom: 0;
 	}

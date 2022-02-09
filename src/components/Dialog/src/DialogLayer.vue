@@ -159,7 +159,7 @@ export default {
 	justify-content: center;
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.DialogLayer {
 		align-items: center;
 	}
