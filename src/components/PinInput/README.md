@@ -1,5 +1,6 @@
 # PinInput
 
+### Correct test code is 123456
 ```vue
 <template>
 	<m-pin-input
@@ -11,7 +12,7 @@
 			#error
 		>
 			<m-notice type="error">
-				I am an error slot :)
+				Error slot
 			</m-notice>
 		</template>
 	</m-pin-input>
@@ -44,8 +45,8 @@ export default {
 					this.hasError = false;
 				} else {
 					this.hasError = true;
-					this.disableInput = false;
 				}
+				this.disableInput = false;
 			}, DELAY_MS);
 		},
 	},
@@ -62,7 +63,7 @@ export default {
 
 | Prop       | Type      | Default              | Possible values | Description |
 | ---------- | --------- | -------------------- | --------------- | ----------- |
-| pin-length | `number`  | `DEFAULT_INPUT_SIZE` | —               | —           |
+| pin-length | `number`  | `6`                  | —               | —           |
 | disabled   | `boolean` | `false`              | —               | —           |
 
 
@@ -75,7 +76,7 @@ export default {
 
 ## Events
 
-| Event    | Type | Description |
-| -------- | ---- | ----------- |
-| complete | -    | —           |
+| Event    | Type | Description        |
+| -------- | ---- | ------------------ |
+| complete | -    | On input completed |
 <!-- api-tables:end -->
