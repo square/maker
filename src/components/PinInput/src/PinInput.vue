@@ -237,6 +237,7 @@ export default {
 	border-radius: 8px;
 	outline: none;
 	caret-color: black;
+	cursor: pointer;
 
 	&.filled {
 		background: #f6f7f9;
@@ -251,8 +252,9 @@ export default {
 	}
 
 	&:focus,
-	:valid {
-		border: 2px solid rgb(255, 255, 255, 0.95);
+	&:valid,
+	&:hover {
+		border: 2px solid rgba(0, 0, 0, 0.9);
 	}
 }
 
