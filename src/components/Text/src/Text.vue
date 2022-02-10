@@ -2,7 +2,7 @@
 import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
-const MIN_SIZE = -1;
+const MIN_SIZE = -2;
 const MAX_SIZE = 1;
 const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
@@ -109,45 +109,78 @@ export default {
 
 <style module="$s">
 .Paragraph {
-	--font-size: var(--mobile-base-font-size);
-	--font-size-scale: var(--mobile-font-size-scale);
+	/* min breakpoint config */
+	--min-resolution: 0;
+	--min-font-size: var(--mobile-base-font-size);
+	--min-font-size-scale: var(--mobile-font-size-scale);
+
+	/* min type scale */
+	--min-fs--2: calc(var(--min-fs--1) / var(--min-font-size-scale));
+	--min-fs--1: calc(var(--min-fs-0) / var(--min-font-size-scale));
+	--min-fs-0: var(--min-font-size);
+	--min-fs-1: calc(var(--min-fs-0) * var(--min-font-size-scale));
+
+	/* max breakpoint config, values chosen to be compatible with Website */
+	--max-resolution: 1200; /* 600 * 2 = 1200 */
+	--max-font-size: var(--min-font-size);
+	--max-font-size-scale: calc(var(--min-font-size-scale) + 0.26); /* 0.13 * 2 = 0.26 */
+
+	/* max type scale */
+	--max-fs--2: calc(var(--max-fs--1) / var(--max-font-size-scale));
+	--max-fs--1: calc(var(--max-fs-0) / var(--max-font-size-scale));
+	--max-fs-0: var(--max-font-size);
+	--max-fs-1: calc(var(--max-fs-0) * var(--max-font-size-scale));
+
+	/* interpolation variables */
+	--resolution-range: calc(var(--max-resolution) - var(--min-resolution));
+	--resolution: 100vw;
+	--resolution-progress: calc(var(--resolution) - (var(--min-resolution) * 1px));
+	--interpolate-by: calc(var(--resolution-progress) / var(--resolution-range));
+	--range-fs--2: calc(var(--max-fs--2) - var(--min-fs--2));
+	--range-fs--1: calc(var(--max-fs--1) - var(--min-fs--1));
+	--range-fs-0: calc(var(--max-fs-0) - var(--min-fs-0));
+	--range-fs-1: calc(var(--max-fs-1) - var(--min-fs-1));
+
+	/* fluid type scale */
+	--fs--2: max(12px, calc(var(--min-fs--2) * 1px + var(--range-fs--2) * var(--interpolate-by)));
+	--fs--1: max(14px, calc(var(--min-fs--1) * 1px + var(--range-fs--1) * var(--interpolate-by)));
+	--fs-0: calc(var(--min-fs-0) * 1px + var(--range-fs-0) * var(--interpolate-by));
+	--fs-1: calc(var(--min-fs-1) * 1px + var(--range-fs-1) * var(--interpolate-by));
+
+	/* line height config */
 	--line-height: var(--mobile-base-line-height);
 	--line-height-scale: var(--mobile-line-height-scale);
 
-	/* derived minus sizes */
-	--font-step-minus-1-size: max(14px, calc(var(--font-step-0-size) / var(--font-size-scale)));
-	--font-step-minus-1-line-height:
-		calc(
-			var(--font-step-0-line-height) / var(--line-height-scale)
-		);
-
-	/* base sizes */
-	--font-step-0-size: var(--font-size);
-	--font-step-0-line-height: var(--line-height);
-
-	/* derived larger sizes */
-	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
-	--font-step-1-line-height: calc(var(--font-step-0-line-height) * var(--line-height-scale));
+	/* line height scale */
+	--lh--2: calc(var(--lh--1) / var(--line-height-scale));
+	--lh--1: calc(var(--lh-0) / var(--line-height-scale));
+	--lh-0: var(--line-height);
+	--lh-1: calc(var(--lh-0) * var(--line-height-scale));
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1200px) {
 	.Paragraph {
-		--font-size-scale: calc(var(--mobile-font-size-scale) + 0.13);
+		--resolution: 1200px;
 	}
 }
 
+.Paragraph.size_minus-2 {
+	font-size: var(--fs--2);
+	line-height: var(--lh--2);
+}
+
 .Paragraph.size_minus-1 {
-	font-size: var(--font-step-minus-1-size);
-	line-height: var(--font-ste-minus-1-line-height);
+	font-size: var(--fs--1);
+	line-height: var(--lh--1);
 }
 
 .Paragraph.size_0 {
-	font-size: var(--font-step-0-size);
-	line-height: var(--font-step-0-line-height);
+	font-size: var(--fs-0);
+	line-height: var(--lh-0);
 }
 
 .Paragraph.size_1 {
-	font-size: var(--font-step-1-size);
-	line-height: var(--font-step-1-line-height);
+	font-size: var(--fs-1);
+	line-height: var(--lh-1);
 }
 </style>

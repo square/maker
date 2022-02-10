@@ -88,12 +88,23 @@
 		>
 		<br>
 		<br>
+		type scale
+		<br>
 		<m-text
-			v-for="size in [-1, 0, 1]"
+			v-for="size in [-2, -1, 0, 1]"
 			:key="size"
 			:size="size"
 		>
 			Size {{ size }}
+		</m-text>
+		named sizes
+		<br>
+		<m-text
+			v-for="namedSize in namedSizes"
+			:key="namedSize.name"
+			:size="namedSize.size"
+		>
+			{{ namedSize.name }}
 		</m-text>
 	</m-theme>
 </template>
@@ -110,23 +121,41 @@ export default {
 	data() {
 		const defaults = defaultTheme();
 		return {
-			baseFontSize: Number.parseInt(defaults.fonts.baseSize, 10),
+			baseFontSize: defaults.fonts.baseSize,
 			fontSizeScale: defaults.fonts.sizeScale,
-			baseLineHeight: Number.parseFloat(defaults.fonts.baseLineHeight),
+			baseLineHeight: defaults.fonts.baseLineHeight,
 			lineHeightScale: defaults.fonts.lineHeightScale,
 			fontFamily: defaults.text.fontFamily,
 			fontWeight: defaults.text.weight,
 			textColor: defaults.resolve(defaults.text.textColor),
+			namedSizes: [
+				{
+					name: 'Paragraph 1 / Label 1',
+					size: 1,
+				},
+				{
+					name: 'Paragraph 2 / Label 2',
+					size: 0,
+				},
+				{
+					name: 'Paragraph 3 / Label 3',
+					size: -1,
+				},
+				{
+					name: 'Paragraph 4 / Label 4',
+					size: -2,
+				},
+			],
 		};
 	},
 	computed: {
 		theme() {
 			return {
 				fonts: {
-					baseSize: `${this.baseFontSize}px`,
-					sizeScale: this.fontSizeScale,
-					baseLineHeight: this.baseLineHeight,
-					lineHeightScale: this.lineHeightScale,
+					baseSize: Number.parseInt(this.baseFontSize, 10),
+					sizeScale: Number.parseFloat(this.fontSizeScale),
+					baseLineHeight: Number.parseFloat(this.baseLineHeight),
+					lineHeightScale: Number.parseFloat(this.lineHeightScale),
 				},
 				text: {
 					fontFamily: this.fontFamily,
@@ -187,7 +216,7 @@ It's possible to use the Text component without a parent Theme component, howeve
 		<br>
 		<br>
 		<m-text
-			v-for="size in [-1, 0, 1]"
+			v-for="size in [-2, -1, 0, 1]"
 			:key="size"
 			:size="size"
 			:font-family="fontFamily"

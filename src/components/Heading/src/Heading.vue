@@ -138,97 +138,138 @@ export default {
 .Heading {
 	margin: 0;
 
-	--font-size: var(--mobile-base-font-size);
-	--font-size-scale: var(--mobile-font-size-scale);
+	/* min breakpoint config */
+	--min-resolution: 0;
+	--min-font-size: var(--mobile-base-font-size);
+	--min-font-size-scale: var(--mobile-font-size-scale);
+
+	/* min type scale */
+	--min-fs--2: calc(var(--min-fs--1) / var(--min-font-size-scale));
+	--min-fs--1: calc(var(--min-fs-0) / var(--min-font-size-scale));
+	--min-fs-0: var(--min-font-size);
+	--min-fs-1: calc(var(--min-fs-0) * var(--min-font-size-scale));
+	--min-fs-2: calc(var(--min-fs-1) * var(--min-font-size-scale));
+	--min-fs-3: calc(var(--min-fs-2) * var(--min-font-size-scale));
+	--min-fs-4: calc(var(--min-fs-3) * var(--min-font-size-scale));
+	--min-fs-5: calc(var(--min-fs-4) * var(--min-font-size-scale));
+	--min-fs-6: calc(var(--min-fs-5) * var(--min-font-size-scale));
+	--min-fs-7: calc(var(--min-fs-6) * var(--min-font-size-scale));
+
+	/* max breakpoint config, values chosen to be compatible with Website */
+	--max-resolution: 1200; /* 600 * 2 = 1200 */
+	--max-font-size: var(--min-font-size);
+	--max-font-size-scale: calc(var(--min-font-size-scale) + 0.26); /* 0.13 * 2 = 0.26 */
+
+	/* max type scale */
+	--max-fs--2: calc(var(--max-fs--1) / var(--max-font-size-scale));
+	--max-fs--1: calc(var(--max-fs-0) / var(--max-font-size-scale));
+	--max-fs-0: var(--max-font-size);
+	--max-fs-1: calc(var(--max-fs-0) * var(--max-font-size-scale));
+	--max-fs-2: calc(var(--max-fs-1) * var(--max-font-size-scale));
+	--max-fs-3: calc(var(--max-fs-2) * var(--max-font-size-scale));
+	--max-fs-4: calc(var(--max-fs-3) * var(--max-font-size-scale));
+	--max-fs-5: calc(var(--max-fs-4) * var(--max-font-size-scale));
+	--max-fs-6: calc(var(--max-fs-5) * var(--max-font-size-scale));
+	--max-fs-7: calc(var(--max-fs-6) * var(--max-font-size-scale));
+
+	/* interpolation variables */
+	--resolution-range: calc(var(--max-resolution) - var(--min-resolution));
+	--resolution: 100vw;
+	--resolution-progress: calc(var(--resolution) - (var(--min-resolution) * 1px));
+	--interpolate-by: calc(var(--resolution-progress) / var(--resolution-range));
+	--range-fs--2: calc(var(--max-fs--2) - var(--min-fs--2));
+	--range-fs--1: calc(var(--max-fs--1) - var(--min-fs--1));
+	--range-fs-0: calc(var(--max-fs-0) - var(--min-fs-0));
+	--range-fs-1: calc(var(--max-fs-1) - var(--min-fs-1));
+	--range-fs-2: calc(var(--max-fs-2) - var(--min-fs-2));
+	--range-fs-3: calc(var(--max-fs-3) - var(--min-fs-3));
+	--range-fs-4: calc(var(--max-fs-4) - var(--min-fs-4));
+	--range-fs-5: calc(var(--max-fs-5) - var(--min-fs-5));
+	--range-fs-6: calc(var(--max-fs-6) - var(--min-fs-6));
+	--range-fs-7: calc(var(--max-fs-7) - var(--min-fs-7));
+
+	/* fluid type scale */
+	--fs--2: max(12px, calc(var(--min-fs--2) * 1px + var(--range-fs--2) * var(--interpolate-by)));
+	--fs--1: max(14px, calc(var(--min-fs--1) * 1px + var(--range-fs--1) * var(--interpolate-by)));
+	--fs-0: calc(var(--min-fs-0) * 1px + var(--range-fs-0) * var(--interpolate-by));
+	--fs-1: calc(var(--min-fs-1) * 1px + var(--range-fs-1) * var(--interpolate-by));
+	--fs-2: calc(var(--min-fs-2) * 1px + var(--range-fs-2) * var(--interpolate-by));
+	--fs-3: calc(var(--min-fs-3) * 1px + var(--range-fs-3) * var(--interpolate-by));
+	--fs-4: calc(var(--min-fs-4) * 1px + var(--range-fs-4) * var(--interpolate-by));
+	--fs-5: calc(var(--min-fs-5) * 1px + var(--range-fs-5) * var(--interpolate-by));
+	--fs-6: calc(var(--min-fs-6) * 1px + var(--range-fs-6) * var(--interpolate-by));
+	--fs-7: calc(var(--min-fs-7) * 1px + var(--range-fs-7) * var(--interpolate-by));
+
+	/* line height config */
 	--line-height: var(--mobile-base-line-height);
 	--line-height-scale: var(--mobile-line-height-scale);
 
-	/* derived minus sizes */
-	--font-step-minus-2-size: max(12px, calc(var(--font-step-minus-1-size) / var(--font-size-scale)));
-	--font-step-minus-2-line-height:
-		calc(
-			var(--font-step-mins-1-line-height) / var(--line-height-scale)
-		);
-	--font-step-minus-1-size: max(14px, calc(var(--font-step-0-size) / var(--font-size-scale)));
-	--font-step-minus-1-line-height:
-		calc(
-			var(--font-step-0-line-height) / var(--line-height-scale)
-		);
-
-	/* base sizes */
-	--font-step-0-size: var(--font-size);
-	--font-step-0-line-height: var(--line-height);
-
-	/* derived larger sizes */
-	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
-	--font-step-1-line-height: calc(var(--font-step-0-line-height) * var(--line-height-scale));
-	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
-	--font-step-2-line-height: calc(var(--font-step-1-line-height) * var(--line-height-scale));
-	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
-	--font-step-3-line-height: calc(var(--font-step-2-line-height) * var(--line-height-scale));
-	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
-	--font-step-4-line-height: calc(var(--font-step-3-line-height) * var(--line-height-scale));
-	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
-	--font-step-5-line-height: calc(var(--font-step-4-line-height) * var(--line-height-scale));
-	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
-	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
-	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
-	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
+	/* line height scale */
+	--lh--2: calc(var(--lh--1) / var(--line-height-scale));
+	--lh--1: calc(var(--lh-0) / var(--line-height-scale));
+	--lh-0: var(--line-height);
+	--lh-1: calc(var(--lh-0) * var(--line-height-scale));
+	--lh-2: calc(var(--lh-1) * var(--line-height-scale));
+	--lh-3: calc(var(--lh-2) * var(--line-height-scale));
+	--lh-4: calc(var(--lh-3) * var(--line-height-scale));
+	--lh-5: calc(var(--lh-4) * var(--line-height-scale));
+	--lh-6: calc(var(--lh-5) * var(--line-height-scale));
+	--lh-7: calc(var(--lh-6) * var(--line-height-scale));
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1200px) {
 	.Heading {
-		--font-size-scale: calc(var(--mobile-font-size-scale) + 0.13);
+		--resolution: 1200px;
 	}
 }
 
 .Heading.size_minus-2 {
-	font-size: var(--font-step-minus-2-size);
-	line-height: var(--font-step-minus-2-line-height);
+	font-size: var(--fs--2);
+	line-height: var(--lh--2);
 }
 
 .Heading.size_minus-1 {
-	font-size: var(--font-step-minus-1-size);
-	line-height: var(--font-step-minus-1-line-height);
+	font-size: var(--fs--1);
+	line-height: var(--lh--1);
 }
 
 .Heading.size_0 {
-	font-size: var(--font-step-0-size);
-	line-height: var(--font-step-0-line-height);
+	font-size: var(--fs-0);
+	line-height: var(--lh-0);
 }
 
 .Heading.size_1 {
-	font-size: var(--font-step-1-size);
-	line-height: var(--font-step-1-line-height);
+	font-size: var(--fs-1);
+	line-height: var(--lh-1);
 }
 
 .Heading.size_2 {
-	font-size: var(--font-step-2-size);
-	line-height: var(--font-step-2-line-height);
+	font-size: var(--fs-2);
+	line-height: var(--lh-2);
 }
 
 .Heading.size_3 {
-	font-size: var(--font-step-3-size);
-	line-height: var(--font-step-3-line-height);
+	font-size: var(--fs-3);
+	line-height: var(--lh-3);
 }
 
 .Heading.size_4 {
-	font-size: var(--font-step-4-size);
-	line-height: var(--font-step-4-line-height);
+	font-size: var(--fs-4);
+	line-height: var(--lh-4);
 }
 
 .Heading.size_5 {
-	font-size: var(--font-step-5-size);
-	line-height: var(--font-step-5-line-height);
+	font-size: var(--fs-5);
+	line-height: var(--lh-5);
 }
 
 .Heading.size_6 {
-	font-size: var(--font-step-6-size);
-	line-height: var(--font-step-6-line-height);
+	font-size: var(--fs-6);
+	line-height: var(--lh-6);
 }
 
 .Heading.size_7 {
-	font-size: var(--font-step-7-size);
-	line-height: var(--font-step-7-line-height);
+	font-size: var(--fs-7);
+	line-height: var(--lh-7);
 }
 </style>

@@ -17,7 +17,7 @@ export default function defaultTheme() {
 			primary: '#000000',
 		},
 		fonts: {
-			baseSize: '16px',
+			baseSize: 16,
 			sizeScale: 1.15,
 			baseLineHeight: 1.5,
 			lineHeightScale: 0.95,
