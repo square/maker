@@ -20,6 +20,7 @@
 					:disabled="disabled"
 					:class="{
 						[$s.CodeInput]: true,
+						[$s.filled]: variant === 'fill',
 						[$s.error]: $slots.error,
 					}"
 					type="text"
@@ -44,12 +45,27 @@ const DEFAULT_INPUT_SIZE = 6;
 
 export default {
 	props: {
+		/**
+		 * Lenth of pin
+		 */
 		pinLength: {
 			type: Number,
 			default: DEFAULT_INPUT_SIZE,
 			validator: (value) => value > 0,
 		},
 
+		/**
+		 * Input variant
+		 */
+		variant: {
+			type: String,
+			default: 'fill',
+			validator: (variant) => ['fill', 'outline'].includes(variant),
+		},
+
+		/**
+		 * Disable the inputs
+		 */
 		disabled: {
 			type: Boolean,
 			default: false,
@@ -206,10 +222,6 @@ export default {
 	padding-bottom: 8px;
 }
 
-.GrayBlock {
-	background: #f1f1f1;
-}
-
 .CodeInput {
 	display: flex;
 	align-items: center;
@@ -226,8 +238,12 @@ export default {
 	outline: none;
 	caret-color: black;
 
+	&.filled {
+		background: #f6f7f9;
+	}
+
 	&.error {
-		border-color: #a12712;
+		border-color: rgba(206, 50, 23, 1);
 	}
 
 	&.disabled {
@@ -236,7 +252,7 @@ export default {
 
 	&:focus,
 	:valid {
-		border: 2px solid black;
+		border: 2px solid rgb(255, 255, 255, 0.95);
 	}
 }
 
