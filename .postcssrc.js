@@ -5,6 +5,9 @@ module.exports = {
 			preserve: false,
 			features: {
 				'custom-properties': false,
+				'custom-media-queries': {
+					importFrom: 'src/styles/breakpoints.css'
+				},
 			},
 		}),
 	],
