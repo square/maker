@@ -110,7 +110,7 @@ export default {
 <style module="$s">
 .Paragraph {
 	/* min breakpoint config */
-	--min-resolution: 0;
+	--min-resolution: 320; /* arbitrary value */
 	--min-font-size: var(--mobile-base-font-size);
 	--min-font-size-scale: var(--mobile-font-size-scale);
 
@@ -120,10 +120,10 @@ export default {
 	--min-fs-0: var(--min-font-size);
 	--min-fs-1: calc(var(--min-fs-0) * var(--min-font-size-scale));
 
-	/* max breakpoint config, values chosen to be compatible with Website */
-	--max-resolution: 1200; /* 600 * 2 = 1200 */
+	/* max breakpoint config */
+	--max-resolution: 1280; /* arbitrary value */
 	--max-font-size: var(--min-font-size);
-	--max-font-size-scale: calc(var(--min-font-size-scale) + 0.26); /* 0.13 * 2 = 0.26 */
+	--max-font-size-scale: calc(var(--min-font-size-scale) + 0.26); /* arbitrary value */
 
 	/* max type scale */
 	--max-fs--2: calc(var(--max-fs--1) / var(--max-font-size-scale));
