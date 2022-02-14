@@ -279,7 +279,132 @@ export default {
 }
 </style>
 ```
+### In a Modal for mobile testing
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			@click="openModal"
+		>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</div>
+</template>
 
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoModal from 'doc/DemoModal.vue';
+
+export default {
+	name: 'DemoSetup',
+
+	components: {
+		MModalLayer,
+		MButton,
+	},
+
+	mixins: [
+		MModalLayer.apiMixin,
+	],
+
+	methods: {
+		openModal() {
+			this.modalApi.open(() => <DemoModal />);
+		},
+	},
+};
+</script>
+```
+
+_DemoModal.vue_
+
+```vue
+<template>
+	<m-modal
+		:class="$s.modalPadding"
+	>
+		<m-heading :size="3">
+			Dialog heading
+		</m-heading>
+		<m-pin-input
+			ref="pinInput"
+			:class="$s.padding"
+			:invalid="invalidEntry"
+			variant="outline"
+			@complete="onCodeComplete"
+		>
+			<template
+				v-if="invalidEntry"
+				#error
+			>
+				<m-notice type="error">
+					Error slot
+				</m-notice>
+			</template>
+		</m-pin-input>
+		<m-button
+			size="small"
+			@click="modalApi.close()"
+		>
+			Close
+		</m-button>
+	</m-modal>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
+import { MPinInput } from '@square/maker/components/PinInput';
+import { MNotice } from '@square/maker/components/Notice';
+import { MModal, modalApi } from '@square/maker/components/Modal';
+
+export default {
+	name: 'DemoDialog',
+
+	components: {
+		MModal,
+		MButton,
+		MHeading,
+		MPinInput,
+		MNotice,
+	},
+
+	inject: {
+		modalApi,
+	},
+
+	data() {
+		return {
+			testCode: '123456',
+			invalidEntry: false,
+		};
+	},
+	methods: {
+		onCodeComplete(code) {
+			if (this.testCode === code) {
+				this.invalidEntry = false;
+				this.modalApi.close();
+			} else {
+				this.invalidEntry = true;
+				this.$refs.pinInput.shakeAndClearInputs();
+			}
+		},
+	},
+};
+</script>
+<style module="$s">
+.padding {
+	padding: 16px 0;
+}
+
+.modalPadding {
+	padding: 24px 6px;
+}
+</style>
+```
 
 <!-- api-tables:start -->
 ## Props
