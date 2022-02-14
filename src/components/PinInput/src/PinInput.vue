@@ -124,7 +124,7 @@ export default {
 		focusOnCodeCell(index) {
 			const cellReference = this.$refs[this.getCodeCellRef(index)];
 			if (cellReference?.[0]?.focus) {
-				cellReference[0].focus();
+				cellReference[0].focus({ preventScroll: true });
 			}
 		},
 
