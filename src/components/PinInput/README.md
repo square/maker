@@ -1,7 +1,6 @@
 # PinInput
 
-Test code for following inputs is 123456
-You can make the component shake when invalid by giving it a ref value and calling `shakeAndClearInputs()`
+### Test code for following inputs is 123456
 ### Filled variant
 ```vue
 <template>
