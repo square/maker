@@ -18,7 +18,7 @@
 				/>
 				<div
 					ref="dialog"
-					:class="$s.DialogContent"
+					:class="$s.DialogContentWrapper"
 				>
 					<v :nodes="dialogApi.state.vnode" />
 				</div>
@@ -162,6 +162,12 @@ export default {
 @media screen and (--for-tablet-landscape-up) {
 	.DialogLayer {
 		align-items: center;
+	}
+}
+
+@media screen and (--for-tablet-landscape-down) {
+	.DialogContentWrapper {
+		width: 100%;
 	}
 }
 
