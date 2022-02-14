@@ -60,7 +60,7 @@ export default {
 		@complete="onCodeComplete"
 	>
 		<template
-			v-if="hasError"
+			v-if="invalidEntry"
 			#error
 		>
 			<m-notice type="error">
@@ -285,12 +285,12 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop       | Type      | Default              | Possible values   | Description        |
-| ---------- | --------- | -------------------- | ----------------- | ------------------ |
-| pin-length | `number`  | `6`                  | —                 | Lenth of pin       |
-| variant    | `string`  | `'fill'`             | `fill`, `outline` | Input variant      |
-| invalid    | `boolean` | `false`              | -                 | Show invalid style |
-| disabled   | `boolean` | `false`              | —                 | Disable the inputs |
+| Prop       | Type      | Default              | Possible values   | Description                 |
+| ---------- | --------- | -------------------- | ----------------- | --------------------------- |
+| pin-length | `number`  | `DEFAULT_INPUT_SIZE` | —                 | Lenth of pin                |
+| variant    | `string`  | `'fill'`             | `fill`, `outline` | Input variant               |
+| invalid    | `boolean` | `false`              | —                 | Toggles input invalid state |
+| disabled   | `boolean` | `false`              | —                 | Disable the inputs          |
 
 
 ## Slots

@@ -193,7 +193,8 @@ export default {
 			}
 		},
 
-		onFocusCode(_event, index) {
+		onFocusCode(event, index) {
+			event.preventDefault();
 			this.$set(this.code, index, '');
 		},
 
