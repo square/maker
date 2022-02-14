@@ -9,29 +9,29 @@
 			}"
 		>
 			<div
-				v-for="n in pinLength"
-				:key="n"
+				v-for="(val, i) in code"
+				:key="i"
 				:class="$s.CodeInputWrapper"
 			>
 				<input
-					:ref="getCodeCellRef(n - 1)"
-					:value="code[n - 1]"
-					:autocomplete="n === 1 ? 'one-time-code' : 'off'"
+					:ref="getCodeCellRef(i)"
+					:value="val"
+					:autocomplete="i === 0 ? 'one-time-code' : 'off'"
 					:disabled="disabled"
+					:maxlength="i === 0 ? pinLength : 1"
 					:class="{
 						[$s.CodeInput]: true,
 						[$s.filled]: variant === 'fill',
-						[$s.error]: $slots.error,
+						[$s.error]: invalid,
 					}"
 					type="text"
-					maxlength="1"
 					inputmode="numeric"
 					pattern="[0-9]*"
 					required
-					@input="onInputCode($event, n - 1)"
-					@paste="onPasteCode($event, n - 1)"
-					@focus="onFocusCode($event, n - 1)"
-					@keydown.delete="onDelete($event, n - 1)"
+					@input="onInputCode($event, i)"
+					@paste="onPasteCode($event, i)"
+					@focus="onFocusCode($event, i)"
+					@keydown.delete="onDelete($event, i)"
 				>
 			</div>
 		</div>
@@ -64,6 +64,14 @@ export default {
 		},
 
 		/**
+		 * Toggles input invalid state
+		 */
+		invalid: {
+			type: Boolean,
+			default: false,
+		},
+
+		/**
 		 * Disable the inputs
 		 */
 		disabled: {
@@ -76,7 +84,6 @@ export default {
 		return {
 			code: new Array(this.pinLength).fill(''),
 			isShaking: false,
-			lastAttemptedCode: '',
 		};
 	},
 
@@ -92,7 +99,7 @@ export default {
 	},
 
 	watch: {
-		// While waiting for response, Inputs are disabled - refocus on first input when re-enabled
+		// Refocus on first input when re-enabled
 		disabled(isDisabled) {
 			if (!isDisabled) {
 				this.focusOnCodeCell(0);
@@ -102,17 +109,6 @@ export default {
 
 	mounted() {
 		this.focusOnCodeCell(0);
-	},
-
-	updated() {
-		const isForCurrentCode = this.currentCode === this.lastAttemptedCode;
-		const shouldShake = this.$slots.error
-			&& !this.disabled
-			&& isForCurrentCode;
-
-		if (shouldShake) {
-			this.shakeInputs();
-		}
 	},
 
 	methods: {
@@ -140,13 +136,19 @@ export default {
 			// Only allow integers in input
 			const BASE_TEN = 10;
 			const inputValue = Number.isInteger(Number.parseInt(event.data, BASE_TEN)) ? event.data : '';
+
+			// One-time-code autofill is treated as an input, not a paste
+			if (this.attemptSplitCodeIntoInputs(inputValue, index)) {
+				return;
+			}
+
 			this.$set(this.code, index, inputValue);
 
 			const firstIncompleteCellIndex = this.findFirstIncompleteCodeCellIndex();
 
 			// eslint-disable-next-line no-magic-numbers
 			if (firstIncompleteCellIndex === -1) {
-				this.handleComplete();
+				this.handleComplete(this.currentCode);
 				return;
 			}
 
@@ -161,16 +163,16 @@ export default {
 				&& Number.isInteger(Number.parseInt(value, BASE_TEN))
 			) {
 				this.$set(this, 'code', value.split(''));
-				const TIMEOUT_LENGTH_MS = 200;
-				setTimeout(this.handleComplete, TIMEOUT_LENGTH_MS);
+
+				// Having a timeout here gives the user a chance to see their code before success/failure
+				const TIMEOUT_LENGTH_MS = 500;
+				setTimeout(() => { this.handleComplete(this.currentCode); }, TIMEOUT_LENGTH_MS);
 				return true;
 			}
 			return false;
 		},
 
-		handleComplete() {
-			const code = this.code.join('');
-			this.lastAttemptedCode = code;
+		handleComplete(code) {
 			this.$emit('complete', code);
 		},
 
@@ -200,7 +202,7 @@ export default {
 			this.$set(this, 'code', newArray);
 		},
 
-		shakeInputs() {
+		shakeAndClearInputs() {
 			this.resetcode();
 			this.focusOnCodeCell(0);
 			this.isShaking = true;
