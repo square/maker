@@ -1,12 +1,13 @@
 <template>
 	<button
+		ref="button"
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
 			$s[`shape_${shape}`],
 			{
 				[$s.fullWidth]: fullWidth,
-				[$s.iconButton]: isSingleChild(),
+				[$s.iconButton]: isSingleChild() && !fullWidth,
 				[$s.loading]: loading,
 			}
 		]"
@@ -20,13 +21,29 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span :class="[$s.MainText, $s.TruncateText]">
+		<span
+			ref="main"
+			:class="[
+				$s.MainText,
+				{
+					[$s.TruncateText]: !isSingleChild(),
+					[$s.ShrinkText]: isMainTextWrapping,
+				}
+			]"
+		>
 			<!-- @slot Button label -->
 			<slot />
 		</span>
 		<span
 			v-if="$scopedSlots.information"
-			:class="[$s.InformationText, $s.TruncateText]"
+			ref="info"
+			:class="[
+				$s.InformationText,
+				$s.TruncateText,
+				{
+					[$s.ShrinkText]: isInfoTextWrapping,
+				}
+			]"
 		>
 			<!-- @slot Information label -->
 			<slot
@@ -141,6 +158,13 @@ export default {
 		},
 	},
 
+	data() {
+		return {
+			isMainTextWrapping: false,
+			isInfoTextWrapping: false,
+		};
+	},
+
 	computed: {
 		style() {
 			return fill({
@@ -148,6 +172,16 @@ export default {
 				textColor: this.textColor,
 			});
 		},
+	},
+
+	mounted() {
+		this.$nextTick(() => {
+			const { button, main, info } = this.$refs;
+			/* eslint-disable no-magic-numbers */
+			this.isMainTextWrapping = main && main.offsetHeight > button.offsetHeight / 2;
+			this.isInfoTextWrapping = info && info.offsetHeight > button.offsetHeight / 2;
+			/* eslint-enable no-magic-numbers */
+		});
 	},
 
 	methods: {
@@ -181,6 +215,7 @@ export default {
 	--medium-font-size: 16px;
 	--medium-padding: 24px;
 	--medium-line-height: 1.77;
+	--shrink-font-size: 14px;
 
 	position: relative;
 	display: inline-flex;
@@ -321,11 +356,18 @@ export default {
 }
 
 .TruncateText {
+	display: -webkit-box;
+	flex: 1;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 	max-width: 100%;
 	overflow: hidden;
 	line-height: 1.1;
-	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.ShrinkText {
+	font-size: var(--shrink-font-size);
 }
 
 .Button.align_center .InformationText {
