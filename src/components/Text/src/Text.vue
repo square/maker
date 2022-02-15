@@ -59,7 +59,7 @@ export default {
 		fontWeight: {
 			type: Number,
 			default: undefined,
-			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
+			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
 		},
 	},
 
@@ -76,8 +76,8 @@ export default {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
-				color: this.resolvedcolor,
-				fontWeight: this.resolvedWeight,
+				color: this.resolvedColor,
+				fontWeight: this.resolvedFontWeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};

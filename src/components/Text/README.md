@@ -9,7 +9,6 @@ Use the Text component for regular body text. There are 10 text sizes: -2 to 7. 
 			v-for="size in [1, 0, -1, -2]"
 			:key="size"
 			:size="size"
-			:font-weight="600"
 		>
 			Text (Size {{ size }})
 		</m-text>
