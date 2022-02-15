@@ -80,8 +80,6 @@ export default {
 				fontWeight: this.resolvedWeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
-				'--mobile-base-line-height': fonts.baseLineHeight,
-				'--mobile-line-height-scale': fonts.lineHeightScale,
 			};
 		},
 	},
@@ -148,8 +146,8 @@ export default {
 	--fs-1: calc(var(--min-fs-1) * 1px + var(--range-fs-1) * var(--interpolate-by));
 
 	/* line height config */
-	--line-height: var(--mobile-base-line-height);
-	--line-height-scale: var(--mobile-line-height-scale);
+	--line-height: 1.5;
+	--line-height-scale: 0.95;
 
 	/* line height scale */
 	--lh--2: calc(var(--lh--1) / var(--line-height-scale));

@@ -27,28 +27,6 @@
 		>
 		{{ fontSizeScale }}
 		<br>
-		base line height
-		<br>
-		<input
-			v-model="baseLineHeight"
-			type="range"
-			min="1"
-			max="1.62"
-			step="0.01"
-		>
-		{{ baseLineHeight }}
-		<br>
-		line height scale
-		<br>
-		<input
-			v-model="lineHeightScale"
-			type="range"
-			min="0.95"
-			max="1.05"
-			step="0.01"
-		>
-		{{ lineHeightScale }}
-		<br>
 		font family
 		<br>
 		<select v-model="fontFamily">
@@ -126,8 +104,6 @@ export default {
 		return {
 			baseFontSize: defaults.fonts.baseSize,
 			fontSizeScale: defaults.fonts.sizeScale,
-			baseLineHeight: defaults.fonts.baseLineHeight,
-			lineHeightScale: defaults.fonts.lineHeightScale,
 			fontFamily: defaults.heading.fontFamily,
 			fontWeight: defaults.heading.weight,
 			textColor: defaults.resolve(defaults.heading.textColor),
@@ -185,8 +161,6 @@ export default {
 				fonts: {
 					baseSize: Number.parseInt(this.baseFontSize, 10),
 					sizeScale: Number.parseFloat(this.fontSizeScale),
-					baseLineHeight: Number.parseFloat(this.baseLineHeight),
-					lineHeightScale: Number.parseFloat(this.lineHeightScale),
 				},
 				heading: {
 					fontFamily: this.fontFamily,
@@ -202,7 +176,7 @@ export default {
 
 ## Unthemed
 
-It's possible to use the Heading component without a parent Theme component, however the base font size, font size scale factor, base line height, and line height scale factor are no longer customizable.
+It's possible to use the Heading component without a parent Theme component, however the base font size and font size scale factor are no longer customizable.
 
 ```vue
 <template>
