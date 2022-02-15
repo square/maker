@@ -15,7 +15,7 @@
 					key="confirm"
 					full-width
 				>
-					Action button with very long text that wraps with very long text that wraps
+					Action long text that wraps with very long text that wraps
 					with very long text that wraps with very long text that wraps
 				</m-action-bar-button>
 			</m-inline-action-bar>
@@ -32,11 +32,9 @@
 					key="confirm"
 					full-width
 				>
-					Action button with very long text that wraps with very long text that wraps
-					with very long text that wraps with very long text that wraps
+					Action with text that wraps
 					<template #information>
-						Label with very long text that wraps with very long text that wraps
-						with very long text that wraps with very long text that wraps
+						Label with long text that wraps
 					</template>
 				</m-action-bar-button>
 			</m-inline-action-bar>
@@ -54,11 +52,9 @@
 					full-width
 					align="space-between"
 				>
-					Action button with very long text that wraps with very long text that wraps
-					with very long text that wraps with very long text that wraps
+					Action with text that wraps
 					<template #information>
-						Label with very long text that wraps with very long text that wraps
-						with very long text that wraps with very long text that wraps
+						Label with long text that wraps
 					</template>
 				</m-action-bar-button>
 			</m-inline-action-bar>
@@ -69,7 +65,7 @@
 					key="confirm"
 					full-width
 				>
-					Action button with text that wraps Action button with text that wraps
+					Action with text that wraps Action with text that wraps
 				</m-action-bar-button>
 			</m-inline-action-bar>
 		</div>
@@ -79,7 +75,7 @@
 					key="confirm"
 					full-width
 				>
-					Action button with text that wraps
+					Confirm
 					<template #information>
 						Label
 					</template>
@@ -165,7 +161,7 @@ export default {
 .wrapper {
 	max-width: 400px;
 	margin: 0 auto;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Square Market", system-ui;
 	background: #ccc;
 
 	& > div {

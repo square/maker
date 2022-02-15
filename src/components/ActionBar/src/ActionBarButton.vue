@@ -1,6 +1,5 @@
 <template>
 	<button
-		ref="button"
 		:class="[
 			$s.Button,
 			$s[`align_${align}`],
@@ -8,6 +7,7 @@
 			{
 				[$s.fullWidth]: fullWidth,
 				[$s.iconButton]: isSingleChild() && !fullWidth,
+				[$s.hasMainAndLabelText]: hasMainAndLabelText(),
 				[$s.loading]: loading,
 			}
 		]"
@@ -22,12 +22,10 @@
 			:class="$s.Loading"
 		/>
 		<span
-			ref="main"
 			:class="[
 				$s.MainText,
 				{
 					[$s.TruncateText]: !isSingleChild(),
-					[$s.ShrinkText]: isMainTextWrapping,
 				}
 			]"
 		>
@@ -36,14 +34,7 @@
 		</span>
 		<span
 			v-if="$scopedSlots.information"
-			ref="info"
-			:class="[
-				$s.InformationText,
-				$s.TruncateText,
-				{
-					[$s.ShrinkText]: isInfoTextWrapping,
-				}
-			]"
+			:class="[$s.InformationText, $s.TruncateText]"
 		>
 			<!-- @slot Information label -->
 			<slot
@@ -158,13 +149,6 @@ export default {
 		},
 	},
 
-	data() {
-		return {
-			isMainTextWrapping: false,
-			isInfoTextWrapping: false,
-		};
-	},
-
 	computed: {
 		style() {
 			return fill({
@@ -174,28 +158,30 @@ export default {
 		},
 	},
 
-	mounted() {
-		this.$nextTick(() => {
-			const { button, main, info } = this.$refs;
-			/* eslint-disable no-magic-numbers */
-			this.isMainTextWrapping = main && main.offsetHeight > button.offsetHeight / 2;
-			this.isInfoTextWrapping = info && info.offsetHeight > button.offsetHeight / 2;
-			/* eslint-enable no-magic-numbers */
-		});
-	},
-
 	methods: {
 		isSingleChild() {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
-			const zero = 0;
 			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > zero,
+				(vnode) => vnode.tag || vnode.text.trim().length > 0,
 			);
 			const singleChild = 1;
 			const firstChildIndex = 0;
 			return children.length === singleChild && children[firstChildIndex].tag;
+		},
+
+		hasMainAndLabelText() {
+			if (!this.$scopedSlots.information) {
+				return false;
+			}
+			const main = (this.$slots.default || []).filter(
+				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+			);
+			const info = (this.$scopedSlots.information() || []).filter(
+				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+			);
+			return main.length > 0 && info.length > 0;
 		},
 
 		handleEscKey() {
@@ -212,10 +198,9 @@ export default {
 <style module="$s">
 .Button {
 	--medium-height: 48px;
-	--medium-font-size: 16px;
+	--medium-font-size: 14px;
 	--medium-padding: 24px;
 	--medium-line-height: 1.77;
-	--shrink-font-size: 14px;
 
 	position: relative;
 	display: inline-flex;
@@ -355,6 +340,14 @@ export default {
 	font-size: 12px;
 }
 
+.hasMainAndLabelText {
+	text-align: right;
+
+	& .InformationText {
+		text-align: left;
+	}
+}
+
 .TruncateText {
 	display: -webkit-box;
 	flex: 1;
@@ -364,10 +357,6 @@ export default {
 	overflow: hidden;
 	line-height: 1.1;
 	text-overflow: ellipsis;
-}
-
-.ShrinkText {
-	font-size: var(--shrink-font-size);
 }
 
 .Button.align_center .InformationText {
