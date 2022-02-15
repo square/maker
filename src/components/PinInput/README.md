@@ -1,6 +1,13 @@
 # PinInput
 
-### Test code for following inputs is 123456
+The Pin Input component is to be used when there is a need to enter in a challenge code of some length,
+and have that challenge code verified.
+
+Note: In the following examples the code 123456 will trigger a successful input, whereas any other code will trigger
+an error state.
+
+To trigger the 'shake and clear' functionality add a ref value to your PinInput component, and then on the parent component
+call `shakeAndClearInputs()` on the referenced component.
 ### Filled variant
 ```vue
 <template>
