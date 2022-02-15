@@ -48,7 +48,7 @@ export default {
 		/**
 		 * text color
 		 */
-		textColor: {
+		color: {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
@@ -56,7 +56,7 @@ export default {
 		/**
 		 * font weight
 		 */
-		weight: {
+		fontWeight: {
 			type: Number,
 			default: undefined,
 			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
@@ -64,7 +64,7 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor', 'weight']),
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'color', 'fontWeight']),
 		sizeClass() {
 			const minNonNegativeSize = 0;
 			if (this.resolvedSize >= minNonNegativeSize) {
@@ -76,7 +76,7 @@ export default {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
-				color: this.resolvedTextColor,
+				color: this.resolvedcolor,
 				fontWeight: this.resolvedWeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
