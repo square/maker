@@ -43,16 +43,15 @@ Use the Text component for regular body text. There are 9 text sizes: -2 to 1. T
 			type="color"
 		>
 		<br>
-		<br>
 		<m-text
-			v-for="size in [-2, -1, 0, 1]"
-			:key="size"
-			:size="size"
+			v-for="namedSize in namedSizes"
+			:key="namedSize.name"
+			:size="namedSize.size"
 			:font-family="fontFamily"
 			:weight="Number.parseInt(fontWeight, 10)"
 			:text-color="textColor"
 		>
-			Size {{ size }}
+			{{ namedSize.name }}
 		</m-text>
 	</div>
 </template>
@@ -71,6 +70,24 @@ export default {
 			fontFamily: defaults.text.fontFamily,
 			fontWeight: defaults.text.weight,
 			textColor: defaults.resolve(defaults.text.textColor),
+			namedSizes: [
+				{
+					name: 'Paragraph 1 / Label 1',
+					size: 1,
+				},
+				{
+					name: 'Paragraph 2 / Label 2',
+					size: 0,
+				},
+				{
+					name: 'Paragraph 3 / Label 3',
+					size: -1,
+				},
+				{
+					name: 'Paragraph 4 / Label 4',
+					size: -2,
+				},
+			],
 		};
 	},
 };
@@ -144,24 +161,12 @@ The Text component can be further customized via the Theme component, where the 
 			type="color"
 		>
 		<br>
-		<br>
-		type scale
-		<br>
 		<m-text
 			v-for="size in [-2, -1, 0, 1]"
 			:key="size"
 			:size="size"
 		>
 			Size {{ size }}
-		</m-text>
-		named sizes
-		<br>
-		<m-text
-			v-for="namedSize in namedSizes"
-			:key="namedSize.name"
-			:size="namedSize.size"
-		>
-			{{ namedSize.name }}
 		</m-text>
 	</m-theme>
 </template>
@@ -183,24 +188,6 @@ export default {
 			fontFamily: defaults.text.fontFamily,
 			fontWeight: defaults.text.weight,
 			textColor: defaults.resolve(defaults.text.textColor),
-			namedSizes: [
-				{
-					name: 'Paragraph 1 / Label 1',
-					size: 1,
-				},
-				{
-					name: 'Paragraph 2 / Label 2',
-					size: 0,
-				},
-				{
-					name: 'Paragraph 3 / Label 3',
-					size: -1,
-				},
-				{
-					name: 'Paragraph 4 / Label 4',
-					size: -2,
-				},
-			],
 		};
 	},
 	computed: {

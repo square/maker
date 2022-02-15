@@ -45,14 +45,14 @@ Use the Heading component for heading text. There are 9 heading sizes: -2 to 7. 
 		<br>
 		<br>
 		<m-heading
-			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
-			:key="size"
-			:size="size"
+			v-for="namedSize in namedSizes"
+			:key="namedSize.name"
+			:size="namedSize.size"
 			:font-family="fontFamily"
 			:weight="Number.parseInt(fontWeight, 10)"
 			:text-color="textColor"
 		>
-			Size {{ size }}
+			{{ namedSize.name }}
 		</m-heading>
 	</div>
 </template>
@@ -71,6 +71,52 @@ export default {
 			fontFamily: defaults.heading.fontFamily,
 			fontWeight: defaults.heading.weight,
 			textColor: defaults.resolve(defaults.heading.textColor),
+			namedSizes: [
+				{
+					name: 'Headline 1',
+					size: 7,
+				},
+				{
+					name: 'Headline 2',
+					size: 6,
+				},
+				{
+					name: 'Headline 3',
+					size: 5,
+				},
+				{
+					name: 'Headline 4',
+					size: 4,
+				},
+				{
+					name: 'Headline 5',
+					size: 3,
+				},
+				{
+					name: 'Title 1',
+					size: 4,
+				},
+				{
+					name: 'Title 2',
+					size: 3,
+				},
+				{
+					name: 'Title 3',
+					size: 2,
+				},
+				{
+					name: 'Title 4',
+					size: 1,
+				},
+				{
+					name: 'Title 5',
+					size: -1,
+				},
+				{
+					name: 'Title 6',
+					size: -2,
+				},
+			],
 		};
 	},
 };
@@ -145,26 +191,12 @@ The Heading component can be further customized via the Theme component, where t
 		>
 		<br>
 		<br>
-		type scale
-		<br>
-		<br>
 		<m-heading
 			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
 			:key="size"
 			:size="size"
 		>
 			Size {{ size }}
-		</m-heading>
-		<br>
-		named sizes
-		<br>
-		<br>
-		<m-heading
-			v-for="namedSize in namedSizes"
-			:key="namedSize.name"
-			:size="namedSize.size"
-		>
-			{{ namedSize.name }}
 		</m-heading>
 	</m-theme>
 </template>
@@ -186,52 +218,6 @@ export default {
 			fontFamily: defaults.heading.fontFamily,
 			fontWeight: defaults.heading.weight,
 			textColor: defaults.resolve(defaults.heading.textColor),
-			namedSizes: [
-				{
-					name: 'Headline 1',
-					size: 7,
-				},
-				{
-					name: 'Headline 2',
-					size: 6,
-				},
-				{
-					name: 'Headline 3',
-					size: 5,
-				},
-				{
-					name: 'Headline 4',
-					size: 4,
-				},
-				{
-					name: 'Headline 5',
-					size: 3,
-				},
-				{
-					name: 'Title 1',
-					size: 4,
-				},
-				{
-					name: 'Title 2',
-					size: 3,
-				},
-				{
-					name: 'Title 3',
-					size: 2,
-				},
-				{
-					name: 'Title 4',
-					size: 1,
-				},
-				{
-					name: 'Title 5',
-					size: -1,
-				},
-				{
-					name: 'Title 6',
-					size: -2,
-				},
-			],
 		};
 	},
 	computed: {
