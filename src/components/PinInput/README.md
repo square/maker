@@ -14,7 +14,7 @@ call `shakeAndClearInputs()` on the referenced component.
 	<m-pin-input
 		ref="pinInput"
 		:invalid="invalidEntry"
-		@complete="onCodeComplete"
+		@complete="onPinComplete"
 	>
 		<template
 			v-if="invalidEntry"
@@ -43,7 +43,7 @@ export default {
 		};
 	},
 	methods: {
-		onCodeComplete(code) {
+		onPinComplete(code) {
 			if (this.testCode === code) {
 				this.invalidEntry = false;
 			} else {
@@ -63,7 +63,7 @@ export default {
 		ref="pinInput"
 		:invalid="invalidEntry"
 		variant="outline"
-		@complete="onCodeComplete"
+		@complete="onPinComplete"
 	>
 		<template
 			v-if="invalidEntry"
@@ -92,7 +92,7 @@ export default {
 		};
 	},
 	methods: {
-		onCodeComplete(code) {
+		onPinComplete(code) {
 			if (this.testCode === code) {
 				this.invalidEntry = false;
 			} else {
@@ -113,7 +113,7 @@ export default {
 		variant="outline"
 		:invalid="invalidEntry"
 		:disabled="disableInput"
-		@complete="onCodeComplete"
+		@complete="onPinComplete"
 	>
 		<template
 			v-if="invalidEntry"
@@ -143,7 +143,7 @@ export default {
 		};
 	},
 	methods: {
-		onCodeComplete(code) {
+		onPinComplete(code) {
 			this.disableInput = true;
 			const DELAY_MS = 500;
 
@@ -217,7 +217,7 @@ _DemoDialog.vue_
 				:class="$s.padding"
 				:invalid="invalidEntry"
 				variant="outline"
-				@complete="onCodeComplete"
+				@complete="onPinComplete"
 			>
 				<template
 					v-if="invalidEntry"
@@ -268,7 +268,7 @@ export default {
 		};
 	},
 	methods: {
-		onCodeComplete(code) {
+		onPinComplete(code) {
 			if (this.testCode === code) {
 				this.invalidEntry = false;
 				this.dialogApi.close();
