@@ -337,7 +337,7 @@ export default {
 }
 
 .align_stack .InformationText {
-	font-size: 12px;
+	width: max-content;
 }
 
 .hasMainAndLabelText {
@@ -357,6 +357,10 @@ export default {
 	overflow: hidden;
 	line-height: 1.1;
 	text-overflow: ellipsis;
+}
+
+.align_stack .TruncateText {
+	-webkit-line-clamp: 1;
 }
 
 .Button.align_center .InformationText {

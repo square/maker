@@ -62,6 +62,26 @@
 		<div>
 			<m-inline-action-bar>
 				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+				>
+					<x-icon class="icon" />
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+					align="stack"
+				>
+					Action with text that stacks
+					<template #information>
+						Label with long text that stacks
+					</template>
+				</m-action-bar-button>
+			</m-inline-action-bar>
+		</div>
+		<div>
+			<m-inline-action-bar>
+				<m-action-bar-button
 					key="confirm"
 					full-width
 				>
@@ -110,6 +130,23 @@
 					full-width
 				>
 					Confirm
+				</m-action-bar-button>
+			</m-inline-action-bar>
+		</div>
+		<div>
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="action"
+					color="#f6f6f6"
+					full-width
+				>
+					Action text that will wrap
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					full-width
+				>
+					Confirm button that wraps
 				</m-action-bar-button>
 			</m-inline-action-bar>
 		</div>
