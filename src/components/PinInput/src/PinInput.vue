@@ -263,10 +263,10 @@ export default {
 }
 
 .shake {
-	animation: invalidcodeshake 500ms linear;
+	animation: invalidpinshake 500ms linear;
 }
 
-@keyframes invalidcodeshake {
+@keyframes invalidpinshake {
 	8%,
 	41% {
 		transform: translateX(-16px);
