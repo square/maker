@@ -6,34 +6,31 @@
 				[$s.PinInputContainer]: true,
 				[$s.shake]: isShaking,
 				[$s.disabled]: disabled,
+				[$s.error]: Boolean($slots.error),
 			}"
 		>
-			<div
-				v-for="(val, i) in code"
+			<input
+				v-for="(val, i) in pin"
 				:key="i"
-				:class="$s.CodeInputWrapper"
+				:ref="getPinCellRef(i)"
+				:value="val"
+				:autocomplete="i === 0 ? 'one-time-code' : 'off'"
+				:disabled="disabled"
+				:maxlength="i === 0 ? pinLength : 1"
+				:class="{
+					[$s.PinInput]: true,
+					[$s.filled]: variant === 'fill',
+					[$s.error]: invalid,
+				}"
+				type="text"
+				inputmode="numeric"
+				pattern="[0-9]*"
+				required
+				@input="onInputPin($event, i)"
+				@paste="onPastePin($event, i)"
+				@focus="onFocusPin($event, i)"
+				@keydown.delete="onDelete($event, i)"
 			>
-				<input
-					:ref="getCodeCellRef(i)"
-					:value="val"
-					:autocomplete="i === 0 ? 'one-time-code' : 'off'"
-					:disabled="disabled"
-					:maxlength="i === 0 ? pinLength : 1"
-					:class="{
-						[$s.CodeInput]: true,
-						[$s.filled]: variant === 'fill',
-						[$s.error]: invalid,
-					}"
-					type="text"
-					inputmode="numeric"
-					pattern="[0-9]*"
-					required
-					@input="onInputCode($event, i)"
-					@paste="onPasteCode($event, i)"
-					@focus="onFocusCode($event, i)"
-					@keydown.delete="onDelete($event, i)"
-				>
-			</div>
 		</div>
 		<!-- @slot Input error slot -->
 		<slot name="error" />
@@ -82,14 +79,14 @@ export default {
 
 	data() {
 		return {
-			code: new Array(this.pinLength).fill(''),
+			pin: new Array(this.pinLength).fill(''),
 			isShaking: false,
 		};
 	},
 
 	computed: {
-		currentCode() {
-			return this.code.join('');
+		currentPin() {
+			return this.pin.join('');
 		},
 
 		containerWidth() {
@@ -102,33 +99,33 @@ export default {
 		// Refocus on first input when re-enabled
 		disabled(isDisabled) {
 			if (!isDisabled) {
-				this.focusOnCodeCell(0);
+				this.focusOnPinCell(0);
 			}
 		},
 	},
 
 	mounted() {
-		this.focusOnCodeCell(0);
+		this.focusOnPinCell(0);
 	},
 
 	methods: {
-		findFirstIncompleteCodeCellIndex() {
-			return this.code.findIndex((value) => value === '');
+		findFirstIncompletePinCellIndex() {
+			return this.pin.findIndex((value) => value === '');
 		},
 
-		getCodeCellRef(index) {
-			return `code-cell-${index}`;
+		getPinCellRef(index) {
+			return `pin-cell-${index}`;
 		},
 
 		// Focus on verification code cell input at given index.
-		focusOnCodeCell(index) {
-			const cellReference = this.$refs[this.getCodeCellRef(index)];
+		focusOnPinCell(index) {
+			const cellReference = this.$refs[this.getPinCellRef(index)];
 			if (cellReference?.[0]?.focus) {
 				cellReference[0].focus();
 			}
 		},
 
-		onInputCode(event, index) {
+		onInputPin(event, index) {
 			if (!event.data) {
 				return;
 			}
@@ -138,74 +135,74 @@ export default {
 			const inputValue = Number.isInteger(Number.parseInt(event.data, BASE_TEN)) ? event.data : '';
 
 			// One-time-code autofill is treated as an input, not a paste
-			if (this.attemptSplitCodeIntoInputs(inputValue, index)) {
+			if (this.attemptSplitPinIntoInputs(inputValue, index)) {
 				return;
 			}
 
-			this.$set(this.code, index, inputValue);
+			this.$set(this.pin, index, inputValue);
 
-			const firstIncompleteCellIndex = this.findFirstIncompleteCodeCellIndex();
+			const firstIncompleteCellIndex = this.findFirstIncompletePinCellIndex();
 
 			// eslint-disable-next-line no-magic-numbers
 			if (firstIncompleteCellIndex === -1) {
-				this.handleComplete(this.currentCode);
+				this.handleComplete(this.currentPin);
 				return;
 			}
 
 			// This allows us to auto jump to the next code cell input as the user types.
-			this.focusOnCodeCell(firstIncompleteCellIndex);
+			this.focusOnPinCell(firstIncompleteCellIndex);
 		},
 
-		attemptSplitCodeIntoInputs(value, inputIndex) {
+		attemptSplitPinIntoInputs(value, inputIndex) {
 			const BASE_TEN = 10;
 			if (inputIndex === 0
 				&& value?.length === this.pinLength
 				&& Number.isInteger(Number.parseInt(value, BASE_TEN))
 			) {
-				this.$set(this, 'code', value.split(''));
+				this.$set(this, 'pin', value.split(''));
 
 				// Having a timeout here gives the user a chance to see their code before success/failure
 				const TIMEOUT_LENGTH_MS = 500;
-				setTimeout(() => { this.handleComplete(this.currentCode); }, TIMEOUT_LENGTH_MS);
+				setTimeout(() => { this.handleComplete(this.currentPin); }, TIMEOUT_LENGTH_MS);
 				return true;
 			}
 			return false;
 		},
 
-		handleComplete(code) {
-			this.$emit('complete', code);
+		handleComplete(pin) {
+			this.$emit('complete', pin);
 		},
 
-		onPasteCode(event, index) {
+		onPastePin(event, index) {
 			event.preventDefault();
 			const pastedValue = (event.clipboardData || window.clipboardData).getData('text');
-			this.attemptSplitCodeIntoInputs(pastedValue, index);
+			this.attemptSplitPinIntoInputs(pastedValue, index);
 		},
 
 		onDelete(event, index) {
 			// Reset current index, and then focus on previous cell
-			this.$set(this.code, index, '');
+			this.$set(this.pin, index, '');
 
 			// eslint-disable-next-line no-magic-numbers
 			const newIndex = index - 1;
 			if (newIndex >= 0) {
-				this.focusOnCodeCell(newIndex);
+				this.focusOnPinCell(newIndex);
 			}
 		},
 
-		onFocusCode(event, index) {
+		onFocusPin(event, index) {
 			event.preventDefault();
-			this.$set(this.code, index, '');
+			this.$set(this.pin, index, '');
 		},
 
-		resetcode() {
+		resetPin() {
 			const newArray = (new Array(this.pinLength)).fill('');
-			this.$set(this, 'code', newArray);
+			this.$set(this, 'pin', newArray);
 		},
 
 		shakeAndClearInputs() {
-			this.resetcode();
-			this.focusOnCodeCell(0);
+			this.resetPin();
+			this.focusOnPinCell(0);
 			this.isShaking = true;
 			const TIMEOUT_LENGTH_MS = 1000;
 			setTimeout(() => {
@@ -222,18 +219,22 @@ export default {
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: space-between;
-	padding-bottom: 8px;
+
+	&.error {
+		padding-bottom: 8px;
+	}
 }
 
-.CodeInput {
+.PinInput {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 46px;
-	height: 46px;
+	box-sizing: border-box;
+	width: 50px;
+	height: 50px;
 	padding: 0;
 	font-weight: 500;
-	font-size: var(--font-step-0-size);
+	font-size: 16px;
 	text-align: center;
 	background: #fff;
 	border: 1px solid #d3d3d3;
@@ -259,22 +260,6 @@ export default {
 	&:hover {
 		border: 2px solid rgba(0, 0, 0, 0.9);
 	}
-}
-
-/**
- * Wrapper class allows for pin input border size to change without causing other pins to shift
- */
-.CodeInputWrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 50px;
-	height: 50px;
-}
-
-.CodeInput:focus,
-.CodeInput:valid {
-	border: 2px solid black;
 }
 
 .shake {
