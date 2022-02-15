@@ -1,6 +1,85 @@
 # Text
 
-## Themed
+Use the Text component for regular body text. There are 9 text sizes: -2 to 1. The font family, font weight, and text color are customizable.
+
+```vue
+<template>
+	<div>
+		font family
+		<br>
+		<select v-model="fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+		font weight
+		<br>
+		<input
+			v-model="fontWeight"
+			type="range"
+			min="100"
+			max="900"
+			step="100"
+		>
+		{{ fontWeight }}
+		<br>
+		text color
+		<br>
+		<input
+			v-model="textColor"
+			type="color"
+		>
+		<br>
+		<br>
+		<m-text
+			v-for="size in [-2, -1, 0, 1]"
+			:key="size"
+			:size="size"
+			:font-family="fontFamily"
+			:weight="Number.parseInt(fontWeight, 10)"
+			:text-color="textColor"
+		>
+			Size {{ size }}
+		</m-text>
+	</div>
+</template>
+
+<script>
+import { defaultTheme } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
+
+export default {
+	components: {
+		MText,
+	},
+	data() {
+		const defaults = defaultTheme();
+		return {
+			fontFamily: defaults.text.fontFamily,
+			fontWeight: defaults.text.weight,
+			textColor: defaults.resolve(defaults.text.textColor),
+		};
+	},
+};
+</script>
+```
+
+## Theming
+
+The Text component can be further customized via the Theme component, where the base font size and font size scale can be set to create a custom typographical hierarchy.
 
 ```vue
 <template>
@@ -143,84 +222,7 @@ export default {
 </script>
 ```
 
-## Unthemed
 
-It's possible to use the Text component without a parent Theme component, however the base font size and font size scale factor are no longer customizable.
-
-```vue
-<template>
-	<div>
-		font family
-		<br>
-		<select v-model="fontFamily">
-			<option value="inherit">
-				inherit
-			</option>
-			<option value="arial">
-				arial
-			</option>
-			<option value="serif">
-				serif
-			</option>
-			<option value="sans-serif">
-				sans-serif
-			</option>
-			<option value="monospace">
-				monospace
-			</option>
-		</select>
-		<br>
-		font weight
-		<br>
-		<input
-			v-model="fontWeight"
-			type="range"
-			min="100"
-			max="900"
-			step="100"
-		>
-		{{ fontWeight }}
-		<br>
-		text color
-		<br>
-		<input
-			v-model="textColor"
-			type="color"
-		>
-		<br>
-		<br>
-		<m-text
-			v-for="size in [-2, -1, 0, 1]"
-			:key="size"
-			:size="size"
-			:font-family="fontFamily"
-			:weight="Number.parseInt(fontWeight, 10)"
-			:text-color="textColor"
-		>
-			Size {{ size }}
-		</m-text>
-	</div>
-</template>
-
-<script>
-import { defaultTheme } from '@square/maker/components/Theme';
-import { MText } from '@square/maker/components/Text';
-
-export default {
-	components: {
-		MText,
-	},
-	data() {
-		const defaults = defaultTheme();
-		return {
-			fontFamily: defaults.text.fontFamily,
-			fontWeight: defaults.text.weight,
-			textColor: defaults.resolve(defaults.text.textColor),
-		};
-	},
-};
-</script>
-```
 
 <!-- api-tables:start -->
 ## Props

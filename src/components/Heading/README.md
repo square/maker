@@ -1,6 +1,85 @@
 # Heading
 
-## Themed
+Use the Heading component for heading text. There are 9 heading sizes: -2 to 7. The font family, font weight, and text color are customizable.
+
+```vue
+<template>
+	<div>
+		font family
+		<br>
+		<select v-model="fontFamily">
+			<option value="inherit">
+				inherit
+			</option>
+			<option value="arial">
+				arial
+			</option>
+			<option value="serif">
+				serif
+			</option>
+			<option value="sans-serif">
+				sans-serif
+			</option>
+			<option value="monospace">
+				monospace
+			</option>
+		</select>
+		<br>
+		font weight
+		<br>
+		<input
+			v-model="fontWeight"
+			type="range"
+			min="100"
+			max="900"
+			step="100"
+		>
+		{{ fontWeight }}
+		<br>
+		text color
+		<br>
+		<input
+			v-model="textColor"
+			type="color"
+		>
+		<br>
+		<br>
+		<m-heading
+			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
+			:key="size"
+			:size="size"
+			:font-family="fontFamily"
+			:weight="Number.parseInt(fontWeight, 10)"
+			:text-color="textColor"
+		>
+			Size {{ size }}
+		</m-heading>
+	</div>
+</template>
+
+<script>
+import { defaultTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
+
+export default {
+	components: {
+		MHeading,
+	},
+	data() {
+		const defaults = defaultTheme();
+		return {
+			fontFamily: defaults.heading.fontFamily,
+			fontWeight: defaults.heading.weight,
+			textColor: defaults.resolve(defaults.heading.textColor),
+		};
+	},
+};
+</script>
+```
+
+## Theming
+
+The Heading component can be further customized via the Theme component, where the base font size and font size scale can be set to create a custom typographical hierarchy.
 
 ```vue
 <template>
@@ -174,84 +253,7 @@ export default {
 </script>
 ```
 
-## Unthemed
 
-It's possible to use the Heading component without a parent Theme component, however the base font size and font size scale factor are no longer customizable.
-
-```vue
-<template>
-	<div>
-		font family
-		<br>
-		<select v-model="fontFamily">
-			<option value="inherit">
-				inherit
-			</option>
-			<option value="arial">
-				arial
-			</option>
-			<option value="serif">
-				serif
-			</option>
-			<option value="sans-serif">
-				sans-serif
-			</option>
-			<option value="monospace">
-				monospace
-			</option>
-		</select>
-		<br>
-		font weight
-		<br>
-		<input
-			v-model="fontWeight"
-			type="range"
-			min="100"
-			max="900"
-			step="100"
-		>
-		{{ fontWeight }}
-		<br>
-		text color
-		<br>
-		<input
-			v-model="textColor"
-			type="color"
-		>
-		<br>
-		<br>
-		<m-heading
-			v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
-			:key="size"
-			:size="size"
-			:font-family="fontFamily"
-			:weight="Number.parseInt(fontWeight, 10)"
-			:text-color="textColor"
-		>
-			Size {{ size }}
-		</m-heading>
-	</div>
-</template>
-
-<script>
-import { defaultTheme } from '@square/maker/components/Theme';
-import { MHeading } from '@square/maker/components/Heading';
-
-export default {
-	components: {
-		MHeading,
-	},
-	data() {
-		const defaults = defaultTheme();
-		return {
-			fontFamily: defaults.heading.fontFamily,
-			fontWeight: defaults.heading.weight,
-			textColor: defaults.resolve(defaults.heading.textColor),
-		};
-	},
-};
-</script>
-```
 
 <!-- api-tables:start -->
 ## Props
