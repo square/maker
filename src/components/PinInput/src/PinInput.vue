@@ -277,17 +277,6 @@ export default {
 	border: 2px solid black;
 }
 
-/* Remove stepper on number inputs */
-input[type=number] {
-	-moz-appearance: textfield;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-	margin: 0;
-	-webkit-appearance: none;
-}
-
 .shake {
 	-webkit-animation: invalidcodeshake 500ms linear;
 	-moz-animation: invalidcodeshake 500ms linear;
