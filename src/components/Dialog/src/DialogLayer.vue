@@ -175,6 +175,7 @@ export default {
 }
 
 .disableScroll {
+	position: fixed;
 	overflow: hidden;
 }
 </style>
