@@ -284,34 +284,24 @@ export default {
 @keyframes invalidcodeshake {
 	8%,
 	41% {
-		-webkit-transform: translateX(-16px);
-		-ms-transform: translateX(-16px);
 		transform: translateX(-16px);
 	}
 
 	25%,
 	58% {
-		-webkit-transform: translateX(16px);
-		-ms-transform: translateX(16px);
 		transform: translateX(16px);
 	}
 
 	75% {
-		-webkit-transform: translateX(-8px);
-		-ms-transform: translateX(-8px);
 		transform: translateX(-8px);
 	}
 
 	92% {
-		-webkit-transform: translateX(8px);
-		-ms-transform: translateX(8px);
 		transform: translateX(8px);
 	}
 
 	0%,
 	100% {
-		-webkit-transform: translateX(0);
-		-ms-transform: translateX(0);
 		transform: translateX(0);
 	}
 }
