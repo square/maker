@@ -99,7 +99,7 @@ export default {
 	--line-height-scale: 0.95;
 }
 
-@media (min-width: 600px) {
+@media (--for-tablet-portrait-up) {
 	:root {
 		--font-size-scale: 1.28;
 		--font-size: 16px;
@@ -123,7 +123,7 @@ export default {
 
 .Paragraph.size_minus-1 {
 	font-size: var(--font-step-minus-1-size);
-	line-height: var(--font-ste-minus-1-line-height);
+	line-height: var(--font-step-minus-1-line-height);
 }
 
 .Paragraph.size_0 {

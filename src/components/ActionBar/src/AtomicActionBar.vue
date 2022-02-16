@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style module="$s">
+/* tempfix: chrome-bottom-offset - value set outside of maker */
 /* stylelint-disable length-zero-no-unit */
 .ActionBar {
 	--actionbar-bottom-padding:
@@ -56,19 +57,19 @@ export default {
 	pointer-events: none;
 }
 
-@media screen and (max-width: 839px) {
+@media screen and (--for-tablet-landscape-down) {
 	.hide-on_mobile {
 		display: none;
 	}
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.hide-on_tablet {
 		display: none;
 	}
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (--for-desktop-up) {
 	.hide-on_desktop {
 		display: none;
 	}

@@ -1,0 +1,4 @@
+@custom-media --for-tablet-portrait-up (min-width: 600px);
+@custom-media --for-tablet-landscape-up (min-width: 840px);
+@custom-media --for-desktop-up (min-width: 1200px);
+@custom-media --for-tablet-landscape-down (max-width: 839px);

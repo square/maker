@@ -6,6 +6,9 @@ module.exports = {
 			features: {
 				'custom-properties': false,
 				'focus-within-pseudo-class': false,
+				'custom-media-queries': {
+					importFrom: 'src/styles/breakpoints.css',
+				},
 			},
 		}),
 	],

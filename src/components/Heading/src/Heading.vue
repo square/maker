@@ -126,7 +126,7 @@ export default {
 	--line-height-scale: 0.95;
 }
 
-@media (min-width: 600px) {
+@media (--for-tablet-portrait-up) {
 	:root {
 		--font-size-scale: 1.28;
 		--font-size: 16px;
