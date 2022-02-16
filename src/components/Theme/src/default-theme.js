@@ -16,6 +16,10 @@ export default function defaultTheme() {
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
 		},
+		fonts: {
+			baseSize: 16,
+			sizeScale: 1.17,
+		},
 		profiles: [
 			{
 				id: 'defaultProfile',
@@ -44,12 +48,14 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
-			textColor: '@colors.text',
+			color: '@colors.text',
+			fontWeight: 400,
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
-			textColor: '@colors.heading',
+			color: '@colors.heading',
+			fontWeight: 700,
 		},
 		choice: {
 			selectedColor: undefined,
