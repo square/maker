@@ -159,15 +159,17 @@ export default {
 	justify-content: center;
 }
 
+.DialogContentWrapper {
+	width: 100%;
+}
+
 @media screen and (--for-tablet-landscape-up) {
 	.DialogLayer {
 		align-items: center;
 	}
-}
 
-@media screen and (--for-tablet-landscape-down) {
 	.DialogContentWrapper {
-		width: 100%;
+		width: auto;
 	}
 }
 
