@@ -18,7 +18,7 @@ export default function defaultTheme() {
 		},
 		fonts: {
 			baseSize: 16,
-			sizeScale: 1.15,
+			sizeScale: 1.17,
 		},
 		profiles: [
 			{

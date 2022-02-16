@@ -124,7 +124,7 @@ export default {
 	/* max breakpoint config */
 	--max-resolution: 1280; /* arbitrary value */
 	--max-font-size: var(--min-font-size);
-	--max-font-size-scale: calc(var(--min-font-size-scale) + 0.26); /* arbitrary value */
+	--max-font-size-scale: calc(var(--min-font-size-scale) + 0.11); /* arbitrary value */
 
 	/* max type scale */
 	--max-fs--2: calc(var(--max-fs--1) / var(--max-font-size-scale));
