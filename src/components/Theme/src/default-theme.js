@@ -48,14 +48,14 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
-			textColor: '@colors.text',
-			weight: 400,
+			color: '@colors.text',
+			fontWeight: 400,
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
 			textColor: '@colors.heading',
-			weight: 700,
+			fontWeight: 700,
 		},
 		choice: {
 			selectedColor: undefined,

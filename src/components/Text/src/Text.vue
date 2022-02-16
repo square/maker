@@ -8,8 +8,7 @@ const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
 
 /**
- * @inheritAttrs span
- * @inheritListeners span
+ * @inheritAttrs p
  */
 export default {
 	inject: {
@@ -23,7 +22,7 @@ export default {
 
 	props: {
 		/**
-		 * which HTML element to wrap the text with
+		 * HTML Element wrapper
 		 */
 		element: {
 			type: String,
@@ -31,7 +30,8 @@ export default {
 			validator: (element) => ['p', 'span'].includes(element),
 		},
 		/**
-		 * size of text
+		 * Size of text
+		 * @values 1, 0, -1, -2
 		 */
 		size: {
 			type: Number,
@@ -39,32 +39,35 @@ export default {
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
-		 * text font family
+		 * Font family
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-family}
 		 */
 		fontFamily: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * text color
+		 * Font weight with standard numeric keyword values
+		 * @values 100, 200, 300, 400, 500, 600, 700, 800, 900
 		 */
-		textColor: {
+		fontWeight: {
+			type: Number,
+			default: undefined,
+			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
+		},
+		/**
+		 * Color
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
+		 */
+		color: {
 			type: String,
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
-		/**
-		 * font weight
-		 */
-		weight: {
-			type: Number,
-			default: undefined,
-			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
-		},
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'textColor', 'weight']),
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'fontWeight', 'color']),
 		sizeClass() {
 			const minNonNegativeSize = 0;
 			if (this.resolvedSize >= minNonNegativeSize) {
@@ -76,8 +79,8 @@ export default {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
-				color: this.resolvedTextColor,
-				fontWeight: this.resolvedWeight,
+				fontWeight: this.resolvedFontWeight,
+				color: this.resolvedColor,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};

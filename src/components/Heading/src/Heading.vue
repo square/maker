@@ -9,8 +9,7 @@ const MAX_WEIGHT = 900;
 
 /**
  * Heading
- * @inheritAttrs h1
- * @inheritListeners h1
+ * @inheritAttrs Heading_Elements
  */
 export default {
 	inject: {
@@ -25,6 +24,7 @@ export default {
 	props: {
 		/**
 		 * Size of heading. Influences which element is used.
+		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
 		 */
 		size: {
 			type: Number,
@@ -40,32 +40,35 @@ export default {
 			validator: (element) => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'].includes(element),
 		},
 		/**
-		 * Heading font family
+		 * Font family
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-family}
 		 */
 		fontFamily: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Heading text color
+		 * Font weight with standard numeric keyword values
+		 * @values 100, 200, 300, 400, 500, 600, 700, 800, 900
 		 */
-		textColor: {
-			type: String,
-			default: undefined,
-			validator: (color) => chroma.valid(color),
-		},
-		/**
-		 * font weight
-		 */
-		weight: {
+		fontWeight: {
 			type: Number,
 			default: undefined,
 			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
 		},
+		/**
+		 * Color
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	computed: {
-		...resolveThemeableProps('heading', ['size', 'fontFamily', 'textColor', 'weight']),
+		...resolveThemeableProps('heading', ['size', 'fontFamily', 'fontWeight', 'color']),
 		tag() {
 			if (this.element) {
 				return this.element;
@@ -103,8 +106,8 @@ export default {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
-				color: this.resolvedTextColor,
-				fontWeight: this.resolvedWeight,
+				fontWeight: this.resolvedFontWeight,
+				color: this.resolvedColor,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
