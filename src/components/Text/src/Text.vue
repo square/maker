@@ -8,8 +8,7 @@ const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
 
 /**
- * @inheritAttrs span
- * @inheritListeners span
+ * @inheritAttrs p
  */
 export default {
 	inject: {
@@ -23,7 +22,7 @@ export default {
 
 	props: {
 		/**
-		 * which HTML element to wrap the text with
+		 * HTML Element wrapper
 		 */
 		element: {
 			type: String,
@@ -31,7 +30,8 @@ export default {
 			validator: (element) => ['p', 'span'].includes(element),
 		},
 		/**
-		 * size of text
+		 * Size of text
+		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
 		 */
 		size: {
 			type: Number,
@@ -39,32 +39,35 @@ export default {
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
-		 * text font family
+		 * Font family
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-family}
 		 */
 		fontFamily: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * text color
-		 */
-		color: {
-			type: String,
-			default: undefined,
-			validator: (color) => chroma.valid(color),
-		},
-		/**
-		 * font weight
+		 * Font weight with standard numeric keyword values
+		 * @values 100, 200, 300, 400, 500, 600, 700, 800, 900
 		 */
 		fontWeight: {
 			type: Number,
 			default: undefined,
 			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
 		},
+		/**
+		 * Color
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'color', 'fontWeight']),
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'fontWeight', 'color']),
 		sizeClass() {
 			const minNonNegativeSize = 0;
 			if (this.resolvedSize >= minNonNegativeSize) {
@@ -76,8 +79,8 @@ export default {
 			const { fonts } = this.theme;
 			return {
 				fontFamily: this.resolvedFontFamily,
-				color: this.resolvedColor,
 				fontWeight: this.resolvedFontWeight,
+				color: this.resolvedColor,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
