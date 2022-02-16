@@ -159,28 +159,27 @@ export default {
 	},
 
 	methods: {
+		getVnodesWithContent(vnodes) {
+			return (vnodes || []).filter(
+				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+			);
+		},
+
 		isSingleChild() {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
-			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
-			);
+			const children = this.getVnodesWithContent(this.$slots.default);
 			const singleChild = 1;
-			const firstChildIndex = 0;
-			return children.length === singleChild && children[firstChildIndex].tag;
+			return children.length === singleChild && children[0].tag;
 		},
 
 		hasMainAndLabelText() {
 			if (!this.$scopedSlots.information) {
 				return false;
 			}
-			const main = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
-			);
-			const info = (this.$scopedSlots.information() || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > 0,
-			);
+			const main = this.getVnodesWithContent(this.$slots.default);
+			const info = this.getVnodesWithContent(this.$scopedSlots.information());
 			return main.length > 0 && info.length > 0;
 		},
 
@@ -349,6 +348,7 @@ export default {
 }
 
 .TruncateText {
+	/* -webkit-box is supported by all modern browsers */
 	display: -webkit-box;
 	flex: 1;
 	-webkit-line-clamp: 2;
