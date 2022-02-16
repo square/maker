@@ -21,7 +21,7 @@
 	background: #f5f6f7;
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.Container {
 		width: 400px;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);

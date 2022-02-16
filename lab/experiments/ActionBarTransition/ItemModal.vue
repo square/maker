@@ -171,6 +171,7 @@ export default {
 </style>
 
 <style module="$s">
+/* tempfix: chrome-bottom-offset - value set outside of maker */
 /* stylelint-disable length-zero-no-unit */
 .ActionBarWrapper {
 	--regular-bottom-padding: 32px;

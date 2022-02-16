@@ -159,7 +159,7 @@ export default {
 	justify-content: center;
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.DialogLayer {
 		align-items: center;
 	}
@@ -174,7 +174,13 @@ export default {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
+/**
+ * Position fixed prevents unnecessary body scrolling and jumpiness on dialogs
+ * when using the pin-input component inside of them on IOS devices
+ *
+ */
 .disableScroll {
+	position: fixed;
 	overflow: hidden;
 }
 </style>

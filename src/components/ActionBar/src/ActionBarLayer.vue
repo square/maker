@@ -86,6 +86,7 @@ export default {
 </script>
 
 <style module="$s">
+/* tempfix: chrome-bottom-offset - value set outside of maker */
 /* stylelint-disable length-zero-no-unit */
 .ActionBarLayer {
 	--actionbar-top-padding: 24px;
@@ -109,7 +110,7 @@ export default {
 	}
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.ActionBarLayer {
 		padding-bottom: 0;
 	}

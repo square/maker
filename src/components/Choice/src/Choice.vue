@@ -105,6 +105,7 @@ export default {
 	watch: {
 		selected() {
 			this.validateProps();
+			this.currentValue = this.selected;
 		},
 
 		currentValue(newValue) {
