@@ -55,7 +55,7 @@ export default function defaultTheme() {
 			fontFamily: 'inherit',
 			size: 2,
 			textColor: '@colors.heading',
-			weight: 700,
+			fontWeight: 700,
 		},
 		choice: {
 			selectedColor: undefined,
