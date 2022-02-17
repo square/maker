@@ -7,7 +7,7 @@
 			$s[`align_${align}`],
 			{
 				[$s.fullWidth]: fullWidth,
-				[$s.iconButton]: isSingleChild(),
+				[$s.iconButton]: isSingleChild() && !fullWidth,
 				[$s.loading]: loading,
 			}
 		]"
