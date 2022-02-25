@@ -6,7 +6,8 @@
 			$s[`shape_${resolvedShape}`],
 			{
 				[$s.fullWidth]: resolvedFullWidth,
-				[$s.iconButton]: isSingleChild(),
+				[$s.iconButton]: isSingleChild() && !resolvedFullWidth,
+				[$s.hasMainAndLabelText]: hasMainAndLabelText(),
 				[$s.loading]: loading,
 			}
 		]"
@@ -20,7 +21,14 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span :class="[$s.MainText, $s.TruncateText]">
+		<span
+			:class="[
+				$s.MainText,
+				{
+					[$s.TruncateText]: !isSingleChild(),
+				}
+			]"
+		>
 			<!-- @slot Button label -->
 			<slot />
 		</span>
@@ -171,17 +179,28 @@ export default {
 	},
 
 	methods: {
+		getVnodesWithContent(vnodes) {
+			return (vnodes || []).filter(
+				(vnode) => vnode.tag || vnode.text.trim().length > 0,
+			);
+		},
+
 		isSingleChild() {
 			if (this.$scopedSlots.information) {
 				return false;
 			}
-			const zero = 0;
-			const children = (this.$slots.default || []).filter(
-				(vnode) => vnode.tag || vnode.text.trim().length > zero,
-			);
+			const children = this.getVnodesWithContent(this.$slots.default);
 			const singleChild = 1;
-			const firstChildIndex = 0;
-			return children.length === singleChild && children[firstChildIndex].tag;
+			return children.length === singleChild && children[0].tag;
+		},
+
+		hasMainAndLabelText() {
+			if (!this.$scopedSlots.information) {
+				return false;
+			}
+			const main = this.getVnodesWithContent(this.$slots.default);
+			const info = this.getVnodesWithContent(this.$scopedSlots.information());
+			return main.length > 0 && info.length > 0;
 		},
 
 		handleEscKey() {
@@ -198,7 +217,7 @@ export default {
 <style module="$s">
 .Button {
 	--medium-height: 48px;
-	--medium-font-size: 16px;
+	--medium-font-size: 14px;
 	--medium-padding: 24px;
 	--medium-line-height: 1.77;
 
@@ -337,15 +356,31 @@ export default {
 }
 
 .align_stack .InformationText {
-	font-size: 12px;
+	width: max-content;
+}
+
+.hasMainAndLabelText {
+	text-align: right;
+
+	& .InformationText {
+		text-align: left;
+	}
 }
 
 .TruncateText {
+	/* -webkit-box is supported by all modern browsers */
+	display: -webkit-box;
+	flex: 1;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 	max-width: 100%;
 	overflow: hidden;
 	line-height: 1.1;
-	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.align_stack .TruncateText {
+	-webkit-line-clamp: 1;
 }
 
 .Button.align_center .InformationText {
