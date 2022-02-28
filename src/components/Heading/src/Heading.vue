@@ -74,6 +74,15 @@ export default {
 			default: 'inherit',
 			validator: (fontStyle) => ['inherit', 'normal', 'italic'].includes(fontStyle),
 		},
+		/**
+		 * text transform
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform}
+		 */
+		textTransform: {
+			type: String,
+			default: 'inherit',
+			validator: (textTransform) => ['inherit', 'none', 'uppercase'].includes(textTransform),
+		},
 	},
 
 	computed: {
@@ -130,6 +139,7 @@ export default {
 			tag,
 			inlineStyles,
 			fontStyle,
+			textTransform,
 		} = this;
 		/**
 		 * @slot heading content
@@ -140,6 +150,7 @@ export default {
 				$s.Heading,
 				$s[`size_${sizeClass}`],
 				$s[`fontstyle_${fontStyle}`],
+				$s[`texttransform_${textTransform}`],
 			],
 			style: inlineStyles,
 			attrs: this.$attrs,
@@ -242,6 +253,18 @@ export default {
 
 .fontstyle_italic {
 	font-style: italic;
+}
+
+.texttransform_inherit {
+	text-transform: inherit;
+}
+
+.texttransform_none {
+	text-transform: none;
+}
+
+.texttransform_uppercase {
+	text-transform: uppercase;
 }
 
 @media (min-width: 1200px) {
