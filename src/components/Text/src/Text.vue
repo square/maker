@@ -66,7 +66,7 @@ export default {
 		},
 		/**
 		 * font style
-		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-style}
 		 */
 		fontStyle: {
 			type: String,
