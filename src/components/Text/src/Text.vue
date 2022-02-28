@@ -64,6 +64,15 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * font style
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-style}
+		 */
+		fontStyle: {
+			type: String,
+			default: 'inherit',
+			validator: (fontStyle) => ['inherit', 'normal', 'italic'].includes(fontStyle),
+		},
 	},
 
 	computed: {
@@ -93,13 +102,18 @@ export default {
 			sizeClass,
 			element,
 			inlineStyles,
+			fontStyle,
 		} = this;
 		/**
 		 * @slot text content
 		 */
 		const defaultSlot = this.$slots.default;
 		return createElement(element, {
-			class: [$s.Paragraph, $s[`size_${sizeClass}`]],
+			class: [
+				$s.Paragraph,
+				$s[`size_${sizeClass}`],
+				$s[`fontstyle_${fontStyle}`],
+			],
 			attrs: this.$attrs,
 			style: inlineStyles,
 			on: this.$listeners,
@@ -157,6 +171,18 @@ export default {
 	--lh--1: calc(var(--lh-0) / var(--line-height-scale));
 	--lh-0: var(--line-height);
 	--lh-1: calc(var(--lh-0) * var(--line-height-scale));
+}
+
+.fontstyle_inherit {
+	font-style: inherit;
+}
+
+.fontstyle_normal {
+	font-style: normal;
+}
+
+.fontstyle_italic {
+	font-style: italic;
 }
 
 @media (min-width: 1200px) {
