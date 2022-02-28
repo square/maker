@@ -33,7 +33,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 
 | Prop        | Type     | Default | Possible values                                               | Description                                      |
 | ----------- | -------- | ------- | ------------------------------------------------------------- | ------------------------------------------------ |
-| element     | `string` | `'p'`   | `p`, `span`                                                   | HTML Element wrapper                             |
+| element     | `string` | `'p'`   | `p`, `span`, `li`                                             | HTML Element wrapper                             |
 | size        | `number` | —       | `1`, `0`, `-1`, `-2`                                          | Size of text                                     |
 | font-family | `string` | —       | —                                                             | Font family                                      |
 | font-weight | `number` | —       | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values |

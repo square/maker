@@ -868,9 +868,9 @@ export default {
 
 ## Modal Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description   |
+| ------- | ------------- |
+| default | Modal content |
 
 
 ## ModalContent Slots
