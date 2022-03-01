@@ -40,6 +40,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 | color          | `string` | —           | —                                                             | Color                                            |
 | font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                       |
 | text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                   |
+| text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                       |
 
 
 ## Slots

@@ -40,6 +40,7 @@ Supports attributes from [`<Heading_Elements>`](https://developer.mozilla.org/en
 | color          | `string` | —           | —                                                             | Color                                                                   |
 | font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                                              |
 | text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                                          |
+| text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                                              |
 
 
 ## Slots
