@@ -149,8 +149,10 @@ export default {
 			class: [
 				$s.Heading,
 				$s[`size_${sizeClass}`],
-				$s[`fontstyle_${fontStyle}`],
-				$s[`texttransform_${textTransform}`],
+				{
+					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
+					[$s[`texttransform_${textTransform}`]]: textTransform !== 'inherit',
+				},
 			],
 			style: inlineStyles,
 			attrs: this.$attrs,
@@ -243,20 +245,12 @@ export default {
 	--lh-7: calc(var(--lh-6) * var(--line-height-scale));
 }
 
-.fontstyle_inherit {
-	font-style: inherit;
-}
-
 .fontstyle_normal {
 	font-style: normal;
 }
 
 .fontstyle_italic {
 	font-style: italic;
-}
-
-.texttransform_inherit {
-	text-transform: inherit;
 }
 
 .texttransform_none {
