@@ -82,6 +82,15 @@ export default {
 			default: 'inherit',
 			validator: (textTransform) => ['inherit', 'none', 'uppercase'].includes(textTransform),
 		},
+		/**
+		 * text align
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/text-align}
+		 */
+		textAlign: {
+			type: String,
+			default: 'inherit',
+			validator: (textAlign) => ['inherit', 'left', 'right', 'center'].includes(textAlign),
+		},
 	},
 
 	computed: {
@@ -113,6 +122,7 @@ export default {
 			inlineStyles,
 			fontStyle,
 			textTransform,
+			textAlign,
 		} = this;
 		/**
 		 * @slot text content
@@ -125,6 +135,7 @@ export default {
 				{
 					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
 					[$s[`texttransform_${textTransform}`]]: textTransform !== 'inherit',
+					[$s[`textalign_${textAlign}`]]: textAlign !== 'inherit',
 				},
 			],
 			attrs: this.$attrs,
@@ -200,6 +211,18 @@ export default {
 
 .texttransform_uppercase {
 	text-transform: uppercase;
+}
+
+.textalign_left {
+	text-align: left;
+}
+
+.textalign_right {
+	text-align: right;
+}
+
+.textalign_center {
+	text-align: center;
 }
 
 @media (min-width: 1200px) {
