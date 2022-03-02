@@ -97,7 +97,7 @@
 				>
 					Confirm
 					<template #information>
-						Label
+						Label with longer text
 					</template>
 				</m-action-bar-button>
 			</m-inline-action-bar>
