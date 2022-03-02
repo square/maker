@@ -73,6 +73,24 @@ export default {
 			default: 'inherit',
 			validator: (fontStyle) => ['inherit', 'normal', 'italic'].includes(fontStyle),
 		},
+		/**
+		 * text transform
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform}
+		 */
+		textTransform: {
+			type: String,
+			default: 'inherit',
+			validator: (textTransform) => ['inherit', 'none', 'uppercase'].includes(textTransform),
+		},
+		/**
+		 * text align
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/text-align}
+		 */
+		textAlign: {
+			type: String,
+			default: 'inherit',
+			validator: (textAlign) => ['inherit', 'left', 'right', 'center'].includes(textAlign),
+		},
 	},
 
 	computed: {
@@ -103,6 +121,8 @@ export default {
 			element,
 			inlineStyles,
 			fontStyle,
+			textTransform,
+			textAlign,
 		} = this;
 		/**
 		 * @slot text content
@@ -112,7 +132,11 @@ export default {
 			class: [
 				$s.Paragraph,
 				$s[`size_${sizeClass}`],
-				$s[`fontstyle_${fontStyle}`],
+				{
+					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
+					[$s[`texttransform_${textTransform}`]]: textTransform !== 'inherit',
+					[$s[`textalign_${textAlign}`]]: textAlign !== 'inherit',
+				},
 			],
 			attrs: this.$attrs,
 			style: inlineStyles,
@@ -173,16 +197,32 @@ export default {
 	--lh-1: calc(var(--lh-0) * var(--line-height-scale));
 }
 
-.fontstyle_inherit {
-	font-style: inherit;
-}
-
 .fontstyle_normal {
 	font-style: normal;
 }
 
 .fontstyle_italic {
 	font-style: italic;
+}
+
+.texttransform_none {
+	text-transform: none;
+}
+
+.texttransform_uppercase {
+	text-transform: uppercase;
+}
+
+.textalign_left {
+	text-align: left;
+}
+
+.textalign_right {
+	text-align: right;
+}
+
+.textalign_center {
+	text-align: center;
 }
 
 @media (min-width: 1200px) {
