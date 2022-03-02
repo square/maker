@@ -370,10 +370,9 @@ export default {
 .TruncateText {
 	/* -webkit-box is supported by all modern browsers */
 	display: -webkit-box;
-	flex: 1;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
-	max-width: 100%;
+	width: max-content;
 	overflow: hidden;
 	line-height: 1.1;
 	text-overflow: ellipsis;
