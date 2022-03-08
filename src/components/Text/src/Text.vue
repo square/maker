@@ -62,7 +62,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => color === 'inherit' || chroma.valid(color),
 		},
 		/**
 		 * font style
