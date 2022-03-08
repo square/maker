@@ -90,7 +90,7 @@ export default {
 /* stylelint-disable length-zero-no-unit */
 .ActionBarLayer {
 	--actionbar-top-padding: 24px;
-	--actionbar-size: 64px;
+	--actionbar-size: 48px;
 	--actionbar-bottom-padding:
 		calc(
 			24px
