@@ -72,6 +72,10 @@ export default function defaultTheme() {
 			color: undefined,
 			bgColor: undefined,
 		},
+		dialog: {
+			color: undefined,
+			bgColor: undefined,
+		},
 		container: {
 			color: undefined,
 			bgColor: undefined,
