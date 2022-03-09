@@ -6,7 +6,7 @@ Any components within the theme component will inherit the tokens provided. We r
 
 ```vue
 <template>
-	<div class="demo">
+	<div class="theme-demo">
 		<div class="controls">
 			<m-heading
 				:size="1"
@@ -41,6 +41,37 @@ Any components within the theme component will inherit the tokens provided. We r
 				>
 				Text
 			</label>
+			<m-heading
+				:size="0"
+			>
+				Neutrals
+			</m-heading>
+			<div class="color-option neutrals">
+				<input
+					v-model="theme.colors['neutral-0']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-10']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-20']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-80']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-90']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-100']"
+					type="color"
+				>
+			</div>
 			<m-heading
 				:size="1"
 			>
@@ -299,6 +330,12 @@ export default {
 					text: '#000000',
 					heading: '#000000',
 					primary: '#000000',
+					'neutral-0': '#ffffff',
+					'neutral-10': '#f1f1f1',
+					'neutral-20': '#d3d3d3',
+					'neutral-80': '#707070',
+					'neutral-90': '#1b1b1b',
+					'neutral-100': '#000000',
 				},
 				heading: {
 					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
@@ -327,9 +364,10 @@ export default {
 };
 </script>
 <style>
-	.demo {
+	.theme-demo {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
+		gap: 10vw;
 		padding: 24px;
 		background-color: #f1f1f1;
 	}
@@ -377,8 +415,117 @@ export default {
 		justify-content: space-between;
 		min-height: 44px;
 	}
+	.neutrals {
+		gap: 8px;
+		display: flex;
+	}
 </style>
 ```
+
+## Neutral colors
+We have a preset scale of neutral colors that are used within most components. Depending on the background color of your site you may want to alter those colors. There are six neutrals and they can be overriden in the `colors` object. We recommend `neutral-0` to be the same or close to your background with each color getting progressively lighter or darker depending on your background.
+
+```vue
+<template>
+	<div class="demos">
+		<div class="swatch-demo light-background">
+			<h3 class="demo-title">
+				Default Neutrals
+			</h3>
+			<ul class="swatch">
+				<li
+					v-for="(value, key) in colors"
+					:key="key"
+					class="color"
+					:style="{backgroundColor: value }"
+				>
+					<span class="label">{{ key }}: {{ value }}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="swatch-demo dark-background">
+			<h3 class="demo-title">
+				Custom Neutrals for dark background
+			</h3>
+			<ul class="swatch">
+				<li
+					v-for="(value, key) in demoDarkColors"
+					:key="key"
+					class="color"
+					:style="{backgroundColor: value }"
+				>
+					<span class="label">{{ key }}: {{ value }}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			colors: {
+				'neutral-0': '#ffffff',
+				'neutral-10': '#f1f1f1',
+				'neutral-20': '#d3d3d3',
+				'neutral-80': '#707070',
+				'neutral-90': '#1b1b1b',
+				'neutral-100': '#000000',
+			},
+			demoDarkColors: {
+				'neutral-0': '#000000',
+				'neutral-10': '#60636b',
+				'neutral-20': '#777981',
+				'neutral-80': '#9c9ea3',
+				'neutral-90': '#f4f4f4',
+				'neutral-100': '#ffffff',
+			},
+		};
+	},
+};
+</script>
+<style>
+.demos {
+	text-align: center;
+}
+.swatch-demo {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+}
+.swatch {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.light-background {
+	background-color: #fff;
+}
+.dark-background {
+	color: #fff;
+	background-color: #000;
+}
+.color {
+	display: flex;
+	align-items: center;
+	width: 120px;
+	height: 120px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	font-family: monospace;
+}
+.label {
+	background: inherit;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	filter: invert(1) grayscale(1) contrast(9);
+}
+</style>
+```
+
 
 
 ## Customizing the theme within subsets of the app
