@@ -1,5 +1,8 @@
 <template>
-	<div :class="$s.Container">
+	<div
+		:class="$s.Container"
+		:style="style"
+	>
 		<div :class="$s.Dialog">
 			<!-- @slot Dialog content -->
 			<slot />
