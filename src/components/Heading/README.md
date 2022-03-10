@@ -31,16 +31,18 @@ export default {
 
 Supports attributes from [`<Heading_Elements>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements).
 
-| Prop           | Type     | Default     | Possible values                                               | Description                                                             |
-| -------------- | -------- | ----------- | ------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of heading. Influences which element is used.                      |
-| element        | `string` | —           | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `div`                     | Override Heading element. By default, the element is derived from size. |
-| font-family    | `string` | —           | —                                                             | Font family                                                             |
-| font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                        |
-| color          | `string` | —           | —                                                             | Color                                                                   |
-| font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                                              |
-| text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                                          |
-| text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                                              |
+| Prop           | Type     | Default     | Possible values                                               | Description                                                                              |
+| -------------- | -------- | ----------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of heading. Influences which element is used.                                       |
+| element        | `string` | —           | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `div`                     | Override Heading element. By default, the element is derived from size.                  |
+| font-family    | `string` | —           | —                                                             | Font family                                                                              |
+| font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                         |
+| font-size      | `string` | —           | —                                                             | Font size, as a valid CSS value. This overrides the 'size' prop.                         |
+| line-height    | `number` | —           | —                                                             | Line Height, as a valid CSS value. This overrides the internally calculated line-height. |
+| color          | `string` | —           | —                                                             | Color                                                                                    |
+| font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                                                               |
+| text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                                                           |
+| text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                                                               |
 
 
 ## Slots

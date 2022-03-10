@@ -57,6 +57,20 @@ export default {
 			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
 		},
 		/**
+		 * Font size, as a valid CSS value. This overrides the 'size' prop.
+		 */
+		fontSize: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Line Height, as a valid CSS value. This overrides the internally calculated line-height.
+		 */
+		lineHeight: {
+			type: Number,
+			default: undefined,
+		},
+		/**
 		 * Color
 		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
 		 */
@@ -135,6 +149,8 @@ export default {
 				fontFamily: this.resolvedFontFamily,
 				fontWeight: this.resolvedFontWeight,
 				color: this.resolvedColor,
+				fontSize: this.fontSize,
+				lineHeight: this.lineHeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
