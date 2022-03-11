@@ -21,14 +21,12 @@ There are no focus, active, or hover states.
 					</th>
 					<td>
 						<m-text-button
-							variant="text"
 							size="large"
 							:color="color"
 						>
 							Button
 						</m-text-button>
 						<m-text-button
-							variant="text"
 							size="large"
 							:color="color"
 							disabled
@@ -36,7 +34,6 @@ There are no focus, active, or hover states.
 							Disabled button
 						</m-text-button>
 						<m-text-button
-							variant="text"
 							size="large"
 							:color="color"
 							loading
