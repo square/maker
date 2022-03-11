@@ -1,5 +1,5 @@
 # Button
-For a simplified text-only button with no padding or focus/active/hover states, see: [TextButton](#TextButton).
+For a simplified text-only button with no padding or focus/active/hover states, see: [TextButton](#/TextButton).
 
 ## Styles & Sizes
 
