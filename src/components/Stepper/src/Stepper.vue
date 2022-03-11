@@ -101,7 +101,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'pill',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 	},
