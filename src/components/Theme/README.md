@@ -526,129 +526,93 @@ export default {
 </style>
 ```
 
+## Theme Profiles
 
-
-## Customizing the theme within subsets of the app
-
-Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:
-1. Providing its own theme data, which will be merged with the theme data provided by the parent or
-2. Selecting a profile from the parent theme, which will be merged with the theme data provided by the parent
-
-A "profile" is, in itself, a theme.
-
-### Option 1: Nested Themes example
-
-```vue
-<template>
-	<m-theme :theme="parentTheme">
-		pick parent theme primary color
-		<br>
-		<input
-			v-model="parentTheme.colors.primary"
-			type="color"
-		>
-		<br>
-
-		<m-button>
-			button in scope of parent theme
-		</m-button>
-
-		<m-theme :theme="childTheme">
-			pick child theme primary color
-			<br>
-			<input
-				v-model="childTheme.colors.primary"
-				type="color"
-			>
-			<br>
-
-			<m-button>
-				button in scope of child theme
-			</m-button>
-		</m-theme>
-	</m-theme>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MButton } from '@square/maker/components/Button';
-
-export default {
-	components: {
-		MTheme,
-		MButton,
-	},
-	data() {
-		return {
-			parentTheme: {
-				colors: {
-					primary: '#000000',
-				},
-			},
-			childTheme: {
-				colors: {
-					primary: '#ff0000',
-				},
-			},
-		};
-	},
-};
-</script>
-```
-
-### Option 2: Theme profiles example
+Many websites will support multiple page or section output. For example, a hero section may leverage different styles from a proceeding content section. We've added the ability to preset these styles by defining each as a seperate profile. The way to implement this currently is by nesting theme components and passing a `profile` to the child theme.
 
 ```vue
 <template>
 	<m-theme :theme="theme">
-		pick theme primary color
-		<br>
-		<input
-			v-model="theme.colors.primary"
-			type="color"
-		>
-		<br>
-
-		<m-button>
-			button in scope of theme
-		</m-button>
+		<section class="profile-demo">
+			<m-heading>Global Default</m-heading>
+			<m-text>
+				This section is using the default data passed in the theme prop.
+				Every component in a theme will inherit the properties set.
+				In this case we're setting the default colors.
+			</m-text>
+			<m-button>
+				Default Button
+			</m-button>
+		</section>
 
 		<m-theme :profile="theme.profiles[0].id">
-			pick {{ theme.profiles[0].id }} profile primary color
-			<br>
-			<input
-				v-model="theme.profiles[0].colors.primary"
-				type="color"
-			>
-			<br>
-
-			<m-button>
-				button in scope of theme with {{ theme.profiles[0].id }} profile selected
-			</m-button>
+			<section class="profile-demo">
+				<m-heading>Profile 1</m-heading>
+				<m-text>
+					This section has a specific profile set,
+					which allows setting specific color overrides more easily.
+					Each component in this section will reflect the colors in the profile.
+				</m-text>
+				<m-button>
+					Profile 1 Button
+				</m-button>
+			</section>
+		</m-theme>
+		<m-theme :profile="theme.profiles[1].id">
+			<section class="profile-demo">
+				<m-heading>Profile 2</m-heading>
+				<m-text>
+					This section has a specific profile set,
+					which allows setting specific color overrides more easily.
+					Each component in this section will reflect the colors in the profile.
+				</m-text>
+				<m-button>
+					Profile 2 Button
+				</m-button>
+			</section>
 		</m-theme>
 	</m-theme>
 </template>
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MTheme,
+		MHeading,
+		MText,
 		MButton,
 	},
 	data() {
 		return {
 			theme: {
 				colors: {
-					primary: '#000000',
+					background: '#484543',
+					text: '#ffffff',
+					heading: '#e5d7cc',
+					primary: '#e5d7cc',
 				},
 				profiles: [
 					{
-						id: 'exampleProfileId',
+						id: 'profile1',
 						colors: {
-							primary: '#ff0000',
+							background: '#b05d54',
+							text: '#e5d7cc',
+							heading: '#e5d7cc',
+							primary: '#e5d7cc',
+						},
+					},
+					{
+						id: 'profile2',
+						colors: {
+							background: '#e5d7cc',
+							text: '#000000',
+							heading: '#000000',
+							primary: '#000000',
 						},
 					},
 				],
@@ -657,6 +621,11 @@ export default {
 	},
 };
 </script>
+<style>
+.profile-demo {
+	padding: 2vh 4vw;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
