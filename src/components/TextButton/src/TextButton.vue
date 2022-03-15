@@ -8,7 +8,7 @@
 			}
 		]"
 		:type="type"
-		:disabled="disabled"
+		:disabled="isDisabled"
 		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
@@ -94,6 +94,9 @@ export default {
 			return textButton({
 				color: this.color,
 			});
+		},
+		isDisabled() {
+			return this.disabled || this.loading;
 		},
 	},
 
