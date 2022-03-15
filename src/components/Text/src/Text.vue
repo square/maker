@@ -56,7 +56,7 @@ export default {
 			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
 		},
 		/**
-		 * Font size, as a valid CSS value. This overrides the 'size' prop.
+		 * Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling.
 		 */
 		fontSize: {
 			type: String,
