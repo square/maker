@@ -46,7 +46,7 @@ Use Notice to notify users of things.
 
 <script>
 import { MNotice } from '@square/maker/components/Notice';
-import { MTextButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 
 export default {
 	components: {
@@ -105,7 +105,7 @@ export default {
 
 <script>
 import { MNotice } from '@square/maker/components/Notice';
-import { MTextButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 
 export default {
 	components: {
@@ -164,7 +164,7 @@ export default {
 
 <script>
 import { MNotice } from '@square/maker/components/Notice';
-import { MTextButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 
 export default {
 	components: {
@@ -224,7 +224,7 @@ export default {
 
 <script>
 import { MNotice } from '@square/maker/components/Notice';
-import { MTextButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 
 export default {
 	components: {
