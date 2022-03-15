@@ -195,7 +195,6 @@ export default {
 	text-overflow: ellipsis;
 	background-color: transparent;
 	border: none;
-	border-radius: inherit;
 	outline: none;
 	box-shadow: none;
 	cursor: inherit;
