@@ -241,7 +241,7 @@ export default {
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import { MTextButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 
 export default {
 	components: {
