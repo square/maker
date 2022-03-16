@@ -1,11 +1,60 @@
 <template>
-	<div :class="$s.Container">
+	<div
+		:class="$s.Container"
+		:style="style"
+	>
 		<div :class="$s.Dialog">
 			<!-- @slot Dialog content -->
 			<slot />
 		</div>
 	</div>
 </template>
+
+<script>
+import chroma from 'chroma-js';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+
+export default {
+	name: 'Dialog',
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
+	props: {
+		/**
+		 * Background color of container
+		 */
+		bgColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
+		/**
+		 * Text color of container
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
+	},
+
+	computed: {
+		...resolveThemeableProps('dialog', ['bgColor', 'color']),
+
+		style() {
+			return {
+				'--bg-color': this.resolvedBgColor,
+				'--color': this.resolvedColor,
+			};
+		},
+	},
+};
+</script>
 
 <style module="$s">
 .Container {
@@ -18,7 +67,8 @@
 
 .Dialog {
 	overflow: scroll;
-	background: #f5f6f7;
+	color: var(--color, inherit);
+	background: var(--bg-color, #f5f6f7);
 }
 
 @media screen and (--for-tablet-landscape-up) {

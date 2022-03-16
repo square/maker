@@ -10,8 +10,8 @@ export default function defaultTheme() {
 			'neutral-90': '#1b1b1b',
 			'neutral-100': '#000000',
 			background: '#ffffff',
-			heading: '#000000',
-			text: '#000000',
+			heading: 'inherit',
+			text: 'inherit',
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
@@ -69,6 +69,10 @@ export default function defaultTheme() {
 			color: undefined,
 		},
 		modal: {
+			color: undefined,
+			bgColor: undefined,
+		},
+		dialog: {
 			color: undefined,
 			bgColor: undefined,
 		},

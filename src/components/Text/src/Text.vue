@@ -56,13 +56,27 @@ export default {
 			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
 		},
 		/**
+		 * Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling.
+		 */
+		fontSize: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Line Height, as a valid CSS value. This overrides the internally calculated line-height.
+		 */
+		lineHeight: {
+			type: Number,
+			default: undefined,
+		},
+		/**
 		 * Color
 		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
 		 */
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => color === 'inherit' || chroma.valid(color),
 		},
 		/**
 		 * font style
@@ -108,6 +122,8 @@ export default {
 				fontFamily: this.resolvedFontFamily,
 				fontWeight: this.resolvedFontWeight,
 				color: this.resolvedColor,
+				fontSize: this.fontSize,
+				lineHeight: this.lineHeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
