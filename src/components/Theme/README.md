@@ -363,62 +363,62 @@ export default {
 	},
 };
 </script>
-<style>
-	.theme-demo {
-		display: flex;
-		justify-content: center;
-		gap: 10vw;
-		padding: 24px;
-		background-color: #f1f1f1;
-	}
-	.controls {
-		order: 1;
-		width: 300px;
-	}
-	.color-option {
-		display: flex;
-		gap: 16px;
-		margin-bottom: 8px;
-	}
-	.font-choice {
-		display: flex;
-		gap: 8px;
-		margin-bottom: 20px;
-	}
-	.family-choice {
-		flex-grow: 2;
-	}
-	.demo-container {
-		order: 0;
-		position: relative;
-		height: 600px;
-		width: 360px;
-		overflow: hidden;
-		border-radius: 30px;
-		box-shadow:
-			4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),
-			12.2px 16.4px 18.2px -40px rgba(0, 0, 0, 0.213),
-			23.7px 31.8px 26.4px -40px rgba(0, 0, 0, 0.159),
-			38px 51px 54px -40px rgba(0, 0, 0, 0.098);
-	}
-	.demo-preview {
-		width: 100%;
-		height: 100%;
-		overflow: scroll;
-	}
-	.section {
-		padding: 16px 24px;
-	}
-	.option {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		min-height: 44px;
-	}
-	.neutrals {
-		gap: 8px;
-		display: flex;
-	}
+<style scoped>
+.theme-demo {
+	display: flex;
+	justify-content: center;
+	gap: 10vw;
+	padding: 24px;
+	background-color: #f1f1f1;
+}
+.controls {
+	order: 1;
+	width: 300px;
+}
+.color-option {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 8px;
+}
+.font-choice {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 20px;
+}
+.family-choice {
+	flex-grow: 2;
+}
+.demo-container {
+	order: 0;
+	position: relative;
+	height: 600px;
+	width: 360px;
+	overflow: hidden;
+	border-radius: 30px;
+	box-shadow:
+		4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),
+		12.2px 16.4px 18.2px -40px rgba(0, 0, 0, 0.213),
+		23.7px 31.8px 26.4px -40px rgba(0, 0, 0, 0.159),
+		38px 51px 54px -40px rgba(0, 0, 0, 0.098);
+}
+.demo-preview {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+}
+.section {
+	padding: 16px 24px;
+}
+.option {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 44px;
+}
+.neutrals {
+	gap: 8px;
+	display: flex;
+}
 </style>
 ```
 
@@ -484,7 +484,7 @@ export default {
 	},
 };
 </script>
-<style>
+<style scoped>
 .demos {
 	text-align: center;
 }
@@ -621,7 +621,7 @@ export default {
 	},
 };
 </script>
-<style>
+<style scoped>
 .profile-demo {
 	padding: 2vh 4vw;
 }
