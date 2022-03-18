@@ -191,4 +191,11 @@ export default {
 	position: fixed;
 	overflow: hidden;
 }
+
+@media (--for-desktop-up) {
+	.disableScroll {
+		position: initial;
+	}
+}
+
 </style>
