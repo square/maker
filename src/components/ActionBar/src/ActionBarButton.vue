@@ -12,7 +12,7 @@
 			}
 		]"
 		:type="type"
-		:disabled="disabled"
+		:disabled="isDisabled"
 		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
@@ -175,6 +175,10 @@ export default {
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,
 			});
+		},
+
+		isDisabled() {
+			return this.disabled || this.loading;
 		},
 	},
 
