@@ -332,6 +332,17 @@ export default {
 					</m-action-bar-button>
 				</m-inline-action-bar>
 			</div>
+			<div>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						key="confirm"
+						loading
+						full-width
+					>
+						Loading
+					</m-action-bar-button>
+				</m-inline-action-bar>
+			</div>
 		</div>
 	</div>
 </template>

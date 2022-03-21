@@ -27,7 +27,7 @@ export default {
 		element: {
 			type: String,
 			default: 'p',
-			validator: (element) => ['p', 'span', 'li'].includes(element),
+			validator: (element) => ['p', 'span', 'div', 'li'].includes(element),
 		},
 		/**
 		 * Size of text
