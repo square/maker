@@ -120,7 +120,6 @@ export default {
 	background-color: var(--color-main);
 	border: none;
 	border-radius: 8px;
-	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
 		var(--focus-border, 0 0);
@@ -179,7 +178,7 @@ export default {
 	width: max-content;
 	max-width: 100%;
 	overflow: hidden;
-	line-height: 1;
+	line-height: 1.5;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
