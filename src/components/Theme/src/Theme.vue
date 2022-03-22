@@ -1,46 +1,88 @@
 <template>
-	<div>
+	<div
+		:class="$s.Theme"
+		:style="styles"
+	>
 		<slot />
 	</div>
 </template>
 
 <script>
-import { kebabCase } from 'lodash';
+import { merge, find } from 'lodash';
+import key from './key';
+import defaultTheme from './default-theme';
+import { resolve, getPath } from './utils';
+
+function resolveTheme(data, parentTheme, theme, profileId) {
+	merge(data, parentTheme, theme);
+	merge(data, find(data.profiles, { id: profileId }));
+
+	data.colors = {
+		...data.colors,
+	};
+
+	data.resolve = resolve;
+	data.getPath = getPath;
+}
 
 export default {
+	inject: {
+		parentTheme: {
+			default: defaultTheme(),
+			from: key,
+		},
+	},
+	provide() {
+		return {
+			// provided data needs to be reactive
+			[key]: this.$data,
+		};
+	},
 	inheritAttrs: false,
-
-	/* TODO
-	 * Declaring the top-level design-tokens as props will make them
-	 * reactive and easier to watch & re-render
-	 */
-	mounted() {
-		this.applyTheme();
-	},
-
-	updated() {
-		this.applyTheme();
-	},
-
-	methods: {
-		applyTheme() {
-			const { $el } = this;
-
-			// First level
-			Object.entries(this.$attrs).forEach(([namespace, designTokens]) => {
-				// Second level
-				Object.entries(designTokens).forEach(([tokenName, tokenValue]) => {
-					const hashedName = `--${this.hash(namespace, tokenName)}`;
-					$el.style.setProperty(hashedName, tokenValue);
-				});
-			});
+	props: {
+		theme: {
+			type: Object,
+			default: () => ({}),
 		},
-
-		hash(namespace, tokenName) {
-			// TODO: Update to use hash
-			return `${kebabCase(namespace)}-${kebabCase(tokenName)}`;
-			// return `maker-${kebabCase(namespace)}-${kebabCase(tokenName)}`;
+		profile: {
+			type: String,
+			default: 'defaultProfile',
 		},
+	},
+	data() {
+		const data = {};
+		resolveTheme(data, this.parentTheme, this.theme, this.profile);
+		return data;
+	},
+	computed: {
+		styles() {
+			const { colors } = this;
+
+			return {
+				'--neutral-0': colors['neutral-0'],
+				'--neutral-10': colors['neutral-10'],
+				'--neutral-20': colors['neutral-20'],
+				'--neutral-80': colors['neutral-80'],
+				'--neutral-90': colors['neutral-90'],
+				'--neutral-100': colors['neutral-100'],
+				'--color-background': colors.background,
+				'--color-heading': colors.heading,
+				'--color-text': colors.text,
+				'--color-elevation': colors['color-elevation'],
+				'--color-overlay': colors['color-overlay'],
+			};
+		},
+	},
+	beforeUpdate() {
+		// update theme on prop changes
+		resolveTheme(this.$data, this.parentTheme, this.theme, this.profile);
 	},
 };
 </script>
+
+<style module="$s">
+.Theme {
+	color: var(--color-text);
+	background-color: var(--color-background);
+}
+</style>

@@ -2,12 +2,12 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`size_${size}`],
-			$s[`shape_${shape}`],
-			$s[`align_${align}`],
+			$s[`size_${resolvedSize}`],
+			$s[`shape_${resolvedShape}`],
+			$s[`align_${resolvedAlign}`],
 			{
-				[$s.fullWidth]: fullWidth,
-				[$s.iconButton]: isSingleChild() && !fullWidth,
+				[$s.fullWidth]: resolvedFullWidth,
+				[$s.iconButton]: isSingleChild() && !resolvedFullWidth,
 				[$s.loading]: loading,
 			}
 		]"
@@ -41,6 +41,7 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import getContrast from '@square/maker/utils/get-contrast';
 
 function getFocus(chromaColor) {
@@ -138,6 +139,13 @@ export default {
 		MLoading,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -153,7 +161,7 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'medium',
+			default: undefined,
 			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
@@ -161,14 +169,14 @@ export default {
 		 */
 		fullWidth: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * Background color of button
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -184,7 +192,7 @@ export default {
 		 */
 		variant: {
 			type: String,
-			default: 'primary',
+			default: undefined,
 			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
 		},
 		/**
@@ -192,7 +200,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'rounded',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -207,7 +215,7 @@ export default {
 		 */
 		align: {
 			type: String,
-			default: 'center',
+			default: undefined,
 			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
 		},
 		/**
@@ -220,10 +228,11 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('button', ['color', 'size', 'textColor', 'variant', 'shape', 'align', 'fullWidth']),
 		style() {
-			return VARIANTS[this.variant]({
-				color: this.color,
-				textColor: this.textColor,
+			return VARIANTS[this.resolvedVariant]({
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
 			});
 		},
 		isDisabled() {
@@ -353,16 +362,13 @@ export default {
 	}
 
 	&:disabled {
-		cursor: initial;
-
-		& > * {
-			opacity: 0.4;
-		}
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px #fff,
+			0 0 0 1px var(--neutral-20, #fff),
 			0 0 0 3px var(--color-focus);
 	}
 

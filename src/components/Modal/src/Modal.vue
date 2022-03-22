@@ -2,19 +2,22 @@
 	<m-touch-capture
 		ref="modal"
 		:class="$s.Modal"
-		:style="modalStyles"
+		:style="style"
 		:prevent-default="preventDefault"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
 	>
+		<!-- @slot Modal content -->
 		<slot />
 	</m-touch-capture>
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import { throttle } from 'lodash';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MTouchCapture } from '@square/maker/components/TouchCapture';
 import modalApi from './modal-api';
 
@@ -27,6 +30,10 @@ export default {
 
 	inject: {
 		modalApi,
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	props: {
@@ -37,6 +44,22 @@ export default {
 			type: Function,
 			required: false,
 			default: undefined,
+		},
+		/**
+		 * Background color of container
+		 */
+		bgColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
+		},
+		/**
+		 * Text color of container
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 	},
 
@@ -51,6 +74,16 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('modal', ['bgColor', 'color']),
+
+		style() {
+			return {
+				'--bg-color': this.resolvedBgColor,
+				'--color': this.resolvedColor,
+				...this.modalStyles,
+			};
+		},
+
 		scrollTop() {
 			return this.$refs.modal && this.$refs.modal.$el
 				? this.$refs.modal.$el.scrollTop : 0;
@@ -111,7 +144,8 @@ export default {
 .Modal {
 	height: 100%;
 	overflow: scroll;
-	background: #f5f6f7;
+	color: var(--color, inherit);
+	background: var(--bg-color, #f5f6f7);
 	transition: transform 0.2s linear;
 }
 

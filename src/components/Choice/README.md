@@ -168,7 +168,7 @@ export default {
 | v-model        | `undefined` | —                 | —                               | Selected choice option                                  |
 | disabled       | `boolean`   | `false`           | —                               | Disables choice option                                  |
 | mode           | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
-| selected-color | `string`    | `'#222'`          | —                               | Background color of a selected option                   |
+| selected-color | `string`    | —                 | —                               | Background color of a selected option                   |
 
 
 ## Choice Slots

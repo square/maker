@@ -253,6 +253,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | ------- | -------- | ---------- | ------------------------------------- | -------------- |
 | type    | `string` | `'info'`   | `error`, `success`, `warning`, `info` | type of notice |
 | variant | `string` | `'inline'` | `inline`, `block`                     | notice variant |
+| color   | `string` | —          | —                                     | notice color   |
 
 
 ## Slots
