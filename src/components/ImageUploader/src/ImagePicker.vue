@@ -187,15 +187,15 @@ export default {
 	box-sizing: border-box;
 	width: 96px;
 	height: 96px;
-	background-color: white;
-	border: 1px solid rgba(0, 0, 0, 0.15);
+	background-color: var(--color-background, #fff);
+	border: 1px solid var(--neutral-20, rgba(0, 0, 0, 0.15));
 	border-radius: 8px;
 	cursor: pointer;
 	transition: background-color 150ms linear;
 }
 
 .ImagePickerInputContainer.isDragged {
-	background-color: #f5f4f4;
+	background-color: var(--neutral-10, #f5f4f4);
 }
 
 .ImagePickerDragIcon {

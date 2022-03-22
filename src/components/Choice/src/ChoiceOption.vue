@@ -66,22 +66,17 @@ export default {
 */
 .Button {
 	--border-radius: 8px;
-	--color-white: #fff;
-	--normal-text-color: #222;
-	--normal-disabled-text-color: rgba(0, 0, 0, 0.4);
-	--normal-background-color: #f2f2f2;
-	--color-focus: rgba(0, 0, 0, 0.3);
 	--button-padding: 12px 24px;
 
 	flex-shrink: 0;
 	padding: var(--button-padding);
-	color: var(--normal-text-color);
+	color: var(--neutral-90, #222);
 	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
 	line-height: inherit;
 	text-align: left;
-	background-color: var(--normal-background-color);
+	background-color: var(--neutral-10, #f2f2f2);
 	border: none;
 	border-radius: var(--border-radius);
 	outline: none;
@@ -94,22 +89,22 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--color-white),
-			0 0 0 3px var(--color-focus);
+			0 0 0 1px var(--neutral-10, #fff),
+			0 0 0 3px var(--neutral-20, rgba(0, 0, 0, 0.3));
 	}
 
 	&:disabled {
-		color: var(--normal-disabled-text-color);
-		cursor: initial;
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 }
 
 .selected {
-	color: var(--selected-text-color);
-	background-color: var(--selected-background-color);
+	color: var(--selected-text-color, var(--neutral-10, #f1f1f1));
+	background-color: var(--selected-background-color, var(--neutral-90, #222));
 
 	&:disabled {
-		color: var(--selected-disabled-text-color);
+		color: var(--selected-disabled-text-color, var(--neutral-20, #666));
 	}
 }
 </style>

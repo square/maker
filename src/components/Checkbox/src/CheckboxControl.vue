@@ -6,6 +6,7 @@
 			:value="value"
 			type="checkbox"
 			:class="$s.Checkbox"
+			:disabled="disabled"
 			v-bind="$attrs"
 			v-on="$listeners"
 		>
@@ -51,6 +52,13 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Toggles checkbox disabled state
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	computed: {
@@ -91,12 +99,8 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: rgba(0, 0, 0, 0.3);
-	--color-border-active: rgba(0, 0, 0, 0.9);
-	--color-background: rgba(0, 0, 0, 0.9);
-	--color-foreground: rgba(255, 255, 255, 0.95);
-	--color-disabled: rgba(0, 0, 0, 0.05);
-	--color-disabled-checked: rgba(0, 0, 0, 0.15);
+	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
+	--color-fill: var(--neutral-90, rgba(0, 0, 0, 0.9));
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -106,36 +110,27 @@ export default {
 	height: 20px;
 	margin: 0;
 	padding: 0;
-	background-color: #fff;
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
 	outline: none;
 	cursor: inherit;
-	transition: background-color 0.2s ease;
+	transition:
+		border 0.2s ease,
+		background-color 0.2s ease;
 	appearance: none;
 
 	&:invalid {
 		border-color: var(--color-error);
 	}
 
-	&:disabled {
-		background-color: var(--color-disabled);
-		border-color: var(--color-disabled);
-		cursor: not-allowed;
-	}
-
 	&:checked {
-		background-color: var(--color-background);
-		border-color: var(--color-border-active);
+		background-color: var(--color-fill);
+		border-color: var(--color-fill);
 	}
 
 	&:hover:not(:disabled, :invalid) {
-		border-color: var(--color-border-active);
-	}
-
-	&:checked:disabled {
-		background-color: var(--color-disabled-checked);
-		border-color: var(--color-disabled);
+		border-color: var(--color-fill);
 	}
 
 	&:checked:invalid {
@@ -154,7 +149,7 @@ export default {
 	transition: opacity 0.2s ease;
 	pointer-events: none;
 	fill: none;
-	stroke: var(--color-foreground);
+	stroke: var(--color-background, #fff);
 	stroke-width: 2px;
 	stroke-linecap: round;
 	stroke-linejoin: round;

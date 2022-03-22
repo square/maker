@@ -1,8 +1,9 @@
 <template>
-	<m-inline-form-control-layout>
+	<m-inline-form-control-layout :disabled="disabled">
 		<template #control>
 			<checkbox-control
 				v-bind="$attrs"
+				:disabled="disabled"
 				v-on="$listeners"
 			/>
 		</template>
@@ -39,6 +40,16 @@ export default {
 	model: {
 		prop: 'checked',
 		event: 'checkbox:update',
+	},
+
+	props: {
+		/**
+		 * Toggles radio disabled state
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 	},
 };
 </script>

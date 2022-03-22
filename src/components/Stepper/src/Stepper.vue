@@ -5,9 +5,9 @@
 		<m-button
 			variant="primary"
 			size="small"
-			:shape="shape"
-			:color="color"
-			:text-color="textColor"
+			:color="resolvedColor"
+			:text-color="resolvedTextColor"
+			:shape="resolvedShape"
 			:disabled="value === minVal"
 			@click="decrement"
 		>
@@ -19,9 +19,9 @@
 		<m-button
 			variant="primary"
 			size="small"
-			:shape="shape"
-			:color="color"
-			:text-color="textColor"
+			:color="resolvedColor"
+			:text-color="resolvedTextColor"
+			:shape="resolvedShape"
 			:disabled="value === maxVal"
 			@click="increment"
 		>
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import chroma from 'chroma-js';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MButton } from '@square/maker/components/Button';
 import Plus from '@square/maker-icons/Plus';
 import Minus from '@square/maker-icons/Minus';
@@ -40,6 +42,13 @@ export default {
 		MButton,
 		Plus,
 		Minus,
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
@@ -76,26 +85,30 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#cccccc',
+			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 		/**
 		 * stepper button text color
 		 */
 		textColor: {
 			type: String,
-			default: '#000000',
+			default: undefined,
+			validator: (color) => chroma.valid(color),
 		},
 		/**
 		 * stepper button shape
 		 */
 		shape: {
 			type: String,
-			default: 'pill',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 	},
 
 	computed: {
+		...resolveThemeableProps('stepper', ['color', 'textColor', 'shape']),
+
 		maxVal() {
 			return Number.parseInt(this.max, 10);
 		},
@@ -143,7 +156,7 @@ export default {
 
 .Quantity {
 	margin: 0 16px;
-	color: inherit;
+	color: var(--neutral-90, inherit);
 	font-weight: 500;
 	font-family: inherit;
 	font-feature-settings: "tnum";

@@ -2,7 +2,7 @@
 	<button
 		:class="[
 			$s.Button,
-			$s[`size_${size}`],
+			$s[`size_${resolvedSize}`],
 			{
 				[$s.loading]: loading,
 			}
@@ -27,13 +27,13 @@
 <script>
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import assert from '@square/maker/utils/assert';
 
 function textButton(tokens) {
 	const textColor = tokens.color ? chroma(tokens.color) : undefined;
 	return {
-		'--color-main': 'color',
-		'--color-contrast': textColor ? textColor.hex() : undefined,
+		color: textColor ? textColor.hex() : undefined,
 	};
 }
 
@@ -45,6 +45,13 @@ function textButton(tokens) {
 export default {
 	components: {
 		MLoading,
+	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
@@ -62,7 +69,7 @@ export default {
 		 */
 		size: {
 			type: String,
-			default: 'medium',
+			default: undefined,
 			validator: (size) => ['medium', 'large'].includes(size),
 		},
 		/**
@@ -90,9 +97,10 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('textbutton', ['size', 'color']),
 		style() {
 			return textButton({
-				color: this.color,
+				color: this.resolvedColor,
 			});
 		},
 		isDisabled() {
@@ -113,11 +121,11 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-contrast, inherit);
+	color: var(--neutral-90);
 	font-weight: 500;
 	font-family: inherit;
 	vertical-align: middle;
-	background-color: var(--color-main);
+	background-color: transparent;
 	border: none;
 	border-radius: 8px;
 	outline: none;
@@ -149,7 +157,7 @@ export default {
 		cursor: initial;
 
 		& > * {
-			opacity: 0.4;
+			opacity: 0.5;
 		}
 	}
 
@@ -168,7 +176,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-contrast);
+	color: var(--neutral-90);
 	background-color: transparent;
 }
 
