@@ -119,15 +119,10 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 8px;
-	box-shadow:
-		var(--outline-border, 0 0),
-		var(--focus-border, 0 0);
+	border-radius: 4px;
+	outline-color: currentColor;
 	cursor: pointer;
-	transition:
-		color 0.2s ease-in,
-		background-color 0.2s ease-in,
-		box-shadow 0.2s ease-in;
+	transition: box-shadow 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -142,6 +137,11 @@ export default {
 
 	&.size_large {
 		font-size: 16px;
+	}
+
+	&:active,
+	&:focus {
+		box-shadow: 0 0 0 1px currentColor;
 	}
 
 	&:disabled {
