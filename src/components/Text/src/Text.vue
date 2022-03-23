@@ -23,7 +23,6 @@ export default {
 	props: {
 		/**
 		 * HTML Element wrapper
-		 *
 		 */
 		element: {
 			type: String,
