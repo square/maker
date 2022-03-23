@@ -6,7 +6,6 @@ const MIN_SIZE = -2;
 const MAX_SIZE = 7;
 const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
-const DEFAULT_TAG_NAME = 'p';
 
 /**
  * @inheritAttrs p
@@ -28,7 +27,7 @@ export default {
 		 */
 		element: {
 			type: String,
-			default: DEFAULT_TAG_NAME,
+			default: 'p',
 			validator: (element) => ['p', 'span', 'div', 'li'].includes(element),
 		},
 		/**
@@ -146,7 +145,7 @@ export default {
 		 */
 		const defaultSlot = this.$slots.default;
 
-		const element = this.element === null ? DEFAULT_TAG_NAME : this.element;
+		const element = this.element || 'p';
 
 		return createElement(element, {
 			class: [
