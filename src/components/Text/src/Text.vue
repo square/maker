@@ -178,6 +178,12 @@ export default {
 	--min-fs--1: calc(var(--min-fs-0) / var(--min-font-size-scale));
 	--min-fs-0: var(--min-font-size);
 	--min-fs-1: calc(var(--min-fs-0) * var(--min-font-size-scale));
+	--min-fs-2: calc(var(--min-fs-1) * var(--min-font-size-scale));
+	--min-fs-3: calc(var(--min-fs-2) * var(--min-font-size-scale));
+	--min-fs-4: calc(var(--min-fs-3) * var(--min-font-size-scale));
+	--min-fs-5: calc(var(--min-fs-4) * var(--min-font-size-scale));
+	--min-fs-6: calc(var(--min-fs-5) * var(--min-font-size-scale));
+	--min-fs-7: calc(var(--min-fs-6) * var(--min-font-size-scale));
 
 	/* max breakpoint config */
 	--max-resolution: 1280; /* arbitrary value */
@@ -189,6 +195,12 @@ export default {
 	--max-fs--1: calc(var(--max-fs-0) / var(--max-font-size-scale));
 	--max-fs-0: var(--max-font-size);
 	--max-fs-1: calc(var(--max-fs-0) * var(--max-font-size-scale));
+	--max-fs-2: calc(var(--max-fs-1) * var(--max-font-size-scale));
+	--max-fs-3: calc(var(--max-fs-2) * var(--max-font-size-scale));
+	--max-fs-4: calc(var(--max-fs-3) * var(--max-font-size-scale));
+	--max-fs-5: calc(var(--max-fs-4) * var(--max-font-size-scale));
+	--max-fs-6: calc(var(--max-fs-5) * var(--max-font-size-scale));
+	--max-fs-7: calc(var(--max-fs-6) * var(--max-font-size-scale));
 
 	/* interpolation variables */
 	--resolution-range: calc(var(--max-resolution) - var(--min-resolution));
@@ -199,12 +211,24 @@ export default {
 	--range-fs--1: calc(var(--max-fs--1) - var(--min-fs--1));
 	--range-fs-0: calc(var(--max-fs-0) - var(--min-fs-0));
 	--range-fs-1: calc(var(--max-fs-1) - var(--min-fs-1));
+	--range-fs-2: calc(var(--max-fs-2) - var(--min-fs-2));
+	--range-fs-3: calc(var(--max-fs-3) - var(--min-fs-3));
+	--range-fs-4: calc(var(--max-fs-4) - var(--min-fs-4));
+	--range-fs-5: calc(var(--max-fs-5) - var(--min-fs-5));
+	--range-fs-6: calc(var(--max-fs-6) - var(--min-fs-6));
+	--range-fs-7: calc(var(--max-fs-7) - var(--min-fs-7));
 
 	/* fluid type scale */
 	--fs--2: max(12px, calc(var(--min-fs--2) * 1px + var(--range-fs--2) * var(--interpolate-by)));
 	--fs--1: max(14px, calc(var(--min-fs--1) * 1px + var(--range-fs--1) * var(--interpolate-by)));
 	--fs-0: calc(var(--min-fs-0) * 1px + var(--range-fs-0) * var(--interpolate-by));
 	--fs-1: calc(var(--min-fs-1) * 1px + var(--range-fs-1) * var(--interpolate-by));
+	--fs-2: calc(var(--min-fs-2) * 1px + var(--range-fs-2) * var(--interpolate-by));
+	--fs-3: calc(var(--min-fs-3) * 1px + var(--range-fs-3) * var(--interpolate-by));
+	--fs-4: calc(var(--min-fs-4) * 1px + var(--range-fs-4) * var(--interpolate-by));
+	--fs-5: calc(var(--min-fs-5) * 1px + var(--range-fs-5) * var(--interpolate-by));
+	--fs-6: calc(var(--min-fs-6) * 1px + var(--range-fs-6) * var(--interpolate-by));
+	--fs-7: calc(var(--min-fs-7) * 1px + var(--range-fs-7) * var(--interpolate-by));
 
 	/* line height config */
 	--line-height: 1.5;
@@ -215,6 +239,12 @@ export default {
 	--lh--1: calc(var(--lh-0) / var(--line-height-scale));
 	--lh-0: var(--line-height);
 	--lh-1: calc(var(--lh-0) * var(--line-height-scale));
+	--lh-2: calc(var(--lh-1) * var(--line-height-scale));
+	--lh-3: calc(var(--lh-2) * var(--line-height-scale));
+	--lh-4: calc(var(--lh-3) * var(--line-height-scale));
+	--lh-5: calc(var(--lh-4) * var(--line-height-scale));
+	--lh-6: calc(var(--lh-5) * var(--line-height-scale));
+	--lh-7: calc(var(--lh-6) * var(--line-height-scale));
 }
 
 .fontstyle_normal {
@@ -270,4 +300,35 @@ export default {
 	font-size: var(--fs-1);
 	line-height: var(--lh-1);
 }
+
+.Paragraph.size_2 {
+	font-size: var(--fs-2);
+	line-height: var(--lh-2);
+}
+
+.Paragraph.size_3 {
+	font-size: var(--fs-3);
+	line-height: var(--lh-3);
+}
+
+.Paragraph.size_4 {
+	font-size: var(--fs-4);
+	line-height: var(--lh-4);
+}
+
+.Paragraph.size_5 {
+	font-size: var(--fs-5);
+	line-height: var(--lh-5);
+}
+
+.Paragraph.size_6 {
+	font-size: var(--fs-6);
+	line-height: var(--lh-6);
+}
+
+.Paragraph.size_7 {
+	font-size: var(--fs-7);
+	line-height: var(--lh-7);
+}
+
 </style>
