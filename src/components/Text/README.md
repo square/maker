@@ -1,6 +1,6 @@
 # Text
 
-Use the Text component for regular body text. There are 10 text sizes: -2 to 7. The font family, font weight, and text color are customizable.
+Use the Text component for regular body text. There are 4 text sizes. The font family, font weight, and text color are customizable.
 
 ```vue
 <template>
@@ -34,7 +34,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 | Prop           | Type     | Default     | Possible values                                               | Description                                                                                 |
 | -------------- | -------- | ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | element        | `string` | `'p'`       | `p`, `span`, `div`, `li`                                      | HTML Element wrapper                                                                        |
-| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of text                                                                                |
+| size           | `number` | —           | `1`, `0`, `-1`, `-2`                                          | Size of text                                                                                |
 | font-family    | `string` | —           | —                                                             | Font family                                                                                 |
 | font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                            |
 | font-size      | `string` | —           | —                                                             | Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling. |
