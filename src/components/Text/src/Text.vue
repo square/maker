@@ -3,7 +3,7 @@ import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 const MIN_SIZE = -2;
-const MAX_SIZE = 1;
+const MAX_SIZE = 7;
 const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
 
@@ -31,7 +31,7 @@ export default {
 		},
 		/**
 		 * Size of text
-		 * @values 1, 0, -1, -2
+		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
 		 */
 		size: {
 			type: Number,
