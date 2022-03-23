@@ -6,7 +6,7 @@ Use the Text component for regular body text. There are 10 text sizes: -2 to 7. 
 <template>
 	<div>
 		<m-text
-			v-for="size in [1, 0, -1, -2]"
+			v-for="size in [7, 6, 5, 4, 3, 2, 1, 0, -1, -2]"
 			:key="size"
 			:size="size"
 		>
