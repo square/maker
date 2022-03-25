@@ -156,7 +156,6 @@ export default {
 }
 
 .variant_outline {
-	--color-background: transparent;
 	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
 }
 
@@ -196,7 +195,7 @@ export default {
 	font-family: inherit;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	background-color: var(--color-background);
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: inherit;
 	outline: none;

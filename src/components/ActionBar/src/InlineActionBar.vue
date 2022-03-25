@@ -51,11 +51,14 @@ export default {
 </script>
 
 <style module="$s">
+/* tempfix: chrome-bottom-offset - value set outside of maker */
 /* stylelint-disable length-zero-no-unit */
 .ActionBarWrapper {
+	--actionbar-size: 48px;
 	--actionbar-bottom-padding:
 		calc(
 			24px
+			+ var(--actionbar-size)
 			+ env(safe-area-inset-bottom, 24px)
 			+ var(--chrome-bottom-offset, 0px)
 		);

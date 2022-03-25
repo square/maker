@@ -149,7 +149,7 @@ export default {
 	transition: transform 0.2s linear;
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (--for-tablet-landscape-up) {
 	.Modal {
 		width: 600px;
 		min-height: 180px;

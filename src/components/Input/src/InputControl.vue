@@ -126,7 +126,6 @@ export default {
 }
 
 .variant_outline {
-	--color-background: transparent;
 	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
 }
 
@@ -167,9 +166,9 @@ export default {
 	font-size: 16px;
 	font-family: inherit;
 	font-family: var(--font-family);
-	background-color: var(--color-background);
+	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: min(32px, var(--radii-default, 8px));
+	border-radius: var(--border-radius);
 	transition: border-color 0.2s ease;
 
 	&:not(.disabled, .invalid):hover,
@@ -196,7 +195,6 @@ export default {
 	text-overflow: ellipsis;
 	background-color: transparent;
 	border: none;
-	border-radius: inherit;
 	outline: none;
 	box-shadow: none;
 	cursor: inherit;

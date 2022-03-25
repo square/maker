@@ -18,7 +18,7 @@
 				/>
 				<div
 					ref="dialog"
-					:class="$s.DialogContent"
+					:class="$s.DialogContentWrapper"
 				>
 					<v :nodes="dialogApi.state.vnode" />
 				</div>
@@ -159,9 +159,17 @@ export default {
 	justify-content: center;
 }
 
-@media screen and (min-width: 840px) {
+.DialogContentWrapper {
+	width: 100%;
+}
+
+@media screen and (--for-tablet-landscape-up) {
 	.DialogLayer {
 		align-items: center;
+	}
+
+	.DialogContentWrapper {
+		width: auto;
 	}
 }
 
@@ -171,10 +179,23 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: var(--color-overlay, rgba(0, 0, 0, 0.3));
 }
 
+/**
+ * Position fixed prevents unnecessary body scrolling and jumpiness on dialogs
+ * when using the pin-input component inside of them on IOS devices
+ *
+ */
 .disableScroll {
+	position: fixed;
 	overflow: hidden;
 }
+
+@media (--for-desktop-up) {
+	.disableScroll {
+		position: initial;
+	}
+}
+
 </style>

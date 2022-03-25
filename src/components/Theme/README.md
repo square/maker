@@ -1,24 +1,329 @@
 # Theme
 
-You can add the Theme component anywhere to encapsulate a group of components you would like to theme. If you would like to theme all the components in your entire app then you would add the Theme component to the root level of your app, like so:
+The theme component provides an optional way to globally customize the visual styles of all components in Maker. There are a library of Design Tokens available that apply to several components, as well as the ability to customize specific components.
+
+Any components within the theme component will inherit the tokens provided. We recommend wrapping your application / site with this component to style all Maker components the same way.
 
 ```vue
 <template>
-	<m-theme :theme="theme">
-		<!-- <app /> -->
-	</m-theme>
+	<div class="theme-demo">
+		<div class="controls">
+			<m-heading
+				:size="1"
+			>
+				Colors
+			</m-heading>
+			<label class="color-option">
+				<input
+					v-model="theme.colors.background"
+					type="color"
+				>
+				Background
+			</label>
+			<label class="color-option">
+				<input
+					v-model="theme.colors.primary"
+					type="color"
+				>
+				Primary
+			</label>
+			<label class="color-option">
+				<input
+					v-model="theme.colors.heading"
+					type="color"
+				>
+				Heading
+			</label>
+			<label class="color-option">
+				<input
+					v-model="theme.colors.text"
+					type="color"
+				>
+				Text
+			</label>
+			<m-heading
+				:size="0"
+			>
+				Neutrals
+			</m-heading>
+			<div class="color-option neutrals">
+				<input
+					v-model="theme.colors['neutral-0']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-10']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-20']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-80']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-90']"
+					type="color"
+				>
+				<input
+					v-model="theme.colors['neutral-100']"
+					type="color"
+				>
+			</div>
+			<m-heading
+				:size="1"
+			>
+				Fonts
+			</m-heading>
+			<m-heading
+				:size="0"
+			>
+				Heading
+			</m-heading>
+			<div class="font-choice">
+				<m-select
+					v-model="theme.heading.fontFamily"
+					class="family-choice"
+					:options="fontOptions"
+					@change="updateFont"
+				/>
+				<m-select
+					v-model="theme.heading.fontWeight"
+					:options="defaultWeights"
+					@change="updateFont"
+				/>
+			</div>
+			<m-heading
+				:size="0"
+			>
+				Text
+			</m-heading>
+			<div class="font-choice">
+				<m-select
+					v-model="theme.text.fontFamily"
+					class="family-choice"
+					:options="fontOptions"
+					@change="updateFont"
+				/>
+				<m-select
+					v-model="theme.text.fontWeight"
+					:options="defaultWeights"
+					@change="updateFont"
+				/>
+			</div>
+			<label>
+				<input
+					v-model="theme.fonts.baseSize"
+					type="range"
+					min="16"
+					max="22"
+					step="1"
+				>
+				Base font size
+			</label>
+			<label>
+				<input
+					v-model="theme.fonts.sizeScale"
+					type="range"
+					min="1.067"
+					max="1.618"
+					step="0.01"
+				>
+				Contrast
+			</label>
+		</div>
+		<div class="demo-container">
+			<div class="demo-preview">
+				<m-theme :theme="theme">
+					<div class="section">
+						<m-heading
+							:size="2"
+							class="item-title"
+						>
+							Cappuccino
+						</m-heading>
+						<m-heading
+							:size="1"
+							class="item-price"
+						>
+							$4.00
+						</m-heading>
+						<m-text
+							:size="0"
+							class="item-description"
+						>
+							The essence of handcrafting. Our rich espresso is artfully
+							marbled with freshly micro-foamed milk.
+						</m-text>
+						<m-stepper
+							v-model="quantity"
+							min="1"
+							max="10"
+						/>
+					</div>
+					<m-container>
+						<template
+							#label
+						>
+							<m-heading
+								:size="-1"
+							>
+								Size
+							</m-heading>
+						</template>
+						<div class="option">
+							<m-radio
+								v-model="size"
+								value="sm"
+							>
+								Small
+							</m-radio>
+							<m-text
+								:size="-1"
+							>
+								$3.00
+							</m-text>
+						</div>
+						<m-divider />
+						<div class="option">
+							<m-radio
+								v-model="size"
+								value="md"
+							>
+								Medium
+							</m-radio>
+							<m-text
+								:size="-1"
+							>
+								$3.50
+							</m-text>
+						</div>
+						<m-divider />
+						<div class="option">
+							<m-radio
+								v-model="size"
+								value="lg"
+							>
+								Large
+							</m-radio>
+							<m-text
+								:size="-1"
+							>
+								$4.00
+							</m-text>
+						</div>
+					</m-container>
+					<m-container>
+						<template
+							#label
+						>
+							<m-heading
+								:size="-1"
+							>
+								Modifiers
+							</m-heading>
+						</template>
+						<template #required-label>
+							Optional
+						</template>
+						<div class="option">
+							<m-checkbox>
+								Add Cream
+							</m-checkbox>
+						</div>
+						<m-divider />
+						<div class="option">
+							<m-checkbox>
+								Add Sugar
+							</m-checkbox>
+						</div>
+						<m-divider />
+						<div class="option">
+							<m-checkbox>
+								Add Cinnamon
+							</m-checkbox>
+						</div>
+					</m-container>
+					<m-container>
+						<template
+							#label
+						>
+							<m-heading
+								:size="-1"
+							>
+								Notes
+							</m-heading>
+						</template>
+						<template #required-label>
+							Optional
+						</template>
+						<m-input
+							variant="outline"
+							placeholder="Details"
+						/>
+					</m-container>
+					<m-inline-action-bar>
+						<m-action-bar-button
+							key="confirm"
+							full-width
+						>
+							Add to Order
+						</m-action-bar-button>
+					</m-inline-action-bar>
+				</m-theme>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MDivider } from '@square/maker/components/Divider';
+import { MStepper } from '@square/maker/components/Stepper';
+import { MContainer } from '@square/maker/components/Container';
+import { MRadio } from '@square/maker/components/Radio';
+import { MCheckbox } from '@square/maker/components/Checkbox';
+import { MInput } from '@square/maker/components/Input';
+import { MSelect } from '@square/maker/components/Select';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 
 export default {
 	components: {
 		MTheme,
+		MHeading,
+		MText,
+		MDivider,
+		MStepper,
+		MContainer,
+		MRadio,
+		MCheckbox,
+		MInput,
+		MSelect,
+		MInlineActionBar,
+		MActionBarButton,
 	},
 
 	data() {
 		return {
+			defaultWeights: [{ label: '300', value: '300' }, { label: '400', value: '400' }, { label: '600', value: '600' }],
+			fontOptions: [
+				{
+					label: 'Sans-serif',
+					value: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+				},
+				{
+					label: 'Serif',
+					value: 'Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
+				},
+				{
+					label: 'Mono',
+					value: 'Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace',
+				},
+			],
 			theme: {
 				/* theme config */
 			},
@@ -173,692 +478,293 @@ export default {
 		return {
 			theme: {
 				colors: {
+					background: '#ffffff',
+					text: '#000000',
+					heading: '#000000',
 					primary: '#000000',
+					'neutral-0': '#ffffff',
+					'neutral-10': '#f1f1f1',
+					'neutral-20': '#d3d3d3',
+					'neutral-80': '#707070',
+					'neutral-90': '#1b1b1b',
+					'neutral-100': '#000000',
 				},
-				button: {
-					size: 'medium',
-					variant: 'primary',
-					shape: 'rounded',
-					color: '@colors.primary',
-					align: 'center',
-					fullWidth: false,
-					textColor: '#ffffff',
+				heading: {
+					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+					fontWeight: '600',
+				},
+				text: {
+					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+					fontWeight: '400',
+				},
+				fonts: {
+					baseSize: 16,
+					sizeScale: 1.15,
 				},
 			},
+			size: 'sm',
+			selected: 'choice-1',
+			quantity: 1,
 		};
+	},
+
+	methods: {
+		updateFont() {
+
+		},
 	},
 };
 </script>
-```
-
-
-## Theming Text Buttons
-
-`size`, and `color`,are themeable props on TextButton.
-
-```vue
-<template>
-	<div>
-		<h3>no theme</h3>
-		<m-text-button>theme-less textbutton</m-text-button>
-		<br>
-
-		<h3>theme</h3>
-		pick theme textbutton color
-		<br>
-		<input
-			v-model="theme.textbutton.color"
-			type="color"
-		>
-		<br>
-
-		pick theme textbutton size
-		<br>
-		<select v-model="theme.textbutton.size">
-			<option value="medium">
-				medium
-			</option>
-			<option value="large">
-				large
-			</option>
-		</select>
-		<br><br>
-
-		<m-theme :theme="theme">
-			<m-text-button>default themed text button</m-text-button>
-			<br><br>
-			<m-text-button color="#000000">
-				always black textbutton
-			</m-text-button>
-			<br><br>
-			<m-text-button size="medium">
-				always medium button
-			</m-text-button>
-			<br><br>
-		</m-theme>
-	</div>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MTextButton } from '@square/maker/components/Button';
-
-export default {
-	components: {
-		MTheme,
-		MTextButton,
-	},
-	data() {
-		return {
-			theme: {
-				textbutton: {
-					size: 'medium',
-					color: undefined,
-				},
-			},
-		};
-	},
-};
-</script>
-```
-
-## Theming ActionBarButtons
-
-`color`, `textColor`, `shape`, `align`, and `fullWidth` are themeable props in ActionBarButtons. If you set values for any of these props at a theme level then all Buttons within your App will inherit those values. You can still customize any individual buttons at a local level by setting prop values directly on that ActionBarButton.
-
-```vue
-<template>
-	<div>
-		<h3>no theme</h3>
-		<div class="card">
-			<div class="content">
-				<ol>
-					<li
-						v-for="i in 20"
-						:key="i"
-					>
-						content content content
-					</li>
-				</ol>
-				<m-inline-action-bar>
-					<m-action-bar-button
-						key="close"
-						color="#f6f6f6"
-					>
-						<x-icon class="icon" />
-					</m-action-bar-button>
-					<m-action-bar-button
-						key="confirm"
-						full-width
-					>
-						Confirm or whatever
-					</m-action-bar-button>
-				</m-inline-action-bar>
-			</div>
-		</div>
-		<br>
-
-		<h3>theme</h3>
-		pick theme primary color
-		<br>
-		<input
-			v-model="theme.colors.primary"
-			type="color"
-		>
-		<br>
-
-		pick theme default actionbarbutton text color
-		<br>
-		<input
-			v-model="theme.actionbarbutton.textColor"
-			type="color"
-		>
-		<br>
-
-		pick theme default actionbarbutton align
-		<br>
-		<select v-model="theme.actionbarbutton.align">
-			<option value="center">
-				center
-			</option>
-			<option value="stack">
-				stack
-			</option>
-			<option value="space-between">
-				space between
-			</option>
-		</select>
-		<br>
-
-		pick theme default actionbarbutton fullWidth
-		<br>
-		<select v-model="theme.actionbarbutton.fullWidth">
-			<option :value="true">
-				true
-			</option>
-			<option :value="false">
-				false
-			</option>
-		</select>
-		<br>
-
-		pick theme default actionbarbutton shape
-		<br>
-		<select v-model="theme.actionbarbutton.shape">
-			<option value="squared">
-				squared
-			</option>
-			<option value="rounded">
-				rounded
-			</option>
-			<option value="pill">
-				pill
-			</option>
-		</select>
-		<br><br>
-
-		<m-theme :theme="theme">
-			<div class="card">
-				<div class="content">
-					<ol>
-						<li
-							v-for="i in 20"
-							:key="i"
-						>
-							content content content
-						</li>
-					</ol>
-					<m-inline-action-bar>
-						<m-action-bar-button
-							key="close"
-							color="#f6f6f6"
-						>
-							<x-icon class="icon" />
-						</m-action-bar-button>
-						<m-action-bar-button
-							key="confirm"
-							full-width
-						>
-							Confirm or whatever
-						</m-action-bar-button>
-					</m-inline-action-bar>
-				</div>
-			</div>
-		</m-theme>
-	</div>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
-
-export default {
-	components: {
-		MTheme,
-		MInlineActionBar,
-		MActionBarButton,
-		XIcon,
-	},
-	data() {
-		return {
-			theme: {
-				colors: {
-					primary: '#000000',
-				},
-				actionbarbutton: {
-					color: '@colors.primary',
-					textColor: undefined,
-					shape: 'pill',
-					align: 'center',
-					fullWidth: false,
-				},
-			},
-		};
-	},
-};
-</script>
-
 <style scoped>
-.card {
-	width: 600px;
-	height: 400px;
+.theme-demo {
+	display: flex;
+	justify-content: center;
+	gap: 10vw;
+	padding: 24px;
+	background-color: #f1f1f1;
+}
+.controls {
+	order: 1;
+	width: 300px;
+}
+.color-option {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 8px;
+}
+.font-choice {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 20px;
+}
+.family-choice {
+	flex-grow: 2;
+}
+.demo-container {
+	order: 0;
 	position: relative;
+	height: 600px;
+	width: 360px;
 	overflow: hidden;
-	border-radius: 16px;
-	box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
-	padding: 16px;
+	border-radius: 30px;
+	box-shadow:
+		4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),
+		12.2px 16.4px 18.2px -40px rgba(0, 0, 0, 0.213),
+		23.7px 31.8px 26.4px -40px rgba(0, 0, 0, 0.159),
+		38px 51px 54px -40px rgba(0, 0, 0, 0.098);
 }
-.content {
-	overflow: scroll;
+.demo-preview {
+	width: 100%;
 	height: 100%;
+	overflow: scroll;
 }
-.icon {
-	width: 24px;
-	height: 24px;
+.section {
+	padding: 16px 24px;
+}
+.option {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 44px;
+}
+.neutrals {
+	gap: 8px;
+	display: flex;
 }
 </style>
 ```
 
-## Theming Headings & Texts
+## Neutral colors
+We have a preset scale of neutral colors that are used within most components. Depending on the background color of your site you may want to alter those colors. There are six neutrals and they can be overriden in the `colors` object. We recommend `neutral-0` to be the same or close to your background with each color getting progressively lighter or darker depending on your background.
+
+```vue
+<template>
+	<div class="demos">
+		<div class="swatch-demo light-background">
+			<h3 class="demo-title">
+				Default Neutrals
+			</h3>
+			<ul class="swatch">
+				<li
+					v-for="(value, key) in colors"
+					:key="key"
+					class="color"
+					:style="{backgroundColor: value }"
+				>
+					<span class="label">{{ key }}: {{ value }}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="swatch-demo dark-background">
+			<h3 class="demo-title">
+				Custom Neutrals for dark background
+			</h3>
+			<ul class="swatch">
+				<li
+					v-for="(value, key) in demoDarkColors"
+					:key="key"
+					class="color"
+					:style="{backgroundColor: value }"
+				>
+					<span class="label">{{ key }}: {{ value }}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			colors: {
+				'neutral-0': '#ffffff',
+				'neutral-10': '#f1f1f1',
+				'neutral-20': '#d3d3d3',
+				'neutral-80': '#707070',
+				'neutral-90': '#1b1b1b',
+				'neutral-100': '#000000',
+			},
+			demoDarkColors: {
+				'neutral-0': '#000000',
+				'neutral-10': '#60636b',
+				'neutral-20': '#777981',
+				'neutral-80': '#9c9ea3',
+				'neutral-90': '#f4f4f4',
+				'neutral-100': '#ffffff',
+			},
+		};
+	},
+};
+</script>
+<style scoped>
+.demos {
+	text-align: center;
+}
+.swatch-demo {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+}
+.swatch {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.light-background {
+	background-color: #fff;
+}
+.dark-background {
+	color: #fff;
+	background-color: #000;
+}
+.color {
+	display: flex;
+	align-items: center;
+	width: 120px;
+	height: 120px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	font-family: monospace;
+}
+.label {
+	background: inherit;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	filter: invert(1) grayscale(1) contrast(9);
+}
+</style>
+```
+
+## Theme Profiles
+
+Many websites will support multiple page or section output. For example, a hero section may leverage different styles from a proceeding content section. We've added the ability to preset these styles by defining each as a seperate profile. The way to implement this currently is by nesting theme components and passing a `profile` to the child theme.
 
 ```vue
 <template>
 	<m-theme :theme="theme">
-		pick default heading color
-		<br>
-		<input
-			v-model="theme.colors.heading"
-			type="color"
-		>
-		<br>
+		<section class="profile-demo">
+			<m-heading>Global Default</m-heading>
+			<m-text>
+				This section is using the default data passed in the theme prop.
+				Every component in a theme will inherit the properties set.
+				In this case we're setting the default colors.
+			</m-text>
+			<m-button>
+				Default Button
+			</m-button>
+		</section>
 
-		pick default heading font family
-		<br>
-		<select v-model="theme.heading.fontFamily">
-			<option value="inherit">
-				inherit
-			</option>
-			<option value="arial">
-				arial
-			</option>
-			<option value="serif">
-				serif
-			</option>
-			<option value="sans-serif">
-				sans-serif
-			</option>
-			<option value="monospace">
-				monospace
-			</option>
-		</select>
-		<br>
-
-		pick default heading size
-		<br>
-		<input
-			v-model="theme.heading.size"
-			type="number"
-			min="-2"
-			max="7"
-		>
-		<br>
-
-		<m-heading>
-			heading content
-		</m-heading>
+		<m-theme :profile="theme.profiles[0].id">
+			<section class="profile-demo">
+				<m-heading>Profile 1</m-heading>
+				<m-text>
+					This section has a specific profile set,
+					which allows setting specific color overrides more easily.
+					Each component in this section will reflect the colors in the profile.
+				</m-text>
+				<m-button>
+					Profile 1 Button
+				</m-button>
+			</section>
+		</m-theme>
+		<m-theme :profile="theme.profiles[1].id">
+			<section class="profile-demo">
+				<m-heading>Profile 2</m-heading>
+				<m-text>
+					This section has a specific profile set,
+					which allows setting specific color overrides more easily.
+					Each component in this section will reflect the colors in the profile.
+				</m-text>
+				<m-button>
+					Profile 2 Button
+				</m-button>
+			</section>
+		</m-theme>
 	</m-theme>
 </template>
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
 import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MTheme,
 		MHeading,
-	},
-	data() {
-		return {
-			theme: {
-				colors: {
-					heading: '#000000',
-				},
-				heading: {
-					fontFamily: 'inherit',
-					size: 2,
-				},
-			},
-		};
-	},
-};
-</script>
-```
-
-<br>
-
-```vue
-<template>
-	<m-theme :theme="theme">
-		pick default text color
-		<br>
-		<input
-			v-model="theme.colors.text"
-			type="color"
-		>
-		<br>
-
-		pick default text font family
-		<br>
-		<select v-model="theme.text.fontFamily">
-			<option value="inherit">
-				inherit
-			</option>
-			<option value="arial">
-				arial
-			</option>
-			<option value="serif">
-				serif
-			</option>
-			<option value="sans-serif">
-				sans-serif
-			</option>
-			<option value="monospace">
-				monospace
-			</option>
-		</select>
-		<br>
-
-		pick default text size
-		<br>
-		<input
-			v-model="theme.text.size"
-			type="number"
-			min="-1"
-			max="1"
-		>
-		<br>
-
-		<m-text>
-			text content
-		</m-text>
-	</m-theme>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MText } from '@square/maker/components/Text';
-
-export default {
-	components: {
-		MTheme,
 		MText,
-	},
-	data() {
-		return {
-			theme: {
-				colors: {
-					text: '#000000',
-				},
-				text: {
-					fontFamily: 'inherit',
-					size: 0,
-				},
-			},
-		};
-	},
-};
-</script>
-```
-
-## Theming Choice options
-
-`selectedColor` is the themeable prop on Choice.
-
-```vue
-<template>
-	<div>
-		<h3>no theme</h3>
-		<m-choice
-			v-model="theChosenOne"
-		>
-			<m-choice-option value="choice-1">
-				Choice 1
-			</m-choice-option>
-			<m-choice-option value="choice-2">
-				Choice 2
-			</m-choice-option>
-			<m-choice-option value="choice-3">
-				Choice 3
-			</m-choice-option>
-		</m-choice>
-		<br>
-
-		<h3>theme</h3>
-		pick theme default selectedColor
-		<br>
-		<input
-			v-model="theme.choice.selectedColor"
-			type="color"
-		>
-		<br><br>
-
-		<m-theme :theme="theme">
-			Default themed choice options
-			<m-choice
-				v-model="theChosenOne"
-				:selected-color="theme.choice.selectedColor"
-			>
-				<m-choice-option value="choice-1">
-					Choice 1
-				</m-choice-option>
-				<m-choice-option value="choice-2">
-					Choice 2
-				</m-choice-option>
-				<m-choice-option value="choice-3">
-					Choice 3
-				</m-choice-option>
-			</m-choice>
-
-			Always black
-			<m-choice
-				v-model="theChosenOne"
-				selected-color="black"
-			>
-				<m-choice-option value="choice-1">
-					Choice 1
-				</m-choice-option>
-				<m-choice-option value="choice-2">
-					Choice 2
-				</m-choice-option>
-				<m-choice-option value="choice-3">
-					Choice 3
-				</m-choice-option>
-			</m-choice>
-		</m-theme>
-	</div>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
-
-export default {
-	components: {
-		MTheme,
-		MChoice,
-		MChoiceOption,
-	},
-	data() {
-		return {
-			theme: {
-				choice: {
-					selectedColor: undefined,
-				},
-			},
-			theChosenOne: 'choice-1',
-		};
-	},
-};
-</script>
-```
-
-## Theming Steppers
-
-```vue
-<template>
-	<m-theme :theme="theme">
-		pick default stepper color
-		<br>
-		<input
-			v-model="theme.stepper.color"
-			type="color"
-		>
-		<br>
-
-		pick default stepper text color
-		<br>
-		<input
-			v-model="theme.stepper.textColor"
-			type="color"
-		>
-		<br>
-
-		<m-stepper
-			v-model="number"
-			min="0"
-			max="10"
-		/>
-		stepper number: {{ number }}
-	</m-theme>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MStepper } from '@square/maker/components/Stepper';
-
-export default {
-	components: {
-		MTheme,
-		MStepper,
-	},
-	data() {
-		return {
-			number: 5,
-			theme: {
-				stepper: {
-					color: '#cccccc',
-					textColor: '#000000',
-				},
-			},
-		};
-	},
-};
-</script>
-```
-
-## Customizing the theme within subsets of the app
-
-Theme components can be nested, and when nested the child Theme can override its parent Theme in two ways:
-1. Providing its own theme data, which will be merged with the theme data provided by the parent or
-2. Selecting a profile from the parent theme, which will be merged with the theme data provided by the parent
-
-A "profile" is, in itself, a theme.
-
-### Option 1: Nested Themes example
-
-```vue
-<template>
-	<m-theme :theme="parentTheme">
-		pick parent theme primary color
-		<br>
-		<input
-			v-model="parentTheme.colors.primary"
-			type="color"
-		>
-		<br>
-
-		<m-button>
-			button in scope of parent theme
-		</m-button>
-
-		<m-theme :theme="childTheme">
-			pick child theme primary color
-			<br>
-			<input
-				v-model="childTheme.colors.primary"
-				type="color"
-			>
-			<br>
-
-			<m-button>
-				button in scope of child theme
-			</m-button>
-		</m-theme>
-	</m-theme>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MButton } from '@square/maker/components/Button';
-
-export default {
-	components: {
-		MTheme,
-		MButton,
-	},
-	data() {
-		return {
-			parentTheme: {
-				colors: {
-					primary: '#000000',
-				},
-			},
-			childTheme: {
-				colors: {
-					primary: '#ff0000',
-				},
-			},
-		};
-	},
-};
-</script>
-```
-
-### Option 2: Theme profiles example
-
-```vue
-<template>
-	<m-theme :theme="theme">
-		pick theme primary color
-		<br>
-		<input
-			v-model="theme.colors.primary"
-			type="color"
-		>
-		<br>
-
-		<m-button>
-			button in scope of theme
-		</m-button>
-
-		<m-theme :profile="theme.profiles[0].id">
-			pick {{ theme.profiles[0].id }} profile primary color
-			<br>
-			<input
-				v-model="theme.profiles[0].colors.primary"
-				type="color"
-			>
-			<br>
-
-			<m-button>
-				button in scope of theme with {{ theme.profiles[0].id }} profile selected
-			</m-button>
-		</m-theme>
-	</m-theme>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import { MButton } from '@square/maker/components/Button';
-
-export default {
-	components: {
-		MTheme,
 		MButton,
 	},
 	data() {
 		return {
 			theme: {
 				colors: {
-					primary: '#000000',
+					background: '#484543',
+					text: '#ffffff',
+					heading: '#e5d7cc',
+					primary: '#e5d7cc',
 				},
 				profiles: [
 					{
-						id: 'exampleProfileId',
+						id: 'profile1',
 						colors: {
-							primary: '#ff0000',
+							background: '#b05d54',
+							text: '#e5d7cc',
+							heading: '#e5d7cc',
+							primary: '#e5d7cc',
+						},
+					},
+					{
+						id: 'profile2',
+						colors: {
+							background: '#e5d7cc',
+							text: '#000000',
+							heading: '#000000',
+							primary: '#000000',
 						},
 					},
 				],
@@ -867,6 +773,11 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.profile-demo {
+	padding: 2vh 4vw;
+}
+</style>
 ```
 
 <!-- api-tables:start -->

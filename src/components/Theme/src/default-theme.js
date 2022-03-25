@@ -10,11 +10,15 @@ export default function defaultTheme() {
 			'neutral-90': '#1b1b1b',
 			'neutral-100': '#000000',
 			background: '#ffffff',
-			heading: '#000000',
-			text: '#000000',
+			heading: 'inherit',
+			text: 'inherit',
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
+		},
+		fonts: {
+			baseSize: 16,
+			sizeScale: 1.17,
 		},
 		profiles: [
 			{
@@ -44,12 +48,14 @@ export default function defaultTheme() {
 		text: {
 			fontFamily: 'inherit',
 			size: 0,
-			textColor: '@colors.text',
+			color: '@colors.text',
+			fontWeight: 400,
 		},
 		heading: {
 			fontFamily: 'inherit',
 			size: 2,
-			textColor: '@colors.heading',
+			color: '@colors.heading',
+			fontWeight: 700,
 		},
 		choice: {
 			selectedColor: undefined,
@@ -63,6 +69,10 @@ export default function defaultTheme() {
 			color: undefined,
 		},
 		modal: {
+			color: undefined,
+			bgColor: undefined,
+		},
+		dialog: {
 			color: undefined,
 			bgColor: undefined,
 		},

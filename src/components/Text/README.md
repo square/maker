@@ -1,14 +1,16 @@
 # Text
 
+Use the Text component for regular body text. There are 10 text sizes: -2 to 7. The font family, font weight, and text color are customizable.
+
 ```vue
 <template>
-	<div class="container">
+	<div>
 		<m-text
-			v-for="size in [-1, 0, 1]"
+			v-for="size in [1, 0, -1, -2]"
 			:key="size"
 			:size="size"
 		>
-			Size {{ size }}
+			Text (Size {{ size }})
 		</m-text>
 	</div>
 </template>
@@ -27,14 +29,20 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-Supports attributes from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
+Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p).
 
-| Prop        | Type     | Default | Possible values | Description                              |
-| ----------- | -------- | ------- | --------------- | ---------------------------------------- |
-| element     | `string` | `'p'`   | `p`, `span`     | which HTML element to wrap the text with |
-| size        | `number` | —       | —               | size of text                             |
-| font-family | `string` | —       | —               | text font family                         |
-| text-color  | `string` | —       | —               | text color                               |
+| Prop           | Type     | Default     | Possible values                                               | Description                                                                                 |
+| -------------- | -------- | ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| element        | `string` | `'p'`       | `p`, `span`, `div`, `li`                                      | HTML Element wrapper                                                                        |
+| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of text                                                                                |
+| font-family    | `string` | —           | —                                                             | Font family                                                                                 |
+| font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                            |
+| font-size      | `string` | —           | —                                                             | Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling. |
+| line-height    | `number` | —           | —                                                             | Line Height, as a valid CSS value. This overrides the internally calculated line-height.    |
+| color          | `string` | —           | —                                                             | Color                                                                                       |
+| font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                                                                  |
+| text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                                                              |
+| text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                                                                  |
 
 
 ## Slots
@@ -42,9 +50,4 @@ Supports attributes from [`<span>`](https://developer.mozilla.org/en-US/docs/Web
 | Slot    | Description  |
 | ------- | ------------ |
 | default | text content |
-
-
-## Events
-
-Supports events from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
 <!-- api-tables:end -->
