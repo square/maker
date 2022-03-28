@@ -219,19 +219,6 @@
 					>
 					Contrast
 				</label>
-				<h2 :class="$s.sectionTitle">
-					Shape
-				</h2>
-				<label>
-					<input
-						v-model="theme.radii.default"
-						type="range"
-						min="0"
-						max="60"
-						step="2"
-					>
-					Shape
-				</label>
 				<!-- eslint-disable vue/no-textarea-mustache -->
 				<textarea rows="20">
 {{ theme }}
@@ -297,7 +284,6 @@ export default {
 				'--font-weights-text': `${theme.fontWeights.text}`,
 				'--font-base-size': `${theme.fonts.baseSize}px`,
 				'--font-scale-ratio': theme.fonts.scaleRatio,
-				'--radii-default': `${theme.radii.default}px`,
 			};
 			return styles;
 		},

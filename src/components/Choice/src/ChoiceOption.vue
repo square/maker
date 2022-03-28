@@ -78,7 +78,7 @@ export default {
 	text-align: left;
 	background-color: var(--neutral-10, #f2f2f2);
 	border: none;
-	border-radius: min(16px, var(--radii-default, 8px));
+	border-radius: var(--border-radius);
 	outline: none;
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;

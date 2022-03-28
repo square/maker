@@ -238,7 +238,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--radii-default, 32px);
+	border-radius: 32px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),

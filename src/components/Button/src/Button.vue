@@ -269,7 +269,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: min(32px, var(--radii-default, 8px));
+	border-radius: 8px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -282,6 +282,14 @@ export default {
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
+
+	&.shape_pill {
+		border-radius: 32px;
+	}
+
+	&.shape_squared {
+		border-radius: 0;
+	}
 
 	&.iconButton {
 		min-width: max-content;
