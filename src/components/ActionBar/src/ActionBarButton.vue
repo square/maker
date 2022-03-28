@@ -290,6 +290,18 @@ export default {
 		justify-content: space-between;
 	}
 
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: 8px;
+	}
+
+	&.shape_pill {
+		border-radius: 32px;
+	}
+
 	&:disabled {
 		cursor: initial;
 
