@@ -382,7 +382,8 @@ import { MContainer } from '@square/maker/components/Container';
 import { MRadio } from '@square/maker/components/Radio';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MInput } from '@square/maker/components/Input';
-import { MButton, MTextButton } from '@square/maker/components/Button';
+import { MButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 

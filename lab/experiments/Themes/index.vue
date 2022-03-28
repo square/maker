@@ -50,11 +50,9 @@
 					</div>
 				</div>
 			</div>
-			<m-heading
-				:size="1"
-			>
+			<h2 :class="$s.sectionTitle">
 				Colors
-			</m-heading>
+			</h2>
 			<div :class="$s.Profile">
 				<label>
 					<input
@@ -84,12 +82,11 @@
 					>
 					Text
 				</label>
-				<m-heading
-					:size="0"
-					style="color: gray;"
+				<h3
+					:class="$s.subsectionTitle"
 				>
 					Neutrals
-				</m-heading>
+				</h3>
 				<div :class="$s.palette">
 					<div :class="$s.color">
 						<span :style="{ backgroundColor : theme.colors['neutral-0'] }" />
@@ -131,16 +128,14 @@
 						</div>
 					</div>
 				</div> -->
-				<m-heading
-					:size="1"
-				>
+				<h2 :class="$s.sectionTitle">
 					Fonts
-				</m-heading>
-				<m-heading
-					:size="0"
+				</h2>
+				<h3
+					:class="$s.subsectionTitle"
 				>
 					Heading
-				</m-heading>
+				</h3>
 				<div :class="$s.fontChoice">
 					<select
 						v-model="theme.fonts.heading"
@@ -170,11 +165,11 @@
 						</template>
 					</select>
 				</div>
-				<m-heading
-					:size="0"
+				<h3
+					:class="$s.subsectionTitle"
 				>
 					Text
-				</m-heading>
+				</h3>
 				<div :class="$s.fontChoice">
 					<select
 						v-model="theme.fonts.text"
@@ -224,11 +219,9 @@
 					>
 					Contrast
 				</label>
-				<m-heading
-					:size="1"
-				>
+				<h2 :class="$s.sectionTitle">
 					Shape
-				</m-heading>
+				</h2>
 				<label>
 					<input
 						v-model="theme.radii.default"
@@ -253,7 +246,6 @@
 import chroma from 'chroma-js';
 import { mapStores, mapState } from 'pinia';
 import { MTheme } from '@square/maker/components/Theme';
-import { MHeading } from '@square/maker/components/Heading';
 import Preview from './preview.vue';
 import * as themes from './themes'; // this should probably be a json request, but enough for testing
 import { useThemeStore } from './stores/theme';
@@ -268,7 +260,6 @@ export default {
 	components: {
 		MTheme,
 		Preview,
-		MHeading,
 	},
 
 	data() {
@@ -572,5 +563,18 @@ export default {
 
 .fontChoice > select {
 	padding: 8px;
+}
+
+.sectionTitle,
+.subsectionTitle {
+	margin: 0 0 1rem 0;
+}
+
+.sectionTitle {
+	font-size: 1.2rem;
+}
+
+.subsectionTitle {
+	font-size: 1rem;
 }
 </style>
