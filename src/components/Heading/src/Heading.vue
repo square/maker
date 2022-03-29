@@ -1,5 +1,4 @@
 <script>
-import chroma from 'chroma-js';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 const MIN_SIZE = -2;
@@ -77,7 +76,13 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => color === 'inherit' || chroma.valid(color),
+			validator: (color) => {
+				// CSS not defined when rendering server-side
+				if (global.CSS) {
+					return global.CSS.supports('color', color);
+				}
+				return true;
+			},
 		},
 		/**
 		 * font style
