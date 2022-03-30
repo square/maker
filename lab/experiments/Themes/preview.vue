@@ -586,31 +586,6 @@ export default {
 </style>
 <style module="$s">
 .Preview {
-	--font-size-scale: var(--font-scale-ratio, 1.15);
-	--font-size: var(--font-base-size, 16px);
-	--line-height: 1.5em;
-	--line-height-scale: 0.95;
-	--font-step-minus-2-size: max(12px, calc(var(--font-step-minus-1-size) / var(--font-size-scale)));
-	--font-step-minus-2-line-height: calc(var(--font-step-1-line-height) / var(--line-height-scale));
-	--font-step-minus-1-size: max(14px, calc(var(--font-size) / var(--font-size-scale)));
-	--font-step-minus-1-line-height: calc(var(--font-step-0-line-height) / var(--line-height-scale));
-	--font-step-0-size: var(--font-size);
-	--font-step-0-line-height: var(--line-height);
-	--font-step-1-size: calc(var(--font-step-0-size) * var(--font-size-scale));
-	--font-step-1-line-height: calc(var(--font-step-0-line-height) * var(--line-height-scale));
-	--font-step-2-size: calc(var(--font-step-1-size) * var(--font-size-scale));
-	--font-step-2-line-height: calc(var(--font-step-1-line-height) * var(--line-height-scale));
-	--font-step-3-size: calc(var(--font-step-2-size) * var(--font-size-scale));
-	--font-step-3-line-height: calc(var(--font-step-2-line-height) * var(--line-height-scale));
-	--font-step-4-size: calc(var(--font-step-3-size) * var(--font-size-scale));
-	--font-step-4-line-height: calc(var(--font-step-3-line-height) * var(--line-height-scale));
-	--font-step-5-size: calc(var(--font-step-4-size) * var(--font-size-scale));
-	--font-step-5-line-height: calc(var(--font-step-4-line-height) * var(--line-height-scale));
-	--font-step-6-size: calc(var(--font-step-5-size) * var(--font-size-scale));
-	--font-step-6-line-height: calc(var(--font-step-5-line-height) * var(--line-height-scale));
-	--font-step-7-size: calc(var(--font-step-6-size) * var(--font-size-scale));
-	--font-step-7-line-height: calc(var(--font-step-6-line-height) * var(--line-height-scale));
-
 	display: grid;
 	grid-template-columns: repeat(3, minmax(360px, 1fr));
 	gap: 40px;

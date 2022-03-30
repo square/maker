@@ -138,7 +138,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.fonts.heading"
+						v-model="theme.heading.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -152,7 +152,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.fontWeights.heading"
+						v-model="theme.heading.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -172,7 +172,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.fonts.text"
+						v-model="theme.text.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -186,7 +186,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.fontWeights.text"
+						v-model="theme.text.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -211,7 +211,7 @@
 				</label>
 				<label>
 					<input
-						v-model="theme.fonts.scaleRatio"
+						v-model="theme.fonts.sizeScale"
 						type="range"
 						min="1.067"
 						max="1.618"
@@ -225,7 +225,7 @@
 				</textarea>
 			</div>
 		</div>
-		<preview :style="styleOverride" />
+		<preview />
 	</m-theme>
 </template>
 
@@ -260,14 +260,14 @@ export default {
 	computed: {
 		...mapStores(useThemeStore),
 		...mapState(useThemeStore, ['theme']),
-		surfaces: (store) => store.theme.colors.surfaces,
+		// surfaces: (store) => store.theme.colors.surfaces,
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.fonts.heading;
-			const fontWeightsHeading = themeStore.$state.theme.fontWeights.heading;
-			const fontText = themeStore.$state.theme.fonts.text;
-			const fontWeightsText = themeStore.$state.theme.fontWeights.text;
+			const fontHeading = themeStore.$state.theme.heading.fontFamily;
+			const fontWeightsHeading = themeStore.$state.theme.heading.fontWeight;
+			const fontText = themeStore.$state.theme.text.fontFamily;
+			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
@@ -275,18 +275,18 @@ export default {
 
 			return fonts;
 		},
-		styleOverride() {
-			const { theme } = themeStore.$state;
-			const styles = {
-				'--font-heading': `${theme.fonts.heading}, sans-serif`,
-				'--font-text': `${theme.fonts.text}, sans-serif`,
-				'--font-weights-heading': `${theme.fontWeights.heading}`,
-				'--font-weights-text': `${theme.fontWeights.text}`,
-				'--font-base-size': `${theme.fonts.baseSize}px`,
-				'--font-scale-ratio': theme.fonts.scaleRatio,
-			};
-			return styles;
-		},
+		// styleOverride() {
+		// 	const { theme } = themeStore.$state;
+		// 	const styles = {
+		// 		'--font-heading': `${theme.fonts.heading}, sans-serif`,
+		// 		'--font-text': `${theme.fonts.text}, sans-serif`,
+		// 		'--font-weights-heading': `${theme.fontWeights.heading}`,
+		// 		'--font-weights-text': `${theme.fontWeights.text}`,
+		// 		'--font-base-size': `${theme.fonts.baseSize}px`,
+		// 		'--font-scale-ratio': theme.fonts.scaleRatio,
+		// 	};
+		// 	return styles;
+		// },
 	},
 
 	watch: {

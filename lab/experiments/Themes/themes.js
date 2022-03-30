@@ -18,18 +18,17 @@ export const modern = {
 		'color-elevation': '#ffffff',
 		'color-overlay': 'rgba(0, 0, 0, 0.32)',
 	},
+	heading: {
+		fontFamily: 'Open Sans',
+		fontWeight: '600',
+	},
+	text: {
+		fontFamily: 'Open Sans',
+		fontWeight: '400',
+	},
 	fonts: {
-		heading: 'Open Sans',
-		text: 'Open Sans',
 		baseSize: 16,
-		scaleRatio: 1.15,
-	},
-	fontWeights: {
-		heading: 600,
-		text: 400,
-	},
-	radii: {
-		default: '0',
+		sizeScale: 1.15,
 	},
 };
 
@@ -48,18 +47,17 @@ export const midnight = {
 		'color-elevation': '#777981',
 		'color-overlay': 'rgba(255, 255, 255, 0.32)',
 	},
+	heading: {
+		fontFamily: 'Domine',
+		fontWeight: '400',
+	},
+	text: {
+		fontFamily: 'Karla',
+		fontWeight: '400',
+	},
 	fonts: {
-		heading: 'Domine',
-		text: 'Karla',
-		baseSize: '19',
-		scaleRatio: '1.217',
-	},
-	fontWeights: {
-		heading: '400',
-		text: '400',
-	},
-	radii: {
-		default: '16',
+		baseSize: 19,
+		sizeScale: 1.217,
 	},
 };
 
@@ -78,18 +76,17 @@ export const spaces = {
 		'color-elevation': '#ffffff',
 		'color-overlay': 'rgba(0, 0, 0, 0.32)',
 	},
+	heading: {
+		fontFamily: 'Libre Franklin',
+		fontWeight: '700',
+	},
+	text: {
+		fontFamily: 'Libre Franklin',
+		fontWeight: '400',
+	},
 	fonts: {
-		heading: 'Libre Franklin',
-		text: 'Libre Franklin',
-		baseSize: '18',
-		scaleRatio: '1.297',
-	},
-	fontWeights: {
-		heading: '700',
-		text: '400',
-	},
-	radii: {
-		default: '0',
+		baseSize: 18,
+		sizeScale: 1.297,
 	},
 };
 
@@ -108,17 +105,16 @@ export const santa = {
 		'color-elevation': '#ea8173',
 		'color-overlay': 'rgba(255, 255, 255, 0.32)',
 	},
+	heading: {
+		fontFamily: 'Comfortaa',
+		fontWeight: '700',
+	},
+	text: {
+		fontFamily: 'Rubik',
+		fontWeight: '400',
+	},
 	fonts: {
-		heading: 'Comfortaa',
-		text: 'Rubik',
-		baseSize: '18',
-		scaleRatio: '1.407',
-	},
-	fontWeights: {
-		heading: '700',
-		text: '400',
-	},
-	radii: {
-		default: '60',
+		baseSize: 18,
+		sizeScale: 1.407,
 	},
 };
