@@ -129,5 +129,8 @@
   },
   "release": {
     "preset": "conventionalcommits"
+  },
+  "dependencies": {
+    "@stitches/core": "^1.2.7"
   }
 }
