@@ -46,10 +46,38 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		text: {
-			fontFamily: 'inherit',
 			size: 0,
+			fontFamily: 'inherit',
 			color: '@colors.text',
-			fontWeight: 400,
+			element: 'p',
+			fontWeight: 'inherit',
+			fontStyle: 'inherit',
+			textTransform: 'inherit',
+			textAlign: 'inherit',
+			variant: 'body',
+			variants: {
+				headline: {
+					size: 4,
+					fontWeight: '700',
+					element: 'h1',
+				},
+				title: {
+					size: 2,
+					fontWeight: '500',
+					element: 'h2',
+				},
+				body: {
+					size: 0,
+					fontWeight: '400',
+					element: 'p',
+				},
+				label: {
+					size: -1,
+					fontWeight: '500',
+					element: 'h6',
+					textTransform: 'uppercase',
+				},
+			},
 		},
 		heading: {
 			fontFamily: 'inherit',

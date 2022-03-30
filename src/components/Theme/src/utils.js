@@ -14,7 +14,7 @@ export function resolve(valueOrPointer) {
 		return valueOrPointer; // non-strings are always values
 	}
 	if (valueOrPointer.startsWith('@')) {
-		return this.getPath(valueOrPointer); // resolve pointer to value
+		return this.resolve(this.getPath(valueOrPointer)); // resolve pointer to value
 	}
 	return valueOrPointer; // not a pointer, already resolved value, return as-is
 }
@@ -48,24 +48,74 @@ function capitalizeFirstLetter(string) {
 export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
-		computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
-			if (!isNil(this[propName])) {
-				// if validator for this prop exists then Vue would have already validated it by this point
-				return this[propName];
-			}
-			const themeDefaultPropValue = this.theme[componentKeyInTheme][propName];
-			if (themeDefaultPropValue) {
-				const valueOrPath = themeDefaultPropValue;
-				const value = this.theme.resolve(valueOrPath);
+		if (propName === 'variant') {
+			computedResolvedProps.resolvedVariant = function resolveThemeableVariant() {
+				// local override directly set on component instance
+				if (!isNil(this[propName])) {
+					// if validator for this prop exists then
+					// Vue would have already validated it by this point
+					return this[propName];
+				}
+
+				let valueOrPath;
+
+				// more specific theme override
+				const themeValue = this.theme[componentKeyInTheme][propName];
+				if (themeValue) {
+					valueOrPath = themeValue;
+				}
+
+				if (!valueOrPath) {
+					return undefined;
+				}
+
+				const resolvedValue = this.theme.resolve(valueOrPath);
 				const propValidator = this.$vnode.componentOptions
 					.Ctor.extendOptions.props[propName].validator;
 				if (propValidator) {
-					assert.error(propValidator(value), `Invalid value "${value}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
+					assert.error(propValidator(resolvedValue), `Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
 				}
-				return value;
-			}
-			return undefined;
-		};
+				return resolvedValue;
+			};
+		} else {
+			computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
+				// local override directly set on component instance
+				if (!isNil(this[propName])) {
+					// if validator for this prop exists then
+					// Vue would have already validated it by this point
+					return this[propName];
+				}
+
+				let valueOrPath;
+
+				// default theme value
+				const themeValue = this.theme[componentKeyInTheme][propName];
+				if (themeValue) {
+					valueOrPath = themeValue;
+				}
+
+				// variant value
+				if (this.resolvedVariant) {
+					const variantValues = this.theme[componentKeyInTheme].variants?.[this.resolvedVariant];
+					assert.error(variantValues, `Invalid variant "${this.resolvedVariant}" for component "${componentKeyInTheme}" in theme.`);
+					if (variantValues[propName]) {
+						valueOrPath = variantValues[propName];
+					}
+				}
+
+				if (!valueOrPath) {
+					return undefined;
+				}
+
+				const resolvedValue = this.theme.resolve(valueOrPath);
+				const propValidator = this.$vnode.componentOptions
+					.Ctor.extendOptions.props[propName].validator;
+				if (propValidator) {
+					assert.error(propValidator(resolvedValue), `Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
+				}
+				return resolvedValue;
+			};
+		}
 	}
 	return computedResolvedProps;
 }

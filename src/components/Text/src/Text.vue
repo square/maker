@@ -1,10 +1,9 @@
 <script>
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import cssValidator from '@square/maker/utils/css-validator';
 
 const MIN_SIZE = -2;
 const MAX_SIZE = 7;
-const MIN_WEIGHT = 100;
-const MAX_WEIGHT = 900;
 
 /**
  * @inheritAttrs p
@@ -21,15 +20,23 @@ export default {
 
 	props: {
 		/**
-		 * HTML Element wrapper
+		 * variants are defined at the theme level
+		 */
+		variant: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * [HTML Element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
+		 * @values h1, h2, h3, h4, h5, h6, p, span, div, li
 		 */
 		element: {
 			type: String,
-			default: 'p',
-			validator: (element) => ['p', 'span', 'div', 'li'].includes(element),
+			default: undefined,
+			validator: (element) => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div', 'li'].includes(element),
 		},
 		/**
-		 * Size of text
+		 * Size of text as step in fluid scale
 		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
 		 */
 		size: {
@@ -38,82 +45,106 @@ export default {
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
-		 * Font family
-		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-family}
+		 * [Font family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
 		 */
 		fontFamily: {
 			type: String,
 			default: undefined,
+			validator: cssValidator('font-family'),
 		},
 		/**
-		 * Font weight with standard numeric keyword values
-		 * @values 100, 200, 300, 400, 500, 600, 700, 800, 900
+		 * [Font weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)
 		 */
 		fontWeight: {
-			type: Number,
+			type: String,
 			default: undefined,
-			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
+			validator: cssValidator('font-weight'),
 		},
 		/**
-		 * Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling.
+		 * [Font size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
+		 * Overrides the `size` prop, and disables type scaling.
 		 */
 		fontSize: {
 			type: String,
 			default: undefined,
+			validator: cssValidator('font-size'),
 		},
 		/**
-		 * Line Height, as a valid CSS value. This overrides the internally calculated line-height.
+		 * [Line height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height)
+		 * Overrides the internally calculated line height.
 		 */
 		lineHeight: {
-			type: Number,
+			type: String,
 			default: undefined,
+			validator: cssValidator('line-height'),
 		},
 		/**
-		 * Color
-		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/color}
+		 * [Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)
 		 */
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => {
-				// CSS not defined when rendering server-side
-				if (global.CSS) {
-					return global.CSS.supports('color', color);
-				}
-				return true;
-			},
+			validator: cssValidator('color'),
 		},
 		/**
-		 * font style
-		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-style}
+		 * [Font style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)
+		 * @values inherit, normal, italic
 		 */
 		fontStyle: {
 			type: String,
-			default: 'inherit',
-			validator: (fontStyle) => ['inherit', 'normal', 'italic'].includes(fontStyle),
+			default: undefined,
+			validator: cssValidator('font-style'),
 		},
 		/**
-		 * text transform
-		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform}
+		 * [Text transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)
+		 * @values inherit, none, uppercase, lowercase, capitalize
 		 */
 		textTransform: {
 			type: String,
-			default: 'inherit',
-			validator: (textTransform) => ['inherit', 'none', 'uppercase'].includes(textTransform),
+			default: undefined,
+			validator: cssValidator('text-transform'),
 		},
 		/**
-		 * text align
-		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/text-align}
+		 * [Text align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)
+		 * @values inherit, left, right, center, start, end
 		 */
 		textAlign: {
 			type: String,
-			default: 'inherit',
-			validator: (textAlign) => ['inherit', 'left', 'right', 'center'].includes(textAlign),
+			default: undefined,
+			validator: cssValidator('text-align'),
 		},
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'fontWeight', 'color']),
+		...resolveThemeableProps('text', [
+			'variant',
+			'element',
+			'size',
+			'fontFamily',
+			'fontWeight',
+			'color',
+			'fontStyle',
+			'textTransform',
+			'textAlign',
+		]),
+		tag() {
+			if (this.resolvedElement) {
+				return this.resolvedElement;
+			}
+			const h1Threshold = 4;
+			const h2Threshold = 3;
+			const h3Threshold = 2;
+			if (this.resolvedSize >= h1Threshold) {
+				return 'h1';
+			}
+			if (this.resolvedSize >= h2Threshold) {
+				return 'h2';
+			}
+			if (this.resolvedSize >= h3Threshold) {
+				return 'h3';
+			}
+			return 'p';
+		},
 		sizeClass() {
 			const minNonNegativeSize = 0;
 			if (this.resolvedSize >= minNonNegativeSize) {
@@ -123,42 +154,49 @@ export default {
 		},
 		inlineStyles() {
 			const { fonts } = this.theme;
-			return {
-				fontFamily: this.resolvedFontFamily,
-				fontWeight: this.resolvedFontWeight,
-				color: this.resolvedColor,
+			const styles = {
 				fontSize: this.fontSize,
 				lineHeight: this.lineHeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
+			if (this.resolvedFontFamily !== 'inherit') {
+				styles.fontFamily = this.resolvedFontFamily;
+			}
+			if (this.resolvedFontWeight !== 'inherit') {
+				styles.fontWeight = this.resolvedFontWeight;
+			}
+			if (this.resolvedColor !== 'inherit') {
+				styles.color = this.resolvedColor;
+			}
+			if (this.resolvedFontStyle !== 'inherit') {
+				styles.fontStyle = this.resolvedFontStyle;
+			}
+			if (this.resolvedTextTransform !== 'inherit') {
+				styles.textTransform = this.resolvedTextTransform;
+			}
+			if (this.resolvedTextAlign !== 'inherit') {
+				styles.textAlign = this.resolvedTextAlign;
+			}
+			return styles;
 		},
 	},
 
 	render(createElement) {
 		const {
 			$s,
+			tag,
 			sizeClass,
 			inlineStyles,
-			fontStyle,
-			textTransform,
-			textAlign,
 		} = this;
 		/**
 		 * @slot text content
 		 */
 		const defaultSlot = this.$slots.default;
-		const element = this.element || 'p';
-
-		return createElement(element, {
+		return createElement(tag, {
 			class: [
-				$s.Paragraph,
+				$s.Text,
 				$s[`size_${sizeClass}`],
-				{
-					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
-					[$s[`texttransform_${textTransform}`]]: textTransform !== 'inherit',
-					[$s[`textalign_${textAlign}`]]: textAlign !== 'inherit',
-				},
 			],
 			attrs: this.$attrs,
 			style: inlineStyles,
@@ -169,7 +207,15 @@ export default {
 </script>
 
 <style module="$s">
-.Paragraph {
+.Text {
+	margin: 0;
+	color: inherit;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	text-align: inherit;
+	text-transform: inherit;
+
 	/* min breakpoint config */
 	--min-resolution: 320; /* arbitrary value */
 	--min-font-size: var(--mobile-base-font-size);
@@ -249,86 +295,58 @@ export default {
 	--lh-7: calc(var(--lh-6) * var(--line-height-scale));
 }
 
-.fontstyle_normal {
-	font-style: normal;
-}
-
-.fontstyle_italic {
-	font-style: italic;
-}
-
-.texttransform_none {
-	text-transform: none;
-}
-
-.texttransform_uppercase {
-	text-transform: uppercase;
-}
-
-.textalign_left {
-	text-align: left;
-}
-
-.textalign_right {
-	text-align: right;
-}
-
-.textalign_center {
-	text-align: center;
-}
-
 @media (min-width: 1200px) {
-	.Paragraph {
+	.Text {
 		--resolution: 1200px;
 	}
 }
 
-.Paragraph.size_minus-2 {
+.Text.size_minus-2 {
 	font-size: var(--fs--2);
 	line-height: var(--lh--2);
 }
 
-.Paragraph.size_minus-1 {
+.Text.size_minus-1 {
 	font-size: var(--fs--1);
 	line-height: var(--lh--1);
 }
 
-.Paragraph.size_0 {
+.Text.size_0 {
 	font-size: var(--fs-0);
 	line-height: var(--lh-0);
 }
 
-.Paragraph.size_1 {
+.Text.size_1 {
 	font-size: var(--fs-1);
 	line-height: var(--lh-1);
 }
 
-.Paragraph.size_2 {
+.Text.size_2 {
 	font-size: var(--fs-2);
 	line-height: var(--lh-2);
 }
 
-.Paragraph.size_3 {
+.Text.size_3 {
 	font-size: var(--fs-3);
 	line-height: var(--lh-3);
 }
 
-.Paragraph.size_4 {
+.Text.size_4 {
 	font-size: var(--fs-4);
 	line-height: var(--lh-4);
 }
 
-.Paragraph.size_5 {
+.Text.size_5 {
 	font-size: var(--fs-5);
 	line-height: var(--lh-5);
 }
 
-.Paragraph.size_6 {
+.Text.size_6 {
 	font-size: var(--fs-6);
 	line-height: var(--lh-6);
 }
 
-.Paragraph.size_7 {
+.Text.size_7 {
 	font-size: var(--fs-7);
 	line-height: var(--lh-7);
 }
