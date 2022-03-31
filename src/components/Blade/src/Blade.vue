@@ -17,7 +17,7 @@
 
 .Blade {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 	background: #f5f6f7;
 }
 
