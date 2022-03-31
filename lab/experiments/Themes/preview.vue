@@ -460,6 +460,7 @@ export default {
 };
 </script>
 <style>
+@import '@square/maker/styles/global.css';
 
 .header {
 	display: grid;
@@ -607,11 +608,8 @@ export default {
 	max-height: calc(100% - 40px);
 	padding: 20px 10px;
 	overflow: hidden;
-	color: var(--color-text);
-	font-weight: var(--font-weights-text, normal);
-	font-size: var(--font-base-size);
-	font-family: var(--font-text, inherit);
-	background-color: var(--color-background);
+	color: var(--maker-colors-text);
+	background-color: var(--maker-colors-background);
 	border-radius: 30px;
 	box-shadow:
 		4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),

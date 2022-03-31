@@ -92,19 +92,19 @@
 						<span :style="{ backgroundColor : theme.colors['neutral-0'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-10)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-10'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-20)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-20'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-80)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-80'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-90)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-90'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-100)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-100'] }" />
 					</div>
 				</div>
 				<!-- <div :class="$s.Profiles">
@@ -275,18 +275,6 @@ export default {
 
 			return fonts;
 		},
-		// styleOverride() {
-		// 	const { theme } = themeStore.$state;
-		// 	const styles = {
-		// 		'--font-heading': `${theme.fonts.heading}, sans-serif`,
-		// 		'--font-text': `${theme.fonts.text}, sans-serif`,
-		// 		'--font-weights-heading': `${theme.fontWeights.heading}`,
-		// 		'--font-weights-text': `${theme.fontWeights.text}`,
-		// 		'--font-base-size': `${theme.fonts.baseSize}px`,
-		// 		'--font-scale-ratio': theme.fonts.scaleRatio,
-		// 	};
-		// 	return styles;
-		// },
 	},
 
 	watch: {
@@ -319,7 +307,6 @@ export default {
 	methods: {
 		loadWebFont(fonts) {
 			// eslint-disable-next-line no-console
-			console.log(fonts);
 			WebFont.load({
 				google: {
 					families: fonts,
@@ -331,7 +318,6 @@ export default {
 		},
 		changeTheme(theme) {
 			// eslint-disable-next-line no-console
-			console.log(theme);
 			themeStore.theme = themes[theme];
 			this.updateFont();
 		},
