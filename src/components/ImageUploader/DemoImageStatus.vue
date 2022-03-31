@@ -1,11 +1,12 @@
 <template>
 	<m-card :class="$s.ImagesCard">
-		<m-heading
+		<m-text
 			v-if="header"
+			variant="title"
 			:size="1"
 		>
 			{{ header }}
-		</m-heading>
+		</m-text>
 		<div
 			v-if="images.length"
 			:class="$s.Images"
@@ -24,14 +25,14 @@
 
 <script>
 import { MCard } from '@square/maker/components/Card';
-import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
 
 export default {
 	name: 'DemoImageStatus',
 
 	components: {
 		MCard,
-		MHeading,
+		MText,
 	},
 
 	props: {

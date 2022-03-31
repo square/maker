@@ -95,7 +95,9 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 				}
 
 				// variant value
-				if (this.resolvedVariant) {
+				const hasUserDefinedVariants = !this.$vnode.componentOptions
+					.Ctor.extendOptions.props.variant?.validator;
+				if (this.resolvedVariant && hasUserDefinedVariants) {
 					const variantValues = this.theme[componentKeyInTheme].variants?.[this.resolvedVariant];
 					assert.error(variantValues, `Invalid variant "${this.resolvedVariant}" for component "${componentKeyInTheme}" in theme.`);
 					if (variantValues[propName]) {

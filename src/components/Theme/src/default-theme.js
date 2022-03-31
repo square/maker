@@ -60,11 +60,13 @@ export default function defaultTheme() {
 					size: 4,
 					fontWeight: '700',
 					element: 'h1',
+					color: '@colors.heading',
 				},
 				title: {
 					size: 2,
-					fontWeight: '500',
+					fontWeight: '700',
 					element: 'h2',
+					color: '@colors.heading',
 				},
 				body: {
 					size: 0,
@@ -73,17 +75,11 @@ export default function defaultTheme() {
 				},
 				label: {
 					size: -1,
-					fontWeight: '500',
+					fontWeight: '700',
 					element: 'h6',
 					textTransform: 'uppercase',
 				},
 			},
-		},
-		heading: {
-			fontFamily: 'inherit',
-			size: 2,
-			color: '@colors.heading',
-			fontWeight: 700,
 		},
 		choice: {
 			selectedColor: undefined,

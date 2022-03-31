@@ -1,13 +1,19 @@
 <template>
 	<div class="page">
-		<m-heading :size="4">
+		<m-text
+			variant="title"
+			:size="4"
+		>
 			Kitchen Sink
-		</m-heading>
+		</m-text>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Button
-			</m-heading>
+			</m-text>
 			<m-button>
 				Button
 			</m-button>
@@ -83,9 +89,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Checkbox
-			</m-heading>
+			</m-text>
 			<m-checkbox>
 				checkbox
 			</m-checkbox>
@@ -104,31 +113,40 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Divider
-			</m-heading>
+			</m-text>
 
 			<m-divider />
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
-				Heading
-			</m-heading>
+			<m-text
+				variant="title"
+				:size="2"
+			>
+				Text
+			</m-text>
 
-			<m-heading
+			<m-text
 				v-for="size in [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]"
-				:key="`heading-${size}`"
+				:key="size"
 				:size="size"
 			>
-				Size {{ size }}
-			</m-heading>
+				Text Size {{ size }}
+			</m-text>
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Image
-			</m-heading>
+			</m-text>
 
 			<m-image
 				class="square"
@@ -137,9 +155,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Input
-			</m-heading>
+			</m-text>
 
 			<m-input placeholder="placeholder" />
 			<m-input
@@ -190,17 +211,23 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Loading
-			</m-heading>
+			</m-text>
 
 			<m-loading />
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Notice
-			</m-heading>
+			</m-text>
 
 			<m-notice type="error">
 				I am an error notice
@@ -241,9 +268,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Radio
-			</m-heading>
+			</m-text>
 
 			<m-radio value="1">
 				radio
@@ -269,9 +299,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Select
-			</m-heading>
+			</m-text>
 
 			<m-select
 				v-model="currentOption"
@@ -304,9 +337,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Skeleton
-			</m-heading>
+			</m-text>
 
 			<m-skeleton-block class="square" />
 
@@ -314,17 +350,23 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Stepper
-			</m-heading>
+			</m-text>
 
 			<m-stepper v-model="number" />
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Text
-			</m-heading>
+			</m-text>
 
 			<m-text
 				v-for="size in [-1, 0, 1]"
@@ -336,9 +378,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Textarea
-			</m-heading>
+			</m-text>
 
 			<m-textarea placeholder="placeholder" />
 			<m-textarea
@@ -363,9 +408,12 @@
 		</div>
 
 		<div class="section">
-			<m-heading :size="2">
+			<m-text
+				variant="title"
+				:size="2"
+			>
 				Toggle
-			</m-heading>
+			</m-text>
 
 			<m-toggle>
 				toggle
@@ -390,7 +438,6 @@
 import { MButton } from '@square/maker/components/Button';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MDivider } from '@square/maker/components/Divider';
-import { MHeading } from '@square/maker/components/Heading';
 import { MImage } from '@square/maker/components/Image';
 import { MInput } from '@square/maker/components/Input';
 import { MLoading } from '@square/maker/components/Loading';
@@ -412,7 +459,6 @@ export default {
 		MButton,
 		MCheckbox,
 		MDivider,
-		MHeading,
 		MImage,
 		MInput,
 		MLoading,
