@@ -160,7 +160,11 @@ export default {
 }
 
 .DialogContentWrapper {
+	position: relative;
 	width: 100%;
+	max-height: calc(100% - 48px);
+	overflow: auto;
+	border-radius: 8px 8px 0 0;
 }
 
 @media screen and (--for-tablet-landscape-up) {
@@ -169,7 +173,13 @@ export default {
 	}
 
 	.DialogContentWrapper {
+		display: inline-block;
 		width: auto;
+		height: auto;
+		max-height: calc(100% - 64px);
+		overflow: hidden;
+		border-radius: 8px;
+		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 	}
 }
 
@@ -183,19 +193,17 @@ export default {
 }
 
 /**
- * Position fixed prevents unnecessary body scrolling and jumpiness on dialogs
- * when using the pin-input component inside of them on IOS devices
- *
+ * Position fixed prevents unnecessary body scrolling and jumpiness on Dialogs
+ * when using the PinInput component inside of them on iOS devices
  */
 .disableScroll {
 	position: fixed;
 	overflow: hidden;
 }
 
-@media (--for-desktop-up) {
+@media (--for-tablet-landscape-up) {
 	.disableScroll {
 		position: initial;
 	}
 }
-
 </style>
