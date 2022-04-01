@@ -8,11 +8,12 @@ Any components within the theme component will inherit the tokens provided. We r
 <template>
 	<div class="theme-demo">
 		<div class="controls">
-			<m-heading
+			<m-text
+				variant="title"
 				:size="1"
 			>
 				Colors
-			</m-heading>
+			</m-text>
 			<label class="color-option">
 				<input
 					v-model="theme.colors.background"
@@ -41,11 +42,12 @@ Any components within the theme component will inherit the tokens provided. We r
 				>
 				Text
 			</label>
-			<m-heading
+			<m-text
+				variant="title"
 				:size="0"
 			>
 				Neutrals
-			</m-heading>
+			</m-text>
 			<div class="color-option neutrals">
 				<input
 					v-model="theme.colors['neutral-0']"
@@ -72,34 +74,37 @@ Any components within the theme component will inherit the tokens provided. We r
 					type="color"
 				>
 			</div>
-			<m-heading
+			<m-text
+				variant="title"
 				:size="1"
 			>
 				Fonts
-			</m-heading>
-			<m-heading
+			</m-text>
+			<m-text
+				variant="title"
 				:size="0"
 			>
 				Heading
-			</m-heading>
+			</m-text>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.heading.fontFamily"
+					v-model="theme.text.variants.title.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
 					@change="updateFont"
 				/>
 				<m-select
-					v-model="theme.heading.fontWeight"
+					v-model="theme.text.variants.title.fontWeight"
 					:options="defaultWeights"
 					@change="updateFont"
 				/>
 			</div>
-			<m-heading
+			<m-text
+				variant="title"
 				:size="0"
 			>
 				Text
-			</m-heading>
+			</m-text>
 			<div class="font-choice">
 				<m-select
 					v-model="theme.text.fontFamily"
@@ -138,18 +143,20 @@ Any components within the theme component will inherit the tokens provided. We r
 			<div class="demo-preview">
 				<m-theme :theme="theme">
 					<div class="section">
-						<m-heading
+						<m-text
+							variant="title"
 							:size="2"
 							class="item-title"
 						>
 							Cappuccino
-						</m-heading>
-						<m-heading
+						</m-text>
+						<m-text
+							variant="title"
 							:size="1"
 							class="item-price"
 						>
 							$4.00
-						</m-heading>
+						</m-text>
 						<m-text
 							:size="0"
 							class="item-description"
@@ -167,11 +174,12 @@ Any components within the theme component will inherit the tokens provided. We r
 						<template
 							#label
 						>
-							<m-heading
+							<m-text
+								variant="title"
 								:size="-1"
 							>
 								Size
-							</m-heading>
+							</m-text>
 						</template>
 						<div class="option">
 							<m-radio
@@ -219,11 +227,12 @@ Any components within the theme component will inherit the tokens provided. We r
 						<template
 							#label
 						>
-							<m-heading
+							<m-text
+								variant="title"
 								:size="-1"
 							>
 								Modifiers
-							</m-heading>
+							</m-text>
 						</template>
 						<template #required-label>
 							Optional
@@ -250,11 +259,12 @@ Any components within the theme component will inherit the tokens provided. We r
 						<template
 							#label
 						>
-							<m-heading
+							<m-text
+								variant="title"
 								:size="-1"
 							>
 								Notes
-							</m-heading>
+							</m-text>
 						</template>
 						<template #required-label>
 							Optional
@@ -280,7 +290,6 @@ Any components within the theme component will inherit the tokens provided. We r
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MStepper } from '@square/maker/components/Stepper';
@@ -294,7 +303,6 @@ import { MInlineActionBar, MActionBarButton } from '@square/maker/components/Act
 export default {
 	components: {
 		MTheme,
-		MHeading,
 		MText,
 		MDivider,
 		MStepper,
@@ -337,13 +345,15 @@ export default {
 					'neutral-90': '#1b1b1b',
 					'neutral-100': '#000000',
 				},
-				heading: {
-					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
-					fontWeight: '600',
-				},
 				text: {
 					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
 					fontWeight: '400',
+					variants: {
+						title: {
+							fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+							fontWeight: '600',
+						},
+					},
 				},
 				fonts: {
 					baseSize: 16,
@@ -534,7 +544,9 @@ Many websites will support multiple page or section output. For example, a hero 
 <template>
 	<m-theme :theme="theme">
 		<section class="profile-demo">
-			<m-heading>Global Default</m-heading>
+			<m-text variant="title">
+				Global Default
+			</m-text>
 			<m-text>
 				This section is using the default data passed in the theme prop.
 				Every component in a theme will inherit the properties set.
@@ -547,7 +559,9 @@ Many websites will support multiple page or section output. For example, a hero 
 
 		<m-theme :profile="theme.profiles[0].id">
 			<section class="profile-demo">
-				<m-heading>Profile 1</m-heading>
+				<m-text variant="title">
+					Profile 1
+				</m-text>
 				<m-text>
 					This section has a specific profile set,
 					which allows setting specific color overrides more easily.
@@ -560,7 +574,9 @@ Many websites will support multiple page or section output. For example, a hero 
 		</m-theme>
 		<m-theme :profile="theme.profiles[1].id">
 			<section class="profile-demo">
-				<m-heading>Profile 2</m-heading>
+				<m-text variant="title">
+					Profile 2
+				</m-text>
 				<m-text>
 					This section has a specific profile set,
 					which allows setting specific color overrides more easily.
@@ -576,14 +592,12 @@ Many websites will support multiple page or section output. For example, a hero 
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MTheme,
-		MHeading,
 		MText,
 		MButton,
 	},

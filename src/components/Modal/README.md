@@ -58,9 +58,9 @@ _DemoModal.vue_
 			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text variant="title">
 				Modal heading
-			</m-heading>
+			</m-text>
 			<m-text>
 				Modal content
 			</m-text>
@@ -76,7 +76,6 @@ _DemoModal.vue_
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 
@@ -86,7 +85,6 @@ export default {
 	components: {
 		MModal,
 		MButton,
-		MHeading,
 		MText,
 		MModalContent,
 	},
@@ -341,9 +339,9 @@ _ActionBarDemoModal.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text variant="title">
 				Modal heading
-			</m-heading>
+			</m-text>
 			<m-text>
 				modal content
 			</m-text>
@@ -369,7 +367,6 @@ _ActionBarDemoModal.vue_
 </template>
 
 <script>
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
@@ -379,7 +376,6 @@ export default {
 	name: 'ActionBarDemoModal',
 
 	components: {
-		MHeading,
 		MText,
 		MModal,
 		MActionBarButton,
@@ -467,9 +463,9 @@ _StackingDemoFirstModal.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text variant="title">
 				First modal heading
-			</m-heading>
+			</m-text>
 			<m-text>
 				First modal content
 			</m-text>
@@ -495,7 +491,6 @@ _StackingDemoFirstModal.vue_
 </template>
 
 <script>
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
@@ -507,7 +502,6 @@ export default {
 
 	components: {
 		MModal,
-		MHeading,
 		MText,
 		MModalContent,
 		MInlineActionBar,
@@ -560,9 +554,9 @@ _StackingDemoSecondModal.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text variant="title">
 				Second modal heading
-			</m-heading>
+			</m-text>
 			<m-text>
 				Second modal content
 			</m-text>
@@ -587,7 +581,6 @@ _StackingDemoSecondModal.vue_
 </template>
 
 <script>
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
@@ -598,7 +591,6 @@ export default {
 
 	components: {
 		MModal,
-		MHeading,
 		MText,
 		MModalContent,
 		MActionBarButton,
@@ -685,9 +677,9 @@ _StackingDemoFirstModalCloseAll.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text variant="title">
 				First modal heading
-			</m-heading>
+			</m-text>
 			<m-text>
 				First modal content
 			</m-text>
@@ -713,7 +705,6 @@ _StackingDemoFirstModalCloseAll.vue_
 </template>
 
 <script>
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
@@ -725,7 +716,6 @@ export default {
 
 	components: {
 		MModal,
-		MHeading,
 		MText,
 		MModalContent,
 		MInlineActionBar,
@@ -778,9 +768,9 @@ _StackingDemoSecondModalCloseAll.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text variant="title">
 				Second modal heading
-			</m-heading>
+			</m-text>
 			<m-text>
 				Second modal content
 			</m-text>
@@ -805,7 +795,6 @@ _StackingDemoSecondModalCloseAll.vue_
 </template>
 
 <script>
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
@@ -816,7 +805,6 @@ export default {
 
 	components: {
 		MModal,
-		MHeading,
 		MText,
 		MModalContent,
 		MActionBarButton,

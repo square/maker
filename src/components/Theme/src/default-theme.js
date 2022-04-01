@@ -33,6 +33,11 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+			variants: {
+				primary: {},
+				secondary: {},
+				tertiary: {},
+			},
 		},
 		textbutton: {
 			color: '@colors.primary',
@@ -46,16 +51,39 @@ export default function defaultTheme() {
 			align: 'center',
 		},
 		text: {
-			fontFamily: 'inherit',
 			size: 0,
-			color: '@colors.text',
-			fontWeight: 400,
-		},
-		heading: {
 			fontFamily: 'inherit',
-			size: 2,
-			color: '@colors.heading',
-			fontWeight: 700,
+			color: '@colors.text',
+			element: 'p',
+			fontWeight: 'inherit',
+			fontStyle: 'inherit',
+			textTransform: 'inherit',
+			textAlign: 'inherit',
+			variants: {
+				headline: {
+					size: 4,
+					fontWeight: '700',
+					element: 'h1',
+					color: '@colors.heading',
+				},
+				title: {
+					size: 2,
+					fontWeight: '700',
+					element: 'h2',
+					color: '@colors.heading',
+				},
+				body: {
+					size: 0,
+					fontWeight: '400',
+					element: 'p',
+				},
+				label: {
+					size: -1,
+					fontWeight: '700',
+					element: 'h6',
+					textTransform: 'uppercase',
+				},
+			},
 		},
 		choice: {
 			selectedColor: undefined,

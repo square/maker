@@ -9,17 +9,19 @@
 				<div
 					:class="$s.Scale"
 				>
-					<m-heading
+					<m-text
+						variant="title"
 						:size="1"
 						style="margin-bottom: 20px;"
 					>
 						Maker Theme
-					</m-heading>
-					<m-heading
+					</m-text>
+					<m-text
+						variant="title"
 						:size="0"
 					>
 						Colors
-					</m-heading>
+					</m-text>
 					<div :class="$s.Profile">
 						<label>
 							<input
@@ -76,11 +78,12 @@
 					:class="$s.Preview"
 				>
 					<div>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="0"
 						>
 							Enter delivery address
-						</m-heading>
+						</m-text>
 						<m-segmented-control
 							v-model="selected"
 							size="small"
@@ -113,11 +116,12 @@
 								</m-choice-option>
 							</m-choice>
 						</div>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="-1"
 						>
 							Enter delivery address
-						</m-heading>
+						</m-text>
 						<m-text :size="-1">
 							<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
 						</m-text>
@@ -179,11 +183,12 @@
 					:class="$s.Preview"
 				>
 					<div>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="0"
 						>
 							House special wings
-						</m-heading>
+						</m-text>
 						<m-radio value="1">
 							Buffalo
 						</m-radio>
@@ -264,11 +269,12 @@
 					:class="$s.Preview"
 				>
 					<div>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="0"
 						>
 							Schedule order
-						</m-heading>
+						</m-text>
 						<m-text :size="-1">
 							<check-circle :class="$s.Icon" /> No minimum
 						</m-text>
@@ -278,11 +284,12 @@
 					</div>
 					<m-divider />
 					<div>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="0"
 						>
 							Select date and time
-						</m-heading>
+						</m-text>
 						<m-text :size="-1">
 							Choose from the availble timeslots for your order
 						</m-text>
@@ -316,7 +323,6 @@ import chroma from 'chroma-js';
 import { MTheme } from '@square/maker/components/Theme';
 import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MNotice } from '@square/maker/components/Notice';
 import { MInput } from '@square/maker/components/Input';
@@ -405,7 +411,6 @@ export default {
 		MChoice,
 		MChoiceOption,
 		MDivider,
-		MHeading,
 		MText,
 		MNotice,
 		MInput,
