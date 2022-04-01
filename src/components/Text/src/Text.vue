@@ -5,9 +5,6 @@ import cssValidator from '@square/maker/utils/css-validator';
 const MIN_SIZE = -2;
 const MAX_SIZE = 7;
 
-/**
- * @inheritAttrs p
- */
 export default {
 	inject: {
 		theme: {
@@ -61,8 +58,7 @@ export default {
 			validator: cssValidator('font-weight'),
 		},
 		/**
-		 * [Font size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
-		 * Overrides the `size` prop, and disables type scaling.
+		 * [Font size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size). Overrides the `size` prop, and disables type scaling.
 		 */
 		fontSize: {
 			type: String,
@@ -70,8 +66,7 @@ export default {
 			validator: cssValidator('font-size'),
 		},
 		/**
-		 * [Line height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height)
-		 * Overrides the internally calculated line height.
+		 * [Line height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height). Overrides the internally calculated line height.
 		 */
 		lineHeight: {
 			type: String,
@@ -209,12 +204,6 @@ export default {
 <style module="$s">
 .Text {
 	margin: 0;
-	color: inherit;
-	font-weight: inherit;
-	font-family: inherit;
-	font-style: inherit;
-	text-align: inherit;
-	text-transform: inherit;
 
 	/* min breakpoint config */
 	--min-resolution: 320; /* arbitrary value */

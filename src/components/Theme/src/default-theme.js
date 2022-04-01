@@ -54,7 +54,6 @@ export default function defaultTheme() {
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
-			variant: 'body',
 			variants: {
 				headline: {
 					size: 4,
