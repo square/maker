@@ -188,12 +188,12 @@ export default {
 			validator: (color) => chroma.valid(color),
 		},
 		/**
-		 * Semantic variant
+		 * Variant
+		 * @values primary, secondary, tertiary, variant defined in theme
 		 */
 		variant: {
 			type: String,
 			default: undefined,
-			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
 		},
 		/**
 		 * Shape of button

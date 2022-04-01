@@ -33,6 +33,11 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+			variants: {
+				primary: {},
+				secondary: {},
+				tertiary: {},
+			},
 		},
 		textbutton: {
 			color: '@colors.primary',
