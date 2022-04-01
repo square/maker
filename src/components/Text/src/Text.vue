@@ -18,6 +18,7 @@ export default {
 	props: {
 		/**
 		 * variants are defined at the theme level
+		 * @values headline, title, body, label, variant defined in theme
 		 */
 		variant: {
 			type: String,
