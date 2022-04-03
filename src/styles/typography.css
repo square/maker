@@ -4,7 +4,7 @@
 
 	/* min breakpoint config */
 	--min-resolution: 320; /* arbitrary value */
-	--min-font-size: calc(var(--maker-fonts-baseSize, 16) * 1px);
+	--min-font-size: var(--maker-fonts-baseSize, 16);
 	--min-font-size-scale: var(--maker-fonts-sizeScale, 1.15);
 
 	/* min type scale */
