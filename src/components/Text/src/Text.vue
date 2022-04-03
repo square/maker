@@ -26,7 +26,7 @@ export default {
 		element: {
 			type: String,
 			default: 'p',
-			validator: (element) => ['p', 'span', 'div', 'li'].includes(element),
+			validator: (element) => ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'li'].includes(element),
 		},
 		/**
 		 * Size of text
@@ -110,6 +110,15 @@ export default {
 			default: 'inherit',
 			validator: (textAlign) => ['inherit', 'left', 'right', 'center'].includes(textAlign),
 		},
+		/**
+		 * Variant - allows four custom font styles through the Theme component
+		 * @values body, title, headline, label
+		 */
+		variant: {
+			type: String,
+			default: 'body',
+			validator: (variant) => ['body', 'title', 'headline', 'label'].includes(variant),
+		},
 	},
 
 	computed: {
@@ -134,6 +143,7 @@ export default {
 	render(createElement) {
 		const {
 			$s,
+			variant,
 			sizeClass,
 			inlineStyles,
 			fontStyle,
@@ -148,7 +158,7 @@ export default {
 
 		return createElement(element, {
 			class: [
-				$s.Paragraph,
+				$s[`text_${variant}`],
 				sizeClass,
 				{
 					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
@@ -165,6 +175,32 @@ export default {
 </script>
 
 <style module="$s">
+/* Variant defaults */
+.text_body,
+.text_label {
+	font-weight: var(--maker-fontWeights-body, 400);
+	font-family: var(--maker-fonts-body, --system-font);
+}
+
+.text_title {
+	margin: 0;
+	color: var(--maker-colors-heading, #000);
+	font-weight: var(--maker-fontWeights-heading, 600);
+	font-family: var(--maker-fonts-heading, --system-font);
+}
+
+.text_headline {
+	margin: 0;
+	color: var(--maker-colors-heading, #000);
+	font-weight: var(--maker-fontWeights-heading, 600);
+	font-family: var(--maker-fonts-heading, --system-font);
+}
+
+.text_label {
+	font-weight: var(--maker-fontWeights-label, var(--maker-fontWeights-body, 400));
+	font-family: var(--maker-fonts-label, var(--maker-fonts-body, --system-font));
+}
+
 .fontstyle_normal {
 	font-style: normal;
 }
