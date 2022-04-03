@@ -193,9 +193,9 @@ export default {
 <style module="$s">
 .Heading {
 	margin: 0;
-	color: var(--maker-colors-heading);
-	font-weight: var(--maker-heading-fontWeight);
-	font-family: var(--maker-heading-fontFamily);
+	color: var(--maker-colors-heading, #000);
+	font-weight: var(--maker-fontWeights-heading, 600);
+	font-family: var(--maker-fonts-heading, --system-font);
 }
 
 .fontstyle_normal {
