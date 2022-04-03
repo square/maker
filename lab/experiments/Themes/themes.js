@@ -27,8 +27,14 @@ export const modern = {
 		fontWeight: '400',
 	},
 	fonts: {
+		body: 'Open Sans',
+		heading: 'Open Sans',
 		baseSize: 16,
 		sizeScale: 1.15,
+	},
+	fontWeights: {
+		body: '400',
+		heading: '600',
 	},
 };
 
@@ -56,8 +62,14 @@ export const midnight = {
 		fontWeight: '400',
 	},
 	fonts: {
+		body: 'Domine',
+		heading: 'Karla',
 		baseSize: 19,
 		sizeScale: 1.217,
+	},
+	fontWeights: {
+		body: '400',
+		heading: '600',
 	},
 };
 
@@ -85,8 +97,14 @@ export const spaces = {
 		fontWeight: '400',
 	},
 	fonts: {
+		body: 'Libre Franklin',
+		heading: 'Libre Franklin',
 		baseSize: 18,
 		sizeScale: 1.297,
+	},
+	fontWeights: {
+		body: '400',
+		heading: '700',
 	},
 };
 
@@ -114,7 +132,13 @@ export const santa = {
 		fontWeight: '400',
 	},
 	fonts: {
+		body: 'Comfortaa',
+		heading: 'Rubik',
 		baseSize: 18,
 		sizeScale: 1.407,
+	},
+	fontWeights: {
+		body: '400',
+		heading: '700',
 	},
 };

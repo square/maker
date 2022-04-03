@@ -14,6 +14,12 @@
 					:class="$s.Section"
 					class="banner"
 				/>
+				<div :class="[$s.Section, $s.labelDemo]">
+					<m-text variant="label">
+						This is a Text component with the label variant.
+						This is a basic demo to show how text variants can work with CSS based theming.
+					</m-text>
+				</div>
 				<div
 					v-for="category in categories"
 					:key="category"
@@ -67,12 +73,14 @@
 					class="detail-image"
 				/>
 				<div :class="$s.Section">
-					<m-heading
+					<m-text
 						:size="2"
+						variant="title"
+						element="h1"
 						class="item-title"
 					>
 						Cappuccino
-					</m-heading>
+					</m-text>
 					<m-heading
 						:size="1"
 						class="item-price"
@@ -636,5 +644,11 @@ export default {
 
 .Section {
 	padding: 2vh 1vw;
+}
+
+.labelDemo {
+	margin-top: 1rem;
+	padding: 1vh 1vw;
+	border: 1px solid black;
 }
 </style>
