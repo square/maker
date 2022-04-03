@@ -639,7 +639,7 @@ export default {
 
 ## Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description   |
+| ------- | ------------- |
+| default | theme content |
 <!-- api-tables:end -->
