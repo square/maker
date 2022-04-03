@@ -78,6 +78,8 @@ body {
 </style>
 
 <style>
+@import '@square/maker/styles/global.css';
+
 /*
 While this import adds some syntax highlighting to the code
 examples inside the styleguide it looks terrible because:
