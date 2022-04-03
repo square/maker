@@ -76,7 +76,7 @@ export default {
 <style module="$s">
 :root {
 	--theme-font-weight: var(--maker-text-fontWeight, normal);
-	--theme-font-size: var(--maker-fonts-baseSize, 16px);
+	--theme-font-size: calc(var(--maker-fonts-baseSize, 16) * 1px);
 	--theme-font-family: var(--maker-text-fontFamily, --system-font);
 }
 
