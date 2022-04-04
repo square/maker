@@ -179,26 +179,26 @@ export default {
 .text_body,
 .text_label {
 	font-weight: var(--maker-fontWeights-body, 400);
-	font-family: var(--maker-fonts-body, --system-font);
+	font-family: var(--maker-fonts-body, var(--system-font));
 }
 
 .text_title {
 	margin: 0;
 	color: var(--maker-colors-heading, #000);
 	font-weight: var(--maker-fontWeights-heading, 600);
-	font-family: var(--maker-fonts-heading, --system-font);
+	font-family: var(--maker-fonts-heading, var(--system-font));
 }
 
 .text_headline {
 	margin: 0;
 	color: var(--maker-colors-heading, #000);
 	font-weight: var(--maker-fontWeights-heading, 600);
-	font-family: var(--maker-fonts-heading, --system-font);
+	font-family: var(--maker-fonts-heading, var(--system-font));
 }
 
 .text_label {
 	font-weight: var(--maker-fontWeights-label, var(--maker-fontWeights-body, 400));
-	font-family: var(--maker-fonts-label, var(--maker-fonts-body, --system-font));
+	font-family: var(--maker-fonts-label, var(--maker-fonts-body, var(--system-font)));
 }
 
 .fontstyle_normal {

@@ -195,7 +195,7 @@ export default {
 	margin: 0;
 	color: var(--maker-colors-heading, #000);
 	font-weight: var(--maker-fontWeights-heading, 600);
-	font-family: var(--maker-fonts-heading, --system-font);
+	font-family: var(--maker-fonts-heading, var(--system-font));
 }
 
 .fontstyle_normal {
