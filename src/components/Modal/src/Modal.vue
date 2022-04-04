@@ -143,7 +143,7 @@ export default {
 <style module="$s">
 .Modal {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 	color: var(--color, inherit);
 	background: var(--bg-color, #f5f6f7);
 	transition: transform 0.2s linear;
