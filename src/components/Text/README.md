@@ -33,7 +33,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 
 | Prop           | Type     | Default     | Possible values                                               | Description                                                                                 |
 | -------------- | -------- | ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| element        | `string` | `'p'`       | `p`, `span`, `div`, `li`                                      | HTML Element wrapper                                                                        |
+| element        | `string` | `'p'`       | `p`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `span`, `div`, `li`  | HTML Element wrapper                                                                        |
 | size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of text                                                                                |
 | font-family    | `string` | —           | —                                                             | Font family                                                                                 |
 | font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                            |
@@ -43,6 +43,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 | font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                                                                  |
 | text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                                                              |
 | text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                                                                  |
+| variant        | `string` | `'body'`    | `body`, `title`, `headline`, `label`                          | Variant - allows four custom font styles through the Theme component                        |
 
 
 ## Slots
