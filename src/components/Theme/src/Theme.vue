@@ -53,8 +53,7 @@ export default {
 	},
 	methods: {
 		applyTheme() {
-			const { theme } = createStitches({ theme: this.theme, prefix: 'maker' });
-			this.defaultTheme = theme;
+			createStitches({ theme: this.theme, prefix: 'maker' });
 		},
 	},
 
