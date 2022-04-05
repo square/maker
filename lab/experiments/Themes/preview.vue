@@ -19,21 +19,25 @@
 					:key="category"
 					:class="$s.Section"
 				>
-					<m-heading :size="1">
+					<m-text
+						variant="title"
+						:size="1"
+					>
 						{{ category }}
-					</m-heading>
+					</m-text>
 					<template v-for="item in categoryItems(category)">
 						<div
 							:key="item.name"
 							class="item"
 						>
 							<div class="item-details">
-								<m-heading
+								<m-text
+									variant="title"
 									:size="0"
 									class="item-title"
 								>
 									{{ item.name }}
-								</m-heading>
+								</m-text>
 								<m-text
 									:size="-1"
 									class="item-description"
@@ -67,18 +71,20 @@
 					class="detail-image"
 				/>
 				<div :class="$s.Section">
-					<m-heading
+					<m-text
+						variant="title"
 						:size="2"
 						class="item-title"
 					>
 						Cappuccino
-					</m-heading>
-					<m-heading
+					</m-text>
+					<m-text
+						variant="title"
 						:size="1"
 						class="item-price"
 					>
 						$4.00
-					</m-heading>
+					</m-text>
 					<m-text
 						:size="0"
 						class="item-description"
@@ -96,11 +102,12 @@
 					<template
 						#label
 					>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="-1"
 						>
 							Size
-						</m-heading>
+						</m-text>
 					</template>
 					<div class="option">
 						<m-radio
@@ -148,11 +155,12 @@
 					<template
 						#label
 					>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="-1"
 						>
 							Modifiers
-						</m-heading>
+						</m-text>
 					</template>
 					<template #required-label>
 						Optional
@@ -179,11 +187,12 @@
 					<template
 						#label
 					>
-						<m-heading
+						<m-text
+							variant="title"
 							:size="-1"
 						>
 							Notes
-						</m-heading>
+						</m-text>
 					</template>
 					<template #required-label>
 						Optional
@@ -220,22 +229,24 @@
 					</div>
 				</div>
 				<div :class="[$s.Section, $s.Cart]">
-					<m-heading
+					<m-text
+						variant="title"
 						:size="1"
 					>
 						Shopping Cart
-					</m-heading>
+					</m-text>
 					<div
 						class="cart-item"
 					>
 						<div class="cart-content">
 							<div class="cart-text">
-								<m-heading
+								<m-text
+									variant="title"
 									:size="-1"
 									class="item-title"
 								>
 									Holiday Spice Latte
-								</m-heading>
+								</m-text>
 								<m-text
 									:size="-1"
 									class="cart-price"
@@ -266,12 +277,13 @@
 					>
 						<div class="cart-content">
 							<div class="cart-text">
-								<m-heading
+								<m-text
+									variant="title"
 									:size="-1"
 									class="item-title"
 								>
 									Blonde Latte
-								</m-heading>
+								</m-text>
 								<m-text
 									:size="-1"
 									class="cart-price"
@@ -303,11 +315,12 @@
 						Add more items
 					</m-button>
 					<m-divider style="margin: 24px 0;" />
-					<m-heading
+					<m-text
+						variant="title"
 						:size="0"
 					>
 						Add a tip
-					</m-heading>
+					</m-text>
 					<m-text :size="-1">
 						100% of the tip goes to the kitchen
 					</m-text>
@@ -373,7 +386,6 @@ import MenuIcon from '@square/maker-icons/Menu';
 import ShoppingBagIcon from '@square/maker-icons/ShoppingBag';
 import XIcon from '@square/maker-icons/X';
 import Trash from '@square/maker-icons/Trash';
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MImage } from '@square/maker/components/Image';
@@ -393,7 +405,6 @@ export default {
 		ShoppingBagIcon,
 		XIcon,
 		Trash,
-		MHeading,
 		MText,
 		MDivider,
 		MImage,
