@@ -45,6 +45,20 @@ function capitalizeFirstLetter(string) {
 	return string[0].toUpperCase() + string.slice(secondLetterIndex);
 }
 
+/**
+ * @param {string} componentKeyInTheme - the name of a key in the theme object
+ * @param {string[]} propNames - Prop names in a Vue Component
+ *
+ * Assumes a Vue Component as the "this" value.
+ * @returns {Array} an array of functions for computing the value of a given prop name.
+ *
+ * Each function does the following:
+ * If the prop has a value in the Vue Component, return that value.
+ * If not, find the value for that prop name in the `theme` object (under the given key).
+ * If the value is a path, resolve that path in the `theme` object.
+ * Validate the value using the Vue Component's validator for that prop name, if one is defined.
+ * Return the value
+*/
 export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
