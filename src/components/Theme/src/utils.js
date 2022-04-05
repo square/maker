@@ -59,7 +59,6 @@ function capitalizeFirstLetter(string) {
  * Validate the value using the Vue Component's validator for that prop name, if one is defined.
  * Return the value
 */
-
 export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
