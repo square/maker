@@ -18,7 +18,7 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#000',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 		/**
@@ -26,7 +26,7 @@ export default {
 		 */
 		bgColor: {
 			type: String,
-			default: '#fff',
+			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
 	},
@@ -45,8 +45,8 @@ export default {
 <style module="$s">
 .PopoverContent {
 	padding: 24px;
-	color: var(--popover-color);
-	background-color: var(--popover-bg-color);
+	color: var(--popover-color, var(--neutral-90, black));
+	background-color: var(--popover-bg-color, var(--color-elevation, white));
 	border-radius: 8px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
 }
