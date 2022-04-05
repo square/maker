@@ -18,13 +18,15 @@ export const modern = {
 		'color-elevation': '#ffffff',
 		'color-overlay': 'rgba(0, 0, 0, 0.32)',
 	},
-	heading: {
-		fontFamily: 'Open Sans',
-		fontWeight: '600',
-	},
 	text: {
 		fontFamily: 'Open Sans',
 		fontWeight: '400',
+		variants: {
+			title: {
+				fontFamily: 'Open Sans',
+				fontWeight: '600',
+			},
+		},
 	},
 	fonts: {
 		baseSize: 16,
@@ -47,13 +49,15 @@ export const midnight = {
 		'color-elevation': '#777981',
 		'color-overlay': 'rgba(255, 255, 255, 0.32)',
 	},
-	heading: {
-		fontFamily: 'Domine',
-		fontWeight: '400',
-	},
 	text: {
 		fontFamily: 'Karla',
 		fontWeight: '400',
+		variants: {
+			title: {
+				fontFamily: 'Domine',
+				fontWeight: '400',
+			},
+		},
 	},
 	fonts: {
 		baseSize: 19,
@@ -76,13 +80,15 @@ export const spaces = {
 		'color-elevation': '#ffffff',
 		'color-overlay': 'rgba(0, 0, 0, 0.32)',
 	},
-	heading: {
-		fontFamily: 'Libre Franklin',
-		fontWeight: '700',
-	},
 	text: {
 		fontFamily: 'Libre Franklin',
 		fontWeight: '400',
+		variants: {
+			title: {
+				fontFamily: 'Libre Franklin',
+				fontWeight: '700',
+			},
+		},
 	},
 	fonts: {
 		baseSize: 18,
@@ -105,13 +111,15 @@ export const santa = {
 		'color-elevation': '#ea8173',
 		'color-overlay': 'rgba(255, 255, 255, 0.32)',
 	},
-	heading: {
-		fontFamily: 'Comfortaa',
-		fontWeight: '700',
-	},
 	text: {
 		fontFamily: 'Rubik',
 		fontWeight: '400',
+		variants: {
+			title: {
+				fontFamily: 'Comfortaa',
+				fontWeight: '700',
+			},
+		},
 	},
 	fonts: {
 		baseSize: 18,
