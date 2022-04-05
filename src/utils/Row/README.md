@@ -18,7 +18,7 @@
 				<template #side-secondary>
 					Side secondary
 				</template>
-				<template #control>
+				<template #side-secondary-icon>
 					<m-checkbox />
 				</template>
 			</m-row>
@@ -57,7 +57,7 @@
 				<template #side>
 					Side
 				</template>
-				<template #control>
+				<template #side-secondary-icon>
 					<m-checkbox />
 				</template>
 			</m-row>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { MRow } from '@square/maker/components/Row';
+import { MRow } from '@square/maker/utils/Row';
 import { MCard } from '@square/maker/components/Card';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import Settings from '@square/maker-icons/Settings';
@@ -107,14 +107,14 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Slots
 
-| Slot            | Description          |
-| --------------- | -------------------- |
-| default         | main label           |
-| icon            | icon slot            |
-| secondary       | secondary label      |
-| side            | side main label      |
-| side-secondary  | side secondary label |
-| control         | control              |
+| Slot           | Description |
+| -------------- | ----------- |
+| icon           | —           |
+| default        | —           |
+| secondary      | —           |
+| side           | —           |
+| side-secondary | —           |
+| control        | —           |
 
 
 ## Events

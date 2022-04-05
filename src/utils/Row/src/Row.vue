@@ -39,10 +39,10 @@
 			</div>
 		</div>
 		<div
-			v-if="$slots.control"
-			:class="$s.Control"
+			v-if="$slots['side-secondary-icon']"
+			:class="$s.SideIcon"
 		>
-			<slot name="control" />
+			<slot name="side-secondary-icon" />
 		</div>
 	</div>
 </template>
@@ -87,7 +87,12 @@ export default {
 }
 
 .Side,
-.Control {
+.SideIcon {
 	text-align: right;
+}
+
+.Icon,
+.SideIcon {
+	display: flex;
 }
 </style>
