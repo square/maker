@@ -122,7 +122,7 @@ export default {
 	color: var(--color-foreground);
 	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 16px;
-	font-family: var(--font-family-paragraph, 'inherit');
+	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
