@@ -11,14 +11,14 @@
 				>
 					<m-text
 						variant="title"
-						:size="1"
+						font-size="20px"
 						style="margin-bottom: 20px;"
 					>
 						Maker Theme
 					</m-text>
 					<m-text
 						variant="title"
-						:size="0"
+						font-size="16px"
 					>
 						Colors
 					</m-text>
@@ -51,7 +51,7 @@
 							>
 							Text
 						</label>
-						<m-divider />
+						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
 							<div :class="$s.color">
 								<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
@@ -71,6 +71,31 @@
 							<div :class="$s.color">
 								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
 							</div>
+						</div>
+						<m-divider :class="$s.Divider" />
+						<m-text
+							variant="title"
+							font-size="16px"
+						>
+							Typography
+						</m-text>
+						<div :class="$s.Typography">
+							base size
+							<input
+								v-model="fontsBaseSize"
+								type="range"
+								min="16"
+								max="24"
+								step="1"
+							>
+							type scale
+							<input
+								v-model="fontsTypeScale"
+								type="range"
+								min="1.15"
+								max="1.62"
+								step="0.01"
+							>
 						</div>
 					</div>
 				</div>
@@ -310,6 +335,23 @@
 							@image-uploader:change="setImages"
 						/>
 					</div>
+					<m-divider />
+					<div :class="$s.TypographyPreview">
+						<m-text
+							v-for="variant in ['headline', 'title', 'paragraph', 'label']"
+							:key="variant"
+							:variant="variant"
+						>
+							{{ variant }}
+						</m-text>
+						<m-text
+							v-for="size in [7, 6, 5, 4, 3, 2, 1, 0, -1, -2]"
+							:key="size"
+							:size="size"
+						>
+							Size {{ size }}
+						</m-text>
+					</div>
 				</div>
 			</div>
 			<m-modal-layer />
@@ -479,12 +521,15 @@ export default {
 			selected: 'medium',
 			images: [],
 			item: storeData.items[0],
+			fontsBaseSize: '16',
+			fontsTypeScale: '1.17',
 		};
 	},
 
 	computed: {
 		theme() {
 			const colors = contrastColors(this.backgroundColor);
+			const baseTen = 10;
 			return {
 				colors: {
 					primary: this.primaryColor,
@@ -492,6 +537,10 @@ export default {
 					heading: this.headingColor,
 					text: this.textColor,
 					...colors,
+				},
+				fonts: {
+					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
+					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
 				},
 				notice: {
 					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
@@ -501,6 +550,26 @@ export default {
 				},
 				actionbarbutton: {
 					shape: 'rounded',
+				},
+				text: {
+					variants: {
+						headline: {
+							fontFamily: 'arial',
+							fontWeight: '700',
+						},
+						title: {
+							fontFamily: 'serif',
+							fontWeight: '500',
+						},
+						paragraph: {
+							fontFamily: 'sans-serif',
+							fontWeight: '400',
+						},
+						label: {
+							fontFamily: 'monospace',
+							fontWeight: '500',
+						},
+					},
 				},
 			};
 		},
@@ -575,21 +644,22 @@ export default {
 .Profile {
 	display: flex;
 	flex-direction: column;
-
-	& label {
-		margin-bottom: 8px;
-	}
+	gap: 8px;
+	margin: 8px 0;
 
 	& input {
 		margin-right: 16px;
 	}
 }
 
+hr.Divider {
+	margin: 8px 0;
+}
+
 .palette {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
-	margin-top: 16px;
 }
 
 .palette > .color {
@@ -619,6 +689,11 @@ export default {
 	& > div > *:last-child {
 		margin-bottom: 0;
 	}
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.TypographyPreview > * {
+	margin: 0 !important;
 }
 
 .Icon {
