@@ -90,6 +90,7 @@
 							<br>
 							{{ textVariants[textVariant].fontWeight }}
 							<br>
+							<br>
 						</div>
 					</div>
 					<m-divider :class="$s.Divider" />
