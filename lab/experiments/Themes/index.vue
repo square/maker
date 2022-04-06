@@ -336,7 +336,7 @@ export default {
 	},
 
 	created: () => {
-		themeStore.theme = themes.modern;
+		themeStore.theme = themes.websiteTheme;
 	},
 
 	mounted() {
