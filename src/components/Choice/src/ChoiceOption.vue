@@ -1,7 +1,7 @@
 <template>
 	<button
 		:class="[
-			$s.Button,
+			$s.ChoiceOption,
 			{ [$s.selected]: isSelected },
 		]"
 		@click="selectSelf"
@@ -64,7 +64,7 @@ export default {
 	--selected-text-color
 	--selected-disabled-text-color
 */
-.Button {
+.ChoiceOption {
 	--border-radius: 8px;
 	--button-padding: 12px 24px;
 
