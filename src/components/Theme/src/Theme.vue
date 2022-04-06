@@ -5,6 +5,8 @@ import key from './key';
 import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
 
+const themeTokenSupport = ['colors', 'fonts', 'fontWeights'];
+
 function resolveTheme(data, parentTheme, theme, profileId) {
 	merge(data, parentTheme, theme);
 	merge(data, find(data.profiles, { id: profileId }));
@@ -53,7 +55,11 @@ export default {
 	},
 	methods: {
 		applyTheme() {
-			createStitches({ theme: this.theme, prefix: 'maker' });
+			const tokens = {};
+			for (const element of themeTokenSupport) {
+				tokens[element] = this.theme[element];
+			}
+			createStitches({ theme: tokens, prefix: 'maker' });
 		},
 	},
 
@@ -74,9 +80,9 @@ export default {
 
 <style module="$s">
 :root {
-	--theme-font-weight: var(--maker-text-fontWeight, normal);
+	--theme-font-weight: var(--maker-fontWeights-body, normal);
 	--theme-font-size: calc(var(--maker-fonts-baseSize, 16) * 1px);
-	--theme-font-family: var(--maker-text-fontFamily, --system-font);
+	--theme-font-family: var(--maker-fonts-body, --system-font);
 }
 
 .Theme {
