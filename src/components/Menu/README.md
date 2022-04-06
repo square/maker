@@ -163,6 +163,7 @@ export default {
 
 	methods: {
 		clickHandler() {
+			// eslint-disable-next-line no-alert
 			alert('Action clicked');
 		},
 	},

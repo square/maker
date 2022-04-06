@@ -123,9 +123,9 @@ export default {
 
 <style module="$s">
 .MenuOption {
-	cursor: pointer;
-	padding: 16px;
 	box-sizing: border-box;
+	padding: 16px;
+	cursor: pointer;
 
 	&:hover {
 		background-color: var(--neutral-10, #f1f1f1);
