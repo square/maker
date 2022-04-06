@@ -5,7 +5,7 @@ import key from './key';
 import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
 
-const themeTokenSupport = ['colors', 'fonts', 'fontWeights'];
+const themeTokenSupport = ['fonts', 'fontWeights'];
 
 function resolveTheme(data, parentTheme, theme, profileId) {
 	merge(data, parentTheme, theme);
@@ -42,7 +42,9 @@ export default {
 		},
 	},
 	data() {
-		const data = {};
+		const data = {
+			scope: '',
+		};
 		resolveTheme(data, this.parentTheme, this.theme, this.profile);
 		return data;
 	},
@@ -55,11 +57,12 @@ export default {
 	},
 	methods: {
 		applyTheme() {
-			const tokens = {};
+			const tokens = { colors: this.colors };
 			for (const element of themeTokenSupport) {
 				tokens[element] = this.theme[element];
 			}
-			createStitches({ theme: tokens, prefix: 'maker' });
+			const { theme } = createStitches({ theme: tokens, prefix: 'maker' });
+			this.scope = theme.className;
 		},
 	},
 
@@ -70,7 +73,7 @@ export default {
 		 */
 		const defaultSlot = this.$slots.default;
 		return h('div', {
-			class: [$s.Theme],
+			class: [$s.Theme, this.scope],
 			attrs: this.$attrs,
 			on: this.$listeners,
 		}, defaultSlot);
