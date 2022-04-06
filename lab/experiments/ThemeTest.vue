@@ -11,14 +11,91 @@
 				>
 					<m-text
 						variant="title"
-						:size="1"
-						style="margin-bottom: 20px;"
+						font-size="20px"
+						style="margin-bottom: 16px;"
 					>
 						Maker Theme
 					</m-text>
 					<m-text
 						variant="title"
-						:size="0"
+						font-size="16px"
+					>
+						Typography
+					</m-text>
+					<div :class="$s.Typography">
+						base size
+						<br>
+						<input
+							v-model="fontsBaseSize"
+							type="range"
+							min="16"
+							max="24"
+							step="1"
+						>
+						<br>
+						{{ fontsBaseSize }}
+						<br>
+						type scale
+						<br>
+						<input
+							v-model="fontsTypeScale"
+							type="range"
+							min="1.15"
+							max="1.62"
+							step="0.01"
+						>
+						<br>
+						{{ fontsTypeScale }}
+						<br>
+						<m-divider :class="$s.Divider" />
+						<m-text
+							variant="title"
+							font-size="16px"
+						>
+							Variants
+						</m-text>
+						<div
+							v-for="textVariant in Object.keys(textVariants)"
+							:key="textVariant"
+						>
+							{{ textVariant }}
+							<br>
+							<select
+								v-model="textVariants[textVariant].fontFamily"
+							>
+								<option>
+									serif
+								</option>
+								<option>
+									sans-serif
+								</option>
+								<option>
+									monospace
+								</option>
+								<option>
+									inherit
+								</option>
+								<option>
+									arial
+								</option>
+							</select>
+							<br>
+							<input
+								v-model="textVariants[textVariant].fontWeight"
+								type="range"
+								min="100"
+								max="900"
+								step="100"
+							>
+							<br>
+							{{ textVariants[textVariant].fontWeight }}
+							<br>
+						</div>
+					</div>
+					<m-divider :class="$s.Divider" />
+					<m-text
+						variant="title"
+						font-size="16px"
 					>
 						Colors
 					</m-text>
@@ -51,7 +128,7 @@
 							>
 							Text
 						</label>
-						<m-divider />
+						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
 							<div :class="$s.color">
 								<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
@@ -310,6 +387,23 @@
 							@image-uploader:change="setImages"
 						/>
 					</div>
+					<m-divider />
+					<div :class="$s.TypographyPreview">
+						<m-text
+							v-for="variant in ['headline', 'title', 'paragraph', 'label']"
+							:key="variant"
+							:variant="variant"
+						>
+							{{ variant }}
+						</m-text>
+						<m-text
+							v-for="size in [7, 6, 5, 4, 3, 2, 1, 0, -1, -2]"
+							:key="size"
+							:size="size"
+						>
+							Size {{ size }}
+						</m-text>
+					</div>
 				</div>
 			</div>
 			<m-modal-layer />
@@ -479,12 +573,33 @@ export default {
 			selected: 'medium',
 			images: [],
 			item: storeData.items[0],
+			fontsBaseSize: '16',
+			fontsTypeScale: '1.17',
+			textVariants: {
+				headline: {
+					fontFamily: 'arial',
+					fontWeight: '700',
+				},
+				title: {
+					fontFamily: 'serif',
+					fontWeight: '500',
+				},
+				paragraph: {
+					fontFamily: 'sans-serif',
+					fontWeight: '400',
+				},
+				label: {
+					fontFamily: 'monospace',
+					fontWeight: '500',
+				},
+			},
 		};
 	},
 
 	computed: {
 		theme() {
 			const colors = contrastColors(this.backgroundColor);
+			const baseTen = 10;
 			return {
 				colors: {
 					primary: this.primaryColor,
@@ -492,6 +607,10 @@ export default {
 					heading: this.headingColor,
 					text: this.textColor,
 					...colors,
+				},
+				fonts: {
+					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
+					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
 				},
 				notice: {
 					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
@@ -501,6 +620,11 @@ export default {
 				},
 				actionbarbutton: {
 					shape: 'rounded',
+				},
+				text: {
+					variants: {
+						...this.textVariants,
+					},
 				},
 			};
 		},
@@ -575,21 +699,22 @@ export default {
 .Profile {
 	display: flex;
 	flex-direction: column;
-
-	& label {
-		margin-bottom: 8px;
-	}
+	gap: 8px;
+	margin: 8px 0;
 
 	& input {
 		margin-right: 16px;
 	}
 }
 
+hr.Divider {
+	margin: 8px 0;
+}
+
 .palette {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
-	margin-top: 16px;
 }
 
 .palette > .color {
@@ -619,6 +744,11 @@ export default {
 	& > div > *:last-child {
 		margin-bottom: 0;
 	}
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.TypographyPreview > * {
+	margin: 0 !important;
 }
 
 .Icon {
