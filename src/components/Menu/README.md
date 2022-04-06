@@ -7,10 +7,10 @@
 		<m-menu
 			v-model="single"
 		>
-			<template #trigger-icon>
+			<template #toggle-icon>
 				<settings class="icon" />
 			</template>
-			<template #trigger>
+			<template #toggle>
 				Single select menu
 			</template>
 			<template #menu>
@@ -24,7 +24,7 @@
 					<template #side>
 						Side
 					</template>
-					<template #side-secondary-icon>
+					<template #side-icon>
 						<settings class="icon" />
 					</template>
 				</m-menu-option>
@@ -61,7 +61,7 @@
 			v-model="multi"
 			type="multi-select"
 		>
-			<template #trigger>
+			<template #toggle>
 				Multi select menu
 			</template>
 			<template #menu>
@@ -75,7 +75,7 @@
 					<template #side>
 						Side
 					</template>
-					<template #side-secondary-icon>
+					<template #side-icon>
 						<settings class="icon" />
 					</template>
 				</m-menu-option>
@@ -109,14 +109,14 @@
 		{{ multi }}
 
 		<m-menu
-			trigger="button"
+			toggle="button"
 			type="action"
 		>
-			<template #trigger-icon>
+			<template #toggle-icon>
 				<settings class="icon" />
 			</template>
-			<template #trigger>
-				Trigger
+			<template #toggle>
+				Toggle
 			</template>
 			<template #menu>
 				<m-menu-option
@@ -185,20 +185,47 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Props
+## Menu Props
 
-| Prop     | Type        | Default           | Possible values                           | Description          |
-| -------- | ----------- | ----------------- | ----------------------------------------- | -------------------- |
-| selected | `undefined` | `undefined`       | String or Array                           |                      |
-| trigger  | `string`    | `'select'`        | `select`, `button`                        | Menu's trigger style |
-| type     | `string`    | `'single-select'` | `multi-select`, `single-select`, `action` | —                    |
+| Prop    | Type        | Default           | Possible values                           | Description          |
+| ------- | ----------- | ----------------- | ----------------------------------------- | -------------------- |
+| v-model | `undefined` | —                 | —                                         | Selected menu option |
+| toggle  | `string`    | `'select'`        | `select`, `button`                        | Menu's toggle style  |
+| type    | `string`    | `'single-select'` | `multi-select`, `single-select`, `action` | —                    |
 
 
-## Slots
+## Menu Slots
 
-| Slot         | Description  |
-| ------------ | ------------ |
-| trigger-icon | Trigger icon |
-| trigger      | Trigger slot |
-| menu         | Menu options |
+| Slot        | Description |
+| ----------- | ----------- |
+| toggle-icon | —           |
+| toggle      | —           |
+| menu        | —           |
+
+
+## Menu Events
+
+| Event       | Type | Description |
+| ----------- | ---- | ----------- |
+| menu:update | -    | —           |
+
+
+## MenuOption Props
+
+| Prop          | Type        | Default | Possible values | Description |
+| ------------- | ----------- | ------- | --------------- | ----------- |
+| value         | `undefined` | —       | —               | —           |
+| click-handler | `func`      | —       | —               | —           |
+
+
+## MenuOption Slots
+
+| Slot           | Description |
+| -------------- | ----------- |
+| default        | —           |
+| icon           | —           |
+| secondary      | —           |
+| side           | —           |
+| side-secondary | —           |
+| side-icon      | —           |
 <!-- api-tables:end -->

@@ -39,10 +39,10 @@
 			</div>
 		</div>
 		<div
-			v-if="$slots['side-secondary-icon']"
+			v-if="$slots['side-icon']"
 			:class="$s.SideIcon"
 		>
-			<slot name="side-secondary-icon" />
+			<slot name="side-icon" />
 		</div>
 	</div>
 </template>
@@ -63,7 +63,7 @@ export default {
 	--opacity-sublabel: 0.7;
 
 	display: flex;
-	gap: 16px;
+	gap: 12px;
 	align-items: center;
 	width: 100%;
 }

@@ -29,6 +29,20 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
+		/**
+		 * Popover padding
+		 */
+		padding: {
+			type: String,
+			default: '24px',
+			validator: (padding) => {
+				// CSS not defined when rendering server-side
+				if (global.CSS) {
+					return global.CSS.supports('padding', padding);
+				}
+				return true;
+			},
+		},
 	},
 
 	computed: {
@@ -36,6 +50,7 @@ export default {
 			return {
 				'--popover-color': this.color,
 				'--popover-bg-color': this.bgColor,
+				'--padding': this.padding,
 			};
 		},
 	},
@@ -44,7 +59,7 @@ export default {
 
 <style module="$s">
 .PopoverContent {
-	padding: 24px;
+	padding: var(--padding);
 	color: var(--popover-color, var(--neutral-90, black));
 	background-color: var(--popover-bg-color, var(--color-elevation, white));
 	border-radius: 8px;

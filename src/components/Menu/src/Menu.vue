@@ -9,26 +9,27 @@
 		>
 			<template #action="popover">
 				<component
-					:is="triggerComponent"
+					:is="toggleComponent"
 					@click="popover.toggle()"
 				>
 					<template
-						v-if="isSelectTrigger"
+						v-if="isSelectToggle"
 						#prefix
 					>
-						<slot name="trigger-icon" />
+						<slot name="toggle-icon" />
 					</template>
 					<template v-else>
-						<slot name="trigger-icon" />
-						<slot name="trigger" />
+						<slot name="toggle-icon" />
+						<slot name="toggle" />
 					</template>
-					<slot name="trigger" />
+					<slot name="toggle" />
 				</component>
 			</template>
 
 			<template #content>
 				<m-popover-content
 					:class="$s.MenuContent"
+					padding="16px 0"
 				>
 					<slot
 						name="menu"
@@ -48,7 +49,7 @@
 import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import assert from '@square/maker/utils/assert';
-import SelectTrigger from './SelectTrigger.vue';
+import SelectToggle from './SelectToggle.vue';
 import key from './key';
 
 export default {
@@ -56,7 +57,7 @@ export default {
 		MPopover,
 		MPopoverContent,
 		MButton,
-		SelectTrigger,
+		SelectToggle,
 	},
 
 	provide() {
@@ -82,12 +83,12 @@ export default {
 		},
 
 		/**
-		 * Menu's trigger style
+		 * Menu's toggle style
 		 */
-		trigger: {
+		toggle: {
 			type: String,
 			default: 'select',
-			validator: (trigger) => ['select', 'button'].includes(trigger),
+			validator: (toggle) => ['select', 'button'].includes(toggle),
 		},
 
 		type: {
@@ -103,16 +104,13 @@ export default {
 			isSingleSelect: this.type === 'single-select',
 			isMultiSelect: this.type === 'multi-select',
 			isActionSelect: this.type === 'action',
+			isSelectToggle: this.toggle === 'select',
 		};
 	},
 
 	computed: {
-		isSelectTrigger() {
-			return this.trigger === 'select';
-		},
-
-		triggerComponent() {
-			return this.isSelectTrigger ? SelectTrigger : MButton;
+		toggleComponent() {
+			return this.isSelectToggle ? SelectToggle : MButton;
 		},
 	},
 
@@ -145,7 +143,6 @@ export default {
 .MenuContent {
 	display: flex;
 	flex-direction: column;
-	grid-gap: 16px;
 	min-width: 200px;
 }
 </style>

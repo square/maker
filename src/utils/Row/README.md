@@ -18,7 +18,7 @@
 				<template #side-secondary>
 					Side secondary
 				</template>
-				<template #side-secondary-icon>
+				<template #side-icon>
 					<m-checkbox />
 				</template>
 			</m-row>
@@ -57,7 +57,7 @@
 				<template #side>
 					Side
 				</template>
-				<template #side-secondary-icon>
+				<template #side-icon>
 					<m-checkbox />
 				</template>
 			</m-row>
@@ -114,7 +114,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | secondary      | —           |
 | side           | —           |
 | side-secondary | —           |
-| control        | —           |
+| side-icon      | —           |
 
 
 ## Events
