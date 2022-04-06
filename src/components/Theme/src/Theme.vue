@@ -56,7 +56,7 @@ export default {
 	},
 	computed: {
 		styles() {
-			const { colors } = this;
+			const { colors, fonts } = this;
 
 			return {
 				'--neutral-0': colors['neutral-0'],
@@ -70,6 +70,10 @@ export default {
 				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
+				'--font-family-paragraph': fonts.paragraph.fontFamily,
+				'--font-weight-paragraph': fonts.paragraph.fontWeight,
+				'--font-family-label': fonts.label.fontFamily,
+				'--font-weight-label': fonts.label.fontWeight,
 			};
 		},
 	},

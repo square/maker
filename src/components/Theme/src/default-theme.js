@@ -19,6 +19,14 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.17,
+			paragraph: {
+				fontFamily: 'inherit',
+				fontWeight: '400',
+			},
+			label: {
+				fontFamily: 'inherit',
+				fontWeight: '500',
+			},
 		},
 		profiles: [
 			{
@@ -52,10 +60,10 @@ export default function defaultTheme() {
 		},
 		text: {
 			size: 0,
-			fontFamily: 'inherit',
+			fontFamily: '@fonts.paragraph.fontFamily',
 			color: '@colors.text',
 			element: 'p',
-			fontWeight: 'inherit',
+			fontWeight: '@fonts.paragraph.fontWeight',
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
@@ -72,14 +80,11 @@ export default function defaultTheme() {
 					element: 'h2',
 					color: '@colors.heading',
 				},
-				paragraph: {
-					size: 0,
-					fontWeight: '400',
-					element: 'p',
-				},
+				paragraph: {}, // component default
 				label: {
 					size: 0,
-					fontWeight: '500',
+					fontFamily: '@fonts.label.fontFamily',
+					fontWeight: '@fonts.label.fontWeight',
 					element: 'h6',
 					textTransform: 'uppercase',
 				},

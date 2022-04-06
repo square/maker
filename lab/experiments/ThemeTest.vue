@@ -611,6 +611,14 @@ export default {
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
 					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
+					paragraph: {
+						fontFamily: this.textVariants.paragraph.fontFamily,
+						fontWeight: this.textVariants.paragraph.fontWeight,
+					},
+					label: {
+						fontFamily: this.textVariants.label.fontFamily,
+						fontWeight: this.textVariants.label.fontWeight,
+					},
 				},
 				notice: {
 					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
