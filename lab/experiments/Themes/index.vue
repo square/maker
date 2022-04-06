@@ -2,6 +2,7 @@
 <template>
 	<m-theme
 		:theme="theme"
+		:profile="themeProfile"
 		:class="$s.App"
 	>
 		<div :class="$s.Editor">
@@ -313,6 +314,9 @@ export default {
 			}
 
 			return fonts;
+		},
+		themeProfile() {
+			return themeStore.$state.theme.profiles[5].id;
 		},
 	},
 
