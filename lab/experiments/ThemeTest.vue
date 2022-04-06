@@ -12,10 +12,87 @@
 					<m-text
 						variant="title"
 						font-size="20px"
-						style="margin-bottom: 20px;"
+						style="margin-bottom: 16px;"
 					>
 						Maker Theme
 					</m-text>
+					<m-text
+						variant="title"
+						font-size="16px"
+					>
+						Typography
+					</m-text>
+					<div :class="$s.Typography">
+						base size
+						<br>
+						<input
+							v-model="fontsBaseSize"
+							type="range"
+							min="16"
+							max="24"
+							step="1"
+						>
+						<br>
+						{{ fontsBaseSize }}
+						<br>
+						type scale
+						<br>
+						<input
+							v-model="fontsTypeScale"
+							type="range"
+							min="1.15"
+							max="1.62"
+							step="0.01"
+						>
+						<br>
+						{{ fontsTypeScale }}
+						<br>
+						<m-divider :class="$s.Divider" />
+						<m-text
+							variant="title"
+							font-size="16px"
+						>
+							Variants
+						</m-text>
+						<div
+							v-for="textVariant in Object.keys(textVariants)"
+							:key="textVariant"
+						>
+							{{ textVariant }}
+							<br>
+							<select
+								v-model="textVariants[textVariant].fontFamily"
+							>
+								<option>
+									serif
+								</option>
+								<option>
+									sans-serif
+								</option>
+								<option>
+									monospace
+								</option>
+								<option>
+									inherit
+								</option>
+								<option>
+									arial
+								</option>
+							</select>
+							<br>
+							<input
+								v-model="textVariants[textVariant].fontWeight"
+								type="range"
+								min="100"
+								max="900"
+								step="100"
+							>
+							<br>
+							{{ textVariants[textVariant].fontWeight }}
+							<br>
+						</div>
+					</div>
+					<m-divider :class="$s.Divider" />
 					<m-text
 						variant="title"
 						font-size="16px"
@@ -70,83 +147,6 @@
 							</div>
 							<div :class="$s.color">
 								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
-							</div>
-						</div>
-						<m-divider :class="$s.Divider" />
-						<m-text
-							variant="title"
-							font-size="16px"
-						>
-							Typography
-						</m-text>
-						<div :class="$s.Typography">
-							base size
-							<br>
-							<input
-								v-model="fontsBaseSize"
-								type="range"
-								min="16"
-								max="24"
-								step="1"
-							>
-							<br>
-							{{ fontsBaseSize }}
-							<br>
-							type scale
-							<br>
-							<input
-								v-model="fontsTypeScale"
-								type="range"
-								min="1.15"
-								max="1.62"
-								step="0.01"
-							>
-							<br>
-							{{ fontsTypeScale }}
-							<br>
-							<br>
-							<m-text
-								variant="title"
-								font-size="16px"
-							>
-								Variants
-							</m-text>
-							<div
-								v-for="textVariant in Object.keys(textVariants)"
-								:key="textVariant"
-							>
-								{{ textVariant }}
-								<br>
-								<select
-									v-model="textVariants[textVariant].fontFamily"
-								>
-									<option>
-										serif
-									</option>
-									<option>
-										sans-serif
-									</option>
-									<option>
-										monospace
-									</option>
-									<option>
-										inherit
-									</option>
-									<option>
-										arial
-									</option>
-								</select>
-								<br>
-								<input
-									v-model="textVariants[textVariant].fontWeight"
-									type="range"
-									min="100"
-									max="900"
-									step="100"
-								>
-								<br>
-								{{ textVariants[textVariant].fontWeight }}
-								<br>
 							</div>
 						</div>
 					</div>
