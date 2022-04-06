@@ -61,25 +61,25 @@ export default function defaultTheme() {
 			textAlign: 'inherit',
 			variants: {
 				headline: {
-					size: 4,
+					size: 7,
 					fontWeight: '700',
 					element: 'h1',
 					color: '@colors.heading',
 				},
 				title: {
-					size: 2,
-					fontWeight: '700',
+					size: 3,
+					fontWeight: '500',
 					element: 'h2',
 					color: '@colors.heading',
 				},
-				body: {
+				paragraph: {
 					size: 0,
 					fontWeight: '400',
 					element: 'p',
 				},
 				label: {
-					size: -1,
-					fontWeight: '700',
+					size: 0,
+					fontWeight: '500',
 					element: 'h6',
 					textTransform: 'uppercase',
 				},
