@@ -342,7 +342,8 @@ export default {
 
 .CalendarHeaderTitle {
 	color: var(--color-heading, #000);
-	font-weight: bold;
+	font-weight: var(--font-weight-label, 500);
+	font-family: var(--font-family-label, inherit);
 }
 
 .CalendarHeaderButtonIcon {
@@ -361,8 +362,9 @@ export default {
 	height: var(--cell-size);
 	padding: var(--cell-padding);
 	color: var(--neutral-80, rgba(0, 0, 0, 0.5));
-	font-weight: normal;
+	font-weight: var(--font-weight-paragraph, 400);
 	font-size: var(--font-size-minus-1);
+	font-family: var(--font-family-paragraph, inherit);
 	line-height: var(--line-height-minus-1);
 	text-transform: uppercase;
 	cursor: initial;
@@ -380,7 +382,9 @@ export default {
 	height: var(--cell-size);
 	padding: 0;
 	color: inherit;
+	font-weight: var(--font-weight-paragraph, 400);
 	font-size: inherit;
+	font-family: var(--font-family-paragraph, inherit);
 	background-color: inherit;
 	border: none;
 	border-radius: 8px;
