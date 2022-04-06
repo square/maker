@@ -632,7 +632,7 @@ export default {
 					},
 				},
 				notice: {
-					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : undefined,
 				},
 				modal: {
 					bgColor: this.backgroundColor,

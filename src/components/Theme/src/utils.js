@@ -76,11 +76,11 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 
 				// default theme variant for this component
 				const variantFromTheme = this.theme[componentKeyInTheme].variant;
-				if (variantFromTheme) {
+				if (!isNil(variantFromTheme)) {
 					variantOrPath = variantFromTheme;
 				}
 
-				if (!variantOrPath) {
+				if (isNil(variantOrPath)) {
 					return undefined;
 				}
 
@@ -113,20 +113,20 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 
 				// default theme value
 				const valueFromTheme = this.theme[componentKeyInTheme][propName];
-				if (valueFromTheme) {
+				if (!isNil(valueFromTheme)) {
 					valueOrPath = valueFromTheme;
 				}
 
 				// variant value, overrides default theme value
-				if (this.resolvedVariant) {
+				if (!isNil(this.resolvedVariant)) {
 					const valueFromThemeVariant = this.theme[componentKeyInTheme]
 						.variants?.[this.resolvedVariant]?.[propName];
-					if (valueFromThemeVariant) {
+					if (!isNil(valueFromThemeVariant)) {
 						valueOrPath = valueFromThemeVariant;
 					}
 				}
 
-				if (!valueOrPath) {
+				if (isNil(valueOrPath)) {
 					return undefined;
 				}
 
