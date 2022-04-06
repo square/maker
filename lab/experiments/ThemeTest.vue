@@ -255,6 +255,14 @@
 							Schedule for later
 						</m-button>
 					</div>
+					<m-divider />
+					<m-container
+						label="label"
+						sublabel="sublabel"
+						requirement-label="requirement label"
+					>
+						container content
+					</m-container>
 				</div>
 				<div
 					:class="$s.Preview"
@@ -431,6 +439,7 @@ import { MCalendar } from '@square/maker/components/Calendar';
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
 import { MModalLayer } from '@square/maker/components/Modal';
+import { MContainer } from '@square/maker/components/Container';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
@@ -504,6 +513,7 @@ export default {
 		MTheme,
 		MChoice,
 		MChoiceOption,
+		MContainer,
 		MDivider,
 		MText,
 		MNotice,
