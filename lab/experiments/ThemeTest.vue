@@ -613,7 +613,7 @@ export default {
 					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
 				},
 				notice: {
-					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : undefined,
 				},
 				modal: {
 					bgColor: this.backgroundColor,
