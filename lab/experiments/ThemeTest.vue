@@ -81,6 +81,7 @@
 						</m-text>
 						<div :class="$s.Typography">
 							base size
+							<br>
 							<input
 								v-model="fontsBaseSize"
 								type="range"
@@ -88,7 +89,11 @@
 								max="24"
 								step="1"
 							>
+							<br>
+							{{ fontsBaseSize }}
+							<br>
 							type scale
+							<br>
 							<input
 								v-model="fontsTypeScale"
 								type="range"
@@ -96,6 +101,53 @@
 								max="1.62"
 								step="0.01"
 							>
+							<br>
+							{{ fontsTypeScale }}
+							<br>
+							<br>
+							<m-text
+								variant="title"
+								font-size="16px"
+							>
+								Variants
+							</m-text>
+							<div
+								v-for="textVariant in Object.keys(textVariants)"
+								:key="textVariant"
+							>
+								{{ textVariant }}
+								<br>
+								<select
+									v-model="textVariants[textVariant].fontFamily"
+								>
+									<option>
+										serif
+									</option>
+									<option>
+										sans-serif
+									</option>
+									<option>
+										monospace
+									</option>
+									<option>
+										inherit
+									</option>
+									<option>
+										arial
+									</option>
+								</select>
+								<br>
+								<input
+									v-model="textVariants[textVariant].fontWeight"
+									type="range"
+									min="100"
+									max="900"
+									step="100"
+								>
+								<br>
+								{{ textVariants[textVariant].fontWeight }}
+								<br>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -523,6 +575,24 @@ export default {
 			item: storeData.items[0],
 			fontsBaseSize: '16',
 			fontsTypeScale: '1.17',
+			textVariants: {
+				headline: {
+					fontFamily: 'arial',
+					fontWeight: '700',
+				},
+				title: {
+					fontFamily: 'serif',
+					fontWeight: '500',
+				},
+				paragraph: {
+					fontFamily: 'sans-serif',
+					fontWeight: '400',
+				},
+				label: {
+					fontFamily: 'monospace',
+					fontWeight: '500',
+				},
+			},
 		};
 	},
 
@@ -553,22 +623,7 @@ export default {
 				},
 				text: {
 					variants: {
-						headline: {
-							fontFamily: 'arial',
-							fontWeight: '700',
-						},
-						title: {
-							fontFamily: 'serif',
-							fontWeight: '500',
-						},
-						paragraph: {
-							fontFamily: 'sans-serif',
-							fontWeight: '400',
-						},
-						label: {
-							fontFamily: 'monospace',
-							fontWeight: '500',
-						},
+						...this.textVariants,
 					},
 				},
 			};
