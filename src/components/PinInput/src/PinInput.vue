@@ -219,6 +219,8 @@ export default {
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: space-between;
+	font-weight: var(--font-weight-label, 500);
+	font-family: var(--font-family-label, inherit);
 
 	&.error {
 		padding-bottom: 8px;
@@ -233,8 +235,9 @@ export default {
 	width: 50px;
 	height: 50px;
 	padding: 0;
-	font-weight: 500;
+	font-weight: inherit;
 	font-size: 16px;
+	font-family: inherit;
 	text-align: center;
 	background: #fff;
 	border: 1px solid #d3d3d3;

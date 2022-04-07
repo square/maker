@@ -264,6 +264,8 @@
 					>
 						container content
 					</m-container>
+					<m-divider />
+					<m-pin-input :pin-length="3" />
 				</div>
 				<div
 					:class="$s.Preview"
@@ -441,6 +443,7 @@ import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MContainer } from '@square/maker/components/Container';
+import { MPinInput } from '@square/maker/components/PinInput';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
@@ -533,6 +536,7 @@ export default {
 		MSegment,
 		MTextButton,
 		MModalLayer,
+		MPinInput,
 	},
 
 	mixins: [
