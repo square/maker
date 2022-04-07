@@ -10,7 +10,9 @@
 		<div :class="$s.ControlAligner">
 			<slot name="control" />
 		</div>
-		<div>
+		<div
+			:class="$s.Label"
+		>
 			<slot name="label" />
 			<div
 				v-if="$slots.sublabel"
@@ -61,6 +63,11 @@ export default {
 	align-items: center;
 	height: 24px;
 	margin-right: 8px;
+}
+
+.Label {
+	font-weight: var(--font-weight-paragraph, 400);
+	font-family: var(--font-family-paragraph, inherit);
 }
 
 .SubLabel {
