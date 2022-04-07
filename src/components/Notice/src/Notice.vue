@@ -123,8 +123,9 @@ export default {
 <style module="$s">
 .Notice {
 	color: var(--color);
+	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 14px;
-	font-family: inherit;
+	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;
 	border-radius: 8px;
 }
