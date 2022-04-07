@@ -1,7 +1,7 @@
 <template>
 	<button
 		:class="[
-			$s.Button,
+			$s.TextButton,
 			$s[`size_${resolvedSize}`],
 			{
 				[$s.loading]: loading,
@@ -116,14 +116,14 @@ export default {
 </script>
 
 <style module="$s">
-.Button {
+.TextButton {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
 	color: var(--neutral-90);
-	font-weight: 500;
-	font-family: inherit;
+	font-weight: var(--font-weight-label, 500);
+	font-family: var(--font-family-label, inherit);
 	vertical-align: middle;
 	background-color: transparent;
 	border: none;
