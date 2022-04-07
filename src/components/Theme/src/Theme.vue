@@ -70,6 +70,8 @@ export default {
 				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
+				'--font-family-title': fonts.title.fontFamily,
+				'--font-weight-title': fonts.title.fontWeight,
 				'--font-family-paragraph': fonts.paragraph.fontFamily,
 				'--font-weight-paragraph': fonts.paragraph.fontWeight,
 				'--font-family-label': fonts.label.fontFamily,

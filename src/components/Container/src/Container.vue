@@ -150,9 +150,9 @@ export default {
 .Label {
 	margin-bottom: 16px;
 	color: var(--color, var(--neutral-90, inherit));
-	font-weight: var(--font-weight-label, 500);
+	font-weight: var(--font-weight-title, 500);
 	font-size: 14px;
-	font-family: var(--font-family-label, inherit);
+	font-family: var(--font-family-title, inherit);
 	line-height: 20px;
 }
 
@@ -181,9 +181,9 @@ export default {
 
 .Sublabel {
 	color: var(--color, var(--neutral-80, inherit));
-	font-weight: var(--font-weight-label, 500);
+	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 14px;
-	font-family: var(--font-family-label, inherit);
+	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;
 	letter-spacing: normal;
 	text-transform: none;
@@ -191,9 +191,9 @@ export default {
 
 .RequirementLabel {
 	padding-left: 8px;
-	font-weight: var(--font-weight-label, 500);
+	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 14px;
-	font-family: var(--font-family-label, inherit);
+	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;
 	white-space: nowrap;
 }

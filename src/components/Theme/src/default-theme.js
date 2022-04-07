@@ -19,6 +19,10 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.17,
+			title: {
+				fontFamily: 'inherit',
+				fontWeight: '500',
+			},
 			paragraph: {
 				fontFamily: 'inherit',
 				fontWeight: '400',
@@ -76,7 +80,8 @@ export default function defaultTheme() {
 				},
 				title: {
 					size: 3,
-					fontWeight: '500',
+					fontFamily: '@fonts.title.fontFamily',
+					fontWeight: '@fonts.title.fontWeight',
 					element: 'h2',
 					color: '@colors.heading',
 				},
