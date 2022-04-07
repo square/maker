@@ -279,6 +279,9 @@
 						</m-text>
 						<m-radio value="1">
 							Buffalo
+							<template #sublabel>
+								mildly spicy
+							</template>
 						</m-radio>
 						<br>
 						<m-radio
@@ -286,6 +289,9 @@
 							disabled
 						>
 							Ginger soy
+							<template #sublabel>
+								very tasty
+							</template>
 						</m-radio>
 						<br>
 						<m-radio
@@ -294,6 +300,9 @@
 							disabled
 						>
 							Disabled and selected
+							<template #sublabel>
+								obligatory sublabel
+							</template>
 						</m-radio>
 						<m-select
 							placeholder="Select dip"
@@ -326,16 +335,25 @@
 					<div>
 						<m-checkbox>
 							Include cutlery and utensils
+							<template #sublabel>
+								they're so shiny
+							</template>
 						</m-checkbox>
 						<m-checkbox disabled>
 							Provide compostable utensils
+							<template #sublabel>
+								not as shiny
+							</template>
 						</m-checkbox>
 						<br>
 						<m-checkbox
 							disabled
 							checked
 						>
-							Disabled and selected
+							Disabled and checked
+							<template #sublabel>
+								obligatory sublabel
+							</template>
 						</m-checkbox>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea

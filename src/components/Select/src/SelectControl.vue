@@ -169,9 +169,9 @@ export default {
 	position: relative;
 	box-sizing: border-box;
 	min-width: 80px;
+	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 16px;
-	font-family: inherit;
-	font-family: var(--font-family);
+	font-family: var(--font-family-paragraph, inherit);
 	border-radius: var(--border-radius);
 }
 
@@ -191,6 +191,7 @@ export default {
 	padding: 0 32px 0 16px;
 	overflow: hidden;
 	color: var(--color-foreground);
+	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
 	white-space: nowrap;
