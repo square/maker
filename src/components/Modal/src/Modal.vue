@@ -145,6 +145,8 @@ export default {
 	height: 100%;
 	overflow: auto;
 	color: var(--color, inherit);
+	font-weight: var(--font-weight-paragraph, 400);
+	font-family: var(--font-family-paragraph, inherit);
 	background: var(--bg-color, #f5f6f7);
 	transition: transform 0.2s linear;
 }
