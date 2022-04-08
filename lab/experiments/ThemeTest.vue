@@ -644,6 +644,10 @@ export default {
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
 					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
+					title: {
+						fontFamily: this.textVariants.title.fontFamily,
+						fontWeight: this.textVariants.title.fontWeight,
+					},
 					paragraph: {
 						fontFamily: this.textVariants.paragraph.fontFamily,
 						fontWeight: this.textVariants.paragraph.fontWeight,
