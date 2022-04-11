@@ -34,7 +34,7 @@ export default {
 		 */
 		size: {
 			type: Number,
-			default: undefined,
+			default: 0,
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
