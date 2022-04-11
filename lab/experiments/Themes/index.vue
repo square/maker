@@ -1,14 +1,12 @@
 /* eslint-disable vue/no-textarea-mustache */
 <template>
-	<m-theme
-		:theme="theme"
-		:profile="themeProfile"
+	<div
 		:class="$s.App"
 	>
 		<div :class="$s.Editor">
 			<div :class="$s.EditorHeader">
 				<h1>Maker Theme</h1>
-				<a @click="toggleThemes">Themes</a>
+				<!-- <a @click="toggleThemes">Themes</a> -->
 			</div>
 			<div
 				v-if="showThemes"
@@ -54,31 +52,62 @@
 			<h2 :class="$s.sectionTitle">
 				Colors
 			</h2>
+			<div :class="$s.Profiles">
+				<div
+					v-for="(profile, index) in theme.profiles"
+					:key="index"
+					:class="[
+						$s.ProfileSet,
+						profile.id,
+						{
+							[$s.active]: profile.id === currentProfile,
+						},
+					]"
+					:style="{
+						backgroundColor : profile.colors['background'],
+						color : profile.colors['text']
+					}"
+					@click="changeProfile(profile.id)"
+				>
+					<div>
+						<div
+							:class="$s.previewTitle"
+						>
+							Aa
+						</div> <div
+							:class="$s.previewButton"
+							:style="{
+								backgroundColor : profile.colors['button']
+							}"
+						/>
+					</div>
+				</div>
+			</div>
 			<div :class="$s.Profile">
 				<label>
 					<input
-						v-model="theme.colors.background"
+						v-model="currentProfileColors.background"
 						type="color"
 					>
 					Background
 				</label>
 				<label>
 					<input
-						v-model="theme.colors.primary"
+						v-model="currentProfileColors.button"
 						type="color"
 					>
-					Primary
+					Button
 				</label>
 				<label>
 					<input
-						v-model="theme.colors.heading"
+						v-model="currentProfileColors.heading"
 						type="color"
 					>
 					Heading
 				</label>
 				<label>
 					<input
-						v-model="theme.colors.text"
+						v-model="currentProfileColors.text"
 						type="color"
 					>
 					Text
@@ -108,27 +137,6 @@
 						<span :style="{ backgroundColor : theme.colors['neutral-100'] }" />
 					</div>
 				</div>
-				<!-- <div :class="$s.Profiles">
-					<div
-						v-for="(value, name, index) in surfaces"
-						:key="index"
-						:class="[
-							$s.ProfileSet,
-							name,
-						]"
-						@click="changeMode(name)"
-					>
-						<div>
-							<div
-								:class="$s.previewTitle"
-							>
-								Aa
-							</div> <div
-								:class="$s.previewButton"
-							/>
-						</div>
-					</div>
-				</div> -->
 				<h2 :class="$s.sectionTitle">
 					Fonts
 				</h2>
@@ -169,7 +177,7 @@
 				<h3
 					:class="$s.subsectionTitle"
 				>
-					Text
+					Body
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
@@ -260,8 +268,13 @@
 				</textarea>
 			</div>
 		</div>
-		<preview />
-	</m-theme>
+		<m-theme
+			:theme="theme"
+			:profile="themeProfile"
+		>
+			<preview />
+		</m-theme>
+	</div>
 </template>
 
 <script>
@@ -289,6 +302,7 @@ export default {
 			fontOptions,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
 			showThemes: false,
+			themeProfile: 'custom-profile',
 		};
 	},
 
@@ -315,8 +329,13 @@ export default {
 
 			return fonts;
 		},
-		themeProfile() {
-			return themeStore.$state.theme.profiles[5].id;
+		currentProfile() {
+			const { profiles } = themeStore.$state.theme;
+			const currentProfile = profiles.find((profile) => profile.id === this.themeProfile);
+			return currentProfile.id;
+		},
+		currentProfileColors() {
+			return this.getProfile(this.currentProfile).colors;
 		},
 	},
 
@@ -366,6 +385,15 @@ export default {
 		},
 		toggleThemes() {
 			this.showThemes = !this.showThemes;
+		},
+		getProfile(id) {
+			return themeStore.theme.profiles.find((profile) => profile.id === id);
+		},
+		changeProfile(id) {
+			this.themeProfile = id;
+			const { colors } = this.getProfile(id);
+			// update the base colors based on the current profile
+			themeStore.theme.colors = Object.assign(themeStore.theme.colors, colors);
 		},
 	},
 
@@ -539,9 +567,13 @@ export default {
 	cursor: pointer;
 }
 
+.ProfileSet.active {
+	outline: 2px solid blue;
+}
+
+/* colors for these preview styles are applied inline */
 .previewTitle {
 	margin-bottom: 6px;
-	color: var(--preview-title, #000);
 	font-weight: 700;
 	font-size: 14px;
 }
@@ -549,7 +581,6 @@ export default {
 .previewButton {
 	width: 24px;
 	height: 8px;
-	background: var(--preview-button, #000);
 	border-radius: 8px;
 }
 

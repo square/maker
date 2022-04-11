@@ -10,7 +10,10 @@
 						<shopping-bag-icon class="icon" />
 					</div>
 				</div>
-				<m-theme :profile="nestedThemeProfile">
+				<m-theme
+					:class="$s.Section"
+					:profile="nestedThemeProfile"
+				>
 					Testing nested themes, this is using a defined profile called "primary-bold".
 				</m-theme>
 				<div :class="[$s.Section, $s.labelDemo]">
@@ -600,6 +603,7 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(360px, 1fr));
 	gap: 40px;
+	height: 100%;
 	max-height: calc(100vh - 80px);
 	padding: 40px;
 	background-color: #f8f8f8;
