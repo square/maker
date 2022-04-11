@@ -17,8 +17,11 @@
 					Testing nested themes, this is using a defined profile called "primary-bold".
 				</m-theme>
 				<div :class="[$s.Section, $s.labelDemo]">
-					<m-text variant="label">
-						This is a Text component with the label variant.
+					<m-text
+						variant="label"
+						color="var(--maker-colors-neutral-20)"
+					>
+						This is a Text component with the label variant and custom color.
 						This is a basic demo to show how text variants can work with CSS based theming.
 					</m-text>
 				</div>
