@@ -19,7 +19,10 @@ import key from './key';
 export default {
 	provide() {
 		return {
-			[key]: this.$data,
+			[key]: {
+				...this.$data,
+				disabled: this.disabled,
+			},
 		};
 	},
 

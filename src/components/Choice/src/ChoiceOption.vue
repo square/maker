@@ -4,6 +4,7 @@
 			$s.Button,
 			{ [$s.selected]: isSelected },
 		]"
+		:disabled="controlState.disabled || $attrs.disabled"
 		@click="selectSelf"
 	>
 		<slot />
