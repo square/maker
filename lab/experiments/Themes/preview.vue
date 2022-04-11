@@ -10,10 +10,12 @@
 						<shopping-bag-icon class="icon" />
 					</div>
 				</div>
-				<div
+				<m-theme
 					:class="$s.Section"
-					class="banner"
-				/>
+					:profile="nestedThemeProfile"
+				>
+					Testing nested themes, this is using a defined profile called "primary-bold".
+				</m-theme>
 				<div
 					v-for="category in categories"
 					:key="category"
@@ -373,6 +375,7 @@ import MenuIcon from '@square/maker-icons/Menu';
 import ShoppingBagIcon from '@square/maker-icons/ShoppingBag';
 import XIcon from '@square/maker-icons/X';
 import Trash from '@square/maker-icons/Trash';
+import { MTheme } from '@square/maker/components/Theme';
 import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
@@ -393,6 +396,7 @@ export default {
 		ShoppingBagIcon,
 		XIcon,
 		Trash,
+		MTheme,
 		MHeading,
 		MText,
 		MDivider,
@@ -449,6 +453,7 @@ export default {
 			size: 'sm',
 			selected: 'choice-1',
 			quantity: 1,
+			nestedThemeProfile: 'primary-bold',
 		};
 	},
 
