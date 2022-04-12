@@ -729,7 +729,6 @@ export default {
 	min-height: 100vh;
 	margin: auto;
 	padding: 25px 50px;
-	font-family: Arial, Helvetica, sans-serif;
 
 	& > div {
 		flex: 1;

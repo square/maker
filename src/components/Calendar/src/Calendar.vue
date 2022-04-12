@@ -361,10 +361,7 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--color-paragraph, rgba(0, 0, 0, 0.5));
-	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: var(--font-size-minus-1);
-	font-family: var(--font-family-paragraph, inherit);
 	line-height: var(--line-height-minus-1);
 	text-transform: uppercase;
 	cursor: initial;
@@ -373,7 +370,6 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--color-paragraph, #000);
 	text-align: center;
 }
 
@@ -382,9 +378,9 @@ export default {
 	height: var(--cell-size);
 	padding: 0;
 	color: inherit;
-	font-weight: var(--font-weight-paragraph, inherit);
+	font-weight: inherit;
 	font-size: inherit;
-	font-family: var(--font-family-paragraph, inherit);
+	font-family: inherit;
 	background-color: inherit;
 	border: none;
 	border-radius: 8px;
@@ -400,7 +396,7 @@ export default {
 	}
 
 	&.today {
-		border: 1px solid var(--color-paragraph, inherit);
+		border: 1px solid currentColor;
 	}
 
 	&.disabled {
