@@ -10,6 +10,20 @@
 						<shopping-bag-icon class="icon" />
 					</div>
 				</div>
+				<div :class="[$s.Section, $s.textVariantDemo]">
+					<m-text
+						variant="headline"
+						:size="5"
+					>
+						Headline (variant) +5
+					</m-text>
+					<m-text
+						:size="-1"
+						variant="label"
+					>
+						Label (variant) -1
+					</m-text>
+				</div>
 				<m-theme
 					:class="$s.Section"
 					:profile="nestedThemeProfile"
@@ -594,6 +608,7 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(360px, 1fr));
 	gap: 40px;
+	height: 100%;
 	max-height: calc(100vh - 80px);
 	padding: 40px;
 	background-color: #f8f8f8;
@@ -640,5 +655,10 @@ export default {
 
 .Section {
 	padding: 2vh 1vw;
+}
+
+.textVariantDemo {
+	padding: 1vh 1vw;
+	border: 1px solid black;
 }
 </style>

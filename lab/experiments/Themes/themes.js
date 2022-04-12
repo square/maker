@@ -140,10 +140,14 @@ export const websiteTheme = {
 		sizeScale: 1.17,
 		body: 'Open Sans',
 		heading: 'Open Sans',
+		headline: 'Open Sans',
+		label: 'Open Sans',
 	},
 	fontWeights: {
 		body: 400,
 		heading: 600,
+		headline: 300,
+		label: 500,
 	},
 	text: {
 		color: '@colors.text',
