@@ -26,7 +26,7 @@ export default {
 		element: {
 			type: String,
 			default: 'p',
-			validator: (element) => ['p', 'span', 'div', 'li'].includes(element),
+			validator: (element) => ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'li'].includes(element),
 		},
 		/**
 		 * Size of text
@@ -36,6 +36,15 @@ export default {
 			type: Number,
 			default: undefined,
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
+		},
+		/**
+		 * Variant, allows four custom font styles through the Theme component
+		 * @values body, title, headline, label
+		 */
+		variant: {
+			type: String,
+			default: 'body',
+			validator: (variant) => ['body', 'title', 'headline', 'label'].includes(variant),
 		},
 		/**
 		 * Font family
@@ -123,9 +132,11 @@ export default {
 		},
 		inlineStyles() {
 			const { fonts } = this.theme;
+			const resolveProps = this.resolveVariant();
+
 			return {
-				fontFamily: this.resolvedFontFamily,
-				fontWeight: this.resolvedFontWeight,
+				fontFamily: resolveProps ? this.resolvedFontFamily : this.fontFamily,
+				fontWeight: resolveProps ? this.resolvedFontWeight : this.fontWeight,
 				color: this.resolvedColor,
 				fontSize: this.fontSize,
 				lineHeight: this.lineHeight,
@@ -135,9 +146,16 @@ export default {
 		},
 	},
 
+	methods: {
+		resolveVariant() {
+			return !(this.variant === 'headline' || this.variant === 'label');
+		},
+	},
+
 	render(createElement) {
 		const {
 			$s,
+			variant,
 			sizeClass,
 			inlineStyles,
 			fontStyle,
@@ -152,7 +170,8 @@ export default {
 
 		return createElement(element, {
 			class: [
-				$s.Paragraph,
+				$s.Text,
+				$s[`text_${variant}`],
 				$s[`size_${sizeClass}`],
 				{
 					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
@@ -169,7 +188,7 @@ export default {
 </script>
 
 <style module="$s">
-.Paragraph {
+.Text {
 	/* min breakpoint config */
 	--min-resolution: 320; /* arbitrary value */
 	--min-font-size: var(--mobile-base-font-size);
@@ -249,6 +268,30 @@ export default {
 	--lh-7: calc(var(--lh-6) * var(--line-height-scale));
 }
 
+/* Variant defaults */
+.text_body,
+.text_label {
+	font-weight: var(--fontWeights-body, 400);
+	font-family: var(--fonts-body, sans-serif);
+}
+
+.text_title {
+	margin: 0;
+	font-weight: var(--fontWeights-heading, 600);
+	font-family: var(--fonts-heading, sans-serif);
+}
+
+.text_headline {
+	margin: 0;
+	font-weight: var(--fontWeights-headline, var(--fontWeights-heading, 600));
+	font-family: var(--fonts-headline, var(--fonts-heading, sans-serif));
+}
+
+.text_label {
+	font-weight: var(--fontWeights-label, var(--fontWeights-body, 500));
+	font-family: var(--fonts-label, var(--fonts-body, sans-serif));
+}
+
 .fontstyle_normal {
 	font-style: normal;
 }
@@ -278,57 +321,57 @@ export default {
 }
 
 @media (min-width: 1200px) {
-	.Paragraph {
+	.Text {
 		--resolution: 1200px;
 	}
 }
 
-.Paragraph.size_minus-2 {
+.Text.size_minus-2 {
 	font-size: var(--fs--2);
 	line-height: var(--lh--2);
 }
 
-.Paragraph.size_minus-1 {
+.Text.size_minus-1 {
 	font-size: var(--fs--1);
 	line-height: var(--lh--1);
 }
 
-.Paragraph.size_0 {
+.Text.size_0 {
 	font-size: var(--fs-0);
 	line-height: var(--lh-0);
 }
 
-.Paragraph.size_1 {
+.Text.size_1 {
 	font-size: var(--fs-1);
 	line-height: var(--lh-1);
 }
 
-.Paragraph.size_2 {
+.Text.size_2 {
 	font-size: var(--fs-2);
 	line-height: var(--lh-2);
 }
 
-.Paragraph.size_3 {
+.Text.size_3 {
 	font-size: var(--fs-3);
 	line-height: var(--lh-3);
 }
 
-.Paragraph.size_4 {
+.Text.size_4 {
 	font-size: var(--fs-4);
 	line-height: var(--lh-4);
 }
 
-.Paragraph.size_5 {
+.Text.size_5 {
 	font-size: var(--fs-5);
 	line-height: var(--lh-5);
 }
 
-.Paragraph.size_6 {
+.Text.size_6 {
 	font-size: var(--fs-6);
 	line-height: var(--lh-6);
 }
 
-.Paragraph.size_7 {
+.Text.size_7 {
 	font-size: var(--fs-7);
 	line-height: var(--lh-7);
 }
