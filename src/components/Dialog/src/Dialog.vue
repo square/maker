@@ -58,8 +58,6 @@ export default {
 .Dialog {
 	overflow: auto;
 	color: var(--color, inherit);
-	font-weight: var(--font-weight-paragraph, inherit);
-	font-family: var(--font-family-paragraph, inherit);
 	background: var(--bg-color, #f5f6f7);
 }
 
