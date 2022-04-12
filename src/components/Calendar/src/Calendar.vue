@@ -341,7 +341,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--color-heading, #000);
+	color: var(--color-primary, #000);
 	font-weight: var(--font-weight-label, 500);
 	font-family: var(--font-family-label, inherit);
 }
@@ -361,7 +361,7 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--neutral-80, rgba(0, 0, 0, 0.5));
+	color: var(--color-text, rgba(0, 0, 0, 0.5));
 	font-weight: var(--font-weight-paragraph, 400);
 	font-size: var(--font-size-minus-1);
 	font-family: var(--font-family-paragraph, inherit);
@@ -396,11 +396,11 @@ export default {
 
 	&.selected {
 		color: var(--color-background, #fff);
-		background-color: var(--neutral-90, #000);
+		background-color: var(--color-primary, #000);
 	}
 
 	&.today {
-		border: 1px solid var(--neutral-90, #000);
+		border: 1px solid var(--color-primary, #000);
 	}
 
 	&.disabled {

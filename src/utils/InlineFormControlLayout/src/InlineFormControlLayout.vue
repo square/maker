@@ -16,7 +16,6 @@
 			<slot name="label" />
 			<div
 				v-if="$slots.sublabel"
-				:class="$s.SubLabel"
 			>
 				<slot name="sublabel" />
 			</div>
@@ -66,11 +65,8 @@ export default {
 }
 
 .Label {
+	color: var(--color-text, inherit);
 	font-weight: var(--font-weight-paragraph, 400);
 	font-family: var(--font-family-paragraph, inherit);
-}
-
-.SubLabel {
-	color: var(--neutral-80, inherit);
 }
 </style>

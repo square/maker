@@ -65,6 +65,7 @@ export default {
 				'--neutral-80': colors['neutral-80'],
 				'--neutral-90': colors['neutral-90'],
 				'--neutral-100': colors['neutral-100'],
+				'--color-primary': colors.primary,
 				'--color-background': colors.background,
 				'--color-heading': colors.heading,
 				'--color-text': colors.text,
