@@ -276,10 +276,10 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.heading.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.heading.fontWeight;
-			const fontText = themeStore.$state.theme.text.fontFamily;
-			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
+			const fontHeading = themeStore.$state.theme.fonts.heading;
+			const fontWeightsHeading = themeStore.$state.theme.fontWeights.heading;
+			const fontText = themeStore.$state.theme.fonts.body;
+			const fontWeightsText = themeStore.$state.theme.fontWeights.body;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
@@ -326,8 +326,6 @@ export default {
 
 	methods: {
 		loadWebFont(fonts) {
-			// eslint-disable-next-line no-console
-			console.log(fonts);
 			WebFont.load({
 				google: {
 					families: fonts,
@@ -338,8 +336,6 @@ export default {
 			this.loadWebFont(this.fontLoad);
 		},
 		changeTheme(theme) {
-			// eslint-disable-next-line no-console
-			console.log(theme);
 			themeStore.theme = themes[theme];
 			this.updateFont();
 		},
