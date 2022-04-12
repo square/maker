@@ -147,13 +147,13 @@ export const websiteTheme = {
 	},
 	text: {
 		color: '@colors.text',
-		fontWeight: 400,
-		fontFamily: 'Open Sans',
+		fontWeight: '@fontWeights.body',
+		fontFamily: '@fonts.body',
 	},
 	heading: {
 		color: '@colors.heading',
-		fontWeight: 600,
-		fontFamily: 'Open Sans',
+		fontWeight: '@fontWeights.heading',
+		fontFamily: '@fonts.heading',
 	},
 	button: {
 		color: '@colors.button',
