@@ -17,10 +17,10 @@ export default {
 
 	props: {
 		/**
-		 * variants are defined at the theme level
-		 * @values headline, title, body, label, variant defined in theme
+		 * patterns are defined at the theme level
+		 * @values headline, title, body, label, pattern defined in theme
 		 */
-		variant: {
+		pattern: {
 			type: String,
 			default: undefined,
 		},
@@ -113,7 +113,7 @@ export default {
 
 	computed: {
 		...resolveThemeableProps('text', [
-			'variant',
+			'pattern',
 			'element',
 			'size',
 			'fontFamily',

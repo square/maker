@@ -62,42 +62,42 @@ function capitalizeFirstLetter(string) {
 export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
-		if (propName === 'variant') {
-			computedResolvedProps.resolvedVariant = function resolveThemeableVariant() {
-				// local variant set directly on component
-				// overrides variant set by theme
-				if (!isNil(this.variant)) {
+		if (propName === 'pattern') {
+			computedResolvedProps.resolvedPattern = function resolveThemeablePattern() {
+				// local pattern set directly on component
+				// overrides pattern set by theme
+				if (!isNil(this.pattern)) {
 					// if validator for this prop exists then
 					// Vue would have already validated it by this point
-					return this.variant;
+					return this.pattern;
 				}
 
-				let variantOrPath;
+				let patternOrPath;
 
-				// default theme variant for this component
-				const variantFromTheme = this.theme[componentKeyInTheme].variant;
-				if (!isNil(variantFromTheme)) {
-					variantOrPath = variantFromTheme;
+				// default theme pattern for this component
+				const patternFromTheme = this.theme[componentKeyInTheme].pattern;
+				if (!isNil(patternFromTheme)) {
+					patternOrPath = patternFromTheme;
 				}
 
-				if (isNil(variantOrPath)) {
+				if (isNil(patternOrPath)) {
 					return undefined;
 				}
 
-				const resolvedVariant = this.theme.resolve(variantOrPath);
-				const variantValidator = this.$vnode.componentOptions
-					.Ctor.extendOptions.props.variant.validator;
+				const resolvedPattern = this.theme.resolve(patternOrPath);
+				const patternValidator = this.$vnode.componentOptions
+					.Ctor.extendOptions.props.pattern.validator;
 
-				// validate using variant prop validator if exists
-				if (variantValidator) {
-					assert.error(variantValidator(resolvedVariant), `Invalid value "${resolvedVariant}" for prop "variant" for component "${componentKeyInTheme}" in theme.`);
+				// validate using pattern prop validator if exists
+				if (patternValidator) {
+					assert.error(patternValidator(resolvedPattern), `Invalid value "${resolvedPattern}" for prop "pattern" for component "${componentKeyInTheme}" in theme.`);
 
-				// otherwise try validating by checking variants config for component
+				// otherwise try validating by checking patterns config for component
 				} else {
-					const themeVariant = this.theme[componentKeyInTheme].variants?.[resolvedVariant];
-					assert.error(themeVariant, `Invalid variant "${resolvedVariant}" for component "${componentKeyInTheme}" in theme.`);
+					const themePattern = this.theme[componentKeyInTheme].patterns?.[resolvedPattern];
+					assert.error(themePattern, `Invalid pattern "${resolvedPattern}" for component "${componentKeyInTheme}" in theme.`);
 				}
-				return resolvedVariant;
+				return resolvedPattern;
 			};
 		} else {
 			computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
@@ -117,12 +117,12 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 					valueOrPath = valueFromTheme;
 				}
 
-				// variant value, overrides default theme value
-				if (!isNil(this.resolvedVariant)) {
-					const valueFromThemeVariant = this.theme[componentKeyInTheme]
-						.variants?.[this.resolvedVariant]?.[propName];
-					if (!isNil(valueFromThemeVariant)) {
-						valueOrPath = valueFromThemeVariant;
+				// pattern value, overrides default theme value
+				if (!isNil(this.resolvedPattern)) {
+					const valueFromThemePattern = this.theme[componentKeyInTheme]
+						.patterns?.[this.resolvedPattern]?.[propName];
+					if (!isNil(valueFromThemePattern)) {
+						valueOrPath = valueFromThemePattern;
 					}
 				}
 
