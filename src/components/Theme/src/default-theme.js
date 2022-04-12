@@ -88,11 +88,8 @@ export default function defaultTheme() {
 				},
 				paragraph: {}, // component default
 				label: {
-					size: 0,
 					fontFamily: '@fonts.label.fontFamily',
 					fontWeight: '@fonts.label.fontWeight',
-					element: 'h6',
-					textTransform: 'uppercase',
 				},
 			},
 		},
