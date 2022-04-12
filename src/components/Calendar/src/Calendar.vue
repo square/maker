@@ -361,7 +361,7 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--color-text, rgba(0, 0, 0, 0.5));
+	color: var(--color-paragraph, rgba(0, 0, 0, 0.5));
 	font-weight: var(--font-weight-paragraph, 400);
 	font-size: var(--font-size-minus-1);
 	font-family: var(--font-family-paragraph, inherit);
@@ -373,7 +373,7 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--color-text, #000);
+	color: var(--color-paragraph, #000);
 	text-align: center;
 }
 

@@ -141,7 +141,7 @@ export default {
 <style module="$s">
 .Container {
 	padding: 16px 24px;
-	color: var(--color, var(--color-text, inherit));
+	color: var(--color, var(--color-paragraph, inherit));
 	font-weight: var(--font-weight-paragraph, 400);
 	font-family: var(--font-family-paragraph, inherit);
 	background-color: var(--bg-color, inherit);
@@ -149,7 +149,7 @@ export default {
 
 .Label {
 	margin-bottom: 16px;
-	color: var(--color, var(--color-heading, inherit));
+	color: var(--color, var(--color-title, inherit));
 	font-weight: var(--font-weight-title, 500);
 	font-size: 14px;
 	font-family: var(--font-family-title, inherit);
@@ -180,7 +180,7 @@ export default {
 }
 
 .Sublabel {
-	color: var(--color, var(--color-text, inherit));
+	color: var(--color, var(--color-paragraph, inherit));
 	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 14px;
 	font-family: var(--font-family-paragraph, inherit);
@@ -191,7 +191,7 @@ export default {
 
 .RequirementLabel {
 	padding-left: 8px;
-	color: var(--color, var(--color-text, inherit));
+	color: var(--color, var(--color-paragraph, inherit));
 	font-weight: var(--font-weight-paragraph, 400);
 	font-size: 14px;
 	font-family: var(--font-family-paragraph, inherit);

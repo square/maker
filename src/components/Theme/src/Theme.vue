@@ -67,8 +67,8 @@ export default {
 				'--neutral-100': colors['neutral-100'],
 				'--color-primary': colors.primary,
 				'--color-background': colors.background,
-				'--color-heading': colors.heading,
-				'--color-text': colors.text,
+				'--color-title': colors.title,
+				'--color-paragraph': colors.paragraph,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
 				'--font-family-title': fonts.title.fontFamily,
@@ -89,7 +89,7 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--color-text);
+	color: var(--color-paragraph);
 	background-color: var(--color-background);
 }
 </style>

@@ -618,7 +618,7 @@ export default {
 	max-height: calc(100% - 40px);
 	padding: 20px 10px;
 	overflow: hidden;
-	color: var(--color-text);
+	color: var(--color-paragraph);
 	font-weight: var(--font-weights-text, normal);
 	font-size: var(--font-base-size);
 	font-family: var(--font-text, inherit);
