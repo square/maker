@@ -232,8 +232,9 @@ export default {
 	height: var(--medium-height);
 	padding: 0 var(--medium-padding);
 	color: var(--text-color);
-	font-weight: 500;
+	font-weight: var(--fontWeights-label, var(--fontWeights-body, 500));
 	font-size: var(--medium-font-size);
+	font-family: var(--fonts-label, var(--fonts-body, sans-serif));
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
