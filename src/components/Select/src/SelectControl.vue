@@ -169,9 +169,7 @@ export default {
 	position: relative;
 	box-sizing: border-box;
 	min-width: 80px;
-	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: 16px;
-	font-family: var(--font-family-paragraph, inherit);
 	border-radius: var(--border-radius);
 }
 
