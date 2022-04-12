@@ -144,7 +144,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.heading.fontFamily"
+						v-model="theme.fonts.heading"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -158,7 +158,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.heading.fontWeight"
+						v-model="theme.fontWeights.heading"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -178,7 +178,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.fontFamily"
+						v-model="theme.fonts.body"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -192,7 +192,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.fontWeight"
+						v-model="theme.fontWeights.body"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">

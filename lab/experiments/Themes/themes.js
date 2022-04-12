@@ -138,6 +138,12 @@ export const websiteTheme = {
 	fonts: {
 		baseSize: 16,
 		sizeScale: 1.17,
+		body: 'Open Sans',
+		heading: 'Open Sans',
+	},
+	fontWeights: {
+		body: 400,
+		heading: 600,
 	},
 	text: {
 		color: '@colors.text',
