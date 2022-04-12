@@ -65,7 +65,7 @@ export default function defaultTheme() {
 		text: {
 			size: 0,
 			fontFamily: '@fonts.paragraph.fontFamily',
-			color: '@colors.text',
+			color: '@colors.paragraph',
 			element: 'p',
 			fontWeight: '@fonts.paragraph.fontWeight',
 			fontStyle: 'inherit',
@@ -77,14 +77,14 @@ export default function defaultTheme() {
 					fontFamily: '@fonts.title.fontFamily',
 					fontWeight: '700',
 					element: 'h1',
-					color: '@colors.heading',
+					color: '@colors.title',
 				},
 				title: {
 					size: 3,
 					fontFamily: '@fonts.title.fontFamily',
 					fontWeight: '@fonts.title.fontWeight',
 					element: 'h2',
-					color: '@colors.heading',
+					color: '@colors.title',
 				},
 				paragraph: {}, // component default
 				label: {

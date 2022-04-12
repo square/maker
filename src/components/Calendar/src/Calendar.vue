@@ -400,7 +400,7 @@ export default {
 	}
 
 	&.today {
-		border: 1px solid var(--color-primary, #000);
+		border: 1px solid var(--color-paragraph, inherit);
 	}
 
 	&.disabled {

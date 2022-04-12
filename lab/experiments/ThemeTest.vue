@@ -117,17 +117,17 @@
 						</label>
 						<label>
 							<input
-								v-model="headingColor"
+								v-model="titleColor"
 								type="color"
 							>
-							Heading
+							Title
 						</label>
 						<label>
 							<input
-								v-model="textColor"
+								v-model="paragraphColor"
 								type="color"
 							>
-							Text
+							Paragraph
 						</label>
 						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
@@ -565,8 +565,8 @@ export default {
 		return {
 			backgroundColor: '#ffffff',
 			primaryColor: '#14433d',
-			headingColor: '#000000',
-			textColor: '#000000',
+			titleColor: '#000000',
+			paragraphColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -637,8 +637,8 @@ export default {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
-					heading: this.headingColor,
-					text: this.textColor,
+					title: this.titleColor,
+					paragraph: this.paragraphColor,
 					...colors,
 				},
 				fonts: {
