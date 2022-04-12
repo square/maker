@@ -19,6 +19,16 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.17,
+			body: 'inherit',
+			heading: 'inherit',
+			headline: 'inherit',
+			label: 'inherit',
+		},
+		fontWeights: {
+			body: 400,
+			heading: 600,
+			headline: 300,
+			label: 500,
 		},
 		profiles: [
 			{

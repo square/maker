@@ -73,8 +73,12 @@ export default {
 				'--fonts-baseSize': fonts.baseSize,
 				'--fonts-body': fonts.body,
 				'--fonts-heading': fonts.heading,
+				'--fonts-headline': fonts.headline,
+				'--fonts-label': fonts.label,
 				'--fontWeights-body': fontWeights.body,
 				'--fontWeights-heading': fontWeights.heading,
+				'--fontWeights-headline': fontWeights.headline,
+				'--fontWeights-label': fontWeights.label,
 			};
 		},
 	},
