@@ -142,7 +142,7 @@ export default {
 .Container {
 	padding: 16px 24px;
 	color: var(--color, var(--color-paragraph, inherit));
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-family: var(--font-family-paragraph, inherit);
 	background-color: var(--bg-color, inherit);
 }
@@ -181,7 +181,7 @@ export default {
 
 .Sublabel {
 	color: var(--color, var(--color-paragraph, inherit));
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: 14px;
 	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;
@@ -192,7 +192,7 @@ export default {
 .RequirementLabel {
 	padding-left: 8px;
 	color: var(--color, var(--color-paragraph, inherit));
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: 14px;
 	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;

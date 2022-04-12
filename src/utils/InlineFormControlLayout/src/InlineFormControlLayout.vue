@@ -66,7 +66,7 @@ export default {
 
 .Label {
 	color: var(--color-paragraph, inherit);
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-family: var(--font-family-paragraph, inherit);
 }
 </style>

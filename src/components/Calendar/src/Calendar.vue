@@ -362,7 +362,7 @@ export default {
 	height: var(--cell-size);
 	padding: var(--cell-padding);
 	color: var(--color-paragraph, rgba(0, 0, 0, 0.5));
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: var(--font-size-minus-1);
 	font-family: var(--font-family-paragraph, inherit);
 	line-height: var(--line-height-minus-1);
@@ -382,7 +382,7 @@ export default {
 	height: var(--cell-size);
 	padding: 0;
 	color: inherit;
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: inherit;
 	font-family: var(--font-family-paragraph, inherit);
 	background-color: inherit;

@@ -163,7 +163,7 @@ export default {
 	height: 48px;
 	padding: 0 16px;
 	color: var(--color-foreground);
-	font-weight: var(--font-weight-paragraph, 400);
+	font-weight: var(--font-weight-paragraph, inherit);
 	font-size: 16px;
 	font-family: var(--font-family-paragraph, inherit);
 	background-color: var(--color-background, #fff);

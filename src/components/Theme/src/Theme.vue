@@ -90,6 +90,8 @@ export default {
 <style module="$s">
 .Theme {
 	color: var(--color-paragraph);
+	font-weight: var(--font-weight-paragraph);
+	font-family: var(--font-family-paragraph);
 	background-color: var(--color-background);
 }
 </style>
