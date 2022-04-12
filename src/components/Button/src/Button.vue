@@ -150,6 +150,14 @@ export default {
 
 	props: {
 		/**
+		 * patterns are defined at the theme level
+		 * @values pattern defined in theme
+		 */
+		pattern: {
+			type: String,
+			default: undefined,
+		},
+		/**
 		 * Type of the button
 		 */
 		type: {
@@ -189,11 +197,12 @@ export default {
 		},
 		/**
 		 * Variant
-		 * @values primary, secondary, tertiary, variant defined in theme
+		 * @values primary, secondary, tertiary
 		 */
 		variant: {
 			type: String,
 			default: undefined,
+			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
 		},
 		/**
 		 * Shape of button
@@ -228,7 +237,16 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('button', ['color', 'size', 'textColor', 'variant', 'shape', 'align', 'fullWidth']),
+		...resolveThemeableProps('button', [
+			'color',
+			'size',
+			'textColor',
+			'variant',
+			'shape',
+			'align',
+			'fullWidth',
+			'pattern',
+		]),
 		style() {
 			return VARIANTS[this.resolvedVariant]({
 				color: this.resolvedColor,
