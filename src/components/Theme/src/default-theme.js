@@ -74,6 +74,7 @@ export default function defaultTheme() {
 			variants: {
 				headline: {
 					size: 7,
+					fontFamily: '@fonts.title.fontFamily',
 					fontWeight: '700',
 					element: 'h1',
 					color: '@colors.heading',
