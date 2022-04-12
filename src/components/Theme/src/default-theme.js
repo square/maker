@@ -45,10 +45,16 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
-			variants: {
-				primary: {},
-				secondary: {},
-				tertiary: {},
+			patterns: {
+				primary: {
+					variant: 'primary',
+				},
+				secondary: {
+					variant: 'secondary',
+				},
+				tertiary: {
+					variant: 'tertiary',
+				},
 			},
 		},
 		textbutton: {
@@ -71,7 +77,7 @@ export default function defaultTheme() {
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
-			variants: {
+			patterns: {
 				headline: {
 					size: 7,
 					fontFamily: '@fonts.title.fontFamily',

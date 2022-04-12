@@ -2,38 +2,6 @@
 
 For a simplified text-only button with no padding or focus/active/hover states, see: [TextButton](#/TextButton).
 
-```vue
-<template>
-	<div>
-		<m-button
-			variant="primary"
-		>
-			primary
-		</m-button>
-		<m-button
-			variant="secondary"
-		>
-			secondary
-		</m-button>
-		<m-button
-			variant="tertiary"
-		>
-			tertiary
-		</m-button>
-	</div>
-</template>
-
-<script>
-import { MButton } from '@square/maker/components/Button';
-
-export default {
-	components: {
-		MButton,
-	},
-};
-</script>
-```
-
 ## Styles & Sizes
 
 ```vue
@@ -558,18 +526,19 @@ body {
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Prop       | Type      | Default    | Possible values                                                | Description                           |
-| ---------- | --------- | ---------- | -------------------------------------------------------------- | ------------------------------------- |
-| type       | `string`  | `'button'` | —                                                              | Type of the button                    |
-| size       | `string`  | —          | `small`, `medium`, `large`                                     | Size of the button                    |
-| full-width | `boolean` | —          | —                                                              | Whether to make the button full-width |
-| color      | `string`  | —          | —                                                              | Background color of button            |
-| text-color | `string`  | —          | —                                                              | Text color of button                  |
-| variant    | `string`  | —          | `primary`, `secondary`, `tertiary`, `variant defined in theme` | Variant                               |
-| shape      | `string`  | —          | `squared`, `rounded`, `pill`                                   | Shape of button                       |
-| disabled   | `boolean` | `false`    | —                                                              | Toggles button disabled state         |
-| align      | `string`  | —          | `center`, `stack`, `space-between`                             | How to align button's contents        |
-| loading    | `boolean` | `false`    | —                                                              | Toggles button loading state          |
+| Prop       | Type      | Default    | Possible values                    | Description                             |
+| ---------- | --------- | ---------- | ---------------------------------- | --------------------------------------- |
+| pattern    | `string`  | —          | `pattern defined in theme`         | patterns are defined at the theme level |
+| type       | `string`  | `'button'` | —                                  | Type of the button                      |
+| size       | `string`  | —          | `small`, `medium`, `large`         | Size of the button                      |
+| full-width | `boolean` | —          | —                                  | Whether to make the button full-width   |
+| color      | `string`  | —          | —                                  | Background color of button              |
+| text-color | `string`  | —          | —                                  | Text color of button                    |
+| variant    | `string`  | —          | `primary`, `secondary`, `tertiary` | Variant                                 |
+| shape      | `string`  | —          | `squared`, `rounded`, `pill`       | Shape of button                         |
+| disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state           |
+| align      | `string`  | —          | `center`, `stack`, `space-between` | How to align button's contents          |
+| loading    | `boolean` | `false`    | —                                  | Toggles button loading state            |
 
 
 ## Slots
