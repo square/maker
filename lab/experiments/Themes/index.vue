@@ -140,6 +140,40 @@
 				<h3
 					:class="$s.subsectionTitle"
 				>
+					Headline
+				</h3>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="theme.fonts.headline"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="theme.fontWeights.headline"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
+				</div>
+				<h3
+					:class="$s.subsectionTitle"
+				>
 					Heading
 				</h3>
 				<div :class="$s.fontChoice">
@@ -174,7 +208,7 @@
 				<h3
 					:class="$s.subsectionTitle"
 				>
-					Text
+					Body
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
@@ -193,6 +227,40 @@
 					</select>
 					<select
 						v-model="theme.fontWeights.body"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
+				</div>
+				<h3
+					:class="$s.subsectionTitle"
+				>
+					Label
+				</h3>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="theme.fonts.label"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="theme.fontWeights.label"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -225,6 +293,11 @@
 					>
 					Contrast
 				</label>
+				<p>
+					The preview of the text sizes are based on the browser viewport.
+					&nbsp;Since each canvas isn't an iframe, the contrast option is calculating
+					&nbsp;for desktop instead of mobile.
+				</p>
 				<!-- eslint-disable vue/no-textarea-mustache -->
 				<textarea rows="20">
 {{ theme }}
@@ -280,10 +353,16 @@ export default {
 			const fontWeightsHeading = themeStore.$state.theme.fontWeights.heading;
 			const fontText = themeStore.$state.theme.fonts.body;
 			const fontWeightsText = themeStore.$state.theme.fontWeights.body;
+			const fontHeadline = themeStore.$state.theme.fonts.headline;
+			const fontWeightsHeadline = themeStore.$state.theme.fontWeights.headline;
+			const fontLabel = themeStore.$state.theme.fonts.label;
+			const fontWeightsLabel = themeStore.$state.theme.fontWeights.label;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
 			fonts.push(`${fontText}:${fontWeightsText}`);
+			fonts.push(`${fontHeadline}:${fontWeightsHeadline}`);
+			fonts.push(`${fontLabel}:${fontWeightsLabel}`);
 
 			return fonts;
 		},
