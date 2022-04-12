@@ -234,7 +234,6 @@ export default {
 	color: var(--text-color);
 	font-weight: 500;
 	font-size: var(--medium-font-size);
-	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;

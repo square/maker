@@ -123,7 +123,6 @@ export default {
 	min-width: 0;
 	color: var(--neutral-90);
 	font-weight: 500;
-	font-family: inherit;
 	vertical-align: middle;
 	background-color: transparent;
 	border: none;

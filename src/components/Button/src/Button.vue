@@ -265,7 +265,6 @@ export default {
 	min-width: 0;
 	color: var(--color-contrast);
 	font-weight: 500;
-	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;

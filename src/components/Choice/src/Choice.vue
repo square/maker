@@ -137,7 +137,6 @@ export default {
 	box-sizing: border-box;
 	font-weight: var(--font-weight);
 	font-size: var(--font-size);
-	font-family: inherit;
 	line-height: var(--line-height);
 }
 </style>

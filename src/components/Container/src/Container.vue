@@ -142,7 +142,6 @@ export default {
 .Container {
 	padding: 16px 24px;
 	color: var(--color, var(--neutral-80, inherit));
-	font-family: inherit;
 	background-color: var(--bg-color, inherit);
 }
 

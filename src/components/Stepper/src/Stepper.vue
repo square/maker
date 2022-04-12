@@ -158,7 +158,6 @@ export default {
 	margin: 0 16px;
 	color: var(--neutral-90, inherit);
 	font-weight: 500;
-	font-family: inherit;
 	font-feature-settings: "tnum";
 	font-variant-numeric: tabular-nums;
 }

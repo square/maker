@@ -46,7 +46,6 @@ export default {
 .LayoutContainer {
 	display: inline-flex;
 	font-size: 14px;
-	font-family: inherit;
 	line-height: 24px;
 	cursor: pointer;
 }

@@ -121,8 +121,6 @@ export default {
 	padding: 12px 16px;
 	color: var(--color-foreground);
 	font-size: 16px;
-	font-family: inherit;
-	font-family: var(--font-family);
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);

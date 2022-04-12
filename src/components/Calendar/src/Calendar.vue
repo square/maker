@@ -327,7 +327,6 @@ export default {
 	min-width: min-content;
 	padding: 16px;
 	font-size: var(--font-size);
-	font-family: inherit;
 	line-height: var(--line-height);
 	background-color: var(--color-background, #fff);
 	border-radius: 4px;
