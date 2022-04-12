@@ -613,9 +613,6 @@ export default {
 	padding: 20px 10px;
 	overflow: hidden;
 	color: var(--color-text);
-	font-weight: var(--font-weights-text, normal);
-	font-size: var(--font-base-size);
-	font-family: var(--font-text, inherit);
 	background-color: var(--color-background);
 	border-radius: 30px;
 	box-shadow:
