@@ -141,9 +141,6 @@ export default {
 <style module="$s">
 .Container {
 	padding: 16px 24px;
-	color: var(--color, var(--color-paragraph, inherit));
-	font-weight: var(--font-weight-paragraph, inherit);
-	font-family: var(--font-family-paragraph, inherit);
 	background-color: var(--bg-color, inherit);
 }
 
@@ -191,10 +188,8 @@ export default {
 
 .RequirementLabel {
 	padding-left: 8px;
-	color: var(--color, var(--color-paragraph, inherit));
-	font-weight: var(--font-weight-paragraph, inherit);
+	color: var(--color, inherit);
 	font-size: 14px;
-	font-family: var(--font-family-paragraph, inherit);
 	line-height: 24px;
 	white-space: nowrap;
 }
