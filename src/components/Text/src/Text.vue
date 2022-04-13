@@ -132,11 +132,10 @@ export default {
 		},
 		inlineStyles() {
 			const { fonts } = this.theme;
-			const resolveProps = this.resolveVariant();
 
 			return {
-				fontFamily: resolveProps ? this.resolvedFontFamily : this.fontFamily,
-				fontWeight: resolveProps ? this.resolvedFontWeight : this.fontWeight,
+				fontFamily: this.useThemeComponentData ? this.resolvedFontFamily : this.fontFamily,
+				fontWeight: this.useThemeComponentData ? this.resolvedFontWeight : this.fontWeight,
 				color: this.resolvedColor,
 				fontSize: this.fontSize,
 				lineHeight: this.lineHeight,
@@ -144,12 +143,18 @@ export default {
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
 		},
-	},
-
-	methods: {
-		resolveVariant() {
-			return !(this.variant === 'headline' || this.variant === 'label');
+		/*
+		 * Text and heading have component definitions in the theme
+		 * This conditional check allows for fontFamily prop to work
+		 * when the component props are not defined in the theme data.
+		 *
+		 * The two other variants: headline and label are set with CSS
+		 * at the parent level and used in styling below
+		 */
+		useThemeComponentData() {
+			return (this.variant === 'text' || this.variant === 'heading');
 		},
+
 	},
 
 	render(createElement) {
@@ -272,24 +277,24 @@ export default {
 .text_body,
 .text_label {
 	font-weight: var(--fontWeights-body, 400);
-	font-family: var(--fonts-body, sans-serif);
+	font-family: var(--fonts-body, inherit);
 }
 
 .text_title {
 	margin: 0;
 	font-weight: var(--fontWeights-heading, 600);
-	font-family: var(--fonts-heading, sans-serif);
+	font-family: var(--fonts-heading, inherit);
 }
 
 .text_headline {
 	margin: 0;
 	font-weight: var(--fontWeights-headline, var(--fontWeights-heading, 600));
-	font-family: var(--fonts-headline, var(--fonts-heading, sans-serif));
+	font-family: var(--fonts-headline, var(--fonts-heading, inherit));
 }
 
 .text_label {
 	font-weight: var(--fontWeights-label, var(--fontWeights-body, 500));
-	font-family: var(--fonts-label, var(--fonts-body, sans-serif));
+	font-family: var(--fonts-label, var(--fonts-body, inherit));
 }
 
 .fontstyle_normal {
