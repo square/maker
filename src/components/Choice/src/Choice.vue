@@ -24,31 +24,7 @@ export default {
 		 * Vue 3 will bring the `computed` helper to make (most of) this cleaner
 		 */
 		return {
-			[key]: {
-				isSelected: (value) => {
-					if (this.isMultiSelect) {
-						return this.currentValue.includes(value);
-					}
-					return this.currentValue === value;
-				},
-				selectValue: (value) => {
-					if (this.isMultiSelect) {
-						const currentValueArray = this.currentValue.slice();
-
-						if (currentValueArray.includes(value)) {
-							const singleValue = 1;
-							currentValueArray.splice(currentValueArray.indexOf(value), singleValue);
-						} else {
-							currentValueArray.push(value);
-						}
-
-						value = currentValueArray;
-					}
-
-					this.currentValue = value;
-				},
-				isDisabled: () => this.disabled,
-			},
+			[key]: this,
 		};
 	},
 
@@ -151,6 +127,30 @@ export default {
 			if (this.isMultiSelect) {
 				assert.error(Array.isArray(this.selected), 'The v-model value for a multi-select must be of type Array.');
 			}
+		},
+
+		isSelected(value) {
+			if (this.isMultiSelect) {
+				return this.currentValue.includes(value);
+			}
+			return this.currentValue === value;
+		},
+
+		selectValue(value) {
+			if (this.isMultiSelect) {
+				const currentValueArray = this.currentValue.slice();
+
+				if (currentValueArray.includes(value)) {
+					const singleValue = 1;
+					currentValueArray.splice(currentValueArray.indexOf(value), singleValue);
+				} else {
+					currentValueArray.push(value);
+				}
+
+				value = currentValueArray;
+			}
+
+			this.currentValue = value;
 		},
 	},
 };

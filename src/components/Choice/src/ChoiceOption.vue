@@ -37,7 +37,7 @@ export default {
 		},
 
 		isDisabled() {
-			return this.disabled || this.controlState.isDisabled();
+			return this.disabled || this.controlState.disabled;
 		},
 	},
 

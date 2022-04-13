@@ -249,9 +249,10 @@ export default {
 
 ## ChoiceOption Props
 
-| Prop   | Type        | Default | Possible values | Description |
-| ------ | ----------- | ------- | --------------- | ----------- |
-| value* | `undefined` | —       | —               | —           |
+| Prop     | Type        | Default | Possible values | Description |
+| -------- | ----------- | ------- | --------------- | ----------- |
+| value*   | `undefined` | —       | —               | —           |
+| disabled | `boolean`   | `false` | —               | —           |
 
 
 ## ChoiceOption Slots
