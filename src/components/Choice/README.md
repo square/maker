@@ -160,6 +160,68 @@ export default {
 </style>
 ```
 
+### Disabled state
+
+```vue
+<template>
+	<div>
+		<m-toggle
+			v-model="disabled"
+			:class="$s.Toggle"
+		>
+			Disabled
+		</m-toggle>
+
+		<m-choice
+			v-model="selected"
+			:disabled="disabled"
+		>
+			<m-choice-option value="choice-1">
+				Choice
+			</m-choice-option>
+			<m-choice-option value="choice-2">
+				Choice<br>second line
+			</m-choice-option>
+			<m-choice-option value="choice-3">
+				Choice longer text
+			</m-choice-option>
+			<m-choice-option
+				:disabled="true"
+				value="choice-4"
+			>
+				Choice always disabled
+			</m-choice-option>
+		</m-choice>
+		<br>
+		<p>Selected value: {{ selected }}</p>
+	</div>
+</template>
+
+<script>
+import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
+import { MToggle } from '@square/maker/components/Toggle';
+
+export default {
+	components: {
+		MChoice,
+		MChoiceOption,
+		MToggle,
+	},
+	data() {
+		return {
+			selected: 'choice-1',
+			disabled: false,
+		};
+	},
+};
+</script>
+<style module="$s">
+.Toggle {
+	margin-bottom: 16px;
+}
+</style>
+```
+
 <!-- api-tables:start -->
 ## Choice Props
 
