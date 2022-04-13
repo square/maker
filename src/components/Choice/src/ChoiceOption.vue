@@ -4,7 +4,7 @@
 			$s.Button,
 			{ [$s.selected]: isSelected },
 		]"
-		:disabled="controlState.disabled || $attrs.disabled"
+		:disabled="isDisabled"
 		@click="selectSelf"
 	>
 		<slot />
@@ -24,35 +24,26 @@ export default {
 			type: undefined,
 			required: true,
 		},
+
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	computed: {
 		isSelected() {
-			if (this.controlState.isMultiSelect) {
-				return this.controlState.currentValue.includes(this.value);
-			}
-			return this.controlState.currentValue === this.value;
+			return this.controlState.isSelected(this.value);
+		},
+
+		isDisabled() {
+			return this.disabled || this.controlState.disabled;
 		},
 	},
 
 	methods: {
 		selectSelf() {
-			let currentValue = this.value;
-
-			if (this.controlState.isMultiSelect) {
-				const currentValueArray = this.controlState.currentValue.slice();
-
-				if (currentValueArray.includes(currentValue)) {
-					const singleValue = 1;
-					currentValueArray.splice(currentValueArray.indexOf(currentValue), singleValue);
-				} else {
-					currentValueArray.push(currentValue);
-				}
-
-				currentValue = currentValueArray;
-			}
-
-			this.controlState.currentValue = currentValue;
+			this.controlState.selectValue(this.value);
 		},
 	},
 };
