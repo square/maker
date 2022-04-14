@@ -39,12 +39,12 @@ export default {
 		},
 		/**
 		 * Variant, allows four custom font styles through the Theme component
-		 * @values body, title, headline, label
+		 * @values body, heading, headline, label
 		 */
 		variant: {
 			type: String,
 			default: 'body',
-			validator: (variant) => ['body', 'title', 'headline', 'label'].includes(variant),
+			validator: (variant) => ['body', 'heading', 'headline', 'label'].includes(variant),
 		},
 		/**
 		 * Font family
@@ -122,7 +122,7 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'fontWeight', 'color']),
+		...resolveThemeableProps('text', ['size', 'fontFamily', 'fontWeight']),
 		sizeClass() {
 			const minNonNegativeSize = 0;
 			if (this.resolvedSize >= minNonNegativeSize) {
@@ -136,7 +136,7 @@ export default {
 			return {
 				fontFamily: this.useThemeComponentData ? this.resolvedFontFamily : this.fontFamily,
 				fontWeight: this.useThemeComponentData ? this.resolvedFontWeight : this.fontWeight,
-				color: this.resolvedColor,
+				color: this.color,
 				fontSize: this.fontSize,
 				lineHeight: this.lineHeight,
 				'--mobile-base-font-size': fonts.baseSize,
@@ -280,14 +280,18 @@ export default {
 	font-family: var(--fonts-body, inherit);
 }
 
-.text_title {
+.text_heading,
+.text_headline {
 	margin: 0;
+	color: var(--color-heading, #000);
+}
+
+.text_heading {
 	font-weight: var(--fontWeights-heading, 600);
 	font-family: var(--fonts-heading, inherit);
 }
 
 .text_headline {
-	margin: 0;
 	font-weight: var(--fontWeights-headline, var(--fontWeights-heading, 600));
 	font-family: var(--fonts-headline, var(--fonts-heading, inherit));
 }

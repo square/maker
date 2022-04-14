@@ -35,7 +35,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 | -------------- | -------- | ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | element        | `string` | `'p'`       | `p`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `span`, `div`, `li`  | HTML Element wrapper                                                                        |
 | size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of text                                                                                |
-| variant        | `string` | `'body'`    | `body`, `title`, `headline`, `label`                          | Variant, allows four custom font styles through the Theme component                         |
+| variant        | `string` | `'body'`    | `body`, `heading`, `headline`, `label`                        | Variant, allows four custom font styles through the Theme component                         |
 | font-family    | `string` | —           | —                                                             | Font family                                                                                 |
 | font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                            |
 | font-size      | `string` | —           | —                                                             | Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling. |
