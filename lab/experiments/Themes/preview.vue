@@ -18,6 +18,17 @@
 						Headline (variant) +5
 					</m-text>
 					<m-text
+						variant="headline"
+						color="green"
+					>
+						Headline (color green)
+					</m-text>
+					<m-text
+						variant="heading"
+					>
+						Heading (variant)
+					</m-text>
+					<m-text
 						:size="-1"
 						variant="label"
 					>
