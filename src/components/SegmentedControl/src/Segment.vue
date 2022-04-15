@@ -1,7 +1,7 @@
 <template>
 	<button
 		:class="[
-			$s.Button,
+			$s.Segment,
 			$s[`shape_${controlState.shapeInner}`],
 			$s[`size_${controlState.sizeInner}`],
 			{ [$s.selected]: isSelected },
@@ -39,10 +39,10 @@ export default {
 </script>
 
 <style module="$s">
-.Button {
+.Segment {
 	flex: 1 0 0;
 	color: var(--neutral-90, black);
-	font-weight: 500;
+	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
 	line-height: inherit;

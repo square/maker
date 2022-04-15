@@ -56,7 +56,7 @@ export default {
 	},
 	computed: {
 		styles() {
-			const { colors } = this;
+			const { colors, fonts } = this;
 
 			return {
 				'--neutral-0': colors['neutral-0'],
@@ -65,11 +65,18 @@ export default {
 				'--neutral-80': colors['neutral-80'],
 				'--neutral-90': colors['neutral-90'],
 				'--neutral-100': colors['neutral-100'],
+				'--color-primary': colors.primary,
 				'--color-background': colors.background,
-				'--color-heading': colors.heading,
-				'--color-text': colors.text,
+				'--color-title': colors.title,
+				'--color-paragraph': colors.paragraph,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
+				'--font-family-title': fonts.title.fontFamily,
+				'--font-weight-title': fonts.title.fontWeight,
+				'--font-family-paragraph': fonts.paragraph.fontFamily,
+				'--font-weight-paragraph': fonts.paragraph.fontWeight,
+				'--font-family-label': fonts.label.fontFamily,
+				'--font-weight-label': fonts.label.fontWeight,
 			};
 		},
 	},
@@ -82,7 +89,9 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--color-text);
+	color: var(--color-paragraph);
+	font-weight: var(--font-weight-paragraph);
+	font-family: var(--font-family-paragraph);
 	background-color: var(--color-background);
 }
 </style>

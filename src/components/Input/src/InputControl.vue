@@ -164,8 +164,6 @@ export default {
 	padding: 0 16px;
 	color: var(--color-foreground);
 	font-size: 16px;
-	font-family: inherit;
-	font-family: var(--font-family);
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
 	border-radius: var(--border-radius);
@@ -190,6 +188,7 @@ export default {
 	flex-grow: 1;
 	box-sizing: inherit;
 	color: inherit;
+	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
 	text-overflow: ellipsis;

@@ -10,8 +10,8 @@ export default function defaultTheme() {
 			'neutral-90': '#1b1b1b',
 			'neutral-100': '#000000',
 			background: '#ffffff',
-			heading: 'inherit',
-			text: 'inherit',
+			title: 'inherit',
+			paragraph: 'inherit',
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
@@ -19,6 +19,18 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.17,
+			title: {
+				fontFamily: 'inherit',
+				fontWeight: '500',
+			},
+			paragraph: {
+				fontFamily: 'inherit',
+				fontWeight: '400',
+			},
+			label: {
+				fontFamily: 'inherit',
+				fontWeight: '500',
+			},
 		},
 		profiles: [
 			{
@@ -58,36 +70,32 @@ export default function defaultTheme() {
 		},
 		text: {
 			size: 0,
-			fontFamily: 'inherit',
-			color: '@colors.text',
+			fontFamily: '@fonts.paragraph.fontFamily',
+			color: '@colors.paragraph',
 			element: 'p',
-			fontWeight: 'inherit',
+			fontWeight: '@fonts.paragraph.fontWeight',
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
 			patterns: {
 				headline: {
 					size: 7,
+					fontFamily: '@fonts.title.fontFamily',
 					fontWeight: '700',
 					element: 'h1',
-					color: '@colors.heading',
+					color: '@colors.title',
 				},
 				title: {
 					size: 3,
-					fontWeight: '500',
+					fontFamily: '@fonts.title.fontFamily',
+					fontWeight: '@fonts.title.fontWeight',
 					element: 'h2',
-					color: '@colors.heading',
+					color: '@colors.title',
 				},
-				paragraph: {
-					size: 0,
-					fontWeight: '400',
-					element: 'p',
-				},
+				paragraph: {}, // component default
 				label: {
-					size: 0,
-					fontWeight: '500',
-					element: 'h6',
-					textTransform: 'uppercase',
+					fontFamily: '@fonts.label.fontFamily',
+					fontWeight: '@fonts.label.fontWeight',
 				},
 			},
 		},

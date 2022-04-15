@@ -10,14 +10,14 @@
 					:class="$s.Scale"
 				>
 					<m-text
-						variant="title"
+						pattern="title"
 						font-size="20px"
 						style="margin-bottom: 16px;"
 					>
 						Maker Theme
 					</m-text>
 					<m-text
-						variant="title"
+						pattern="title"
 						font-size="16px"
 					>
 						Typography
@@ -49,19 +49,19 @@
 						<br>
 						<m-divider :class="$s.Divider" />
 						<m-text
-							variant="title"
+							pattern="title"
 							font-size="16px"
 						>
-							Variants
+							Patterns
 						</m-text>
 						<div
-							v-for="textVariant in Object.keys(textVariants)"
-							:key="textVariant"
+							v-for="textPattern in Object.keys(textPatterns)"
+							:key="textPattern"
 						>
-							{{ textVariant }}
+							{{ textPattern }}
 							<br>
 							<select
-								v-model="textVariants[textVariant].fontFamily"
+								v-model="textPatterns[textPattern].fontFamily"
 							>
 								<option>
 									serif
@@ -81,20 +81,21 @@
 							</select>
 							<br>
 							<input
-								v-model="textVariants[textVariant].fontWeight"
+								v-model="textPatterns[textPattern].fontWeight"
 								type="range"
 								min="100"
 								max="900"
 								step="100"
 							>
 							<br>
-							{{ textVariants[textVariant].fontWeight }}
+							{{ textPatterns[textPattern].fontWeight }}
+							<br>
 							<br>
 						</div>
 					</div>
 					<m-divider :class="$s.Divider" />
 					<m-text
-						variant="title"
+						pattern="title"
 						font-size="16px"
 					>
 						Colors
@@ -116,17 +117,17 @@
 						</label>
 						<label>
 							<input
-								v-model="headingColor"
+								v-model="titleColor"
 								type="color"
 							>
-							Heading
+							Title
 						</label>
 						<label>
 							<input
-								v-model="textColor"
+								v-model="paragraphColor"
 								type="color"
 							>
-							Text
+							Paragraph
 						</label>
 						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
@@ -156,7 +157,7 @@
 				>
 					<div>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="0"
 						>
 							Enter delivery address
@@ -194,7 +195,7 @@
 							</m-choice>
 						</div>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="-1"
 						>
 							Enter delivery address
@@ -255,19 +256,32 @@
 							Schedule for later
 						</m-button>
 					</div>
+					<m-divider />
+					<m-container
+						label="label"
+						sublabel="sublabel"
+						requirement-label="requirement label"
+					>
+						container content
+					</m-container>
+					<m-divider />
+					<m-pin-input :pin-length="3" />
 				</div>
 				<div
 					:class="$s.Preview"
 				>
 					<div>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="0"
 						>
 							House special wings
 						</m-text>
 						<m-radio value="1">
 							Buffalo
+							<template #sublabel>
+								mildly spicy
+							</template>
 						</m-radio>
 						<br>
 						<m-radio
@@ -275,6 +289,9 @@
 							disabled
 						>
 							Ginger soy
+							<template #sublabel>
+								very tasty
+							</template>
 						</m-radio>
 						<br>
 						<m-radio
@@ -283,6 +300,9 @@
 							disabled
 						>
 							Disabled and selected
+							<template #sublabel>
+								obligatory sublabel
+							</template>
 						</m-radio>
 						<m-select
 							placeholder="Select dip"
@@ -315,16 +335,25 @@
 					<div>
 						<m-checkbox>
 							Include cutlery and utensils
+							<template #sublabel>
+								they're so shiny
+							</template>
 						</m-checkbox>
 						<m-checkbox disabled>
 							Provide compostable utensils
+							<template #sublabel>
+								not as shiny
+							</template>
 						</m-checkbox>
 						<br>
 						<m-checkbox
 							disabled
 							checked
 						>
-							Disabled and selected
+							Disabled and checked
+							<template #sublabel>
+								obligatory sublabel
+							</template>
 						</m-checkbox>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea
@@ -347,7 +376,7 @@
 				>
 					<div>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="0"
 						>
 							Schedule order
@@ -362,7 +391,7 @@
 					<m-divider />
 					<div>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="0"
 						>
 							Select date and time
@@ -390,11 +419,11 @@
 					<m-divider />
 					<div :class="$s.TypographyPreview">
 						<m-text
-							v-for="variant in ['headline', 'title', 'paragraph', 'label']"
-							:key="variant"
-							:variant="variant"
+							v-for="pattern in ['headline', 'title', 'paragraph', 'label']"
+							:key="pattern"
+							:pattern="pattern"
 						>
-							{{ variant }}
+							{{ pattern }}
 						</m-text>
 						<m-text
 							v-for="size in [7, 6, 5, 4, 3, 2, 1, 0, -1, -2]"
@@ -431,6 +460,8 @@ import { MCalendar } from '@square/maker/components/Calendar';
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
 import { MModalLayer } from '@square/maker/components/Modal';
+import { MContainer } from '@square/maker/components/Container';
+import { MPinInput } from '@square/maker/components/PinInput';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
@@ -504,6 +535,7 @@ export default {
 		MTheme,
 		MChoice,
 		MChoiceOption,
+		MContainer,
 		MDivider,
 		MText,
 		MNotice,
@@ -522,6 +554,7 @@ export default {
 		MSegment,
 		MTextButton,
 		MModalLayer,
+		MPinInput,
 	},
 
 	mixins: [
@@ -532,8 +565,8 @@ export default {
 		return {
 			backgroundColor: '#ffffff',
 			primaryColor: '#14433d',
-			headingColor: '#000000',
-			textColor: '#000000',
+			titleColor: '#000000',
+			paragraphColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -575,7 +608,7 @@ export default {
 			item: storeData.items[0],
 			fontsBaseSize: '16',
 			fontsTypeScale: '1.17',
-			textVariants: {
+			textPatterns: {
 				headline: {
 					fontFamily: 'arial',
 					fontWeight: '700',
@@ -604,13 +637,25 @@ export default {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
-					heading: this.headingColor,
-					text: this.textColor,
+					title: this.titleColor,
+					paragraph: this.paragraphColor,
 					...colors,
 				},
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
 					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
+					title: {
+						fontFamily: this.textPatterns.title.fontFamily,
+						fontWeight: this.textPatterns.title.fontWeight,
+					},
+					paragraph: {
+						fontFamily: this.textPatterns.paragraph.fontFamily,
+						fontWeight: this.textPatterns.paragraph.fontWeight,
+					},
+					label: {
+						fontFamily: this.textPatterns.label.fontFamily,
+						fontWeight: this.textPatterns.label.fontWeight,
+					},
 				},
 				notice: {
 					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : undefined,
@@ -622,8 +667,8 @@ export default {
 					shape: 'rounded',
 				},
 				text: {
-					variants: {
-						...this.textVariants,
+					patterns: {
+						...this.textPatterns,
 					},
 				},
 			};
@@ -684,7 +729,6 @@ export default {
 	min-height: 100vh;
 	margin: auto;
 	padding: 25px 50px;
-	font-family: Arial, Helvetica, sans-serif;
 
 	& > div {
 		flex: 1;

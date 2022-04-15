@@ -341,8 +341,9 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--color-heading, #000);
-	font-weight: bold;
+	color: var(--color-primary, #000);
+	font-weight: var(--font-weight-label, 500);
+	font-family: var(--font-family-label, inherit);
 }
 
 .CalendarHeaderButtonIcon {
@@ -360,8 +361,6 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
-	color: var(--neutral-80, rgba(0, 0, 0, 0.5));
-	font-weight: normal;
 	font-size: var(--font-size-minus-1);
 	line-height: var(--line-height-minus-1);
 	text-transform: uppercase;
@@ -371,7 +370,6 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
-	color: var(--color-text, #000);
 	text-align: center;
 }
 
@@ -380,7 +378,9 @@ export default {
 	height: var(--cell-size);
 	padding: 0;
 	color: inherit;
+	font-weight: inherit;
 	font-size: inherit;
+	font-family: inherit;
 	background-color: inherit;
 	border: none;
 	border-radius: 8px;
@@ -392,11 +392,11 @@ export default {
 
 	&.selected {
 		color: var(--color-background, #fff);
-		background-color: var(--neutral-90, #000);
+		background-color: var(--color-primary, #000);
 	}
 
 	&.today {
-		border: 1px solid var(--neutral-90, #000);
+		border: 1px solid currentColor;
 	}
 
 	&.disabled {

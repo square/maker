@@ -1,7 +1,7 @@
 <template>
 	<div
 		:class="[
-			$s.Container,
+			$s.SegmentedControl,
 			$s[`shape_${shapeInner}`],
 			$s[`size_${sizeInner}`],
 		]"
@@ -64,12 +64,14 @@ export default {
 </script>
 
 <style module="$s">
-.Container {
+.SegmentedControl {
 	display: flex;
 	box-sizing: border-box;
 	height: 56px;
 	padding: 4px;
+	font-weight: var(--font-weight-label, 500);
 	font-size: 14px;
+	font-family: var(--font-family-label, inherit);
 	line-height: 24px;
 	background-color: var(--neutral-10, #f6f7f9);
 	border-radius: 4px;

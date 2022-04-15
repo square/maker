@@ -124,7 +124,6 @@ export default {
 .Notice {
 	color: var(--color);
 	font-size: 14px;
-	font-family: inherit;
 	line-height: 24px;
 	border-radius: 8px;
 }
