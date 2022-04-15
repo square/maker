@@ -10,10 +10,37 @@
 						<shopping-bag-icon class="icon" />
 					</div>
 				</div>
-				<div
+				<div :class="[$s.Section, $s.textVariantDemo]">
+					<m-text
+						variant="headline"
+						:size="5"
+					>
+						Headline (variant) +5
+					</m-text>
+					<m-text
+						variant="headline"
+						color="green"
+					>
+						Headline (color green)
+					</m-text>
+					<m-text
+						variant="heading"
+					>
+						Heading (variant)
+					</m-text>
+					<m-text
+						:size="-1"
+						variant="label"
+					>
+						Label (variant) -1
+					</m-text>
+				</div>
+				<m-theme
 					:class="$s.Section"
-					class="banner"
-				/>
+					:profile="nestedThemeProfile"
+				>
+					Testing nested themes, this is using a defined profile called "primary-bold".
+				</m-theme>
 				<div
 					v-for="category in categories"
 					:key="category"
@@ -386,6 +413,7 @@ import MenuIcon from '@square/maker-icons/Menu';
 import ShoppingBagIcon from '@square/maker-icons/ShoppingBag';
 import XIcon from '@square/maker-icons/X';
 import Trash from '@square/maker-icons/Trash';
+import { MTheme } from '@square/maker/components/Theme';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MImage } from '@square/maker/components/Image';
@@ -405,6 +433,7 @@ export default {
 		ShoppingBagIcon,
 		XIcon,
 		Trash,
+		MTheme,
 		MText,
 		MDivider,
 		MImage,
@@ -460,6 +489,7 @@ export default {
 			size: 'sm',
 			selected: 'choice-1',
 			quantity: 1,
+			nestedThemeProfile: 'primary-bold',
 		};
 	},
 
@@ -600,6 +630,7 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(360px, 1fr));
 	gap: 40px;
+	height: 100%;
 	max-height: calc(100vh - 80px);
 	padding: 40px;
 	background-color: #f8f8f8;
@@ -618,11 +649,6 @@ export default {
 	max-height: calc(100% - 40px);
 	padding: 20px 10px;
 	overflow: hidden;
-	color: var(--color-paragraph);
-	font-weight: var(--font-weights-text, normal);
-	font-size: var(--font-base-size);
-	font-family: var(--font-text, inherit);
-	background-color: var(--color-background);
 	border-radius: 30px;
 	box-shadow:
 		4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),
@@ -649,5 +675,10 @@ export default {
 
 .Section {
 	padding: 2vh 1vw;
+}
+
+.textVariantDemo {
+	padding: 1vh 1vw;
+	border: 1px solid black;
 }
 </style>

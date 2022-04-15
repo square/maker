@@ -73,7 +73,6 @@ export default {
 	color: var(--neutral-90, #222);
 	font-weight: inherit;
 	font-size: inherit;
-	font-family: inherit;
 	line-height: inherit;
 	text-align: left;
 	background-color: var(--neutral-10, #f2f2f2);

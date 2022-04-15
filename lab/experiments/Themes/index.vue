@@ -1,13 +1,12 @@
 /* eslint-disable vue/no-textarea-mustache */
 <template>
-	<m-theme
-		:theme="theme"
+	<div
 		:class="$s.App"
 	>
 		<div :class="$s.Editor">
 			<div :class="$s.EditorHeader">
 				<h1>Maker Theme</h1>
-				<a @click="toggleThemes">Themes</a>
+				<!-- <a @click="toggleThemes">Themes</a> -->
 			</div>
 			<div
 				v-if="showThemes"
@@ -53,31 +52,62 @@
 			<h2 :class="$s.sectionTitle">
 				Colors
 			</h2>
+			<div :class="$s.Profiles">
+				<div
+					v-for="(profile, index) in theme.profiles"
+					:key="index"
+					:class="[
+						$s.ProfileSet,
+						profile.id,
+						{
+							[$s.active]: profile.id === currentProfile,
+						},
+					]"
+					:style="{
+						backgroundColor : profile.colors['background'],
+						color : profile.colors['text']
+					}"
+					@click="changeProfile(profile.id)"
+				>
+					<div>
+						<div
+							:class="$s.previewTitle"
+						>
+							Aa
+						</div> <div
+							:class="$s.previewButton"
+							:style="{
+								backgroundColor : profile.colors['button']
+							}"
+						/>
+					</div>
+				</div>
+			</div>
 			<div :class="$s.Profile">
 				<label>
 					<input
-						v-model="theme.colors.background"
+						v-model="currentProfileColors.background"
 						type="color"
 					>
 					Background
 				</label>
 				<label>
 					<input
-						v-model="theme.colors.primary"
+						v-model="currentProfileColors.button"
 						type="color"
 					>
-					Primary
+					Button
 				</label>
 				<label>
 					<input
-						v-model="theme.colors.heading"
+						v-model="currentProfileColors.heading"
 						type="color"
 					>
 					Heading
 				</label>
 				<label>
 					<input
-						v-model="theme.colors.text"
+						v-model="currentProfileColors.text"
 						type="color"
 					>
 					Text
@@ -89,56 +119,32 @@
 				</h3>
 				<div :class="$s.palette">
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : theme.colors['neutral-0'] }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-10'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-10)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-20'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-20)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-80'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-80)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-90'] }" />
 					</div>
 					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-90)' }" />
-					</div>
-					<div :class="$s.color">
-						<span :style="{ backgroundColor : 'var(--neutral-100)' }" />
+						<span :style="{ backgroundColor : theme.colors['neutral-100'] }" />
 					</div>
 				</div>
-				<!-- <div :class="$s.Profiles">
-					<div
-						v-for="(value, name, index) in surfaces"
-						:key="index"
-						:class="[
-							$s.ProfileSet,
-							name,
-						]"
-						@click="changeMode(name)"
-					>
-						<div>
-							<div
-								:class="$s.previewTitle"
-							>
-								Aa
-							</div> <div
-								:class="$s.previewButton"
-							/>
-						</div>
-					</div>
-				</div> -->
 				<h2 :class="$s.sectionTitle">
 					Fonts
 				</h2>
 				<h3
 					:class="$s.subsectionTitle"
 				>
-					Heading
+					Headline
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.variants.title.fontFamily"
+						v-model="theme.fonts.headline"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -152,7 +158,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.variants.title.fontWeight"
+						v-model="theme.fontWeights.headline"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -168,11 +174,11 @@
 				<h3
 					:class="$s.subsectionTitle"
 				>
-					Text
+					Heading
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.fontFamily"
+						v-model="theme.fonts.heading"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -186,7 +192,75 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.fontWeight"
+						v-model="theme.fontWeights.heading"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
+				</div>
+				<h3
+					:class="$s.subsectionTitle"
+				>
+					Body
+				</h3>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="theme.fonts.body"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="theme.fontWeights.body"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
+				</div>
+				<h3
+					:class="$s.subsectionTitle"
+				>
+					Label
+				</h3>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="theme.fonts.label"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="theme.fontWeights.label"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -219,14 +293,24 @@
 					>
 					Contrast
 				</label>
+				<p>
+					The preview of the text sizes are based on the browser viewport.
+					&nbsp;Since each canvas isn't an iframe, the contrast option is calculating
+					&nbsp;for desktop instead of mobile.
+				</p>
 				<!-- eslint-disable vue/no-textarea-mustache -->
 				<textarea rows="20">
 {{ theme }}
 				</textarea>
 			</div>
 		</div>
-		<preview />
-	</m-theme>
+		<m-theme
+			:theme="theme"
+			:profile="themeProfile"
+		>
+			<preview />
+		</m-theme>
+	</div>
 </template>
 
 <script>
@@ -254,6 +338,7 @@ export default {
 			fontOptions,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
 			showThemes: false,
+			themeProfile: 'custom-profile',
 		};
 	},
 
@@ -264,29 +349,31 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.text.variants.title.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.text.variants.title.fontWeight;
-			const fontText = themeStore.$state.theme.text.fontFamily;
-			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
+			const fontHeading = themeStore.$state.theme.fonts.heading;
+			const fontWeightsHeading = themeStore.$state.theme.fontWeights.heading;
+			const fontText = themeStore.$state.theme.fonts.body;
+			const fontWeightsText = themeStore.$state.theme.fontWeights.body;
+			const fontHeadline = themeStore.$state.theme.fonts.headline;
+			const fontWeightsHeadline = themeStore.$state.theme.fontWeights.headline;
+			const fontLabel = themeStore.$state.theme.fonts.label;
+			const fontWeightsLabel = themeStore.$state.theme.fontWeights.label;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
 			fonts.push(`${fontText}:${fontWeightsText}`);
+			fonts.push(`${fontHeadline}:${fontWeightsHeadline}`);
+			fonts.push(`${fontLabel}:${fontWeightsLabel}`);
 
 			return fonts;
 		},
-		// styleOverride() {
-		// 	const { theme } = themeStore.$state;
-		// 	const styles = {
-		// 		'--font-heading': `${theme.fonts.heading}, sans-serif`,
-		// 		'--font-text': `${theme.fonts.text}, sans-serif`,
-		// 		'--font-weights-heading': `${theme.fontWeights.heading}`,
-		// 		'--font-weights-text': `${theme.fontWeights.text}`,
-		// 		'--font-base-size': `${theme.fonts.baseSize}px`,
-		// 		'--font-scale-ratio': theme.fonts.scaleRatio,
-		// 	};
-		// 	return styles;
-		// },
+		currentProfile() {
+			const { profiles } = themeStore.$state.theme;
+			const currentProfile = profiles.find((profile) => profile.id === this.themeProfile);
+			return currentProfile.id;
+		},
+		currentProfileColors() {
+			return this.getProfile(this.currentProfile).colors;
+		},
 	},
 
 	watch: {
@@ -309,7 +396,7 @@ export default {
 	},
 
 	created: () => {
-		themeStore.theme = themes.modern;
+		themeStore.theme = themes.websiteTheme;
 	},
 
 	mounted() {
@@ -318,8 +405,6 @@ export default {
 
 	methods: {
 		loadWebFont(fonts) {
-			// eslint-disable-next-line no-console
-			console.log(fonts);
 			WebFont.load({
 				google: {
 					families: fonts,
@@ -330,13 +415,20 @@ export default {
 			this.loadWebFont(this.fontLoad);
 		},
 		changeTheme(theme) {
-			// eslint-disable-next-line no-console
-			console.log(theme);
 			themeStore.theme = themes[theme];
 			this.updateFont();
 		},
 		toggleThemes() {
 			this.showThemes = !this.showThemes;
+		},
+		getProfile(id) {
+			return themeStore.theme.profiles.find((profile) => profile.id === id);
+		},
+		changeProfile(id) {
+			this.themeProfile = id;
+			const { colors } = this.getProfile(id);
+			// update the base colors based on the current profile
+			themeStore.theme.colors = Object.assign(themeStore.theme.colors, colors);
 		},
 	},
 
@@ -353,6 +445,7 @@ export default {
 	padding: 20px;
 	overflow-y: scroll;
 	color: #000;
+	font-size: 16px;
 	font-family: -apple-system, 'Helvetica Neue', sans-serif;
 	background-color: #fff;
 }
@@ -509,9 +602,13 @@ export default {
 	cursor: pointer;
 }
 
+.ProfileSet.active {
+	outline: 2px solid blue;
+}
+
+/* colors for these preview styles are applied inline */
 .previewTitle {
 	margin-bottom: 6px;
-	color: var(--preview-title, #000);
 	font-weight: 700;
 	font-size: 14px;
 }
@@ -519,7 +616,6 @@ export default {
 .previewButton {
 	width: 24px;
 	height: 8px;
-	background: var(--preview-button, #000);
 	border-radius: 8px;
 }
 

@@ -61,19 +61,21 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop           | Type     | Default | Possible values                                                       | Description                                                                                                                    |
-| -------------- | -------- | ------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| pattern        | `string` | —       | `headline`, `title`, `paragraph`, `label`, `pattern defined in theme` | patterns are defined at the theme level                                                                                        |
-| element        | `string` | —       | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `div`, `li`          | [HTML Element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)                                                   |
-| size           | `number` | —       | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`                    | Size of text as step in fluid scale                                                                                            |
-| font-family    | `string` | —       | —                                                                     | [Font family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)                                                    |
-| font-weight    | `string` | —       | —                                                                     | [Font weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)                                                    |
-| font-size      | `string` | —       | —                                                                     | [Font size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size). Overrides the `size` prop, and disables type scaling. |
-| line-height    | `string` | —       | —                                                                     | [Line height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height). Overrides the internally calculated line height.  |
-| color          | `string` | —       | —                                                                     | [Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)                                                                |
-| font-style     | `string` | —       | `inherit`, `normal`, `italic`                                         | [Font style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)                                                      |
-| text-transform | `string` | —       | `inherit`, `none`, `uppercase`, `lowercase`, `capitalize`             | [Text transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)                                              |
-| text-align     | `string` | —       | `inherit`, `left`, `right`, `center`, `start`, `end`                  | [Text align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)                                                      |
+Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p).
+
+| Prop           | Type     | Default     | Possible values                                               | Description                                                                                 |
+| -------------- | -------- | ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| element        | `string` | `'p'`       | `p`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `span`, `div`, `li`  | HTML Element wrapper                                                                        |
+| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of text                                                                                |
+| variant        | `string` | `'body'`    | `body`, `heading`, `headline`, `label`                        | Variant, allows four custom font styles through the Theme component                         |
+| font-family    | `string` | —           | —                                                             | Font family                                                                                 |
+| font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                            |
+| font-size      | `string` | —           | —                                                             | Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling. |
+| line-height    | `number` | —           | —                                                             | Line Height, as a valid CSS value. This overrides the internally calculated line-height.    |
+| color          | `string` | —           | —                                                             | Color                                                                                       |
+| font-style     | `string` | `'inherit'` | `inherit`, `normal`, `italic`                                 | font style                                                                                  |
+| text-transform | `string` | `'inherit'` | `inherit`, `none`, `uppercase`                                | text transform                                                                              |
+| text-align     | `string` | `'inherit'` | `inherit`, `left`, `right`, `center`                          | text align                                                                                  |
 
 
 ## Slots

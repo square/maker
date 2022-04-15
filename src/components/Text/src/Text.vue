@@ -43,7 +43,17 @@ export default {
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 		/**
-		 * [Font family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
+		 * Variant, allows four custom font styles through the Theme component
+		 * @values body, heading, headline, label
+		 */
+		variant: {
+			type: String,
+			default: 'body',
+			validator: (variant) => ['body', 'heading', 'headline', 'label'].includes(variant),
+		},
+		/**
+		 * Font family
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-family}
 		 */
 		fontFamily: {
 			type: String,
@@ -176,12 +186,25 @@ export default {
 			}
 			return styles;
 		},
+		/*
+		 * Text and heading have component definitions in the theme
+		 * This conditional check allows for fontFamily prop to work
+		 * when the component props are not defined in the theme data.
+		 *
+		 * The two other variants: headline and label are set with CSS
+		 * at the parent level and used in styling below
+		 */
+		useThemeComponentData() {
+			return (this.variant === 'text' || this.variant === 'heading');
+		},
+
 	},
 
 	render(createElement) {
 		const {
 			$s,
 			tag,
+			variant,
 			sizeClass,
 			inlineStyles,
 		} = this;
@@ -192,6 +215,7 @@ export default {
 		return createElement(tag, {
 			class: [
 				$s.Text,
+				$s[`text_${variant}`],
 				$s[`size_${sizeClass}`],
 			],
 			attrs: this.$attrs,
@@ -204,8 +228,6 @@ export default {
 
 <style module="$s">
 .Text {
-	margin: 0;
-
 	/* min breakpoint config */
 	--min-resolution: 320; /* arbitrary value */
 	--min-font-size: var(--mobile-base-font-size);
@@ -283,6 +305,62 @@ export default {
 	--lh-5: calc(var(--lh-4) * var(--line-height-scale));
 	--lh-6: calc(var(--lh-5) * var(--line-height-scale));
 	--lh-7: calc(var(--lh-6) * var(--line-height-scale));
+}
+
+/* Variant defaults */
+.text_body,
+.text_label {
+	font-weight: var(--fontWeights-body, 400);
+	font-family: var(--fonts-body, inherit);
+}
+
+.text_heading,
+.text_headline {
+	margin: 0;
+	color: var(--color-heading, #000);
+}
+
+.text_heading {
+	font-weight: var(--fontWeights-heading, 600);
+	font-family: var(--fonts-heading, inherit);
+}
+
+.text_headline {
+	font-weight: var(--fontWeights-headline, var(--fontWeights-heading, 600));
+	font-family: var(--fonts-headline, var(--fonts-heading, inherit));
+}
+
+.text_label {
+	font-weight: var(--fontWeights-label, var(--fontWeights-body, 500));
+	font-family: var(--fonts-label, var(--fonts-body, inherit));
+}
+
+.fontstyle_normal {
+	font-style: normal;
+}
+
+.fontstyle_italic {
+	font-style: italic;
+}
+
+.texttransform_none {
+	text-transform: none;
+}
+
+.texttransform_uppercase {
+	text-transform: uppercase;
+}
+
+.textalign_left {
+	text-align: left;
+}
+
+.textalign_right {
+	text-align: right;
+}
+
+.textalign_center {
+	text-align: center;
 }
 
 @media (min-width: 1200px) {

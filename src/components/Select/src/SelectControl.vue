@@ -170,6 +170,7 @@ export default {
 	box-sizing: border-box;
 	min-width: 80px;
 	font-size: 16px;
+	font-family: var(--fonts-body);
 	border-radius: var(--border-radius);
 }
 
@@ -191,7 +192,6 @@ export default {
 	color: var(--color-foreground);
 	font-weight: inherit;
 	font-size: inherit;
-	font-family: inherit;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	background-color: var(--color-background, #fff);

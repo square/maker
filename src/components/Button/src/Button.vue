@@ -282,8 +282,8 @@ export default {
 	align-items: center;
 	min-width: 0;
 	color: var(--color-contrast);
-	font-weight: var(--font-weight-label, 500);
-	font-family: var(--font-family-label, inherit);
+	font-weight: var(--fontWeights-label, var(--fontWeights-body, 500));
+	font-family: var(--fonts-label, var(--fonts-body, sans-serif));
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;

@@ -190,7 +190,6 @@ export default {
 	color: inherit;
 	font-weight: inherit;
 	font-size: inherit;
-	font-family: inherit;
 	text-overflow: ellipsis;
 	background-color: transparent;
 	border: none;

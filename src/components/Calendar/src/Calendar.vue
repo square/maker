@@ -327,7 +327,6 @@ export default {
 	min-width: min-content;
 	padding: 16px;
 	font-size: var(--font-size);
-	font-family: inherit;
 	line-height: var(--line-height);
 	background-color: var(--color-background, #fff);
 	border-radius: 4px;
@@ -342,8 +341,8 @@ export default {
 
 .CalendarHeaderTitle {
 	color: var(--color-primary, #000);
-	font-weight: var(--font-weight-label, 500);
-	font-family: var(--font-family-label, inherit);
+	font-weight: var(--fontWeights-label, 500);
+	font-family: var(--fonts-label, inherit);
 }
 
 .CalendarHeaderButtonIcon {

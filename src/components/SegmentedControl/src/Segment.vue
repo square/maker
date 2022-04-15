@@ -44,7 +44,6 @@ export default {
 	color: var(--neutral-90, black);
 	font-weight: inherit;
 	font-size: inherit;
-	font-family: inherit;
 	line-height: inherit;
 	background-color: transparent;
 	border: none;
