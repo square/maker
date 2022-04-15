@@ -5,8 +5,8 @@
 	>
 		<slot />
 		<template
-			v-if="isSelectOption || $slots.icon"
-			#icon
+			v-if="isSelectOption || $slots.prefix"
+			#prefix
 		>
 			<span
 				v-if="isSelectOption"
@@ -19,7 +19,7 @@
 			</span>
 			<slot
 				v-else
-				name="icon"
+				name="prefix"
 			/>
 		</template>
 		<template
@@ -41,10 +41,10 @@
 			<slot name="side-secondary" />
 		</template>
 		<template
-			v-if="$slots['side-icon']"
-			#side-icon
+			v-if="$slots.suffix"
+			#suffix
 		>
-			<slot name="side-icon" />
+			<slot name="suffix" />
 		</template>
 	</m-row>
 </template>

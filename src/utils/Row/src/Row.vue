@@ -5,10 +5,10 @@
 		v-on="$listeners"
 	>
 		<div
-			v-if="$slots.icon"
+			v-if="$slots.prefix"
 			:class="$s.Icon"
 		>
-			<slot name="icon" />
+			<slot name="prefix" />
 		</div>
 		<div
 			v-if="$slots.default"
@@ -39,10 +39,10 @@
 			</div>
 		</div>
 		<div
-			v-if="$slots['side-icon']"
+			v-if="$slots['suffix']"
 			:class="$s.SideIcon"
 		>
-			<slot name="side-icon" />
+			<slot name="suffix" />
 		</div>
 	</div>
 </template>
@@ -63,7 +63,7 @@ export default {
 	--opacity-sublabel: 0.7;
 
 	display: flex;
-	gap: 12px;
+	gap: 8px;
 	align-items: center;
 	width: 100%;
 }
@@ -73,6 +73,7 @@ export default {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	gap: 4px;
 	font-size: 16px;
 }
 

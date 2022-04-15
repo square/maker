@@ -8,22 +8,29 @@
 			placement="bottom-start"
 		>
 			<template #action="popover">
-				<component
-					:is="toggleComponent"
-					@click="popover.toggle()"
+				<select-control
+					v-if="$slots['toggle-select']"
+					@click.stop="popover.toggle()"
 				>
 					<template
-						v-if="isSelectToggle"
 						#prefix
 					>
-						<slot name="toggle-icon" />
+						<!-- @slot Select toggle prefix -->
+						<slot name="toggle-select-prefix" />
 					</template>
-					<template v-else>
-						<slot name="toggle-icon" />
-						<slot name="toggle" />
-					</template>
-					<slot name="toggle" />
-				</component>
+					<!-- @slot Select toggle text -->
+					<slot name="toggle-select" />
+				</select-control>
+				<div
+					v-else
+					:class="$s.CustomToggle"
+					@click="popover.toggle()"
+				>
+					<!-- @slot Custom toggle slot (not rendered if toggle-select is used) -->
+					<slot
+						name="toggle"
+					/>
+				</div>
 			</template>
 
 			<template #content>
@@ -31,9 +38,8 @@
 					:class="$s.MenuContent"
 					padding="16px 0"
 				>
-					<slot
-						name="menu"
-					/>
+					<!-- @slot Menu options -->
+					<slot name="menu" />
 				</m-popover-content>
 			</template>
 		</m-popover>
@@ -47,17 +53,15 @@
  * @inheritListeners div
  */
 import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
-import { MButton } from '@square/maker/components/Button';
 import assert from '@square/maker/utils/assert';
-import SelectToggle from './SelectToggle.vue';
+import SelectControl from '../../Select/src/SelectControl.vue';
 import key from './key';
 
 export default {
 	components: {
 		MPopover,
 		MPopoverContent,
-		MButton,
-		SelectToggle,
+		SelectControl,
 	},
 
 	provide() {
@@ -82,15 +86,6 @@ export default {
 			default: undefined,
 		},
 
-		/**
-		 * Menu's toggle style
-		 */
-		toggle: {
-			type: String,
-			default: 'select',
-			validator: (toggle) => ['select', 'button'].includes(toggle),
-		},
-
 		type: {
 			type: String,
 			default: 'single-select',
@@ -104,14 +99,7 @@ export default {
 			isSingleSelect: this.type === 'single-select',
 			isMultiSelect: this.type === 'multi-select',
 			isActionSelect: this.type === 'action',
-			isSelectToggle: this.toggle === 'select',
 		};
-	},
-
-	computed: {
-		toggleComponent() {
-			return this.isSelectToggle ? SelectToggle : MButton;
-		},
 	},
 
 	watch: {
@@ -144,5 +132,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	min-width: 200px;
+}
+
+.CustomToggle {
+	display: inline-block;
 }
 </style>

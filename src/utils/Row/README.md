@@ -6,7 +6,7 @@
 		<m-card class="card">
 			<m-row>
 				Default
-				<template #icon>
+				<template #prefix>
 					<settings class="icon" />
 				</template>
 				<template #secondary>
@@ -18,7 +18,7 @@
 				<template #side-secondary>
 					Side secondary
 				</template>
-				<template #side-icon>
+				<template #suffix>
 					<m-checkbox />
 				</template>
 			</m-row>
@@ -40,7 +40,7 @@
 		<m-card class="card">
 			<m-row>
 				Default
-				<template #icon>
+				<template #prefix>
 					<settings class="icon" />
 				</template>
 				<template #side>
@@ -57,7 +57,7 @@
 				<template #side>
 					Side
 				</template>
-				<template #side-icon>
+				<template #suffix>
 					<m-checkbox />
 				</template>
 			</m-row>
@@ -109,12 +109,12 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Slot           | Description |
 | -------------- | ----------- |
-| icon           | —           |
+| prefix         | —           |
 | default        | —           |
 | secondary      | —           |
 | side           | —           |
 | side-secondary | —           |
-| side-icon      | —           |
+| suffix         | —           |
 
 
 ## Events

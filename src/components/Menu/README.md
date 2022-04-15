@@ -7,10 +7,10 @@
 		<m-menu
 			v-model="single"
 		>
-			<template #toggle-icon>
+			<template #toggle-select-prefix>
 				<settings class="icon" />
 			</template>
-			<template #toggle>
+			<template #toggle-select>
 				Single select menu
 			</template>
 			<template #menu>
@@ -18,13 +18,10 @@
 					value="one"
 				>
 					Option one
-					<template #icon>
-						<settings class="icon" />
-					</template>
 					<template #side>
 						Side
 					</template>
-					<template #side-icon>
+					<template #suffix>
 						<settings class="icon" />
 					</template>
 				</m-menu-option>
@@ -32,9 +29,6 @@
 					value="two"
 				>
 					Option two
-					<template #icon>
-						<settings class="icon" />
-					</template>
 					<template #secondary>
 						Secondary
 					</template>
@@ -49,7 +43,7 @@
 					value="three"
 				>
 					Option three
-					<template #icon>
+					<template #suffix>
 						<settings class="icon" />
 					</template>
 				</m-menu-option>
@@ -61,7 +55,7 @@
 			v-model="multi"
 			type="multi-select"
 		>
-			<template #toggle>
+			<template #toggle-select>
 				Multi select menu
 			</template>
 			<template #menu>
@@ -69,13 +63,10 @@
 					value="one"
 				>
 					Option one
-					<template #icon>
-						<settings class="icon" />
-					</template>
 					<template #side>
 						Side
 					</template>
-					<template #side-icon>
+					<template #suffix>
 						<settings class="icon" />
 					</template>
 				</m-menu-option>
@@ -83,9 +74,6 @@
 					value="two"
 				>
 					Option two
-					<template #icon>
-						<settings class="icon" />
-					</template>
 					<template #secondary>
 						Secondary
 					</template>
@@ -100,7 +88,7 @@
 					value="three"
 				>
 					Option three
-					<template #icon>
+					<template #suffix>
 						<settings class="icon" />
 					</template>
 				</m-menu-option>
@@ -109,14 +97,13 @@
 		{{ multi }}
 
 		<m-menu
-			toggle="button"
 			type="action"
 		>
-			<template #toggle-icon>
-				<settings class="icon" />
-			</template>
 			<template #toggle>
-				Toggle
+				<m-button>
+					<settings class="icon" />
+					Toggle
+				</m-button>
 			</template>
 			<template #menu>
 				<m-menu-option
@@ -124,7 +111,7 @@
 					:key="index"
 					:click-handler="clickHandler"
 				>
-					<template #icon>
+					<template #prefix>
 						<settings class="icon" />
 					</template>
 					Action {{ index }}
@@ -139,6 +126,7 @@
 
 <script>
 import { MMenu, MMenuOption } from '@square/maker/components/Menu';
+import { MButton } from '@square/maker/components/Button';
 import Settings from '@square/maker-icons/Settings';
 import { MPopoverLayer } from '@square/maker/components/Popover';
 
@@ -148,6 +136,7 @@ export default {
 		MMenuOption,
 		MPopoverLayer,
 		Settings,
+		MButton,
 	},
 
 	mixins: [
@@ -191,17 +180,17 @@ export default {
 | Prop    | Type        | Default           | Possible values                           | Description          |
 | ------- | ----------- | ----------------- | ----------------------------------------- | -------------------- |
 | v-model | `undefined` | —                 | —                                         | Selected menu option |
-| toggle  | `string`    | `'select'`        | `select`, `button`                        | Menu's toggle style  |
 | type    | `string`    | `'single-select'` | `multi-select`, `single-select`, `action` | —                    |
 
 
 ## Menu Slots
 
-| Slot        | Description |
-| ----------- | ----------- |
-| toggle-icon | —           |
-| toggle      | —           |
-| menu        | —           |
+| Slot                 | Description                                                |
+| -------------------- | ---------------------------------------------------------- |
+| toggle-select-prefix | Select toggle prefix                                       |
+| toggle-select        | Select toggle text                                         |
+| toggle               | Custom toggle slot (not rendered if toggle-select is used) |
+| menu                 | Menu options                                               |
 
 
 ## Menu Events
@@ -224,9 +213,9 @@ export default {
 | Slot           | Description |
 | -------------- | ----------- |
 | default        | —           |
-| icon           | —           |
+| prefix         | —           |
 | secondary      | —           |
 | side           | —           |
 | side-secondary | —           |
-| side-icon      | —           |
+| suffix         | —           |
 <!-- api-tables:end -->
