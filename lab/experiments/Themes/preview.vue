@@ -47,7 +47,7 @@
 					:class="$s.Section"
 				>
 					<m-text
-						variant="title"
+						variant="heading"
 						:size="1"
 					>
 						{{ category }}
@@ -59,7 +59,7 @@
 						>
 							<div class="item-details">
 								<m-text
-									variant="title"
+									variant="heading"
 									:size="0"
 									class="item-title"
 								>
@@ -99,14 +99,14 @@
 				/>
 				<div :class="$s.Section">
 					<m-text
-						variant="title"
+						variant="heading"
 						:size="2"
 						class="item-title"
 					>
 						Cappuccino
 					</m-text>
 					<m-text
-						variant="title"
+						variant="heading"
 						:size="1"
 						class="item-price"
 					>
@@ -130,7 +130,7 @@
 						#label
 					>
 						<m-text
-							variant="title"
+							variant="heading"
 							:size="-1"
 						>
 							Size
@@ -183,7 +183,7 @@
 						#label
 					>
 						<m-text
-							variant="title"
+							variant="heading"
 							:size="-1"
 						>
 							Modifiers
