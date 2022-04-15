@@ -6,7 +6,7 @@
 	>
 		<div
 			v-if="$slots.prefix"
-			:class="$s.Icon"
+			:class="$s.Prefix"
 		>
 			<slot name="prefix" />
 		</div>
@@ -40,7 +40,7 @@
 		</div>
 		<div
 			v-if="$slots['suffix']"
-			:class="$s.SideIcon"
+			:class="$s.Suffix"
 		>
 			<slot name="suffix" />
 		</div>
@@ -82,18 +82,18 @@ export default {
 	opacity: var(--opacity-sublabel);
 }
 
-.Icon,
+.Prefix,
 .Label {
 	text-align: left;
 }
 
 .Side,
-.SideIcon {
+.Suffix {
 	text-align: right;
 }
 
-.Icon,
-.SideIcon {
+.Prefix,
+.Suffix {
 	display: flex;
 }
 </style>
