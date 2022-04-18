@@ -100,7 +100,8 @@ export default {
 	/* these should later be pulled from
 	the ThemeProvider component */
 	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
-	--color-fill: var(--neutral-90, rgba(0, 0, 0, 0.9));
+	--color-border-focus: var(--neutral-90, rgba(0, 0, 0, 0.9));
+	--color-active: var(--color-text, rgba(0, 0, 0, 0.9));
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -132,8 +133,8 @@ export default {
 	}
 
 	&:checked {
-		background-color: var(--color-fill);
-		border-color: var(--color-fill);
+		background-color: var(--color-active);
+		border-color: var(--color-active);
 
 		&::after {
 			content: "";
@@ -152,7 +153,7 @@ export default {
 	&:hover:not(:disabled, :invalid),
 	&:focus:not(:disabled, :invalid),
 	&:active:not(:disabled, :invalid) {
-		border-color: var(--color-fill);
+		border-color: var(--color-border-focus);
 	}
 }
 </style>
