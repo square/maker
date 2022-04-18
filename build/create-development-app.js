@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Meta from 'vue-meta';
 import VuePortal from '@linusborg/vue-simple-portal';
+import '@square/maker/styles/global.css';
 
 Vue.use(Meta);
 Vue.use(VuePortal);

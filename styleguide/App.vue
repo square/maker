@@ -21,6 +21,8 @@ export default {
 </script>
 
 <style>
+@import '@square/maker/styles/global.css';
+
 :root {
 	--nav-width: 264px;
 	--demo-left-offset: 40px;
@@ -34,17 +36,7 @@ body {
 }
 
 body {
-	font-family:
-		-apple-system,
-		BlinkMacSystemFont,
-		"Segoe UI",
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		"Apple Color Emoji",
-		"Segoe UI Emoji",
-		"Segoe UI Symbol";
+	font-family: var(--system-font);
 }
 
 .FixInlineActionBarLayerDemosInStyleguide {
