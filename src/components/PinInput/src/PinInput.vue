@@ -126,7 +126,7 @@ export default {
 		},
 
 		onInputPin(event, index) {
-			const input = event?.data || event?.target?.value;
+			const input = event?.target?.value;
 			if (!input) {
 				return;
 			}
