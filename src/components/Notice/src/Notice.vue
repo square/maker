@@ -141,35 +141,6 @@ export default {
 	margin-right: 24px;
 }
 
-.ActionsWrapper > *:last-child {
-	margin-right: 0;
-}
-
-.type_error {
-	--color: #a12712;
-	--color-icon: #d83e3b;
-}
-
-.type_warning {
-	--color: #584400;
-	--color-icon: #f2bd0d;
-}
-
-.type_success {
-	--color: #035203;
-	--color-icon: #1fad1f;
-}
-
-.variant_block {
-	padding: 16px;
-	background-color: var(--neutral-10, rgba(238, 93, 93, 0.1));
-}
-
-.type_info {
-	--color: var(--neutral-80, rgba(24, 24, 24, 1));
-	--color-icon: var(--neutral-90, rgba(24, 24, 24, 1));
-}
-
 .IconAligner {
 	display: flex;
 	align-items: center;
@@ -180,7 +151,39 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
-	fill: transparent;
 	stroke: var(--color-icon);
+}
+
+.ActionsWrapper > *:last-child {
+	margin-right: 0;
+}
+
+.type_error {
+	--color: #a12712;
+	--color-icon: #d83e3b;
+	--color-bg: #f6eceb;
+}
+
+.type_warning {
+	--color: #584400;
+	--color-icon: #f2bd0d;
+	--color-bg: #f9eecf;
+}
+
+.type_success {
+	--color: #035203;
+	--color-icon: #1fad1f;
+	--color-bg: #ebf1eb;
+}
+
+.type_info {
+	--color: var(--neutral-90, #1b1b1b);
+	--color-icon: var(--neutral-80, #707070);
+	--color-bg: var(--neutral-10, #f1f1f1);
+}
+
+.variant_block {
+	padding: 16px;
+	background-color: var(--neutral-10, var(--color-bg));
 }
 </style>
