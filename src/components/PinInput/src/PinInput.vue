@@ -126,13 +126,13 @@ export default {
 		},
 
 		onInputPin(event, index) {
-			if (!event.data) {
+			const input = event?.data || event?.target?.value;
+			if (!input) {
 				return;
 			}
-
 			// Only allow integers in input
 			const BASE_TEN = 10;
-			const inputValue = Number.isInteger(Number.parseInt(event.data, BASE_TEN)) ? event.data : '';
+			const inputValue = Number.isInteger(Number.parseInt(input, BASE_TEN)) ? input : '';
 
 			// One-time-code autofill is treated as an input, not a paste
 			if (this.attemptSplitPinIntoInputs(inputValue, index)) {
