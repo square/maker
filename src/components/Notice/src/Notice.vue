@@ -149,7 +149,7 @@ export default {
 .type_error {
 	--color: #a12712;
 	--color-icon: #d83e3b;
-	--color-big: #f6eceb;
+	--color-bg: #f6eceb;
 }
 
 .type_warning {
