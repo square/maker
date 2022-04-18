@@ -142,6 +142,19 @@ export default {
 	margin-right: 24px;
 }
 
+.IconAligner {
+	display: flex;
+	align-items: center;
+	height: 24px;
+	margin-right: 8px;
+}
+
+.Icon {
+	width: 16px;
+	height: 16px;
+	stroke: var(--color-icon);
+}
+
 .ActionsWrapper > *:last-child {
 	margin-right: 0;
 }
@@ -172,20 +185,6 @@ export default {
 
 .variant_block {
 	padding: 16px;
-	background-color: var(--color-bg);
-}
-
-.IconAligner {
-	display: flex;
-	align-items: center;
-	height: 24px;
-	margin-right: 8px;
-}
-
-.Icon {
-	width: 16px;
-	height: 16px;
-	fill: transparent;
-	stroke: var(--color-icon);
+	background-color: var(--neutral-10, var(--color-bg));
 }
 </style>
