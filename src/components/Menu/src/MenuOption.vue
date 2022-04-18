@@ -1,7 +1,10 @@
 <template>
 	<m-row
 		:class="$s.MenuOption"
+		role="menuitem"
+		tabindex="0"
 		@click="selectSelf"
+		@keydown="handleKeyboardEvent"
 	>
 		<slot />
 		<template
@@ -92,6 +95,12 @@ export default {
 		},
 	},
 
+	mounted() {
+		if (this.$el?.previousElementSibling === null) {
+			this.$el.focus();
+		}
+	},
+
 	methods: {
 		selectSelf() {
 			const { isMultiSelect, isActionSelect } = this.controlState;
@@ -117,6 +126,22 @@ export default {
 
 			this.controlState.currentValue = currentValue;
 		},
+
+		handleKeyboardEvent(event) {
+			switch (event.key) {
+			case 'Enter':
+				this.selectSelf();
+				break;
+			case 'ArrowUp':
+				this.$el?.previousElementSibling?.focus();
+				break;
+			case 'ArrowDown':
+				this.$el?.nextElementSibling?.focus();
+				break;
+			default:
+				break;
+			}
+		},
 	},
 };
 </script>
@@ -127,7 +152,8 @@ export default {
 	padding: 16px;
 	cursor: pointer;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: var(--neutral-10, #f1f1f1);
 	}
 }

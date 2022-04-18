@@ -5,6 +5,7 @@
 		v-on="$listeners"
 	>
 		<m-popover
+			ref="popover"
 			placement="bottom-start"
 		>
 			<template #action="popover">
@@ -39,10 +40,16 @@
 					padding="16px 0"
 				>
 					<!-- @slot Menu options -->
-					<slot name="menu" />
+					<div role="menu">
+						<slot name="menu" />
+					</div>
 				</m-popover-content>
 			</template>
 		</m-popover>
+		<pseudo-window
+			document
+			@keydown.esc="handleEscKey"
+		/>
 	</div>
 </template>
 
@@ -52,6 +59,7 @@
  * @inheritAttrs div
  * @inheritListeners div
  */
+import PseudoWindow from 'vue-pseudo-window';
 import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import assert from '@square/maker/utils/assert';
 import SelectControl from '../../Select/src/SelectControl.vue';
@@ -59,6 +67,7 @@ import key from './key';
 
 export default {
 	components: {
+		PseudoWindow,
 		MPopover,
 		MPopoverContent,
 		SelectControl,
@@ -122,6 +131,14 @@ export default {
 			if (this.isMultiSelect) {
 				assert.error(Array.isArray(this.selected), 'The v-model value for a multi-select must be of type Array.');
 			}
+		},
+
+		handleEscKey() {
+			/**
+			 * ESC keyup event on window
+			 * @property {string}
+			 */
+			this.$refs.popover.close();
 		},
 	},
 };

@@ -15,7 +15,7 @@
 		<button
 			v-if="$slots.default"
 			:class="[
-				$s.Select,
+				$s.SelectButton,
 				{
 					[$s.hasPrefix]: $slots.prefix,
 				},
@@ -200,7 +200,8 @@ export default {
 	pointer-events: none;
 }
 
-.Select {
+.Select,
+.SelectButton {
 	display: flex;
 	align-items: center;
 	box-sizing: inherit;
