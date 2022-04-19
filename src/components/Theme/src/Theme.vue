@@ -59,18 +59,19 @@ export default {
 			const { colors, fonts } = this;
 
 			return {
+				'--color-background': colors.background,
+				'--color-text': colors.text,
+				'--color-heading': colors.heading,
+				'--color-primary': colors.primary,
+				'--color-secondary': colors.secondary,
+				'--color-elevation': colors.elevation,
+				'--color-overlay': colors.overlay,
 				'--neutral-0': colors['neutral-0'],
 				'--neutral-10': colors['neutral-10'],
 				'--neutral-20': colors['neutral-20'],
 				'--neutral-80': colors['neutral-80'],
 				'--neutral-90': colors['neutral-90'],
 				'--neutral-100': colors['neutral-100'],
-				'--color-primary': colors.primary,
-				'--color-background': colors.background,
-				'--color-title': colors.title,
-				'--color-paragraph': colors.paragraph,
-				'--color-elevation': colors['color-elevation'],
-				'--color-overlay': colors['color-overlay'],
 				'--font-family-title': fonts.title.fontFamily,
 				'--font-weight-title': fonts.title.fontWeight,
 				'--font-family-paragraph': fonts.paragraph.fontFamily,
@@ -89,7 +90,7 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--color-paragraph);
+	color: var(--color-text);
 	font-weight: var(--font-weight-paragraph);
 	font-family: var(--font-family-paragraph);
 	background-color: var(--color-background);

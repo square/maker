@@ -3,18 +3,19 @@ import { resolve, getPath } from './utils';
 export default function defaultTheme() {
 	return {
 		colors: {
+			background: '#ffffff',
+			heading: '#000000',
+			text: '#000000',
+			primary: '#000000',
+			secondary: '#000000',
 			'neutral-0': '#ffffff',
 			'neutral-10': '#f1f1f1',
 			'neutral-20': '#d3d3d3',
 			'neutral-80': '#707070',
 			'neutral-90': '#1b1b1b',
 			'neutral-100': '#000000',
-			background: '#ffffff',
-			title: 'inherit',
-			paragraph: 'inherit',
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
-			primary: '#000000',
 		},
 		fonts: {
 			baseSize: 16,
@@ -48,9 +49,11 @@ export default function defaultTheme() {
 			patterns: {
 				primary: {
 					variant: 'primary',
+					color: '@colors.primary',
 				},
 				secondary: {
 					variant: 'secondary',
+					color: '@colors.secondary',
 				},
 				tertiary: {
 					variant: 'tertiary',
@@ -71,7 +74,7 @@ export default function defaultTheme() {
 		text: {
 			size: 0,
 			fontFamily: '@fonts.paragraph.fontFamily',
-			color: '@colors.paragraph',
+			color: '@colors.text',
 			element: 'p',
 			fontWeight: '@fonts.paragraph.fontWeight',
 			fontStyle: 'inherit',
@@ -83,14 +86,14 @@ export default function defaultTheme() {
 					fontFamily: '@fonts.title.fontFamily',
 					fontWeight: '700',
 					element: 'h1',
-					color: '@colors.title',
+					color: '@colors.heading',
 				},
 				title: {
 					size: 3,
 					fontFamily: '@fonts.title.fontFamily',
 					fontWeight: '@fonts.title.fontWeight',
 					element: 'h2',
-					color: '@colors.title',
+					color: '@colors.heading',
 				},
 				paragraph: {}, // component default
 				label: {
