@@ -56,7 +56,7 @@ export default {
 	},
 	computed: {
 		styles() {
-			const { colors, fonts } = this;
+			const { colors, fonts, fontWeights } = this;
 
 			return {
 				'--neutral-0': colors['neutral-0'],
@@ -67,16 +67,18 @@ export default {
 				'--neutral-100': colors['neutral-100'],
 				'--color-primary': colors.primary,
 				'--color-background': colors.background,
-				'--color-title': colors.title,
-				'--color-paragraph': colors.paragraph,
+				'--color-heading': colors.heading,
+				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
-				'--font-family-title': fonts.title.fontFamily,
-				'--font-weight-title': fonts.title.fontWeight,
-				'--font-family-paragraph': fonts.paragraph.fontFamily,
-				'--font-weight-paragraph': fonts.paragraph.fontWeight,
-				'--font-family-label': fonts.label.fontFamily,
-				'--font-weight-label': fonts.label.fontWeight,
+				'--fonts-baseSize': fonts.baseSize,
+				'--fonts-sizeScale': fonts.sizeScale,
+				'--fonts-heading': fonts.heading,
+				'--fontWeights-heading': fontWeights.heading,
+				'--fonts-body': fonts.body,
+				'--fontWeights-body': fontWeights.body,
+				'--fonts-label': fonts.label,
+				'--fontWeights-label': fontWeights.label,
 			};
 		},
 	},
@@ -89,9 +91,10 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--color-paragraph);
-	font-weight: var(--font-weight-paragraph);
-	font-family: var(--font-family-paragraph);
+	color: var(--color-text);
+	font-weight: var(--fontWeights-body);
+	font-size: calc(var(--fonts-baseSize, 16) * 1px);
+	font-family: var(--fonts-body, var(--system-font));
 	background-color: var(--color-background);
 }
 </style>

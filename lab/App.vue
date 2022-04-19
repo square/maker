@@ -17,6 +17,8 @@ export default {
 </script>
 
 <style>
+@import '@square/maker/styles/global.css';
+
 body {
 	margin: 0;
 	background-color: #f8f8fb;
