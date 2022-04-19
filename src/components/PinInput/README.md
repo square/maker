@@ -144,18 +144,18 @@ export default {
 	},
 	methods: {
 		onPinComplete(code) {
+			const DELAY_MS = 1000;
 			this.disableInput = true;
-			const DELAY_MS = 500;
 
 			// simulate API time for code validation
 			setTimeout(() => {
+				this.disableInput = false;
 				if (this.testCode === code) {
 					this.invalidEntry = false;
 				} else {
 					this.invalidEntry = true;
-					this.$refs.pinInput.shakeAndClearInputs();
+					this.$nextTick(this.$refs.pinInput.shakeAndClearInputs);
 				}
-				this.disableInput = false;
 			}, DELAY_MS);
 		},
 	},
