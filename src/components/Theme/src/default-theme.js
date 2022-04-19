@@ -104,7 +104,7 @@ export default function defaultTheme() {
 		},
 		stepper: {
 			color: '@colors["neutral-10"]',
-			textColor: '@colors.text',
+			textColor: '@colors["neutral-90"]',
 			shape: 'pill',
 		},
 		notice: {
