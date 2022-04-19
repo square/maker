@@ -77,7 +77,7 @@
 						</div> <div
 							:class="$s.previewButton"
 							:style="{
-								backgroundColor : profile.colors['button']
+								backgroundColor : profile.colors['primary']
 							}"
 						/>
 					</div>
@@ -93,13 +93,6 @@
 				</label>
 				<label>
 					<input
-						v-model="currentProfileColors.button"
-						type="color"
-					>
-					Button
-				</label>
-				<label>
-					<input
 						v-model="currentProfileColors.heading"
 						type="color"
 					>
@@ -111,6 +104,20 @@
 						type="color"
 					>
 					Text
+				</label>
+				<label>
+					<input
+						v-model="currentProfileColors.primary"
+						type="color"
+					>
+					Primary
+				</label>
+				<label>
+					<input
+						v-model="currentProfileColors.secondary"
+						type="color"
+					>
+					Secondary
 				</label>
 				<h3
 					:class="$s.subsectionTitle"
@@ -144,7 +151,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.variants.title.fontFamily"
+						v-model="theme.fonts.title.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -158,7 +165,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.variants.title.fontWeight"
+						v-model="theme.fonts.title.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -178,7 +185,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.fontFamily"
+						v-model="theme.fonts.paragraph.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -192,7 +199,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.fontWeight"
+						v-model="theme.fonts.paragraph.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -276,10 +283,10 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.text.variants.title.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.text.variants.title.fontWeight;
-			const fontText = themeStore.$state.theme.text.fontFamily;
-			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
+			const fontHeading = themeStore.$state.theme.fonts.title.fontFamily;
+			const fontWeightsHeading = themeStore.$state.theme.fonts.title.fontWeight;
+			const fontText = themeStore.$state.theme.fonts.paragraph.fontFamily;
+			const fontWeightsText = themeStore.$state.theme.fonts.paragraph.fontWeight;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
