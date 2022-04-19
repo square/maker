@@ -20,18 +20,16 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.17,
-			title: {
-				fontFamily: 'inherit',
-				fontWeight: '500',
-			},
-			paragraph: {
-				fontFamily: 'inherit',
-				fontWeight: '400',
-			},
-			label: {
-				fontFamily: 'inherit',
-				fontWeight: '500',
-			},
+			body: 'inherit',
+			heading: 'inherit',
+			headline: 'inherit',
+			label: 'inherit',
+		},
+		fontWeights: {
+			body: 400,
+			heading: 600,
+			headline: 400,
+			label: 500,
 		},
 		profiles: [
 			{
@@ -73,32 +71,32 @@ export default function defaultTheme() {
 		},
 		text: {
 			size: 0,
-			fontFamily: '@fonts.paragraph.fontFamily',
+			fontFamily: '@fonts.body',
 			color: '@colors.text',
 			element: 'p',
-			fontWeight: '@fonts.paragraph.fontWeight',
+			fontWeight: '@fontWeights.body',
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
 			patterns: {
 				headline: {
 					size: 7,
-					fontFamily: '@fonts.title.fontFamily',
-					fontWeight: '700',
+					fontFamily: '@fonts.headline',
+					fontWeight: '@fontWeights.headline',
 					element: 'h1',
 					color: '@colors.heading',
 				},
 				title: {
 					size: 3,
-					fontFamily: '@fonts.title.fontFamily',
-					fontWeight: '@fonts.title.fontWeight',
+					fontFamily: '@fonts.heading',
+					fontWeight: '@fontWeights.heading',
 					element: 'h2',
 					color: '@colors.heading',
 				},
-				paragraph: {}, // component default
+				text: {}, // component default
 				label: {
-					fontFamily: '@fonts.label.fontFamily',
-					fontWeight: '@fonts.label.fontWeight',
+					fontFamily: '@fonts.label',
+					fontWeight: '@fontWeights.label',
 				},
 			},
 		},

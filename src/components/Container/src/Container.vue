@@ -146,10 +146,10 @@ export default {
 
 .Label {
 	margin-bottom: 16px;
-	color: var(--color, var(--color-title, inherit));
-	font-weight: var(--font-weight-title, 500);
+	color: var(--color, var(--color-heading, inherit));
+	font-weight: var(--fontWeight-heading, 500);
 	font-size: 14px;
-	font-family: var(--font-family-title, inherit);
+	font-family: var(--font-heading, inherit);
 	line-height: 20px;
 }
 
@@ -177,10 +177,10 @@ export default {
 }
 
 .Sublabel {
-	color: var(--color, var(--color-paragraph, inherit));
-	font-weight: var(--font-weight-paragraph, inherit);
+	color: var(--color, var(--color-text, inherit));
+	font-weight: var(--fontWeight-body, inherit);
 	font-size: 14px;
-	font-family: var(--font-family-paragraph, inherit);
+	font-family: var(--font-body, inherit);
 	line-height: 24px;
 	letter-spacing: normal;
 	text-transform: none;

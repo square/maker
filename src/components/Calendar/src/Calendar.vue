@@ -342,8 +342,8 @@ export default {
 
 .CalendarHeaderTitle {
 	color: var(--color-primary, #000);
-	font-weight: var(--font-weight-label, 500);
-	font-family: var(--font-family-label, inherit);
+	font-weight: var(--fontWeight-label, 500);
+	font-family: var(--font-label, inherit);
 }
 
 .CalendarHeaderButtonIcon {

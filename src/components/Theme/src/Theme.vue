@@ -56,7 +56,7 @@ export default {
 	},
 	computed: {
 		styles() {
-			const { colors, fonts } = this;
+			const { colors, fonts, fontWeights } = this;
 
 			return {
 				'--color-background': colors.background,
@@ -72,12 +72,12 @@ export default {
 				'--neutral-80': colors['neutral-80'],
 				'--neutral-90': colors['neutral-90'],
 				'--neutral-100': colors['neutral-100'],
-				'--font-family-title': fonts.title.fontFamily,
-				'--font-weight-title': fonts.title.fontWeight,
-				'--font-family-paragraph': fonts.paragraph.fontFamily,
-				'--font-weight-paragraph': fonts.paragraph.fontWeight,
-				'--font-family-label': fonts.label.fontFamily,
-				'--font-weight-label': fonts.label.fontWeight,
+				'--font-body': fonts.body,
+				'--fontWeight-body': fontWeights.body,
+				'--font-heading': fonts.heading,
+				'--fontWeight-heading': fontWeights.heading,
+				'--font-label': fonts.label,
+				'--fontWeight-label': fontWeights.label,
 			};
 		},
 	},
@@ -91,8 +91,8 @@ export default {
 <style module="$s">
 .Theme {
 	color: var(--color-text);
-	font-weight: var(--font-weight-paragraph);
-	font-family: var(--font-family-paragraph);
+	font-weight: var(--fontWeight-body);
+	font-family: var(--font-body);
 	background-color: var(--color-background);
 }
 </style>
