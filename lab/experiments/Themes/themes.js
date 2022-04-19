@@ -138,18 +138,16 @@ export const websiteTheme = {
 	fonts: {
 		baseSize: 16,
 		sizeScale: 1.17,
-		title: {
-			fontFamily: 'Open Sans',
-			fontWeight: '500',
-		},
-		paragraph: {
-			fontFamily: 'Open Sans',
-			fontWeight: '400',
-		},
-		label: {
-			fontFamily: 'Open Sans',
-			fontWeight: '500',
-		},
+		body: 'Open Sans',
+		heading: 'Open Sans',
+		headline: 'Open Sans',
+		label: 'Open Sans',
+	},
+	fontWeights: {
+		body: 400,
+		heading: 600,
+		headline: 400,
+		label: 500,
 	},
 };
 

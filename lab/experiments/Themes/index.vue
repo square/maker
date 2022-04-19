@@ -151,7 +151,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.fonts.title.fontFamily"
+						v-model="theme.fonts.heading"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -165,7 +165,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.fonts.title.fontWeight"
+						v-model="theme.fontWeights.heading"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -185,7 +185,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.fonts.paragraph.fontFamily"
+						v-model="theme.fonts.body"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -199,7 +199,41 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.fonts.paragraph.fontWeight"
+						v-model="theme.fontWeights.body"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in defaultWeights">
+							<option
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</template>
+					</select>
+				</div>
+				<h3
+					:class="$s.subsectionTitle"
+				>
+					Label
+				</h3>
+				<div :class="$s.fontChoice">
+					<select
+						v-model="theme.fonts.label"
+						:class="$s.familyChoice"
+						@change="updateFont"
+					>
+						<template v-for="(value, index) in fontOptions">
+							<option
+								:key="index"
+								:value="value.name"
+							>
+								{{ value.name }}
+							</option>
+						</template>
+					</select>
+					<select
+						v-model="theme.fontWeights.label"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -283,14 +317,17 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.fonts.title.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.fonts.title.fontWeight;
-			const fontText = themeStore.$state.theme.fonts.paragraph.fontFamily;
-			const fontWeightsText = themeStore.$state.theme.fonts.paragraph.fontWeight;
+			const fontHeading = themeStore.$state.theme.fonts.heading;
+			const fontWeightsHeading = themeStore.$state.theme.fontWeights.heading;
+			const fontText = themeStore.$state.theme.fonts.body;
+			const fontWeightsText = themeStore.$state.theme.fontWeights.body;
+			const fontLabel = themeStore.$state.theme.fonts.label;
+			const fontWeightsLabel = themeStore.$state.theme.fontWeights.label;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
 			fonts.push(`${fontText}:${fontWeightsText}`);
+			fonts.push(`${fontLabel}:${fontWeightsLabel}`);
 
 			return fonts;
 		},
