@@ -10,14 +10,14 @@
 					:class="$s.Scale"
 				>
 					<m-text
-						pattern="title"
+						pattern="heading"
 						font-size="20px"
 						style="margin-bottom: 16px;"
 					>
 						Maker Theme
 					</m-text>
 					<m-text
-						pattern="title"
+						pattern="heading"
 						font-size="16px"
 					>
 						Typography
@@ -26,76 +26,89 @@
 						base size
 						<br>
 						<input
-							v-model="fontsBaseSize"
+							v-model="fonts.fontsBaseSize"
 							type="range"
 							min="16"
 							max="24"
 							step="1"
 						>
 						<br>
-						{{ fontsBaseSize }}
+						{{ fonts.fontsBaseSize }}
 						<br>
 						type scale
 						<br>
 						<input
-							v-model="fontsTypeScale"
+							v-model="fonts.sizeScale"
 							type="range"
 							min="1.15"
 							max="1.62"
 							step="0.01"
 						>
 						<br>
-						{{ fontsTypeScale }}
+						{{ fonts.sizeScale }}
 						<br>
 						<m-divider :class="$s.Divider" />
-						<m-text
-							pattern="title"
-							font-size="16px"
+						Heading
+						<br>
+						<select
+							v-model="fonts.heading"
 						>
-							Patterns
-						</m-text>
-						<div
-							v-for="textPattern in Object.keys(textPatterns)"
-							:key="textPattern"
+							<option>
+								serif
+							</option>
+							<option>
+								sans-serif
+							</option>
+							<option>
+								monospace
+							</option>
+							<option>
+								inherit
+							</option>
+							<option>
+								arial
+							</option>
+						</select>
+						<input
+							v-model="fontWeights.heading"
+							type="range"
+							min="100"
+							max="900"
+							step="100"
 						>
-							{{ textPattern }}
-							<br>
-							<select
-								v-model="textPatterns[textPattern].fontFamily"
-							>
-								<option>
-									serif
-								</option>
-								<option>
-									sans-serif
-								</option>
-								<option>
-									monospace
-								</option>
-								<option>
-									inherit
-								</option>
-								<option>
-									arial
-								</option>
-							</select>
-							<br>
-							<input
-								v-model="textPatterns[textPattern].fontWeight"
-								type="range"
-								min="100"
-								max="900"
-								step="100"
-							>
-							<br>
-							{{ textPatterns[textPattern].fontWeight }}
-							<br>
-							<br>
-						</div>
+						<br><br>
+						Text
+						<br>
+						<select
+							v-model="fonts.body"
+						>
+							<option>
+								serif
+							</option>
+							<option>
+								sans-serif
+							</option>
+							<option>
+								monospace
+							</option>
+							<option>
+								inherit
+							</option>
+							<option>
+								arial
+							</option>
+						</select>
+						<input
+							v-model="fontWeights.body"
+							type="range"
+							min="100"
+							max="900"
+							step="100"
+						>
 					</div>
 					<m-divider :class="$s.Divider" />
 					<m-text
-						pattern="title"
+						pattern="heading"
 						font-size="16px"
 					>
 						Colors
@@ -117,14 +130,14 @@
 						</label>
 						<label>
 							<input
-								v-model="titleColor"
+								v-model="headingColor"
 								type="color"
 							>
 							Title
 						</label>
 						<label>
 							<input
-								v-model="paragraphColor"
+								v-model="textColor"
 								type="color"
 							>
 							Paragraph
@@ -157,7 +170,7 @@
 				>
 					<div>
 						<m-text
-							pattern="title"
+							pattern="heading"
 							:size="0"
 						>
 							Enter delivery address
@@ -195,7 +208,7 @@
 							</m-choice>
 						</div>
 						<m-text
-							pattern="title"
+							pattern="heading"
 							:size="-1"
 						>
 							Enter delivery address
@@ -272,7 +285,7 @@
 				>
 					<div>
 						<m-text
-							pattern="title"
+							pattern="heading"
 							:size="0"
 						>
 							House special wings
@@ -376,7 +389,7 @@
 				>
 					<div>
 						<m-text
-							pattern="title"
+							pattern="heading"
 							:size="0"
 						>
 							Schedule order
@@ -391,7 +404,7 @@
 					<m-divider />
 					<div>
 						<m-text
-							pattern="title"
+							pattern="heading"
 							:size="0"
 						>
 							Select date and time
@@ -419,7 +432,7 @@
 					<m-divider />
 					<div :class="$s.TypographyPreview">
 						<m-text
-							v-for="pattern in ['headline', 'title', 'paragraph', 'label']"
+							v-for="pattern in ['headline', 'heading', 'text', 'label']"
 							:key="pattern"
 							:pattern="pattern"
 						>
@@ -565,8 +578,8 @@ export default {
 		return {
 			backgroundColor: '#ffffff',
 			primaryColor: '#14433d',
-			titleColor: '#000000',
-			paragraphColor: '#000000',
+			headingColor: '#000000',
+			textColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -606,25 +619,19 @@ export default {
 			selected: 'medium',
 			images: [],
 			item: storeData.items[0],
-			fontsBaseSize: '16',
-			fontsTypeScale: '1.17',
-			textPatterns: {
-				headline: {
-					fontFamily: 'arial',
-					fontWeight: '700',
-				},
-				title: {
-					fontFamily: 'serif',
-					fontWeight: '500',
-				},
-				paragraph: {
-					fontFamily: 'sans-serif',
-					fontWeight: '400',
-				},
-				label: {
-					fontFamily: 'monospace',
-					fontWeight: '500',
-				},
+			fonts: {
+				baseSize: 16,
+				sizeScale: 1.17,
+				body: 'system-ui',
+				heading: 'system-ui',
+				headline: 'system-ui',
+				label: 'system-ui',
+			},
+			fontWeights: {
+				body: 400,
+				heading: 600,
+				headline: 400,
+				label: 500,
 			},
 		};
 	},
@@ -637,25 +644,21 @@ export default {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
-					title: this.titleColor,
-					paragraph: this.paragraphColor,
+					heading: this.headingColor,
+					text: this.textColor,
 					...colors,
 				},
 				fonts: {
-					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
-					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
-					title: {
-						fontFamily: this.textPatterns.title.fontFamily,
-						fontWeight: this.textPatterns.title.fontWeight,
-					},
-					paragraph: {
-						fontFamily: this.textPatterns.paragraph.fontFamily,
-						fontWeight: this.textPatterns.paragraph.fontWeight,
-					},
-					label: {
-						fontFamily: this.textPatterns.label.fontFamily,
-						fontWeight: this.textPatterns.label.fontWeight,
-					},
+					baseSize: Number.parseInt(this.fonts.baseSize, baseTen),
+					sizeScale: Number.parseFloat(this.fonts.sizeScale, baseTen),
+					heading: this.fonts.heading,
+					body: this.fonts.body,
+					label: this.fonts.label,
+				},
+				fontWeights: {
+					heading: this.fontWeights.heading,
+					body: this.fontWeights.body,
+					label: this.fontWeights.label,
 				},
 				notice: {
 					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : undefined,
@@ -665,11 +668,6 @@ export default {
 				},
 				actionbarbutton: {
 					shape: 'rounded',
-				},
-				text: {
-					patterns: {
-						...this.textPatterns,
-					},
 				},
 			};
 		},
