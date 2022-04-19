@@ -86,7 +86,7 @@ export default function defaultTheme() {
 					element: 'h1',
 					color: '@colors.heading',
 				},
-				title: {
+				heading: {
 					size: 3,
 					fontFamily: '@fonts.heading',
 					fontWeight: '@fontWeights.heading',

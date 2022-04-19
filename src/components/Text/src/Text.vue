@@ -18,7 +18,7 @@ export default {
 	props: {
 		/**
 		 * patterns are defined at the theme level
-		 * @values headline, title, paragraph, label, pattern defined in theme
+		 * @values headline, heading, text, label, pattern defined in theme
 		 */
 		pattern: {
 			type: String,

@@ -32,13 +32,13 @@ export default {
 
 ## Patterns
 
-There are four text patterns by default: headline, title, paragraph, label. These can be customized via the [Theme](#/Theme).
+There are four text patterns by default: headline, heading, text, label. These can be customized via the [Theme](#/Theme).
 
 ```vue
 <template>
 	<div>
 		<m-text
-			v-for="pattern in ['headline', 'title', 'paragraph', 'label']"
+			v-for="pattern in ['headline', 'heading', 'text', 'label']"
 			:key="pattern"
 			:pattern="pattern"
 		>
