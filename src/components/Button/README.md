@@ -38,14 +38,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="large"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="primary"
 							size="large"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -53,7 +51,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="large"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -61,14 +58,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="large"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
 							size="large"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -76,7 +71,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="large"
-							:color="color"
 							loading
 						>
 							Loading
@@ -86,14 +80,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="large"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="large"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -101,7 +93,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="large"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -109,14 +100,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="large"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="large"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -124,7 +113,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="large"
-							:color="color"
 							loading
 						>
 							Loading
@@ -134,14 +122,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="large"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="large"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -149,7 +135,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="large"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -157,14 +142,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="large"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="large"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -172,7 +155,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="large"
-							:color="color"
 							loading
 						>
 							Loading
@@ -187,14 +169,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="medium"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="primary"
 							size="medium"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -202,7 +182,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="medium"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -210,14 +189,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="medium"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
 							size="medium"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -225,7 +202,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="medium"
-							:color="color"
 							loading
 						>
 							Loading
@@ -235,14 +211,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="medium"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="medium"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -250,7 +224,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="medium"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -258,14 +231,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="medium"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="medium"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -273,7 +244,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="medium"
-							:color="color"
 							loading
 						>
 							Loading
@@ -283,14 +253,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="medium"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="medium"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -298,7 +266,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="medium"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -306,14 +273,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="medium"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="medium"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -321,7 +286,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="medium"
-							:color="color"
 							loading
 						>
 							Loading
@@ -336,14 +300,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="small"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="primary"
 							size="small"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -351,7 +313,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="small"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -359,14 +320,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="small"
-							:color="color"
 						>
 							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="primary"
 							size="small"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -374,7 +333,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="primary"
 							size="small"
-							:color="color"
 							loading
 						>
 							Loading
@@ -384,14 +342,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="small"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="small"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -399,7 +355,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="small"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -407,14 +362,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="small"
-							:color="color"
 						>
 							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="secondary"
 							size="small"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -422,7 +375,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="secondary"
 							size="small"
-							:color="color"
 							loading
 						>
 							Loading
@@ -432,14 +384,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="small"
-							:color="color"
 						>
 							Button
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="small"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -447,7 +397,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="small"
-							:color="color"
 						>
 							Button
 							<plus class="icon" />
@@ -455,14 +404,12 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="small"
-							:color="color"
 						>
 							<plus class="icon" />
 						</m-button>
 						<m-button
 							variant="tertiary"
 							size="small"
-							:color="color"
 							disabled
 						>
 							Disabled button
@@ -470,7 +417,6 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 						<m-button
 							variant="tertiary"
 							size="small"
-							:color="color"
 							loading
 						>
 							Loading

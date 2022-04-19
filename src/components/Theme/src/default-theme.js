@@ -15,6 +15,7 @@ export default function defaultTheme() {
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
+			secondary: '#f1f1f1',
 		},
 		fonts: {
 			baseSize: 16,
@@ -48,12 +49,15 @@ export default function defaultTheme() {
 			patterns: {
 				primary: {
 					variant: 'primary',
+					color: 'blue',
 				},
 				secondary: {
 					variant: 'secondary',
+					color: 'green',
 				},
 				tertiary: {
 					variant: 'tertiary',
+					color: 'red',
 				},
 			},
 		},
