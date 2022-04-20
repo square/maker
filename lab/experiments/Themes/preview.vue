@@ -630,11 +630,11 @@ export default {
 	max-height: calc(100% - 40px);
 	padding: 20px 10px;
 	overflow: hidden;
-	color: var(--color-text);
-	font-weight: var(--fontWeights-body, normal);
-	font-size: var(--font-base-size);
-	font-family: var(--font-body, inherit);
-	background-color: var(--color-background);
+	color: var(--maker-color-text);
+	font-weight: var(--maker-font-weights-body, normal);
+	font-size: var(--font-base-size, 16px);
+	font-family: var(--maker-font-body, inherit);
+	background-color: var(--maker-color-background);
 	border-radius: 30px;
 	box-shadow:
 		4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),

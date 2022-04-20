@@ -58,7 +58,7 @@ _DemoModal.vue_
 			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Modal heading
 			</m-text>
 			<m-text>
@@ -339,7 +339,7 @@ _ActionBarDemoModal.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Modal heading
 			</m-text>
 			<m-text>
@@ -463,7 +463,7 @@ _StackingDemoFirstModal.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				First modal heading
 			</m-text>
 			<m-text>
@@ -554,7 +554,7 @@ _StackingDemoSecondModal.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Second modal heading
 			</m-text>
 			<m-text>
@@ -677,7 +677,7 @@ _StackingDemoFirstModalCloseAll.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				First modal heading
 			</m-text>
 			<m-text>
@@ -768,7 +768,7 @@ _StackingDemoSecondModalCloseAll.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Second modal heading
 			</m-text>
 			<m-text>

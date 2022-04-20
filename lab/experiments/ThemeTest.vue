@@ -145,22 +145,22 @@
 						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-0)' }" /> Neutral 0
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-10)' }" /> Neutral 10
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-10)' }" /> Neutral 10
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-20)' }" /> Neutral 20
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-20)' }" /> Neutral 20
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-80)' }" /> Neutral 80
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-80)' }" /> Neutral 80
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-90)' }" /> Neutral 90
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-90)' }" /> Neutral 90
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-100)' }" /> Neutral 100
 							</div>
 						</div>
 					</div>
@@ -772,7 +772,7 @@ hr.Divider {
 }
 
 .Preview {
-	border: 1px solid var(--neutral-20);
+	border: 1px solid var(--maker-color-neutral-20);
 
 	/* stylelint-disable-next-line no-descending-specificity */
 	& > div {

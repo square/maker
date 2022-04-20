@@ -121,9 +121,9 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--neutral-90);
-	font-weight: var(--fontWeight-label, 500);
-	font-family: var(--font-label, inherit);
+	color: var(--maker-color-neutral-90);
+	font-weight: var(--maker-font-weight-label, 500);
+	font-family: var(--maker-font-label, inherit);
 	vertical-align: middle;
 	background-color: transparent;
 	border: none;
@@ -175,7 +175,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--neutral-90);
+	color: var(--maker-color-neutral-90);
 	background-color: transparent;
 }
 

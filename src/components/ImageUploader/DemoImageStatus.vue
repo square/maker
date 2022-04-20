@@ -2,7 +2,7 @@
 	<m-card :class="$s.ImagesCard">
 		<m-text
 			v-if="header"
-			variant="title"
+			pattern="title"
 			:size="1"
 		>
 			{{ header }}

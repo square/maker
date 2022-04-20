@@ -64,8 +64,8 @@ export default {
 .PopoverContent {
 	padding: 24px;
 	color: var(--popover-color, var(--color-text, black));
-	background-color: var(--popover-bg-color, var(--color-background, white));
-	border: 1px solid var(--neutral-10);
+	background-color: var(--popover-bg-color, var(--maker-color-background, white));
+	border: 1px solid var(--maker-color-neutral-10);
 	border-radius: 8px;
 	box-shadow: 0 0 18px 6px rgba(0, 0, 0, 0.2);
 }

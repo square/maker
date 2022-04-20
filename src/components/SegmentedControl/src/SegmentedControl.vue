@@ -69,11 +69,11 @@ export default {
 	box-sizing: border-box;
 	height: 56px;
 	padding: 4px;
-	font-weight: var(--fontWeight-label, 500);
+	font-weight: var(--maker-font-weight-label, 500);
 	font-size: 14px;
-	font-family: var(--font-label, inherit);
+	font-family: var(--maker-font-label, inherit);
 	line-height: 24px;
-	background-color: var(--neutral-10, #f6f7f9);
+	background-color: var(--maker-color-neutral-10, #f6f7f9);
 	border-radius: 4px;
 }
 

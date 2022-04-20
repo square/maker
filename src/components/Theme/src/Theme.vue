@@ -59,25 +59,24 @@ export default {
 			const { colors, fonts, fontWeights } = this;
 
 			return {
-				'--color-background': colors.background,
-				'--color-text': colors.text,
-				'--color-heading': colors.heading,
-				'--color-primary': colors.primary,
-				'--color-secondary': colors.secondary,
-				'--color-elevation': colors.elevation,
-				'--color-overlay': colors.overlay,
-				'--neutral-0': colors['neutral-0'],
-				'--neutral-10': colors['neutral-10'],
-				'--neutral-20': colors['neutral-20'],
-				'--neutral-80': colors['neutral-80'],
-				'--neutral-90': colors['neutral-90'],
-				'--neutral-100': colors['neutral-100'],
-				'--font-body': fonts.body,
-				'--fontWeight-body': fontWeights.body,
-				'--font-heading': fonts.heading,
-				'--fontWeight-heading': fontWeights.heading,
-				'--font-label': fonts.label,
-				'--fontWeight-label': fontWeights.label,
+				'--maker-color-neutral-0': colors['neutral-0'],
+				'--maker-color-neutral-10': colors['neutral-10'],
+				'--maker-color-neutral-20': colors['neutral-20'],
+				'--maker-color-neutral-80': colors['neutral-80'],
+				'--maker-color-neutral-90': colors['neutral-90'],
+				'--maker-color-neutral-100': colors['neutral-100'],
+				'--maker-color-primary': colors.primary,
+				'--maker-color-background': colors.background,
+				'--maker-color-text': colors.text,
+				'--maker-color-heading': colors.heading,
+				'--maker-color-elevation': colors.elevation,
+				'--maker-color-overlay': colors.overlay,
+				'--maker-font-body': fonts.body,
+				'--maker-font-weight-body': fontWeights.body,
+				'--maker-font-heading': fonts.heading,
+				'--maker-font-weight-heading': fontWeights.heading,
+				'--maker-font-label': fonts.label,
+				'--maker-font-weight-label': fontWeights.label,
 			};
 		},
 	},
@@ -90,9 +89,9 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--color-text);
-	font-weight: var(--fontWeight-body);
-	font-family: var(--font-body);
-	background-color: var(--color-background);
+	color: var(--maker-color-text);
+	font-weight: var(--maker-font-weight-body);
+	font-family: var(--maker-font-body);
+	background-color: var(--maker-color-background);
 }
 </style>

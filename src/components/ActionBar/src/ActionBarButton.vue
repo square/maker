@@ -163,7 +163,7 @@ export default {
 			/**
 			 * Return different default theme colors for icon buttons
 			 * This can be removed if the action bar icon button ever
-			 * becomes its own component or if we add theming for variants
+			 * becomes its own component or if we add theming for patterns
 			 */
 			if (this.isSingleChild()) {
 				return fill({
@@ -232,9 +232,9 @@ export default {
 	height: var(--medium-height);
 	padding: 0 var(--medium-padding);
 	color: var(--text-color);
-	font-weight: var(--fontWeight-label, 500);
+	font-weight: var(--maker-font-weight-label, 500);
 	font-size: var(--medium-font-size);
-	font-family: var(--font-label, inherit);
+	font-family: var(--maker-font-label, inherit);
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
@@ -312,7 +312,7 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--neutral-20, #fff),
+			0 0 0 1px var(--maker-color-neutral-20, #fff),
 			0 0 0 3px var(--color-focus);
 	}
 

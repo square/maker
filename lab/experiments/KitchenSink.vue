@@ -1,7 +1,7 @@
 <template>
 	<div class="page">
 		<m-text
-			variant="title"
+			pattern="title"
 			:size="4"
 		>
 			Kitchen Sink
@@ -9,7 +9,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Button
@@ -90,7 +90,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Checkbox
@@ -114,7 +114,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Divider
@@ -125,7 +125,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Text
@@ -142,7 +142,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Image
@@ -156,7 +156,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Input
@@ -212,7 +212,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Loading
@@ -223,7 +223,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Notice
@@ -269,7 +269,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Radio
@@ -300,7 +300,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Select
@@ -338,7 +338,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Skeleton
@@ -351,7 +351,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Stepper
@@ -362,7 +362,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Text
@@ -379,7 +379,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Textarea
@@ -409,7 +409,7 @@
 
 		<div class="section">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				Toggle

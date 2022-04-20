@@ -9,7 +9,7 @@ Any components within the theme component will inherit the tokens provided. We r
 	<div class="theme-demo">
 		<div class="controls">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="1"
 			>
 				Colors
@@ -30,20 +30,20 @@ Any components within the theme component will inherit the tokens provided. We r
 			</label>
 			<label class="color-option">
 				<input
-					v-model="theme.colors.heading"
+					v-model="theme.colors.title"
 					type="color"
 				>
-				Heading
+				Title
 			</label>
 			<label class="color-option">
 				<input
-					v-model="theme.colors.text"
+					v-model="theme.colors.paragraph"
 					type="color"
 				>
-				Text
+				Paragraph
 			</label>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="0"
 			>
 				Neutrals
@@ -75,47 +75,43 @@ Any components within the theme component will inherit the tokens provided. We r
 				>
 			</div>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="1"
 			>
 				Fonts
 			</m-text>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="0"
 			>
-				Heading
+				Title
 			</m-text>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.text.variants.title.fontFamily"
+					v-model="theme.fonts.title.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
-					@change="updateFont"
 				/>
 				<m-select
-					v-model="theme.text.variants.title.fontWeight"
+					v-model="theme.fonts.title.fontWeight"
 					:options="defaultWeights"
-					@change="updateFont"
 				/>
 			</div>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="0"
 			>
-				Text
+				Paragraph
 			</m-text>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.text.fontFamily"
+					v-model="theme.fonts.paragraph.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
-					@change="updateFont"
 				/>
 				<m-select
-					v-model="theme.text.fontWeight"
+					v-model="theme.fonts.paragraph.fontWeight"
 					:options="defaultWeights"
-					@change="updateFont"
 				/>
 			</div>
 			<label>
@@ -144,14 +140,14 @@ Any components within the theme component will inherit the tokens provided. We r
 				<m-theme :theme="theme">
 					<div class="section">
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="2"
 							class="item-title"
 						>
 							Cappuccino
 						</m-text>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="1"
 							class="item-price"
 						>
@@ -175,7 +171,7 @@ Any components within the theme component will inherit the tokens provided. We r
 							#label
 						>
 							<m-text
-								variant="title"
+								pattern="title"
 								:size="-1"
 							>
 								Size
@@ -228,7 +224,7 @@ Any components within the theme component will inherit the tokens provided. We r
 							#label
 						>
 							<m-text
-								variant="title"
+								pattern="title"
 								:size="-1"
 							>
 								Modifiers
@@ -260,7 +256,7 @@ Any components within the theme component will inherit the tokens provided. We r
 							#label
 						>
 							<m-text
-								variant="title"
+								pattern="title"
 								:size="-1"
 							>
 								Notes
@@ -317,7 +313,11 @@ export default {
 
 	data() {
 		return {
-			defaultWeights: [{ label: '300', value: '300' }, { label: '400', value: '400' }, { label: '600', value: '600' }],
+			defaultWeights: [
+				{ label: '300', value: '300' },
+				{ label: '400', value: '400' },
+				{ label: '600', value: '600' },
+			],
 			fontOptions: [
 				{
 					label: 'Sans-serif',
@@ -335,8 +335,8 @@ export default {
 			theme: {
 				colors: {
 					background: '#ffffff',
-					text: '#000000',
-					heading: '#000000',
+					paragraph: '#000000',
+					title: '#000000',
 					primary: '#000000',
 					'neutral-0': '#ffffff',
 					'neutral-10': '#f1f1f1',
@@ -345,19 +345,17 @@ export default {
 					'neutral-90': '#1b1b1b',
 					'neutral-100': '#000000',
 				},
-				text: {
-					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
-					fontWeight: '400',
-					variants: {
-						title: {
-							fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
-							fontWeight: '600',
-						},
-					},
-				},
 				fonts: {
 					baseSize: 16,
 					sizeScale: 1.15,
+					title: {
+						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+						fontWeight: '600',
+					},
+					paragraph: {
+						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+						fontWeight: '400',
+					},
 				},
 			},
 			size: 'sm',
@@ -365,14 +363,9 @@ export default {
 			quantity: 1,
 		};
 	},
-
-	methods: {
-		updateFont() {
-
-		},
-	},
 };
 </script>
+
 <style scoped>
 .theme-demo {
 	display: flex;
@@ -544,7 +537,7 @@ Many websites will support multiple page or section output. For example, a hero 
 <template>
 	<m-theme :theme="theme">
 		<section class="profile-demo">
-			<m-text variant="title">
+			<m-text pattern="title">
 				Global Default
 			</m-text>
 			<m-text>
@@ -559,7 +552,7 @@ Many websites will support multiple page or section output. For example, a hero 
 
 		<m-theme :profile="theme.profiles[0].id">
 			<section class="profile-demo">
-				<m-text variant="title">
+				<m-text pattern="title">
 					Profile 1
 				</m-text>
 				<m-text>
@@ -574,7 +567,7 @@ Many websites will support multiple page or section output. For example, a hero 
 		</m-theme>
 		<m-theme :profile="theme.profiles[1].id">
 			<section class="profile-demo">
-				<m-text variant="title">
+				<m-text pattern="title">
 					Profile 2
 				</m-text>
 				<m-text>
@@ -606,8 +599,8 @@ export default {
 			theme: {
 				colors: {
 					background: '#484543',
-					text: '#ffffff',
-					heading: '#e5d7cc',
+					paragraph: '#ffffff',
+					title: '#e5d7cc',
 					primary: '#e5d7cc',
 				},
 				profiles: [
@@ -615,8 +608,8 @@ export default {
 						id: 'profile1',
 						colors: {
 							background: '#b05d54',
-							text: '#e5d7cc',
-							heading: '#e5d7cc',
+							paragraph: '#e5d7cc',
+							title: '#e5d7cc',
 							primary: '#e5d7cc',
 						},
 					},
@@ -624,8 +617,8 @@ export default {
 						id: 'profile2',
 						colors: {
 							background: '#e5d7cc',
-							text: '#000000',
-							heading: '#000000',
+							paragraph: '#000000',
+							title: '#000000',
 							primary: '#000000',
 						},
 					},
@@ -635,9 +628,13 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .profile-demo {
 	padding: 2vh 4vw;
+}
+.profile-demo > * {
+	margin-bottom: 8px;
 }
 </style>
 ```

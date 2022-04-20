@@ -32,7 +32,7 @@
 			:class="$s.Sizes"
 		>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="2"
 			>
 				{{ shape }} shape
@@ -43,7 +43,7 @@
 				:key="size"
 			>
 				<m-text
-					variant="title"
+					pattern="title"
 					:size="0"
 				>
 					{{ size }}

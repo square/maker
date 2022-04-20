@@ -51,7 +51,7 @@ _DemoBlade.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-blade-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Blade heading
 			</m-text>
 			<m-text>
@@ -151,7 +151,7 @@ _ActionBarDemoBlade.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-blade-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Blade heading
 			</m-text>
 			<m-text>
