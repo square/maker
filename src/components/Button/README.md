@@ -36,40 +36,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</th>
 					<td>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 							loading
 						>
@@ -78,40 +78,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</td>
 					<td>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 							loading
 						>
@@ -120,40 +120,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</td>
 					<td>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 							loading
 						>
@@ -167,40 +167,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</th>
 					<td>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 							loading
 						>
@@ -209,40 +209,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</td>
 					<td>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 							loading
 						>
@@ -251,40 +251,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</td>
 					<td>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 						>
 							<x class="icon" />
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 							loading
 						>
@@ -298,40 +298,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</th>
 					<td>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 						>
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 							loading
 						>
@@ -340,40 +340,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</td>
 					<td>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="small"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="small"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="small"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="small"
 						>
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="small"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="small"
 							loading
 						>
@@ -382,40 +382,40 @@ For a simplified text-only button with no padding or focus/active/hover states, 
 					</td>
 					<td>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="small"
 						>
 							Button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="small"
 						>
 							<plus class="icon" />
 							Button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="small"
 						>
 							Button
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="small"
 						>
 							<plus class="icon" />
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="small"
 							disabled
 						>
 							Disabled button
 						</m-button>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="small"
 							loading
 						>
