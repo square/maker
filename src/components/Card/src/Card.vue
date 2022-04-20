@@ -25,8 +25,8 @@ export default {
 <style module="$s">
 .Card {
 	padding: 16px 24px;
-	background-color: var(--color-background, #fff);
-	border: 1px solid var(--neutral-20, #eaeaea);
+	background-color: var(--maker-color-background, #fff);
+	border: 1px solid var(--maker-color-neutral-20, #eaeaea);
 	border-radius: 8px;
 }
 </style>

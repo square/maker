@@ -41,7 +41,7 @@ export default {
 <style module="$s">
 .Segment {
 	flex: 1 0 0;
-	color: var(--neutral-90, black);
+	color: var(--maker-color-neutral-90, black);
 	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
@@ -62,8 +62,8 @@ export default {
 }
 
 .selected {
-	color: var(--neutral-90, black);
-	background-color: var(--color-elevation, white);
+	color: var(--maker-color-neutral-90, black);
+	background-color: var(--maker-color-elevation, white);
 	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
 }
 </style>

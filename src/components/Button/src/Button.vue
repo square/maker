@@ -282,8 +282,8 @@ export default {
 	align-items: center;
 	min-width: 0;
 	color: var(--color-contrast);
-	font-weight: var(--font-weight-label, 500);
-	font-family: var(--font-family-label, inherit);
+	font-weight: var(--maker-font-weight-label, 500);
+	font-family: var(--maker-font-family-label, inherit);
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
@@ -386,7 +386,7 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--neutral-20, #fff),
+			0 0 0 1px var(--maker-color-neutral-20, #fff),
 			0 0 0 3px var(--color-focus);
 	}
 
