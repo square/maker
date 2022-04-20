@@ -144,7 +144,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.variants.title.fontFamily"
+						v-model="theme.text.patterns.title.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -158,7 +158,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.variants.title.fontWeight"
+						v-model="theme.text.patterns.title.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -276,8 +276,8 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.text.variants.title.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.text.variants.title.fontWeight;
+			const fontHeading = themeStore.$state.theme.text.patterns.title.fontFamily;
+			const fontWeightsHeading = themeStore.$state.theme.text.patterns.title.fontWeight;
 			const fontText = themeStore.$state.theme.text.fontFamily;
 			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
 

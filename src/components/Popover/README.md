@@ -301,7 +301,7 @@ _DemoModal.vue_
 			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Popover in a modal
 			</m-text>
 
@@ -368,7 +368,7 @@ _DemoDialog.vue_
 <template>
 	<m-dialog>
 		<m-dialog-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Popover in a dialog
 			</m-text>
 
@@ -435,7 +435,7 @@ _DemoPopoverContent.vue_
 <template>
 	<div :class="$s.DemoPopoverContent">
 		<m-text
-			variant="title"
+			pattern="title"
 			:class="$s.DemoPopoverHeader"
 			:size="0"
 		>

@@ -2,7 +2,7 @@
 	<div>
 		<div class="highlight">
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="1"
 				class="heading"
 			>
@@ -24,7 +24,7 @@
 			:key="category"
 		>
 			<m-text
-				variant="title"
+				pattern="title"
 				class="heading"
 			>
 				{{ category }}
@@ -38,7 +38,7 @@
 					>
 						<div class="item-details">
 							<m-text
-								variant="title"
+								pattern="title"
 								:size="-1"
 							>
 								{{ item.name }}

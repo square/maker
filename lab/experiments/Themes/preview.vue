@@ -22,7 +22,7 @@
 					:class="$s.Section"
 				>
 					<m-text
-						variant="title"
+						pattern="title"
 						:size="1"
 					>
 						{{ category }}
@@ -34,7 +34,7 @@
 						>
 							<div class="item-details">
 								<m-text
-									variant="title"
+									pattern="title"
 									:size="0"
 									class="item-title"
 								>
@@ -74,14 +74,14 @@
 				/>
 				<div :class="$s.Section">
 					<m-text
-						variant="title"
+						pattern="title"
 						:size="2"
 						class="item-title"
 					>
 						Cappuccino
 					</m-text>
 					<m-text
-						variant="title"
+						pattern="title"
 						:size="1"
 						class="item-price"
 					>
@@ -105,7 +105,7 @@
 						#label
 					>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="-1"
 						>
 							Size
@@ -158,7 +158,7 @@
 						#label
 					>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="-1"
 						>
 							Modifiers
@@ -190,7 +190,7 @@
 						#label
 					>
 						<m-text
-							variant="title"
+							pattern="title"
 							:size="-1"
 						>
 							Notes
@@ -232,7 +232,7 @@
 				</div>
 				<div :class="[$s.Section, $s.Cart]">
 					<m-text
-						variant="title"
+						pattern="title"
 						:size="1"
 					>
 						Shopping Cart
@@ -243,7 +243,7 @@
 						<div class="cart-content">
 							<div class="cart-text">
 								<m-text
-									variant="title"
+									pattern="title"
 									:size="-1"
 									class="item-title"
 								>
@@ -280,7 +280,7 @@
 						<div class="cart-content">
 							<div class="cart-text">
 								<m-text
-									variant="title"
+									pattern="title"
 									:size="-1"
 									class="item-title"
 								>
@@ -318,7 +318,7 @@
 					</m-button>
 					<m-divider style="margin: 24px 0;" />
 					<m-text
-						variant="title"
+						pattern="title"
 						:size="0"
 					>
 						Add a tip

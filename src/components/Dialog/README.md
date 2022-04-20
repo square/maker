@@ -48,7 +48,7 @@ _DemoDialog.vue_
 	<m-dialog>
 		<m-dialog-content>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="3"
 			>
 				Dialog heading
@@ -306,7 +306,7 @@ _ActionBarDemoDialog.vue_
 	<m-dialog>
 		<m-dialog-content>
 			<m-text
-				variant="title"
+				pattern="title"
 				:size="3"
 			>
 				Whoa, hold on!
@@ -427,7 +427,7 @@ _DemoModal.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-text variant="title">
+			<m-text pattern="title">
 				Modal heading
 			</m-text>
 			<m-text>

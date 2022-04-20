@@ -1,7 +1,7 @@
 <template>
 	<div :class="$s.Page">
 		<m-text
-			variant="title"
+			pattern="title"
 			:size="4"
 		>
 			Lab experiments

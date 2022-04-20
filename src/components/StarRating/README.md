@@ -12,7 +12,7 @@
 		</label>
 		<div>
 			<m-text
-				variant="title"
+				pattern="title"
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>
@@ -36,7 +36,7 @@
 
 		<div>
 			<m-text
-				variant="title"
+				pattern="title"
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>
@@ -70,7 +70,7 @@
 
 		<div>
 			<m-text
-				variant="title"
+				pattern="title"
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>

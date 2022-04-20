@@ -199,7 +199,7 @@ export const modern = {
 	text: {
 		fontFamily: 'Open Sans',
 		fontWeight: '400',
-		variants: {
+		patterns: {
 			title: {
 				fontFamily: 'Open Sans',
 				fontWeight: '600',
@@ -230,7 +230,7 @@ export const midnight = {
 	text: {
 		fontFamily: 'Karla',
 		fontWeight: '400',
-		variants: {
+		patterns: {
 			title: {
 				fontFamily: 'Domine',
 				fontWeight: '400',
@@ -261,7 +261,7 @@ export const spaces = {
 	text: {
 		fontFamily: 'Libre Franklin',
 		fontWeight: '400',
-		variants: {
+		patterns: {
 			title: {
 				fontFamily: 'Libre Franklin',
 				fontWeight: '700',
@@ -292,7 +292,7 @@ export const santa = {
 	text: {
 		fontFamily: 'Rubik',
 		fontWeight: '400',
-		variants: {
+		patterns: {
 			title: {
 				fontFamily: 'Comfortaa',
 				fontWeight: '700',

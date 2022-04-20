@@ -163,7 +163,7 @@ export default {
 			/**
 			 * Return different default theme colors for icon buttons
 			 * This can be removed if the action bar icon button ever
-			 * becomes its own component or if we add theming for variants
+			 * becomes its own component or if we add theming for patterns
 			 */
 			if (this.isSingleChild()) {
 				return fill({
