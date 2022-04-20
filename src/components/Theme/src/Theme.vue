@@ -59,24 +59,24 @@ export default {
 			const { colors, fonts } = this;
 
 			return {
-				'--neutral-0': colors['neutral-0'],
-				'--neutral-10': colors['neutral-10'],
-				'--neutral-20': colors['neutral-20'],
-				'--neutral-80': colors['neutral-80'],
-				'--neutral-90': colors['neutral-90'],
-				'--neutral-100': colors['neutral-100'],
-				'--color-primary': colors.primary,
-				'--color-background': colors.background,
-				'--color-title': colors.title,
-				'--color-paragraph': colors.paragraph,
-				'--color-elevation': colors['color-elevation'],
-				'--color-overlay': colors['color-overlay'],
-				'--font-family-title': fonts.title.fontFamily,
-				'--font-weight-title': fonts.title.fontWeight,
-				'--font-family-paragraph': fonts.paragraph.fontFamily,
-				'--font-weight-paragraph': fonts.paragraph.fontWeight,
-				'--font-family-label': fonts.label.fontFamily,
-				'--font-weight-label': fonts.label.fontWeight,
+				'--maker-color-neutral-0': colors['neutral-0'],
+				'--maker-color-neutral-10': colors['neutral-10'],
+				'--maker-color-neutral-20': colors['neutral-20'],
+				'--maker-color-neutral-80': colors['neutral-80'],
+				'--maker-color-neutral-90': colors['neutral-90'],
+				'--maker-color-neutral-100': colors['neutral-100'],
+				'--maker-color-primary': colors.primary,
+				'--maker-color-background': colors.background,
+				'--maker-color-title': colors.title,
+				'--maker-color-paragraph': colors.paragraph,
+				'--maker-color-elevation': colors['color-elevation'],
+				'--maker-color-overlay': colors['color-overlay'],
+				'--maker-font-family-title': fonts.title.fontFamily,
+				'--maker-font-weight-title': fonts.title.fontWeight,
+				'--maker-font-family-paragraph': fonts.paragraph.fontFamily,
+				'--maker-font-weight-paragraph': fonts.paragraph.fontWeight,
+				'--maker-font-family-label': fonts.label.fontFamily,
+				'--maker-font-weight-label': fonts.label.fontWeight,
 			};
 		},
 	},
@@ -89,9 +89,9 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--color-paragraph);
-	font-weight: var(--font-weight-paragraph);
-	font-family: var(--font-family-paragraph);
-	background-color: var(--color-background);
+	color: var(--maker-color-paragraph);
+	font-weight: var(--maker-font-weight-paragraph);
+	font-family: var(--maker-font-family-paragraph);
+	background-color: var(--maker-color-background);
 }
 </style>
