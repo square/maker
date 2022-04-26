@@ -184,6 +184,6 @@ export default {
 
 .variant_block {
 	padding: 16px;
-	background-color: var(--maker-color-neutral-10, var(--color-bg));
+	background-color: var(--color-bg);
 }
 </style>
