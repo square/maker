@@ -171,10 +171,14 @@ export default {
 					textColor: this.textColor || this.resolvedColor,
 				});
 			}
-			return fill({
-				color: this.resolvedColor,
-				textColor: this.resolvedTextColor,
-			});
+			return {
+				...fill({
+					color: this.resolvedColor,
+					textColor: this.resolvedTextColor,
+				}),
+				'--border-radius-small': this.theme.shapes.radii.small,
+				'--border-radius-large': this.theme.shapes.radii.large,
+			};
 		},
 
 		isDisabled() {
@@ -238,7 +242,6 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 32px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -295,11 +298,11 @@ export default {
 	}
 
 	&.shape_rounded {
-		border-radius: 8px;
+		border-radius: var(--border-radius-small, 8px);
 	}
 
 	&.shape_pill {
-		border-radius: 32px;
+		border-radius: var(--border-radius-large, 32px);
 	}
 
 	&:disabled {

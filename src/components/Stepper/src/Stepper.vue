@@ -7,7 +7,6 @@
 			size="small"
 			:color="resolvedColor"
 			:text-color="resolvedTextColor"
-			:shape="resolvedShape"
 			:disabled="value === minVal"
 			@click="decrement"
 		>
@@ -21,7 +20,6 @@
 			size="small"
 			:color="resolvedColor"
 			:text-color="resolvedTextColor"
-			:shape="resolvedShape"
 			:disabled="value === maxVal"
 			@click="increment"
 		>
@@ -96,18 +94,10 @@ export default {
 			default: undefined,
 			validator: (color) => chroma.valid(color),
 		},
-		/**
-		 * stepper button shape
-		 */
-		shape: {
-			type: String,
-			default: undefined,
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
-		},
 	},
 
 	computed: {
-		...resolveThemeableProps('stepper', ['color', 'textColor', 'shape']),
+		...resolveThemeableProps('stepper', ['color', 'textColor']),
 
 		maxVal() {
 			return Number.parseInt(this.max, 10);

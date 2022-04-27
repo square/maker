@@ -1,5 +1,8 @@
 <template>
-	<div :class="$s.ImageWrapper">
+	<div
+		:class="$s.ImageWrapper"
+		:style="style"
+	>
 		<template v-if="isIntersecting">
 			<m-transition-fade-in>
 				<m-skeleton-block
@@ -7,7 +10,10 @@
 				/>
 				<img
 					v-else
-					:class="$s.Image"
+					:class="[
+						$s.Image,
+						$s[`shape_${resolvedShape}`],
+					]"
 					:src="src"
 					:srcset="srcset"
 					v-bind="$attrs"
@@ -21,6 +27,7 @@
 <script>
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 function SharedIntersectionObserver() {
 	const callbacks = new WeakMap();
@@ -54,6 +61,13 @@ export default {
 		MSkeletonBlock,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	inheritAttrs: false,
 
 	props: {
@@ -65,6 +79,11 @@ export default {
 			type: String,
 			default: undefined,
 		},
+		shape: {
+			type: String,
+			default: undefined,
+			validator: (shape) => ['squared', 'rounded'].includes(shape),
+		},
 	},
 
 	data() {
@@ -72,6 +91,15 @@ export default {
 			isIntersecting: true,
 			loaded: imgCache.has(this.src + this.srcset),
 		};
+	},
+
+	computed: {
+		...resolveThemeableProps('image', ['shape']),
+		style() {
+			return {
+				'--border-radius-medium': this.theme.shapes.radii.medium,
+			};
+		},
 	},
 
 	watch: {
@@ -135,5 +163,13 @@ export default {
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
+
+	&.shape_rounded {
+		border-radius: var(--border-radius-medium, 16px);
+	}
+
+	&.shape_squared {
+		border-radius: 0;
+	}
 }
 </style>

@@ -2,7 +2,6 @@
 	<div
 		:class="[
 			$s.Container,
-			$s[`shape_${shapeInner}`],
 			$s[`size_${sizeInner}`],
 		]"
 	>
@@ -32,14 +31,6 @@ export default {
 			required: true,
 		},
 		/**
-		 * Shape of Control & Segments
-		 */
-		shape: {
-			type: String,
-			default: 'rounded',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
-		},
-		/**
 		 * Size of Control & Segments
 		 */
 		size: {
@@ -51,7 +42,6 @@ export default {
 	data() {
 		return {
 			currentValue: this.selected,
-			shapeInner: this.shape,
 			sizeInner: this.size,
 		};
 	},
@@ -72,15 +62,7 @@ export default {
 	font-size: 14px;
 	line-height: 24px;
 	background-color: var(--neutral-10, #f6f7f9);
-	border-radius: 4px;
-}
-
-.shape_pill {
-	border-radius: 32px;
-}
-
-.shape_squared {
-	border-radius: 0;
+	border-radius: var(--maker-border-radius-button, 8px);
 }
 
 .size_small {

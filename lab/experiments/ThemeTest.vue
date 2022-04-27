@@ -70,6 +70,24 @@
 								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
 							</div>
 						</div>
+						<m-divider />
+						<m-heading
+							:size="0"
+						>
+							Shape
+						</m-heading>
+						<select
+							v-model="shape"
+						>
+							<template v-for="(value, index) in shapes">
+								<option
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</template>
+						</select>
 					</div>
 				</div>
 				<div
@@ -474,6 +492,12 @@ export default {
 			selected: 'medium',
 			images: [],
 			item: storeData.items[0],
+			shape: 'rounded',
+			shapes: [
+				'squared',
+				'rounded',
+				'pill',
+			],
 		};
 	},
 
@@ -494,8 +518,8 @@ export default {
 				modal: {
 					bgColor: this.backgroundColor,
 				},
-				actionbarbutton: {
-					shape: 'rounded',
+				shapes: {
+					default: this.shape,
 				},
 			};
 		},

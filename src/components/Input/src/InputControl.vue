@@ -154,7 +154,6 @@ export default {
 	--color-foreground: var(--neutral-90, rgba(107, 107, 107, 0.9));
 	--color-border-active: var(--neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
 
 	display: flex;
 	align-items: center;
@@ -168,7 +167,7 @@ export default {
 	font-family: var(--font-family);
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: var(--border-radius);
+	border-radius: var(--maker-border-radius, 8px);
 	transition: border-color 0.2s ease;
 
 	&:not(.disabled, .invalid):hover,

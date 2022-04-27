@@ -230,10 +230,14 @@ export default {
 	computed: {
 		...resolveThemeableProps('button', ['color', 'size', 'textColor', 'variant', 'shape', 'align', 'fullWidth']),
 		style() {
-			return VARIANTS[this.resolvedVariant]({
-				color: this.resolvedColor,
-				textColor: this.resolvedTextColor,
-			});
+			return {
+				...VARIANTS[this.resolvedVariant]({
+					color: this.resolvedColor,
+					textColor: this.resolvedTextColor,
+				}),
+				'--border-radius-small': this.theme.shapes.radii.small,
+				'--border-radius-large': this.theme.shapes.radii.large,
+			};
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
@@ -269,7 +273,6 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 8px;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -283,12 +286,16 @@ export default {
 	touch-action: manipulation;
 	fill: currentColor;
 
-	&.shape_pill {
-		border-radius: 32px;
-	}
-
 	&.shape_squared {
 		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: var(--border-radius-small, 8px);
+	}
+
+	&.shape_pill {
+		border-radius: var(--border-radius-large, 32px);
 	}
 
 	&.iconButton {

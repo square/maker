@@ -32,14 +32,6 @@ export default {
 			validator: (size) => ['xsmall', 'small', 'medium', 'large'].includes(size),
 		},
 		/**
-		 * Shape of the progress bar
-		 */
-		shape: {
-			type: String,
-			default: 'rounded',
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
-		},
-		/**
 		 * Color of the progress bar (not background)
 		 */
 		color: {
@@ -73,12 +65,14 @@ export default {
 	width: 100%;
 	overflow: hidden;
 	background-color: #f5f4f4;
+	border-radius: var(--maker-border-radius, 0);
 }
 
 .ProgressBar {
 	width: var(--fill-percent, 0);
 	height: 100%;
 	background-color: var(--bar-color);
+	border-radius: var(--maker-border-radius, 0);
 	transition: width 100ms linear;
 }
 
@@ -96,17 +90,5 @@ export default {
 
 .ProgressBarContainer.size_large {
 	height: 16px;
-}
-
-.ProgressBarContainer.shape_squared,
-.ProgressBarContainer.shape_squared .ProgressBar {
-	border-radius: 0;
-}
-
-.ProgressBarContainer.shape_rounded,
-.ProgressBarContainer.shape_rounded .ProgressBar,
-.ProgressBarContainer.shape_pill,
-.ProgressBarContainer.shape_pill .ProgressBar {
-	border-radius: 16px;
 }
 </style>

@@ -57,7 +57,6 @@ export default {
 	--selected-disabled-text-color
 */
 .Button {
-	--border-radius: 8px;
 	--button-padding: 12px 24px;
 
 	flex-shrink: 0;
@@ -70,7 +69,7 @@ export default {
 	text-align: left;
 	background-color: var(--neutral-10, #f2f2f2);
 	border: none;
-	border-radius: var(--border-radius);
+	border-radius: var(--maker-border-radius, 8px);
 	outline: none;
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;
