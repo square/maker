@@ -167,7 +167,7 @@ export default {
 			 */
 			if (this.isSingleChild()) {
 				return fill({
-					color: this.color || this.theme.colors['color-elevation'] || '#000',
+					color: this.color || this.theme.colors.elevation || '#000',
 					textColor: this.textColor || this.resolvedColor,
 				});
 			}

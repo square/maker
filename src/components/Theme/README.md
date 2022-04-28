@@ -644,6 +644,38 @@ export default {
 </style>
 ```
 
+## Reusable CSS Variables
+
+The Theme component makes these reusable CSS variables available to all DOM nodes rendered inside of it.
+
+### Colors
+
+Variable | Purpose
+-|-
+--maker-color-neutral-0 | neutral-0
+--maker-color-neutral-10 | neutral-10
+--maker-color-neutral-20 | neutral-20
+--maker-color-neutral-80 | neutral-80
+--maker-color-neutral-90 | neutral-80
+--maker-color-neutral-100 | neutral-100
+--maker-color-primary | primary color
+--maker-color-background | background color
+--maker-color-heading | heading color
+--maker-color-body | body text color
+--maker-color-elevation | elevation color
+--maker-color-overlay | overlay color
+
+### Typography
+
+Variable | Purpose
+-|-
+--maker-font-family-heading | heading font family
+--maker-font-weight-heading | heading font weight
+--maker-font-family-body | body text font family
+--maker-font-weight-body | body text font weight
+--maker-font-family-label | label font family
+--maker-font-weight-label | label font weight
+
 <!-- api-tables:start -->
 ## Props
 

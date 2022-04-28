@@ -524,8 +524,8 @@ function contrastColors(bgHex) {
 
 	return {
 		...colors,
-		'color-elevation': isLight ? '#ffffff' : colors['neutral-20'],
-		'color-overlay': isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
+		elevation: isLight ? '#ffffff' : colors['neutral-20'],
+		overlay: isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
 	};
 }
 // Above will be supplied by website-springboard
