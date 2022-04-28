@@ -30,17 +30,17 @@ Any components within the theme component will inherit the tokens provided. We r
 			</label>
 			<label class="color-option">
 				<input
-					v-model="theme.colors.title"
+					v-model="theme.colors.heading"
 					type="color"
 				>
-				Title
+				Heading
 			</label>
 			<label class="color-option">
 				<input
-					v-model="theme.colors.paragraph"
+					v-model="theme.colors.body"
 					type="color"
 				>
-				Paragraph
+				Body
 			</label>
 			<m-text
 				pattern="title"
@@ -84,16 +84,16 @@ Any components within the theme component will inherit the tokens provided. We r
 				pattern="title"
 				:size="0"
 			>
-				Title
+				Heading
 			</m-text>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.fonts.title.fontFamily"
+					v-model="theme.fonts.heading.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
 				/>
 				<m-select
-					v-model="theme.fonts.title.fontWeight"
+					v-model="theme.fonts.heading.fontWeight"
 					:options="defaultWeights"
 				/>
 			</div>
@@ -101,16 +101,16 @@ Any components within the theme component will inherit the tokens provided. We r
 				pattern="title"
 				:size="0"
 			>
-				Paragraph
+				Body
 			</m-text>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.fonts.paragraph.fontFamily"
+					v-model="theme.fonts.body.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
 				/>
 				<m-select
-					v-model="theme.fonts.paragraph.fontWeight"
+					v-model="theme.fonts.body.fontWeight"
 					:options="defaultWeights"
 				/>
 			</div>
@@ -335,8 +335,8 @@ export default {
 			theme: {
 				colors: {
 					background: '#ffffff',
-					paragraph: '#000000',
-					title: '#000000',
+					body: '#000000',
+					heading: '#000000',
 					primary: '#000000',
 					'neutral-0': '#ffffff',
 					'neutral-10': '#f1f1f1',
@@ -348,13 +348,17 @@ export default {
 				fonts: {
 					baseSize: 16,
 					sizeScale: 1.15,
-					title: {
+					heading: {
 						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
 						fontWeight: '600',
 					},
-					paragraph: {
+					body: {
 						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
 						fontWeight: '400',
+					},
+					label: {
+						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+						fontWeight: '500',
 					},
 				},
 			},
@@ -487,6 +491,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .demos {
 	text-align: center;
@@ -599,8 +604,8 @@ export default {
 			theme: {
 				colors: {
 					background: '#484543',
-					paragraph: '#ffffff',
-					title: '#e5d7cc',
+					body: '#ffffff',
+					heading: '#e5d7cc',
 					primary: '#e5d7cc',
 				},
 				profiles: [
@@ -608,8 +613,8 @@ export default {
 						id: 'profile1',
 						colors: {
 							background: '#b05d54',
-							paragraph: '#e5d7cc',
-							title: '#e5d7cc',
+							body: '#e5d7cc',
+							heading: '#e5d7cc',
 							primary: '#e5d7cc',
 						},
 					},
@@ -617,8 +622,8 @@ export default {
 						id: 'profile2',
 						colors: {
 							background: '#e5d7cc',
-							paragraph: '#000000',
-							title: '#000000',
+							body: '#000000',
+							heading: '#000000',
 							primary: '#000000',
 						},
 					},

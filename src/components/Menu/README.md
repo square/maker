@@ -190,7 +190,7 @@ export default {
 | toggle-select-prefix | Select toggle prefix                                       |
 | toggle-select        | Select toggle text                                         |
 | toggle               | Custom toggle slot (not rendered if toggle-select is used) |
-| menu                 | Menu options                                               |
+| menu                 | —                                                          |
 
 
 ## Menu Events
