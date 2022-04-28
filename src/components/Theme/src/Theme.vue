@@ -67,14 +67,14 @@ export default {
 				'--maker-color-neutral-100': colors['neutral-100'],
 				'--maker-color-primary': colors.primary,
 				'--maker-color-background': colors.background,
-				'--maker-color-title': colors.title,
-				'--maker-color-paragraph': colors.paragraph,
+				'--maker-color-heading': colors.heading,
+				'--maker-color-body': colors.body,
 				'--maker-color-elevation': colors.elevation,
 				'--maker-color-overlay': colors.overlay,
-				'--maker-font-family-title': fonts.title.fontFamily,
-				'--maker-font-weight-title': fonts.title.fontWeight,
-				'--maker-font-family-paragraph': fonts.paragraph.fontFamily,
-				'--maker-font-weight-paragraph': fonts.paragraph.fontWeight,
+				'--maker-font-family-heading': fonts.heading.fontFamily,
+				'--maker-font-weight-heading': fonts.heading.fontWeight,
+				'--maker-font-family-body': fonts.body.fontFamily,
+				'--maker-font-weight-body': fonts.body.fontWeight,
 				'--maker-font-family-label': fonts.label.fontFamily,
 				'--maker-font-weight-label': fonts.label.fontWeight,
 			};
@@ -89,9 +89,9 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--maker-color-paragraph);
-	font-weight: var(--maker-font-weight-paragraph);
-	font-family: var(--maker-font-family-paragraph);
+	color: var(--maker-color-body);
+	font-weight: var(--maker-font-weight-body);
+	font-family: var(--maker-font-family-body);
 	background-color: var(--maker-color-background);
 }
 </style>
