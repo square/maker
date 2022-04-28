@@ -117,17 +117,17 @@
 						</label>
 						<label>
 							<input
-								v-model="titleColor"
+								v-model="headingColor"
 								type="color"
 							>
-							Title
+							Heading
 						</label>
 						<label>
 							<input
-								v-model="paragraphColor"
+								v-model="bodyColor"
 								type="color"
 							>
-							Paragraph
+							Body
 						</label>
 						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
@@ -565,8 +565,8 @@ export default {
 		return {
 			backgroundColor: '#ffffff',
 			primaryColor: '#14433d',
-			titleColor: '#000000',
-			paragraphColor: '#000000',
+			headingColor: '#000000',
+			bodyColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -637,18 +637,18 @@ export default {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
-					title: this.titleColor,
-					paragraph: this.paragraphColor,
+					heading: this.headingColor,
+					body: this.bodyColor,
 					...colors,
 				},
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
 					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
-					title: {
+					heading: {
 						fontFamily: this.textPatterns.title.fontFamily,
 						fontWeight: this.textPatterns.title.fontWeight,
 					},
-					paragraph: {
+					body: {
 						fontFamily: this.textPatterns.paragraph.fontFamily,
 						fontWeight: this.textPatterns.paragraph.fontWeight,
 					},
