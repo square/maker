@@ -238,6 +238,54 @@ export default {
 };
 </script>
 ```
+### External click to focus/blur
+
+```vue
+<template>
+	<div>
+		<m-input
+			ref="input"
+			variant="outline"
+			placeholder="Placeholder"
+		/>
+		<br>
+		<m-button
+			@click="handleClick"
+		>
+			Click to {{ focused ? 'blur' : 'focus' }}
+		</m-button>
+	</div>
+</template>
+
+<script>
+import { MInput } from '@square/maker/components/Input';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MInput,
+		MButton,
+	},
+
+	data() {
+		return {
+			focused: false,
+		};
+	},
+
+	methods: {
+		handleClick() {
+			if (this.focused) {
+				this.$refs.input.blur();
+			} else {
+				this.$refs.input.focus();
+			}
+			this.focused = !this.focused;
+		},
+	},
+};
+</script>
+```
 
 <!-- api-tables:start -->
 ## Props
