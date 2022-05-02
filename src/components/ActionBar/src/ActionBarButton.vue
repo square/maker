@@ -167,7 +167,7 @@ export default {
 			 */
 			if (this.isSingleChild()) {
 				return fill({
-					color: this.color || this.theme.colors['color-elevation'] || '#000',
+					color: this.color || this.theme.colors.elevation || '#000',
 					textColor: this.textColor || this.resolvedColor,
 				});
 			}
@@ -232,9 +232,9 @@ export default {
 	height: var(--medium-height);
 	padding: 0 var(--medium-padding);
 	color: var(--text-color);
-	font-weight: var(--maker-font-weight-label, 500);
+	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: var(--medium-font-size);
-	font-family: var(--maker-font-family-label, inherit);
+	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;

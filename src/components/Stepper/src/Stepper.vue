@@ -157,8 +157,8 @@ export default {
 .Quantity {
 	margin: 0 16px;
 	color: var(--maker-color-neutral-90, inherit);
-	font-weight: var(--maker-font-weight-label, 500);
-	font-family: var(--maker-font-family-label, inherit);
+	font-weight: var(--maker-font-label-font-weight, 500);
+	font-family: var(--maker-font-label-font-family, inherit);
 	font-feature-settings: "tnum";
 	font-variant-numeric: tabular-nums;
 }

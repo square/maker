@@ -219,8 +219,8 @@ export default {
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: space-between;
-	font-weight: var(--maker-font-weight-label, 500);
-	font-family: var(--maker-font-family-label, inherit);
+	font-weight: var(--maker-font-label-font-weight, 500);
+	font-family: var(--maker-font-label-font-family, inherit);
 
 	&.error {
 		padding-bottom: 8px;

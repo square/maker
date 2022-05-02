@@ -623,10 +623,10 @@ export default {
 	max-height: calc(100% - 40px);
 	padding: 20px 10px;
 	overflow: hidden;
-	color: var(--maker-color-paragraph);
+	color: var(--maker-color-body);
 	font-weight: var(--font-weights-text, normal);
 	font-size: var(--font-base-size);
-	font-family: var(--maker-font-family-paragraph, inherit);
+	font-family: var(--maker-font-body-font-family, inherit);
 	background-color: var(--maker-color-background);
 	border-radius: 30px;
 	box-shadow:
