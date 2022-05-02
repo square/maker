@@ -12,7 +12,23 @@
 			<!-- @slot Select prefix -->
 			<slot name="prefix" />
 		</span>
+		<button
+			v-if="$slots.default"
+			:class="[
+				$s.SelectButton,
+				{
+					[$s.hasPrefix]: $slots.prefix,
+				},
+			]"
+			v-bind="$attrs"
+			v-on="$listeners"
+		>
+			<span>
+				<slot />
+			</span>
+		</button>
 		<select
+			v-else
 			ref="select"
 			v-model="selected"
 			:class="[
@@ -94,7 +110,7 @@ export default {
 		 */
 		options: {
 			type: Array,
-			required: true,
+			default: () => ([]),
 		},
 		/**
 		 * Toggles select invalid state
@@ -138,7 +154,7 @@ export default {
 		setCustomValidity() {
 			const customValidity = this.invalid ? 'invalid' : '';
 			// sets element's internal :invalid flag
-			this.$refs.select.setCustomValidity(customValidity);
+			this.$refs?.select?.setCustomValidity(customValidity);
 		},
 	},
 };
@@ -184,7 +200,10 @@ export default {
 	pointer-events: none;
 }
 
-.Select {
+.Select,
+.SelectButton {
+	display: flex;
+	align-items: center;
 	box-sizing: inherit;
 	width: 100%;
 	height: 48px;

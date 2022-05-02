@@ -504,10 +504,11 @@ export default {
 
 ## PopoverContent Props
 
-| Prop     | Type     | Default | Possible values | Description                     |
-| -------- | -------- | ------- | --------------- | ------------------------------- |
-| color    | `string` | —       | —               | Text color within the popover   |
-| bg-color | `string` | —       | —               | Background color of the popover |
+| Prop     | Type     | Default  | Possible values | Description                     |
+| -------- | -------- | -------- | --------------- | ------------------------------- |
+| color    | `string` | —        | —               | Text color within the popover   |
+| bg-color | `string` | —        | —               | Background color of the popover |
+| padding  | `string` | `'24px'` | —               | Popover padding                 |
 
 
 ## PopoverContent Slots
