@@ -669,12 +669,12 @@ Variable | Purpose
 
 Variable | Purpose
 -|-
---maker-font-family-heading | heading font family
---maker-font-weight-heading | heading font weight
---maker-font-family-body | body text font family
---maker-font-weight-body | body text font weight
---maker-font-family-label | label font family
---maker-font-weight-label | label font weight
+--maker-font-heading-font-family | heading font family
+--maker-font-heading-font-weight | heading font weight
+--maker-font-body-font-family | body text font family
+--maker-font-body-font-weight | body text font weight
+--maker-font-label-font-family | label font family
+--maker-font-label-font-weight | label font weight
 
 <!-- api-tables:start -->
 ## Props

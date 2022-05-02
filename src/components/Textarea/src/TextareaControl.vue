@@ -120,9 +120,9 @@ export default {
 	min-height: calc(12px * 2 + 24px * 3);
 	padding: 12px 16px;
 	color: var(--color-foreground);
-	font-weight: var(--maker-font-weight-body, inherit);
+	font-weight: var(--maker-font-body-font-weight, inherit);
 	font-size: 16px;
-	font-family: var(--maker-font-family-body, inherit);
+	font-family: var(--maker-font-body-font-family, inherit);
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);

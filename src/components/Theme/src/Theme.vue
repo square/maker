@@ -71,12 +71,12 @@ export default {
 				'--maker-color-body': colors.body,
 				'--maker-color-elevation': colors.elevation,
 				'--maker-color-overlay': colors.overlay,
-				'--maker-font-family-heading': fonts.heading.fontFamily,
-				'--maker-font-weight-heading': fonts.heading.fontWeight,
-				'--maker-font-family-body': fonts.body.fontFamily,
-				'--maker-font-weight-body': fonts.body.fontWeight,
-				'--maker-font-family-label': fonts.label.fontFamily,
-				'--maker-font-weight-label': fonts.label.fontWeight,
+				'--maker-font-heading-font-family': fonts.heading.fontFamily,
+				'--maker-font-heading-font-weight': fonts.heading.fontWeight,
+				'--maker-font-body-font-family': fonts.body.fontFamily,
+				'--maker-font-body-font-weight': fonts.body.fontWeight,
+				'--maker-font-label-font-family': fonts.label.fontFamily,
+				'--maker-font-label-font-weight': fonts.label.fontWeight,
 			};
 		},
 	},
@@ -90,8 +90,8 @@ export default {
 <style module="$s">
 .Theme {
 	color: var(--maker-color-body);
-	font-weight: var(--maker-font-weight-body);
-	font-family: var(--maker-font-family-body);
+	font-weight: var(--maker-font-body-font-weight);
+	font-family: var(--maker-font-body-font-family);
 	background-color: var(--maker-color-background);
 }
 </style>

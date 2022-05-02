@@ -626,7 +626,7 @@ export default {
 	color: var(--maker-color-body);
 	font-weight: var(--font-weights-text, normal);
 	font-size: var(--font-base-size);
-	font-family: var(--maker-font-family-body, inherit);
+	font-family: var(--maker-font-body-font-family, inherit);
 	background-color: var(--maker-color-background);
 	border-radius: 30px;
 	box-shadow:

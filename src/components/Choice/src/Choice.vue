@@ -161,9 +161,9 @@ export default {
 
 	display: flex;
 	box-sizing: border-box;
-	font-weight: var(--maker-font-weight-label, 500);
+	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: var(--font-size);
-	font-family: var(--maker-font-family-label, inherit);
+	font-family: var(--maker-font-label-font-family, inherit);
 	line-height: var(--line-height);
 }
 </style>
