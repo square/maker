@@ -2,6 +2,7 @@
 	<m-block-form-control-layout>
 		<template #control>
 			<input-control
+				ref="input"
 				:invalid="isInvalid"
 				v-bind="$attrs"
 				v-on="$listeners"
@@ -48,6 +49,15 @@ export default {
 	computed: {
 		isInvalid() {
 			return this.$attrs.invalid === '' || this.$attrs.invalid || !!this.$slots.error;
+		},
+	},
+
+	methods: {
+		focus() {
+			this.$refs.input.focus();
+		},
+		blur() {
+			this.$refs.input.blur();
 		},
 	},
 };
