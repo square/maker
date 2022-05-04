@@ -271,7 +271,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--maker-shape-button-border-radius);
+	border-radius: var(--border-radius, --maker-shape-default-border-radius, 8px);
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
