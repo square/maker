@@ -3,6 +3,7 @@
 		:class="[
 			$s.Container,
 			$s[`size_${sizeInner}`],
+			$s[`shape_${shape}`],
 		]"
 	>
 		<slot />
@@ -31,6 +32,14 @@ export default {
 			required: true,
 		},
 		/**
+		 * Shape of Control & Segments
+		 */
+		shape: {
+			type: String,
+			default: undefined,
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
 		 * Size of Control & Segments
 		 */
 		size: {
@@ -43,6 +52,7 @@ export default {
 		return {
 			currentValue: this.selected,
 			sizeInner: this.size,
+			shapeInner: this.shape,
 		};
 	},
 	watch: {
@@ -63,6 +73,18 @@ export default {
 	line-height: 24px;
 	background-color: var(--neutral-10, #f6f7f9);
 	border-radius: var(--maker-shape-button-border-radius, 8px);
+}
+
+.shape_pill {
+	border-radius: 32px;
+}
+
+.shape_rounded {
+	border-radius: 4px;
+}
+
+.shape_squared {
+	border-radius: 0;
 }
 
 .size_small {

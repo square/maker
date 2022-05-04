@@ -2,6 +2,7 @@
 	<button
 		:class="[
 			$s.Button,
+			$s[`shape_${controlState.shapeInner}`],
 			$s[`size_${controlState.sizeInner}`],
 			{ [$s.selected]: isSelected },
 		]"
@@ -50,6 +51,18 @@ export default {
 	border-radius: var(--maker-shape-button-border-radius, 8px);
 	outline: none;
 	cursor: pointer;
+}
+
+.shape_pill {
+	border-radius: 32px;
+}
+
+.shape_rounded {
+	border-radius: 4px;
+}
+
+.shape_squared {
+	border-radius: 0;
 }
 
 .selected {
