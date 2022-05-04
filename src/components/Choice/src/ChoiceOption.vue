@@ -69,7 +69,7 @@ export default {
 	text-align: left;
 	background-color: var(--neutral-10, #f2f2f2);
 	border: none;
-	border-radius: var(--maker-border-radius, 8px);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	outline: none;
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;

@@ -1,7 +1,6 @@
 <template>
 	<div
 		:class="$s.ImageWrapper"
-		:style="style"
 	>
 		<template v-if="isIntersecting">
 			<m-transition-fade-in>
@@ -12,8 +11,8 @@
 					v-else
 					:class="[
 						$s.Image,
-						$s[`shape_${resolvedShape}`],
 					]"
+					:style="style"
 					:src="src"
 					:srcset="srcset"
 					v-bind="$attrs"
@@ -97,7 +96,7 @@ export default {
 		...resolveThemeableProps('image', ['shape']),
 		style() {
 			return {
-				'--border-radius-medium': this.theme.shapes.radii.medium,
+				'--border-radius': this.theme.shapes[this.resolvedShape]?.imageBorderRadius,
 			};
 		},
 	},
@@ -163,13 +162,6 @@ export default {
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-
-	&.shape_rounded {
-		border-radius: var(--border-radius-medium, 16px);
-	}
-
-	&.shape_squared {
-		border-radius: 0;
-	}
+	border-radius: var(--border-radius, 0);
 }
 </style>

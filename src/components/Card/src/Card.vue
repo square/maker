@@ -2,7 +2,6 @@
 	<div
 		:class="[
 			$s.Card,
-			$s[`shape_${resolvedShape}`],
 		]"
 		:style="style"
 		v-bind="$attrs"
@@ -43,9 +42,10 @@ export default {
 
 	computed: {
 		...resolveThemeableProps('card', ['shape']),
+
 		style() {
 			return {
-				'--border-radius-small': this.theme.shapes.radii.small,
+				'--border-radius': this.theme.shapes[this.resolvedShape]?.defaultBorderRadius,
 			};
 		},
 	},
@@ -57,14 +57,6 @@ export default {
 	padding: 16px 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--neutral-20, #eaeaea);
-
-	&.shape_rounded,
-	&.shape_pill {
-		border-radius: var(--border-radius-small, 8px);
-	}
-
-	&.shape_squared {
-		border-radius: 0;
-	}
+	border-radius: var(--border-radius, --maker-shape-default-border-radius);
 }
 </style>

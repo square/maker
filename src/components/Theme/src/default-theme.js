@@ -21,12 +21,22 @@ export default function defaultTheme() {
 			sizeScale: 1.17,
 		},
 		shapes: {
-			default: 'rounded',
-			radii: {
-				small: '8px',
-				medium: '16px',
-				large: '32px',
+			squared: {
+				defaultBorderRadius: '0px',
+				buttonBorderRadius: '0px',
+				imageBorderRadius: '0px',
 			},
+			rounded: {
+				defaultBorderRadius: '4px',
+				buttonBorderRadius: '8px',
+				imageBorderRadius: '16px',
+			},
+			pill: {
+				defaultBorderRadius: '4px',
+				buttonBorderRadius: '100px',
+				imageBorderRadius: '16px',
+			},
+			global: 'rounded',
 		},
 		profiles: [
 			{
@@ -36,7 +46,7 @@ export default function defaultTheme() {
 		button: {
 			size: 'medium',
 			variant: 'primary',
-			shape: '@shapes.default',
+			shape: '@shapes.global',
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
@@ -48,16 +58,16 @@ export default function defaultTheme() {
 		},
 		actionbarbutton: {
 			color: '@colors.primary',
-			shape: '@shapes.default',
+			shape: '@shapes.global',
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
 		},
 		image: {
-			shape: 'squared',
+			shape: '@shapes.global',
 		},
 		card: {
-			shape: '@shapes.default',
+			shape: '@shapes.global',
 		},
 		text: {
 			fontFamily: 'inherit',

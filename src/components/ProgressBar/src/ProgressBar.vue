@@ -3,7 +3,6 @@
 		:class="[
 			$s.ProgressBarContainer,
 			$s[`size_${size}`],
-			$s[`shape_${shape}`],
 		]"
 	>
 		<div
@@ -65,14 +64,14 @@ export default {
 	width: 100%;
 	overflow: hidden;
 	background-color: #f5f4f4;
-	border-radius: var(--maker-border-radius, 0);
+	border-radius: var(--maker-default-border-radius, 0);
 }
 
 .ProgressBar {
 	width: var(--fill-percent, 0);
 	height: 100%;
 	background-color: var(--bar-color);
-	border-radius: var(--maker-border-radius, 0);
+	border-radius: var(--maker-default-border-radius, 0);
 	transition: width 100ms linear;
 }
 

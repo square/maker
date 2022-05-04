@@ -189,7 +189,7 @@ export default {
 	height: 96px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--neutral-20, rgba(0, 0, 0, 0.15));
-	border-radius: var(--maker-border-radius, 8px);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	cursor: pointer;
 	transition: background-color 150ms linear;
 }

@@ -76,7 +76,7 @@ export default {
 		top: 50%;
 		width: 100%;
 		height: 75%;
-		border-radius: 8px;
+		border-radius: var(--maker-shape-default-border-radius, 8px);
 		transform: translateY(-50%);
 		animation: pulsing 0.5s ease-in-out infinite alternate;
 		content: "";

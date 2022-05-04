@@ -57,13 +57,7 @@ export default {
 	computed: {
 		styles() {
 			const { colors, shapes } = this;
-			const { radii } = shapes;
-			radii.default = shapes.default === 'squared' ? 0 : radii.small;
-			radii.button = {
-				squared: 0,
-				rounded: radii.small,
-				pill: radii.large,
-			}[shapes.default];
+			const shape = shapes[shapes.global];
 
 			return {
 				'--neutral-0': colors['neutral-0'],
@@ -77,8 +71,8 @@ export default {
 				'--color-text': colors.text,
 				'--color-elevation': colors['color-elevation'],
 				'--color-overlay': colors['color-overlay'],
-				'--maker-border-radius': radii.default,
-				'--maker-border-radius-button': radii.button,
+				'--maker-shape-default-border-radius': shape.defaultBorderRadius,
+				'--maker-shape-button-border-radius': shape.buttonBorderRadius,
 			};
 		},
 	},

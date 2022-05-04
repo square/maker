@@ -125,7 +125,7 @@ export default {
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: var(--maker-border-radius, 8px);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	outline: none;
 	transition:
 		border 0.2s ease,

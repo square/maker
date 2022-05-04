@@ -70,24 +70,68 @@
 								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
 							</div>
 						</div>
+						<br>
 						<m-divider />
+						<br>
 						<m-heading
 							:size="0"
 						>
-							Shape
+							Default Shape
 						</m-heading>
 						<select
 							v-model="shape"
 						>
-							<template v-for="(value, index) in shapes">
+							<option
+								v-for="(value, index) in shapes"
+								:key="index"
+								:value="value"
+							>
+								{{ value }}
+							</option>
+						</select>
+						<template
+							v-if="shape === 'custom'"
+						>
+							<br>
+							default radius:
+							<select
+								v-model="customShape.defaultBorderRadius"
+							>
 								<option
+									v-for="(value, index) in borderRadiusOptions"
 									:key="index"
 									:value="value"
 								>
 									{{ value }}
 								</option>
-							</template>
-						</select>
+							</select>
+							<br>
+							button radius:
+							<select
+								v-model="customShape.buttonBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+							<br>
+							image radius:
+							<select
+								v-model="customShape.imageBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+						</template>
 					</div>
 				</div>
 				<div
@@ -131,17 +175,19 @@
 								</m-choice-option>
 							</m-choice>
 						</div>
-						<m-heading
-							:size="-1"
-						>
-							Enter delivery address
-						</m-heading>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
-						</m-text>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
-						</m-text>
+						<m-card>
+							<m-heading
+								:size="-1"
+							>
+								Enter delivery address
+							</m-heading>
+							<m-text :size="-1">
+								<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
+							</m-text>
+							<m-text :size="-1">
+								<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
+							</m-text>
+						</m-card>
 						<m-notice
 							type="info"
 							variant="block"
@@ -282,17 +328,15 @@
 					:class="$s.Preview"
 				>
 					<div>
-						<m-heading
-							:size="0"
-						>
-							Schedule order
-						</m-heading>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> No minimum
-						</m-text>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> No fees
-						</m-text>
+						<m-text-button>
+							<info :class="$s.Icon" />  Learn more
+						</m-text-button>
+						<m-image
+							src="https://source.unsplash.com/900x600/?vacation"
+						/>
+						<m-image-uploader
+							@image-uploader:change="setImages"
+						/>
 					</div>
 					<m-divider />
 					<div>
@@ -310,15 +354,6 @@
 							:min-date="minDate"
 							:max-date="maxDate"
 							:disabled-dates="disabledDates"
-						/>
-					</div>
-					<m-divider />
-					<div>
-						<m-text-button>
-							<info :class="$s.Icon" />  Learn more
-						</m-text-button>
-						<m-image-uploader
-							@image-uploader:change="setImages"
 						/>
 					</div>
 				</div>
@@ -348,6 +383,8 @@ import { MTextButton } from '@square/maker/components/TextButton';
 import { MCalendar } from '@square/maker/components/Calendar';
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
+import { MCard } from '@square/maker/components/Card';
+import { MImage } from '@square/maker/components/Image';
 import { MModalLayer } from '@square/maker/components/Modal';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
@@ -439,6 +476,8 @@ export default {
 		MImageUploader,
 		MSegmentedControl,
 		MSegment,
+		MCard,
+		MImage,
 		MTextButton,
 		MModalLayer,
 	},
@@ -497,6 +536,22 @@ export default {
 				'squared',
 				'rounded',
 				'pill',
+				'custom',
+			],
+			customShape: {
+				defaultBorderRadius: '0px',
+				buttonBorderRadius: '0px',
+				imageBorderRadius: '0px',
+			},
+			borderRadiusOptions: [
+				'0px',
+				'4px',
+				'8px',
+				'12px',
+				'16px',
+				'20px',
+				'24px',
+				'32px',
 			],
 		};
 	},
@@ -519,7 +574,8 @@ export default {
 					bgColor: this.backgroundColor,
 				},
 				shapes: {
-					default: this.shape,
+					...(this.shape === 'custom' ? { squared: this.customShape } : {}),
+					global: this.shape === 'custom' ? 'squared' : this.shape,
 				},
 			};
 		},

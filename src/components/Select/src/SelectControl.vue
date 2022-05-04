@@ -187,7 +187,7 @@ export default {
 	font-size: 16px;
 	font-family: inherit;
 	font-family: var(--font-family);
-	border-radius: var(--maker-border-radius, 8px);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 }
 
 .Prefix {

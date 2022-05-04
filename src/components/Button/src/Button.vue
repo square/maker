@@ -3,7 +3,6 @@
 		:class="[
 			$s.Button,
 			$s[`size_${resolvedSize}`],
-			$s[`shape_${resolvedShape}`],
 			$s[`align_${resolvedAlign}`],
 			{
 				[$s.fullWidth]: resolvedFullWidth,
@@ -235,8 +234,7 @@ export default {
 					color: this.resolvedColor,
 					textColor: this.resolvedTextColor,
 				}),
-				'--border-radius-small': this.theme.shapes.radii.small,
-				'--border-radius-large': this.theme.shapes.radii.large,
+				'--border-radius': this.theme.shapes[this.resolvedShape]?.buttonBorderRadius,
 			};
 		},
 		isDisabled() {
@@ -273,6 +271,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
+	border-radius: var(--maker-shape-button-border-radius);
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -285,18 +284,6 @@ export default {
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
-
-	&.shape_squared {
-		border-radius: 0;
-	}
-
-	&.shape_rounded {
-		border-radius: var(--border-radius-small, 8px);
-	}
-
-	&.shape_pill {
-		border-radius: var(--border-radius-large, 32px);
-	}
 
 	&.iconButton {
 		min-width: max-content;
