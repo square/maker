@@ -334,7 +334,7 @@ export default {
 	justify-content: center;
 	color: var(--text-color);
 	background-color: inherit;
-	border-radius: 50%;
+	border-radius: var(--border-radius, --maker-shape-default-border-radius, 8px);
 }
 
 .MainText {
