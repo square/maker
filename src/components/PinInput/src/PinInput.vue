@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<div
-			:style="{ width: containerWidth }"
 			:class="{
 				[$s.PinInputContainer]: true,
 				[$s.shake]: isShaking,
@@ -18,7 +17,7 @@
 				:disabled="disabled"
 				:maxlength="i === 0 ? pinLength : 1"
 				:class="{
-					[$s.PinInput]: true,
+					[$s.PinInputCell]: true,
 					[$s.filled]: variant === 'fill',
 					[$s.error]: invalid,
 				}"
@@ -87,11 +86,6 @@ export default {
 	computed: {
 		currentPin() {
 			return this.pin.join('');
-		},
-
-		containerWidth() {
-			const SINGLE_CONTAINER_WIDTH = 58;
-			return `${this.pinLength * SINGLE_CONTAINER_WIDTH}px`;
 		},
 	},
 
@@ -217,20 +211,22 @@ export default {
 .PinInputContainer {
 	display: flex;
 	flex-wrap: nowrap;
+	gap: 8px;
 	align-items: center;
-	justify-content: space-between;
 
 	&.error {
 		padding-bottom: 8px;
 	}
 }
 
-.PinInput {
+.PinInputCell {
 	display: flex;
+	flex: 0 1 auto;
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
 	width: 50px;
+	min-width: 0;
 	height: 50px;
 	padding: 0;
 	font-weight: 500;

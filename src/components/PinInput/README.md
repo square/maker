@@ -8,7 +8,9 @@ an error state.
 
 To trigger the 'shake and clear' functionality add a ref value to your PinInput component, and then on the parent component
 call `shakeAndClearInputs()` on the referenced component.
+
 ### Filled variant
+
 ```vue
 <template>
 	<m-pin-input
@@ -57,6 +59,7 @@ export default {
 ```
 
 ### Outline variant
+
 ```vue
 <template>
 	<m-pin-input
@@ -106,6 +109,7 @@ export default {
 ```
 
 ### With mocked API latency
+
 ```vue
 <template>
 	<m-pin-input
@@ -144,18 +148,18 @@ export default {
 	},
 	methods: {
 		onPinComplete(code) {
+			const DELAY_MS = 1000;
 			this.disableInput = true;
-			const DELAY_MS = 500;
 
 			// simulate API time for code validation
 			setTimeout(() => {
+				this.disableInput = false;
 				if (this.testCode === code) {
 					this.invalidEntry = false;
 				} else {
 					this.invalidEntry = true;
-					this.$refs.pinInput.shakeAndClearInputs();
+					this.$nextTick(this.$refs.pinInput.shakeAndClearInputs);
 				}
-				this.disableInput = false;
 			}, DELAY_MS);
 		},
 	},
@@ -164,6 +168,7 @@ export default {
 ```
 
 ### In a dialog for mobile testing
+
 ```vue
 <template>
 	<div>
@@ -280,6 +285,7 @@ export default {
 	},
 };
 </script>
+
 <style module="$s">
 .padding {
 	padding: 16px 0;
