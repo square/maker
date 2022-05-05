@@ -3,6 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`align_${resolvedAlign}`],
+			$s[`shape_${resolvedShape}`],
 			{
 				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild() && !resolvedFullWidth,
@@ -159,25 +160,22 @@ export default {
 	computed: {
 		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
-			let colors = fill({
-				color: this.resolvedColor,
-				textColor: this.resolvedTextColor,
-			});
-
 			/**
 			 * Return different default theme colors for icon buttons
 			 * This can be removed if the action bar icon button ever
 			 * becomes its own component or if we add theming for variants
 			 */
 			if (this.isSingleChild()) {
-				colors = fill({
+				return fill({
 					color: this.color || this.theme.colors['color-elevation'] || '#000',
 					textColor: this.textColor || this.resolvedColor,
 				});
 			}
 			return {
-				...colors,
-				'--border-radius': this.theme.shapes[this.resolvedShape]?.buttonBorderRadius,
+				...fill({
+					color: this.resolvedColor,
+					textColor: this.resolvedTextColor,
+				}),
 			};
 		},
 
@@ -228,6 +226,8 @@ export default {
 	--medium-font-size: 14px;
 	--medium-padding: 24px;
 	--medium-line-height: 1.77;
+	--radius-rounded-button: 8px;
+	--radius-pill-button: 32px;
 
 	position: relative;
 	display: inline-flex;
@@ -242,7 +242,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--border-radius, --maker-shape-default-border-radius, 8px);
+	border-radius: var(--maker-shape-default-border-radius, 4px);
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -294,6 +294,18 @@ export default {
 		justify-content: space-between;
 	}
 
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: var(--radius-rounded-button);
+	}
+
+	&.shape_pill {
+		border-radius: var(--radius-pill-button);
+	}
+
 	&:disabled {
 		cursor: initial;
 
@@ -334,7 +346,7 @@ export default {
 	justify-content: center;
 	color: var(--text-color);
 	background-color: inherit;
-	border-radius: var(--border-radius, --maker-shape-default-border-radius, 8px);
+	border-radius: 50%;
 }
 
 .MainText {

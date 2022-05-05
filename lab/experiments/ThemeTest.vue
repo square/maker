@@ -86,11 +86,11 @@
 								:key="index"
 								:value="value"
 							>
-								{{ value }}
+								{{ value.name }}
 							</option>
 						</select>
 						<template
-							v-if="shape === 'custom'"
+							v-if="shape.name === 'custom'"
 						>
 							<br>
 							default radius:
@@ -531,12 +531,37 @@ export default {
 			selected: 'medium',
 			images: [],
 			item: storeData.items[0],
-			shape: 'rounded',
+			shape: {
+				name: 'squared',
+				defaultBorderRadius: '0px',
+				buttonBorderRadius: '0px',
+				imageBorderRadius: '0px',
+			},
 			shapes: [
-				'squared',
-				'rounded',
-				'pill',
-				'custom',
+				{
+					name: 'squared',
+					defaultBorderRadius: '0px',
+					buttonBorderRadius: '0px',
+					imageBorderRadius: '0px',
+				},
+				{
+					name: 'rounded',
+					defaultBorderRadius: '4px',
+					buttonBorderRadius: '8px',
+					imageBorderRadius: '16px',
+				},
+				{
+					name: 'pill',
+					defaultBorderRadius: '4px',
+					buttonBorderRadius: '32px',
+					imageBorderRadius: '16px',
+				},
+				{
+					name: 'custom',
+					defaultBorderRadius: '0px',
+					buttonBorderRadius: '0px',
+					imageBorderRadius: '0px',
+				},
 			],
 			customShape: {
 				defaultBorderRadius: '0px',
@@ -574,8 +599,7 @@ export default {
 					bgColor: this.backgroundColor,
 				},
 				shapes: {
-					...(this.shape === 'custom' ? { squared: this.customShape } : {}),
-					global: this.shape === 'custom' ? 'squared' : this.shape,
+					...(this.shape.name === 'custom' ? this.customShape : this.shape),
 				},
 			};
 		},

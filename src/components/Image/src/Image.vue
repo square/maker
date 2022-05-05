@@ -11,8 +11,8 @@
 					v-else
 					:class="[
 						$s.Image,
+						$s[`shape_${resolvedShape}`],
 					]"
-					:style="style"
 					:src="src"
 					:srcset="srcset"
 					v-bind="$attrs"
@@ -94,11 +94,6 @@ export default {
 
 	computed: {
 		...resolveThemeableProps('image', ['shape']),
-		style() {
-			return {
-				'--border-radius': this.theme.shapes[this.resolvedShape]?.imageBorderRadius,
-			};
-		},
 	},
 
 	watch: {
@@ -152,6 +147,9 @@ export default {
 
 <style module="$s">
 .ImageWrapper {
+	--radius-rounded-image: 16px;
+	--radius-pill-image: 16px;
+
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -162,6 +160,18 @@ export default {
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	border-radius: var(--border-radius, 0);
+	border-radius: var(--maker-shape-image-border-radius, 0);
+
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: var(--radius-rounded-image);
+	}
+
+	&.shape_pill {
+		border-radius: var(--radius-pill-image);
+	}
 }
 </style>

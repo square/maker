@@ -65,6 +65,9 @@ export default {
 
 <style module="$s">
 .Container {
+	--radius-rounded-button: 8px;
+	--radius-pill-button: 32px;
+
 	display: flex;
 	box-sizing: border-box;
 	height: 56px;
@@ -76,11 +79,11 @@ export default {
 }
 
 .shape_pill {
-	border-radius: 32px;
+	border-radius: var(--radius-pill-button);
 }
 
 .shape_rounded {
-	border-radius: 4px;
+	border-radius: var(--radius-rounded-button);
 }
 
 .shape_squared {
