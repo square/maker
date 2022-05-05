@@ -51,7 +51,7 @@ export default {
 	line-height: inherit;
 	background-color: transparent;
 	border: none;
-	border-radius: var(--maker-shape-button-border-radius, 8px);
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
 	cursor: pointer;
 }

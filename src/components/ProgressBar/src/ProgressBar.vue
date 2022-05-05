@@ -3,10 +3,14 @@
 		:class="[
 			$s.ProgressBarContainer,
 			$s[`size_${size}`],
+			$s[`shape_${shape}`],
 		]"
 	>
 		<div
-			:class="$s.ProgressBar"
+			:class="[
+				$s.ProgressBar,
+				$s[`shape_${shape}`],
+			]"
 			:style="barStyles"
 		/>
 	</div>
@@ -29,6 +33,14 @@ export default {
 			type: String,
 			default: 'medium',
 			validator: (size) => ['xsmall', 'small', 'medium', 'large'].includes(size),
+		},
+		/**
+		 * Shape of the progress bar
+		 */
+		shape: {
+			type: String,
+			default: undefined,
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
 		 * Color of the progress bar (not background)
@@ -64,15 +76,33 @@ export default {
 	width: 100%;
 	overflow: hidden;
 	background-color: #f5f4f4;
-	border-radius: var(--maker-default-border-radius, 0);
+	border-radius: var(--maker-default-border-radius, 16px);
+
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded,
+	&.shape_pill {
+		border-radius: 16px;
+	}
 }
 
 .ProgressBar {
 	width: var(--fill-percent, 0);
 	height: 100%;
 	background-color: var(--bar-color);
-	border-radius: var(--maker-default-border-radius, 0);
+	border-radius: var(--maker-default-border-radius, 16px);
 	transition: width 100ms linear;
+
+	&.shape_squared {
+		border-radius: 0;
+	}
+
+	&.shape_rounded,
+	&.shape_pill {
+		border-radius: 16px;
+	}
 }
 
 .ProgressBarContainer.size_xsmall {

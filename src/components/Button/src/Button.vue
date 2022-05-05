@@ -230,12 +230,10 @@ export default {
 	computed: {
 		...resolveThemeableProps('button', ['color', 'size', 'textColor', 'variant', 'shape', 'align', 'fullWidth']),
 		style() {
-			return {
-				...VARIANTS[this.resolvedVariant]({
-					color: this.resolvedColor,
-					textColor: this.resolvedTextColor,
-				}),
-			};
+			return VARIANTS[this.resolvedVariant]({
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
+			});
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
@@ -274,7 +272,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--maker-shape-button-border-radius);
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),

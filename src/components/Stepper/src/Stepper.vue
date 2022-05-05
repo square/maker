@@ -20,8 +20,8 @@
 			variant="primary"
 			size="small"
 			:color="resolvedColor"
-			:shape="resolvedShape"
 			:text-color="resolvedTextColor"
+			:shape="resolvedShape"
 			:disabled="value === maxVal"
 			@click="increment"
 		>

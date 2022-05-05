@@ -171,12 +171,10 @@ export default {
 					textColor: this.textColor || this.resolvedColor,
 				});
 			}
-			return {
-				...fill({
-					color: this.resolvedColor,
-					textColor: this.resolvedTextColor,
-				}),
-			};
+			return fill({
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
+			});
 		},
 
 		isDisabled() {
@@ -242,7 +240,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--maker-shape-default-border-radius, 4px);
+	border-radius: var(--maker-shape-default-border-radius, var(--radius-rounded-button));
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -346,7 +344,7 @@ export default {
 	justify-content: center;
 	color: var(--text-color);
 	background-color: inherit;
-	border-radius: 50%;
+	border-radius: 32px;
 }
 
 .MainText {

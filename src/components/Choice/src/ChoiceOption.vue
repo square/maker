@@ -58,6 +58,7 @@ export default {
 */
 .Button {
 	--button-padding: 12px 24px;
+	--radius-rounded-default: 4px;
 
 	flex-shrink: 0;
 	padding: var(--button-padding);
@@ -69,7 +70,7 @@ export default {
 	text-align: left;
 	background-color: var(--neutral-10, #f2f2f2);
 	border: none;
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	border-radius: var(--maker-shape-default-border-radius, var(--radius-rounded-default));
 	outline: none;
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;

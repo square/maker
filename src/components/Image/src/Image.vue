@@ -1,7 +1,5 @@
 <template>
-	<div
-		:class="$s.ImageWrapper"
-	>
+	<div :class="$s.ImageWrapper">
 		<template v-if="isIntersecting">
 			<m-transition-fade-in>
 				<m-skeleton-block

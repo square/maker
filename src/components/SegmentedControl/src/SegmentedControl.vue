@@ -75,7 +75,7 @@ export default {
 	font-size: 14px;
 	line-height: 24px;
 	background-color: var(--neutral-10, #f6f7f9);
-	border-radius: var(--maker-shape-button-border-radius, 8px);
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 }
 
 .shape_pill {
