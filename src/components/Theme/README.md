@@ -193,30 +193,32 @@ Any components within the theme component will inherit the tokens provided. We r
 							class="item-image"
 						/>
 						<br>
-						<m-heading
-							:size="2"
-							class="item-title"
-						>
-							Cappuccino
-						</m-heading>
-						<m-heading
-							:size="1"
-							class="item-price"
-						>
-							$4.00
-						</m-heading>
-						<m-text
-							:size="0"
-							class="item-description"
-						>
-							The essence of handcrafting. Our rich espresso is artfully
-							marbled with freshly micro-foamed milk.
-						</m-text>
-						<m-stepper
-							v-model="quantity"
-							min="1"
-							max="10"
-						/>
+						<m-card>
+							<m-heading
+								:size="2"
+								class="item-title"
+							>
+								Cappuccino
+							</m-heading>
+							<m-heading
+								:size="1"
+								class="item-price"
+							>
+								$4.00
+							</m-heading>
+							<m-text
+								:size="0"
+								class="item-description"
+							>
+								The essence of handcrafting. Our rich espresso is artfully
+								marbled with freshly micro-foamed milk.
+							</m-text>
+							<m-stepper
+								v-model="quantity"
+								min="1"
+								max="10"
+							/>
+						</m-card>
 					</div>
 					<m-container>
 						<template
@@ -346,6 +348,7 @@ import { MInput } from '@square/maker/components/Input';
 import { MSelect } from '@square/maker/components/Select';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import { MImage } from '@square/maker/components/Image';
+import { MCard } from '@square/maker/components/Card';
 
 export default {
 	components: {
@@ -362,6 +365,7 @@ export default {
 		MInlineActionBar,
 		MActionBarButton,
 		MImage,
+		MCard,
 	},
 
 	data() {
