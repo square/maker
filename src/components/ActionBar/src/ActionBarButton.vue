@@ -240,7 +240,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--maker-shape-default-border-radius, var(--radius-rounded-button));
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
