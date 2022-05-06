@@ -30,7 +30,10 @@
 				@keyup.enter="commitManualValue"
 			>
 			<span
-				:class="$s.QuantityReadonly"
+				:class="[
+					$s.QuantityReadonly,
+					{ [$s.isManualInput]: isSettingManualValue }
+				]"
 				@click="triggerManualInput"
 			>
 				<!-- This allows us to auto-resize the input as users type -->
@@ -225,6 +228,10 @@ export default {
 .QuantityReadonly {
 	padding: 0 12px;
 	cursor: pointer;
+
+	&.isManualInput {
+		color: transparent;
+	}
 }
 
 .QuantityReadonly,
@@ -246,11 +253,14 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	height: 100%;
 	padding: 0;
 	color: var(--neutral-90, inherit);
 	text-align: center;
 	background: transparent;
 	border: 0;
+	-moz-appearance: textfield;
 
 	&::-webkit-inner-spin-button,
 	&::-webkit-outer-spin-button {
