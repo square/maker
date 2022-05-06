@@ -152,10 +152,6 @@ export default {
 				return;
 			}
 			const incrementBy = 1;
-			/**
-			 * updated stepper value
-			 * @property {number}
-			 */
 			this.emitUpdate(this.value + incrementBy);
 		},
 		decrement() {
@@ -163,10 +159,6 @@ export default {
 				return;
 			}
 			const decrementBy = 1;
-			/**
-			 * updated stepper value
-			 * @property {number}
-			 */
 			this.emitUpdate(this.value - decrementBy);
 		},
 
@@ -183,17 +175,33 @@ export default {
 			event?.preventDefault?.();
 			event?.stopPropagation?.();
 
-			const newValue = Number(this.manualValue);
+			const newValue = Number.parseInt(this.manualValue, 10);
 			this.isSettingManualValue = false;
 
 			if (Number.isNaN(newValue) || newValue === null || newValue === undefined) {
 				return;
 			}
 
-			this.emitUpdate(newValue);
+			this.emitUpdate(this.validateManualValueInRange(newValue));
+		},
+
+		validateManualValueInRange(newValue) {
+			if (!Number.isNaN(this.minVal) && newValue < this.minVal) {
+				return this.minVal;
+			}
+
+			if (!Number.isNaN(this.maxVal) && newValue > this.maxVal) {
+				return this.maxVal;
+			}
+
+			return newValue;
 		},
 
 		emitUpdate(newValue) {
+			/**
+			 * updated stepper value
+			 * @property {number}
+			 */
 			this.$emit('stepper:update', newValue);
 		},
 	},

@@ -7,7 +7,7 @@
 	>
 		<m-stepper
 			v-model="number"
-			min="-10"
+			min="0"
 			max="10"
 		/>
 		v-model: {{ number }}
