@@ -7,7 +7,7 @@
 	>
 		<m-stepper
 			v-model="number"
-			min="0"
+			min="-10"
 			max="10"
 		/>
 		v-model: {{ number }}
@@ -46,7 +46,7 @@ export default {
 
 ## Events
 
-| Event          | Type     | Description           |
-| -------------- | -------- | --------------------- |
-| stepper:update | `number` | updated stepper value |
+| Event          | Type | Description |
+| -------------- | ---- | ----------- |
+| stepper:update | -    | —           |
 <!-- api-tables:end -->

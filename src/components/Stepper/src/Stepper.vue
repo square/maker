@@ -13,9 +13,30 @@
 		>
 			<minus :class="$s.Icon" />
 		</m-button>
-		<span :class="$s.Quantity">
-			{{ value }}
-		</span>
+		<div
+			:class="$s.Quantity"
+		>
+			<input
+				v-show="isSettingManualValue"
+				ref="manualInput"
+				v-model="manualValue"
+				:class="$s.QuantityManualInput"
+				:min="min"
+				:max="max"
+				type="number"
+				inputmode="numeric"
+				align="center"
+				@blur="commitManualValue"
+				@keyup.enter="commitManualValue"
+			>
+			<span
+				:class="$s.QuantityReadonly"
+				@click="triggerManualInput"
+			>
+				<!-- This allows us to auto-resize the input as users type -->
+				{{ isSettingManualValue ? manualValue : value }}
+			</span>
+		</div>
 		<m-button
 			variant="primary"
 			size="small"
@@ -106,6 +127,13 @@ export default {
 		},
 	},
 
+	data() {
+		return {
+			manualValue: 0,
+			isSettingManualValue: false,
+		};
+	},
+
 	computed: {
 		...resolveThemeableProps('stepper', ['color', 'textColor', 'shape']),
 
@@ -128,7 +156,7 @@ export default {
 			 * updated stepper value
 			 * @property {number}
 			 */
-			this.$emit('stepper:update', this.value + incrementBy);
+			this.emitUpdate(this.value + incrementBy);
 		},
 		decrement() {
 			if (!Number.isNaN(this.minVal) && this.value <= this.minVal) {
@@ -139,7 +167,34 @@ export default {
 			 * updated stepper value
 			 * @property {number}
 			 */
-			this.$emit('stepper:update', this.value - decrementBy);
+			this.emitUpdate(this.value - decrementBy);
+		},
+
+		triggerManualInput() {
+			this.manualValue = this.value;
+			this.isSettingManualValue = true;
+			this.$nextTick(() => {
+				this.$refs.manualInput.focus();
+				this.$refs.manualInput.select();
+			});
+		},
+
+		commitManualValue(event) {
+			event?.preventDefault?.();
+			event?.stopPropagation?.();
+
+			const newValue = Number(this.manualValue);
+			this.isSettingManualValue = false;
+
+			if (Number.isNaN(newValue) || newValue === null || newValue === undefined) {
+				return;
+			}
+
+			this.emitUpdate(newValue);
+		},
+
+		emitUpdate(newValue) {
+			this.$emit('stepper:update', newValue);
 		},
 	},
 };
@@ -155,12 +210,49 @@ export default {
 }
 
 .Quantity {
-	margin: 0 16px;
+	position: relative;
+	margin: 0 4px;
+}
+
+.QuantityReadonly {
+	padding: 0 12px;
+	cursor: pointer;
+}
+
+.QuantityReadonly,
+.QuantityManualInput {
 	color: var(--neutral-90, inherit);
 	font-weight: 500;
+	font-size: 16px;
 	font-family: inherit;
 	font-feature-settings: "tnum";
 	font-variant-numeric: tabular-nums;
+}
+
+.QuantityManualInput {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: var(--neutral-90, inherit);
+	text-align: center;
+	background: transparent;
+	border: 0;
+
+	&::-webkit-inner-spin-button,
+	&::-webkit-outer-spin-button {
+		margin: 0;
+		-webkit-appearance: none;
+	}
+
+	&:focus {
+		outline: none;
+	}
 }
 
 .Icon {
