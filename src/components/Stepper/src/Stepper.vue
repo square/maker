@@ -17,7 +17,7 @@
 			:class="$s.Quantity"
 		>
 			<input
-				v-show="isSettingManualValue"
+				v-if="isSettingManualValue"
 				ref="manualInput"
 				v-model="manualValue"
 				:class="$s.QuantityManualInput"
