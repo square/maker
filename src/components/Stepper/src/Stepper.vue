@@ -26,8 +26,7 @@
 				type="number"
 				inputmode="numeric"
 				align="center"
-				@blur="commitManualValue"
-				@keyup.enter="commitManualValue"
+				@change="commitManualValue"
 			>
 			<span
 				:class="[
@@ -60,6 +59,7 @@ import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/co
 import { MButton } from '@square/maker/components/Button';
 import Plus from '@square/maker-icons/Plus';
 import Minus from '@square/maker-icons/Minus';
+import { BASE_TEN } from '@square/maker/utils/constants';
 
 export default {
 	components: {
@@ -141,11 +141,11 @@ export default {
 		...resolveThemeableProps('stepper', ['color', 'textColor', 'shape']),
 
 		maxVal() {
-			return Number.parseInt(this.max, 10);
+			return Number.parseInt(this.max, BASE_TEN);
 		},
 
 		minVal() {
-			return Number.parseInt(this.min, 10);
+			return Number.parseInt(this.min, BASE_TEN);
 		},
 	},
 
@@ -178,7 +178,8 @@ export default {
 			event?.preventDefault?.();
 			event?.stopPropagation?.();
 
-			const newValue = Number.parseInt(this.manualValue, 10);
+			// eslint-disable-next-line no-magic-numbers
+			const newValue = Math.round(Number.parseFloat(this.manualValue, BASE_TEN));
 			this.isSettingManualValue = false;
 
 			if (Number.isNaN(newValue) || newValue === null || newValue === undefined) {
