@@ -175,8 +175,8 @@ export default {
 		},
 
 		commitManualValue(event) {
-			event?.preventDefault?.();
-			event?.stopPropagation?.();
+			event.preventDefault();
+			event.stopPropagation();
 
 			// eslint-disable-next-line no-magic-numbers
 			const newValue = Math.round(Number.parseFloat(this.manualValue, BASE_TEN));
