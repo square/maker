@@ -126,7 +126,7 @@ export default {
 	font-size: 14px;
 	font-family: inherit;
 	line-height: 24px;
-	border-radius: 8px;
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 }
 
 .IconContentWrapper {

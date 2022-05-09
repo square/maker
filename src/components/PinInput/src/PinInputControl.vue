@@ -230,7 +230,7 @@ export default {
 	text-align: center;
 	background: #fff;
 	border: 1px solid #d3d3d3;
-	border-radius: 8px;
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	outline: none;
 	caret-color: black;
 	cursor: pointer;

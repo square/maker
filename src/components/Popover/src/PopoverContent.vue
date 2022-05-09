@@ -81,7 +81,7 @@ export default {
 	color: var(--popover-color, var(--color-text, black));
 	background-color: var(--popover-bg-color, var(--color-background, white));
 	border: 1px solid var(--neutral-10);
-	border-radius: 8px;
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	box-shadow: 0 0 18px 6px rgba(0, 0, 0, 0.2);
 }
 </style>

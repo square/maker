@@ -259,6 +259,9 @@ export default {
 
 <style module="$s">
 .Button {
+	--radius-rounded-button: 8px;
+	--radius-pill-button: 32px;
+
 	position: relative;
 	display: inline-flex;
 	align-items: center;
@@ -269,7 +272,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 8px;
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -283,12 +286,16 @@ export default {
 	touch-action: manipulation;
 	fill: currentColor;
 
-	&.shape_pill {
-		border-radius: 32px;
-	}
-
 	&.shape_squared {
 		border-radius: 0;
+	}
+
+	&.shape_rounded {
+		border-radius: var(--radius-rounded-button);
+	}
+
+	&.shape_pill {
+		border-radius: var(--radius-pill-button);
 	}
 
 	&.iconButton {
