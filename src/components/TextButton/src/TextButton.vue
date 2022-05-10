@@ -127,7 +127,7 @@ export default {
 	vertical-align: middle;
 	background-color: transparent;
 	border: none;
-	border-radius: 4px;
+	border-radius: var(--maker-shape-default-border-radius, 4px);
 	outline-color: currentColor;
 	cursor: pointer;
 	transition: box-shadow 0.2s ease-in;

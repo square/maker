@@ -2,8 +2,8 @@
 	<div
 		:class="[
 			$s.Container,
-			$s[`shape_${shapeInner}`],
 			$s[`size_${sizeInner}`],
+			$s[`shape_${shape}`],
 		]"
 	>
 		<slot />
@@ -36,7 +36,7 @@ export default {
 		 */
 		shape: {
 			type: String,
-			default: 'rounded',
+			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
@@ -51,8 +51,8 @@ export default {
 	data() {
 		return {
 			currentValue: this.selected,
-			shapeInner: this.shape,
 			sizeInner: this.size,
+			shapeInner: this.shape,
 		};
 	},
 	watch: {
@@ -65,6 +65,9 @@ export default {
 
 <style module="$s">
 .Container {
+	--radius-rounded-button: 8px;
+	--radius-pill-button: 32px;
+
 	display: flex;
 	box-sizing: border-box;
 	height: 56px;
@@ -72,11 +75,15 @@ export default {
 	font-size: 14px;
 	line-height: 24px;
 	background-color: var(--neutral-10, #f6f7f9);
-	border-radius: 4px;
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 }
 
 .shape_pill {
-	border-radius: 32px;
+	border-radius: var(--radius-pill-button);
+}
+
+.shape_rounded {
+	border-radius: var(--radius-rounded-button);
 }
 
 .shape_squared {

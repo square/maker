@@ -180,7 +180,6 @@ export default {
 	--color-foreground: var(--neutral-90, rgba(2, 1, 1, 0.9));
 	--color-border-active: var(--neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
 
 	position: relative;
 	box-sizing: border-box;
@@ -188,7 +187,7 @@ export default {
 	font-size: 16px;
 	font-family: inherit;
 	font-family: var(--font-family);
-	border-radius: var(--border-radius);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 }
 
 .Prefix {
