@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { BASE_TEN } from '@square/maker/utils/constants';
+
 const DEFAULT_INPUT_SIZE = 6;
 
 export default {
@@ -121,7 +123,6 @@ export default {
 				return;
 			}
 			// Only allow integers in input
-			const BASE_TEN = 10;
 			const inputValue = Number.isInteger(Number.parseInt(input, BASE_TEN)) ? input : '';
 
 			// One-time-code autofill is treated as an input, not a paste
@@ -144,7 +145,6 @@ export default {
 		},
 
 		attemptSplitPinIntoInputs(value, inputIndex) {
-			const BASE_TEN = 10;
 			if (inputIndex === 0
 				&& value?.length === this.pinLength
 				&& Number.isInteger(Number.parseInt(value, BASE_TEN))
