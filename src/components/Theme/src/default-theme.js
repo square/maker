@@ -138,6 +138,7 @@ export default function defaultTheme() {
 			textColor: '@colors["neutral-90"]',
 		},
 		notice: {
+			pattern: 'info', // default pattern
 			patterns: {
 				error: {
 					type: 'error',

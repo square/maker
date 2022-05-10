@@ -127,8 +127,11 @@ export default {
 			return this.$slots.actions && this.variant === 'block';
 		},
 		style() {
+			const textColor = this.variant === 'inline'
+				? this.resolvedColor
+				: 'var(--maker-color-neutral-90, #1b1b1b)';
 			return {
-				'--color': this.resolvedColor,
+				'--color': textColor,
 				'--color-icon': this.resolvedColor,
 				'--color-bg': this.resolvedBgColor,
 			};
