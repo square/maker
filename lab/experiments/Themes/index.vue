@@ -107,10 +107,10 @@
 				</label>
 				<label>
 					<input
-						v-model="currentProfileColors.text"
+						v-model="currentProfileColors.body"
 						type="color"
 					>
-					Text
+					Body
 				</label>
 				<h3
 					:class="$s.subsectionTitle"
@@ -301,7 +301,7 @@ export default {
 		background(newValue) {
 			const neutrals = generateNeutralColors(newValue);
 			const headingColor = themeStore.$state.theme.colors.heading;
-			const textColor = themeStore.$state.theme.colors.text;
+			const textColor = themeStore.$state.theme.colors.body;
 			const contrastRatio = 4.5;
 
 			themeStore.$state.theme.colors = Object.assign(themeStore.$state.theme.colors, neutrals);
@@ -311,7 +311,7 @@ export default {
 			}
 
 			if (chroma.contrast(newValue, textColor) < contrastRatio) {
-				themeStore.$state.theme.colors.text = neutrals['neutral-100'];
+				themeStore.$state.theme.colors.body = neutrals['neutral-100'];
 			}
 		},
 	},

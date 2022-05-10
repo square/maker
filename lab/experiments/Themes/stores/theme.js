@@ -14,11 +14,11 @@ export const useThemeStore = defineStore('theme', {
 				sizeScale: 1.17,
 				heading: {
 					fontFamily: 'inherit',
-					fontWeight: 'inherit',
+					fontWeight: '700',
 				},
 				body: {
 					fontFamily: 'inherit',
-					fontWeight: 'inherit',
+					fontWeight: '400',
 				},
 			},
 			shape: {},
