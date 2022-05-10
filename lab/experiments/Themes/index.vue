@@ -144,7 +144,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.patterns.title.fontFamily"
+						v-model="theme.fonts.heading.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -158,7 +158,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.patterns.title.fontWeight"
+						v-model="theme.fonts.heading.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -174,11 +174,11 @@
 				<h3
 					:class="$s.subsectionTitle"
 				>
-					Text
+					Body
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.text.fontFamily"
+						v-model="theme.fonts.body.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -192,7 +192,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.text.fontWeight"
+						v-model="theme.fonts.body.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -276,10 +276,10 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.text.patterns.title.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.text.patterns.title.fontWeight;
-			const fontText = themeStore.$state.theme.text.fontFamily;
-			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
+			const fontHeading = themeStore.$state.theme.fonts.heading.fontFamily;
+			const fontWeightsHeading = themeStore.$state.theme.fonts.heading.fontWeight;
+			const fontText = themeStore.$state.theme.fonts.body.fontFamily;
+			const fontWeightsText = themeStore.$state.theme.fonts.body.fontWeight;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);

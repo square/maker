@@ -9,7 +9,18 @@ export const useThemeStore = defineStore('theme', {
 				heading: '#000000',
 				primary: '#000000',
 			},
-			fonts: {},
+			fonts: {
+				baseSize: 16,
+				sizeScale: 1.17,
+				heading: {
+					fontFamily: 'inherit',
+					fontWeight: 'inherit',
+				},
+				body: {
+					fontFamily: 'inherit',
+					fontWeight: 'inherit',
+				},
+			},
 			shape: {},
 		},
 	}),
