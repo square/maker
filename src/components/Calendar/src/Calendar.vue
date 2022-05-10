@@ -330,7 +330,7 @@ export default {
 	font-family: inherit;
 	line-height: var(--line-height);
 	background-color: var(--maker-color-background, #fff);
-	border-radius: 4px;
+	border-radius: var(--maker-shape-default-border-radius, 4px);
 }
 
 .CalendarHeader {
@@ -383,7 +383,7 @@ export default {
 	font-family: inherit;
 	background-color: inherit;
 	border: none;
-	border-radius: 8px;
+	border-radius: var(--maker-shape-button-border-radius, 8px);
 	outline: none;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in;

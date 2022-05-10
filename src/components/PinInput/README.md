@@ -308,9 +308,10 @@ export default {
 
 ## Slots
 
-| Slot  | Description      |
-| ----- | ---------------- |
-| error | Input error slot |
+| Slot    | Description             |
+| ------- | ----------------------- |
+| default | —                       |
+| error   | slot for error messages |
 
 
 ## Events

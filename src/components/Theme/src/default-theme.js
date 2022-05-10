@@ -32,6 +32,11 @@ export default function defaultTheme() {
 				fontWeight: '500',
 			},
 		},
+		shapes: {
+			defaultBorderRadius: '4px',
+			buttonBorderRadius: '4px',
+			imageBorderRadius: '0px',
+		},
 		profiles: [
 			{
 				id: 'defaultProfile',
@@ -40,7 +45,7 @@ export default function defaultTheme() {
 		button: {
 			size: 'medium',
 			variant: 'primary',
-			shape: 'rounded',
+			shape: undefined,
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
@@ -63,10 +68,16 @@ export default function defaultTheme() {
 		},
 		actionbarbutton: {
 			color: '@colors.primary',
-			shape: 'pill',
+			shape: undefined,
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+		},
+		image: {
+			shape: undefined,
+		},
+		card: {
+			shape: undefined,
 		},
 		text: {
 			size: 0,
@@ -105,7 +116,6 @@ export default function defaultTheme() {
 		stepper: {
 			color: '@colors["neutral-10"]',
 			textColor: '@colors["neutral-90"]',
-			shape: 'pill',
 		},
 		notice: {
 			color: undefined,

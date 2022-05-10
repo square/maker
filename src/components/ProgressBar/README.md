@@ -102,10 +102,10 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop     | Type     | Default     | Possible values                      | Description                                |
-| -------- | -------- | ----------- | ------------------------------------ | ------------------------------------------ |
-| size     | `string` | `'medium'`  | `xsmall`, `small`, `medium`, `large` | Size (height) of the progress bar          |
-| shape    | `string` | `'rounded'` | `squared`, `rounded`, `pill`         | Shape of the progress bar                  |
-| color    | `string` | `'#000'`    | —                                    | Color of the progress bar (not background) |
-| progress | `number` | `0`         | —                                    | Progress/width of the bar (0-100)          |
+| Prop     | Type     | Default    | Possible values                      | Description                                |
+| -------- | -------- | ---------- | ------------------------------------ | ------------------------------------------ |
+| size     | `string` | `'medium'` | `xsmall`, `small`, `medium`, `large` | Size (height) of the progress bar          |
+| shape    | `string` | —          | `squared`, `rounded`, `pill`         | Shape of the progress bar                  |
+| color    | `string` | `'#000'`   | —                                    | Color of the progress bar (not background) |
+| progress | `number` | `0`        | —                                    | Progress/width of the bar (0-100)          |
 <!-- api-tables:end -->

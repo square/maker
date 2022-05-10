@@ -1,1 +1,1 @@
-export { default as MPinInput } from './src/PinInput.vue';
+export { default as MPinInput } from './src/PinInputFormItem.vue';

@@ -150,6 +150,69 @@
 								<span :style="{ backgroundColor : 'var(--maker-color-neutral-100)' }" /> Neutral 100
 							</div>
 						</div>
+						<br>
+						<m-divider />
+						<br>
+						<m-text
+							pattern="title"
+							:size="0"
+						>
+							Default Shape
+						</m-text>
+						<select
+							v-model="shape"
+						>
+							<option
+								v-for="(value, index) in shapes"
+								:key="index"
+								:value="value"
+							>
+								{{ value.name }}
+							</option>
+						</select>
+						<template
+							v-if="shape.name === 'custom'"
+						>
+							<br>
+							default radius:
+							<select
+								v-model="customShape.defaultBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+							<br>
+							button radius:
+							<select
+								v-model="customShape.buttonBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+							<br>
+							image radius:
+							<select
+								v-model="customShape.imageBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+						</template>
 					</div>
 				</div>
 				<div
@@ -194,18 +257,20 @@
 								</m-choice-option>
 							</m-choice>
 						</div>
-						<m-text
-							pattern="title"
-							:size="-1"
-						>
-							Enter delivery address
-						</m-text>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
-						</m-text>
-						<m-text :size="-1">
-							<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
-						</m-text>
+						<m-card>
+							<m-text
+								pattern="title"
+								:size="-1"
+							>
+								Enter delivery address
+							</m-text>
+							<m-text :size="-1">
+								<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
+							</m-text>
+							<m-text :size="-1">
+								<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
+							</m-text>
+						</m-card>
 						<m-notice
 							type="info"
 							variant="block"
@@ -387,6 +452,15 @@
 						<m-text :size="-1">
 							<check-circle :class="$s.Icon" /> No fees
 						</m-text>
+						<m-text-button>
+							<info :class="$s.Icon" />  Learn more
+						</m-text-button>
+						<m-image
+							src="https://source.unsplash.com/900x600/?vacation"
+						/>
+						<m-image-uploader
+							@image-uploader:change="setImages"
+						/>
 					</div>
 					<m-divider />
 					<div>
@@ -459,6 +533,8 @@ import { MTextButton } from '@square/maker/components/TextButton';
 import { MCalendar } from '@square/maker/components/Calendar';
 import { MImageUploader } from '@square/maker/components/ImageUploader';
 import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedControl';
+import { MCard } from '@square/maker/components/Card';
+import { MImage } from '@square/maker/components/Image';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MContainer } from '@square/maker/components/Container';
 import { MPinInput } from '@square/maker/components/PinInput';
@@ -552,6 +628,8 @@ export default {
 		MImageUploader,
 		MSegmentedControl,
 		MSegment,
+		MCard,
+		MImage,
 		MTextButton,
 		MModalLayer,
 		MPinInput,
@@ -626,6 +704,53 @@ export default {
 					fontWeight: '500',
 				},
 			},
+			shape: {
+				name: 'squared',
+				defaultBorderRadius: '0px',
+				buttonBorderRadius: '0px',
+				imageBorderRadius: '0px',
+			},
+			shapes: [
+				{
+					name: 'squared',
+					defaultBorderRadius: '0px',
+					buttonBorderRadius: '0px',
+					imageBorderRadius: '0px',
+				},
+				{
+					name: 'rounded',
+					defaultBorderRadius: '4px',
+					buttonBorderRadius: '8px',
+					imageBorderRadius: '16px',
+				},
+				{
+					name: 'pill',
+					defaultBorderRadius: '4px',
+					buttonBorderRadius: '32px',
+					imageBorderRadius: '16px',
+				},
+				{
+					name: 'custom',
+					defaultBorderRadius: '0px',
+					buttonBorderRadius: '0px',
+					imageBorderRadius: '0px',
+				},
+			],
+			customShape: {
+				defaultBorderRadius: '0px',
+				buttonBorderRadius: '0px',
+				imageBorderRadius: '0px',
+			},
+			borderRadiusOptions: [
+				'0px',
+				'4px',
+				'8px',
+				'12px',
+				'16px',
+				'20px',
+				'24px',
+				'32px',
+			],
 		};
 	},
 
@@ -663,8 +788,8 @@ export default {
 				modal: {
 					bgColor: this.backgroundColor,
 				},
-				actionbarbutton: {
-					shape: 'rounded',
+				shapes: {
+					...(this.shape.name === 'custom' ? this.customShape : this.shape),
 				},
 				text: {
 					patterns: {

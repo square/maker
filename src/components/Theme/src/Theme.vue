@@ -56,7 +56,7 @@ export default {
 	},
 	computed: {
 		styles() {
-			const { colors, fonts } = this;
+			const { colors, fonts, shapes } = this;
 
 			return {
 				'--maker-color-neutral-0': colors['neutral-0'],
@@ -77,6 +77,9 @@ export default {
 				'--maker-font-body-font-weight': fonts.body.fontWeight,
 				'--maker-font-label-font-family': fonts.label.fontFamily,
 				'--maker-font-label-font-weight': fonts.label.fontWeight,
+				'--maker-shape-default-border-radius': shapes.defaultBorderRadius,
+				'--maker-shape-button-border-radius': shapes.buttonBorderRadius,
+				'--maker-shape-image-border-radius': shapes.imageBorderRadius,
 			};
 		},
 	},

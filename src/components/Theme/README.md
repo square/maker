@@ -134,37 +134,95 @@ Any components within the theme component will inherit the tokens provided. We r
 				>
 				Contrast
 			</label>
+			<m-text
+				pattern="title"
+				:size="1"
+			>
+				Shapes
+			</m-text>
+			<label>
+				<select
+					v-model="theme.shapes.defaultBorderRadius"
+				>
+					<option
+						v-for="(value, index) in borderRadiusOptions"
+						:key="index"
+						:value="value"
+					>
+						{{ value }}
+					</option>
+				</select>
+				Default border radius
+			</label>
+			<br>
+			<label>
+				<select
+					v-model="theme.shapes.buttonBorderRadius"
+				>
+					<option
+						v-for="(value, index) in borderRadiusOptions"
+						:key="index"
+						:value="value"
+					>
+						{{ value }}
+					</option>
+				</select>
+				Button border radius
+			</label>
+			<br>
+			<label>
+				<select
+					v-model="theme.shapes.imageBorderRadius"
+				>
+					<option
+						v-for="(value, index) in borderRadiusOptions"
+						:key="index"
+						:value="value"
+					>
+						{{ value }}
+					</option>
+				</select>
+
+				Image border radius
+			</label>
 		</div>
 		<div class="demo-container">
 			<div class="demo-preview">
 				<m-theme :theme="theme">
 					<div class="section">
-						<m-text
-							pattern="title"
-							:size="2"
-							class="item-title"
-						>
-							Cappuccino
-						</m-text>
-						<m-text
-							pattern="title"
-							:size="1"
-							class="item-price"
-						>
-							$4.00
-						</m-text>
-						<m-text
-							:size="0"
-							class="item-description"
-						>
-							The essence of handcrafting. Our rich espresso is artfully
-							marbled with freshly micro-foamed milk.
-						</m-text>
-						<m-stepper
-							v-model="quantity"
-							min="1"
-							max="10"
+						<m-image
+							src="https://source.unsplash.com/900x600/?vacation"
+							class="item-image"
 						/>
+						<br>
+						<m-card>
+							<m-text
+								pattern="title"
+								:size="2"
+								class="item-title"
+							>
+								Cappuccino
+							</m-text>
+							<m-text
+								pattern="title"
+								:size="1"
+								class="item-price"
+							>
+								$4.00
+							</m-text>
+							<m-text
+								:size="0"
+								class="item-description"
+							>
+								The essence of handcrafting. Our rich espresso is artfully
+								marbled with freshly micro-foamed milk.
+							</m-text>
+							<m-stepper
+								v-model="quantity"
+								min="1"
+								max="10"
+							/>
+						</m-card>
 					</div>
 					<m-container>
 						<template
@@ -295,6 +353,8 @@ import { MCheckbox } from '@square/maker/components/Checkbox';
 import { MInput } from '@square/maker/components/Input';
 import { MSelect } from '@square/maker/components/Select';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MImage } from '@square/maker/components/Image';
+import { MCard } from '@square/maker/components/Card';
 
 export default {
 	components: {
@@ -309,6 +369,8 @@ export default {
 		MSelect,
 		MInlineActionBar,
 		MActionBarButton,
+		MImage,
+		MCard,
 	},
 
 	data() {
@@ -331,6 +393,16 @@ export default {
 					label: 'Mono',
 					value: 'Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace',
 				},
+			],
+			borderRadiusOptions: [
+				'0px',
+				'4px',
+				'8px',
+				'12px',
+				'16px',
+				'20px',
+				'24px',
+				'32px',
 			],
 			theme: {
 				colors: {
@@ -361,6 +433,7 @@ export default {
 						fontWeight: '500',
 					},
 				},
+				shapes: {},
 			},
 			size: 'sm',
 			selected: 'choice-1',

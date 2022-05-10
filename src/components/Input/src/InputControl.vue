@@ -154,7 +154,6 @@ export default {
 	--color-foreground: var(--maker-color-neutral-90, rgba(107, 107, 107, 0.9));
 	--color-border-active: var(--maker-color-neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
 
 	display: flex;
 	align-items: center;
@@ -166,7 +165,7 @@ export default {
 	font-size: 16px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: var(--border-radius);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	transition: border-color 0.2s ease;
 
 	&:not(.disabled, .invalid):hover,

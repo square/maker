@@ -1,38 +1,34 @@
 <template>
-	<div>
-		<div
+	<div
+		:class="{
+			[$s.PinInputContainer]: true,
+			[$s.shake]: isShaking,
+			[$s.disabled]: disabled,
+			[$s.error]: Boolean($slots.error),
+		}"
+	>
+		<input
+			v-for="(val, i) in pin"
+			:key="i"
+			:ref="getPinCellRef(i)"
+			:value="val"
+			:autocomplete="i === 0 ? 'one-time-code' : 'off'"
+			:disabled="disabled"
+			:maxlength="i === 0 ? pinLength : 1"
 			:class="{
-				[$s.PinInputContainer]: true,
-				[$s.shake]: isShaking,
-				[$s.disabled]: disabled,
-				[$s.error]: Boolean($slots.error),
+				[$s.PinInputCell]: true,
+				[$s.filled]: variant === 'fill',
+				[$s.error]: invalid,
 			}"
+			type="text"
+			inputmode="numeric"
+			pattern="[0-9]*"
+			required
+			@input="onInputPin($event, i)"
+			@paste="onPastePin($event, i)"
+			@focus="onFocusPin($event, i)"
+			@keydown.delete="onDelete($event, i)"
 		>
-			<input
-				v-for="(val, i) in pin"
-				:key="i"
-				:ref="getPinCellRef(i)"
-				:value="val"
-				:autocomplete="i === 0 ? 'one-time-code' : 'off'"
-				:disabled="disabled"
-				:maxlength="i === 0 ? pinLength : 1"
-				:class="{
-					[$s.PinInputCell]: true,
-					[$s.filled]: variant === 'fill',
-					[$s.error]: invalid,
-				}"
-				type="text"
-				inputmode="numeric"
-				pattern="[0-9]*"
-				required
-				@input="onInputPin($event, i)"
-				@paste="onPastePin($event, i)"
-				@focus="onFocusPin($event, i)"
-				@keydown.delete="onDelete($event, i)"
-			>
-		</div>
-		<!-- @slot Input error slot -->
-		<slot name="error" />
 	</div>
 </template>
 
@@ -237,7 +233,7 @@ export default {
 	text-align: center;
 	background: #fff;
 	border: 1px solid #d3d3d3;
-	border-radius: 8px;
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	outline: none;
 	caret-color: black;
 	cursor: pointer;

@@ -224,6 +224,8 @@ export default {
 	--medium-font-size: 14px;
 	--medium-padding: 24px;
 	--medium-line-height: 1.77;
+	--radius-rounded-button: 8px;
+	--radius-pill-button: 32px;
 
 	position: relative;
 	display: inline-flex;
@@ -238,7 +240,7 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
-	border-radius: 32px;
+	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -295,11 +297,11 @@ export default {
 	}
 
 	&.shape_rounded {
-		border-radius: 8px;
+		border-radius: var(--radius-rounded-button);
 	}
 
 	&.shape_pill {
-		border-radius: 32px;
+		border-radius: var(--radius-pill-button);
 	}
 
 	&:disabled {

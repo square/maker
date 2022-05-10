@@ -111,7 +111,6 @@ export default {
 	--color-foreground: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
 	--color-border-active: var(--maker-color-neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
 
 	box-sizing: border-box;
 	width: 100%;
@@ -126,7 +125,7 @@ export default {
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: var(--border-radius);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 	outline: none;
 	transition:
 		border 0.2s ease,

@@ -180,13 +180,12 @@ export default {
 	--color-foreground: var(--maker-color-neutral-90, rgba(2, 1, 1, 0.9));
 	--color-border-active: var(--maker-color-neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
-	--border-radius: 8px;
 
 	position: relative;
 	box-sizing: border-box;
 	min-width: 80px;
 	font-size: 16px;
-	border-radius: var(--border-radius);
+	border-radius: var(--maker-shape-default-border-radius, 8px);
 }
 
 .Prefix {

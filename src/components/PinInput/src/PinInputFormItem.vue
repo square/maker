@@ -1,8 +1,8 @@
 <template>
 	<m-block-form-control-layout>
 		<template #control>
-			<input-control
-				ref="input"
+			<pin-input-control
+				ref="pinInputControl"
 				:invalid="isInvalid"
 				v-bind="$attrs"
 				v-on="$listeners"
@@ -15,10 +15,10 @@
 						:name="slot"
 					/>
 				</template>
-			</input-control>
+			</pin-input-control>
 		</template>
 		<template #error>
-			<!-- @slot Input error slot -->
+			<!-- @slot slot for error messages -->
 			<slot name="error" />
 		</template>
 	</m-block-form-control-layout>
@@ -26,25 +26,19 @@
 
 <script>
 import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLayout';
-import InputControl from './InputControl.vue';
+import PinInputControl from './PinInputControl.vue';
 
 /**
- * Input component
- * @inheritAttrs ./InputControl.vue
- * @inheritListeners ./InputControl.vue
- * @inheritSlots ./InputControl.vue
+ * @inheritAttrs ./PinInputControl.vue
+ * @inheritListeners ./PinInputControl.vue
  */
 export default {
 	components: {
-		InputControl,
 		MBlockFormControlLayout,
+		PinInputControl,
 	},
 
 	inheritAttrs: false,
-
-	model: {
-		event: 'input:update',
-	},
 
 	computed: {
 		isInvalid() {
@@ -53,11 +47,8 @@ export default {
 	},
 
 	methods: {
-		focus() {
-			this.$refs.input.focus();
-		},
-		blur() {
-			this.$refs.input.blur();
+		shakeAndClearInputs() {
+			this.$refs.pinInputControl.shakeAndClearInputs();
 		},
 	},
 };
