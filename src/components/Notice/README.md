@@ -6,6 +6,105 @@ Use Notice to notify users of things.
 
 ## Examples
 
+```vue
+<template>
+	<div class="spaceout">
+		<m-notice pattern="error">
+			Error inline message
+		</m-notice>
+		<m-notice pattern="success">
+			Success inline message
+		</m-notice>
+		<m-notice pattern="warning">
+			Warning inline message
+		</m-notice>
+		<m-notice pattern="info">
+			Info inline message
+		</m-notice>
+
+		<m-notice
+			pattern="error"
+			variant="block"
+		>
+			Error block message
+			<template #actions>
+				<m-text-button pattern="error">
+					Button
+				</m-text-button>
+				<m-text-button pattern="error">
+					Dismiss
+				</m-text-button>
+			</template>
+		</m-notice>
+		<m-notice
+			pattern="success"
+			variant="block"
+		>
+			Success block message
+			<template #actions>
+				<m-text-button pattern="success">
+					Button
+				</m-text-button>
+				<m-text-button pattern="success">
+					Dismiss
+				</m-text-button>
+			</template>
+		</m-notice>
+		<m-notice
+			pattern="warning"
+			variant="block"
+		>
+			Warning block message
+			<template #actions>
+				<m-text-button pattern="warning">
+					Button
+				</m-text-button>
+				<m-text-button pattern="warning">
+					Dismiss
+				</m-text-button>
+			</template>
+		</m-notice>
+		<m-notice
+			pattern="info"
+			variant="block"
+		>
+			Info block message
+			<template #actions>
+				<m-text-button pattern="info">
+					Button
+				</m-text-button>
+				<m-text-button pattern="info">
+					Dismiss
+				</m-text-button>
+			</template>
+		</m-notice>
+	</div>
+</template>
+
+<script>
+import { MNotice } from '@square/maker/components/Notice';
+import { MTextButton } from '@square/maker/components/TextButton';
+
+export default {
+	components: {
+		MNotice,
+		MTextButton,
+	},
+};
+</script>
+
+<style scoped>
+.spaceout > * {
+	margin-bottom: 16px;
+}
+.spaceout > *:last-child {
+	margin-bottom: 0;
+}
+.spaceout {
+	max-width: 400px;
+}
+</style>
+```
 
 
 ### Error
