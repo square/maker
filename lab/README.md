@@ -53,6 +53,10 @@ lab/experiments/
 
 ```
 
+### Managing State
+
+Each lab app is also bootstrapped with pinia, refer to its docs on how to manage state.
+
 ### Building & Deploying
 
 ```sh
