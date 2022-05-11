@@ -7,7 +7,8 @@ const MIN_WEIGHT = 100;
 const MAX_WEIGHT = 900;
 
 /**
- * @inheritAttrs p
+ * Heading
+ * @inheritAttrs Heading_Elements
  */
 export default {
 	inject: {
@@ -21,21 +22,21 @@ export default {
 
 	props: {
 		/**
-		 * HTML Element wrapper
-		 */
-		element: {
-			type: String,
-			default: 'p',
-			validator: (element) => ['p', 'span', 'div', 'li'].includes(element),
-		},
-		/**
-		 * Size of text
+		 * Size of heading. Influences which element is used.
 		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
 		 */
 		size: {
 			type: Number,
 			default: undefined,
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
+		},
+		/**
+		 * Override Heading element. By default, the element is derived from size.
+		 */
+		element: {
+			type: String,
+			default: undefined,
+			validator: (element) => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'].includes(element),
 		},
 		/**
 		 * Font family
@@ -52,7 +53,7 @@ export default {
 		fontWeight: {
 			type: Number,
 			default: undefined,
-			validator: (fontWeight) => fontWeight >= MIN_WEIGHT && fontWeight <= MAX_WEIGHT,
+			validator: (weight) => weight >= MIN_WEIGHT && weight <= MAX_WEIGHT,
 		},
 		/**
 		 * Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling.
@@ -113,7 +114,33 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('text', ['size', 'fontFamily', 'fontWeight', 'color']),
+		...resolveThemeableProps('heading', ['size', 'fontFamily', 'fontWeight', 'color']),
+		tag() {
+			if (this.element) {
+				return this.element;
+			}
+			const h1Threshold = 4;
+			const h2Threshold = 3;
+			const h3Threshold = 2;
+			const h4Threshold = 1;
+			const h5Threshold = 0;
+			if (this.resolvedSize >= h1Threshold) {
+				return 'h1';
+			}
+			if (this.resolvedSize >= h2Threshold) {
+				return 'h2';
+			}
+			if (this.resolvedSize >= h3Threshold) {
+				return 'h3';
+			}
+			if (this.resolvedSize >= h4Threshold) {
+				return 'h4';
+			}
+			if (this.resolvedSize >= h5Threshold) {
+				return 'h5';
+			}
+			return 'h6';
+		},
 		sizeClass() {
 			const minNonNegativeSize = 0;
 			if (this.resolvedSize >= minNonNegativeSize) {
@@ -139,20 +166,19 @@ export default {
 		const {
 			$s,
 			sizeClass,
+			tag,
 			inlineStyles,
 			fontStyle,
 			textTransform,
 			textAlign,
 		} = this;
 		/**
-		 * @slot text content
+		 * @slot heading content
 		 */
 		const defaultSlot = this.$slots.default;
-		const element = this.element || 'p';
-
-		return createElement(element, {
+		return createElement(tag, {
 			class: [
-				$s.Paragraph,
+				$s.Heading,
 				$s[`size_${sizeClass}`],
 				{
 					[$s[`fontstyle_${fontStyle}`]]: fontStyle !== 'inherit',
@@ -160,8 +186,8 @@ export default {
 					[$s[`textalign_${textAlign}`]]: textAlign !== 'inherit',
 				},
 			],
-			attrs: this.$attrs,
 			style: inlineStyles,
+			attrs: this.$attrs,
 			on: this.$listeners,
 		}, defaultSlot);
 	},
@@ -169,7 +195,9 @@ export default {
 </script>
 
 <style module="$s">
-.Paragraph {
+.Heading {
+	margin: 0;
+
 	/* min breakpoint config */
 	--min-resolution: 320; /* arbitrary value */
 	--min-font-size: var(--mobile-base-font-size);
@@ -278,57 +306,57 @@ export default {
 }
 
 @media (min-width: 1200px) {
-	.Paragraph {
+	.Heading {
 		--resolution: 1200px;
 	}
 }
 
-.Paragraph.size_minus-2 {
+.Heading.size_minus-2 {
 	font-size: var(--fs--2);
 	line-height: var(--lh--2);
 }
 
-.Paragraph.size_minus-1 {
+.Heading.size_minus-1 {
 	font-size: var(--fs--1);
 	line-height: var(--lh--1);
 }
 
-.Paragraph.size_0 {
+.Heading.size_0 {
 	font-size: var(--fs-0);
 	line-height: var(--lh-0);
 }
 
-.Paragraph.size_1 {
+.Heading.size_1 {
 	font-size: var(--fs-1);
 	line-height: var(--lh-1);
 }
 
-.Paragraph.size_2 {
+.Heading.size_2 {
 	font-size: var(--fs-2);
 	line-height: var(--lh-2);
 }
 
-.Paragraph.size_3 {
+.Heading.size_3 {
 	font-size: var(--fs-3);
 	line-height: var(--lh-3);
 }
 
-.Paragraph.size_4 {
+.Heading.size_4 {
 	font-size: var(--fs-4);
 	line-height: var(--lh-4);
 }
 
-.Paragraph.size_5 {
+.Heading.size_5 {
 	font-size: var(--fs-5);
 	line-height: var(--lh-5);
 }
 
-.Paragraph.size_6 {
+.Heading.size_6 {
 	font-size: var(--fs-6);
 	line-height: var(--lh-6);
 }
 
-.Paragraph.size_7 {
+.Heading.size_7 {
 	font-size: var(--fs-7);
 	line-height: var(--lh-7);
 }

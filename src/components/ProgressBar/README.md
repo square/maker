@@ -31,23 +31,17 @@
 			:key="shape"
 			:class="$s.Sizes"
 		>
-			<m-text
-				pattern="title"
-				:size="2"
-			>
+			<m-heading :size="2">
 				{{ shape }} shape
-			</m-text>
+			</m-heading>
 
 			<div
 				v-for="size in ['xsmall', 'small', 'medium', 'large']"
 				:key="size"
 			>
-				<m-text
-					pattern="title"
-					:size="0"
-				>
+				<m-heading :size="0">
 					{{ size }}
-				</m-text>
+				</m-heading>
 				<m-progress-bar
 					:shape="shape"
 					:size="size"
@@ -61,12 +55,12 @@
 
 <script>
 import { MProgressBar } from '@square/maker/components/ProgressBar';
-import { MText } from '@square/maker/components/Text';
+import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
 		MProgressBar,
-		MText,
+		MHeading,
 	},
 
 	data() {

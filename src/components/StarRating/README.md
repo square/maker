@@ -11,13 +11,12 @@
 			>
 		</label>
 		<div>
-			<m-text
-				pattern="title"
+			<m-heading
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>
 				Star States
-			</m-text>
+			</m-heading>
 
 			<div>
 				<div
@@ -35,13 +34,12 @@
 		</div>
 
 		<div>
-			<m-text
-				pattern="title"
+			<m-heading
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>
 				Star Rating
-			</m-text>
+			</m-heading>
 
 			<div>
 				Rating ({{ avgRating }} Stars):
@@ -69,13 +67,12 @@
 		</div>
 
 		<div>
-			<m-text
-				pattern="title"
+			<m-heading
 				:class="$s.StarDemoHeader"
 				:size="1"
 			>
 				Editable Star Rating
-			</m-text>
+			</m-heading>
 
 			<div>
 				Rating: ({{ formRating }} Stars)
@@ -100,13 +97,13 @@
 
 <script>
 import { MStar, MStarRating } from '@square/maker/components/StarRating';
-import { MText } from '@square/maker/components/Text';
+import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
 		MStar,
 		MStarRating,
-		MText,
+		MHeading,
 	},
 	data() {
 		return {

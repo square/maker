@@ -107,10 +107,10 @@
 				</label>
 				<label>
 					<input
-						v-model="currentProfileColors.body"
+						v-model="currentProfileColors.text"
 						type="color"
 					>
-					Body
+					Text
 				</label>
 				<h3
 					:class="$s.subsectionTitle"
@@ -144,7 +144,7 @@
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.fonts.heading.fontFamily"
+						v-model="theme.heading.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -158,7 +158,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.fonts.heading.fontWeight"
+						v-model="theme.heading.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -174,11 +174,11 @@
 				<h3
 					:class="$s.subsectionTitle"
 				>
-					Body
+					Text
 				</h3>
 				<div :class="$s.fontChoice">
 					<select
-						v-model="theme.fonts.body.fontFamily"
+						v-model="theme.text.fontFamily"
 						:class="$s.familyChoice"
 						@change="updateFont"
 					>
@@ -192,7 +192,7 @@
 						</template>
 					</select>
 					<select
-						v-model="theme.fonts.body.fontWeight"
+						v-model="theme.text.fontWeight"
 						@change="updateFont"
 					>
 						<template v-for="(value, index) in defaultWeights">
@@ -276,10 +276,10 @@ export default {
 		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
-			const fontHeading = themeStore.$state.theme.fonts.heading.fontFamily;
-			const fontWeightsHeading = themeStore.$state.theme.fonts.heading.fontWeight;
-			const fontText = themeStore.$state.theme.fonts.body.fontFamily;
-			const fontWeightsText = themeStore.$state.theme.fonts.body.fontWeight;
+			const fontHeading = themeStore.$state.theme.heading.fontFamily;
+			const fontWeightsHeading = themeStore.$state.theme.heading.fontWeight;
+			const fontText = themeStore.$state.theme.text.fontFamily;
+			const fontWeightsText = themeStore.$state.theme.text.fontWeight;
 
 			// Can optimize this later
 			fonts.push(`${fontHeading}:${fontWeightsHeading}`);
@@ -301,7 +301,7 @@ export default {
 		background(newValue) {
 			const neutrals = generateNeutralColors(newValue);
 			const headingColor = themeStore.$state.theme.colors.heading;
-			const textColor = themeStore.$state.theme.colors.body;
+			const textColor = themeStore.$state.theme.colors.text;
 			const contrastRatio = 4.5;
 
 			themeStore.$state.theme.colors = Object.assign(themeStore.$state.theme.colors, neutrals);
@@ -311,7 +311,7 @@ export default {
 			}
 
 			if (chroma.contrast(newValue, textColor) < contrastRatio) {
-				themeStore.$state.theme.colors.body = neutrals['neutral-100'];
+				themeStore.$state.theme.colors.text = neutrals['neutral-100'];
 			}
 		},
 	},

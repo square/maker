@@ -46,7 +46,7 @@ export default {
 
 ## Events
 
-| Event          | Type     | Description           |
-| -------------- | -------- | --------------------- |
-| stepper:update | `number` | updated stepper value |
+| Event          | Type | Description |
+| -------------- | ---- | ----------- |
+| stepper:update | -    | —           |
 <!-- api-tables:end -->

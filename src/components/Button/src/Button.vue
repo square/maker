@@ -150,14 +150,6 @@ export default {
 
 	props: {
 		/**
-		 * patterns are defined at the theme level
-		 * @values pattern defined in theme
-		 */
-		pattern: {
-			type: String,
-			default: undefined,
-		},
-		/**
 		 * Type of the button
 		 */
 		type: {
@@ -196,8 +188,7 @@ export default {
 			validator: (color) => chroma.valid(color),
 		},
 		/**
-		 * Variant
-		 * @values primary, secondary, tertiary
+		 * Semantic variant
 		 */
 		variant: {
 			type: String,
@@ -237,16 +228,7 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('button', [
-			'color',
-			'size',
-			'textColor',
-			'variant',
-			'shape',
-			'align',
-			'fullWidth',
-			'pattern',
-		]),
+		...resolveThemeableProps('button', ['color', 'size', 'textColor', 'variant', 'shape', 'align', 'fullWidth']),
 		style() {
 			return VARIANTS[this.resolvedVariant]({
 				color: this.resolvedColor,
@@ -285,8 +267,8 @@ export default {
 	align-items: center;
 	min-width: 0;
 	color: var(--color-contrast);
-	font-weight: var(--maker-font-label-font-weight, 500);
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-weight: 500;
+	font-family: inherit;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
@@ -393,7 +375,7 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--maker-color-neutral-20, #fff),
+			0 0 0 1px var(--neutral-20, #fff),
 			0 0 0 3px var(--color-focus);
 	}
 

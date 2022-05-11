@@ -11,7 +11,7 @@ export default function defaultTheme() {
 			'neutral-100': '#000000',
 			background: '#ffffff',
 			heading: 'inherit',
-			body: 'inherit',
+			text: 'inherit',
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
@@ -19,18 +19,6 @@ export default function defaultTheme() {
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.17,
-			heading: {
-				fontFamily: 'inherit',
-				fontWeight: '500',
-			},
-			body: {
-				fontFamily: 'inherit',
-				fontWeight: '400',
-			},
-			label: {
-				fontFamily: 'inherit',
-				fontWeight: '500',
-			},
 		},
 		shapes: {
 			defaultBorderRadius: '4px',
@@ -50,17 +38,6 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
-			patterns: {
-				primary: {
-					variant: 'primary',
-				},
-				secondary: {
-					variant: 'secondary',
-				},
-				tertiary: {
-					variant: 'tertiary',
-				},
-			},
 		},
 		textbutton: {
 			color: '@colors.primary',
@@ -80,35 +57,16 @@ export default function defaultTheme() {
 			shape: undefined,
 		},
 		text: {
+			fontFamily: 'inherit',
 			size: 0,
-			fontFamily: '@fonts.body.fontFamily',
-			color: '@colors.body',
-			element: 'p',
-			fontWeight: '@fonts.body.fontWeight',
-			fontStyle: 'inherit',
-			textTransform: 'inherit',
-			textAlign: 'inherit',
-			patterns: {
-				headline: {
-					size: 7,
-					fontFamily: '@fonts.heading.fontFamily',
-					fontWeight: '@fonts.heading.fontFamily',
-					element: 'h1',
-					color: '@colors.heading',
-				},
-				title: {
-					size: 3,
-					fontFamily: '@fonts.heading.fontFamily',
-					fontWeight: '@fonts.heading.fontWeight',
-					element: 'h2',
-					color: '@colors.heading',
-				},
-				paragraph: {}, // component default
-				label: {
-					fontFamily: '@fonts.label.fontFamily',
-					fontWeight: '@fonts.label.fontWeight',
-				},
-			},
+			color: '@colors.text',
+			fontWeight: 400,
+		},
+		heading: {
+			fontFamily: 'inherit',
+			size: 2,
+			color: '@colors.heading',
+			fontWeight: 700,
 		},
 		choice: {
 			selectedColor: undefined,

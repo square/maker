@@ -1,13 +1,12 @@
 <template>
 	<div>
 		<div class="highlight">
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="1"
 				class="heading"
 			>
 				{{ storeName }} Online Store
-			</m-text>
+			</m-heading>
 		</div>
 
 		<div class="notice-banner">
@@ -23,12 +22,9 @@
 			v-for="category in categories"
 			:key="category"
 		>
-			<m-text
-				pattern="title"
-				class="heading"
-			>
+			<m-heading class="heading">
 				{{ category }}
-			</m-text>
+			</m-heading>
 			<div class="highlight">
 				<template v-for="item in categoryItems(category)">
 					<div
@@ -37,12 +33,9 @@
 						@click="openItemModal(item)"
 					>
 						<div class="item-details">
-							<m-text
-								pattern="title"
-								:size="-1"
-							>
+							<m-heading :size="-1">
 								{{ item.name }}
-							</m-text>
+							</m-heading>
 							<m-text
 								:size="-1"
 								class="item-description"
@@ -81,6 +74,7 @@
 </template>
 
 <script>
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MImage } from '@square/maker/components/Image';
@@ -92,6 +86,7 @@ import storeData from './data';
 
 export default {
 	components: {
+		MHeading,
 		MText,
 		MDivider,
 		MImage,

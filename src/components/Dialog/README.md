@@ -47,12 +47,9 @@ _DemoDialog.vue_
 <template>
 	<m-dialog>
 		<m-dialog-content>
-			<m-text
-				pattern="title"
-				:size="3"
-			>
+			<m-heading :size="3">
 				Dialog heading
-			</m-text>
+			</m-heading>
 			<m-text>
 				Dialog content
 			</m-text>
@@ -68,6 +65,7 @@ _DemoDialog.vue_
 
 <script>
 import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
 
@@ -78,6 +76,7 @@ export default {
 		MDialog,
 		MDialogContent,
 		MButton,
+		MHeading,
 		MText,
 	},
 
@@ -305,12 +304,9 @@ _ActionBarDemoDialog.vue_
 <template>
 	<m-dialog>
 		<m-dialog-content>
-			<m-text
-				pattern="title"
-				:size="3"
-			>
+			<m-heading :size="3">
 				Whoa, hold on!
-			</m-text>
+			</m-heading>
 			<m-text>
 				Did you know that adult male polar bears can weight over 1,500 lbs?
 			</m-text>
@@ -335,6 +331,7 @@ _ActionBarDemoDialog.vue_
 </template>
 
 <script>
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
@@ -345,6 +342,7 @@ export default {
 
 	components: {
 		MDialog,
+		MHeading,
 		MText,
 		MDialogContent,
 		MInlineActionBar,
@@ -427,9 +425,9 @@ _DemoModal.vue_
 			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
-			<m-text pattern="title">
+			<m-heading>
 				Modal heading
-			</m-text>
+			</m-heading>
 			<m-text>
 				Modal content
 			</m-text>
@@ -451,6 +449,7 @@ _DemoModal.vue_
 
 <script>
 import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import { dialogApi } from '@square/maker/components/Dialog';
@@ -462,6 +461,7 @@ export default {
 	components: {
 		MModal,
 		MButton,
+		MHeading,
 		MText,
 		MModalContent,
 	},
