@@ -21,25 +21,21 @@
 					:key="category"
 					:class="$s.Section"
 				>
-					<m-text
-						pattern="title"
-						:size="1"
-					>
+					<m-heading :size="1">
 						{{ category }}
-					</m-text>
+					</m-heading>
 					<template v-for="item in categoryItems(category)">
 						<div
 							:key="item.name"
 							class="item"
 						>
 							<div class="item-details">
-								<m-text
-									pattern="title"
+								<m-heading
 									:size="0"
 									class="item-title"
 								>
 									{{ item.name }}
-								</m-text>
+								</m-heading>
 								<m-text
 									:size="-1"
 									class="item-description"
@@ -73,20 +69,18 @@
 					class="detail-image"
 				/>
 				<div :class="$s.Section">
-					<m-text
-						pattern="title"
+					<m-heading
 						:size="2"
 						class="item-title"
 					>
 						Cappuccino
-					</m-text>
-					<m-text
-						pattern="title"
+					</m-heading>
+					<m-heading
 						:size="1"
 						class="item-price"
 					>
 						$4.00
-					</m-text>
+					</m-heading>
 					<m-text
 						:size="0"
 						class="item-description"
@@ -104,12 +98,11 @@
 					<template
 						#label
 					>
-						<m-text
-							pattern="title"
+						<m-heading
 							:size="-1"
 						>
 							Size
-						</m-text>
+						</m-heading>
 					</template>
 					<div class="option">
 						<m-radio
@@ -157,12 +150,11 @@
 					<template
 						#label
 					>
-						<m-text
-							pattern="title"
+						<m-heading
 							:size="-1"
 						>
 							Modifiers
-						</m-text>
+						</m-heading>
 					</template>
 					<template #required-label>
 						Optional
@@ -189,12 +181,11 @@
 					<template
 						#label
 					>
-						<m-text
-							pattern="title"
+						<m-heading
 							:size="-1"
 						>
 							Notes
-						</m-text>
+						</m-heading>
 					</template>
 					<template #required-label>
 						Optional
@@ -231,24 +222,22 @@
 					</div>
 				</div>
 				<div :class="[$s.Section, $s.Cart]">
-					<m-text
-						pattern="title"
+					<m-heading
 						:size="1"
 					>
 						Shopping Cart
-					</m-text>
+					</m-heading>
 					<div
 						class="cart-item"
 					>
 						<div class="cart-content">
 							<div class="cart-text">
-								<m-text
-									pattern="title"
+								<m-heading
 									:size="-1"
 									class="item-title"
 								>
 									Holiday Spice Latte
-								</m-text>
+								</m-heading>
 								<m-text
 									:size="-1"
 									class="cart-price"
@@ -279,13 +268,12 @@
 					>
 						<div class="cart-content">
 							<div class="cart-text">
-								<m-text
-									pattern="title"
+								<m-heading
 									:size="-1"
 									class="item-title"
 								>
 									Blonde Latte
-								</m-text>
+								</m-heading>
 								<m-text
 									:size="-1"
 									class="cart-price"
@@ -317,12 +305,11 @@
 						Add more items
 					</m-button>
 					<m-divider style="margin: 24px 0;" />
-					<m-text
-						pattern="title"
+					<m-heading
 						:size="0"
 					>
 						Add a tip
-					</m-text>
+					</m-heading>
 					<m-text :size="-1">
 						100% of the tip goes to the kitchen
 					</m-text>
@@ -389,6 +376,7 @@ import ShoppingBagIcon from '@square/maker-icons/ShoppingBag';
 import XIcon from '@square/maker-icons/X';
 import Trash from '@square/maker-icons/Trash';
 import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MImage } from '@square/maker/components/Image';
@@ -409,6 +397,7 @@ export default {
 		XIcon,
 		Trash,
 		MTheme,
+		MHeading,
 		MText,
 		MDivider,
 		MImage,
@@ -623,11 +612,11 @@ export default {
 	max-height: calc(100% - 40px);
 	padding: 20px 10px;
 	overflow: hidden;
-	color: var(--maker-color-body);
+	color: var(--color-text);
 	font-weight: var(--font-weights-text, normal);
 	font-size: var(--font-base-size);
-	font-family: var(--maker-font-body-font-family, inherit);
-	background-color: var(--maker-color-background);
+	font-family: var(--font-text, inherit);
+	background-color: var(--color-background);
 	border-radius: 30px;
 	box-shadow:
 		4.8px 6.4px 10.8px -40px rgba(0, 0, 0, 0.34),

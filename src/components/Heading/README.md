@@ -1,26 +1,26 @@
-# Text
+# Heading
 
-Use the Text component for regular body text. There are 10 text sizes: -2 to 7. The font family, font weight, and text color are customizable.
+Use the Heading component for Heading text. There are 10 text sizes: -2 to 7. The font family, font weight, and text color are customizable.
 
 ```vue
 <template>
 	<div>
-		<m-text
-			v-for="size in [1, 0, -1, -2]"
+		<m-heading
+			v-for="size in [5, 4, 3, 2, 1]"
 			:key="size"
 			:size="size"
 		>
-			Text (Size {{ size }})
-		</m-text>
+			Heading (Size {{ size }})
+		</m-heading>
 	</div>
 </template>
 
 <script>
-import { MText } from '@square/maker/components/Text';
+import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
-		MText,
+		MHeading,
 	},
 };
 </script>
@@ -29,12 +29,12 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p).
+Supports attributes from [`<Heading_Elements>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements).
 
 | Prop           | Type     | Default     | Possible values                                               | Description                                                                                 |
 | -------------- | -------- | ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| element        | `string` | `'p'`       | `p`, `span`, `div`, `li`                                      | HTML Element wrapper                                                                        |
-| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of text                                                                                |
+| size           | `number` | —           | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`            | Size of heading. Influences which element is used.                                          |
+| element        | `string` | —           | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `div`                     | Override Heading element. By default, the element is derived from size.                     |
 | font-family    | `string` | —           | —                                                             | Font family                                                                                 |
 | font-weight    | `number` | —           | `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900` | Font weight with standard numeric keyword values                                            |
 | font-size      | `string` | —           | —                                                             | Font size, as a valid CSS value. This overrides the 'size' prop, and disables type scaling. |
@@ -47,7 +47,7 @@ Supports attributes from [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HT
 
 ## Slots
 
-| Slot    | Description  |
-| ------- | ------------ |
-| default | text content |
+| Slot    | Description     |
+| ------- | --------------- |
+| default | heading content |
 <!-- api-tables:end -->

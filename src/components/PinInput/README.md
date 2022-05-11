@@ -214,12 +214,9 @@ _DemoDialog.vue_
 <template>
 	<m-dialog>
 		<m-dialog-content>
-			<m-text
-				variant="title"
-				:size="3"
-			>
+			<m-heading :size="3">
 				Dialog heading
-			</m-text>
+			</m-heading>
 			<m-pin-input
 				ref="pinInput"
 				:class="$s.padding"
@@ -248,7 +245,7 @@ _DemoDialog.vue_
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MText } from '@square/maker/components/Text';
+import { MHeading } from '@square/maker/components/Heading';
 import { MPinInput } from '@square/maker/components/PinInput';
 import { MNotice } from '@square/maker/components/Notice';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
@@ -260,7 +257,7 @@ export default {
 		MDialog,
 		MDialogContent,
 		MButton,
-		MText,
+		MHeading,
 		MPinInput,
 		MNotice,
 	},

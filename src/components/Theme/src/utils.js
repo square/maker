@@ -14,7 +14,7 @@ export function resolve(valueOrPointer) {
 		return valueOrPointer; // non-strings are always values
 	}
 	if (valueOrPointer.startsWith('@')) {
-		return this.resolve(this.getPath(valueOrPointer)); // resolve pointer to value
+		return this.getPath(valueOrPointer); // resolve pointer to value
 	}
 	return valueOrPointer; // not a pointer, already resolved value, return as-is
 }
@@ -62,83 +62,24 @@ function capitalizeFirstLetter(string) {
 export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
-		if (propName === 'pattern') {
-			computedResolvedProps.resolvedPattern = function resolveThemeablePattern() {
-				// local pattern set directly on component
-				// overrides pattern set by theme
-				if (!isNil(this.pattern)) {
-					// if validator for this prop exists then
-					// Vue would have already validated it by this point
-					return this.pattern;
-				}
-
-				let patternOrPath;
-
-				// default theme pattern for this component
-				const patternFromTheme = this.theme[componentKeyInTheme].pattern;
-				if (!isNil(patternFromTheme)) {
-					patternOrPath = patternFromTheme;
-				}
-
-				if (isNil(patternOrPath)) {
-					return undefined;
-				}
-
-				const resolvedPattern = this.theme.resolve(patternOrPath);
-				const patternValidator = this.$vnode.componentOptions
-					.Ctor.extendOptions.props.pattern.validator;
-
-				// validate using pattern prop validator if exists
-				if (patternValidator) {
-					assert.error(patternValidator(resolvedPattern), `Invalid value "${resolvedPattern}" for prop "pattern" for component "${componentKeyInTheme}" in theme.`);
-
-				// otherwise try validating by checking patterns config for component
-				} else {
-					const themePattern = this.theme[componentKeyInTheme].patterns?.[resolvedPattern];
-					assert.error(themePattern, `Invalid pattern "${resolvedPattern}" for component "${componentKeyInTheme}" in theme.`);
-				}
-				return resolvedPattern;
-			};
-		} else {
-			computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
-				// local value set directly on component
-				// overrides value set by theme
-				if (!isNil(this[propName])) {
-					// if validator for this prop exists then
-					// Vue would have already validated it by this point
-					return this[propName];
-				}
-
-				let valueOrPath;
-
-				// default theme value
-				const valueFromTheme = this.theme[componentKeyInTheme][propName];
-				if (!isNil(valueFromTheme)) {
-					valueOrPath = valueFromTheme;
-				}
-
-				// pattern value, overrides default theme value
-				if (!isNil(this.resolvedPattern)) {
-					const valueFromThemePattern = this.theme[componentKeyInTheme]
-						.patterns?.[this.resolvedPattern]?.[propName];
-					if (!isNil(valueFromThemePattern)) {
-						valueOrPath = valueFromThemePattern;
-					}
-				}
-
-				if (isNil(valueOrPath)) {
-					return undefined;
-				}
-
-				const resolvedValue = this.theme.resolve(valueOrPath);
+		computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
+			if (!isNil(this[propName])) {
+				// if validator for this prop exists then Vue would have already validated it by this point
+				return this[propName];
+			}
+			const themeDefaultPropValue = this.theme[componentKeyInTheme][propName];
+			if (themeDefaultPropValue) {
+				const valueOrPath = themeDefaultPropValue;
+				const value = this.theme.resolve(valueOrPath);
 				const propValidator = this.$vnode.componentOptions
 					.Ctor.extendOptions.props[propName].validator;
 				if (propValidator) {
-					assert.error(propValidator(resolvedValue), `Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
+					assert.error(propValidator(value), `Invalid value "${value}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
 				}
-				return resolvedValue;
-			};
-		}
+				return value;
+			}
+			return undefined;
+		};
 	}
 	return computedResolvedProps;
 }

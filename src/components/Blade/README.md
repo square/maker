@@ -51,9 +51,9 @@ _DemoBlade.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-blade-content>
-			<m-text pattern="title">
+			<m-heading>
 				Blade heading
-			</m-text>
+			</m-heading>
 			<m-text>
 				Blade content
 			</m-text>
@@ -70,6 +70,7 @@ _DemoBlade.vue_
 <script>
 import { MBlade, MBladeContent, bladeApi } from '@square/maker/components/Blade';
 import { MButton } from '@square/maker/components/Button';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 
 export default {
@@ -79,6 +80,7 @@ export default {
 		MBlade,
 		MBladeContent,
 		MButton,
+		MHeading,
 		MText,
 	},
 
@@ -151,9 +153,9 @@ _ActionBarDemoBlade.vue_
 			src="https://picsum.photos/400/300"
 		>
 		<m-blade-content>
-			<m-text pattern="title">
+			<m-heading>
 				Blade heading
-			</m-text>
+			</m-heading>
 			<m-text>
 				Blade content
 			</m-text>
@@ -179,6 +181,7 @@ _ActionBarDemoBlade.vue_
 
 <script>
 import { MBlade, MBladeContent, bladeApi } from '@square/maker/components/Blade';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
@@ -189,6 +192,7 @@ export default {
 	components: {
 		MBlade,
 		MBladeContent,
+		MHeading,
 		MText,
 		MInlineActionBar,
 		MActionBarButton,

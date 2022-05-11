@@ -19,8 +19,6 @@
 			</m-text>
 		</m-container>
 
-		raw unwrapped text in modal
-
 		<m-container
 			v-for="oneOf in item.oneOf"
 			:key="oneOf.name"

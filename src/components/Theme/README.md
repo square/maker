@@ -8,12 +8,11 @@ Any components within the theme component will inherit the tokens provided. We r
 <template>
 	<div class="theme-demo">
 		<div class="controls">
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="1"
 			>
 				Colors
-			</m-text>
+			</m-heading>
 			<label class="color-option">
 				<input
 					v-model="theme.colors.background"
@@ -37,17 +36,16 @@ Any components within the theme component will inherit the tokens provided. We r
 			</label>
 			<label class="color-option">
 				<input
-					v-model="theme.colors.body"
+					v-model="theme.colors.text"
 					type="color"
 				>
-				Body
+				Text
 			</label>
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="0"
 			>
 				Neutrals
-			</m-text>
+			</m-heading>
 			<div class="color-option neutrals">
 				<input
 					v-model="theme.colors['neutral-0']"
@@ -74,44 +72,45 @@ Any components within the theme component will inherit the tokens provided. We r
 					type="color"
 				>
 			</div>
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="1"
 			>
 				Fonts
-			</m-text>
-			<m-text
-				pattern="title"
+			</m-heading>
+			<m-heading
 				:size="0"
 			>
 				Heading
-			</m-text>
+			</m-heading>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.fonts.heading.fontFamily"
+					v-model="theme.heading.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
+					@change="updateFont"
 				/>
 				<m-select
-					v-model="theme.fonts.heading.fontWeight"
+					v-model="theme.heading.fontWeight"
 					:options="defaultWeights"
+					@change="updateFont"
 				/>
 			</div>
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="0"
 			>
-				Body
-			</m-text>
+				Text
+			</m-heading>
 			<div class="font-choice">
 				<m-select
-					v-model="theme.fonts.body.fontFamily"
+					v-model="theme.text.fontFamily"
 					class="family-choice"
 					:options="fontOptions"
+					@change="updateFont"
 				/>
 				<m-select
-					v-model="theme.fonts.body.fontWeight"
+					v-model="theme.text.fontWeight"
 					:options="defaultWeights"
+					@change="updateFont"
 				/>
 			</div>
 			<label>
@@ -134,12 +133,11 @@ Any components within the theme component will inherit the tokens provided. We r
 				>
 				Contrast
 			</label>
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="1"
 			>
 				Shapes
-			</m-text>
+			</m-heading>
 			<label>
 				<select
 					v-model="theme.shapes.defaultBorderRadius"
@@ -196,20 +194,18 @@ Any components within the theme component will inherit the tokens provided. We r
 						/>
 						<br>
 						<m-card>
-							<m-text
-								pattern="title"
+							<m-heading
 								:size="2"
 								class="item-title"
 							>
 								Cappuccino
-							</m-text>
-							<m-text
-								pattern="title"
+							</m-heading>
+							<m-heading
 								:size="1"
 								class="item-price"
 							>
 								$4.00
-							</m-text>
+							</m-heading>
 							<m-text
 								:size="0"
 								class="item-description"
@@ -228,12 +224,11 @@ Any components within the theme component will inherit the tokens provided. We r
 						<template
 							#label
 						>
-							<m-text
-								pattern="title"
+							<m-heading
 								:size="-1"
 							>
 								Size
-							</m-text>
+							</m-heading>
 						</template>
 						<div class="option">
 							<m-radio
@@ -281,12 +276,11 @@ Any components within the theme component will inherit the tokens provided. We r
 						<template
 							#label
 						>
-							<m-text
-								pattern="title"
+							<m-heading
 								:size="-1"
 							>
 								Modifiers
-							</m-text>
+							</m-heading>
 						</template>
 						<template #required-label>
 							Optional
@@ -313,12 +307,11 @@ Any components within the theme component will inherit the tokens provided. We r
 						<template
 							#label
 						>
-							<m-text
-								pattern="title"
+							<m-heading
 								:size="-1"
 							>
 								Notes
-							</m-text>
+							</m-heading>
 						</template>
 						<template #required-label>
 							Optional
@@ -344,6 +337,7 @@ Any components within the theme component will inherit the tokens provided. We r
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MDivider } from '@square/maker/components/Divider';
 import { MStepper } from '@square/maker/components/Stepper';
@@ -359,6 +353,7 @@ import { MCard } from '@square/maker/components/Card';
 export default {
 	components: {
 		MTheme,
+		MHeading,
 		MText,
 		MDivider,
 		MStepper,
@@ -375,11 +370,7 @@ export default {
 
 	data() {
 		return {
-			defaultWeights: [
-				{ label: '300', value: '300' },
-				{ label: '400', value: '400' },
-				{ label: '600', value: '600' },
-			],
+			defaultWeights: [{ label: '300', value: '300' }, { label: '400', value: '400' }, { label: '600', value: '600' }],
 			fontOptions: [
 				{
 					label: 'Sans-serif',
@@ -407,7 +398,7 @@ export default {
 			theme: {
 				colors: {
 					background: '#ffffff',
-					body: '#000000',
+					text: '#000000',
 					heading: '#000000',
 					primary: '#000000',
 					'neutral-0': '#ffffff',
@@ -417,21 +408,17 @@ export default {
 					'neutral-90': '#1b1b1b',
 					'neutral-100': '#000000',
 				},
+				heading: {
+					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+					fontWeight: '600',
+				},
+				text: {
+					fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
+					fontWeight: '400',
+				},
 				fonts: {
 					baseSize: 16,
 					sizeScale: 1.15,
-					heading: {
-						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
-						fontWeight: '600',
-					},
-					body: {
-						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
-						fontWeight: '400',
-					},
-					label: {
-						fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
-						fontWeight: '500',
-					},
 				},
 				shapes: {},
 			},
@@ -440,9 +427,14 @@ export default {
 			quantity: 1,
 		};
 	},
+
+	methods: {
+		updateFont() {
+
+		},
+	},
 };
 </script>
-
 <style scoped>
 .theme-demo {
 	display: flex;
@@ -564,7 +556,6 @@ export default {
 	},
 };
 </script>
-
 <style scoped>
 .demos {
 	text-align: center;
@@ -615,9 +606,7 @@ Many websites will support multiple page or section output. For example, a hero 
 <template>
 	<m-theme :theme="theme">
 		<section class="profile-demo">
-			<m-text pattern="title">
-				Global Default
-			</m-text>
+			<m-heading>Global Default</m-heading>
 			<m-text>
 				This section is using the default data passed in the theme prop.
 				Every component in a theme will inherit the properties set.
@@ -630,9 +619,7 @@ Many websites will support multiple page or section output. For example, a hero 
 
 		<m-theme :profile="theme.profiles[0].id">
 			<section class="profile-demo">
-				<m-text pattern="title">
-					Profile 1
-				</m-text>
+				<m-heading>Profile 1</m-heading>
 				<m-text>
 					This section has a specific profile set,
 					which allows setting specific color overrides more easily.
@@ -645,9 +632,7 @@ Many websites will support multiple page or section output. For example, a hero 
 		</m-theme>
 		<m-theme :profile="theme.profiles[1].id">
 			<section class="profile-demo">
-				<m-text pattern="title">
-					Profile 2
-				</m-text>
+				<m-heading>Profile 2</m-heading>
 				<m-text>
 					This section has a specific profile set,
 					which allows setting specific color overrides more easily.
@@ -663,12 +648,14 @@ Many websites will support multiple page or section output. For example, a hero 
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MTheme,
+		MHeading,
 		MText,
 		MButton,
 	},
@@ -677,7 +664,7 @@ export default {
 			theme: {
 				colors: {
 					background: '#484543',
-					body: '#ffffff',
+					text: '#ffffff',
 					heading: '#e5d7cc',
 					primary: '#e5d7cc',
 				},
@@ -686,7 +673,7 @@ export default {
 						id: 'profile1',
 						colors: {
 							background: '#b05d54',
-							body: '#e5d7cc',
+							text: '#e5d7cc',
 							heading: '#e5d7cc',
 							primary: '#e5d7cc',
 						},
@@ -695,7 +682,7 @@ export default {
 						id: 'profile2',
 						colors: {
 							background: '#e5d7cc',
-							body: '#000000',
+							text: '#000000',
 							heading: '#000000',
 							primary: '#000000',
 						},
@@ -706,48 +693,12 @@ export default {
 	},
 };
 </script>
-
 <style scoped>
 .profile-demo {
 	padding: 2vh 4vw;
 }
-.profile-demo > * {
-	margin-bottom: 8px;
-}
 </style>
 ```
-
-## Reusable CSS Variables
-
-The Theme component makes these reusable CSS variables available to all DOM nodes rendered inside of it.
-
-### Colors
-
-Variable | Purpose
--|-
---maker-color-neutral-0 | neutral-0
---maker-color-neutral-10 | neutral-10
---maker-color-neutral-20 | neutral-20
---maker-color-neutral-80 | neutral-80
---maker-color-neutral-90 | neutral-80
---maker-color-neutral-100 | neutral-100
---maker-color-primary | primary color
---maker-color-background | background color
---maker-color-heading | heading color
---maker-color-body | body text color
---maker-color-elevation | elevation color
---maker-color-overlay | overlay color
-
-### Typography
-
-Variable | Purpose
--|-
---maker-font-heading-font-family | heading font family
---maker-font-heading-font-weight | heading font weight
---maker-font-body-font-family | body text font family
---maker-font-body-font-weight | body text font weight
---maker-font-label-font-family | label font family
---maker-font-label-font-weight | label font weight
 
 <!-- api-tables:start -->
 ## Props

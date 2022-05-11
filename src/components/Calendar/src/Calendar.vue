@@ -329,7 +329,7 @@ export default {
 	font-size: var(--font-size);
 	font-family: inherit;
 	line-height: var(--line-height);
-	background-color: var(--maker-color-background, #fff);
+	background-color: var(--color-background, #fff);
 	border-radius: var(--maker-shape-default-border-radius, 4px);
 }
 
@@ -341,9 +341,8 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--maker-color-primary, #000);
-	font-weight: var(--maker-font-label-font-weight, 500);
-	font-family: var(--maker-font-label-font-family, inherit);
+	color: var(--color-heading, #000);
+	font-weight: bold;
 }
 
 .CalendarHeaderButtonIcon {
@@ -361,6 +360,8 @@ export default {
 	width: var(--cell-size);
 	height: var(--cell-size);
 	padding: var(--cell-padding);
+	color: var(--neutral-80, rgba(0, 0, 0, 0.5));
+	font-weight: normal;
 	font-size: var(--font-size-minus-1);
 	line-height: var(--line-height-minus-1);
 	text-transform: uppercase;
@@ -370,6 +371,7 @@ export default {
 .DateCell {
 	padding: var(--cell-padding);
 	overflow: hidden;
+	color: var(--color-text, #000);
 	text-align: center;
 }
 
@@ -378,9 +380,7 @@ export default {
 	height: var(--cell-size);
 	padding: 0;
 	color: inherit;
-	font-weight: inherit;
 	font-size: inherit;
-	font-family: inherit;
 	background-color: inherit;
 	border: none;
 	border-radius: var(--maker-shape-button-border-radius, 8px);
@@ -391,12 +391,12 @@ export default {
 	touch-action: manipulation;
 
 	&.selected {
-		color: var(--maker-color-background, #fff);
-		background-color: var(--maker-color-primary, #000);
+		color: var(--color-background, #fff);
+		background-color: var(--neutral-90, #000);
 	}
 
 	&.today {
-		border: 1px solid currentColor;
+		border: 1px solid var(--neutral-90, #000);
 	}
 
 	&.disabled {
@@ -406,6 +406,6 @@ export default {
 }
 
 .DateCell:hover .DateCellButton:not(.selected):not(.disabled) {
-	background-color: var(--maker-color-neutral-10, rgba(0, 0, 0, 0.1));
+	background-color: var(--neutral-10, rgba(0, 0, 0, 0.1));
 }
 </style>

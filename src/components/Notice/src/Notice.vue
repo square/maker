@@ -124,6 +124,7 @@ export default {
 .Notice {
 	color: var(--color);
 	font-size: 14px;
+	font-family: inherit;
 	line-height: 24px;
 	border-radius: var(--maker-shape-default-border-radius, 8px);
 }
@@ -177,9 +178,9 @@ export default {
 }
 
 .type_info {
-	--color: var(--maker-color-neutral-90, #1b1b1b);
-	--color-icon: var(--maker-color-neutral-80, #707070);
-	--color-bg: var(--maker-color-neutral-10, #f1f1f1);
+	--color: var(--neutral-90, #1b1b1b);
+	--color-icon: var(--neutral-80, #707070);
+	--color-bg: var(--neutral-10, #f1f1f1);
 }
 
 .variant_block {

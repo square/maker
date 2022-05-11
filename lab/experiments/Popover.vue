@@ -6,12 +6,11 @@
 			:class="$s.Preview"
 			:theme="theme(backgroundColor)"
 		>
-			<m-text
-				pattern="title"
+			<m-heading
 				:size="0"
 			>
 				Parent Site MTheme
-			</m-text>
+			</m-heading>
 			<input
 				v-model="backgroundColor"
 				type="color"
@@ -29,9 +28,9 @@
 					<m-popover-content
 						:class="$s.Popover"
 					>
-						<m-text pattern="title">
+						<m-heading>
 							Popover content
-						</m-text>
+						</m-heading>
 						<m-text>
 							Content for a basic popover
 						</m-text>
@@ -59,12 +58,11 @@
 				:class="$s.Block"
 				:theme="theme(blockColor)"
 			>
-				<m-text
-					pattern="title"
+				<m-heading
 					:size="0"
 				>
 					Nested Block MTheme
-				</m-text>
+				</m-heading>
 				<input
 					v-model="blockColor"
 					type="color"
@@ -82,9 +80,9 @@
 						<m-popover-content
 							:class="$s.Popover"
 						>
-							<m-text pattern="title">
+							<m-heading>
 								Popover content
-							</m-text>
+							</m-heading>
 							<m-text>
 								Content for a basic popover
 							</m-text>
@@ -116,6 +114,7 @@
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
+import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MInput } from '@square/maker/components/Input';
 import { MButton } from '@square/maker/components/Button';
@@ -126,6 +125,7 @@ import { generateNeutralColors } from './Themes/utils/colors';
 export default {
 	components: {
 		MTheme,
+		MHeading,
 		MText,
 		MInput,
 		MButton,

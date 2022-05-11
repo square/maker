@@ -17,11 +17,11 @@ export const websiteTheme = {
 				background: '#ffffff',
 				primary: '#7bbd4b',
 				heading: '#000000',
-				body: '#000000',
+				text: '#000000',
 				button: '#7bbd4b',
 				textbutton: '#000000',
-				elevation: '#ffffff',
-				overlay: 'rgba(0, 0, 0, 0.32)',
+				'color-elevation': '#ffffff',
+				'color-overlay': 'rgba(0, 0, 0, 0.32)',
 			},
 		},
 		{
@@ -36,11 +36,11 @@ export const websiteTheme = {
 				background: '#ffffff',
 				primary: '#7bbd4b',
 				heading: '#000000',
-				body: '#000000',
+				text: '#000000',
 				button: '#7bbd4b',
 				textbutton: '#000000',
-				elevation: '#ffffff',
-				overlay: 'rgba(0, 0, 0, 0.32)',
+				'color-elevation': '#ffffff',
+				'color-overlay': 'rgba(0, 0, 0, 0.32)',
 			},
 		},
 		{
@@ -55,11 +55,11 @@ export const websiteTheme = {
 				background: '#f8f7f7',
 				primary: '#7bbd4b',
 				heading: '#000000',
-				body: '#000000',
+				text: '#000000',
 				button: '#7bbd4b',
 				textbutton: '#000000',
-				elevation: '#ffffff',
-				overlay: 'rgba(0, 0, 0, 0.32)',
+				'color-elevation': '#ffffff',
+				'color-overlay': 'rgba(0, 0, 0, 0.32)',
 			},
 		},
 		{
@@ -74,11 +74,11 @@ export const websiteTheme = {
 				background: '#f2f5ef',
 				primary: '#7bbd4b',
 				heading: '#3a641c',
-				body: '#3a641c',
+				text: '#3a641c',
 				button: '#7bbd4b',
 				textbutton: '#3a641c',
-				elevation: '#ffffff',
-				overlay: 'rgba(0, 0, 0, 0.32)',
+				'color-elevation': '#ffffff',
+				'color-overlay': 'rgba(0, 0, 0, 0.32)',
 			},
 		},
 		{
@@ -93,11 +93,11 @@ export const websiteTheme = {
 				background: '#7bbd4b',
 				primary: '#000000',
 				heading: '#000000',
-				body: '#000000',
+				text: '#000000',
 				button: '#000000',
 				textbutton: '#000000',
-				elevation: '#ffffff',
-				overlay: 'rgba(0, 0, 0, 0.32)',
+				'color-elevation': '#ffffff',
+				'color-overlay': 'rgba(0, 0, 0, 0.32)',
 			},
 		},
 		{
@@ -112,11 +112,11 @@ export const websiteTheme = {
 				background: '#000000',
 				primary: '#7bbd4b',
 				heading: '#ffffff',
-				body: '#ffffff',
+				text: '#ffffff',
 				button: '#7bbd4b',
 				textbutton: '#7bbd4b',
-				elevation: '#575757',
-				overlay: 'rgba(255, 255, 255, 0.32)',
+				'color-elevation': '#575757',
+				'color-overlay': 'rgba(255, 255, 255, 0.32)',
 			},
 		},
 	],
@@ -129,23 +129,25 @@ export const websiteTheme = {
 		'neutral-100': '#000000',
 		background: '#ffffff',
 		heading: '#000000',
-		body: '#000000',
+		text: '#000000',
 		button: '#7bbd4b',
 		textbutton: '#000000',
-		elevation: '#ffffff',
-		overlay: 'rgba(0, 0, 0, 0.32)',
+		'color-elevation': '#ffffff',
+		'color-overlay': 'rgba(0, 0, 0, 0.32)',
 	},
 	fonts: {
 		baseSize: 16,
 		sizeScale: 1.17,
-		heading: {
-			fontFamily: 'inherit',
-			fontWeight: '700',
-		},
-		body: {
-			fontFamily: 'inherit',
-			fontWeight: '400',
-		},
+	},
+	text: {
+		color: '@colors.text',
+		fontWeight: 400,
+		fontFamily: 'Open Sans',
+	},
+	heading: {
+		color: '@colors.heading',
+		fontWeight: 600,
+		fontFamily: 'Open Sans',
 	},
 	button: {
 		color: '@colors.button',
@@ -183,7 +185,7 @@ export const modern = {
 	colors: {
 		background: '#ffffff',
 		heading: '#333232',
-		body: '#000000',
+		text: '#000000',
 		primary: '#000000',
 		'neutral-0': '#ffffff',
 		'neutral-10': '#f1f1f1',
@@ -191,20 +193,20 @@ export const modern = {
 		'neutral-80': '#707070',
 		'neutral-90': '#1b1b1b',
 		'neutral-100': '#000000',
-		elevation: '#ffffff',
-		overlay: 'rgba(0, 0, 0, 0.32)',
+		'color-elevation': '#ffffff',
+		'color-overlay': 'rgba(0, 0, 0, 0.32)',
+	},
+	heading: {
+		fontFamily: 'Open Sans',
+		fontWeight: '600',
+	},
+	text: {
+		fontFamily: 'Open Sans',
+		fontWeight: '400',
 	},
 	fonts: {
 		baseSize: 16,
 		sizeScale: 1.15,
-		heading: {
-			fontFamily: 'Open Sans',
-			fontWeight: '600',
-		},
-		body: {
-			fontFamily: 'Open Sans',
-			fontWeight: '400',
-		},
 	},
 };
 
@@ -212,7 +214,7 @@ export const midnight = {
 	colors: {
 		background: '#31353f',
 		heading: '#ffffff',
-		body: '#ffffff',
+		text: '#ffffff',
 		primary: '#d5e2fb',
 		'neutral-0': '#000000',
 		'neutral-10': '#60636b',
@@ -220,20 +222,20 @@ export const midnight = {
 		'neutral-80': '#9c9ea3',
 		'neutral-90': '#f4f4f4',
 		'neutral-100': '#ffffff',
-		elevation: '#777981',
-		overlay: 'rgba(255, 255, 255, 0.32)',
+		'color-elevation': '#777981',
+		'color-overlay': 'rgba(255, 255, 255, 0.32)',
+	},
+	heading: {
+		fontFamily: 'Domine',
+		fontWeight: '400',
+	},
+	text: {
+		fontFamily: 'Karla',
+		fontWeight: '400',
 	},
 	fonts: {
 		baseSize: 19,
 		sizeScale: 1.217,
-		heading: {
-			fontFamily: 'Domine',
-			fontWeight: '400',
-		},
-		body: {
-			fontFamily: 'Karla',
-			fontWeight: '400',
-		},
 	},
 };
 
@@ -241,7 +243,7 @@ export const spaces = {
 	colors: {
 		background: '#fff9f2',
 		heading: '#0b474b',
-		body: '#0b474b',
+		text: '#0b474b',
 		primary: '#0b474b',
 		'neutral-0': '#ffffff',
 		'neutral-10': '#f1ebe4',
@@ -249,20 +251,20 @@ export const spaces = {
 		'neutral-80': '#706e6b',
 		'neutral-90': '#1b1b1b',
 		'neutral-100': '#000000',
-		elevation: '#ffffff',
-		overlay: 'rgba(0, 0, 0, 0.32)',
+		'color-elevation': '#ffffff',
+		'color-overlay': 'rgba(0, 0, 0, 0.32)',
+	},
+	heading: {
+		fontFamily: 'Libre Franklin',
+		fontWeight: '700',
+	},
+	text: {
+		fontFamily: 'Libre Franklin',
+		fontWeight: '400',
 	},
 	fonts: {
 		baseSize: 18,
 		sizeScale: 1.297,
-		heading: {
-			fontFamily: 'Libre Franklin',
-			fontWeight: '700',
-		},
-		body: {
-			fontFamily: 'Libre Franklin',
-			fontWeight: '400',
-		},
 	},
 };
 
@@ -270,7 +272,7 @@ export const santa = {
 	colors: {
 		background: '#cb2a2a',
 		heading: '#ffffff',
-		body: '#fffeeb',
+		text: '#fffeeb',
 		primary: '#367010',
 		'neutral-0': '#000000',
 		'neutral-10': '#e1695b',
@@ -278,19 +280,19 @@ export const santa = {
 		'neutral-80': '#f4a599',
 		'neutral-90': '#fff5f3',
 		'neutral-100': '#ffffff',
-		elevation: '#ea8173',
-		overlay: 'rgba(255, 255, 255, 0.32)',
+		'color-elevation': '#ea8173',
+		'color-overlay': 'rgba(255, 255, 255, 0.32)',
+	},
+	heading: {
+		fontFamily: 'Comfortaa',
+		fontWeight: '700',
+	},
+	text: {
+		fontFamily: 'Rubik',
+		fontWeight: '400',
 	},
 	fonts: {
 		baseSize: 18,
 		sizeScale: 1.407,
-		heading: {
-			fontFamily: 'Comfortaa',
-			fontWeight: '700',
-		},
-		body: {
-			fontFamily: 'Rubik',
-			fontWeight: '400',
-		},
 	},
 };

@@ -1,11 +1,8 @@
 <template>
 	<div :class="$s.Page">
-		<m-text
-			pattern="title"
-			:size="4"
-		>
+		<m-heading :size="4">
 			Lab experiments
-		</m-text>
+		</m-heading>
 
 		<nav :class="$s.Nav">
 			<li
@@ -24,11 +21,11 @@
 </template>
 
 <script>
-import { MText } from '@square/maker/components/Text';
+import { MHeading } from '@square/maker/components/Heading';
 
 export default {
 	components: {
-		MText,
+		MHeading,
 	},
 
 	data() {
