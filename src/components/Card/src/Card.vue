@@ -52,8 +52,8 @@ export default {
 	--radius-pill-default: 4px;
 
 	padding: 16px 24px;
-	background-color: var(--color-background, #fff);
-	border: 1px solid var(--neutral-20, #eaeaea);
+	background-color: var(--maker-color-background, #fff);
+	border: 1px solid var(--maker-color-neutral-20, #eaeaea);
 	border-radius: var(--maker-shape-default-border-radius, var(--radius-rounded-default));
 
 	&.shape_squared {

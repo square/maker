@@ -84,7 +84,7 @@ export default {
 }
 
 @keyframes pulsing {
-	0% { background-color: var(--neutral-10, #ebedef); }
-	100% { background-color: var(--neutral-20, #f5f6f7); }
+	0% { background-color: var(--maker-color-neutral-10, #ebedef); }
+	100% { background-color: var(--maker-color-neutral-20, #f5f6f7); }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
 	<div
 		:class="[
-			$s.Container,
+			$s.SegmentedControl,
+			$s[`shape_${shapeInner}`],
 			$s[`size_${sizeInner}`],
-			$s[`shape_${shape}`],
 		]"
 	>
 		<slot />
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style module="$s">
-.Container {
+.SegmentedControl {
 	--radius-rounded-button: 8px;
 	--radius-pill-button: 32px;
 
@@ -72,9 +72,11 @@ export default {
 	box-sizing: border-box;
 	height: 56px;
 	padding: 4px;
+	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: 14px;
+	font-family: var(--maker-font-label-font-family, inherit);
 	line-height: 24px;
-	background-color: var(--neutral-10, #f6f7f9);
+	background-color: var(--maker-color-neutral-10, #f6f7f9);
 	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 }
 

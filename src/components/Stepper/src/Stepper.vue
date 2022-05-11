@@ -237,10 +237,10 @@ export default {
 
 .QuantityReadonly,
 .QuantityManualInput {
-	color: var(--neutral-90, inherit);
-	font-weight: 500;
-	font-size: 16px;
-	font-family: inherit;
+	color: var(--maker-color-neutral-90, inherit);
+	font-weight: var(--maker-font-label-font-weight, 500);
+	font-size: inherit;
+	font-family: var(--maker-font-label-font-family, inherit);
 	font-feature-settings: "tnum";
 	font-variant-numeric: tabular-nums;
 }

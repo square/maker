@@ -301,9 +301,9 @@ _DemoModal.vue_
 			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
-			<m-heading>
+			<m-text pattern="title">
 				Popover in a modal
-			</m-heading>
+			</m-text>
 
 			<m-popover>
 				<template #action="popover">
@@ -332,7 +332,7 @@ _DemoModal.vue_
 <script>
 import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
-import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
@@ -344,7 +344,7 @@ export default {
 		MPopoverContent,
 		MModal,
 		MButton,
-		MHeading,
+		MText,
 		MModalContent,
 		DemoPopover,
 	},
@@ -368,9 +368,9 @@ _DemoDialog.vue_
 <template>
 	<m-dialog>
 		<m-dialog-content>
-			<m-heading>
+			<m-text pattern="title">
 				Popover in a dialog
-			</m-heading>
+			</m-text>
 
 			<m-popover>
 				<template #action="popover">
@@ -399,7 +399,7 @@ _DemoDialog.vue_
 <script>
 import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
-import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
 import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
@@ -411,7 +411,7 @@ export default {
 		MPopoverContent,
 		MDialog,
 		MButton,
-		MHeading,
+		MText,
 		MDialogContent,
 		DemoPopover,
 	},
@@ -434,12 +434,13 @@ _DemoPopoverContent.vue_
 ```vue
 <template>
 	<div :class="$s.DemoPopoverContent">
-		<m-heading
+		<m-text
+			pattern="title"
 			:class="$s.DemoPopoverHeader"
 			:size="0"
 		>
 			Hello, I'm a popover
-		</m-heading>
+		</m-text>
 
 		<div :class="$s.DemoPopoverText">
 			This is some popover content
@@ -455,13 +456,13 @@ _DemoPopoverContent.vue_
 </template>
 
 <script>
-import { MHeading } from '@square/maker/components/Heading';
+import { MText } from '@square/maker/components/Text';
 
 export default {
 	name: 'DemoPopoverContent',
 
 	components: {
-		MHeading,
+		MText,
 	},
 };
 </script>

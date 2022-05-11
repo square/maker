@@ -209,6 +209,8 @@ export default {
 	flex-wrap: nowrap;
 	gap: 8px;
 	align-items: center;
+	font-weight: var(--maker-font-label-font-weight, 500);
+	font-family: var(--maker-font-label-font-family, inherit);
 
 	&.error {
 		padding-bottom: 8px;
@@ -225,8 +227,9 @@ export default {
 	min-width: 0;
 	height: 50px;
 	padding: 0;
-	font-weight: 500;
+	font-weight: inherit;
 	font-size: 16px;
+	font-family: inherit;
 	text-align: center;
 	background: #fff;
 	border: 1px solid #d3d3d3;
