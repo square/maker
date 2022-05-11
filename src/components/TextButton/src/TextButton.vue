@@ -58,6 +58,13 @@ export default {
 
 	props: {
 		/**
+		 * pattern defined at theme level
+		 */
+		pattern: {
+			type: String,
+			default: undefined,
+		},
+		/**
 		 * Type of the button
 		 */
 		type: {
@@ -97,7 +104,11 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('textbutton', ['size', 'color']),
+		...resolveThemeableProps('textbutton', [
+			'pattern',
+			'size',
+			'color',
+		]),
 		style() {
 			return textButton({
 				color: this.resolvedColor,
