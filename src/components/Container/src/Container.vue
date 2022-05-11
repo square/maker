@@ -141,16 +141,15 @@ export default {
 <style module="$s">
 .Container {
 	padding: 16px 24px;
-	color: var(--color, var(--neutral-80, inherit));
-	font-family: inherit;
 	background-color: var(--bg-color, inherit);
 }
 
 .Label {
 	margin-bottom: 16px;
-	color: var(--color, var(--neutral-90, inherit));
-	font-weight: 500;
+	color: var(--color, var(--maker-color-heading, inherit));
+	font-weight: var(--maker-font-heading-font-weight, 500);
 	font-size: 14px;
+	font-family: var(--maker-font-heading-font-family, inherit);
 	line-height: 20px;
 }
 
@@ -178,9 +177,10 @@ export default {
 }
 
 .Sublabel {
-	color: var(--color, var(--neutral-80, inherit));
-	font-weight: 400;
+	color: var(--color, var(--maker-color-body, inherit));
+	font-weight: var(--maker-font-body-font-weight, inherit);
 	font-size: 14px;
+	font-family: var(--maker-font-body-font-family, inherit);
 	line-height: 24px;
 	letter-spacing: normal;
 	text-transform: none;
@@ -188,6 +188,7 @@ export default {
 
 .RequirementLabel {
 	padding-left: 8px;
+	color: var(--color, inherit);
 	font-size: 14px;
 	line-height: 24px;
 	white-space: nowrap;

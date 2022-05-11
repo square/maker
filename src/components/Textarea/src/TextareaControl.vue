@@ -98,18 +98,18 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: var(--neutral-10, #f6f7f9);
+	--color-background: var(--maker-color-neutral-10, #f6f7f9);
 	--color-border: transparent;
 }
 
 .variant_outline {
-	--color-border: var(--neutral-20, rgba(0, 0, 0, 0.3));
+	--color-border: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
 }
 
 .Textarea {
-	--color-placeholder: var(--neutral-80, rgba(0, 0, 0, 0.55));
-	--color-foreground: var(--neutral-90, rgba(0, 0, 0, 0.9));
-	--color-border-active: var(--neutral-80, #222);
+	--color-placeholder: var(--maker-color-neutral-80, rgba(0, 0, 0, 0.55));
+	--color-foreground: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
+	--color-border-active: var(--maker-color-neutral-80, #222);
 	--color-error: rgba(206, 50, 23, 1);
 
 	box-sizing: border-box;
@@ -119,9 +119,9 @@ export default {
 	min-height: calc(12px * 2 + 24px * 3);
 	padding: 12px 16px;
 	color: var(--color-foreground);
+	font-weight: var(--maker-font-body-font-weight, inherit);
 	font-size: 16px;
-	font-family: inherit;
-	font-family: var(--font-family);
+	font-family: var(--maker-font-body-font-family, inherit);
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);

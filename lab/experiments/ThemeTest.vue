@@ -9,17 +9,97 @@
 				<div
 					:class="$s.Scale"
 				>
-					<m-heading
-						:size="1"
-						style="margin-bottom: 20px;"
+					<m-text
+						pattern="title"
+						font-size="20px"
+						style="margin-bottom: 16px;"
 					>
 						Maker Theme
-					</m-heading>
-					<m-heading
-						:size="0"
+					</m-text>
+					<m-text
+						pattern="title"
+						font-size="16px"
+					>
+						Typography
+					</m-text>
+					<div :class="$s.Typography">
+						base size
+						<br>
+						<input
+							v-model="fontsBaseSize"
+							type="range"
+							min="16"
+							max="24"
+							step="1"
+						>
+						<br>
+						{{ fontsBaseSize }}
+						<br>
+						type scale
+						<br>
+						<input
+							v-model="fontsTypeScale"
+							type="range"
+							min="1.15"
+							max="1.62"
+							step="0.01"
+						>
+						<br>
+						{{ fontsTypeScale }}
+						<br>
+						<m-divider :class="$s.Divider" />
+						<m-text
+							pattern="title"
+							font-size="16px"
+						>
+							Patterns
+						</m-text>
+						<div
+							v-for="textPattern in Object.keys(textPatterns)"
+							:key="textPattern"
+						>
+							{{ textPattern }}
+							<br>
+							<select
+								v-model="textPatterns[textPattern].fontFamily"
+							>
+								<option>
+									serif
+								</option>
+								<option>
+									sans-serif
+								</option>
+								<option>
+									monospace
+								</option>
+								<option>
+									inherit
+								</option>
+								<option>
+									arial
+								</option>
+							</select>
+							<br>
+							<input
+								v-model="textPatterns[textPattern].fontWeight"
+								type="range"
+								min="100"
+								max="900"
+								step="100"
+							>
+							<br>
+							{{ textPatterns[textPattern].fontWeight }}
+							<br>
+							<br>
+						</div>
+					</div>
+					<m-divider :class="$s.Divider" />
+					<m-text
+						pattern="title"
+						font-size="16px"
 					>
 						Colors
-					</m-heading>
+					</m-text>
 					<div :class="$s.Profile">
 						<label>
 							<input
@@ -44,40 +124,41 @@
 						</label>
 						<label>
 							<input
-								v-model="textColor"
+								v-model="bodyColor"
 								type="color"
 							>
-							Text
+							Body
 						</label>
-						<m-divider />
+						<m-divider :class="$s.Divider" />
 						<div :class="$s.palette">
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-0)' }" /> Neutral 0
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-0)' }" /> Neutral 0
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-10)' }" /> Neutral 10
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-10)' }" /> Neutral 10
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-20)' }" /> Neutral 20
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-20)' }" /> Neutral 20
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-80)' }" /> Neutral 80
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-80)' }" /> Neutral 80
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-90)' }" /> Neutral 90
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-90)' }" /> Neutral 90
 							</div>
 							<div :class="$s.color">
-								<span :style="{ backgroundColor : 'var(--neutral-100)' }" /> Neutral 100
+								<span :style="{ backgroundColor : 'var(--maker-color-neutral-100)' }" /> Neutral 100
 							</div>
 						</div>
 						<br>
 						<m-divider />
 						<br>
-						<m-heading
+						<m-text
+							pattern="title"
 							:size="0"
 						>
 							Default Shape
-						</m-heading>
+						</m-text>
 						<select
 							v-model="shape"
 						>
@@ -138,11 +219,12 @@
 					:class="$s.Preview"
 				>
 					<div>
-						<m-heading
+						<m-text
+							pattern="title"
 							:size="0"
 						>
 							Enter delivery address
-						</m-heading>
+						</m-text>
 						<m-segmented-control
 							v-model="selected"
 							size="small"
@@ -176,11 +258,12 @@
 							</m-choice>
 						</div>
 						<m-card>
-							<m-heading
+							<m-text
+								pattern="title"
 								:size="-1"
 							>
 								Enter delivery address
-							</m-heading>
+							</m-text>
 							<m-text :size="-1">
 								<check-circle :class="$s.Icon" /> Pickup until 10:00 pm
 							</m-text>
@@ -238,18 +321,32 @@
 							Schedule for later
 						</m-button>
 					</div>
+					<m-divider />
+					<m-container
+						label="label"
+						sublabel="sublabel"
+						requirement-label="requirement label"
+					>
+						container content
+					</m-container>
+					<m-divider />
+					<m-pin-input :pin-length="3" />
 				</div>
 				<div
 					:class="$s.Preview"
 				>
 					<div>
-						<m-heading
+						<m-text
+							pattern="title"
 							:size="0"
 						>
 							House special wings
-						</m-heading>
+						</m-text>
 						<m-radio value="1">
 							Buffalo
+							<template #sublabel>
+								mildly spicy
+							</template>
 						</m-radio>
 						<br>
 						<m-radio
@@ -257,6 +354,9 @@
 							disabled
 						>
 							Ginger soy
+							<template #sublabel>
+								very tasty
+							</template>
 						</m-radio>
 						<br>
 						<m-radio
@@ -265,6 +365,9 @@
 							disabled
 						>
 							Disabled and selected
+							<template #sublabel>
+								obligatory sublabel
+							</template>
 						</m-radio>
 						<m-select
 							placeholder="Select dip"
@@ -297,16 +400,25 @@
 					<div>
 						<m-checkbox>
 							Include cutlery and utensils
+							<template #sublabel>
+								they're so shiny
+							</template>
 						</m-checkbox>
 						<m-checkbox disabled>
 							Provide compostable utensils
+							<template #sublabel>
+								not as shiny
+							</template>
 						</m-checkbox>
 						<br>
 						<m-checkbox
 							disabled
 							checked
 						>
-							Disabled and selected
+							Disabled and checked
+							<template #sublabel>
+								obligatory sublabel
+							</template>
 						</m-checkbox>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea
@@ -328,6 +440,18 @@
 					:class="$s.Preview"
 				>
 					<div>
+						<m-text
+							pattern="title"
+							:size="0"
+						>
+							Schedule order
+						</m-text>
+						<m-text :size="-1">
+							<check-circle :class="$s.Icon" /> No minimum
+						</m-text>
+						<m-text :size="-1">
+							<check-circle :class="$s.Icon" /> No fees
+						</m-text>
 						<m-text-button>
 							<info :class="$s.Icon" />  Learn more
 						</m-text-button>
@@ -340,11 +464,12 @@
 					</div>
 					<m-divider />
 					<div>
-						<m-heading
+						<m-text
+							pattern="title"
 							:size="0"
 						>
 							Select date and time
-						</m-heading>
+						</m-text>
 						<m-text :size="-1">
 							Choose from the availble timeslots for your order
 						</m-text>
@@ -355,6 +480,32 @@
 							:max-date="maxDate"
 							:disabled-dates="disabledDates"
 						/>
+					</div>
+					<m-divider />
+					<div>
+						<m-text-button>
+							<info :class="$s.Icon" />  Learn more
+						</m-text-button>
+						<m-image-uploader
+							@image-uploader:change="setImages"
+						/>
+					</div>
+					<m-divider />
+					<div :class="$s.TypographyPreview">
+						<m-text
+							v-for="pattern in ['headline', 'title', 'paragraph', 'label']"
+							:key="pattern"
+							:pattern="pattern"
+						>
+							{{ pattern }}
+						</m-text>
+						<m-text
+							v-for="size in [7, 6, 5, 4, 3, 2, 1, 0, -1, -2]"
+							:key="size"
+							:size="size"
+						>
+							Size {{ size }}
+						</m-text>
 					</div>
 				</div>
 			</div>
@@ -369,7 +520,6 @@ import chroma from 'chroma-js';
 import { MTheme } from '@square/maker/components/Theme';
 import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
-import { MHeading } from '@square/maker/components/Heading';
 import { MText } from '@square/maker/components/Text';
 import { MNotice } from '@square/maker/components/Notice';
 import { MInput } from '@square/maker/components/Input';
@@ -386,6 +536,8 @@ import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedC
 import { MCard } from '@square/maker/components/Card';
 import { MImage } from '@square/maker/components/Image';
 import { MModalLayer } from '@square/maker/components/Modal';
+import { MContainer } from '@square/maker/components/Container';
+import { MPinInput } from '@square/maker/components/PinInput';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
@@ -448,8 +600,8 @@ function contrastColors(bgHex) {
 
 	return {
 		...colors,
-		'color-elevation': isLight ? '#ffffff' : colors['neutral-20'],
-		'color-overlay': isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
+		elevation: isLight ? '#ffffff' : colors['neutral-20'],
+		overlay: isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
 	};
 }
 // Above will be supplied by website-springboard
@@ -459,8 +611,8 @@ export default {
 		MTheme,
 		MChoice,
 		MChoiceOption,
+		MContainer,
 		MDivider,
-		MHeading,
 		MText,
 		MNotice,
 		MInput,
@@ -480,6 +632,7 @@ export default {
 		MImage,
 		MTextButton,
 		MModalLayer,
+		MPinInput,
 	},
 
 	mixins: [
@@ -491,7 +644,7 @@ export default {
 			backgroundColor: '#ffffff',
 			primaryColor: '#14433d',
 			headingColor: '#000000',
-			textColor: '#000000',
+			bodyColor: '#000000',
 			choice: '10am',
 			number: 0,
 			options: [
@@ -531,6 +684,26 @@ export default {
 			selected: 'medium',
 			images: [],
 			item: storeData.items[0],
+			fontsBaseSize: '16',
+			fontsTypeScale: '1.17',
+			textPatterns: {
+				headline: {
+					fontFamily: 'arial',
+					fontWeight: '700',
+				},
+				title: {
+					fontFamily: 'serif',
+					fontWeight: '500',
+				},
+				paragraph: {
+					fontFamily: 'sans-serif',
+					fontWeight: '400',
+				},
+				label: {
+					fontFamily: 'monospace',
+					fontWeight: '500',
+				},
+			},
 			shape: {
 				name: 'squared',
 				defaultBorderRadius: '0px',
@@ -584,22 +757,44 @@ export default {
 	computed: {
 		theme() {
 			const colors = contrastColors(this.backgroundColor);
+			const baseTen = 10;
 			return {
 				colors: {
 					primary: this.primaryColor,
 					background: this.backgroundColor,
 					heading: this.headingColor,
-					text: this.textColor,
+					body: this.bodyColor,
 					...colors,
 				},
+				fonts: {
+					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
+					sizeScale: Number.parseFloat(this.fontsTypeScale, baseTen),
+					heading: {
+						fontFamily: this.textPatterns.title.fontFamily,
+						fontWeight: this.textPatterns.title.fontWeight,
+					},
+					body: {
+						fontFamily: this.textPatterns.paragraph.fontFamily,
+						fontWeight: this.textPatterns.paragraph.fontWeight,
+					},
+					label: {
+						fontFamily: this.textPatterns.label.fontFamily,
+						fontWeight: this.textPatterns.label.fontWeight,
+					},
+				},
 				notice: {
-					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : '',
+					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : undefined,
 				},
 				modal: {
 					bgColor: this.backgroundColor,
 				},
 				shapes: {
 					...(this.shape.name === 'custom' ? this.customShape : this.shape),
+				},
+				text: {
+					patterns: {
+						...this.textPatterns,
+					},
 				},
 			};
 		},
@@ -659,7 +854,6 @@ export default {
 	min-height: 100vh;
 	margin: auto;
 	padding: 25px 50px;
-	font-family: Arial, Helvetica, sans-serif;
 
 	& > div {
 		flex: 1;
@@ -674,21 +868,22 @@ export default {
 .Profile {
 	display: flex;
 	flex-direction: column;
-
-	& label {
-		margin-bottom: 8px;
-	}
+	gap: 8px;
+	margin: 8px 0;
 
 	& input {
 		margin-right: 16px;
 	}
 }
 
+hr.Divider {
+	margin: 8px 0;
+}
+
 .palette {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
-	margin-top: 16px;
 }
 
 .palette > .color {
@@ -704,7 +899,7 @@ export default {
 }
 
 .Preview {
-	border: 1px solid var(--neutral-20);
+	border: 1px solid var(--maker-color-neutral-20);
 
 	/* stylelint-disable-next-line no-descending-specificity */
 	& > div {
@@ -718,6 +913,11 @@ export default {
 	& > div > *:last-child {
 		margin-bottom: 0;
 	}
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.TypographyPreview > * {
+	margin: 0 !important;
 }
 
 .Icon {

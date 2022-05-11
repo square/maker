@@ -1,5 +1,5 @@
 <template>
-	<div :class="$s.Container">
+	<div :class="$s.BladeContainer">
 		<div :class="$s.Blade">
 			<!-- @slot Blade content -->
 			<slot />
@@ -8,7 +8,7 @@
 </template>
 
 <style module="$s">
-.Container {
+.BladeContainer {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -22,7 +22,7 @@
 }
 
 @media screen and (--for-tablet-landscape-up) {
-	.Container {
+	.BladeContainer {
 		width: 400px;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 	}

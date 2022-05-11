@@ -1,8 +1,6 @@
 <template>
 	<div
-		:class="[
-			$s.Container,
-		]"
+		:class="$s.Choice"
 		:style="style"
 	>
 		<slot />
@@ -157,16 +155,15 @@ export default {
 </script>
 
 <style module="$s">
-.Container {
+.Choice {
 	--font-size: 14px;
-	--font-weight: 500;
 	--line-height: 24px;
 
 	display: flex;
 	box-sizing: border-box;
-	font-weight: var(--font-weight);
+	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: var(--font-size);
-	font-family: inherit;
+	font-family: var(--maker-font-label-font-family, inherit);
 	line-height: var(--line-height);
 }
 </style>
