@@ -525,7 +525,7 @@ We have a preset scale of neutral colors that are used within most components. D
 		</div>
 		<div class="swatch-demo dark-background">
 			<h3 class="demo-title">
-				Custom Neutrals for dark background
+				Suggested Neutrals for Dark Backgrounds
 			</h3>
 			<ul class="swatch">
 				<li
@@ -554,10 +554,10 @@ export default {
 			},
 			demoDarkColors: {
 				'neutral-0': '#000000',
-				'neutral-10': '#60636b',
-				'neutral-20': '#777981',
-				'neutral-80': '#9c9ea3',
-				'neutral-90': '#f4f4f4',
+				'neutral-10': '#3c3c3c',
+				'neutral-20': '#575757',
+				'neutral-80': '#848484',
+				'neutral-90': '#f1f1f1',
 				'neutral-100': '#ffffff',
 			},
 		};
