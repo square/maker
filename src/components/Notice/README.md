@@ -114,8 +114,14 @@ Suggested colors for dark theme.
 ```vue
 <template>
 	<m-theme
-		:theme="darkTheme"
+		:theme="theme"
 	>
+		background color
+		<input
+			v-model="bgColor"
+			type="color"
+		>
+		{{ JSON.stringify(theme) }}
 		<div class="spaceout">
 			<m-notice pattern="error">
 				Error inline message
@@ -191,9 +197,101 @@ Suggested colors for dark theme.
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import { MNotice } from '@square/maker/components/Notice';
 import { MTextButton } from '@square/maker/components/TextButton';
 import { MTheme } from '@square/maker/components/Theme';
+
+// generation logic
+const IS_LIGHT_THRESHOLD = 0.32;
+const CONTRAST_THRESHOLD = 4;
+const RATIOS = {
+	light: {
+		10: 0.05,
+		20: 0.155,
+		80: 0.527,
+		90: 0.9,
+	},
+	dark: {
+		10: 0.255,
+		20: 0.37,
+		80: 0.55,
+		90: 0.95,
+	},
+};
+
+function contrastColors(bgHex) {
+	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
+	const contrastColor = isLight ? '#000000' : '#ffffff';
+	const levels = isLight ? RATIOS.light : RATIOS.dark;
+	const colors = {
+		background: bgHex,
+		'neutral-0': isLight ? '#ffffff' : '#000000',
+		'neutral-100': !isLight ? '#ffffff' : '#000000',
+	};
+	colors.body = colors['neutral-100'];
+
+	Object.entries(levels).forEach(([name, level]) => {
+		colors[`neutral-${name}`] = chroma.mix(
+			bgHex,
+			contrastColor,
+			level,
+			'lab',
+		).hex();
+	});
+
+	if (isLight) {
+		colors.critical = {
+			fill: '#cd2026',
+			text: '#a82826',
+			subtle: '#f6eceb',
+		};
+		colors.warning = {
+			fill: '#ffbf00',
+			text: '#7e662a',
+			subtle: '#f9eecf',
+		};
+		colors.success = {
+			fill: '#008000',
+			text: '#0a7A06',
+			subtle: '#ebf1eb',
+		};
+	} else {
+		colors.critical = {
+			fill: '#cd2026',
+			text: '#ff7566',
+			subtle: colors['neutral-10'],
+		};
+		colors.warning = {
+			fill: '#ffbf00',
+			text: '#ffbf00',
+			subtle: colors['neutral-10'],
+		};
+		colors.success = {
+			fill: '#008000',
+			text: '#64cc52',
+			subtle: colors['neutral-10'],
+		};
+	}
+
+	for (const colorType of ['critical', 'warning', 'success']) {
+		if (chroma.contrast(colors[colorType].text, colors.background) < CONTRAST_THRESHOLD) {
+			if (isLight) {
+				colors[colorType].text = '#000000';
+				colors[colorType].fill = '#000000';
+			} else {
+				colors[colorType].text = '#ffffff';
+				colors[colorType].fill = '#ffffff';
+			}
+		}
+	}
+
+	return {
+		...colors,
+		elevation: isLight ? '#ffffff' : colors['neutral-20'],
+		overlay: isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
+	};
+}
 
 export default {
 	components: {
@@ -203,33 +301,15 @@ export default {
 	},
 	data() {
 		return {
-			darkTheme: {
-				colors: {
-					background: '#000000',
-					'neutral-0': '#000000',
-					'neutral-10': '#3c3c3c',
-					'neutral-20': '#575757',
-					'neutral-80': '#848484',
-					'neutral-90': '#f1f1f1',
-					'neutral-100': '#ffffff',
-					critical: {
-						fill: '#cd2026',
-						text: '#ff7566',
-						subtle: '#3c3c3c',
-					},
-					warning: {
-						fill: '#ffbf00',
-						text: '#ffbf00',
-						subtle: '#3c3c3c',
-					},
-					success: {
-						fill: '#008000',
-						text: '#64cc52',
-						subtle: '#3c3c3c',
-					},
-				},
-			},
+			bgColor: '#000000',
 		};
+	},
+	computed: {
+		theme() {
+			return {
+				colors: contrastColors(this.bgColor),
+			};
+		},
 	},
 };
 </script>
