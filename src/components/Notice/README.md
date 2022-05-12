@@ -121,6 +121,17 @@ Suggested colors for dark theme.
 			v-model="bgColor"
 			type="color"
 		>
+		<br>
+		min contrast ratio
+		<input
+			v-model="minContrastRatio"
+			type="range"
+			min="1.0"
+			max="6.0"
+			step="0.1"
+		>
+		{{ minContrastRatio }}
+		<br>
 		{{ JSON.stringify(theme) }}
 		<div class="spaceout">
 			<m-notice pattern="error">
@@ -204,7 +215,6 @@ import { MTheme } from '@square/maker/components/Theme';
 
 // generation logic
 const IS_LIGHT_THRESHOLD = 0.32;
-const CONTRAST_THRESHOLD = 4;
 const RATIOS = {
 	light: {
 		10: 0.05,
@@ -220,7 +230,7 @@ const RATIOS = {
 	},
 };
 
-function contrastColors(bgHex) {
+function contrastColors(bgHex, minContrastRatioString) {
 	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
 	const contrastColor = isLight ? '#000000' : '#ffffff';
 	const levels = isLight ? RATIOS.light : RATIOS.dark;
@@ -274,8 +284,11 @@ function contrastColors(bgHex) {
 		};
 	}
 
+	const BASE_TEN = 10;
+	const minContrastRatio = Number.parseFloat(minContrastRatioString, BASE_TEN);
+
 	for (const colorType of ['critical', 'warning', 'success']) {
-		if (chroma.contrast(colors[colorType].text, colors.background) < CONTRAST_THRESHOLD) {
+		if (chroma.contrast(colors[colorType].text, colors.background) < minContrastRatio) {
 			if (isLight) {
 				colors[colorType].text = '#000000';
 				colors[colorType].fill = '#000000';
@@ -302,12 +315,13 @@ export default {
 	data() {
 		return {
 			bgColor: '#000000',
+			minContrastRatio: '4.0',
 		};
 	},
 	computed: {
 		theme() {
 			return {
-				colors: contrastColors(this.bgColor),
+				colors: contrastColors(this.bgColor, this.minContrastRatio),
 			};
 		},
 	},
