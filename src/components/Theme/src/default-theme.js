@@ -15,12 +15,21 @@ export default function defaultTheme() {
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
-			critical: '#a82826',
-			criticalBg: '#f6eceb',
-			success: '#0a7a06',
-			successBg: '#ebf1eb',
-			warning: '#7e662a',
-			warningBg: '#f9eecf',
+			critical: {
+				fill: '#cd2026',
+				text: '#a82826',
+				subtle: '#f6eceb',
+			},
+			warning: {
+				fill: '#ffbf00',
+				text: '#7e662a',
+				subtle: '#f9eecf',
+			},
+			success: {
+				fill: '#008000',
+				text: '#0a7A06',
+				subtle: '#ebf1eb',
+			},
 		},
 		fonts: {
 			baseSize: 16,
@@ -73,13 +82,13 @@ export default function defaultTheme() {
 			size: 'medium',
 			patterns: {
 				error: {
-					color: '@colors.critical',
+					color: '@colors.critical.text',
 				},
 				success: {
-					color: '@colors.success',
+					color: '@colors.success.text',
 				},
 				warning: {
-					color: '@colors.warning',
+					color: '@colors.warning.text',
 				},
 				info: {
 					color: '@colors["neutral-90"]',
@@ -142,21 +151,25 @@ export default function defaultTheme() {
 			patterns: {
 				error: {
 					type: 'error',
-					color: '@colors.critical',
-					bgColor: '@colors.criticalBg',
+					iconColor: '@colors.critical.fill',
+					color: '@colors.critical.text',
+					bgColor: '@colors.critical.subtle',
 				},
 				success: {
 					type: 'success',
-					color: '@colors.success',
-					bgColor: '@colors.successBg',
+					iconColor: '@colors.success.fill',
+					color: '@colors.success.text',
+					bgColor: '@colors.success.subtle',
 				},
 				warning: {
 					type: 'warning',
-					color: '@colors.warning',
-					bgColor: '@colors.warningBg',
+					iconColor: '@colors.warning.fill',
+					color: '@colors.warning.text',
+					bgColor: '@colors.warning.subtle',
 				},
 				info: {
 					type: 'info',
+					iconColor: '@colors["neutral-80"]',
 					color: '@colors["neutral-90"]',
 					bgColor: '@colors["neutral-10"]',
 				},

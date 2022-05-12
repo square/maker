@@ -212,12 +212,21 @@ export default {
 					'neutral-80': '#848484',
 					'neutral-90': '#f1f1f1',
 					'neutral-100': '#ffffff',
-					critical: '#ff7566',
-					criticalBg: '#3c3c3c',
-					success: '#64cc52',
-					successBg: '#3c3c3c',
-					warning: '#ffbf00',
-					warningBg: '#3c3c3c',
+					critical: {
+						fill: '#cd2026',
+						text: '#ff7566',
+						subtle: '#3c3c3c',
+					},
+					warning: {
+						fill: '#ffbf00',
+						text: '#ffbf00',
+						subtle: '#3c3c3c',
+					},
+					success: {
+						fill: '#008000',
+						text: '#64cc52',
+						subtle: '#3c3c3c',
+					},
 				},
 			},
 		};
@@ -244,13 +253,14 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop     | Type     | Default    | Possible values                       | Description                                |
-| -------- | -------- | ---------- | ------------------------------------- | ------------------------------------------ |
-| pattern  | `string` | —          | —                                     | pattern defined at theme level             |
-| type     | `string` | —          | `error`, `success`, `warning`, `info` | type of notice                             |
-| variant  | `string` | `'inline'` | `inline`, `block`                     | notice variant                             |
-| color    | `string` | —          | —                                     | icon color & text color for inline notices |
-| bg-color | `string` | —          | —                                     | background color for block notices         |
+| Prop       | Type     | Default    | Possible values                       | Description                        |
+| ---------- | -------- | ---------- | ------------------------------------- | ---------------------------------- |
+| pattern    | `string` | —          | —                                     | pattern defined at theme level     |
+| type       | `string` | —          | `error`, `success`, `warning`, `info` | type of notice                     |
+| variant    | `string` | `'inline'` | `inline`, `block`                     | notice variant                     |
+| icon-color | `string` | —          | —                                     | icon color                         |
+| color      | `string` | —          | —                                     | text color for inline notices      |
+| bg-color   | `string` | —          | —                                     | background color for block notices |
 
 
 ## Slots

@@ -87,7 +87,15 @@ export default {
 			validator: (variant) => ['inline', 'block'].includes(variant),
 		},
 		/**
-		 * icon color & text color for inline notices
+		 * icon color
+		 */
+		iconColor: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('color'),
+		},
+		/**
+		 * text color for inline notices
 		 */
 		color: {
 			type: String,
@@ -108,6 +116,7 @@ export default {
 		...resolveThemeableProps('notice', [
 			'pattern',
 			'type',
+			'iconColor',
 			'color',
 			'bgColor',
 		]),
@@ -132,7 +141,7 @@ export default {
 				: 'var(--maker-color-neutral-90, #1b1b1b)';
 			return {
 				'--color': textColor,
-				'--color-icon': this.resolvedColor,
+				'--color-icon': this.resolvedIconColor,
 				'--color-bg': this.resolvedBgColor,
 			};
 		},
@@ -183,20 +192,20 @@ export default {
 }
 
 .type_error {
-	--color: #a12712;
-	--color-icon: #d83e3b;
+	--color: #a82826;
+	--color-icon: #cd2026;
 	--color-bg: #f6eceb;
 }
 
 .type_warning {
-	--color: #584400;
-	--color-icon: #f2bd0d;
+	--color: #7e662a;
+	--color-icon: #ffbf00;
 	--color-bg: #f9eecf;
 }
 
 .type_success {
-	--color: #035203;
-	--color-icon: #1fad1f;
+	--color: #0a7a06;
+	--color-icon: #008000;
 	--color-bg: #ebf1eb;
 }
 
