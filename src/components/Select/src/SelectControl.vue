@@ -172,6 +172,7 @@ export default {
 }
 
 .variant_outline {
+	--color-background: var(--maker-color-background);
 	--color-border: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
 }
 

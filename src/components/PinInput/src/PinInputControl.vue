@@ -227,19 +227,20 @@ export default {
 	min-width: 0;
 	height: 50px;
 	padding: 0;
+	color: var(--maker-color-neutral-90, rgba(107, 107, 107, 0.9));
 	font-weight: inherit;
 	font-size: 16px;
 	font-family: inherit;
 	text-align: center;
-	background: #fff;
-	border: 1px solid #d3d3d3;
+	background: var(--maker-color-background, #fff);
+	border: 1px solid var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
 	border-radius: var(--maker-shape-default-border-radius, 8px);
 	outline: none;
-	caret-color: black;
+	caret-color: currentColor;
 	cursor: pointer;
 
 	&.filled {
-		background: #f6f7f9;
+		background: var(--maker-color-neutral-10, #f6f7f9);
 	}
 
 	&.error {
@@ -253,7 +254,7 @@ export default {
 	&:focus,
 	&:valid,
 	&:hover {
-		border: 2px solid rgba(0, 0, 0, 0.9);
+		border: 2px solid var(--maker-color-neutral-80, #222);
 	}
 }
 

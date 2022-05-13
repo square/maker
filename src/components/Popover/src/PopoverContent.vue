@@ -78,7 +78,7 @@ export default {
 <style module="$s">
 .PopoverContent {
 	padding: var(--padding);
-	color: var(--popover-color, var(--color-text, black));
+	color: var(--popover-color, var(--maker-color-body, black));
 	background-color: var(--popover-bg-color, var(--maker-color-background, white));
 	border: 1px solid var(--maker-color-neutral-10);
 	border-radius: var(--maker-shape-default-border-radius, 8px);
