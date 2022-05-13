@@ -296,13 +296,40 @@
 							variant="outline"
 							disabled
 						/>
-						<m-notice type="error">
+						<m-notice pattern="info">
+							Here's some info for you
+						</m-notice>
+						<m-notice pattern="error">
 							There has been error notice
 						</m-notice>
-						<m-notice type="warning">
+						<m-notice pattern="warning">
 							Warning please take note
 						</m-notice>
-						<m-notice type="success">
+						<m-notice pattern="success">
+							Action has been successfully completed
+						</m-notice>
+						<m-notice
+							pattern="info"
+							variant="block"
+						>
+							Here's some info for you
+						</m-notice>
+						<m-notice
+							pattern="error"
+							variant="block"
+						>
+							There has been error notice
+						</m-notice>
+						<m-notice
+							pattern="warning"
+							variant="block"
+						>
+							Warning please take note
+						</m-notice>
+						<m-notice
+							pattern="success"
+							variant="block"
+						>
 							Action has been successfully completed
 						</m-notice>
 					</div>
@@ -553,6 +580,7 @@ import storeData from './SiteApp/data';
 
 // Below will be supplied by website-springboard
 const IS_LIGHT_THRESHOLD = 0.32;
+const NOTICE_MIN_CONTRAST = 4;
 const RATIOS = {
 	light: {
 		10: 0.05,
@@ -567,36 +595,73 @@ const RATIOS = {
 		90: 0.95,
 	},
 };
-function isNoticeContrastColor(bgHex) {
-	const lowerBound = 0.15;
-	const upperBound = 0.85;
-	return chroma(bgHex).hsl()[2] > lowerBound && chroma(bgHex).hsl()[2] < upperBound;
-}
 
+// generates neutrals, elevation, overlay, & contextual colors
 function contrastColors(bgHex) {
 	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
 	const contrastColor = isLight ? '#000000' : '#ffffff';
 	const levels = isLight ? RATIOS.light : RATIOS.dark;
 	const colors = {
+		background: bgHex,
 		'neutral-0': isLight ? '#ffffff' : '#000000',
 		'neutral-100': !isLight ? '#ffffff' : '#000000',
 	};
-
-	// if (isLight) {
-	// 	colors['neutral-90'] = 'rgb(142, 142, 147)';
-	// 	colors['neutral-80'] = 'rgb(174, 174, 178)';
-	// 	colors['neutral-20'] = 'rgb(229, 229, 234)';
-	// 	colors['neutral-10'] = 'rgb(242, 242, 247)';
-	// } else {
-	// 	colors['neutral-10'] = 'rgb(44, 44, 46)';
-	// 	colors['neutral-20'] = 'rgb(58, 58, 60)';
-	// 	colors['neutral-80'] = 'rgb(99, 99, 102)';
-	// 	colors['neutral-90'] = 'rgb(142, 142, 147)';
-	// }
+	colors.body = colors['neutral-100'];
 
 	Object.entries(levels).forEach(([name, level]) => {
-		colors[`neutral-${name}`] = chroma.mix(bgHex, contrastColor, level, 'lab').hex();
+		colors[`neutral-${name}`] = chroma.mix(
+			bgHex,
+			contrastColor,
+			level,
+			'lab',
+		).hex();
 	});
+
+	if (isLight) {
+		colors.critical = {
+			fill: '#cd2026',
+			text: '#a82826',
+			subtle: '#f6eceb',
+		};
+		colors.warning = {
+			fill: '#ffbf00',
+			text: '#7e662a',
+			subtle: '#f9eecf',
+		};
+		colors.success = {
+			fill: '#008000',
+			text: '#0a7A06',
+			subtle: '#ebf1eb',
+		};
+	} else {
+		colors.critical = {
+			fill: '#cd2026',
+			text: '#ff7566',
+			subtle: colors['neutral-10'],
+		};
+		colors.warning = {
+			fill: '#ffbf00',
+			text: '#ffbf00',
+			subtle: colors['neutral-10'],
+		};
+		colors.success = {
+			fill: '#008000',
+			text: '#64cc52',
+			subtle: colors['neutral-10'],
+		};
+	}
+
+	for (const colorType of ['critical', 'warning', 'success']) {
+		if (chroma.contrast(colors[colorType].text, colors.background) < NOTICE_MIN_CONTRAST) {
+			if (isLight) {
+				colors[colorType].text = '#000000';
+				colors[colorType].fill = '#000000';
+			} else {
+				colors[colorType].text = '#ffffff';
+				colors[colorType].fill = '#ffffff';
+			}
+		}
+	}
 
 	return {
 		...colors,
@@ -760,11 +825,11 @@ export default {
 			const baseTen = 10;
 			return {
 				colors: {
+					...colors,
 					primary: this.primaryColor,
 					background: this.backgroundColor,
 					heading: this.headingColor,
 					body: this.bodyColor,
-					...colors,
 				},
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
@@ -781,9 +846,6 @@ export default {
 						fontFamily: this.textPatterns.label.fontFamily,
 						fontWeight: this.textPatterns.label.fontWeight,
 					},
-				},
-				notice: {
-					color: isNoticeContrastColor(this.backgroundColor) ? colors['neutral-90'] : undefined,
 				},
 				modal: {
 					bgColor: this.backgroundColor,

@@ -2,7 +2,7 @@
 	<div
 		:class="[
 			$s.Notice,
-			$s[`type_${type}`],
+			$s[`type_${resolvedType}`],
 			$s[`variant_${variant}`],
 		]"
 		:style="style"
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
 import AlertTriangle from '@square/maker-icons/AlertTriangle';
 import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
 import assert from '@square/maker/utils/assert';
+import cssValidator from '@square/maker/utils/css-validator';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
@@ -64,11 +64,18 @@ export default {
 
 	props: {
 		/**
+		 * pattern defined at theme level
+		 */
+		pattern: {
+			type: String,
+			default: undefined,
+		},
+		/**
 		 * type of notice
 		 */
 		type: {
 			type: String,
-			default: 'info',
+			default: undefined,
 			validator: (type) => ['error', 'success', 'warning', 'info'].includes(type),
 		},
 		/**
@@ -80,25 +87,47 @@ export default {
 			validator: (variant) => ['inline', 'block'].includes(variant),
 		},
 		/**
-		 * notice color
+		 * icon color
+		 */
+		iconColor: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('color'),
+		},
+		/**
+		 * text color for inline notices
 		 */
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: cssValidator('color'),
+		},
+		/**
+		 * background color for block notices
+		 */
+		bgColor: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('color'),
 		},
 	},
 
 	computed: {
-		...resolveThemeableProps('notice', ['color']),
+		...resolveThemeableProps('notice', [
+			'pattern',
+			'type',
+			'iconColor',
+			'color',
+			'bgColor',
+		]),
 		iconComponent() {
-			if (this.type === 'error') {
+			if (this.resolvedType === 'error') {
 				return AlertCircle;
 			}
-			if (this.type === 'success') {
+			if (this.resolvedType === 'success') {
 				return CheckCircle;
 			}
-			if (this.type === 'warning') {
+			if (this.resolvedType === 'warning') {
 				return AlertTriangle;
 			}
 			return Info;
@@ -107,9 +136,13 @@ export default {
 			return this.$slots.actions && this.variant === 'block';
 		},
 		style() {
+			const textColor = this.variant === 'inline'
+				? this.resolvedColor
+				: 'var(--maker-color-neutral-90, #1b1b1b)';
 			return {
-				'--color': this.resolvedColor,
-				'--color-icon': this.resolvedColor,
+				'--color': textColor,
+				'--color-icon': this.resolvedIconColor,
+				'--color-bg': this.resolvedBgColor,
 			};
 		},
 	},
@@ -159,20 +192,20 @@ export default {
 }
 
 .type_error {
-	--color: #a12712;
-	--color-icon: #d83e3b;
+	--color: #a82826;
+	--color-icon: #cd2026;
 	--color-bg: #f6eceb;
 }
 
 .type_warning {
-	--color: #584400;
-	--color-icon: #f2bd0d;
+	--color: #7e662a;
+	--color-icon: #ffbf00;
 	--color-bg: #f9eecf;
 }
 
 .type_success {
-	--color: #035203;
-	--color-icon: #1fad1f;
+	--color: #0a7a06;
+	--color-icon: #008000;
 	--color-bg: #ebf1eb;
 }
 

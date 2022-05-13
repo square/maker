@@ -15,6 +15,21 @@ export default function defaultTheme() {
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
+			critical: {
+				fill: '#cd2026',
+				text: '#a82826',
+				subtle: '#f6eceb',
+			},
+			warning: {
+				fill: '#ffbf00',
+				text: '#7e662a',
+				subtle: '#f9eecf',
+			},
+			success: {
+				fill: '#008000',
+				text: '#0a7A06',
+				subtle: '#ebf1eb',
+			},
 		},
 		fonts: {
 			baseSize: 16,
@@ -65,6 +80,20 @@ export default function defaultTheme() {
 		textbutton: {
 			color: '@colors.primary',
 			size: 'medium',
+			patterns: {
+				error: {
+					color: '@colors.critical.text',
+				},
+				success: {
+					color: '@colors.success.text',
+				},
+				warning: {
+					color: '@colors.warning.text',
+				},
+				info: {
+					color: '@colors["neutral-90"]',
+				},
+			},
 		},
 		actionbarbutton: {
 			color: '@colors.primary',
@@ -118,7 +147,32 @@ export default function defaultTheme() {
 			textColor: '@colors["neutral-90"]',
 		},
 		notice: {
-			color: undefined,
+			patterns: {
+				error: {
+					type: 'error',
+					iconColor: '@colors.critical.fill',
+					color: '@colors.critical.text',
+					bgColor: '@colors.critical.subtle',
+				},
+				success: {
+					type: 'success',
+					iconColor: '@colors.success.fill',
+					color: '@colors.success.text',
+					bgColor: '@colors.success.subtle',
+				},
+				warning: {
+					type: 'warning',
+					iconColor: '@colors.warning.fill',
+					color: '@colors.warning.text',
+					bgColor: '@colors.warning.subtle',
+				},
+				info: {
+					type: 'info',
+					iconColor: '@colors["neutral-80"]',
+					color: '@colors["neutral-90"]',
+					bgColor: '@colors["neutral-10"]',
+				},
+			},
 		},
 		modal: {
 			color: undefined,
