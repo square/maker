@@ -61,14 +61,33 @@ export default {
 
 <style scoped>
 .spaceout > * {
-	margin-bottom: 16px;
-}
-.spaceout > *:last-child {
-	margin-bottom: 0;
-}
-.spaceout {
-	max-width: 400px;
-	padding: 16px;
+	margin: 4px;
 }
 </style>
 ```
+
+
+<!-- api-tables:start -->
+## Props
+
+Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+
+| Prop       | Type     | Default | Possible values     | Description                                                      |
+| ---------- | -------- | ------- | ------------------- | ---------------------------------------------------------------- |
+| pattern    | `string` | —       | —                   | pattern defined at theme level                                   |
+| mode       | `string` | —       | `filled`, `outline` | style of pill                                                    |
+| color      | `string` | —       | —                   | bg color for filled pills, text & border color for outline pills |
+| text-color | `string` | —       | —                   | text color for filled pills, ignored for outline pills           |
+
+
+## Slots
+
+| Slot    | Description  |
+| ------- | ------------ |
+| default | pill content |
+
+
+## Events
+
+Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+<!-- api-tables:end -->

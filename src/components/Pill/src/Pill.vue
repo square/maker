@@ -1,5 +1,5 @@
 <template>
-	<div
+	<span
 		:class="$s.Pill"
 		:style="style"
 		v-bind="$attrs"
@@ -7,10 +7,11 @@
 	>
 		<!-- @slot pill content -->
 		<slot />
-	</div>
+	</span>
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import cssValidator from '@square/maker/utils/css-validator';
 import getContrast from '@square/maker/utils/get-contrast';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
@@ -51,7 +52,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: cssValidator('color'),
+			validator: (color) => chroma.valid(color),
 		},
 		/**
 		 * text color for filled pills, ignored for outline pills
@@ -76,7 +77,7 @@ export default {
 			let color;
 			if (this.resolvedMode === 'filled') {
 				bgColor = this.resolvedColor;
-				color = this.resolvedTextColor || getContrast(bgColor);
+				color = this.resolvedTextColor || getContrast(chroma(bgColor)).hex();
 			} else { // outline
 				bgColor = 'transparent';
 				color = this.resolvedColor;
@@ -93,6 +94,7 @@ export default {
 
 <style module="$s">
 .Pill {
+	display: inline-block;
 	padding: 4px 8px;
 	color: var(--color);
 	font-weight: var(--maker-font-label-font-weight, 500);
