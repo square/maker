@@ -174,6 +174,23 @@ export default function defaultTheme() {
 				},
 			},
 		},
+		pill: {
+			mode: 'filled',
+			patterns: {
+				error: {
+					color: '@colors.critical.fill',
+				},
+				success: {
+					color: '@colors.success.fill',
+				},
+				warning: {
+					color: '@colors.warning.fill',
+				},
+				info: {
+					color: '@colors["neutral-90"]',
+				},
+			},
+		},
 		modal: {
 			color: undefined,
 			bgColor: undefined,
