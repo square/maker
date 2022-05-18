@@ -35,7 +35,7 @@ jobs:
           cd ..
           npm run styleguide-deploy
       - name: Comment Styleguide Deploy link on PR
-        uses: unsplash/comment-on-pr@master
+        uses: unsplash/comment-on-pr@aec5cbe272bfc179b9748dfbf8e9c4430d6840c7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
