@@ -61,7 +61,7 @@ export default {
 			'bgColor',
 		]),
 		style() {
-			const textColor = this.resolvedTextColor || 'var(--maker-color-neutral-90, #1b1b1b)';
+			const textColor = this.resolvedTextColor || 'var(--maker-color-neutral-90)';
 			const bgColor = this.resolvedBgColor || 'transparent';
 			const borderColor = bgColor === 'transparent' ? textColor : bgColor;
 			return {
@@ -78,7 +78,7 @@ export default {
 .Pill {
 	display: inline-block;
 	padding: 4px 8px;
-	color: var(--text-color);
+	color: var(--text-color, #1b1b1b);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: 12px;
 	font-family: var(--maker-font-label-font-family, inherit);
