@@ -88,12 +88,7 @@ export default {
 	user-select: none;
 
 	/* general vars */
-	--color-black-90: rgba(0, 0, 0, 0.9);
-	--color-black-30: rgba(0, 0, 0, 0.3);
-	--color-black-15: rgba(0, 0, 0, 0.15);
-	--color-black-05: rgba(0, 0, 0, 0.05);
 	--color-error: rgba(206, 50, 23, 1);
-	--color-white: #fff;
 	--transition: 0.2s ease;
 
 	/* toggle vars */
@@ -162,22 +157,22 @@ export default {
 .Checkbox:checked + .Toggle .ToggleBall {
 	left: var(--tb-left-checked);
 
-	--tb-background-color: var(--color-white);
+	--tb-background-color: var(--maker-color-background, #fff);
 }
 
 .Checkbox:disabled {
 	& + .Toggle {
-		border-color: var(--color-black-05);
+		border-color: var(--maker-color-neutral-10, rgba(0, 0, 0, 0.05));
 	}
 
 	&:not(:checked) + .Toggle {
-		background-color: var(--color-black-05);
+		background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
 
-		--tb-background-color: var(--color-black-15);
+		--tb-background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
 	}
 
 	&:checked + .Toggle {
-		background-color: var(--color-black-15);
+		background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
 	}
 }
 
@@ -187,7 +182,7 @@ export default {
 	}
 
 	&:not(:checked) + .Toggle {
-		background-color: var(--color-white);
+		background-color: var(--maker-color-background, #fff);
 
 		--tb-background-color: var(--color-error);
 	}
@@ -199,26 +194,26 @@ export default {
 
 .Checkbox:not(:disabled, :invalid) {
 	& + .Toggle {
-		border-color: var(--color-black-30);
+		border-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
 	}
 
 	&:not(:checked) + .Toggle {
-		background-color: var(--color-white);
+		background-color: var(--maker-color-background, #fff);
 
-		--tb-background-color: var(--color-black-30);
+		--tb-background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
 
 		&:hover,
 		&:active,
 		&:focus {
-			border-color: var(--color-black-90);
+			border-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
 
-			--tb-background-color: var(--color-black-90);
+			--tb-background-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
 		}
 	}
 
 	&:checked + .Toggle {
-		background-color: var(--color-black-90);
-		border-color: var(--color-black-90);
+		background-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
+		border-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
 	}
 }
 </style>
