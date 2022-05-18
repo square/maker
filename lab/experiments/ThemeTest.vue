@@ -296,6 +296,15 @@
 							variant="outline"
 							disabled
 						/>
+						<div :class="$s.pills">
+							<m-pill
+								v-for="pattern in pillPatterns"
+								:key="pattern"
+								:pattern="pattern"
+							>
+								{{ pattern }} pill
+							</m-pill>
+						</div>
 						<m-notice pattern="info">
 							Here's some info for you
 						</m-notice>
@@ -544,7 +553,7 @@
 <script>
 import chroma from 'chroma-js';
 
-import { MTheme } from '@square/maker/components/Theme';
+import { MTheme, defaultTheme } from '@square/maker/components/Theme';
 import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
 import { MText } from '@square/maker/components/Text';
@@ -565,6 +574,7 @@ import { MImage } from '@square/maker/components/Image';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MContainer } from '@square/maker/components/Container';
 import { MPinInput } from '@square/maker/components/PinInput';
+import { MPill } from '@square/maker/components/Pill';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
@@ -653,6 +663,7 @@ function contrastColors(bgHex) {
 
 	for (const colorType of ['critical', 'warning', 'success']) {
 		if (chroma.contrast(colors[colorType].text, colors.background) < NOTICE_MIN_CONTRAST) {
+			colors[colorType].onFill = colors[colorType].fill;
 			if (isLight) {
 				colors[colorType].text = '#000000';
 				colors[colorType].fill = '#000000';
@@ -698,6 +709,7 @@ export default {
 		MTextButton,
 		MModalLayer,
 		MPinInput,
+		MPill,
 	},
 
 	mixins: [
@@ -816,6 +828,7 @@ export default {
 				'24px',
 				'32px',
 			],
+			pillPatterns: Object.keys(defaultTheme().pill.patterns),
 		};
 	},
 
@@ -907,6 +920,10 @@ export default {
 </script>
 
 <style module="$s">
+.pills > * {
+	margin: 4px;
+}
+
 .Surface {
 	display: flex;
 	gap: 25px;

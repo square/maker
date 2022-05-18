@@ -21,6 +21,7 @@ Pill has the following built-in patterns: error, warning, success, info.
 
 <script>
 import { MPill } from '@square/maker/components/Pill';
+import { defaultTheme } from '@square/maker/components/Theme';
 
 export default {
 	components: {
@@ -28,20 +29,7 @@ export default {
 	},
 	data() {
 		return {
-			patterns: [
-				'error',
-				'warning',
-				'success',
-				'info',
-				'errorOutline',
-				'warningOutline',
-				'successOutline',
-				'infoOutline',
-				'errorSubtle',
-				'warningSubtle',
-				'successSubtle',
-				'infoSubtle',
-			],
+			patterns: Object.keys(defaultTheme().pill.patterns),
 		};
 	},
 };
