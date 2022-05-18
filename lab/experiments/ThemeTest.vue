@@ -630,32 +630,38 @@ function contrastColors(bgHex) {
 	if (isLight) {
 		colors.critical = {
 			fill: '#cd2026',
+			onFill: '#ffffff',
 			text: '#a82826',
 			subtle: '#f6eceb',
 		};
 		colors.warning = {
 			fill: '#ffbf00',
+			onFill: '#000000',
 			text: '#7e662a',
 			subtle: '#f9eecf',
 		};
 		colors.success = {
 			fill: '#008000',
+			onFill: '#ffffff',
 			text: '#0a7A06',
 			subtle: '#ebf1eb',
 		};
 	} else {
 		colors.critical = {
 			fill: '#cd2026',
+			onFill: '#ffffff',
 			text: '#ff7566',
 			subtle: colors['neutral-10'],
 		};
 		colors.warning = {
 			fill: '#ffbf00',
+			onFill: '#000000',
 			text: '#ffbf00',
 			subtle: colors['neutral-10'],
 		};
 		colors.success = {
 			fill: '#008000',
+			onFill: '#ffffff',
 			text: '#64cc52',
 			subtle: colors['neutral-10'],
 		};
@@ -663,14 +669,10 @@ function contrastColors(bgHex) {
 
 	for (const colorType of ['critical', 'warning', 'success']) {
 		if (chroma.contrast(colors[colorType].text, colors.background) < NOTICE_MIN_CONTRAST) {
+			// next line assumes fill color has good contrast against white & black
 			colors[colorType].onFill = colors[colorType].fill;
-			if (isLight) {
-				colors[colorType].text = '#000000';
-				colors[colorType].fill = '#000000';
-			} else {
-				colors[colorType].text = '#ffffff';
-				colors[colorType].fill = '#ffffff';
-			}
+			colors[colorType].text = contrastColor;
+			colors[colorType].fill = contrastColor;
 		}
 	}
 
