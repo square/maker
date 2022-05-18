@@ -9,42 +9,12 @@ Pill has the following built-in patterns: error, warning, success, info.
 ```vue
 <template>
 	<div class="spaceout">
-		<m-pill pattern="error">
-			Error Filled Pill
-		</m-pill>
-		<m-pill pattern="success">
-			Success Filled Pill
-		</m-pill>
-		<m-pill pattern="warning">
-			Warning Filled Pill
-		</m-pill>
-		<m-pill pattern="info">
-			Info Filled Pill
-		</m-pill>
-
 		<m-pill
-			pattern="error"
-			mode="outline"
+			v-for="pattern in patterns"
+			:key="pattern"
+			:pattern="pattern"
 		>
-			Error Outline Pill
-		</m-pill>
-		<m-pill
-			pattern="success"
-			mode="outline"
-		>
-			Success Outline Pill
-		</m-pill>
-		<m-pill
-			pattern="warning"
-			mode="outline"
-		>
-			Warning Outline Pill
-		</m-pill>
-		<m-pill
-			pattern="info"
-			mode="outline"
-		>
-			Info Outline Pill
+			{{ pattern }} pill
 		</m-pill>
 	</div>
 </template>
@@ -55,6 +25,24 @@ import { MPill } from '@square/maker/components/Pill';
 export default {
 	components: {
 		MPill,
+	},
+	data() {
+		return {
+			patterns: [
+				'error',
+				'warning',
+				'success',
+				'info',
+				'errorOutline',
+				'warningOutline',
+				'successOutline',
+				'infoOutline',
+				'errorSubtle',
+				'warningSubtle',
+				'successSubtle',
+				'infoSubtle',
+			],
+		};
 	},
 };
 </script>
@@ -72,12 +60,11 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop       | Type     | Default | Possible values     | Description                                                      |
-| ---------- | -------- | ------- | ------------------- | ---------------------------------------------------------------- |
-| pattern    | `string` | —       | —                   | pattern defined at theme level                                   |
-| mode       | `string` | —       | `filled`, `outline` | style of pill                                                    |
-| color      | `string` | —       | —                   | bg color for filled pills, text & border color for outline pills |
-| text-color | `string` | —       | —                   | text color for filled pills, ignored for outline pills           |
+| Prop       | Type     | Default | Possible values | Description                                  |
+| ---------- | -------- | ------- | --------------- | -------------------------------------------- |
+| pattern    | `string` | —       | —               | pattern defined at theme level               |
+| text-color | `string` | —       | —               | text color, also border color if no bg color |
+| bg-color   | `string` | —       | —               | bg & border color                            |
 
 
 ## Slots

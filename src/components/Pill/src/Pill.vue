@@ -11,9 +11,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
 import cssValidator from '@square/maker/utils/css-validator';
-import getContrast from '@square/maker/utils/get-contrast';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
@@ -39,25 +37,17 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * style of pill
-		 */
-		mode: {
-			type: String,
-			default: undefined,
-			validator: (mode) => ['filled', 'outline'].includes(mode),
-		},
-		/**
-		 * bg color for filled pills, text & border color for outline pills
-		 */
-		color: {
-			type: String,
-			default: undefined,
-			validator: (color) => chroma.valid(color),
-		},
-		/**
-		 * text color for filled pills, ignored for outline pills
+		 * text color, also border color if no bg color
 		 */
 		textColor: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('color'),
+		},
+		/**
+		 * bg & border color
+		 */
+		bgColor: {
 			type: String,
 			default: undefined,
 			validator: cssValidator('color'),
@@ -67,23 +57,15 @@ export default {
 	computed: {
 		...resolveThemeableProps('pill', [
 			'pattern',
-			'mode',
-			'color',
 			'textColor',
+			'bgColor',
 		]),
 		style() {
-			const borderColor = this.resolvedColor;
-			let bgColor;
-			let color;
-			if (this.resolvedMode === 'filled') {
-				bgColor = this.resolvedColor;
-				color = this.resolvedTextColor || getContrast(chroma(bgColor)).hex();
-			} else { // outline
-				bgColor = 'transparent';
-				color = this.resolvedColor;
-			}
+			const textColor = this.resolvedTextColor || 'var(--maker-color-neutral-90, #1b1b1b)';
+			const bgColor = this.resolvedBgColor || 'transparent';
+			const borderColor = bgColor === 'transparent' ? textColor : bgColor;
 			return {
-				'--color': color,
+				'--text-color': textColor,
 				'--bg-color': bgColor,
 				'--border-color': borderColor,
 			};
@@ -96,7 +78,7 @@ export default {
 .Pill {
 	display: inline-block;
 	padding: 4px 8px;
-	color: var(--color);
+	color: var(--text-color);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: 12px;
 	font-family: var(--maker-font-label-font-family, inherit);
