@@ -4,7 +4,7 @@ Use Pill to notify users of things.
 
 ## Examples
 
-Pill has the following built-in patterns: error, warning, success, info.
+Pill comes with the following pre-defined patterns:
 
 ```vue
 <template>
