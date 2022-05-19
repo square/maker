@@ -5,6 +5,7 @@ on:
     types:
       - opened
       - synchronize
+      - reopened
 
 jobs:
   deploy-styleguide:
@@ -35,7 +36,7 @@ jobs:
           cd ..
           npm run styleguide-deploy
       - name: Comment Styleguide Deploy link on PR
-        uses: unsplash/comment-on-pr@master
+        uses: pretzelhammer/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
