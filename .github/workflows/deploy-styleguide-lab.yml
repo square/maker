@@ -40,5 +40,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: ${{ format("Deployed [Styleguide](https://square.github.io/maker/styleguide/{0}/#/) & [Lab](https://square.github.io/maker/lab/{0}/#/).\n<sub>Note, links may be invalidated after PR is merged or closed.</sub>", github.head_ref) }}
+          msg: ${{ format('Deployed [Styleguide](https://square.github.io/maker/styleguide/{0}/#/) & [Lab](https://square.github.io/maker/lab/{0}/#/).\n<sub>Note: links may be invalidated after PR is merged or closed.</sub>', github.head_ref) }}
           check_for_duplicate_msg: true
