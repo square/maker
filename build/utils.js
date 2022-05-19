@@ -31,6 +31,9 @@ const SEMANTIC_BRANCHES = new Set([
 	'beta',
 	'alpha',
 ]);
+const STABLE_BRANCHES = new Set([
+	'master',
+]);
 const PREVIEW_BRANCHES = new Set([
 	'next',
 	'next-major',
@@ -43,7 +46,7 @@ function isSemanticReleaseBranch(branchName) {
 }
 
 function isStableRelease(branchName) {
-	return branchName === 'master';
+	return STABLE_BRANCHES.has(branchName) || BACKPORT_BRANCH_REGEX.test(branchName);
 }
 
 function isPreviewRelease(branchName) {
