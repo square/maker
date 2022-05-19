@@ -69,27 +69,63 @@ const BUILT_INDEX = `
 		body {
 			font-family: sans-serif;
 		}
+		h1, h2, h3, h4, h5, h6 {
+			margin: 0 0 0.5em 0;
+			white-space: nowrap;
+		}
+		.categories, .subcategories {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 16px;
+		}
+		.categories {
+			gap: 32px;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
 	</style>
 </head>
 <body>
-	<h2>Styleguides</h2>
-	<h3>Versioned Releases</h3>
-	<ul>
-		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
-	</ul>
-	<h3>WIP Branches</h3>
-	<ul>
-		${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
-	</ul>
-	<h2>Labs</h2>
-	<h3>Versioned Releases</h3>
-	<ul>
-		${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
-	</ul>
-	<h3>WIP Branches</h3>
-	<ul>
-		${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
-	</ul>
+	<div class="categories">
+		<div class="category">
+			<h2>Styleguides</h2>
+			<div class="subcategories">
+				<div class="subcategory">
+					<h3>Versioned Releases</h3>
+					<ul>
+						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
+					</ul>
+				</div>
+				<div class="subcategory">
+					<h3>WIP Branches</h3>
+					<ul>
+						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="category">
+			<h2>Labs</h2>
+			<div class="subcategories">
+				<div class="subcategory">
+					<h3>Versioned Releases</h3>
+					<ul>
+						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
+					</ul>
+				</div>
+				<div class="subcategory">
+					<h3>WIP Branches</h3>
+					<ul>
+						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 `;
