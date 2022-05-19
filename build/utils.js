@@ -23,8 +23,23 @@ function getCurrentBranch() {
 	return branchName;
 }
 
+const BACKPORT_BRANCH_REGEX = /\d+\.x/;
+const SEMANTIC_BRANCHES = new Set([
+	'master',
+	'next',
+	'next-major',
+	'beta',
+	'alpha',
+]);
+const PREVIEW_BRANCHES = new Set([
+	'next',
+	'next-major',
+	'beta',
+	'alpha',
+]);
+
 function isSemanticReleaseBranch(branchName) {
-	return ['master', 'next', 'next-major', 'beta', 'alpha'].includes(branchName);
+	return SEMANTIC_BRANCHES.has(branchName) || BACKPORT_BRANCH_REGEX.test(branchName);
 }
 
 function isStableRelease(branchName) {
@@ -32,7 +47,7 @@ function isStableRelease(branchName) {
 }
 
 function isPreviewRelease(branchName) {
-	return ['next', 'next-major', 'beta', 'alpha'].includes(branchName);
+	return PREVIEW_BRANCHES.has(branchName);
 }
 
 function getLibraryVersion() {
