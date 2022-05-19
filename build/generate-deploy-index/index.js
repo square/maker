@@ -94,13 +94,13 @@ const BUILT_INDEX = `
 			<h2>Styleguides</h2>
 			<div class="subcategories">
 				<div class="subcategory">
-					<h3>Versioned Releases</h3>
+					<h3>Releases</h3>
 					<ul>
 						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
-					<h3>WIP Branches</h3>
+					<h3>WIPs</h3>
 					<ul>
 						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 					</ul>
@@ -112,13 +112,13 @@ const BUILT_INDEX = `
 			<h2>Labs</h2>
 			<div class="subcategories">
 				<div class="subcategory">
-					<h3>Versioned Releases</h3>
+					<h3>Releases</h3>
 					<ul>
 						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
-					<h3>WIP Branches</h3>
+					<h3>WIPs</h3>
 					<ul>
 						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
 					</ul>
