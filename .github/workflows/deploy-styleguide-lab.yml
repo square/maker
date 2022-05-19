@@ -1,4 +1,4 @@
-name: Deploy Styleguide
+name: Deploy Styleguide & Lab
 
 on:
   pull_request:
@@ -8,14 +8,14 @@ on:
       - reopened
 
 jobs:
-  deploy-styleguide:
-    name: Deploy Styleguide
+  deploy-styleguide-lab:
+    name: Deploy Styleguide & Lab
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Maker Repo master branch
+      - name: Checkout Maker master branch
         uses: actions/checkout@v2
-      - name: Checkout nested Maker Repo deploys branch in .dist directory
+      - name: Checkout Maker deploys branch in .dist directory
         uses: actions/checkout@v2
         with:
           repository: square/maker
@@ -28,17 +28,17 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-      - name: Build & deploy
+      - name: Build & deploy Styleguide & Lab
         run: |
           cd .dist
           git config user.name github-actions
           git config user.email github-actions@github.com
           cd ..
-          npm run styleguide-deploy
-      - name: Comment Styleguide Deploy link on PR
+          npm run deploy-all
+      - name: Comment Styleguide & Lab links on PR
         uses: pretzelhammer/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: ${{ format('Styleguide deployed to https://square.github.io/maker/styleguide/{0}/#/', github.head_ref) }}
+          msg: ${{ format('Deployed [Styleguide](https://square.github.io/maker/styleguide/{0}/#/). Deployed [Lab](https://square.github.io/maker/lab/{0}/#/).', github.head_ref) }}
           check_for_duplicate_msg: true
