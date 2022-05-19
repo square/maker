@@ -106,72 +106,60 @@ export default {
 }
 
 .Checkbox {
-	position: absolute;
-	opacity: 0;
-}
-
-.ToggleBall {
-	position: absolute;
-	top: var(--tb-top);
-	left: var(--tb-left-unchecked);
-	box-sizing: border-box;
-	width: var(--tb-dim);
-	height: var(--tb-dim);
-	border-radius: inherit;
-	transition:
-		left var(--transition),
-		background-color var(--transition);
-
-	&::after {
-		display: block;
-		width: 100%;
-		height: 100%;
-		background-color: var(--tb-background-color);
-		border-radius: inherit;
-		transition:
-			transform var(--transition),
-			background-color var(--transition);
-		content: "";
-	}
-}
-
-.Toggle {
 	position: relative;
 	display: inline-block;
 	box-sizing: border-box;
 	width: var(--t-width);
 	height: var(--t-height);
+	margin: 0;
+	padding: 0;
 	vertical-align: middle;
 	border: var(--t-border) solid;
 	border-radius: calc(var(--t-width) / 2);
 	transition:
 		background-color var(--transition)
 		border-color var(--transition);
+	appearance: none;
+	user-select: none;
+
+	&::after {
+		position: absolute;
+		top: var(--tb-top);
+		left: var(--tb-left-unchecked);
+		display: block;
+		box-sizing: border-box;
+		width: var(--tb-dim);
+		height: var(--tb-dim);
+		background-color: var(--tb-background-color);
+		border-radius: inherit;
+		transition:
+			left var(--transition),
+			background-color var(--transition);
+		content: "";
+	}
 }
 
-.Checkbox:focus + .Toggle {
+.Checkbox:focus {
 	outline: 1px dotted #212121;
 	outline: 5px auto -webkit-focus-ring-color;
 }
 
-.Checkbox:checked + .Toggle .ToggleBall {
+.Checkbox:checked::after {
 	left: var(--tb-left-checked);
 
 	--tb-background-color: var(--maker-color-background, #fff);
 }
 
 .Checkbox:disabled {
-	& + .Toggle {
-		border-color: var(--maker-color-neutral-10, rgba(0, 0, 0, 0.05));
-	}
+	border-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.05));
 
-	&:not(:checked) + .Toggle {
-		background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
+	&:not(:checked) {
+		background-color: var(--maker-color-neutral-10, rgba(0, 0, 0, 0.15));
 
 		--tb-background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
 	}
 
-	&:checked + .Toggle {
+	&:checked {
 		background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
 	}
 }
@@ -193,11 +181,9 @@ export default {
 }
 
 .Checkbox:not(:disabled, :invalid) {
-	& + .Toggle {
-		border-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
-	}
+	border-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
 
-	&:not(:checked) + .Toggle {
+	&:not(:checked) {
 		background-color: var(--maker-color-background, #fff);
 
 		--tb-background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
@@ -205,15 +191,15 @@ export default {
 		&:hover,
 		&:active,
 		&:focus {
-			border-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
+			border-color: var(--maker-color-body, rgba(0, 0, 0, 0.9));
 
-			--tb-background-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
+			--tb-background-color: var(--maker-color-body, rgba(0, 0, 0, 0.9));
 		}
 	}
 
-	&:checked + .Toggle {
-		background-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
-		border-color: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
+	&:checked {
+		background-color: var(--maker-color-body, rgba(0, 0, 0, 0.9));
+		border-color: var(--maker-color-body, rgba(0, 0, 0, 0.9));
 	}
 }
 </style>
