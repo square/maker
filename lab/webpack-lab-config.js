@@ -5,15 +5,20 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { JustSsrPlugin, clientOnly } = require('vue-just-ssr');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const branch = require('git-branch');
-const { merge } = require('../build/utils');
+const {
+	merge,
+	getCurrentBranch,
+	isSemanticReleaseBranch,
+	getLibraryVersion,
+} = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
 
 const entry = path.resolve('./lab/App.vue');
 require.resolve(entry);
 
 const isProduction = process.env.NODE_ENV === 'production';
-const branchName = branch.sync();
+const branchName = getCurrentBranch();
+const deployName = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
 
 const labDirectory = path.resolve('./lab/experiments/');
 
@@ -73,7 +78,7 @@ const config = merge({}, webpackBaseConfig, {
 	},
 
 	output: {
-		path: path.resolve(`.dist/lab/${branchName}`),
+		path: path.resolve(`.dist/lab/${deployName}`),
 	},
 
 	resolve: {

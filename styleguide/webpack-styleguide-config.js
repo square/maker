@@ -9,7 +9,7 @@ const webpackBaseConfig = require('../build/webpack-base-config');
 const { getCurrentBranch, isSemanticReleaseBranch, getLibraryVersion } = require('../build/utils');
 
 const branchName = getCurrentBranch();
-const deploy = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
+const deployName = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
 
 const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
@@ -40,7 +40,7 @@ const config = merge({}, webpackBaseConfig, {
 	},
 
 	output: {
-		path: path.resolve(`.dist/styleguide/${deploy}`),
+		path: path.resolve(`.dist/styleguide/${deployName}`),
 	},
 
 	resolve: {
