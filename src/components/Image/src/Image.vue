@@ -87,7 +87,6 @@ export default {
 
 	data() {
 		return {
-			isIntersecting: true,
 			loaded: imgCache.has(this.src + this.srcset),
 		};
 	},
@@ -102,13 +101,17 @@ export default {
 	},
 
 	mounted() {
-		if (this.lazyload) {
+		if (!this.lazyload) {
+			this.load();
+		} else {
 			if (!observer) {
 				observer = new SharedIntersectionObserver();
 			}
-			observer.watch(this.$el, this.onIntersection);
-		} else {
-			this.load();
+			observer.watch(this.$el, ({ isIntersecting }) => {
+				if (isIntersecting) {
+					this.load();
+				}
+			});
 		}
 	},
 
@@ -117,13 +120,6 @@ export default {
 	},
 
 	methods: {
-		onIntersection({ isIntersecting }) {
-			this.isIntersecting = isIntersecting;
-			if (isIntersecting) {
-				this.load();
-			}
-		},
-
 		load() {
 			if (this.loaded || (!this.src && !this.srcset)) {
 				return;
