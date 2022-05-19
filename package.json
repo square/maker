@@ -12,7 +12,7 @@
     "dev": "npm run generate-api-tables && just-ssr --webpack-config build/webpack-development-config --open",
     "lab": "just-ssr --webpack-config lab/webpack-lab-config --open --port 8081",
     "lab-build": "NODE_ENV=production webpack --config lab/webpack-lab-config",
-    "lab-deploy": "npm run pull-deploys && npm run lab-build && npm run generate-deploy-index && npm run push-deploys",
+    "lab-deploy": "npm run pull-deploys && npm run lab-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "generate-api-tables": "node ./build/generate-readme-api-tables",
     "styleguide": "npm run generate-api-tables && just-ssr --webpack-config styleguide/webpack-styleguide-config --open",
     "styleguide-build": "npm run generate-api-tables && NODE_ENV=production webpack --config styleguide/webpack-styleguide-config",

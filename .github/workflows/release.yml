@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout Maker master branch
         uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -24,16 +24,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release@17
-      - name: Checkout nested Maker Repo deploys branch in .dist directory
+      - name: Checkout Maker deploys branch in .dist directory
         uses: actions/checkout@v2
         with:
           repository: square/maker
           ref: deploys
           path: .dist
-      - name: Build & deploy styleguide
+      - name: Build & deploy Styleguide & Lab
         run: |
           cd .dist
           git config user.name github-actions
           git config user.email github-actions@github.com
           cd ..
-          npm run styleguide-deploy
+          npm run deploy-all
