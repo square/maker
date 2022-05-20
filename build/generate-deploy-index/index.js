@@ -69,7 +69,7 @@ function sort(items, isSemverItems) {
 
 function toDeployLinks(prefix, suffix, items, isSemverItems) {
 	items = sort(items, isSemverItems);
-	return items.map((item) => `<li><a href="${prefix}${item}${suffix}">${item}</a></li>`).join('\n');
+	return items.map((item) => `<li><a class="deploy-link" href="${prefix}${item}${suffix}" target="_blank" rel="noopener noreferrer">${item}</a></li>`).join('\n');
 }
 
 const STYLEGUIDE_URL_PREFIX = 'https://square.github.io/maker/styleguide/';
@@ -90,6 +90,18 @@ const BUILT_INDEX = `
 			margin: 0 0 0.5em 0;
 			white-space: nowrap;
 		}
+		.maker-link {
+			color: inherit;
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			text-decoration: inherit;
+			background-color: inherit;
+		}
+		.maker-link:hover {
+			color: white;
+			background-color: black;
+		}
 		.categories, .subcategories {
 			display: flex;
 			flex-wrap: wrap;
@@ -98,27 +110,45 @@ const BUILT_INDEX = `
 		.categories {
 			gap: 32px;
 		}
-		ul {
+		.deploy-links {
 			margin: 0;
 			padding: 0;
 			list-style-type: none;
+			font-family: monospace;
+			font-size: 16px;
+		}
+		.deploy-link {
+			text-decoration: none;
+			color: blue;
+			background-color: transparent;
+		}
+		.deploy-link:visited {
+			color: purple;
+		}
+		.deploy-link:hover {
+			color: white;
+			background-color: blue;
+		}
+		.deploy-link:hover:visited {
+			background-color: purple;
 		}
 	</style>
 </head>
 <body>
+	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys 🚀</h1>
 	<div class="categories">
 		<div class="category">
 			<h2>Styleguides</h2>
 			<div class="subcategories">
 				<div class="subcategory">
 					<h3>Releases</h3>
-					<ul>
+					<ul class="deploy-links">
 						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
-					<ul>
+					<ul class="deploy-links">
 						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 					</ul>
 				</div>
@@ -130,13 +160,13 @@ const BUILT_INDEX = `
 			<div class="subcategories">
 				<div class="subcategory">
 					<h3>Releases</h3>
-					<ul>
+					<ul class="deploy-links">
 						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
-					<ul>
+					<ul class="deploy-links">
 						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
 					</ul>
 				</div>
