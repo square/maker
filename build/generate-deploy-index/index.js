@@ -106,7 +106,7 @@ const BUILT_INDEX = `
 					</ul>
 				</div>
 				<div class="subcategory">
-					<h3>WIPs</h3>
+					<h3>PRs</h3>
 					<ul>
 						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 					</ul>
@@ -124,7 +124,7 @@ const BUILT_INDEX = `
 					</ul>
 				</div>
 				<div class="subcategory">
-					<h3>WIPs</h3>
+					<h3>PRs</h3>
 					<ul>
 						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
 					</ul>
