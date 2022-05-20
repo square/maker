@@ -2,23 +2,9 @@ const path = require('path');
 const fse = require('fs-extra');
 const semver = require('semver');
 const {
-	getCurrentBranch,
-	isStableRelease,
-	isBetaRelease,
 	LATEST_STABLE,
 	LATEST_BETA,
 } = require('../utils');
-
-const branchName = getCurrentBranch();
-const isStable = isStableRelease(branchName);
-const isBeta = isBetaRelease(branchName);
-
-if (!isStable && !isBeta) {
-	// only sync versioned releases to latest-stable
-	// or latest-beta directories, e.g. no WIP branches
-	const noErrorStatus = 0;
-	process.exit(noErrorStatus);
-}
 
 function getSubDirectories(baseDirectory) {
 	return fse.readdirSync(baseDirectory, { withFileTypes: true })
