@@ -14,14 +14,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Maker master branch
+      - name: Checkout Maker deploys branch
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Log env info
-        run: node ./build/log-ci-info.js
+          repository: square/maker
+          ref: deploys
+      - name: Remove Styleguide & Lab
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          STYLEGUIDE_DEPLOY="styleguide/${GITHUB_HEAD_REF}"
+          LAB_DEPLOY="lab/${GITHUB_HEAD_REF}"
+          rm -rf "${STYLEGUIDE_DEPLOY}"
+          rm -rf "${LAB_DEPLOY}"
+          git add --all
+          COLON=$(printf "\x3a") # need to escape colon char for yaml
+          COMMIT_MSG="docs${COLON} removes ${GITHUB_HEAD_REF} styleguide & lab after PR closed"
+          git commit -m "${COMMIT_MSG}"
+          git push
