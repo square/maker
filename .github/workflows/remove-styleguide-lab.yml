@@ -1,0 +1,27 @@
+name: Remove Styleguide & Lab
+
+on:
+  pull_request:
+    types:
+      - closed
+
+# this is a work in progress
+# just logging env info out for now
+
+jobs:
+  remove-styleguide-lab:
+    name: Remove Styleguide & Lab
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Maker master branch
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Log env info
+        run: node ./build/log-ci-info.js

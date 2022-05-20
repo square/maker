@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, unicorn/no-null */
 
 const fse = require('fs-extra');
 
@@ -10,10 +10,12 @@ const fse = require('fs-extra');
 // which can be found in the Actions tab
 // of the github repo
 
-console.log({ FULL_ENV: process.env });
+const LOG_OPTIONS = { depth: null };
+
+console.dir({ FULL_ENV: process.env }, LOG_OPTIONS);
 if (process.env.GITHUB_EVENT_PATH) {
 	const EVENT_PAYLOAD = fse.readJSONSync(process.env.GITHUB_EVENT_PATH);
-	console.log({ EVENT_PAYLOAD });
+	console.dir({ EVENT_PAYLOAD }, LOG_OPTIONS);
 } else {
 	console.log('NO GITHUB_EVENT_PATH / EVENT_PAYLOAD');
 }
