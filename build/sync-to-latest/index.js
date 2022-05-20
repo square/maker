@@ -4,16 +4,18 @@ const semver = require('semver');
 const {
 	getCurrentBranch,
 	isStableRelease,
-	isPreviewRelease,
+	isBetaRelease,
+	LATEST_STABLE,
+	LATEST_BETA,
 } = require('../utils');
 
 const branchName = getCurrentBranch();
 const isStable = isStableRelease(branchName);
-const isPreview = isPreviewRelease(branchName);
+const isBeta = isBetaRelease(branchName);
 
-if (!isStable && !isPreview) {
-	// only sync versioned releases to latest or latest-preview directories
-	// e.g. no WIP branches or draft branches
+if (!isStable && !isBeta) {
+	// only sync versioned releases to latest-stable
+	// or latest-beta directories, e.g. no WIP branches
 	const noErrorStatus = 0;
 	process.exit(noErrorStatus);
 }
@@ -41,15 +43,18 @@ function sortSemverDescInPlace(semverArray) {
 	});
 }
 
-function getLatestFromSorted(sortedSemverArray) {
+function getLatestStableFromSorted(sortedSemverArray) {
 	return sortedSemverArray.find(
 		(semverItem) => !semver.prerelease(semverItem),
 	);
 }
 
-function getLatestPreviewFromSorted(sortedSemverArray) {
+function getLatestBetaFromSorted(sortedSemverArray) {
 	return sortedSemverArray.find(
-		(semverItem) => !!semver.prerelease(semverItem),
+		(semverItem) => {
+			const parsedPrerelease = semver.prerelease(semverItem);
+			return parsedPrerelease && parsedPrerelease[0] === 'beta';
+		},
 	);
 }
 
@@ -73,14 +78,14 @@ function syncDistDirectories(distDirectory, distSourceDirectory, distDestination
 const noDeploys = 0;
 function syncSemverToLatest(semverArray, distDirectory) {
 	if (semverArray.length > noDeploys) {
-		const latestDeploy = getLatestFromSorted(semverArray);
-		if (latestDeploy) {
-			syncDistDirectories(distDirectory, latestDeploy, 'latest');
+		const latestStableDeploy = getLatestStableFromSorted(semverArray);
+		if (latestStableDeploy) {
+			syncDistDirectories(distDirectory, latestStableDeploy, LATEST_STABLE);
 		}
 
-		const latestPreviewDeploy = getLatestPreviewFromSorted(semverArray);
-		if (latestPreviewDeploy) {
-			syncDistDirectories(distDirectory, latestPreviewDeploy, 'latest-preview');
+		const latestBetaDeploy = getLatestBetaFromSorted(semverArray);
+		if (latestBetaDeploy) {
+			syncDistDirectories(distDirectory, latestBetaDeploy, LATEST_BETA);
 		}
 	}
 }

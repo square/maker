@@ -4,7 +4,11 @@ const path = require('path');
 const fs = require('fs');
 const semverSort = require('semver/functions/rsort');
 const semverValid = require('semver/functions/valid');
-const { NO_VERSION_INFO } = require('../utils');
+const {
+	NO_VERSION_INFO,
+	LATEST_STABLE,
+	LATEST_BETA,
+} = require('../utils');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -33,23 +37,30 @@ function getDeploys(baseDirectory) {
 
 const STYLEGUIDE_DEPLOYS = getDeploys(STYLEGUIDE_DIST);
 const LAB_DEPLOYS = getDeploys(LAB_DIST);
-const additionalVersions = ['latest-preview', 'latest'];
+const LATEST_ALIASES = new Set([
+	LATEST_STABLE,
+	LATEST_BETA,
+]);
 
 function isVersion(deployName) {
-	return additionalVersions.includes(deployName) || semverValid(deployName);
+	return LATEST_ALIASES.has(deployName) || semverValid(deployName);
 }
 function isntVersion(deployName) {
 	return !isVersion(deployName);
 }
 function sort(items, isSemverItems) {
 	if (isSemverItems) {
-		items = items.filter((item) => semverValid(item));
-		semverSort(items);
-
-		additionalVersions.forEach((version) => {
-			items.unshift(version);
-		});
-
+		const hasLatestStable = items.includes(LATEST_STABLE);
+		const hasLatestBeta = items.includes(LATEST_BETA);
+		const semverOnlyItems = items.filter((item) => semverValid(item));
+		semverSort(semverOnlyItems);
+		items = semverOnlyItems;
+		if (hasLatestBeta) {
+			items.unshift(LATEST_BETA);
+		}
+		if (hasLatestStable) {
+			items.unshift(LATEST_STABLE);
+		}
 		return items;
 	}
 

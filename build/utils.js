@@ -110,7 +110,12 @@ function getDeployName() {
 	return libraryVersion;
 }
 
+const LATEST_STABLE = 'latest-stable';
+const LATEST_BETA = 'latest-beta';
+
 module.exports = {
+	LATEST_STABLE,
+	LATEST_BETA,
 	NO_VERSION_INFO,
 	merge,
 	getDeployName,
