@@ -109,6 +109,7 @@ const BUILT_INDEX = `
 		}
 		.categories {
 			gap: 32px;
+			margin-bottom: 16px;
 		}
 		.deploy-links {
 			margin: 0;
@@ -132,10 +133,14 @@ const BUILT_INDEX = `
 		.deploy-link:hover:visited {
 			background-color: purple;
 		}
+		.updated-msg {
+			font-style: italic;
+		}
 	</style>
 </head>
 <body>
 	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys 🚀</h1>
+
 	<div class="categories">
 		<div class="category">
 			<h2>Styleguides</h2>
@@ -173,6 +178,17 @@ const BUILT_INDEX = `
 			</div>
 		</div>
 	</div>
+
+	<span class="updated-msg">
+		Last updated on <span class="updated-time"></span>
+	</span>
+
+	<script>
+		const lastUpdated = new Date(${Date.now()});
+		document
+			.querySelector('.updated-time')
+			.innerText = lastUpdated.toLocaleString();
+	</script>
 </body>
 </html>
 `;
