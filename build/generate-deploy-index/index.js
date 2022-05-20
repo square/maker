@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const semverSort = require('semver/functions/rsort');
 const semverValid = require('semver/functions/valid');
+const { NO_VERSION_INFO } = require('../utils');
 
 const DIST = path.resolve(process.cwd(), '.dist');
 const DIST_INDEX = path.resolve(DIST, 'index.html');
@@ -16,17 +17,22 @@ function ensureDirectory(directory) {
 	}
 }
 
+ensureDirectory(LAB_DIST);
+ensureDirectory(STYLEGUIDE_DIST);
+
 function getDirectories(baseDirectory) {
 	return fs.readdirSync(baseDirectory, { withFileTypes: true })
 		.filter((entry) => entry.isDirectory())
 		.map((directory) => directory.name);
 }
 
-ensureDirectory(LAB_DIST);
-ensureDirectory(STYLEGUIDE_DIST);
+function getDeploys(baseDirectory) {
+	return getDirectories(baseDirectory)
+		.filter((deploy) => deploy !== NO_VERSION_INFO);
+}
 
-const STYLEGUIDE_DEPLOYS = getDirectories(STYLEGUIDE_DIST).filter((d) => d !== '0.0.0-semantic-release');
-const LAB_DEPLOYS = getDirectories(LAB_DIST).filter((d) => d !== '0.0.0-semantic-release');
+const STYLEGUIDE_DEPLOYS = getDeploys(STYLEGUIDE_DIST);
+const LAB_DEPLOYS = getDeploys(LAB_DIST);
 const additionalVersions = ['latest-preview', 'latest'];
 
 function isVersion(deployName) {

@@ -6,10 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ent = require('ent');
 const { merge } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
-const { getCurrentBranch, isSemanticReleaseBranch, getLibraryVersion } = require('../build/utils');
+const { getDeployName } = require('../build/utils');
 
-const branchName = getCurrentBranch();
-const deployName = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
+const deployName = getDeployName();
 
 const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);

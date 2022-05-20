@@ -34,6 +34,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           cd ..
+          export DEPLOY_NAME=git_branch
           npm run deploy-all
       - name: Comment Styleguide & Lab links on PR
         uses: pretzelhammer/comment-on-pr@master
