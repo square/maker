@@ -94,10 +94,6 @@ function getLibraryVersion() {
 function getDeployName() {
 	const branchName = getCurrentBranch();
 
-	// temporary line just for testing, remove later:
-	console.log({ DEPLOY_NAME: process.env.DEPLOY_NAME });
-	console.log({ FULL_ENV: process.env });
-
 	if (process.env.DEPLOY_NAME === 'git_branch') {
 		return branchName;
 	}
