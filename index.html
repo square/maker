@@ -12,6 +12,18 @@
 			margin: 0 0 0.5em 0;
 			white-space: nowrap;
 		}
+		.maker-link {
+			color: inherit;
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			text-decoration: inherit;
+			background-color: inherit;
+		}
+		.maker-link:hover {
+			color: white;
+			background-color: black;
+		}
 		.categories, .subcategories {
 			display: flex;
 			flex-wrap: wrap;
@@ -20,244 +32,262 @@
 		.categories {
 			gap: 32px;
 		}
-		ul {
+		.deploy-links {
 			margin: 0;
 			padding: 0;
 			list-style-type: none;
+			font-family: monospace;
+			font-size: 16px;
+		}
+		.deploy-link {
+			text-decoration: none;
+			color: blue;
+			background-color: transparent;
+		}
+		.deploy-link:visited {
+			color: purple;
+		}
+		.deploy-link:hover {
+			color: white;
+			background-color: blue;
+		}
+		.deploy-link:hover:visited {
+			background-color: purple;
 		}
 	</style>
 </head>
 <body>
+	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys 🚀</h1>
 	<div class="categories">
 		<div class="category">
 			<h2>Styleguides</h2>
 			<div class="subcategories">
 				<div class="subcategory">
 					<h3>Releases</h3>
-					<ul>
-						<li><a href="https://square.github.io/maker/styleguide/latest-stable/#/">latest-stable</a></li>
-<li><a href="https://square.github.io/maker/styleguide/latest-beta/#/">latest-beta</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.2.3/#/">11.2.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.2.2/#/">11.2.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.2.1/#/">11.2.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.2.0/#/">11.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.1.1/#/">11.1.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.1.0/#/">11.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/11.0.0/#/">11.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0/#/">10.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.15/#/">10.0.0-beta.15</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.14/#/">10.0.0-beta.14</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.13/#/">10.0.0-beta.13</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.12/#/">10.0.0-beta.12</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.11/#/">10.0.0-beta.11</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.10/#/">10.0.0-beta.10</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.9/#/">10.0.0-beta.9</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.8/#/">10.0.0-beta.8</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.7/#/">10.0.0-beta.7</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.6/#/">10.0.0-beta.6</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.5/#/">10.0.0-beta.5</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.4/#/">10.0.0-beta.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.3/#/">10.0.0-beta.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.2/#/">10.0.0-beta.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/10.0.0-beta.1/#/">10.0.0-beta.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.8.1/#/">9.8.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.8.0/#/">9.8.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.7.0/#/">9.7.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.6.0/#/">9.6.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.5.0/#/">9.5.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.4.1/#/">9.4.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.4.0/#/">9.4.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.8/#/">9.3.8</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.7/#/">9.3.7</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.6/#/">9.3.6</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.5/#/">9.3.5</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.4/#/">9.3.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.3/#/">9.3.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.2/#/">9.3.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.1/#/">9.3.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.3.0/#/">9.3.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.2.0/#/">9.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.1.1/#/">9.1.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.1.0/#/">9.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.0.1/#/">9.0.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.0.0/#/">9.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/9.0.0-beta.1/#/">9.0.0-beta.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/8.1.0/#/">8.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/8.0.0/#/">8.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/8.0.0-beta.2/#/">8.0.0-beta.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/8.0.0-beta.1/#/">8.0.0-beta.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.3/#/">7.0.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.2/#/">7.0.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.1/#/">7.0.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0/#/">7.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.29/#/">7.0.0-beta.29</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.26/#/">7.0.0-beta.26</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.25/#/">7.0.0-beta.25</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.24/#/">7.0.0-beta.24</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.23/#/">7.0.0-beta.23</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.22/#/">7.0.0-beta.22</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.21/#/">7.0.0-beta.21</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.20/#/">7.0.0-beta.20</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.19/#/">7.0.0-beta.19</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.18/#/">7.0.0-beta.18</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.17/#/">7.0.0-beta.17</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.16/#/">7.0.0-beta.16</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.15/#/">7.0.0-beta.15</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.14/#/">7.0.0-beta.14</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.13/#/">7.0.0-beta.13</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.12/#/">7.0.0-beta.12</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.11/#/">7.0.0-beta.11</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.10/#/">7.0.0-beta.10</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.9/#/">7.0.0-beta.9</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.8/#/">7.0.0-beta.8</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.7/#/">7.0.0-beta.7</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.6/#/">7.0.0-beta.6</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.5/#/">7.0.0-beta.5</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.4/#/">7.0.0-beta.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.3/#/">7.0.0-beta.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.2/#/">7.0.0-beta.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/7.0.0-beta.1/#/">7.0.0-beta.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.7.3/#/">6.7.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.7.2/#/">6.7.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.7.0/#/">6.7.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.6.2/#/">6.6.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.6.1/#/">6.6.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.6.0/#/">6.6.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.5.4/#/">6.5.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.5.3/#/">6.5.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.5.2/#/">6.5.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.5.1/#/">6.5.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.5.0/#/">6.5.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.4.2/#/">6.4.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.4.1/#/">6.4.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.4.0/#/">6.4.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.3.2/#/">6.3.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.3.1/#/">6.3.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.3.0/#/">6.3.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.2.2/#/">6.2.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.2.1/#/">6.2.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.2.0/#/">6.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.1.0/#/">6.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.0.0/#/">6.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.0.0-beta.4/#/">6.0.0-beta.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.0.0-beta.3/#/">6.0.0-beta.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.0.0-beta.2/#/">6.0.0-beta.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/6.0.0-beta.1/#/">6.0.0-beta.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.4.0/#/">5.4.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.3.0/#/">5.3.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.2.0/#/">5.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.1.0/#/">5.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.0.0/#/">5.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.0.0-beta.3/#/">5.0.0-beta.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.0.0-beta.2/#/">5.0.0-beta.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/5.0.0-beta.1/#/">5.0.0-beta.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.12.0/#/">4.12.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.11.0/#/">4.11.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.10.0/#/">4.10.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.9.1/#/">4.9.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.9.0/#/">4.9.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.8.4/#/">4.8.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.8.3/#/">4.8.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.8.2/#/">4.8.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.8.1/#/">4.8.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.8.0/#/">4.8.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.7.0/#/">4.7.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.6.0/#/">4.6.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.5.2/#/">4.5.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.5.1/#/">4.5.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.5.0/#/">4.5.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.4.2/#/">4.4.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.4.1/#/">4.4.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.4.0/#/">4.4.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.3.0/#/">4.3.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.2.0/#/">4.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.1.4/#/">4.1.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.1.3/#/">4.1.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.1.2/#/">4.1.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.1.1/#/">4.1.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.1.0/#/">4.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.0.1/#/">4.0.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/4.0.0/#/">4.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/3.0.0/#/">3.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.2.4/#/">2.2.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.2.3/#/">2.2.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.2.2/#/">2.2.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.2.1/#/">2.2.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.2.0/#/">2.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.1.0/#/">2.1.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.0.2/#/">2.0.2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.0.1/#/">2.0.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/2.0.0/#/">2.0.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.3.1/#/">1.3.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.3.0/#/">1.3.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.2.1/#/">1.2.1</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.2.0/#/">1.2.0</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.1.4/#/">1.1.4</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.1.3/#/">1.1.3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/1.0.0/#/">1.0.0</a></li>
+					<ul class="deploy-links">
+						<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest-stable/#/" target="_blank" rel="noopener noreferrer">latest-stable</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest-beta/#/" target="_blank" rel="noopener noreferrer">latest-beta</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.2.3/#/" target="_blank" rel="noopener noreferrer">11.2.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.2.2/#/" target="_blank" rel="noopener noreferrer">11.2.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.2.1/#/" target="_blank" rel="noopener noreferrer">11.2.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.2.0/#/" target="_blank" rel="noopener noreferrer">11.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.1.1/#/" target="_blank" rel="noopener noreferrer">11.1.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.1.0/#/" target="_blank" rel="noopener noreferrer">11.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/11.0.0/#/" target="_blank" rel="noopener noreferrer">11.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0/#/" target="_blank" rel="noopener noreferrer">10.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.15/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.15</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.14/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.14</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.13/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.13</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.12/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.12</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.11/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.11</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.10/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.10</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.9/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.9</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.8/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.8</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.7/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.7</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.6/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.6</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.5/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.5</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.4/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.3/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.2/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/10.0.0-beta.1/#/" target="_blank" rel="noopener noreferrer">10.0.0-beta.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.8.1/#/" target="_blank" rel="noopener noreferrer">9.8.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.8.0/#/" target="_blank" rel="noopener noreferrer">9.8.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.7.0/#/" target="_blank" rel="noopener noreferrer">9.7.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.6.0/#/" target="_blank" rel="noopener noreferrer">9.6.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.5.0/#/" target="_blank" rel="noopener noreferrer">9.5.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.4.1/#/" target="_blank" rel="noopener noreferrer">9.4.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.4.0/#/" target="_blank" rel="noopener noreferrer">9.4.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.8/#/" target="_blank" rel="noopener noreferrer">9.3.8</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.7/#/" target="_blank" rel="noopener noreferrer">9.3.7</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.6/#/" target="_blank" rel="noopener noreferrer">9.3.6</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.5/#/" target="_blank" rel="noopener noreferrer">9.3.5</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.4/#/" target="_blank" rel="noopener noreferrer">9.3.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.3/#/" target="_blank" rel="noopener noreferrer">9.3.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.2/#/" target="_blank" rel="noopener noreferrer">9.3.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.1/#/" target="_blank" rel="noopener noreferrer">9.3.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.3.0/#/" target="_blank" rel="noopener noreferrer">9.3.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.2.0/#/" target="_blank" rel="noopener noreferrer">9.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.1.1/#/" target="_blank" rel="noopener noreferrer">9.1.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.1.0/#/" target="_blank" rel="noopener noreferrer">9.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.0.1/#/" target="_blank" rel="noopener noreferrer">9.0.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.0.0/#/" target="_blank" rel="noopener noreferrer">9.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/9.0.0-beta.1/#/" target="_blank" rel="noopener noreferrer">9.0.0-beta.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/8.1.0/#/" target="_blank" rel="noopener noreferrer">8.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/8.0.0/#/" target="_blank" rel="noopener noreferrer">8.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/8.0.0-beta.2/#/" target="_blank" rel="noopener noreferrer">8.0.0-beta.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/8.0.0-beta.1/#/" target="_blank" rel="noopener noreferrer">8.0.0-beta.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.3/#/" target="_blank" rel="noopener noreferrer">7.0.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.2/#/" target="_blank" rel="noopener noreferrer">7.0.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.1/#/" target="_blank" rel="noopener noreferrer">7.0.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0/#/" target="_blank" rel="noopener noreferrer">7.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.29/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.29</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.26/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.26</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.25/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.25</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.24/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.24</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.23/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.23</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.22/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.22</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.21/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.21</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.20/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.20</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.19/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.19</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.18/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.18</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.17/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.17</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.16/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.16</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.15/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.15</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.14/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.14</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.13/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.13</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.12/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.12</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.11/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.11</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.10/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.10</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.9/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.9</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.8/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.8</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.7/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.7</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.6/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.6</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.5/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.5</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.4/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.3/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.2/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/7.0.0-beta.1/#/" target="_blank" rel="noopener noreferrer">7.0.0-beta.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.7.3/#/" target="_blank" rel="noopener noreferrer">6.7.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.7.2/#/" target="_blank" rel="noopener noreferrer">6.7.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.7.0/#/" target="_blank" rel="noopener noreferrer">6.7.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.6.2/#/" target="_blank" rel="noopener noreferrer">6.6.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.6.1/#/" target="_blank" rel="noopener noreferrer">6.6.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.6.0/#/" target="_blank" rel="noopener noreferrer">6.6.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.5.4/#/" target="_blank" rel="noopener noreferrer">6.5.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.5.3/#/" target="_blank" rel="noopener noreferrer">6.5.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.5.2/#/" target="_blank" rel="noopener noreferrer">6.5.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.5.1/#/" target="_blank" rel="noopener noreferrer">6.5.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.5.0/#/" target="_blank" rel="noopener noreferrer">6.5.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.4.2/#/" target="_blank" rel="noopener noreferrer">6.4.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.4.1/#/" target="_blank" rel="noopener noreferrer">6.4.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.4.0/#/" target="_blank" rel="noopener noreferrer">6.4.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.3.2/#/" target="_blank" rel="noopener noreferrer">6.3.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.3.1/#/" target="_blank" rel="noopener noreferrer">6.3.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.3.0/#/" target="_blank" rel="noopener noreferrer">6.3.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.2.2/#/" target="_blank" rel="noopener noreferrer">6.2.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.2.1/#/" target="_blank" rel="noopener noreferrer">6.2.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.2.0/#/" target="_blank" rel="noopener noreferrer">6.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.1.0/#/" target="_blank" rel="noopener noreferrer">6.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.0.0/#/" target="_blank" rel="noopener noreferrer">6.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.0.0-beta.4/#/" target="_blank" rel="noopener noreferrer">6.0.0-beta.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.0.0-beta.3/#/" target="_blank" rel="noopener noreferrer">6.0.0-beta.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.0.0-beta.2/#/" target="_blank" rel="noopener noreferrer">6.0.0-beta.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/6.0.0-beta.1/#/" target="_blank" rel="noopener noreferrer">6.0.0-beta.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.4.0/#/" target="_blank" rel="noopener noreferrer">5.4.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.3.0/#/" target="_blank" rel="noopener noreferrer">5.3.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.2.0/#/" target="_blank" rel="noopener noreferrer">5.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.1.0/#/" target="_blank" rel="noopener noreferrer">5.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.0.0/#/" target="_blank" rel="noopener noreferrer">5.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.0.0-beta.3/#/" target="_blank" rel="noopener noreferrer">5.0.0-beta.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.0.0-beta.2/#/" target="_blank" rel="noopener noreferrer">5.0.0-beta.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/5.0.0-beta.1/#/" target="_blank" rel="noopener noreferrer">5.0.0-beta.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.12.0/#/" target="_blank" rel="noopener noreferrer">4.12.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.11.0/#/" target="_blank" rel="noopener noreferrer">4.11.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.10.0/#/" target="_blank" rel="noopener noreferrer">4.10.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.9.1/#/" target="_blank" rel="noopener noreferrer">4.9.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.9.0/#/" target="_blank" rel="noopener noreferrer">4.9.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.8.4/#/" target="_blank" rel="noopener noreferrer">4.8.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.8.3/#/" target="_blank" rel="noopener noreferrer">4.8.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.8.2/#/" target="_blank" rel="noopener noreferrer">4.8.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.8.1/#/" target="_blank" rel="noopener noreferrer">4.8.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.8.0/#/" target="_blank" rel="noopener noreferrer">4.8.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.7.0/#/" target="_blank" rel="noopener noreferrer">4.7.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.6.0/#/" target="_blank" rel="noopener noreferrer">4.6.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.5.2/#/" target="_blank" rel="noopener noreferrer">4.5.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.5.1/#/" target="_blank" rel="noopener noreferrer">4.5.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.5.0/#/" target="_blank" rel="noopener noreferrer">4.5.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.4.2/#/" target="_blank" rel="noopener noreferrer">4.4.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.4.1/#/" target="_blank" rel="noopener noreferrer">4.4.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.4.0/#/" target="_blank" rel="noopener noreferrer">4.4.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.3.0/#/" target="_blank" rel="noopener noreferrer">4.3.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.2.0/#/" target="_blank" rel="noopener noreferrer">4.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.1.4/#/" target="_blank" rel="noopener noreferrer">4.1.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.1.3/#/" target="_blank" rel="noopener noreferrer">4.1.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.1.2/#/" target="_blank" rel="noopener noreferrer">4.1.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.1.1/#/" target="_blank" rel="noopener noreferrer">4.1.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.1.0/#/" target="_blank" rel="noopener noreferrer">4.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.0.1/#/" target="_blank" rel="noopener noreferrer">4.0.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/4.0.0/#/" target="_blank" rel="noopener noreferrer">4.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/3.0.0/#/" target="_blank" rel="noopener noreferrer">3.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.2.4/#/" target="_blank" rel="noopener noreferrer">2.2.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.2.3/#/" target="_blank" rel="noopener noreferrer">2.2.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.2.2/#/" target="_blank" rel="noopener noreferrer">2.2.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.2.1/#/" target="_blank" rel="noopener noreferrer">2.2.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.2.0/#/" target="_blank" rel="noopener noreferrer">2.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.1.0/#/" target="_blank" rel="noopener noreferrer">2.1.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.0.2/#/" target="_blank" rel="noopener noreferrer">2.0.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.0.1/#/" target="_blank" rel="noopener noreferrer">2.0.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/2.0.0/#/" target="_blank" rel="noopener noreferrer">2.0.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.3.1/#/" target="_blank" rel="noopener noreferrer">1.3.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.3.0/#/" target="_blank" rel="noopener noreferrer">1.3.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.2.1/#/" target="_blank" rel="noopener noreferrer">1.2.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.2.0/#/" target="_blank" rel="noopener noreferrer">1.2.0</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.1.4/#/" target="_blank" rel="noopener noreferrer">1.1.4</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.1.3/#/" target="_blank" rel="noopener noreferrer">1.1.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/1.0.0/#/" target="_blank" rel="noopener noreferrer">1.0.0</a></li>
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
-					<ul>
-						<li><a href="https://square.github.io/maker/styleguide/8.x/#/">8.x</a></li>
-<li><a href="https://square.github.io/maker/styleguide/advanced-theme-lab/#/">advanced-theme-lab</a></li>
-<li><a href="https://square.github.io/maker/styleguide/automate-backporting/#/">automate-backporting</a></li>
-<li><a href="https://square.github.io/maker/styleguide/backport-fix-to-8/#/">backport-fix-to-8</a></li>
-<li><a href="https://square.github.io/maker/styleguide/choice-disabled-fix/#/">choice-disabled-fix</a></li>
-<li><a href="https://square.github.io/maker/styleguide/choice-disabled-fix-2/#/">choice-disabled-fix-2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/ci-improvements/#/">ci-improvements</a></li>
-<li><a href="https://square.github.io/maker/styleguide/color-changes/#/">color-changes</a></li>
-<li><a href="https://square.github.io/maker/styleguide/color-fix/#/">color-fix</a></li>
-<li><a href="https://square.github.io/maker/styleguide/dialog-double-scroll/#/">dialog-double-scroll</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-advanced-lab/#/">fix-advanced-lab</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-branch-filtering-syntax/#/">fix-branch-filtering-syntax</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-double-scrollbars-on-8/#/">fix-double-scrollbars-on-8</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-notice-block-bg/#/">fix-notice-block-bg</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-otp-on-safari/#/">fix-otp-on-safari</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-stepper-buttons-not-rendering/#/">fix-stepper-buttons-not-rendering</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-themeless-notice-colors/#/">fix-themeless-notice-colors</a></li>
-<li><a href="https://square.github.io/maker/styleguide/fix-tiny-theming-bug/#/">fix-tiny-theming-bug</a></li>
-<li><a href="https://square.github.io/maker/styleguide/font-theme-data/#/">font-theme-data</a></li>
-<li><a href="https://square.github.io/maker/styleguide/image-load/#/">image-load</a></li>
-<li><a href="https://square.github.io/maker/styleguide/input-focus/#/">input-focus</a></li>
-<li><a href="https://square.github.io/maker/styleguide/lab-theme-profiles/#/">lab-theme-profiles</a></li>
-<li><a href="https://square.github.io/maker/styleguide/latest/#/">latest</a></li>
-<li><a href="https://square.github.io/maker/styleguide/latest-preview/#/">latest-preview</a></li>
-<li><a href="https://square.github.io/maker/styleguide/menu-component/#/">menu-component</a></li>
-<li><a href="https://square.github.io/maker/styleguide/more-ci-improvements/#/">more-ci-improvements</a></li>
-<li><a href="https://square.github.io/maker/styleguide/mvp-pill/#/">mvp-pill</a></li>
-<li><a href="https://square.github.io/maker/styleguide/new-font-data/#/">new-font-data</a></li>
-<li><a href="https://square.github.io/maker/styleguide/onward-to-v11/#/">onward-to-v11</a></li>
-<li><a href="https://square.github.io/maker/styleguide/package-audit/#/">package-audit</a></li>
-<li><a href="https://square.github.io/maker/styleguide/package-updates/#/">package-updates</a></li>
-<li><a href="https://square.github.io/maker/styleguide/patterns/#/">patterns</a></li>
-<li><a href="https://square.github.io/maker/styleguide/pininput-focus-after-clear/#/">pininput-focus-after-clear</a></li>
-<li><a href="https://square.github.io/maker/styleguide/popover-colors/#/">popover-colors</a></li>
-<li><a href="https://square.github.io/maker/styleguide/prefix-public-css-vars/#/">prefix-public-css-vars</a></li>
-<li><a href="https://square.github.io/maker/styleguide/refactor-pininput/#/">refactor-pininput</a></li>
-<li><a href="https://square.github.io/maker/styleguide/remove-unnecessary-color-prefix/#/">remove-unnecessary-color-prefix</a></li>
-<li><a href="https://square.github.io/maker/styleguide/resolve-themeable-props-jsdoc/#/">resolve-themeable-props-jsdoc</a></li>
-<li><a href="https://square.github.io/maker/styleguide/responsive-pininput/#/">responsive-pininput</a></li>
-<li><a href="https://square.github.io/maker/styleguide/revert-9.8/#/">revert-9.8</a></li>
-<li><a href="https://square.github.io/maker/styleguide/select-invalid/#/">select-invalid</a></li>
-<li><a href="https://square.github.io/maker/styleguide/some-font-color-renames/#/">some-font-color-renames</a></li>
-<li><a href="https://square.github.io/maker/styleguide/stepper-manual-input/#/">stepper-manual-input</a></li>
-<li><a href="https://square.github.io/maker/styleguide/text-color-css-vars/#/">text-color-css-vars</a></li>
-<li><a href="https://square.github.io/maker/styleguide/text-variants/#/">text-variants</a></li>
-<li><a href="https://square.github.io/maker/styleguide/themable-notices/#/">themable-notices</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-data-revision/#/">theme-data-revision</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-font-family-weight-internally/#/">theme-font-family-weight-internally</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-lab-dependencies/#/">theme-lab-dependencies</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-lab-typo-controls/#/">theme-lab-typo-controls</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-notices/#/">theme-notices</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-shape/#/">theme-shape</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-shape-2/#/">theme-shape-2</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-shape-3/#/">theme-shape-3</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theme-stitches-dev/#/">theme-stitches-dev</a></li>
-<li><a href="https://square.github.io/maker/styleguide/themes-lab-demo/#/">themes-lab-demo</a></li>
-<li><a href="https://square.github.io/maker/styleguide/theming-fixes/#/">theming-fixes</a></li>
-<li><a href="https://square.github.io/maker/styleguide/update-typo-defaults/#/">update-typo-defaults</a></li>
+					<ul class="deploy-links">
+						<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/8.x/#/" target="_blank" rel="noopener noreferrer">8.x</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/advanced-theme-lab/#/" target="_blank" rel="noopener noreferrer">advanced-theme-lab</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/automate-backporting/#/" target="_blank" rel="noopener noreferrer">automate-backporting</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/backport-fix-to-8/#/" target="_blank" rel="noopener noreferrer">backport-fix-to-8</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/choice-disabled-fix/#/" target="_blank" rel="noopener noreferrer">choice-disabled-fix</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/choice-disabled-fix-2/#/" target="_blank" rel="noopener noreferrer">choice-disabled-fix-2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/ci-improvements/#/" target="_blank" rel="noopener noreferrer">ci-improvements</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/color-changes/#/" target="_blank" rel="noopener noreferrer">color-changes</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/color-fix/#/" target="_blank" rel="noopener noreferrer">color-fix</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/dialog-double-scroll/#/" target="_blank" rel="noopener noreferrer">dialog-double-scroll</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-advanced-lab/#/" target="_blank" rel="noopener noreferrer">fix-advanced-lab</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-branch-filtering-syntax/#/" target="_blank" rel="noopener noreferrer">fix-branch-filtering-syntax</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-double-scrollbars-on-8/#/" target="_blank" rel="noopener noreferrer">fix-double-scrollbars-on-8</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-notice-block-bg/#/" target="_blank" rel="noopener noreferrer">fix-notice-block-bg</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-otp-on-safari/#/" target="_blank" rel="noopener noreferrer">fix-otp-on-safari</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-stepper-buttons-not-rendering/#/" target="_blank" rel="noopener noreferrer">fix-stepper-buttons-not-rendering</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-themeless-notice-colors/#/" target="_blank" rel="noopener noreferrer">fix-themeless-notice-colors</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/fix-tiny-theming-bug/#/" target="_blank" rel="noopener noreferrer">fix-tiny-theming-bug</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/font-theme-data/#/" target="_blank" rel="noopener noreferrer">font-theme-data</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/image-load/#/" target="_blank" rel="noopener noreferrer">image-load</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/input-focus/#/" target="_blank" rel="noopener noreferrer">input-focus</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/lab-theme-profiles/#/" target="_blank" rel="noopener noreferrer">lab-theme-profiles</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest/#/" target="_blank" rel="noopener noreferrer">latest</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest-preview/#/" target="_blank" rel="noopener noreferrer">latest-preview</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/menu-component/#/" target="_blank" rel="noopener noreferrer">menu-component</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/more-ci-improvements/#/" target="_blank" rel="noopener noreferrer">more-ci-improvements</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/mvp-pill/#/" target="_blank" rel="noopener noreferrer">mvp-pill</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/new-font-data/#/" target="_blank" rel="noopener noreferrer">new-font-data</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/onward-to-v11/#/" target="_blank" rel="noopener noreferrer">onward-to-v11</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/package-audit/#/" target="_blank" rel="noopener noreferrer">package-audit</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/package-updates/#/" target="_blank" rel="noopener noreferrer">package-updates</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/patterns/#/" target="_blank" rel="noopener noreferrer">patterns</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/pininput-focus-after-clear/#/" target="_blank" rel="noopener noreferrer">pininput-focus-after-clear</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/popover-colors/#/" target="_blank" rel="noopener noreferrer">popover-colors</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/prefix-public-css-vars/#/" target="_blank" rel="noopener noreferrer">prefix-public-css-vars</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/refactor-pininput/#/" target="_blank" rel="noopener noreferrer">refactor-pininput</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/remove-unnecessary-color-prefix/#/" target="_blank" rel="noopener noreferrer">remove-unnecessary-color-prefix</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/resolve-themeable-props-jsdoc/#/" target="_blank" rel="noopener noreferrer">resolve-themeable-props-jsdoc</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/responsive-pininput/#/" target="_blank" rel="noopener noreferrer">responsive-pininput</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/revert-9.8/#/" target="_blank" rel="noopener noreferrer">revert-9.8</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/select-invalid/#/" target="_blank" rel="noopener noreferrer">select-invalid</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/some-font-color-renames/#/" target="_blank" rel="noopener noreferrer">some-font-color-renames</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/stepper-manual-input/#/" target="_blank" rel="noopener noreferrer">stepper-manual-input</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/text-color-css-vars/#/" target="_blank" rel="noopener noreferrer">text-color-css-vars</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/text-variants/#/" target="_blank" rel="noopener noreferrer">text-variants</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/themable-notices/#/" target="_blank" rel="noopener noreferrer">themable-notices</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-data-revision/#/" target="_blank" rel="noopener noreferrer">theme-data-revision</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-font-family-weight-internally/#/" target="_blank" rel="noopener noreferrer">theme-font-family-weight-internally</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-lab-dependencies/#/" target="_blank" rel="noopener noreferrer">theme-lab-dependencies</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-lab-typo-controls/#/" target="_blank" rel="noopener noreferrer">theme-lab-typo-controls</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-notices/#/" target="_blank" rel="noopener noreferrer">theme-notices</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-shape/#/" target="_blank" rel="noopener noreferrer">theme-shape</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-shape-2/#/" target="_blank" rel="noopener noreferrer">theme-shape-2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-shape-3/#/" target="_blank" rel="noopener noreferrer">theme-shape-3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theme-stitches-dev/#/" target="_blank" rel="noopener noreferrer">theme-stitches-dev</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/themes-lab-demo/#/" target="_blank" rel="noopener noreferrer">themes-lab-demo</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/theming-fixes/#/" target="_blank" rel="noopener noreferrer">theming-fixes</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/update-typo-defaults/#/" target="_blank" rel="noopener noreferrer">update-typo-defaults</a></li>
 					</ul>
 				</div>
 			</div>
@@ -268,36 +298,36 @@
 			<div class="subcategories">
 				<div class="subcategory">
 					<h3>Releases</h3>
-					<ul>
-						<li><a href="https://square.github.io/maker/lab/latest-stable/#/">latest-stable</a></li>
-<li><a href="https://square.github.io/maker/lab/11.2.3/#/">11.2.3</a></li>
-<li><a href="https://square.github.io/maker/lab/11.2.2/#/">11.2.2</a></li>
-<li><a href="https://square.github.io/maker/lab/11.2.1/#/">11.2.1</a></li>
-<li><a href="https://square.github.io/maker/lab/11.2.0/#/">11.2.0</a></li>
+					<ul class="deploy-links">
+						<li><a class="deploy-link" href="https://square.github.io/maker/lab/latest-stable/#/" target="_blank" rel="noopener noreferrer">latest-stable</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/11.2.3/#/" target="_blank" rel="noopener noreferrer">11.2.3</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/11.2.2/#/" target="_blank" rel="noopener noreferrer">11.2.2</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/11.2.1/#/" target="_blank" rel="noopener noreferrer">11.2.1</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/11.2.0/#/" target="_blank" rel="noopener noreferrer">11.2.0</a></li>
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
-					<ul>
-						<li><a href="https://square.github.io/maker/lab/advanced-theme-lab/#/">advanced-theme-lab</a></li>
-<li><a href="https://square.github.io/maker/lab/beta/#/">beta</a></li>
-<li><a href="https://square.github.io/maker/lab/ci-improvements/#/">ci-improvements</a></li>
-<li><a href="https://square.github.io/maker/lab/font-theme-data/#/">font-theme-data</a></li>
-<li><a href="https://square.github.io/maker/lab/image-load/#/">image-load</a></li>
-<li><a href="https://square.github.io/maker/lab/latest/#/">latest</a></li>
-<li><a href="https://square.github.io/maker/lab/latest-preview/#/">latest-preview</a></li>
-<li><a href="https://square.github.io/maker/lab/master/#/">master</a></li>
-<li><a href="https://square.github.io/maker/lab/more-ci-improvements/#/">more-ci-improvements</a></li>
-<li><a href="https://square.github.io/maker/lab/mvp-pill/#/">mvp-pill</a></li>
-<li><a href="https://square.github.io/maker/lab/new-font-data/#/">new-font-data</a></li>
-<li><a href="https://square.github.io/maker/lab/popover-colors/#/">popover-colors</a></li>
-<li><a href="https://square.github.io/maker/lab/pwa-lab/#/">pwa-lab</a></li>
-<li><a href="https://square.github.io/maker/lab/select-invalid/#/">select-invalid</a></li>
-<li><a href="https://square.github.io/maker/lab/theme-font-family-weight-internally/#/">theme-font-family-weight-internally</a></li>
-<li><a href="https://square.github.io/maker/lab/theme-lab-typo-controls/#/">theme-lab-typo-controls</a></li>
-<li><a href="https://square.github.io/maker/lab/theme-stitches-dev/#/">theme-stitches-dev</a></li>
-<li><a href="https://square.github.io/maker/lab/themes-lab-demo/#/">themes-lab-demo</a></li>
-<li><a href="https://square.github.io/maker/lab/theming-fixes/#/">theming-fixes</a></li>
+					<ul class="deploy-links">
+						<li><a class="deploy-link" href="https://square.github.io/maker/lab/advanced-theme-lab/#/" target="_blank" rel="noopener noreferrer">advanced-theme-lab</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/beta/#/" target="_blank" rel="noopener noreferrer">beta</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/ci-improvements/#/" target="_blank" rel="noopener noreferrer">ci-improvements</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/font-theme-data/#/" target="_blank" rel="noopener noreferrer">font-theme-data</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/image-load/#/" target="_blank" rel="noopener noreferrer">image-load</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/latest/#/" target="_blank" rel="noopener noreferrer">latest</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/latest-preview/#/" target="_blank" rel="noopener noreferrer">latest-preview</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/master/#/" target="_blank" rel="noopener noreferrer">master</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/more-ci-improvements/#/" target="_blank" rel="noopener noreferrer">more-ci-improvements</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/mvp-pill/#/" target="_blank" rel="noopener noreferrer">mvp-pill</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/new-font-data/#/" target="_blank" rel="noopener noreferrer">new-font-data</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/popover-colors/#/" target="_blank" rel="noopener noreferrer">popover-colors</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/pwa-lab/#/" target="_blank" rel="noopener noreferrer">pwa-lab</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/select-invalid/#/" target="_blank" rel="noopener noreferrer">select-invalid</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/theme-font-family-weight-internally/#/" target="_blank" rel="noopener noreferrer">theme-font-family-weight-internally</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/theme-lab-typo-controls/#/" target="_blank" rel="noopener noreferrer">theme-lab-typo-controls</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/theme-stitches-dev/#/" target="_blank" rel="noopener noreferrer">theme-stitches-dev</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/themes-lab-demo/#/" target="_blank" rel="noopener noreferrer">themes-lab-demo</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/theming-fixes/#/" target="_blank" rel="noopener noreferrer">theming-fixes</a></li>
 					</ul>
 				</div>
 			</div>
