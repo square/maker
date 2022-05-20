@@ -5,8 +5,11 @@ on:
     types:
       - closed
 
-# this is a work in progress
-# just logging env info out for now
+# the only downside of this workflow is that after
+# it removes the styleguide & lab deploys it doesn't
+# re-generate the deploy index which I think is okay
+# since it regularly gets generated in other workflows
+# which will clean up any removed dead links
 
 jobs:
   remove-styleguide-lab:
