@@ -525,6 +525,7 @@
 						<m-image-uploader
 							@image-uploader:change="setImages"
 						/>
+						<m-toggle>label</m-toggle>
 					</div>
 					<m-divider />
 					<div :class="$s.TypographyPreview">
@@ -574,6 +575,7 @@ import { MImage } from '@square/maker/components/Image';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MContainer } from '@square/maker/components/Container';
 import { MPinInput } from '@square/maker/components/PinInput';
+import { MToggle } from '@square/maker/components/Toggle';
 import { MPill } from '@square/maker/components/Pill';
 
 import CheckCircle from '@square/maker-icons/CheckCircle';
@@ -711,6 +713,7 @@ export default {
 		MTextButton,
 		MModalLayer,
 		MPinInput,
+		MToggle,
 		MPill,
 	},
 

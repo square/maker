@@ -253,7 +253,7 @@ export default {
 		display: inline-block;
 		width: auto;
 		height: auto;
-		border-radius: 8px;
+		border-radius: var(--maker-shape-default-border-radius, 8px);
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 	}
 }
