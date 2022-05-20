@@ -1,23 +1,21 @@
 <template>
 	<div :class="$s.ImageWrapper">
-		<template v-if="isIntersecting">
-			<m-transition-fade-in>
-				<m-skeleton-block
-					v-if="!loaded"
-				/>
-				<img
-					v-else
-					:class="[
-						$s.Image,
-						$s[`shape_${resolvedShape}`],
-					]"
-					:src="src"
-					:srcset="srcset"
-					v-bind="$attrs"
-					v-on="$listeners"
-				>
-			</m-transition-fade-in>
-		</template>
+		<m-skeleton-block
+			v-if="!loaded"
+		/>
+		<m-transition-fade-in>
+			<img
+				v-if="loaded"
+				:class="[
+					$s.Image,
+					$s[`shape_${resolvedShape}`],
+				]"
+				:src="src"
+				:srcset="srcset"
+				v-bind="$attrs"
+				v-on="$listeners"
+			>
+		</m-transition-fade-in>
 	</div>
 </template>
 
@@ -81,11 +79,14 @@ export default {
 			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
+		lazyload: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
 		return {
-			isIntersecting: true,
 			loaded: imgCache.has(this.src + this.srcset),
 		};
 	},
@@ -100,11 +101,18 @@ export default {
 	},
 
 	mounted() {
-		if (!observer) {
-			observer = new SharedIntersectionObserver();
+		if (!this.lazyload) {
+			this.load();
+		} else {
+			if (!observer) {
+				observer = new SharedIntersectionObserver();
+			}
+			observer.watch(this.$el, ({ isIntersecting }) => {
+				if (isIntersecting) {
+					this.load();
+				}
+			});
 		}
-
-		observer.watch(this.$el, this.onIntersection);
 	},
 
 	beforeDestroy() {
@@ -112,13 +120,6 @@ export default {
 	},
 
 	methods: {
-		onIntersection({ isIntersecting }) {
-			this.isIntersecting = isIntersecting;
-			if (isIntersecting) {
-				this.load();
-			}
-		},
-
 		load() {
 			if (this.loaded || (!this.src && !this.srcset)) {
 				return;

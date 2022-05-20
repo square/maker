@@ -17,16 +17,19 @@ export default function defaultTheme() {
 			primary: '#000000',
 			critical: {
 				fill: '#cd2026',
+				onFill: '#ffffff',
 				text: '#a82826',
 				subtle: '#f6eceb',
 			},
 			warning: {
 				fill: '#ffbf00',
+				onFill: '#000000',
 				text: '#7e662a',
 				subtle: '#f9eecf',
 			},
 			success: {
 				fill: '#008000',
+				onFill: '#ffffff',
 				text: '#0a7A06',
 				subtle: '#ebf1eb',
 			},
@@ -147,6 +150,10 @@ export default function defaultTheme() {
 			textColor: '@colors["neutral-90"]',
 		},
 		notice: {
+			type: 'info',
+			iconColor: '@colors["neutral-80"]',
+			color: '@colors["neutral-90"]',
+			bgColor: '@colors["neutral-10"]',
 			patterns: {
 				error: {
 					type: 'error',
@@ -166,10 +173,59 @@ export default function defaultTheme() {
 					color: '@colors.warning.text',
 					bgColor: '@colors.warning.subtle',
 				},
-				info: {
-					type: 'info',
-					iconColor: '@colors["neutral-80"]',
-					color: '@colors["neutral-90"]',
+				info: {}, // component default
+			},
+		},
+		pill: {
+			textColor: '@colors["neutral-0"]',
+			bgColor: '@colors["neutral-90"]',
+			patterns: {
+				// filled patterns
+				error: {
+					textColor: '@colors.critical.onFill',
+					bgColor: '@colors.critical.fill',
+				},
+				success: {
+					textColor: '@colors.success.onFill',
+					bgColor: '@colors.success.fill',
+				},
+				warning: {
+					textColor: '@colors.warning.onFill',
+					bgColor: '@colors.warning.fill',
+				},
+				info: {}, // component default
+				// outline patterns
+				errorOutline: {
+					textColor: '@colors.critical.text',
+					bgColor: 'transparent',
+				},
+				successOutline: {
+					textColor: '@colors.success.text',
+					bgColor: 'transparent',
+				},
+				warningOutline: {
+					textColor: '@colors.warning.text',
+					bgColor: 'transparent',
+				},
+				infoOutline: {
+					textColor: '@colors["neutral-90"]',
+					bgColor: 'transparent',
+				},
+				// subtle patterns
+				errorSubtle: {
+					textColor: '@colors.critical.text',
+					bgColor: '@colors.critical.subtle',
+				},
+				successSubtle: {
+					textColor: '@colors.success.text',
+					bgColor: '@colors.success.subtle',
+				},
+				warningSubtle: {
+					textColor: '@colors.warning.text',
+					bgColor: '@colors.warning.subtle',
+				},
+				infoSubtle: {
+					textColor: '@colors["neutral-90"]',
 					bgColor: '@colors["neutral-10"]',
 				},
 			},

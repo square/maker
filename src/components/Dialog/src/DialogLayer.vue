@@ -164,7 +164,10 @@ export default {
 	width: 100%;
 	max-height: calc(100% - 48px);
 	overflow: auto;
-	border-radius: 8px 8px 0 0;
+	border-radius:
+		var(--maker-shape-default-border-radius, 8px)
+		var(--maker-shape-default-border-radius, 8px)
+		0 0;
 }
 
 @media screen and (--for-tablet-landscape-up) {
