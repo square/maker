@@ -230,12 +230,12 @@ export default {
 		color: var(--color-foreground);
 	}
 
-	&:not(:disabled, :invalid):hover {
+	&:not(:disabled, .invalid):hover {
 		border-color: var(--color-border-active);
 	}
 
-	&:not(:disabled, :invalid):focus,
-	&:not(:disabled, :invalid):active {
+	&:not(:disabled, .invalid):focus,
+	&:not(:disabled, .invalid):active {
 		border-color: var(--color-border-active);
 	}
 
@@ -244,7 +244,7 @@ export default {
 		opacity: 0.5;
 	}
 
-	&:invalid {
+	&.invalid {
 		border-color: var(--color-error);
 	}
 
