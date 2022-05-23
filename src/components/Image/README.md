@@ -37,11 +37,12 @@ Supports all `<img>` attributes
 
 Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
 
-| Prop   | Type     | Default | Possible values              | Description |
-| ------ | -------- | ------- | ---------------------------- | ----------- |
-| src    | `string` | —       | —                            | —           |
-| srcset | `string` | —       | —                            | —           |
-| shape  | `string` | —       | `squared`, `rounded`, `pill` | —           |
+| Prop     | Type      | Default | Possible values              | Description |
+| -------- | --------- | ------- | ---------------------------- | ----------- |
+| src      | `string`  | —       | —                            | —           |
+| srcset   | `string`  | —       | —                            | —           |
+| shape    | `string`  | —       | `squared`, `rounded`, `pill` | —           |
+| lazyload | `boolean` | `false` | —                            | —           |
 
 
 ## Events
