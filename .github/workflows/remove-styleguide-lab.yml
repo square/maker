@@ -33,7 +33,7 @@ jobs:
           git add --all
           COLON=$(printf "\x3a") # need to escape colon char for yaml
           COMMIT_MSG="docs${COLON} removes ${GITHUB_HEAD_REF} styleguide & lab after PR closed"
-					# next line only fails if deploys were already deleted
-					# which is ok, so we silence the failure with "|| true"
+          # next line only fails if deploys were already deleted
+          # which is ok, so we silence the failure with "|| true"
           git commit -m "${COMMIT_MSG}" || true
           git push
