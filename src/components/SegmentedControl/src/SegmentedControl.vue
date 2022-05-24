@@ -94,6 +94,7 @@ export default {
 
 .size_small {
 	height: 32px;
+	padding: 2px;
 	font-size: 12px;
 	line-height: 16px;
 }
