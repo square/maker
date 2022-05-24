@@ -70,7 +70,7 @@ export default {
 
 	display: flex;
 	box-sizing: border-box;
-	height: 56px;
+	height: 48px;
 	padding: 4px;
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: 14px;
@@ -93,7 +93,7 @@ export default {
 }
 
 .size_small {
-	height: 40px;
+	height: 32px;
 	font-size: 12px;
 	line-height: 16px;
 }
