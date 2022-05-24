@@ -34,11 +34,12 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           cd ..
+          export DEPLOY_NAME=git_branch
           npm run deploy-all
       - name: Comment Styleguide & Lab links on PR
         uses: pretzelhammer/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: ${{ format('Deployed [Styleguide](https://square.github.io/maker/styleguide/{0}/#/) and [Lab](https://square.github.io/maker/lab/{0}/#/).<br><details><summary>Disclaimers</summary><ol><li>Links may take a few minutes to update after PR is opened or commit is pushed.</li><li>Links may become invalidated after PR is merged or closed.</li></ol></details>', github.head_ref) }}
+          msg: ${{ format('Deployed [Styleguide](https://square.github.io/maker/styleguide/{0}/#/) and [Lab](https://square.github.io/maker/lab/{0}/#/).<br><details><summary>Notes</summary><ol><li>Links may take a few minutes to update after PR is opened or commit is pushed.</li><li>Links may become invalidated after PR is merged or closed.</li><li>Links for all releases and open PRs can be found on the <a href="https://square.github.io/maker/">Maker Deploys 🚀</a> page.</li></ol></details>', github.head_ref) }}
           check_for_duplicate_msg: true

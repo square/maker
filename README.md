@@ -1,6 +1,6 @@
 # Square Maker
 
-A Vue.js 2.x component library. [View the styleguide here](https://square.github.io/maker/styleguide/latest/#/).
+A mobile-first themeable Vue.js 2.x component library. [View the styleguide here](https://square.github.io/maker/styleguide/latest-stable/#/).
 
 ## 🚀 Install
 

@@ -7,9 +7,7 @@ const { JustSsrPlugin, clientOnly } = require('vue-just-ssr');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {
 	merge,
-	getCurrentBranch,
-	isSemanticReleaseBranch,
-	getLibraryVersion,
+	getDeployName,
 } = require('../build/utils');
 const webpackBaseConfig = require('../build/webpack-base-config');
 
@@ -17,8 +15,7 @@ const entry = path.resolve('./lab/App.vue');
 require.resolve(entry);
 
 const isProduction = process.env.NODE_ENV === 'production';
-const branchName = getCurrentBranch();
-const deployName = isSemanticReleaseBranch(branchName) ? getLibraryVersion() : branchName;
+const deployName = getDeployName();
 
 const labDirectory = path.resolve('./lab/experiments/');
 

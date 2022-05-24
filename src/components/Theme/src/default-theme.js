@@ -151,9 +151,6 @@ export default function defaultTheme() {
 		},
 		notice: {
 			type: 'info',
-			iconColor: '@colors["neutral-80"]',
-			color: '@colors["neutral-90"]',
-			bgColor: '@colors["neutral-10"]',
 			patterns: {
 				error: {
 					type: 'error',
@@ -173,7 +170,11 @@ export default function defaultTheme() {
 					color: '@colors.warning.text',
 					bgColor: '@colors.warning.subtle',
 				},
-				info: {}, // component default
+				info: {
+					iconColor: '@colors["neutral-80"]',
+					color: '@colors["neutral-90"]',
+					bgColor: '@colors["neutral-10"]',
+				},
 			},
 		},
 		pill: {
