@@ -117,6 +117,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | pattern    | `string` | —          | —                                     | pattern defined at theme level     |
 | type       | `string` | —          | `error`, `success`, `warning`, `info` | type of notice                     |
 | variant    | `string` | `'inline'` | `inline`, `block`                     | notice variant                     |
+| icon-name  | `string` | —          | —                                     | name of icon, defined in theme     |
 | icon-color | `string` | —          | —                                     | icon color                         |
 | color      | `string` | —          | —                                     | text color for inline notices      |
 | bg-color   | `string` | —          | —                                     | background color for block notices |

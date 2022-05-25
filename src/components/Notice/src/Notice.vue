@@ -11,10 +11,9 @@
 	>
 		<div :class="$s.IconContentWrapper">
 			<div :class="$s.IconAligner">
-				<component
-					:is="iconComponent"
+				<m-icon
+					:name="finalIconName"
 					:class="$s.Icon"
-					inline
 				/>
 			</div>
 			<div>
@@ -33,12 +32,9 @@
 </template>
 
 <script>
-import AlertTriangle from '@square/maker-icons/AlertTriangle';
-import AlertCircle from '@square/maker-icons/AlertCircle';
-import CheckCircle from '@square/maker-icons/CheckCircle';
-import Info from '@square/maker-icons/Info';
 import assert from '@square/maker/utils/assert';
 import cssValidator from '@square/maker/utils/css-validator';
+import { MIcon } from '@square/maker/components/Icon';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
@@ -47,10 +43,7 @@ import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/co
  */
 export default {
 	components: {
-		AlertTriangle,
-		AlertCircle,
-		CheckCircle,
-		Info,
+		MIcon,
 	},
 
 	inject: {
@@ -87,6 +80,13 @@ export default {
 			validator: (variant) => ['inline', 'block'].includes(variant),
 		},
 		/**
+		 * name of icon, defined in theme
+		 */
+		iconName: {
+			type: String,
+			default: undefined,
+		},
+		/**
 		 * icon color
 		 */
 		iconColor: {
@@ -116,21 +116,25 @@ export default {
 		...resolveThemeableProps('notice', [
 			'pattern',
 			'type',
+			'iconName',
 			'iconColor',
 			'color',
 			'bgColor',
 		]),
-		iconComponent() {
+		finalIconName() {
+			if (this.resolvedIconName) {
+				return this.resolvedIconName;
+			}
 			if (this.resolvedType === 'error') {
-				return AlertCircle;
+				return 'critical';
 			}
 			if (this.resolvedType === 'success') {
-				return CheckCircle;
+				return 'success';
 			}
 			if (this.resolvedType === 'warning') {
-				return AlertTriangle;
+				return 'warning';
 			}
-			return Info;
+			return 'info';
 		},
 		showActions() {
 			return this.$slots.actions && this.variant === 'block';
@@ -182,9 +186,7 @@ export default {
 }
 
 .Icon {
-	width: 16px;
-	height: 16px;
-	stroke: var(--color-icon);
+	color: var(--color-icon);
 }
 
 .ActionsWrapper > *:last-child {

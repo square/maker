@@ -1,3 +1,7 @@
+import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
+import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
+import CheckCircleFilled from '@square/maker-icons/CheckCircleFilled';
+import InfoFilled from '@square/maker-icons/InfoFilled';
 import { resolve, getPath } from './utils';
 
 export default function defaultTheme() {
@@ -49,6 +53,12 @@ export default function defaultTheme() {
 				fontFamily: 'inherit',
 				fontWeight: '500',
 			},
+		},
+		icons: {
+			critical: AlertCircleFilled,
+			warning: AlertTriangleFilled,
+			success: CheckCircleFilled,
+			info: InfoFilled,
 		},
 		shapes: {
 			defaultBorderRadius: '4px',
@@ -154,23 +164,28 @@ export default function defaultTheme() {
 			patterns: {
 				error: {
 					type: 'error',
+					iconName: 'critical',
 					iconColor: '@colors.critical.fill',
 					color: '@colors.critical.text',
 					bgColor: '@colors.critical.subtle',
 				},
 				success: {
 					type: 'success',
+					iconName: 'success',
 					iconColor: '@colors.success.fill',
 					color: '@colors.success.text',
 					bgColor: '@colors.success.subtle',
 				},
 				warning: {
 					type: 'warning',
+					iconName: 'warning',
 					iconColor: '@colors.warning.fill',
 					color: '@colors.warning.text',
 					bgColor: '@colors.warning.subtle',
 				},
 				info: {
+					type: 'info',
+					iconName: 'info',
 					iconColor: '@colors["neutral-80"]',
 					color: '@colors["neutral-90"]',
 					bgColor: '@colors["neutral-10"]',
