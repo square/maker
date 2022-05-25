@@ -1,7 +1,7 @@
-import AlertTriangle from '@square/maker-icons/AlertTriangle';
-import AlertCircle from '@square/maker-icons/AlertCircle';
-import CheckCircle from '@square/maker-icons/CheckCircle';
-import Info from '@square/maker-icons/Info';
+import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
+import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
+import CheckCircleFilled from '@square/maker-icons/CheckCircleFilled';
+import InfoFilled from '@square/maker-icons/InfoFilled';
 import { resolve, getPath } from './utils';
 
 export default function defaultTheme() {
@@ -55,10 +55,10 @@ export default function defaultTheme() {
 			},
 		},
 		icons: {
-			critical: AlertCircle,
-			warning: AlertTriangle,
-			success: CheckCircle,
-			info: Info,
+			critical: AlertCircleFilled,
+			warning: AlertTriangleFilled,
+			success: CheckCircleFilled,
+			info: InfoFilled,
 		},
 		shapes: {
 			defaultBorderRadius: '4px',

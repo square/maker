@@ -1,8 +1,8 @@
 <template>
 	<component
 		:is="iconComponent"
+		:key="iconComponent.__file"
 		:class="$s.Icon"
-		inline
 		v-bind="$attrs"
 		v-on="$listeners"
 	/>
@@ -36,11 +36,29 @@ export default {
 		},
 	},
 
+	data() {
+		return {
+			rerender: 0,
+		};
+	},
+
 	computed: {
 		iconComponent() {
 			const component = this.theme.icons[this.name];
+			console.log({ __file: component.__file, rerender: this.rerender });
 			assert.error(component, `'${this.name}' icon not defined in theme`);
 			return component;
+		},
+	},
+
+	watch: {
+		'theme.icons': {
+			handler(newVal, oldVal) {
+				this.rerender += 1;
+				// console.log(JSON.stringify({ newVal, oldVal, rerender: this.rerender }, null, 4));
+			},
+			deep: true,
+			immediate: true,
 		},
 	},
 };
