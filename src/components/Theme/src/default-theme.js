@@ -124,7 +124,7 @@ export default function defaultTheme() {
 				headline: {
 					size: 7,
 					fontFamily: '@fonts.heading.fontFamily',
-					fontWeight: '@fonts.heading.fontFamily',
+					fontWeight: '@fonts.heading.fontWeight',
 					element: 'h1',
 					color: '@colors.heading',
 				},
