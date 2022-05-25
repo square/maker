@@ -2,6 +2,10 @@
 	<div :class="$s.ImageWrapper">
 		<m-skeleton-block
 			v-if="!loaded"
+			:class="[
+				$s.Image,
+				$s[`shape_${resolvedShape}`],
+			]"
 		/>
 		<m-transition-fade-in>
 			<img
