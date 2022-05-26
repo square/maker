@@ -1,11 +1,14 @@
 <template>
-	<component
-		:is="iconComponent"
-		:key="iconComponent.__file"
-		:class="$s.Icon"
-		v-bind="$attrs"
-		v-on="$listeners"
-	/>
+	<span>
+		<component
+			:is="iconComponent"
+			:key="iconComponent.__file"
+			:class="$s.Icon"
+			v-bind="$attrs"
+			v-on="$listeners"
+		/>
+		{{ iconComponent.__file }}
+	</span>
 </template>
 
 <script>

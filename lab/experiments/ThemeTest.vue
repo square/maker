@@ -870,7 +870,7 @@ export default {
 				'32px',
 			],
 			pillPatterns: Object.keys(defaultTheme().pill.patterns),
-			iconStyle: 'filled',
+			iconStyle: 'outline',
 		};
 	},
 
@@ -903,7 +903,9 @@ export default {
 						fontWeight: this.textPatterns.label.fontWeight,
 					},
 				},
-				icons,
+				icons: {
+					...icons,
+				},
 				modal: {
 					bgColor: this.backgroundColor,
 				},
