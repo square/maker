@@ -1,7 +1,14 @@
 <template>
-	<div :class="$s.ImageWrapper">
+	<div
+		ref="image-wrapper"
+		:class="$s.ImageWrapper"
+	>
 		<m-skeleton-block
 			v-if="!loaded"
+			:class="[
+				$s.Image,
+				$s[`shape_${resolvedShape}`],
+			]"
 		/>
 		<m-transition-fade-in>
 			<img
@@ -10,16 +17,22 @@
 					$s.Image,
 					$s[`shape_${resolvedShape}`],
 				]"
+				:style="style"
 				:src="src"
 				:srcset="srcset"
 				v-bind="$attrs"
 				v-on="$listeners"
 			>
 		</m-transition-fade-in>
+		<pseudo-window
+			@resize="throttledResizeHandler"
+		/>
 	</div>
 </template>
 
 <script>
+import PseudoWindow from 'vue-pseudo-window';
+import { throttle } from 'lodash';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
@@ -52,6 +65,7 @@ let observer;
  */
 export default {
 	components: {
+		PseudoWindow,
 		MTransitionFadeIn,
 		MSkeletonBlock,
 	},
@@ -77,7 +91,7 @@ export default {
 		shape: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+			validator: (shape) => ['square', 'circle', 'arch'].includes(shape),
 		},
 		lazyload: {
 			type: Boolean,
@@ -86,13 +100,23 @@ export default {
 	},
 
 	data() {
+		const throggleDelay = 200;
+
 		return {
 			loaded: imgCache.has(this.src + this.srcset),
+			throttledResizeHandler: throttle(this.getImageHeight, throggleDelay),
+			height: 0,
 		};
 	},
 
 	computed: {
 		...resolveThemeableProps('image', ['shape']),
+
+		style() {
+			return {
+				'--image-height': `${this.height}px`,
+			};
+		},
 	},
 
 	watch: {
@@ -113,6 +137,7 @@ export default {
 				}
 			});
 		}
+		this.getImageHeight();
 	},
 
 	beforeDestroy() {
@@ -138,7 +163,12 @@ export default {
 			img.addEventListener('load', () => {
 				imgCache.add(this.src + this.srcset);
 				this.loaded = true;
+				this.getImageHeight();
 			});
+		},
+
+		getImageHeight() {
+			this.height = this.$refs['image-wrapper'].offsetHeight || '0';
 		},
 	},
 };
@@ -146,9 +176,6 @@ export default {
 
 <style module="$s">
 .ImageWrapper {
-	--radius-rounded-image: 16px;
-	--radius-pill-image: 16px;
-
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -161,16 +188,17 @@ export default {
 	object-position: center;
 	border-radius: var(--maker-shape-image-border-radius, 0);
 
-	&.shape_squared {
+	&.shape_square {
 		border-radius: 0;
 	}
 
-	&.shape_rounded {
-		border-radius: var(--radius-rounded-image);
+	&.shape_circle {
+		border-radius: var(--image-height, 100%);
 	}
 
-	&.shape_pill {
-		border-radius: var(--radius-pill-image);
+	&.shape_arch {
+		border-top-left-radius: var(--image-height);
+		border-top-right-radius: var(--image-height);
 	}
 }
 </style>
