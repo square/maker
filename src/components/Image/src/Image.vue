@@ -91,7 +91,7 @@ export default {
 		shape: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['square', 'circle', 'arch'].includes(shape),
+			validator: (shape) => ['original', 'square', 'circle', 'arch'].includes(shape),
 		},
 		lazyload: {
 			type: Boolean,
