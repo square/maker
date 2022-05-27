@@ -141,7 +141,9 @@ export default {
 	},
 
 	beforeDestroy() {
-		observer.unwatch(this.$el);
+		if (observer) {
+			observer.unwatch(this.$el);
+		}
 	},
 
 	methods: {
