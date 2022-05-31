@@ -88,10 +88,14 @@ export default {
 			type: String,
 			default: undefined,
 		},
+		/**
+		 * Original applies theme's border radius, square applies border radius of 0
+		 * @values original, square, circle, arch
+		 */
 		shape: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['square', 'circle', 'arch'].includes(shape),
+			validator: (shape) => ['original', 'square', 'circle', 'arch'].includes(shape),
 		},
 		lazyload: {
 			type: Boolean,

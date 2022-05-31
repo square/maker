@@ -88,12 +88,12 @@ Supports all `<img>` attributes
 
 Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
 
-| Prop     | Type      | Default | Possible values            | Description |
-| -------- | --------- | ------- | -------------------------- | ----------- |
-| src      | `string`  | —       | —                          | —           |
-| srcset   | `string`  | —       | —                          | —           |
-| shape    | `string`  | —       | `square`, `circle`, `arch` | —           |
-| lazyload | `boolean` | `false` | —                          | —           |
+| Prop     | Type      | Default | Possible values                        | Description                                                               |
+| -------- | --------- | ------- | -------------------------------------- | ------------------------------------------------------------------------- |
+| src      | `string`  | —       | —                                      | —                                                                         |
+| srcset   | `string`  | —       | —                                      | —                                                                         |
+| shape    | `string`  | —       | `original`, `square`, `circle`, `arch` | Original applies theme's border radius, square applies border radius of 0 |
+| lazyload | `boolean` | `false` | —                                      | —                                                                         |
 
 
 ## Events
