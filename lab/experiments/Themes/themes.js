@@ -4,6 +4,22 @@
  * Imagine a "Brand API" that stores / passes for framework-agnostic consumpion
  */
 export const websiteTheme = {
+	colors: {
+		'neutral-0': '#ffffff',
+		'neutral-10': '#f1f1f1',
+		'neutral-20': '#d3d3d3',
+		'neutral-80': '#707070',
+		'neutral-90': '#1b1b1b',
+		'neutral-100': '#000000',
+		background: '#ffffff',
+		heading: '#000000',
+		body: '#000000',
+		primary: '#7bbd4b',
+		button: '#7bbd4b',
+		textbutton: '#000000',
+		elevation: '#ffffff',
+		overlay: 'rgba(0, 0, 0, 0.32)',
+	},
 	profiles: [
 		{
 			id: 'custom-profile',
@@ -120,62 +136,17 @@ export const websiteTheme = {
 			},
 		},
 	],
-	colors: {
-		'neutral-0': '#ffffff',
-		'neutral-10': '#f1f1f1',
-		'neutral-20': '#d3d3d3',
-		'neutral-80': '#707070',
-		'neutral-90': '#1b1b1b',
-		'neutral-100': '#000000',
-		background: '#ffffff',
-		heading: '#000000',
-		body: '#000000',
-		button: '#7bbd4b',
-		textbutton: '#000000',
-		elevation: '#ffffff',
-		overlay: 'rgba(0, 0, 0, 0.32)',
-	},
 	fonts: {
 		baseSize: 16,
 		sizeScale: 1.17,
 		heading: {
-			fontFamily: 'inherit',
+			fontFamily: 'Domine',
 			fontWeight: '700',
 		},
 		body: {
-			fontFamily: 'inherit',
+			fontFamily: 'Open Sans',
 			fontWeight: '400',
 		},
-	},
-	button: {
-		color: '@colors.button',
-		shape: 'pill',
-	},
-	textbutton: {
-		color: '@colors.textbutton',
-	},
-	actionbarbutton: {
-		color: '@colors.button',
-		shape: 'pill',
-	},
-	stepper: {
-		color: '@colors["neutral-10"]',
-		textColor: '@colors["neutral-100"]',
-		shape: 'pill',
-	},
-	notice: {
-		color: '',
-	},
-	modal: {
-		bgColor: '@colors.background',
-		color: '@colors.text',
-	},
-	dialog: {
-		bgColor: '@colors.background',
-		color: '@colors.text',
-	},
-	container: {
-		color: '@colors.text',
 	},
 };
 

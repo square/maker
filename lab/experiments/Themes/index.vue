@@ -60,12 +60,12 @@
 						$s.ProfileSet,
 						profile.id,
 						{
-							[$s.active]: profile.id === currentProfile,
+							[$s.active]: profile.id === themeProfile,
 						},
 					]"
 					:style="{
 						backgroundColor : profile.colors['background'],
-						color : profile.colors['text']
+						color : profile.colors['body']
 					}"
 					@click="changeProfile(profile.id)"
 				>
@@ -77,7 +77,7 @@
 						</div> <div
 							:class="$s.previewButton"
 							:style="{
-								backgroundColor : profile.colors['button']
+								backgroundColor : profile.colors['primary']
 							}"
 						/>
 					</div>
@@ -88,15 +88,16 @@
 					<input
 						v-model="currentProfileColors.background"
 						type="color"
+						@input="updateProfileColors"
 					>
 					Background
 				</label>
 				<label>
 					<input
-						v-model="currentProfileColors.button"
+						v-model="currentProfileColors.primary"
 						type="color"
 					>
-					Button
+					Primary
 				</label>
 				<label>
 					<input
@@ -272,8 +273,6 @@ export default {
 	computed: {
 		...mapStores(useThemeStore),
 		...mapState(useThemeStore, ['theme']),
-		// surfaces: (store) => store.theme.colors.surfaces,
-		background: (store) => store.theme.colors.background,
 		fontLoad() {
 			const fonts = [];
 			const fontHeading = themeStore.$state.theme.fonts.heading.fontFamily;
@@ -287,32 +286,8 @@ export default {
 
 			return fonts;
 		},
-		currentProfile() {
-			const { profiles } = themeStore.$state.theme;
-			const currentProfile = profiles.find((profile) => profile.id === this.themeProfile);
-			return currentProfile.id;
-		},
 		currentProfileColors() {
-			return this.getProfile(this.currentProfile).colors;
-		},
-	},
-
-	watch: {
-		background(newValue) {
-			const neutrals = generateNeutralColors(newValue);
-			const headingColor = themeStore.$state.theme.colors.heading;
-			const textColor = themeStore.$state.theme.colors.body;
-			const contrastRatio = 4.5;
-
-			themeStore.$state.theme.colors = Object.assign(themeStore.$state.theme.colors, neutrals);
-
-			if (chroma.contrast(newValue, headingColor) < contrastRatio) {
-				themeStore.$state.theme.colors.heading = neutrals['neutral-100'];
-			}
-
-			if (chroma.contrast(newValue, textColor) < contrastRatio) {
-				themeStore.$state.theme.colors.body = neutrals['neutral-100'];
-			}
+			return this.getProfile(this.themeProfile).colors;
 		},
 	},
 
@@ -326,8 +301,6 @@ export default {
 
 	methods: {
 		loadWebFont(fonts) {
-			// eslint-disable-next-line no-console
-			console.log(fonts);
 			WebFont.load({
 				google: {
 					families: fonts,
@@ -338,8 +311,6 @@ export default {
 			this.loadWebFont(this.fontLoad);
 		},
 		changeTheme(theme) {
-			// eslint-disable-next-line no-console
-			console.log(theme);
 			themeStore.theme = themes[theme];
 			this.updateFont();
 		},
@@ -350,10 +321,34 @@ export default {
 			return themeStore.theme.profiles.find((profile) => profile.id === id);
 		},
 		changeProfile(id) {
-			this.themeProfile = id;
-			const { colors } = this.getProfile(id);
-			// update the base colors based on the current profile
-			themeStore.theme.colors = Object.assign(themeStore.theme.colors, colors);
+			if (this.themeProfile !== id) {
+				this.themeProfile = id;
+				const { colors } = this.getProfile(id);
+				// update the base colors based on the current profile
+				themeStore.theme.colors = { ...themeStore.theme.colors, ...colors };
+			}
+		},
+		updateProfileColors(event) {
+			const { currentProfileColors } = this;
+			const color = event.target.value;
+			const neutrals = generateNeutralColors(color);
+			const headingColor = currentProfileColors.heading;
+			const textColor = currentProfileColors.body;
+			const contrastRatio = 4.5;
+			const colors = { ...currentProfileColors, ...neutrals };
+
+			colors.background = color;
+
+			if (chroma.contrast(color, headingColor) < contrastRatio) {
+				colors.heading = neutrals['neutral-100'];
+			}
+
+			if (chroma.contrast(color, textColor) < contrastRatio) {
+				colors.body = neutrals['neutral-100'];
+			}
+
+			this.getProfile(this.themeProfile).colors = colors;
+			themeStore.theme.colors = colors;
 		},
 	},
 
