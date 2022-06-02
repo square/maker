@@ -46,7 +46,7 @@
     "popmotion": "^9.3.1",
     "stylefire": "^7.0.3",
     "vue": "^2.6.12",
-    "@square/maker-icons": "^2.0.0",
+    "@square/maker-icons": "^2.1.2",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@popperjs/core": "^2.10.2"
   },
@@ -56,7 +56,7 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@popperjs/core": "^2.10.2",
-    "@square/maker-icons": "^2.0.0",
+    "@square/maker-icons": "^2.1.2",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
     "@vue/composition-api": "^1.4.9",
