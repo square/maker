@@ -152,7 +152,6 @@
 						</div>
 						<br>
 						<m-divider />
-						<br>
 						<m-text
 							pattern="title"
 							:size="0"
@@ -213,6 +212,24 @@
 								</option>
 							</select>
 						</template>
+						<br>
+						<m-divider />
+						<m-text
+							pattern="title"
+							:size="0"
+						>
+							Icon Style
+						</m-text>
+						<select
+							v-model="iconStyle"
+						>
+							<option value="filled">
+								filled
+							</option>
+							<option value="outline">
+								outline
+							</option>
+						</select>
 					</div>
 				</div>
 				<div
@@ -578,6 +595,12 @@ import { MPinInput } from '@square/maker/components/PinInput';
 import { MToggle } from '@square/maker/components/Toggle';
 import { MPill } from '@square/maker/components/Pill';
 
+import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
+import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
+import CheckCircleFilled from '@square/maker-icons/CheckCircleFilled';
+import InfoFilled from '@square/maker-icons/InfoFilled';
+import AlertTriangle from '@square/maker-icons/AlertTriangle';
+import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
 
@@ -686,6 +709,19 @@ function contrastColors(bgHex) {
 }
 // Above will be supplied by website-springboard
 
+const filledIcons = {
+	critical: AlertCircleFilled,
+	warning: AlertTriangleFilled,
+	success: CheckCircleFilled,
+	info: InfoFilled,
+};
+const outlineIcons = {
+	critical: AlertCircle,
+	warning: AlertTriangle,
+	success: CheckCircle,
+	info: Info,
+};
+
 export default {
 	components: {
 		MTheme,
@@ -702,8 +738,6 @@ export default {
 		MCheckbox,
 		MRadio,
 		MButton,
-		CheckCircle,
-		Info,
 		MCalendar,
 		MImageUploader,
 		MSegmentedControl,
@@ -715,6 +749,8 @@ export default {
 		MPinInput,
 		MToggle,
 		MPill,
+		CheckCircle,
+		Info,
 	},
 
 	mixins: [
@@ -834,6 +870,7 @@ export default {
 				'32px',
 			],
 			pillPatterns: Object.keys(defaultTheme().pill.patterns),
+			iconStyle: 'filled',
 		};
 	},
 
@@ -841,7 +878,8 @@ export default {
 		theme() {
 			const colors = contrastColors(this.backgroundColor);
 			const baseTen = 10;
-			return {
+			const icons = this.iconStyle === 'filled' ? filledIcons : outlineIcons;
+			const theme = {
 				colors: {
 					...colors,
 					primary: this.primaryColor,
@@ -865,6 +903,7 @@ export default {
 						fontWeight: this.textPatterns.label.fontWeight,
 					},
 				},
+				icons,
 				modal: {
 					bgColor: this.backgroundColor,
 				},
@@ -877,6 +916,7 @@ export default {
 					},
 				},
 			};
+			return theme;
 		},
 
 		contrastColor() {

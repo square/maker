@@ -8,19 +8,32 @@
 </template>
 
 <script>
-import { merge, find } from 'lodash';
+import { mergeWith, find } from 'lodash';
 import key from './key';
 import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
 
+// naive check, just checks for presence of a render field,
+// which is assumed to be a function, which is fine for now
+function isVueComponent(value) {
+	return value && value.render;
+}
+
+// recursively merge all objects
+// EXCEPT for Vue components
+function mergeStrategy(_value, mergeValue) {
+	if (isVueComponent(mergeValue)) {
+		return mergeValue;
+	}
+
+	// returning undefined means "merge values recursively"
+	// https://lodash.com/docs/4.17.15#mergeWith
+	return undefined;
+}
+
 function resolveTheme(data, parentTheme, theme, profileId) {
-	merge(data, parentTheme, theme);
-	merge(data, find(data.profiles, { id: profileId }));
-
-	data.colors = {
-		...data.colors,
-	};
-
+	mergeWith(data, parentTheme, theme, mergeStrategy);
+	mergeWith(data, find(data.profiles, { id: profileId }), mergeStrategy);
 	data.resolve = resolve;
 	data.getPath = getPath;
 }
