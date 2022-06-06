@@ -2,6 +2,7 @@
 	<button
 		:class="[
 			$s.Button,
+			$s[`variant_${resolvedVariant}`],
 			$s[`size_${resolvedSize}`],
 			$s[`shape_${resolvedShape}`],
 			$s[`align_${resolvedAlign}`],
@@ -69,9 +70,6 @@ function fill(tokens) {
 	const textColor = tokens.textColor ? contrastingColor(tokens.color) : undefined;
 	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '0 16px',
-		'--medium-padding': '0 24px',
-		'--large-padding': '0 32px',
 		'--color-main': tokens.color,
 		'--color-main-hover': colorHover.hex(),
 		'--color-main-active': colorActive.hex(),
@@ -84,15 +82,8 @@ function outline(tokens) {
 	const color = chroma(tokens.color);
 	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '0 16px',
-		'--medium-padding': '0 24px',
-		'--large-padding': '0 32px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
+		'--color-contrast': tokens.color,
 		'--color-focus': focusColor.hex(),
-		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
 	};
 }
 
@@ -100,13 +91,7 @@ function ghost(tokens) {
 	const color = chroma(tokens.color);
 	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '0 8px',
-		'--medium-padding': '0 12px',
-		'--large-padding': '0 20px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
+		'--color-contrast': tokens.color,
 		'--color-focus': focusColor.hex(),
 	};
 }
@@ -396,6 +381,38 @@ export default {
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
+	}
+}
+
+/* Variants */
+.Button.variant_primary,
+.Button.variant_secondary {
+	--small-padding: 0 16px;
+	--medium-padding: 0 24px;
+	--large-padding: 0 32px;
+}
+
+.Button.variant_secondary {
+	--outline-border: inset 0 0 0 1px var(--color-contrast);
+}
+
+.Button.variant_tertiary {
+	--small-padding: 0 8px;
+	--medium-padding: 0 12px;
+	--large-padding: 0 20px;
+}
+
+.Button.variant_secondary,
+.Button.variant_tertiary {
+	color: var(--color-main);
+	background-color: transparent;
+
+	&:hover:not(:disabled) {
+		background-color: rgba(0, 0, 0, 0.05);
+	}
+
+	&:active:not(:disabled) {
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 }
 
