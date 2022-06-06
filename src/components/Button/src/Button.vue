@@ -41,9 +41,9 @@
 
 <script>
 import cssValidator from '@square/maker/utils/css-validator';
+import { contrastingColor, hexToRgb } from '@square/maker/utils/color';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { contrastingColor, hexToRgb } from '@square/maker/utils/color';
 
 function getFocus(color) {
 	const arbitraryAlphaValue = 0.3;
