@@ -40,43 +40,36 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
 import cssValidator from '@square/maker/utils/css-validator';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { contrastingColor } from '@square/maker/utils/color';
+import { contrastingColor, hexToRgb } from '@square/maker/utils/color';
 
-function getFocus(chromaColor) {
+function getFocus(color) {
 	const arbitraryAlphaValue = 0.3;
-	return chromaColor.alpha(arbitraryAlphaValue);
+	return `rgba(${hexToRgb(color)}, ${arbitraryAlphaValue})`;
 }
 
 function fill(tokens) {
-	const color = chroma(tokens.color);
-	const textColor = tokens.textColor ? contrastingColor(tokens.color) : undefined;
-	const focusColor = getFocus(color);
+	const textColor = tokens.textColor ? tokens.textColor : contrastingColor(tokens.color);
 	return {
 		'--color-main': tokens.color,
 		'--color-contrast': textColor,
-		'--color-focus': focusColor.hex(),
+		'--color-focus': getFocus(tokens.color),
 	};
 }
 
 function outline(tokens) {
-	const color = chroma(tokens.color);
-	const focusColor = getFocus(color);
 	return {
 		'--color-contrast': tokens.color,
-		'--color-focus': focusColor.hex(),
+		'--color-focus': getFocus(tokens.color),
 	};
 }
 
 function ghost(tokens) {
-	const color = chroma(tokens.color);
-	const focusColor = getFocus(color);
 	return {
 		'--color-contrast': tokens.color,
-		'--color-focus': focusColor.hex(),
+		'--color-focus': getFocus(tokens.color),
 	};
 }
 
