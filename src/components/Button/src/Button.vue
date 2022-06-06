@@ -51,28 +51,12 @@ function getFocus(chromaColor) {
 	return chromaColor.alpha(arbitraryAlphaValue);
 }
 
-function getHover(chromaColor) {
-	// mix color with 5% black
-	const arbitraryValue = 0.05;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
-}
-
-function getActive(chromaColor) {
-	// mix color with 10% black
-	const arbitraryValue = 0.1;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
-}
-
 function fill(tokens) {
 	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
 	const textColor = tokens.textColor ? contrastingColor(tokens.color) : undefined;
 	const focusColor = getFocus(color);
 	return {
 		'--color-main': tokens.color,
-		'--color-main-hover': colorHover.hex(),
-		'--color-main-active': colorActive.hex(),
 		'--color-contrast': textColor,
 		'--color-focus': focusColor.hex(),
 	};
@@ -272,6 +256,7 @@ export default {
 	transition:
 		color 0.2s ease-in,
 		background-color 0.2s ease-in,
+		filter 0.2s ease-in,
 		box-shadow 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
@@ -370,14 +355,6 @@ export default {
 			0 0 0 3px var(--color-focus);
 	}
 
-	&:hover:not(:disabled) {
-		background-color: var(--color-main-hover);
-	}
-
-	&:active:not(:disabled) {
-		background-color: var(--color-main-active);
-	}
-
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
@@ -400,6 +377,16 @@ export default {
 	--small-padding: 0 8px;
 	--medium-padding: 0 12px;
 	--large-padding: 0 20px;
+}
+
+.Button.variant_primary {
+	&:hover:not(:disabled) {
+		filter: brightness(95%);
+	}
+
+	&:active:not(:disabled) {
+		filter: brightness(90%);
+	}
 }
 
 .Button.variant_secondary,
