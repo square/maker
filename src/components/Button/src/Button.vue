@@ -391,7 +391,7 @@ export default {
 
 .Button.variant_secondary,
 .Button.variant_tertiary {
-	color: var(--color-main);
+	color: var(--color-contrast);
 	background-color: transparent;
 
 	&:hover:not(:disabled) {
