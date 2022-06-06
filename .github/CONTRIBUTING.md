@@ -130,7 +130,8 @@ If you want to test a branch before releasing it, you can push up a _built branc
 
 ## Git workflow
 
-This repo uses the [GitHub flow](https://guides.github.com/introduction/flow/). 
+This repo uses the [GitHub flow](https://guides.github.com/introduction/flow/).
+
 ### Commit style
 
 This repository uses [Conventional Commits](https://www.conventionalcommits.org) for simple yet meaningful commit messages. Not only are they user-friendly, they are also machine-readable for automated release notes and versioning.
@@ -195,7 +196,7 @@ To release your approved PR, simply merge it to `master` via squash.
 [semantic-release](https://semantic-release.gitbook.io/semantic-release/) will run on Github Actions to determine the next version based on the commits and publish a new version to [npm](https://www.npmjs.com/package/@square/maker) and [GitHub](https://github.com/square/maker/releases).
 
 #### Pre-releases
-Merging to the following special branches will make a pre-release: `next`, `next-major`, `beta`, `alpha`
+Merging to the following special branches will make a pre-release: `next`, `next-major`, `beta`, `alpha`.
 
 For more information on pre-releases, refer to the [semantic-release docs](https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/pre-releases.md).
 
@@ -209,3 +210,103 @@ GH_TOKEN=<YOUR GitHub PAT> npx semantic-release -d -b <CURRENT BRANCHNAME>
 ```
 
 Note, this will look at the specific commits in your branch but that they will be squashed when merged.
+
+#### Backporting features & bugfixes
+
+For detailed information on how to backport features & bugfixes to earlier major releases refer to the [semantic-release docs on maintanence releases](https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/release-workflow/maintenance-releases.md). Below is a quick summarized example.
+
+For example, let's say Maker is on `11.3.2` and a feature is added which bumps it to `11.4.0` but we'd like to backport this feature to `9.x` so here's how we'd do that:
+
+1. Check if a `9.x` branch exists, if so skip ahead to step 3, otherwise do step 2 first
+
+2. Create a `9.x` branch from the latest v9 tag
+
+We can get a list of all of the tags by running:
+
+```bash
+git tag
+```
+
+However this may return a lot of results, since we're just looking for v9 tags we can use a filter pattern:
+
+```bash
+# in general
+git tag -l <pattern>
+
+# in this particular example
+git tag -l v9*
+```
+
+Which would return something like:
+
+```
+v9.0.0
+v9.0.0-beta.1
+v9.0.1
+v9.1.0
+v9.1.1
+v9.2.0
+v9.3.0
+v9.3.1
+v9.3.2
+v9.3.3
+v9.3.4
+v9.3.5
+v9.3.6
+v9.3.7
+v9.3.8
+v9.4.0
+v9.4.1
+v9.4.2
+v9.5.0
+v9.6.0
+v9.7.0
+v9.8.0
+v9.8.1
+```
+
+In this case the latest v9 tag is `v9.8.1`. We can create the `9.x` from this tag by running:
+
+```bash
+# in general
+git checkout -b <new branch name> <tag name>
+
+# in this particular example
+git checkout -b 9.x v9.8.1
+```
+
+And then we can push branch to the remote repo with:
+
+```bash
+# in general
+git push -u <remote name> <branch name>
+
+# in this particular example
+git push -u origin 9.x
+```
+
+3. Create a new branch from `9.x`
+
+```bash
+# create branch
+git checkout -b backport-11.4-to-9.x 9.x
+# push to remote
+git push -u origin backport-11.4-to-9.x
+```
+
+4. Cherry-pick `11.4.0` feature to new branch
+
+All features and bugfixes are squashed, so to merge the feature from `11.4.0` to our new `backport-11.4-to-9.x` branch all we have to do is:
+
+```bash
+# we're currently on the backport-11.4-to-9.x branch
+git cherry-pick v11.4.0
+```
+
+Then resolve any merge conflicts, commit, and push to remote.
+
+5. Open a `backport-11.4-to-9.x` to `9.x` PR on Github
+
+Get it reviewed, approved, and merge it in. Once it has been merged the automatic `semantic-release` Github Action will make a `v9.9.0` release which will be committed to the repo, commented on the PR, and published to Github Releases and NPM. And that's it, we're done.
+
+The process for backporting bugfixes is identical.
