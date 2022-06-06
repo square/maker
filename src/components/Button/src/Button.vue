@@ -43,7 +43,7 @@ import chroma from 'chroma-js';
 import cssValidator from '@square/maker/utils/css-validator';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import getContrast from '@square/maker/utils/get-contrast';
+import { contrastingColor } from '@square/maker/utils/color';
 
 function getFocus(chromaColor) {
 	const arbitraryAlphaValue = 0.3;
@@ -66,21 +66,16 @@ function fill(tokens) {
 	const color = chroma(tokens.color);
 	const colorHover = getHover(color);
 	const colorActive = getActive(color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
-	const contrastColorHover = getHover(contrastColor);
-	const contrastColorActive = getActive(contrastColor);
+	const textColor = tokens.textColor ? contrastingColor(tokens.color) : undefined;
 	const focusColor = getFocus(color);
 	return {
 		'--small-padding': '0 16px',
 		'--medium-padding': '0 24px',
 		'--large-padding': '0 32px',
-		'--color-main': color.hex(),
+		'--color-main': tokens.color,
 		'--color-main-hover': colorHover.hex(),
 		'--color-main-active': colorActive.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-contrast-hover': contrastColorHover.hex(),
-		'--color-contrast-active': contrastColorActive.hex(),
+		'--color-contrast': textColor,
 		'--color-focus': focusColor.hex(),
 	};
 }
@@ -285,11 +280,11 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--inline-color, var(--maker-color-on-primary, #fff));
+	color: var(--color-contrast, #fff);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
-	background-color: var(--inline-background-color, var(--maker-color-primary, #000));
+	background-color: var(--color-main, var(--maker-color-primary, #000));
 	border: none;
 	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
