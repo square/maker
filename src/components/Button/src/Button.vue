@@ -82,8 +82,6 @@ function fill(tokens) {
 
 function outline(tokens) {
 	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
 	return {
 		'--small-padding': '0 16px',
@@ -93,8 +91,6 @@ function outline(tokens) {
 		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
 		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
 		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
 		'--color-focus': focusColor.hex(),
 		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
 	};
@@ -102,8 +98,6 @@ function outline(tokens) {
 
 function ghost(tokens) {
 	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
 	return {
 		'--small-padding': '0 8px',
@@ -113,8 +107,6 @@ function ghost(tokens) {
 		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
 		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
 		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
 		'--color-focus': focusColor.hex(),
 	};
 }
@@ -394,12 +386,10 @@ export default {
 	}
 
 	&:hover:not(:disabled) {
-		color: var(--color-contrast-hover);
 		background-color: var(--color-main-hover);
 	}
 
 	&:active:not(:disabled) {
-		color: var(--color-contrast-active);
 		background-color: var(--color-main-active);
 	}
 
