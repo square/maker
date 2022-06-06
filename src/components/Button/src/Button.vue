@@ -40,6 +40,7 @@
 
 <script>
 import chroma from 'chroma-js';
+import cssValidator from '@square/maker/utils/css-validator';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import getContrast from '@square/maker/utils/get-contrast';
@@ -185,7 +186,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => cssValidator(color),
 		},
 		/**
 		 * Text color of button
@@ -193,7 +194,7 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => cssValidator(color),
 		},
 		/**
 		 * Variant
@@ -284,11 +285,11 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-contrast);
+	color: var(--inline-color, var(--maker-color-on-primary, #fff));
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
-	background-color: var(--color-main);
+	background-color: var(--inline-background-color, var(--maker-color-primary, #000));
 	border: none;
 	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
