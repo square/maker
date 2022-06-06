@@ -1,14 +1,18 @@
 import chroma from 'chroma-js';
 
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 3;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLightThreshold = 0.32;
-		const isLight = chromaBg.luminance() > isLightThreshold;
-		return chroma(isLight ? '#000' : '#fff');
-	}
-	return targetChromaFg;
-}
+export const DARK_COLOR_LUMINANCE_THRESHOLD = 0.32;
+export const WCAG_CONTRAST_TEXT = 4;
+export const WCAG_CONTRAST_TITLE = 3;
 
-export default getContrast;
+export function getContrast(background, foreground, {
+	contrastThreshold = WCAG_CONTRAST_TITLE,
+} = {}) {
+	let contrast = foreground || '#000000';
+
+	if (chroma.contrast(background, contrast) < contrastThreshold) {
+		const isDarkColor = chroma(background).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
+		contrast = isDarkColor ? '#ffffff' : '#000000';
+	}
+
+	return contrast;
+}

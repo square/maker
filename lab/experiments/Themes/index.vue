@@ -103,6 +103,7 @@
 					<input
 						v-model="currentProfileColors.heading"
 						type="color"
+						@input="updateProfileColors"
 					>
 					Heading
 				</label>
@@ -110,6 +111,7 @@
 					<input
 						v-model="currentProfileColors.body"
 						type="color"
+						@input="updateProfileColors"
 					>
 					Body
 				</label>
@@ -242,13 +244,14 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
 import { mapStores, mapState } from 'pinia';
 import { MTheme } from '@square/maker/components/Theme';
+import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
+import makerColors from '@square/maker/utils/maker-colors';
+
 import Preview from './preview.vue';
 import * as themes from './themes'; // this should probably be a json request, but enough for testing
 import { useThemeStore } from './stores/theme';
-import { generateNeutralColors } from './utils/colors';
 import { fontOptions } from './utils/fonts';
 
 const themeStore = useThemeStore();
@@ -329,23 +332,16 @@ export default {
 			}
 		},
 		updateProfileColors(event) {
-			const { currentProfileColors } = this;
-			const color = event.target.value;
-			const neutrals = generateNeutralColors(color);
-			const headingColor = currentProfileColors.heading;
-			const textColor = currentProfileColors.body;
-			const contrastRatio = 4.5;
-			const colors = { ...currentProfileColors, ...neutrals };
-
-			colors.background = color;
-
-			if (chroma.contrast(color, headingColor) < contrastRatio) {
-				colors.heading = neutrals['neutral-100'];
-			}
-
-			if (chroma.contrast(color, textColor) < contrastRatio) {
-				colors.body = neutrals['neutral-100'];
-			}
+			const background = event.target.value;
+			const { heading, body, primary } = this.currentProfileColors;
+			const colors = {
+				...makerColors(background),
+				primary,
+				heading: getContrast(background, heading),
+				body: getContrast(background, body, {
+					contrastThreshold: WCAG_CONTRAST_TEXT,
+				}),
+			};
 
 			this.getProfile(this.themeProfile).colors = colors;
 			themeStore.theme.colors = colors;
