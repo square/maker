@@ -787,9 +787,7 @@ export default {
 					...makerColors(this.backgroundColor),
 					primary: this.primaryColor,
 					heading: getContrast(this.backgroundColor, this.headingColor),
-					body: getContrast(this.backgroundColor, this.bodyColor, {
-						contrastThreshold: WCAG_CONTRAST_TEXT,
-					}),
+					body: getContrast(this.backgroundColor, this.bodyColor, WCAG_CONTRAST_TEXT),
 				},
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),

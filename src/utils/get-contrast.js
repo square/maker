@@ -4,9 +4,7 @@ export const DARK_COLOR_LUMINANCE_THRESHOLD = 0.32;
 export const WCAG_CONTRAST_TEXT = 4;
 export const WCAG_CONTRAST_TITLE = 3;
 
-export function getContrast(background, foreground, {
-	contrastThreshold = WCAG_CONTRAST_TITLE,
-} = {}) {
+export function getContrast(background, foreground, contrastThreshold = WCAG_CONTRAST_TITLE) {
 	let contrast = foreground || '#000000';
 
 	if (chroma.contrast(background, contrast) < contrastThreshold) {

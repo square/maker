@@ -338,9 +338,7 @@ export default {
 				...makerColors(background),
 				primary,
 				heading: getContrast(background, heading),
-				body: getContrast(background, body, {
-					contrastThreshold: WCAG_CONTRAST_TEXT,
-				}),
+				body: getContrast(background, body, WCAG_CONTRAST_TEXT),
 			};
 
 			this.getProfile(this.themeProfile).colors = colors;
