@@ -9,6 +9,7 @@
 
 <script>
 import { mergeWith, find } from 'lodash';
+import { BASE_TEN } from '@square/maker/utils/constants';
 import key from './key';
 import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
@@ -36,6 +37,10 @@ function resolveTheme(data, parentTheme, theme, profileId) {
 	mergeWith(data, find(data.profiles, { id: profileId }), mergeStrategy);
 	data.resolve = resolve;
 	data.getPath = getPath;
+}
+
+function clamp(value, min, max) {
+	return Math.min(Math.max(Number.parseInt(value, BASE_TEN), min), max);
 }
 
 export default {
@@ -70,6 +75,7 @@ export default {
 	computed: {
 		styles() {
 			const { colors, fonts, shapes } = this;
+			const MAX_THUMBNAIL_RADIUS = 8;
 
 			return {
 				'--maker-color-neutral-0': colors['neutral-0'],
@@ -93,6 +99,7 @@ export default {
 				'--maker-shape-default-border-radius': shapes.defaultBorderRadius,
 				'--maker-shape-button-border-radius': shapes.buttonBorderRadius,
 				'--maker-shape-image-border-radius': shapes.imageBorderRadius,
+				'--maker-shape-thumbnail-border-radius': `${clamp(shapes.imageBorderRadius, 0, MAX_THUMBNAIL_RADIUS)}px`,
 			};
 		},
 	},
