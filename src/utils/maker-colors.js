@@ -75,9 +75,9 @@ export default function makerColors(background = '#fff') {
 
 	['critical', 'warning', 'success'].forEach((name) => {
 		if (chroma.contrast(contextualColors[name].text, background) < WCAG_CONTRAST_TEXT) {
+			contextualColors[name].onFill = contextualColors[name].fill;
 			contextualColors[name].text = getContrast(background);
 			contextualColors[name].fill = getContrast(background);
-			contextualColors[name].onFill = getContrast(contextualColors[name].fill);
 		}
 
 		if (!contextualColors[name].subtle) {
