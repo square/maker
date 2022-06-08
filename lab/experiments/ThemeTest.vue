@@ -186,6 +186,19 @@
 								</option>
 							</select>
 							<br>
+							card radius:
+							<select
+								v-model="customShape.cardBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+							<br>
 							button radius:
 							<select
 								v-model="customShape.buttonBorderRadius"
@@ -511,6 +524,10 @@
 						<m-image
 							src="https://source.unsplash.com/900x600/?vacation"
 						/>
+						<m-image
+							style="width: 120px;"
+							src="https://source.unsplash.com/900x600/?vacation"
+						/>
 						<m-image-uploader
 							@image-uploader:change="setImages"
 						/>
@@ -825,6 +842,7 @@ export default {
 			shape: {
 				name: 'squared',
 				defaultBorderRadius: '0px',
+				cardBorderRadius: '0px',
 				buttonBorderRadius: '0px',
 				imageBorderRadius: '0px',
 			},
@@ -832,30 +850,35 @@ export default {
 				{
 					name: 'squared',
 					defaultBorderRadius: '0px',
+					cardBorderRadius: '0px',
 					buttonBorderRadius: '0px',
 					imageBorderRadius: '0px',
 				},
 				{
 					name: 'rounded',
-					defaultBorderRadius: '4px',
+					defaultBorderRadius: '8px',
+					cardBorderRadius: '4px',
 					buttonBorderRadius: '8px',
 					imageBorderRadius: '16px',
 				},
 				{
 					name: 'pill',
 					defaultBorderRadius: '4px',
+					cardBorderRadius: '8px',
 					buttonBorderRadius: '32px',
 					imageBorderRadius: '16px',
 				},
 				{
 					name: 'custom',
 					defaultBorderRadius: '0px',
+					cardBorderRadius: '0px',
 					buttonBorderRadius: '0px',
 					imageBorderRadius: '0px',
 				},
 			],
 			customShape: {
 				defaultBorderRadius: '0px',
+				cardBorderRadius: '0px',
 				buttonBorderRadius: '0px',
 				imageBorderRadius: '0px',
 			},
