@@ -524,6 +524,10 @@
 						<m-image
 							src="https://source.unsplash.com/900x600/?vacation"
 						/>
+						<m-image
+							style="width: 120px;"
+							src="https://source.unsplash.com/900x600/?vacation"
+						/>
 						<m-image-uploader
 							@image-uploader:change="setImages"
 						/>
