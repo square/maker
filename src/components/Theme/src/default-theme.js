@@ -54,6 +54,7 @@ export default function defaultTheme() {
 		icons: defaultIcons,
 		shapes: {
 			defaultBorderRadius: '4px',
+			cardBorderRadius: '4px',
 			buttonBorderRadius: '4px',
 			imageBorderRadius: '0px',
 		},

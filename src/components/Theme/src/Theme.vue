@@ -91,6 +91,7 @@ export default {
 				'--maker-font-label-font-family': fonts.label.fontFamily,
 				'--maker-font-label-font-weight': fonts.label.fontWeight,
 				'--maker-shape-default-border-radius': shapes.defaultBorderRadius,
+				'--maker-shape-card-border-radius': shapes.cardBorderRadius,
 				'--maker-shape-button-border-radius': shapes.buttonBorderRadius,
 				'--maker-shape-image-border-radius': shapes.imageBorderRadius,
 			};
