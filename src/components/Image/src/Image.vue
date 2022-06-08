@@ -15,7 +15,7 @@
 				v-if="loaded"
 				:class="{
 					[$s.Image]: true,
-					[$s[`shape_${resolvedShape}}`]]: resolvedShape,
+					[$s[`shape_${resolvedShape}`]]: resolvedShape,
 					[$s.thumbnail]: isThumbnail,
 				}"
 				:style="style"
