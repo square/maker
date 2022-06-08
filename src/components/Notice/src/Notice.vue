@@ -186,7 +186,7 @@ export default {
 }
 
 .Icon {
-	color: var(--color-icon);
+	fill: var(--color-icon);
 }
 
 .ActionsWrapper > *:last-child {
