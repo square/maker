@@ -1,6 +1,6 @@
 # Button
 
-For a simplified text-only button with no padding or focus/active/hover states, see: [TextButton](#/TextButton).
+You should almost always use this component for standalone buttons in your app. If you very specifically need a visually lightweight button to be used inside of a [Notice](#/Notice) or [Card](#/Card) that has no padding and no focus, hover, or active states then use [TextButton](#/TextButton). If you need a button that navigates the user to another page that's not a button, that's a link, so use [Link](#/Link).
 
 ## Styles & Sizes
 

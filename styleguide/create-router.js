@@ -17,10 +17,13 @@ function createRouter() {
 		mode: 'hash',
 		routes: [
 			{
-				name: 'readme',
+				name: 'home',
 				path: '/',
 				component: Readme,
 			},
+			// this "constant" is generated
+			// at build time and replaced with
+			// the actual routes as part of the build
 			...COMPONENT_ROUTES,
 		],
 	});

@@ -38,7 +38,7 @@ function textButton(tokens) {
 }
 
 /**
- * Button component
+ * TextButton component
  * @inheritAttrs button
  * @inheritListeners button
  */

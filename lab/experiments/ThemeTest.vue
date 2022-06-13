@@ -501,6 +501,23 @@
 							disabled
 						/>
 					</div>
+					<m-divider />
+					<div>
+						Go to
+						<m-link
+							target="_blank"
+							to="https://google.com"
+						>
+							Google
+						</m-link>.
+						<br>
+						Go to
+						<m-link
+							:to="{ name: 'themes-index' }"
+						>
+							Themes lab
+						</m-link>.
+					</div>
 				</div>
 				<div
 					:class="$s.Preview"
@@ -611,6 +628,7 @@ import { MContainer } from '@square/maker/components/Container';
 import { MPinInput } from '@square/maker/components/PinInput';
 import { MToggle } from '@square/maker/components/Toggle';
 import { MPill } from '@square/maker/components/Pill';
+import { MLink } from '@square/maker/components/Link';
 
 import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
 import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
@@ -768,6 +786,7 @@ export default {
 		MPill,
 		CheckCircle,
 		Info,
+		MLink,
 	},
 
 	mixins: [
