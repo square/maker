@@ -84,7 +84,7 @@ export default function defaultTheme() {
 			},
 		},
 		link: {
-			color: undefined,
+			color: '@colors.primary',
 		},
 		textbutton: {
 			color: '@colors.primary',
