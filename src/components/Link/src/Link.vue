@@ -42,6 +42,19 @@ function shouldRenderRouterLink(parent, to) {
 	return false;
 }
 
+function sanitizeVnodes(vnodes = []) {
+	return vnodes
+		.map(
+			(vnode) => {
+				vnode.text = vnode.text.trim();
+				return vnode;
+			},
+		)
+		.filter(
+			(vnode) => vnode.tag || vnode.text.length > 0,
+		);
+}
+
 /**
  * Link component
  * @inheritAttrs a
@@ -86,9 +99,6 @@ export default {
 	},
 
 	render(createElement) {
-		// const parent = this.$parent;
-		// const to = this.to;
-		// const defaultSlot = this.$slots.default;
 		const {
 			$parent,
 			$props,
@@ -99,6 +109,7 @@ export default {
 			$listeners,
 			$slots,
 		} = this;
+		const defaultSlot = sanitizeVnodes($slots.default);
 		const RouterLink = shouldRenderRouterLink($parent, to);
 		if (RouterLink) {
 			return createElement(RouterLink, {
@@ -107,7 +118,7 @@ export default {
 				style: inlineStyles,
 				props: $props,
 				on: $listeners,
-			}, $slots.default);
+			}, defaultSlot);
 		}
 		return createElement('a', {
 			class: $s.Link,
@@ -117,7 +128,7 @@ export default {
 			},
 			style: inlineStyles,
 			on: $listeners,
-		}, $slots.default);
+		}, defaultSlot);
 	},
 };
 </script>
