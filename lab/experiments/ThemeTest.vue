@@ -515,7 +515,10 @@
 						<m-link
 							:to="{ name: 'themes-index' }"
 						>
+							<m-icon name="success" />
 							Themes lab
+							<m-icon name="info" />
+							suffix text
 						</m-link>.
 					</div>
 				</div>
@@ -629,6 +632,7 @@ import { MPinInput } from '@square/maker/components/PinInput';
 import { MToggle } from '@square/maker/components/Toggle';
 import { MPill } from '@square/maker/components/Pill';
 import { MLink } from '@square/maker/components/Link';
+import { MIcon } from '@square/maker/components/Icon';
 
 import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
 import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
@@ -787,6 +791,7 @@ export default {
 		CheckCircle,
 		Info,
 		MLink,
+		MIcon,
 	},
 
 	mixins: [

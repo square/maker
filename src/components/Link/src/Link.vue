@@ -43,15 +43,21 @@ function shouldRenderRouterLink(parent, to) {
 }
 
 function sanitizeVnodes(vnodes = []) {
+	const one = 1;
+	const lastIndex = vnodes.length - one;
 	return vnodes
 		.map(
-			(vnode) => {
-				vnode.text = vnode.text.trim();
+			(vnode, index) => {
+				// removes trailing whitespace
+				// after the last text vnode
+				if (index === lastIndex && vnode.text) {
+					vnode.text = vnode.text.trimEnd();
+				}
 				return vnode;
 			},
 		)
 		.filter(
-			(vnode) => vnode.tag || vnode.text.length > 0,
+			(vnode) => vnode.tag || (vnode.text && vnode.text.length > 0),
 		);
 }
 
@@ -61,8 +67,6 @@ function sanitizeVnodes(vnodes = []) {
  * @inheritListeners a
  */
 export default {
-	// functional: true,
-
 	inject: {
 		theme: {
 			default: defaultTheme(),
