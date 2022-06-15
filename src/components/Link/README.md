@@ -6,8 +6,8 @@ Use Link for navigation links. Links have a `to` prop which can be passed anythi
 <template>
 	<p>
 		Go to
-		<m-link to="https://google.com">
-			Google
+		<m-link to="https://squareup.com">
+			Squareup
 		</m-link>.
 		<br>
 		Go to Styleguide

@@ -506,9 +506,9 @@
 						Go to
 						<m-link
 							target="_blank"
-							to="https://google.com"
+							to="https://squareup.com"
 						>
-							Google
+							Squareup
 						</m-link>.
 						<br>
 						Go to
