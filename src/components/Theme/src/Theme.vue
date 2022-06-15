@@ -8,8 +8,9 @@
 </template>
 
 <script>
-import { mergeWith, find } from 'lodash';
+import { merge, mergeWith } from 'lodash';
 import { BASE_TEN } from '@square/maker/utils/constants';
+import { showWarning } from '@square/maker/utils/debug';
 import key from './key';
 import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
@@ -20,11 +21,47 @@ function isVueComponent(value) {
 	return value && value.render;
 }
 
+// returns true if value is an array
+// of objects with id fields
+// for the moment this is only for profiles
+function isKeyedArray(value) {
+	return value?.[0]?.id;
+}
+
+function keyedArrayIntoObject(arrayValue) {
+	const objectValue = {};
+	for (const item of arrayValue) {
+		objectValue[item.id] = item;
+	}
+	return objectValue;
+}
+
+function objectIntoKeyedArray(objectValue) {
+	const arrayValue = [];
+	for (const [id, item] of Object.entries(objectValue)) {
+		item.id = id;
+		arrayValue.push(item);
+	}
+	return arrayValue;
+}
+
+function mergeKeyedArrays(value, mergeValue) {
+	const valueObject = keyedArrayIntoObject(value);
+	const mergeValueObject = keyedArrayIntoObject(mergeValue);
+	const mergedObject = merge(valueObject, mergeValueObject);
+	const mergedKeyedArray = objectIntoKeyedArray(mergedObject);
+	return mergedKeyedArray;
+}
+
 // recursively merge all objects
 // EXCEPT for Vue components
-function mergeStrategy(_value, mergeValue) {
+function mergeStrategy(value, mergeValue) {
 	if (isVueComponent(mergeValue)) {
 		return mergeValue;
+	}
+
+	if (isKeyedArray(value) && isKeyedArray(mergeValue)) {
+		return mergeKeyedArrays(value, mergeValue);
 	}
 
 	// returning undefined means "merge values recursively"
@@ -34,7 +71,17 @@ function mergeStrategy(_value, mergeValue) {
 
 function resolveTheme(data, parentTheme, theme, profileId) {
 	mergeWith(data, parentTheme, theme, mergeStrategy);
-	mergeWith(data, find(data.profiles, { id: profileId }), mergeStrategy);
+	if (profileId) {
+		const foundProfile = data.profiles.find((profile) => profile.id === profileId);
+		if (foundProfile) {
+			mergeWith(data, foundProfile, mergeStrategy);
+		} else {
+			const validIds = data.profiles
+				.map((profile) => profile.id)
+				.filter((id) => id);
+			showWarning(`profile ${profileId} doesn't exist within theme, only found: ${validIds}`, 'Theme');
+		}
+	}
 	data.resolve = resolve;
 	data.getPath = getPath;
 }
@@ -64,7 +111,7 @@ export default {
 		},
 		profile: {
 			type: String,
-			default: 'defaultProfile',
+			default: undefined,
 		},
 	},
 	data() {

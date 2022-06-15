@@ -58,11 +58,7 @@ export default function defaultTheme() {
 			buttonBorderRadius: '4px',
 			imageBorderRadius: '0px',
 		},
-		profiles: [
-			{
-				id: 'defaultProfile',
-			},
-		],
+		profiles: [],
 		button: {
 			size: 'medium',
 			variant: 'primary',
