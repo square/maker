@@ -752,10 +752,10 @@ Variable | Purpose
 <!-- api-tables:start -->
 ## Props
 
-| Prop    | Type     | Default            | Possible values | Description |
-| ------- | -------- | ------------------ | --------------- | ----------- |
-| theme   | `object` | `{}`               | —               | —           |
-| profile | `string` | `'defaultProfile'` | —               | —           |
+| Prop    | Type     | Default | Possible values | Description |
+| ------- | -------- | ------- | --------------- | ----------- |
+| theme   | `object` | `{}`    | —               | —           |
+| profile | `string` | —       | —               | —           |
 
 
 ## Slots

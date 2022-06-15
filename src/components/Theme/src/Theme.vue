@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { merge, mergeWith, find } from 'lodash';
+import { merge, mergeWith } from 'lodash';
 import { BASE_TEN } from '@square/maker/utils/constants';
 import { showWarning } from '@square/maker/utils/debug';
 import key from './key';
@@ -23,6 +23,7 @@ function isVueComponent(value) {
 
 // returns true if value is an array
 // of objects with id fields
+// for the moment this is only for profiles
 function isKeyedArray(value) {
 	return value?.[0]?.id;
 }
@@ -71,7 +72,7 @@ function mergeStrategy(value, mergeValue) {
 function resolveTheme(data, parentTheme, theme, profileId) {
 	mergeWith(data, parentTheme, theme, mergeStrategy);
 	if (profileId) {
-		const foundProfile = find(data.profiles, { id: profileId });
+		const foundProfile = data.profiles.find((profile) => profile.id === profileId);
 		if (foundProfile) {
 			mergeWith(data, foundProfile, mergeStrategy);
 		} else {
