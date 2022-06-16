@@ -24,7 +24,6 @@
 				</select-control>
 				<div
 					v-else
-					:class="$s.CustomToggle"
 					@click="popover.toggle()"
 				>
 					<!-- @slot Custom toggle slot (not rendered if toggle-select is used) -->
@@ -149,9 +148,5 @@ export default {
 	display: flex;
 	flex-direction: column;
 	min-width: 200px;
-}
-
-.CustomToggle {
-	display: inline-block;
 }
 </style>
