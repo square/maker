@@ -42,31 +42,31 @@
 import chroma from 'chroma-js';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import getContrast from '@square/maker/utils/get-contrast';
+import { getContrast } from '@square/maker/utils/get-contrast';
 
-function getFocus(chromaColor) {
+function getFocus(color) {
+	const chromaColor = chroma(color);
 	const arbitraryAlphaValue = 0.3;
-	return chromaColor.alpha(arbitraryAlphaValue);
+	return chromaColor.alpha(arbitraryAlphaValue).hex();
 }
 
-function getHover(chromaColor) {
+function getHover(color) {
 	// mix color with 5% black
 	const arbitraryValue = 0.05;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
+	return chroma.mix(color, '#000', arbitraryValue).hex();
 }
 
-function getActive(chromaColor) {
+function getActive(color) {
 	// mix color with 10% black
 	const arbitraryValue = 0.1;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
+	return chroma.mix(color, '#000', arbitraryValue).hex();
 }
 
 function fill(tokens) {
-	const color = chroma(tokens.color);
+	const { color, textColor } = tokens;
+	const contrastColor = getContrast(color, textColor);
 	const colorHover = getHover(color);
 	const colorActive = getActive(color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
 	const contrastColorHover = getHover(contrastColor);
 	const contrastColorActive = getActive(contrastColor);
 	const focusColor = getFocus(color);
@@ -74,18 +74,18 @@ function fill(tokens) {
 		'--small-padding': '0 16px',
 		'--medium-padding': '0 24px',
 		'--large-padding': '0 32px',
-		'--color-main': color.hex(),
-		'--color-main-hover': colorHover.hex(),
-		'--color-main-active': colorActive.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-contrast-hover': contrastColorHover.hex(),
-		'--color-contrast-active': contrastColorActive.hex(),
-		'--color-focus': focusColor.hex(),
+		'--color-main': color,
+		'--color-main-hover': colorHover,
+		'--color-main-active': colorActive,
+		'--color-contrast': contrastColor,
+		'--color-contrast-hover': contrastColorHover,
+		'--color-contrast-active': contrastColorActive,
+		'--color-focus': focusColor,
 	};
 }
 
 function outline(tokens) {
-	const color = chroma(tokens.color);
+	const { color } = tokens;
 	const colorHover = getHover(color);
 	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
@@ -96,16 +96,16 @@ function outline(tokens) {
 		'--color-main': 'transparent',
 		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
 		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
+		'--color-contrast': color,
+		'--color-contrast-hover': colorHover,
+		'--color-contrast-active': colorActive,
+		'--color-focus': focusColor,
 		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
 	};
 }
 
 function ghost(tokens) {
-	const color = chroma(tokens.color);
+	const { color } = tokens;
 	const colorHover = getHover(color);
 	const colorActive = getActive(color);
 	const focusColor = getFocus(color);
@@ -116,10 +116,10 @@ function ghost(tokens) {
 		'--color-main': 'transparent',
 		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
 		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
+		'--color-contrast': color,
+		'--color-contrast-hover': colorHover,
+		'--color-contrast-active': colorActive,
+		'--color-focus': focusColor,
 	};
 }
 
