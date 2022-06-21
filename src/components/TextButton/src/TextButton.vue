@@ -31,7 +31,7 @@ import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/co
 import assert from '@square/maker/utils/assert';
 
 /**
- * Button component
+ * TextButton component
  * @inheritAttrs button
  * @inheritListeners button
  */

@@ -13,10 +13,11 @@
 		<m-transition-fade-in>
 			<img
 				v-if="loaded"
-				:class="[
-					$s.Image,
-					$s[`shape_${resolvedShape}`],
-				]"
+				:class="{
+					[$s.Image]: true,
+					[$s[`shape_${resolvedShape}`]]: resolvedShape,
+					[$s.thumbnail]: isThumbnail,
+				}"
 				:style="style"
 				:src="src"
 				:srcset="srcset"
@@ -56,7 +57,7 @@ function SharedIntersectionObserver() {
 }
 
 const imgCache = new Set();
-
+const THUMBNAIL_MAX_WIDTH = '150';
 let observer;
 
 /**
@@ -104,12 +105,13 @@ export default {
 	},
 
 	data() {
-		const throggleDelay = 200;
+		const throttleDelay = 200;
 
 		return {
 			loaded: imgCache.has(this.src + this.srcset),
-			throttledResizeHandler: throttle(this.getImageHeight, throggleDelay),
+			throttledResizeHandler: throttle(this.getImageDimensions, throttleDelay),
 			height: 0,
+			width: 0,
 		};
 	},
 
@@ -120,6 +122,10 @@ export default {
 			return {
 				'--image-height': `${this.height}px`,
 			};
+		},
+
+		isThumbnail() {
+			return this.width < THUMBNAIL_MAX_WIDTH;
 		},
 	},
 
@@ -141,7 +147,7 @@ export default {
 				}
 			});
 		}
-		this.getImageHeight();
+		this.getImageDimensions();
 	},
 
 	beforeDestroy() {
@@ -169,12 +175,13 @@ export default {
 			img.addEventListener('load', () => {
 				imgCache.add(this.src + this.srcset);
 				this.loaded = true;
-				this.getImageHeight();
+				this.getImageDimensions();
 			});
 		},
 
-		getImageHeight() {
+		getImageDimensions() {
 			this.height = this.$refs['image-wrapper'].offsetHeight || '0';
+			this.width = this.$refs['image-wrapper'].offsetWidth || '0';
 		},
 	},
 };
@@ -193,6 +200,10 @@ export default {
 	object-fit: cover;
 	object-position: center;
 	border-radius: var(--maker-shape-image-border-radius, 0);
+
+	&.thumbnail {
+		border-radius: var(--maker-shape-thumbnail-border-radius, 0);
+	}
 
 	&.shape_square {
 		border-radius: 0;

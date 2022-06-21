@@ -186,6 +186,19 @@
 								</option>
 							</select>
 							<br>
+							card radius:
+							<select
+								v-model="customShape.cardBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+							<br>
 							button radius:
 							<select
 								v-model="customShape.buttonBorderRadius"
@@ -488,6 +501,26 @@
 							disabled
 						/>
 					</div>
+					<m-divider />
+					<div>
+						Go to
+						<m-link
+							target="_blank"
+							to="https://squareup.com"
+						>
+							Squareup
+						</m-link>.
+						<br>
+						Go to
+						<m-link
+							:to="{ name: 'themes-index' }"
+						>
+							<m-icon name="success" />
+							Themes lab
+							<m-icon name="info" />
+							suffix text
+						</m-link>.
+					</div>
 				</div>
 				<div
 					:class="$s.Preview"
@@ -509,6 +542,10 @@
 							<info :class="$s.Icon" />  Learn more
 						</m-text-button>
 						<m-image
+							src="https://source.unsplash.com/900x600/?vacation"
+						/>
+						<m-image
+							style="width: 120px;"
 							src="https://source.unsplash.com/900x600/?vacation"
 						/>
 						<m-image-uploader
@@ -594,6 +631,8 @@ import { MToggle } from '@square/maker/components/Toggle';
 import { MPill } from '@square/maker/components/Pill';
 import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
 import makerColors from '@square/maker/utils/maker-colors';
+import { MLink } from '@square/maker/components/Link';
+import { MIcon } from '@square/maker/components/Icon';
 
 import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
 import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
@@ -655,6 +694,8 @@ export default {
 		MPill,
 		CheckCircle,
 		Info,
+		MLink,
+		MIcon,
 	},
 
 	mixins: [
@@ -729,6 +770,7 @@ export default {
 			shape: {
 				name: 'squared',
 				defaultBorderRadius: '0px',
+				cardBorderRadius: '0px',
 				buttonBorderRadius: '0px',
 				imageBorderRadius: '0px',
 			},
@@ -736,30 +778,35 @@ export default {
 				{
 					name: 'squared',
 					defaultBorderRadius: '0px',
+					cardBorderRadius: '0px',
 					buttonBorderRadius: '0px',
 					imageBorderRadius: '0px',
 				},
 				{
 					name: 'rounded',
-					defaultBorderRadius: '4px',
+					defaultBorderRadius: '8px',
+					cardBorderRadius: '4px',
 					buttonBorderRadius: '8px',
 					imageBorderRadius: '16px',
 				},
 				{
 					name: 'pill',
 					defaultBorderRadius: '4px',
+					cardBorderRadius: '8px',
 					buttonBorderRadius: '32px',
 					imageBorderRadius: '16px',
 				},
 				{
 					name: 'custom',
 					defaultBorderRadius: '0px',
+					cardBorderRadius: '0px',
 					buttonBorderRadius: '0px',
 					imageBorderRadius: '0px',
 				},
 			],
 			customShape: {
 				defaultBorderRadius: '0px',
+				cardBorderRadius: '0px',
 				buttonBorderRadius: '0px',
 				imageBorderRadius: '0px',
 			},

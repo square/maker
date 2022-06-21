@@ -97,7 +97,7 @@ export default {
 
 	mounted() {
 		if (this.$el?.previousElementSibling === null) {
-			this.$el.focus();
+			this.$el.focus({ preventScroll: true });
 		}
 	},
 
@@ -133,10 +133,10 @@ export default {
 				this.selectSelf();
 				break;
 			case 'ArrowUp':
-				this.$el?.previousElementSibling?.focus();
+				this.$el?.previousElementSibling?.focus({ preventScroll: true });
 				break;
 			case 'ArrowDown':
-				this.$el?.nextElementSibling?.focus();
+				this.$el?.nextElementSibling?.focus({ preventScroll: true });
 				break;
 			default:
 				break;
