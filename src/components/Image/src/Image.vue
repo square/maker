@@ -1,6 +1,5 @@
 <template>
 	<div
-		ref="image-wrapper"
 		:class="$s.ImageWrapper"
 	>
 		<m-skeleton-block
@@ -12,7 +11,7 @@
 		/>
 		<m-transition-fade-in>
 			<img
-				v-if="loaded"
+				v-show="loaded"
 				:class="{
 					[$s.Image]: true,
 					[$s[`shape_${resolvedShape}`]]: resolvedShape,
@@ -180,8 +179,8 @@ export default {
 		},
 
 		getImageDimensions() {
-			this.height = this.$refs['image-wrapper'].offsetHeight || '0';
-			this.width = this.$refs['image-wrapper'].offsetWidth || '0';
+			this.height = this.$el?.offsetHeight || '0';
+			this.width = this.$el?.offsetWidth || '0';
 		},
 	},
 };
