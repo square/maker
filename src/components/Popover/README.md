@@ -65,6 +65,13 @@ export default {
 					/>
 				</label>
 				<label>
+					Profile
+					<m-select
+						v-model="profile"
+						:options="profileOptions"
+					/>
+				</label>
+				<label>
 					Text Color
 					<input
 						v-model="color"
@@ -80,7 +87,19 @@ export default {
 				</label>
 			</div>
 
-			<div :class="$s.DemoPopover">
+			<m-theme
+				:class="$s.DemoPopover"
+				:theme="theme"
+				:profile="profile"
+			>
+				<m-text
+					pattern="title"
+				>
+					Theme title
+				</m-text>
+				<m-text>
+					Theme text
+				</m-text>
 				<m-popover
 					:placement="placement"
 				>
@@ -95,14 +114,13 @@ export default {
 
 					<template #content>
 						<m-popover-content
-							:color="color"
-							:bg-color="bgColor"
+							v-bind="popoverProps"
 						>
 							<demo-popover />
 						</m-popover-content>
 					</template>
 				</m-popover>
-			</div>
+			</m-theme>
 		</div>
 	</div>
 </template>
@@ -111,6 +129,8 @@ export default {
 import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
 import { MButton } from '@square/maker/components/Button';
 import { MSelect } from '@square/maker/components/Select';
+import { MTheme } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
@@ -122,6 +142,8 @@ export default {
 		MPopoverContent,
 		MButton,
 		MSelect,
+		MTheme,
+		MText,
 		DemoPopover,
 	},
 
@@ -139,9 +161,80 @@ export default {
 				'bottom', 'bottom-start', 'bottom-end',
 				'left', 'left-start', 'left-end',
 			].map((p) => ({ label: p, value: p })),
-			color: '#000000',
-			bgColor: '#ffffff',
+			color: '#ffffff',
+			bgColor: '#484543',
+			theme: {
+				colors: {
+					background: '#484543',
+					body: '#ffffff',
+					heading: '#e5d7cc',
+					primary: '#e5d7cc',
+				},
+				profiles: [
+					{
+						id: 'profile1',
+						colors: {
+							background: '#002a57',
+							body: '#fbf9c1',
+							heading: '#e5d7cc',
+							primary: '#e5d7cc',
+						},
+					},
+					{
+						id: 'profile2',
+						colors: {
+							background: '#e5d7cc',
+							body: '#333333',
+							heading: '#4d1cfd',
+							primary: '#000000',
+						},
+					},
+				],
+			},
+			profile: '',
+			profileOptions: [
+				{
+					label: 'default',
+					value: '',
+				},
+				{
+					label: 'profile1',
+					value: 'profile1',
+				},
+				{
+					label: 'profile2',
+					value: 'profile2',
+				},
+			],
 		};
+	},
+
+	computed: {
+		popoverProps() {
+			const { themeColors } = this;
+			const popover = {};
+			if (themeColors.background !== this.bgColor) {
+				popover.bgColor = this.bgColor;
+			}
+			if (themeColors.body !== this.color) {
+				popover.color = this.color;
+			}
+			return popover;
+		},
+
+		themeColors() {
+			return this.theme.profiles.find((p) => p.id === this.profile)?.colors
+				|| this.theme.colors;
+		},
+	},
+
+	watch: {
+		profile(newProfile) {
+			const profileColors = this.theme.profiles.find((p) => p.id === newProfile)?.colors
+				|| this.theme.colors;
+			this.color = profileColors.body;
+			this.bgColor = profileColors.background;
+		},
 	},
 };
 </script>
@@ -155,8 +248,10 @@ export default {
 
 .DemoPopover {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	gap: 24px;
 	min-width: 350px;
 	padding: 100px 24px;
 }
