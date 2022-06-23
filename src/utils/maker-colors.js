@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 import { cloneDeep } from 'lodash';
-import { WCAG_CONTRAST_TEXT, DARK_COLOR_LUMINANCE_THRESHOLD, getContrast } from '@square/maker/utils/get-contrast';
+import { WCAG_CONTRAST_TEXT, DARK_COLOR_LUMINANCE_THRESHOLD, getContrast } from './get-contrast';
 
 const NEUTRAL_RATIOS = {
 	light: {
