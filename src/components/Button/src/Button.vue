@@ -40,44 +40,37 @@
 </template>
 
 <script>
-import cssValidator from '@square/maker/utils/css-validator';
-import { contrastingColor, hexToRgb } from '@square/maker/utils/color';
+import { colord } from 'colord';
+import { getContrast } from '@square/maker/utils/get-contrast';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
-function getFocus(color) {
-	const arbitraryAlphaValue = 0.3;
-	return `rgba(${hexToRgb(color)}, ${arbitraryAlphaValue})`;
-}
+function setColorVariables(tokens, variant) {
+	const textColor = tokens.textColor ? tokens.textColor : getContrast(tokens.color);
+	const colorObject = colord(tokens.color);
+	const hoverAdjust = 0.05;
+	const activeAdjust = 0.1;
+	const focusAlphaAdjust = 0.3;
+	const focusColor = colorObject.alpha(focusAlphaAdjust).toHex();
+	let stateAdjust;
 
-function fill(tokens) {
-	const textColor = tokens.textColor ? tokens.textColor : contrastingColor(tokens.color);
+	if (variant === 'primary') {
+		stateAdjust = colorObject.isDark() ? 'lighten' : 'darken';
+	} else {
+		stateAdjust = 'alpha';
+	}
+
+	const hoverColor = colorObject[stateAdjust](hoverAdjust).toHex();
+	const activeColor = colorObject[stateAdjust](activeAdjust).toHex();
+
 	return {
 		'--color-main': tokens.color,
 		'--color-contrast': textColor,
-		'--color-focus': getFocus(tokens.color),
+		'--color-hover': hoverColor,
+		'--color-active': activeColor,
+		'--color-focus': focusColor,
 	};
 }
-
-function outline(tokens) {
-	return {
-		'--color-contrast': tokens.color,
-		'--color-focus': getFocus(tokens.color),
-	};
-}
-
-function ghost(tokens) {
-	return {
-		'--color-contrast': tokens.color,
-		'--color-focus': getFocus(tokens.color),
-	};
-}
-
-const VARIANTS = {
-	primary: fill,
-	secondary: outline,
-	tertiary: ghost,
-};
 
 /**
  * Button component
@@ -135,7 +128,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => cssValidator(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Text color of button
@@ -143,7 +136,7 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => cssValidator(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Variant
@@ -198,10 +191,11 @@ export default {
 			'pattern',
 		]),
 		style() {
-			return VARIANTS[this.resolvedVariant]({
+			const tokens = {
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,
-			});
+			};
+			return setColorVariables(tokens, this.resolvedVariant);
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
@@ -337,9 +331,12 @@ export default {
 		justify-content: space-between;
 	}
 
-	&:disabled {
-		cursor: not-allowed;
-		opacity: 0.5;
+	&:hover {
+		background-color: var(--color-hover);
+	}
+
+	&:active {
+		background-color: var(--color-active);
 	}
 
 	&:focus {
@@ -348,51 +345,15 @@ export default {
 			0 0 0 3px var(--color-focus);
 	}
 
+	&:disabled {
+		background-color: var(--color-main, var(--maker-color-primary, #000));
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
-	}
-}
-
-/* Variants */
-.Button.variant_primary,
-.Button.variant_secondary {
-	--small-padding: 0 16px;
-	--medium-padding: 0 24px;
-	--large-padding: 0 32px;
-}
-
-.Button.variant_secondary {
-	--outline-border: inset 0 0 0 1px var(--color-contrast);
-}
-
-.Button.variant_tertiary {
-	--small-padding: 0 8px;
-	--medium-padding: 0 12px;
-	--large-padding: 0 20px;
-}
-
-.Button.variant_primary {
-	&:hover:not(:disabled) {
-		filter: brightness(95%);
-	}
-
-	&:active:not(:disabled) {
-		filter: brightness(90%);
-	}
-}
-
-.Button.variant_secondary,
-.Button.variant_tertiary {
-	color: var(--color-contrast);
-	background-color: transparent;
-
-	&:hover:not(:disabled) {
-		background-color: rgba(0, 0, 0, 0.05);
-	}
-
-	&:active:not(:disabled) {
-		background-color: rgba(0, 0, 0, 0.1);
 	}
 }
 
@@ -405,8 +366,43 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-contrast);
 	background-color: transparent;
+}
+
+/* Variants */
+.Button.variant_primary,
+.Button.variant_secondary {
+	--small-padding: 0 16px;
+	--medium-padding: 0 24px;
+	--large-padding: 0 32px;
+}
+
+.Button.variant_primary .Loading {
+	color: var(--color-contrast);
+}
+
+.Button.variant_secondary {
+	--outline-border: inset 0 0 0 1px var(--color-main);
+}
+
+.Button.variant_tertiary {
+	--small-padding: 0 8px;
+	--medium-padding: 0 12px;
+	--large-padding: 0 20px;
+}
+
+.Button.variant_secondary,
+.Button.variant_tertiary {
+	color: var(--color-main);
+	background-color: transparent;
+
+	&:disabled {
+		background-color: transparent;
+	}
+
+	& .Loading {
+		color: var(--color-main);
+	}
 }
 
 .MainText {
