@@ -49,27 +49,28 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { getContrast } from '@square/maker/utils/get-contrast';
 
-// TODO: refactor the code below so it's shared with Button component
+function setColorVariables(tokens) {
+	const textColor = getContrast(tokens.color, tokens.textColor);
+	const colorObject = colord(tokens.color);
+	const hoverAdjust = 0.05;
+	const activeAdjust = 0.1;
+	const focusAlphaAdjust = 0.3;
+	const focusColor = colorObject.alpha(focusAlphaAdjust).toHex();
+	const stateAdjust = colorObject.isDark() ? 'lighten' : 'darken';
+	const hoverColor = colorObject[stateAdjust](hoverAdjust).toHex();
+	const activeColor = colorObject[stateAdjust](activeAdjust).toHex();
 
-function getFocus(color) {
-	const arbitraryAlphaValue = 0.8;
-	const chromaColor = chroma(color);
-	return chromaColor.alpha(arbitraryAlphaValue).hex();
-}
-
-function fill(tokens) {
-	const { color, textColor } = tokens;
-	const contrastColor = getContrast(color, textColor);
-	const focusColor = getFocus(color);
 	return {
-		'--color-main': color,
-		'--color-contrast': contrastColor,
+		'--color-main': tokens.color,
+		'--color-contrast': textColor,
+		'--color-hover': hoverColor,
+		'--color-active': activeColor,
 		'--color-focus': focusColor,
 	};
 }
@@ -115,7 +116,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Text color of button
@@ -123,7 +124,7 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Shape of button
@@ -160,21 +161,22 @@ export default {
 	computed: {
 		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
+			let tokens = {
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
+			};
 			/**
 			 * Return different default theme colors for icon buttons
 			 * This can be removed if the action bar icon button ever
 			 * becomes its own component or if we add theming for patterns
 			 */
 			if (this.isSingleChild()) {
-				return fill({
+				tokens = {
 					color: this.color || this.theme.colors.elevation || '#000',
 					textColor: this.textColor || this.resolvedColor,
-				});
+				};
 			}
-			return fill({
-				color: this.resolvedColor,
-				textColor: this.resolvedTextColor,
-			});
+			return setColorVariables(tokens);
 		},
 
 		isDisabled() {
