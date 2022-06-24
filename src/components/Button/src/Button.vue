@@ -46,7 +46,7 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 function setColorVariables(tokens, variant) {
-	const textColor = tokens.textColor ? tokens.textColor : getContrast(tokens.color);
+	const textColor = getContrast(tokens.color, tokens.textColor);
 	const colorObject = colord(tokens.color);
 	const hoverAdjust = 0.05;
 	const activeAdjust = 0.1;
