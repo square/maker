@@ -1,6 +1,10 @@
-import chroma from 'chroma-js';
+import { colord, extend } from 'colord';
+import a11yPlugin from 'colord/plugins/a11y';
+import mixPlugin from 'colord/plugins/mix';
 import { cloneDeep } from 'lodash';
 import { WCAG_CONTRAST_TEXT, DARK_COLOR_LUMINANCE_THRESHOLD, getContrast } from './get-contrast';
+
+extend([a11yPlugin, mixPlugin]);
 
 const NEUTRAL_RATIOS = {
 	light: {
@@ -61,20 +65,20 @@ const CONTEXTUAL_COLORS = {
  * @return {Object}
  */
 export default function makerColors(background = '#fff') {
-	const isDarkBg = chroma(background).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
+	const isDarkBg = colord(background).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
 	const neutralRatios = isDarkBg ? NEUTRAL_RATIOS.dark : NEUTRAL_RATIOS.light;
 	const neutralContrast = getContrast(background);
 	const neutralColors = {};
 
 	Object.entries(neutralRatios).forEach(([name, ratio]) => {
-		neutralColors[name] = chroma.mix(background, neutralContrast, ratio, 'lab').hex();
+		neutralColors[name] = colord(background).mix(neutralContrast, ratio).toHex();
 	});
 
 	const contextualColors = isDarkBg
 		? cloneDeep(CONTEXTUAL_COLORS.dark) : cloneDeep(CONTEXTUAL_COLORS.light);
 
 	['critical', 'warning', 'success'].forEach((name) => {
-		if (chroma.contrast(contextualColors[name].text, background) < WCAG_CONTRAST_TEXT) {
+		if (colord(contextualColors[name].text).contrast(background) < WCAG_CONTRAST_TEXT) {
 			contextualColors[name].onFill = contextualColors[name].fill;
 			contextualColors[name].text = getContrast(background);
 			contextualColors[name].fill = getContrast(background);
