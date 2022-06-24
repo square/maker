@@ -30,15 +30,8 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import assert from '@square/maker/utils/assert';
 
-function textButton(tokens) {
-	const textColor = tokens.color ? chroma(tokens.color) : undefined;
-	return {
-		color: textColor ? textColor.hex() : undefined,
-	};
-}
-
 /**
- * Button component
+ * TextButton component
  * @inheritAttrs button
  * @inheritListeners button
  */
@@ -110,9 +103,9 @@ export default {
 			'color',
 		]),
 		style() {
-			return textButton({
-				color: this.resolvedColor,
-			});
+			return {
+				'--color': this.resolvedColor,
+			};
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
@@ -132,7 +125,7 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--maker-color-neutral-90);
+	color: var(--color, var(--maker-color-neutral-90));
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;

@@ -54,7 +54,7 @@ export default {
 	padding: 16px 24px;
 	background-color: var(--maker-color-background, #fff);
 	border: 1px solid var(--maker-color-neutral-20, #eaeaea);
-	border-radius: var(--maker-shape-default-border-radius, var(--radius-rounded-default));
+	border-radius: var(--maker-shape-card-border-radius, var(--radius-rounded-default));
 
 	&.shape_squared {
 		border-radius: 0;

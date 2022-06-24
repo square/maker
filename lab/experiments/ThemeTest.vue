@@ -186,6 +186,19 @@
 								</option>
 							</select>
 							<br>
+							card radius:
+							<select
+								v-model="customShape.cardBorderRadius"
+							>
+								<option
+									v-for="(value, index) in borderRadiusOptions"
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</select>
+							<br>
 							button radius:
 							<select
 								v-model="customShape.buttonBorderRadius"
@@ -488,6 +501,26 @@
 							disabled
 						/>
 					</div>
+					<m-divider />
+					<div>
+						Go to
+						<m-link
+							target="_blank"
+							to="https://squareup.com"
+						>
+							Squareup
+						</m-link>.
+						<br>
+						Go to
+						<m-link
+							:to="{ name: 'themes-index' }"
+						>
+							<m-icon name="success" />
+							Themes lab
+							<m-icon name="info" />
+							suffix text
+						</m-link>.
+					</div>
 				</div>
 				<div
 					:class="$s.Preview"
@@ -509,6 +542,10 @@
 							<info :class="$s.Icon" />  Learn more
 						</m-text-button>
 						<m-image
+							src="https://source.unsplash.com/900x600/?vacation"
+						/>
+						<m-image
+							style="width: 120px;"
 							src="https://source.unsplash.com/900x600/?vacation"
 						/>
 						<m-image-uploader
@@ -569,8 +606,6 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
-
 import { MTheme, defaultTheme } from '@square/maker/components/Theme';
 import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
@@ -594,6 +629,10 @@ import { MContainer } from '@square/maker/components/Container';
 import { MPinInput } from '@square/maker/components/PinInput';
 import { MToggle } from '@square/maker/components/Toggle';
 import { MPill } from '@square/maker/components/Pill';
+import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
+import makerColors from '@square/maker/utils/maker-colors';
+import { MLink } from '@square/maker/components/Link';
+import { MIcon } from '@square/maker/components/Icon';
 
 import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
 import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
@@ -612,102 +651,6 @@ import {
 
 import ItemModal from './SiteApp/ItemModal.vue';
 import storeData from './SiteApp/data';
-
-// Below will be supplied by website-springboard
-const IS_LIGHT_THRESHOLD = 0.32;
-const NOTICE_MIN_CONTRAST = 4;
-const RATIOS = {
-	light: {
-		10: 0.05,
-		20: 0.155,
-		80: 0.527,
-		90: 0.9,
-	},
-	dark: {
-		10: 0.255,
-		20: 0.37,
-		80: 0.55,
-		90: 0.95,
-	},
-};
-
-// generates neutrals, elevation, overlay, & contextual colors
-function contrastColors(bgHex) {
-	const isLight = chroma(bgHex).luminance() > IS_LIGHT_THRESHOLD;
-	const contrastColor = isLight ? '#000000' : '#ffffff';
-	const levels = isLight ? RATIOS.light : RATIOS.dark;
-	const colors = {
-		background: bgHex,
-		'neutral-0': isLight ? '#ffffff' : '#000000',
-		'neutral-100': !isLight ? '#ffffff' : '#000000',
-	};
-	colors.body = colors['neutral-100'];
-
-	Object.entries(levels).forEach(([name, level]) => {
-		colors[`neutral-${name}`] = chroma.mix(
-			bgHex,
-			contrastColor,
-			level,
-			'lab',
-		).hex();
-	});
-
-	if (isLight) {
-		colors.critical = {
-			fill: '#cd2026',
-			onFill: '#ffffff',
-			text: '#a82826',
-			subtle: '#f6eceb',
-		};
-		colors.warning = {
-			fill: '#ffbf00',
-			onFill: '#000000',
-			text: '#7e662a',
-			subtle: '#f9eecf',
-		};
-		colors.success = {
-			fill: '#008000',
-			onFill: '#ffffff',
-			text: '#0a7A06',
-			subtle: '#ebf1eb',
-		};
-	} else {
-		colors.critical = {
-			fill: '#cd2026',
-			onFill: '#ffffff',
-			text: '#ff7566',
-			subtle: colors['neutral-10'],
-		};
-		colors.warning = {
-			fill: '#ffbf00',
-			onFill: '#000000',
-			text: '#ffbf00',
-			subtle: colors['neutral-10'],
-		};
-		colors.success = {
-			fill: '#008000',
-			onFill: '#ffffff',
-			text: '#64cc52',
-			subtle: colors['neutral-10'],
-		};
-	}
-
-	for (const colorType of ['critical', 'warning', 'success']) {
-		if (chroma.contrast(colors[colorType].text, colors.background) < NOTICE_MIN_CONTRAST) {
-			// next line assumes fill color has good contrast against white & black
-			colors[colorType].onFill = colors[colorType].fill;
-			colors[colorType].text = contrastColor;
-			colors[colorType].fill = contrastColor;
-		}
-	}
-
-	return {
-		...colors,
-		elevation: isLight ? '#ffffff' : colors['neutral-20'],
-		overlay: isLight ? 'rgba(0, 0, 0, 0.32)' : 'rgba(255, 255, 255, 0.32)',
-	};
-}
-// Above will be supplied by website-springboard
 
 const filledIcons = {
 	critical: AlertCircleFilled,
@@ -751,6 +694,8 @@ export default {
 		MPill,
 		CheckCircle,
 		Info,
+		MLink,
+		MIcon,
 	},
 
 	mixins: [
@@ -825,6 +770,7 @@ export default {
 			shape: {
 				name: 'squared',
 				defaultBorderRadius: '0px',
+				cardBorderRadius: '0px',
 				buttonBorderRadius: '0px',
 				imageBorderRadius: '0px',
 			},
@@ -832,30 +778,35 @@ export default {
 				{
 					name: 'squared',
 					defaultBorderRadius: '0px',
+					cardBorderRadius: '0px',
 					buttonBorderRadius: '0px',
 					imageBorderRadius: '0px',
 				},
 				{
 					name: 'rounded',
-					defaultBorderRadius: '4px',
+					defaultBorderRadius: '8px',
+					cardBorderRadius: '4px',
 					buttonBorderRadius: '8px',
 					imageBorderRadius: '16px',
 				},
 				{
 					name: 'pill',
 					defaultBorderRadius: '4px',
+					cardBorderRadius: '8px',
 					buttonBorderRadius: '32px',
 					imageBorderRadius: '16px',
 				},
 				{
 					name: 'custom',
 					defaultBorderRadius: '0px',
+					cardBorderRadius: '0px',
 					buttonBorderRadius: '0px',
 					imageBorderRadius: '0px',
 				},
 			],
 			customShape: {
 				defaultBorderRadius: '0px',
+				cardBorderRadius: '0px',
 				buttonBorderRadius: '0px',
 				imageBorderRadius: '0px',
 			},
@@ -876,16 +827,14 @@ export default {
 
 	computed: {
 		theme() {
-			const colors = contrastColors(this.backgroundColor);
 			const baseTen = 10;
 			const icons = this.iconStyle === 'filled' ? filledIcons : outlineIcons;
 			const theme = {
 				colors: {
-					...colors,
+					...makerColors(this.backgroundColor),
 					primary: this.primaryColor,
-					background: this.backgroundColor,
-					heading: this.headingColor,
-					body: this.bodyColor,
+					heading: getContrast(this.backgroundColor, this.headingColor),
+					body: getContrast(this.backgroundColor, this.bodyColor, WCAG_CONTRAST_TEXT),
 				},
 				fonts: {
 					baseSize: Number.parseInt(this.fontsBaseSize, baseTen),
@@ -917,11 +866,6 @@ export default {
 				},
 			};
 			return theme;
-		},
-
-		contrastColor() {
-			return chroma(this.backgroundColor).luminance() > IS_LIGHT_THRESHOLD
-				? '#000000' : '#ffffff';
 		},
 	},
 

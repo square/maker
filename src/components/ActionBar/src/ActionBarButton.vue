@@ -53,24 +53,24 @@ import chroma from 'chroma-js';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import getContrast from '@square/maker/utils/get-contrast';
+import { getContrast } from '@square/maker/utils/get-contrast';
 
 // TODO: refactor the code below so it's shared with Button component
 
-function getFocus(chromaColor) {
+function getFocus(color) {
 	const arbitraryAlphaValue = 0.8;
-	return chromaColor.alpha(arbitraryAlphaValue);
+	const chromaColor = chroma(color);
+	return chromaColor.alpha(arbitraryAlphaValue).hex();
 }
 
 function fill(tokens) {
-	const color = chroma(tokens.color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
+	const { color, textColor } = tokens;
 	const contrastColor = getContrast(color, textColor);
 	const focusColor = getFocus(color);
 	return {
-		'--color-main': color.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-focus': focusColor.hex(),
+		'--color-main': color,
+		'--color-contrast': contrastColor,
+		'--color-focus': focusColor,
 	};
 }
 

@@ -54,14 +54,11 @@ export default function defaultTheme() {
 		icons: defaultIcons,
 		shapes: {
 			defaultBorderRadius: '4px',
+			cardBorderRadius: '4px',
 			buttonBorderRadius: '4px',
 			imageBorderRadius: '0px',
 		},
-		profiles: [
-			{
-				id: 'defaultProfile',
-			},
-		],
+		profiles: [],
 		button: {
 			size: 'medium',
 			variant: 'primary',
@@ -81,6 +78,9 @@ export default function defaultTheme() {
 					variant: 'tertiary',
 				},
 			},
+		},
+		link: {
+			color: '@colors.primary',
 		},
 		textbutton: {
 			color: '@colors.primary',
