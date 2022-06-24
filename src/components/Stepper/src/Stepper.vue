@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MButton } from '@square/maker/components/Button';
 import Plus from '@square/maker-icons/Plus';
@@ -110,7 +110,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * stepper button text color
@@ -118,7 +118,7 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * stepper button shape
