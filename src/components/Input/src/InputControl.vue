@@ -99,9 +99,17 @@ export default {
 	},
 
 	methods: {
+		/**
+		 * focuses input
+		 * @public
+		 */
 		focus() {
 			this.$refs.input.focus();
 		},
+		/**
+		 * blurs input
+		 * @public
+		 */
 		blur() {
 			this.$refs.input.blur();
 		},
