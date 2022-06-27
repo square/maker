@@ -598,6 +598,15 @@ export default {
 | close | -    | Popover has been closed |
 
 
+## Popover Methods
+
+| Method | Description                                |
+| ------ | ------------------------------------------ |
+| open   | opens popover, use from external element   |
+| close  | closes popover                             |
+| toggle | toggles popover, use from external element |
+
+
 ## PopoverContent Props
 
 | Prop     | Type     | Default  | Possible values | Description                     |

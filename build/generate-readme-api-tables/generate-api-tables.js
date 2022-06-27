@@ -100,6 +100,23 @@ function getEventsTable({ events, tags }, tablePrefix) {
 	);
 }
 
+function getMethodsTable({ methods }, tablePrefix) {
+	if (!methods) { return ''; }
+
+	return section(
+		`${tablePrefix ? `${tablePrefix} ` : ''}Methods`,
+		[
+			markdownTable([
+				['Method', 'Description'],
+				...mapIn(methods, (method) => [
+					method.name,
+					method.description || '—',
+				]),
+			]),
+		],
+	);
+}
+
 async function generateApiTables(componentInfo, prefixName) {
 	if (prefixName) {
 		prefixName = componentInfo.displayName;
@@ -109,6 +126,7 @@ async function generateApiTables(componentInfo, prefixName) {
 		getPropsTable(componentInfo, prefixName),
 		getSlotsTable(componentInfo, prefixName),
 		getEventsTable(componentInfo, prefixName),
+		getMethodsTable(componentInfo, prefixName),
 	].filter(Boolean).join('\n\n\n');
 }
 
