@@ -319,4 +319,11 @@ export default {
 | Event    | Type | Description |
 | -------- | ---- | ----------- |
 | complete | -    | —           |
+
+
+## Methods
+
+| Method              | Description                |
+| ------------------- | -------------------------- |
+| shakeAndClearInputs | shakes and clears pininput |
 <!-- api-tables:end -->

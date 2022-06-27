@@ -47,7 +47,7 @@
 		</m-popover>
 		<pseudo-window
 			document
-			@keydown.esc="handleEscKey"
+			@keydown.esc="close"
 		/>
 	</div>
 </template>
@@ -132,7 +132,11 @@ export default {
 			}
 		},
 
-		handleEscKey() {
+		/**
+		 * closes the menu
+		 * @public
+		 */
+		close() {
 			/**
 			 * ESC keyup event on window
 			 * @property {string}
