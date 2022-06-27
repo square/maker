@@ -331,12 +331,9 @@ export default {
 		justify-content: space-between;
 	}
 
-	&:hover {
-		background-color: var(--color-hover);
-	}
-
-	&:active {
-		background-color: var(--color-active);
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 
 	&:focus {
@@ -345,10 +342,12 @@ export default {
 			0 0 0 3px var(--color-focus);
 	}
 
-	&:disabled {
-		background-color: var(--color-main, var(--maker-color-primary, #000));
-		cursor: not-allowed;
-		opacity: 0.5;
+	&:hover:not(:disabled) {
+		background-color: var(--color-hover);
+	}
+
+	&:active:not(:disabled) {
+		background-color: var(--color-active);
 	}
 
 	&.loading {
@@ -395,10 +394,6 @@ export default {
 .Button.variant_tertiary {
 	color: var(--color-main);
 	background-color: transparent;
-
-	&:disabled {
-		background-color: transparent;
-	}
 
 	& .Loading {
 		color: var(--color-main);
