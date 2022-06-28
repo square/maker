@@ -58,8 +58,8 @@ import { getContrast } from '@square/maker/utils/get-contrast';
 function setColorVariables(tokens) {
 	const textColor = getContrast(tokens.color, tokens.textColor);
 	const colorObject = colord(tokens.color);
-	const hoverAdjust = 0.05;
-	const activeAdjust = 0.1;
+	const hoverAdjust = 0.08;
+	const activeAdjust = 0.16;
 	const focusAlphaAdjust = 0.3;
 	const focusColor = colorObject.alpha(focusAlphaAdjust).toHex();
 	const stateAdjust = colorObject.isDark() ? 'lighten' : 'darken';
