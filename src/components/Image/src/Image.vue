@@ -171,6 +171,12 @@ export default {
 				img.srcset = this.srcset;
 			}
 
+			// Needed to not load the full size image
+			// and match the size loaded in the UI
+			if (this.$attrs?.sizes) {
+				img.sizes = this.$attrs.sizes;
+			}
+
 			img.addEventListener('load', () => {
 				imgCache.add(this.src + this.srcset);
 				this.loaded = true;
