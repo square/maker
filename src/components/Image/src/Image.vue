@@ -20,6 +20,7 @@
 				:style="style"
 				:src="src"
 				:srcset="srcset"
+				:sizes="sizes"
 				v-bind="$attrs"
 				v-on="$listeners"
 			>
@@ -85,6 +86,10 @@ export default {
 			default: undefined,
 		},
 		srcset: {
+			type: String,
+			default: undefined,
+		},
+		sizes: {
 			type: String,
 			default: undefined,
 		},
@@ -169,6 +174,12 @@ export default {
 
 			if (this.srcset) {
 				img.srcset = this.srcset;
+			}
+
+			// Needed to not load the full size image
+			// and match the size loaded in the UI
+			if (this.sizes) {
+				img.sizes = this.sizes;
 			}
 
 			img.addEventListener('load', () => {
