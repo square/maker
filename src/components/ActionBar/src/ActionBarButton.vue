@@ -56,19 +56,21 @@ import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/co
 import { getContrast } from '@square/maker/utils/get-contrast';
 
 function setColorVariables(tokens) {
-	const textColor = getContrast(tokens.color, tokens.textColor);
-	const colorObject = colord(tokens.color);
-	const hoverAdjust = 0.08;
-	const activeAdjust = 0.16;
+	const colorMainObject = colord(tokens.color);
+	const colorContrast = getContrast(tokens.color, tokens.textColor);
+
+	// Define each state adjustment and generated color
+	const stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
+	const hoverStateAdjust = 0.08;
+	const activeStateAdjust = 0.16;
 	const focusAlphaAdjust = 0.3;
-	const focusColor = colorObject.alpha(focusAlphaAdjust).toHex();
-	const stateAdjust = colorObject.isDark() ? 'lighten' : 'darken';
-	const hoverColor = colorObject[stateAdjust](hoverAdjust).toHex();
-	const activeColor = colorObject[stateAdjust](activeAdjust).toHex();
+	const focusColor = colorMainObject.alpha(focusAlphaAdjust).toHex();
+	const hoverColor = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
+	const activeColor = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
 
 	return {
 		'--color-main': tokens.color,
-		'--color-contrast': textColor,
+		'--color-contrast': colorContrast,
 		'--color-hover': hoverColor,
 		'--color-active': activeColor,
 		'--color-focus': focusColor,
