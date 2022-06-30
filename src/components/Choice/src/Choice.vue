@@ -12,7 +12,7 @@
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import assert from '@square/maker/utils/assert';
 import { getContrast } from '@square/maker/utils/get-contrast';
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import key from './key';
 
 export default {
@@ -67,7 +67,7 @@ export default {
 		selectedColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid,
 		},
 	},
 
@@ -86,7 +86,7 @@ export default {
 
 		disabledContrastColor() {
 			const alphaValue = 0.4;
-			return chroma(this.contrastColor).alpha(alphaValue);
+			return colord(this.contrastColor).alpha(alphaValue);
 		},
 
 		style() {

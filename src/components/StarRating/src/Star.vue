@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 
 export default {
 	name: 'Star',
@@ -62,7 +62,7 @@ export default {
 		color: {
 			type: String,
 			default: '#FFBF00',
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 	},
 };

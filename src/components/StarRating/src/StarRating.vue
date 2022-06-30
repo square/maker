@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import Star from './Star.vue';
 
 const MIN_RATING = 0;
@@ -67,7 +67,7 @@ export default {
 		color: {
 			type: String,
 			default: '#FFBF00',
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 
 		/**
