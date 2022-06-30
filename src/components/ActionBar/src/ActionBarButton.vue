@@ -64,16 +64,16 @@ function setColorVariables(tokens) {
 	const hoverStateAdjust = 0.08;
 	const activeStateAdjust = 0.16;
 	const focusAlphaAdjust = 0.3;
-	const focusColor = colorMainObject.alpha(focusAlphaAdjust).toHex();
-	const hoverColor = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
-	const activeColor = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
+	const colorHover = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
+	const colorActive = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
+	const colorFocus = colorMainObject.alpha(focusAlphaAdjust).toHex();
 
 	return {
 		'--color-main': tokens.color,
 		'--color-contrast': colorContrast,
-		'--color-hover': hoverColor,
-		'--color-active': activeColor,
-		'--color-focus': focusColor,
+		'--color-hover': colorHover,
+		'--color-active': colorActive,
+		'--color-focus': colorFocus,
 	};
 }
 
