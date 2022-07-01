@@ -5,13 +5,6 @@
 			$s[`variant_${variant}`],
 		]"
 	>
-		<span
-			v-if="$slots.prefix"
-			:class="$s.Prefix"
-		>
-			<!-- @slot Select prefix -->
-			<slot name="prefix" />
-		</span>
 		<button
 			v-if="$slots.default"
 			:class="[
@@ -60,6 +53,18 @@
 			</option>
 		</select>
 		<chevron-down-icon :class="$s.Icon" />
+		<!--
+			Prefix slot needs to come after the select, so we can target
+			them with the sibling selector (~) to apply webkit autofill styles
+			which are not otherwise targetable.
+		-->
+		<span
+			v-if="$slots.prefix"
+			:class="$s.Prefix"
+		>
+			<!-- @slot Select prefix -->
+			<slot name="prefix" />
+		</span>
 	</div>
 </template>
 
@@ -198,6 +203,17 @@ export default {
 	pointer-events: none;
 }
 
+.Icon {
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	width: 16px;
+	height: 16px;
+	color: var(--color-foreground);
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
 .Select,
 .SelectButton {
 	display: flex;
@@ -251,16 +267,18 @@ export default {
 	&::-ms-expand {
 		display: none;
 	}
-}
 
-.Icon {
-	position: absolute;
-	top: 50%;
-	right: 16px;
-	width: 16px;
-	height: 16px;
-	color: var(--color-foreground);
-	transform: translateY(-50%);
-	pointer-events: none;
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		box-shadow: 0 0 0 48px var(--color-foreground) inset, 0 0 0 9999px var(--color-foreground);
+		-webkit-text-fill-color: var(--color-background);
+	}
+
+	&:-webkit-autofill ~ .Icon,
+	&:-webkit-autofill ~ .Prefix {
+		color: var(--color-background);
+	}
 }
 </style>

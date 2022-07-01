@@ -10,16 +10,6 @@
 		]"
 		@click="focus"
 	>
-		<span
-			v-if="$slots.prefix"
-			:class="[
-				$s.Affix,
-				$s.Prefix,
-			]"
-		>
-			<!-- @slot Input prefix -->
-			<slot name="prefix" />
-		</span>
 		<input
 			ref="input"
 			:class="[
@@ -31,6 +21,21 @@
 			v-on="$listeners"
 			@input="$emit('input:update', $event.target.value)"
 		>
+		<!--
+			Both affix slots need to come after the input, so we can target
+			them with the sibling selector (~) to apply webkit autofill styles
+			which are not otherwise targetable.
+		-->
+		<span
+			v-if="$slots.prefix"
+			:class="[
+				$s.Affix,
+				$s.Prefix,
+			]"
+		>
+			<!-- @slot Input prefix -->
+			<slot name="prefix" />
+		</span>
 		<span
 			v-if="$slots.suffix"
 			:class="[
@@ -139,6 +144,7 @@ export default {
 }
 
 .Affix {
+	z-index: 1;
 	display: flex;
 	align-items: center;
 	box-sizing: inherit;
@@ -150,10 +156,12 @@ export default {
 	fill: currentColor;
 
 	&.Prefix {
+		order: 1;
 		padding-right: 8px;
 	}
 
 	&.Suffix {
+		order: 3;
 		padding-left: 8px;
 	}
 }
@@ -170,6 +178,7 @@ export default {
 	width: 100%;
 	height: 48px;
 	padding: 0 16px;
+	overflow: hidden;
 	color: var(--color-foreground);
 	font-size: 16px;
 	background-color: var(--color-background, #fff);
@@ -194,6 +203,7 @@ export default {
 
 .Input {
 	flex-grow: 1;
+	order: 2;
 	box-sizing: inherit;
 	color: inherit;
 	font-weight: inherit;
@@ -217,6 +227,18 @@ export default {
 
 	&.align_right {
 		text-align: right;
+	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		box-shadow: 0 0 0 48px var(--color-foreground) inset, 0 0 0 9999px var(--color-foreground);
+		-webkit-text-fill-color: var(--color-background);
+	}
+
+	&:-webkit-autofill ~ .Affix {
+		color: var(--color-background);
 	}
 }
 </style>
