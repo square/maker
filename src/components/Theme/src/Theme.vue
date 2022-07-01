@@ -100,7 +100,7 @@ export default {
 	provide() {
 		return {
 			// provided data needs to be reactive
-			[key]: this.$data,
+			[key]: this.dataTest,
 		};
 	},
 	inheritAttrs: false,
@@ -115,9 +115,11 @@ export default {
 		},
 	},
 	data() {
-		const data = {};
-		resolveTheme(data, this.parentTheme, this.theme, this.profile);
-		return data;
+		const dataTest = {};
+		resolveTheme(dataTest, this.parentTheme, this.theme, this.profile);
+		return {
+			dataTest,
+		};
 	},
 	computed: {
 		styles() {
@@ -151,9 +153,28 @@ export default {
 			};
 		},
 	},
+
+	// watch: {
+	// 	theme: {
+	// 		deep: true,
+	// 		handler() {
+	// 			resolveTheme(this.$data, this.parentTheme, this.theme, this.profile);
+	// 		},
+	// 	},
+	//
+	// 	parentTheme: {
+	// 		deep: true,
+	// 		handler() {
+	// 			resolveTheme(this.$data, this.parentTheme, this.theme, this.profile);
+	// 		},
+	// 	},
+	//
+	//
+	// },
+
 	beforeUpdate() {
 		// update theme on prop changes
-		resolveTheme(this.$data, this.parentTheme, this.theme, this.profile);
+		resolveTheme(this.dataTest, this.parentTheme, this.theme, this.profile);
 	},
 };
 </script>
