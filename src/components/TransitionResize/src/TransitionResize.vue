@@ -23,7 +23,7 @@ import {
 } from '@square/maker/utils/transitions';
 
 function resizeFn({
- element, startWidth, endWidth, startHeight, endHeight, onComplete,
+	element, startWidth, endWidth, startHeight, endHeight, onComplete,
 }) {
 	const elementStyler = styler(element);
 	const resizeWidthFn = styleFactory(startWidth, endWidth, 'width', 'px');
