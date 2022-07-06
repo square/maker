@@ -84,12 +84,12 @@ const apiMixin = {
 				};
 			},
 
-			async close() {
+			async close(closeData) {
 				const isModalActive = !this.state.vnode; // Verify there's no modal on top
 
 				if (isModalActive && vm.currentLayer) {
 					if (typeof this.state.options.beforeCloseHook === 'function') {
-						if (!(await this.state.options.beforeCloseHook())) {
+						if (!(await this.state.options.beforeCloseHook(closeData))) {
 							return; // cancel
 						}
 					}
@@ -100,6 +100,7 @@ const apiMixin = {
 					vm.popoverApi?.closePopover();
 					vm.$nextTick(() => {
 						vm.currentLayer.state.vnode = undefined;
+						this.state.options.afterCloseHook?.(closeData);
 					});
 				}
 			},
