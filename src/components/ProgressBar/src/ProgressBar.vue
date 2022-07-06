@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 
 const MIN_PROGRESS = 0;
 const MAX_PROGRESS = 100;
@@ -48,7 +48,7 @@ export default {
 		color: {
 			type: String,
 			default: '#000',
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Progress/width of the bar (0-100)

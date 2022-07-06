@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import { MTheme } from '@square/maker/components/Theme';
 import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
 import makerColors from '@square/maker/utils/maker-colors';
@@ -33,7 +33,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Background color of the popover
@@ -41,7 +41,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Popover padding
