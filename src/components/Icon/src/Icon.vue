@@ -2,6 +2,7 @@
 	<component
 		:is="iconComponent"
 		:class="$s.Icon"
+		:style="inlineStyles"
 		v-bind="$attrs"
 		v-on="$listeners"
 	/>
@@ -10,6 +11,11 @@
 <script>
 import assert from '@square/maker/utils/assert';
 import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
+
+const ICON_SIZES = {
+	medium: '16px',
+	large: '24px',
+};
 
 /**
  * @inheritAttrs svg
@@ -33,6 +39,15 @@ export default {
 			type: String,
 			required: true,
 		},
+
+		/**
+		 * size of icon
+		 */
+		size: {
+			type: String,
+			default: 'medium',
+			validator: (size) => ['medium', 'large'].includes(size),
+		},
 	},
 
 	computed: {
@@ -41,14 +56,21 @@ export default {
 			assert.error(component, `'${this.name}' icon not defined in theme`);
 			return component;
 		},
+		inlineStyles() {
+			return {
+				'--icon-size': ICON_SIZES[this.size],
+			};
+		},
 	},
 };
 </script>
 
 <style module="$s">
 .Icon {
-	width: 16px;
-	height: 16px;
+	--icon-size: 16px;
+
+	width: var(--icon-size);
+	height: var(--icon-size);
 	fill: currentColor;
 }
 </style>

@@ -12,8 +12,9 @@
 				variant="primary"
 				@click="incrementMonth(-1)"
 			>
-				<chevron-left
-					:class="$s.CalendarHeaderButtonIcon"
+				<m-icon
+					name="chevronLeft"
+					size="large"
 				/>
 			</m-button>
 
@@ -28,8 +29,9 @@
 				variant="primary"
 				@click="incrementMonth(1)"
 			>
-				<chevron-right
-					:class="$s.CalendarHeaderButtonIcon"
+				<m-icon
+					name="chevronRight"
+					size="large"
 				/>
 			</m-button>
 		</div>
@@ -87,8 +89,7 @@ import {
 	formatISO,
 } from 'date-fns';
 import { MButton } from '@square/maker/components/Button';
-import ChevronLeft from '@square/maker-icons/ChevronLeft';
-import ChevronRight from '@square/maker-icons/ChevronRight';
+import { MIcon } from '@square/maker/components/Icon';
 import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 const formatISOdate = (dateObject) => formatISO(dateObject, { representation: 'date' });
@@ -97,8 +98,7 @@ const isIsoFormat = (string) => !string || /^\d{4}-\d{2}-\d{2}$/.test(string); /
 export default {
 	components: {
 		MButton,
-		ChevronLeft,
-		ChevronRight,
+		MIcon,
 	},
 
 	inject: {
@@ -320,7 +320,6 @@ export default {
 	--font-size-minus-1: 12px;
 	--line-height: 24px;
 	--line-height-minus-1: 16px;
-	--chevron-size: 24px;
 	--cell-size: 40px;
 	--cell-padding: 4px;
 
@@ -344,11 +343,6 @@ export default {
 	color: var(--maker-color-primary, #000);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
-}
-
-.CalendarHeaderButtonIcon {
-	width: var(--chevron-size);
-	height: var(--chevron-size);
 }
 
 .CalendarTable {

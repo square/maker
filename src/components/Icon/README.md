@@ -50,9 +50,10 @@ export default {
 
 Supports attributes from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg).
 
-| Prop  | Type     | Default | Possible values | Description                    |
-| ----- | -------- | ------- | --------------- | ------------------------------ |
-| name* | `string` | —       | —               | name of icon, defined in theme |
+| Prop  | Type     | Default    | Possible values   | Description                    |
+| ----- | -------- | ---------- | ----------------- | ------------------------------ |
+| name* | `string` | —          | —                 | name of icon, defined in theme |
+| size  | `string` | `'medium'` | `medium`, `large` | size of icon                   |
 
 
 ## Events
