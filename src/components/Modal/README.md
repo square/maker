@@ -230,13 +230,67 @@ export default {
 </script>
 ```
 ### Configurable options
+
+#### `modalApi.open`
+
 The `modalApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
 
 ```ts
 {
 	// Modal will close when clicked outside of it - default false
 	closeOnClickOutside: boolean;
+
+	// Modal will call this async function to determine if it should close
+	beforeCloseHook: (closeData?: any) => Promise<boolean>;
+
+	// Modal will call this function after the modal has been dismissed
+	afterCloseHook?: (closeData?: any) => void;
 }
+```
+
+To hook into the close function, you can either:
+1. add the `beforeCloseHook` property on the open options object. The function must be an async function that returns a boolean - true to close the modal or false to block closing.
+2. add the `afterCloseHook` property on the open options object. This will be called once the modal has been fully closed, and does not block the modal from being closed. 
+
+Either option will be passed the `closeData` that `modalApi.close` is called with (see below).
+
+#### `modalApi.close`
+
+The `modalApi.close` function has an optional parameter to pass data to the `afterCloseHook` callback defined in `modalApi.open`.
+##### Component Opening Dialog
+```typescript
+// in the opening parent component
+export default {
+  methods: {
+		openDialog() {
+			this.dialogApi.open(SomeDialogComponent, {
+				beforeCloseHook(closeData) {
+					return closeData !== SOME_FLAG_TO_BLOCK_CLOSING;
+				},
+	
+				afterCloseHook(closeData) {
+					if (closeData === SOME_FLAG_A) {
+						this.performActionA();
+					} else if (closeData === SOME_FLAG_B) {
+						this.performActionB();
+					}
+				},
+			});
+		}
+	}
+};
+```
+
+##### Modal Component
+```typescript
+// in the dialog/modal
+export default {
+  methods: {
+    handleClose() {
+      this.modalApi.close(this.someInternalState);
+    },
+  },
+};
 ```
 
 To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
