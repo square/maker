@@ -236,7 +236,11 @@ export default {
 ```
 
 ### Configurable options
+
+#### `dialog.open`
+
 The `dialogApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
+
 
 ```ts
 {
@@ -244,12 +248,58 @@ The `dialogApi.open()` function has a second optional object parameter that offe
 	closeOnClickOutside: boolean;
 
 	// Dialog will call this async function to determine if it should close
-	beforeCloseHook: () => Promise<boolean>;
+	beforeCloseHook: (closeData?: any) => Promise<boolean>;
+
+	// Dialog will call this function after the dialog has been dismissed
+	afterCloseHook: (closeData?: any) => void;
 }
 ```
 
-To hook into the close function, add the `beforeCloseHook` property on the options object when opening the dialog.
-The function must be an async function that returns a boolean - true to close the modal or false to block closing.
+To hook into the close function, you can either:
+1. add the `beforeCloseHook` property on the open options object. The function must be an async function that returns a boolean - true to close the dialog or false to block closing.
+2. add the `afterCloseHook` property on the open options object. This will be called once the dialog has been fully closed, and does not block the dialog from being closed. 
+
+Either option will be passed the `closeData` that `dialog.close` is called with (see below).
+
+#### `dialog.close`
+
+The `dialog.close` function has an optional parameter to pass data to the `beforeCloseHook` and `afterCloseHook` callbacks defined in `dialog.open`.
+##### Component Opening Dialog
+```typescript
+// in the opening parent component
+export default {
+  methods: {
+		openDialog() {
+			this.dialogApi.open(SomeDialogComponent, {
+				beforeCloseHook(closeData) {
+					return closeData !== SOME_FLAG_TO_BLOCK_CLOSING;
+				},
+	
+				afterCloseHook(closeData) {
+					if (closeData === SOME_FLAG_A) {
+						this.performActionA();
+					} else if (closeData === SOME_FLAG_B) {
+						this.performActionB();
+					}
+				},
+			});
+		}
+	}
+};
+```
+
+##### Dialog Component
+```typescript
+// in the dialog/modal
+export default {
+  methods: {
+    handleClose() {
+      this.dialogApi.close(this.someInternalState);
+    },
+  },
+};
+```
+
 
 
 ## Examples
