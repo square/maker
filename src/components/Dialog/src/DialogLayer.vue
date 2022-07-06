@@ -69,16 +69,18 @@ const apiMixin = {
 				};
 			},
 
-			async close() {
+			async close(closeData) {
 				// Close the open popover (if present) and then close the dialog in the next tick.
 				// Closing at the same time will result in the popover content becoming inline and
 				// causes a weird content shift as the dialog fades away.
 
 				if (this.state.vnode && typeof this.state.options.beforeCloseHook === 'function') {
-					if (!(await this.state.options.beforeCloseHook())) {
+					if (!(await this.state.options.beforeCloseHook(closeData))) {
 						return; // cancel
 					}
 				}
+
+				this.state.options.afterCloseHook?.(closeData);
 
 				vm.popoverApi?.closePopover();
 				vm.$nextTick(() => {
