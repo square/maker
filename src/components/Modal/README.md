@@ -387,7 +387,7 @@ _CloseDataAndHooksDemoModal.vue_
 				v-model="selectedOption"
 				value="option-1"
 			>
-				Option 1 (blocks the dialog)
+				Option 1 (blocks the modal from closing)
 			</m-radio>
 			<m-radio
 				v-model="selectedOption"
