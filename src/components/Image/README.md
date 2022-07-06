@@ -92,6 +92,7 @@ Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/
 | -------- | --------- | ------- | -------------------------------------- | ------------------------------------------------------------------------- |
 | src      | `string`  | —       | —                                      | —                                                                         |
 | srcset   | `string`  | —       | —                                      | —                                                                         |
+| sizes    | `string`  | —       | —                                      | —                                                                         |
 | shape    | `string`  | —       | `original`, `square`, `circle`, `arch` | Original applies theme's border radius, square applies border radius of 0 |
 | lazyload | `boolean` | `false` | —                                      | —                                                                         |
 

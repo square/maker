@@ -1,25 +1,31 @@
 # Icon
 
-Use Icon to render icons defined in the Theme. Only built-in icons are: critical, warning, success, and info which are used within [Notice](#/Notice).
+Use Icon to render icons defined in the Theme. The built-in icons: critical, warning, success, and info are used within [Notice](#/Notice). The built-in icons: chevronLeft and chevronRight are used within [Calendar](#/Calendar). The built-in icons: chevronUp and chevronUp are used within [Select](#/Select);
 
 ```vue
 <template>
 	<ul class="icon-list">
 		<li
-			v-for="name in ['critical', 'warning', 'success', 'info']"
-			:key="name"
+			v-for="iconName in iconNames"
+			:key="iconName"
 		>
-			<m-icon :name="name" /> {{ name }}
+			<m-icon :name="iconName" /> {{ iconName }}
 		</li>
 	</ul>
 </template>
 
 <script>
 import { MIcon } from '@square/maker/components/Icon';
+import { defaultTheme } from '@square/maker/components/Theme';
 
 export default {
 	components: {
 		MIcon,
+	},
+	data() {
+		return {
+			iconNames: Object.keys(defaultTheme().icons),
+		};
 	},
 };
 </script>
