@@ -264,46 +264,165 @@ Either option will be passed the `closeData` that `dialogApi.close` is called wi
 #### `dialogApi.close`
 
 The `dialogApi.close` function has an optional parameter to pass data to the `beforeCloseHook` and `afterCloseHook` callbacks defined in `dialogApi.open`.
-##### Component Opening Dialog
-```typescript
-// in the opening parent component
-export default {
-  methods: {
-		openDialog() {
-			this.dialogApi.open(SomeDialogComponent, {
-				beforeCloseHook(closeData) {
-					return closeData !== SOME_FLAG_TO_BLOCK_CLOSING;
-				},
-	
-				afterCloseHook(closeData) {
-					if (closeData === SOME_FLAG_A) {
-						this.performActionA();
-					} else if (closeData === SOME_FLAG_B) {
-						this.performActionB();
-					}
-				},
-			});
-		}
-	}
-};
-```
-
-##### Dialog Component
-```typescript
-// in the dialog/modal
-export default {
-  methods: {
-    handleClose() {
-      this.dialogApi.close(this.someInternalState);
-    },
-  },
-};
-```
-
 
 
 ## Examples
 
+
+### closeData and before/afterCloseHook
+
+```vue
+<template>
+	<div>
+		<m-button @click="openDialog">
+			Open Dialog
+		</m-button>
+
+		Selected Option: {{ selectedOption }}
+		<m-dialog-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MDialogLayer } from '@square/maker/components/Dialog';
+import CloseDataAndHooksDemoDialog from 'doc/CloseDataAndHooksDemoDialog.vue';
+
+export default {
+	name: 'CloseDataAndHooksSetup',
+
+	components: {
+		MDialogLayer,
+		MButton,
+	},
+
+	mixins: [
+		MDialogLayer.apiMixin,
+	],
+
+	data() {
+		return {
+			selectedOption: undefined,
+		};
+	},
+
+	methods: {
+		openDialog() {
+			this.dialogApi.open(() => <CloseDataAndHooksDemoDialog />, {
+				beforeCloseHook: (selectedOption) => {
+					const shouldClose = selectedOption !== 'option-1';
+
+					if (!shouldClose) {
+						// eslint-disable-next-line no-alert
+						alert('Dialog was blocked from closing!');
+					}
+
+					return shouldClose;
+				},
+
+				afterCloseHook: (selectedOption) => {
+					this.selectedOption = selectedOption;
+				},
+			});
+		},
+	},
+};
+</script>
+```
+
+_CloseDataAndHooksDemoDialog.vue_
+```vue
+<template>
+	<m-dialog>
+		<m-dialog-content>
+			<m-text
+				pattern="title"
+				:size="3"
+			>
+				Close Hooks Demo
+			</m-text>
+			<m-text>
+				Please Select An Option
+			</m-text>
+
+			<m-radio
+				v-model="selectedOption"
+				value="option-1"
+			>
+				Option 1 (blocks the dialog)
+			</m-radio>
+			<m-radio
+				v-model="selectedOption"
+				value="option-2"
+			>
+				Option 2
+			</m-radio>
+			<m-radio
+				v-model="selectedOption"
+				value="option-3"
+			>
+				Option 3
+			</m-radio>
+
+			<m-inline-action-bar>
+				<m-action-bar-button
+					key="close"
+					color="#f6f6f6"
+					full-width
+					@click="dialogApi.close()"
+				>
+					Cancel
+				</m-action-bar-button>
+				<m-action-bar-button
+					key="confirm"
+					:disabled="!selectedOption"
+					full-width
+					@click="dialogApi.close(selectedOption)"
+				>
+					Confirm Selection
+				</m-action-bar-button>
+			</m-inline-action-bar>
+		</m-dialog-content>
+	</m-dialog>
+</template>
+
+<script>
+import { MText } from '@square/maker/components/Text';
+import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
+import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dialog';
+import { MRadio } from '@square/maker/components/Radio';
+
+export default {
+	name: 'CloseDataAndHooksDemoDialog',
+
+	components: {
+		MDialog,
+		MText,
+		MDialogContent,
+		MInlineActionBar,
+		MActionBarButton,
+		MRadio,
+	},
+
+	inject: {
+		dialogApi,
+	},
+
+	data() {
+		return {
+			selectedOption: undefined,
+		};
+	},
+};
+</script>
+
+<style scoped>
+.hook-choice {
+	display: flex;
+	flex-direction: column;
+}
+</style>
+```
 
 
 ### Dialog + ActionBar
