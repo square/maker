@@ -237,7 +237,7 @@ export default {
 
 ### Configurable options
 
-#### `dialog.open`
+#### `dialogApi.open`
 
 The `dialogApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
 
@@ -251,7 +251,7 @@ The `dialogApi.open()` function has a second optional object parameter that offe
 	beforeCloseHook: (closeData?: any) => Promise<boolean>;
 
 	// Dialog will call this function after the dialog has been dismissed
-	afterCloseHook: (closeData?: any) => void;
+	afterCloseHook?: (closeData?: any) => void;
 }
 ```
 
@@ -259,11 +259,11 @@ To hook into the close function, you can either:
 1. add the `beforeCloseHook` property on the open options object. The function must be an async function that returns a boolean - true to close the dialog or false to block closing.
 2. add the `afterCloseHook` property on the open options object. This will be called once the dialog has been fully closed, and does not block the dialog from being closed. 
 
-Either option will be passed the `closeData` that `dialog.close` is called with (see below).
+Either option will be passed the `closeData` that `dialogApi.close` is called with (see below).
 
-#### `dialog.close`
+#### `dialogApi.close`
 
-The `dialog.close` function has an optional parameter to pass data to the `beforeCloseHook` and `afterCloseHook` callbacks defined in `dialog.open`.
+The `dialogApi.close` function has an optional parameter to pass data to the `beforeCloseHook` and `afterCloseHook` callbacks defined in `dialogApi.open`.
 ##### Component Opening Dialog
 ```typescript
 // in the opening parent component

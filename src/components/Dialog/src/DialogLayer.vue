@@ -80,11 +80,10 @@ const apiMixin = {
 					}
 				}
 
-				this.state.options.afterCloseHook?.(closeData);
-
 				vm.popoverApi?.closePopover();
 				vm.$nextTick(() => {
 					this.state.vnode = undefined;
+					this.state.options.afterCloseHook?.(closeData);
 				});
 			},
 		};
