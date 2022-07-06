@@ -349,7 +349,7 @@ _CloseDataAndHooksDemoDialog.vue_
 				v-model="selectedOption"
 				value="option-1"
 			>
-				Option 1 (blocks the dialog)
+				Option 1 (blocks the dialog from closing)
 			</m-radio>
 			<m-radio
 				v-model="selectedOption"
