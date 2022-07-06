@@ -59,12 +59,15 @@
 				{{ option.label }}
 			</option>
 		</select>
-		<chevron-down-icon :class="$s.Icon" />
+		<m-icon
+			:class="$s.Icon"
+			name="chevronDown"
+		/>
 	</div>
 </template>
 
 <script>
-import ChevronDownIcon from '@square/maker-icons/ChevronDown';
+import { MIcon } from '@square/maker/components/Icon';
 
 /**
  * @inheritAttrs select
@@ -72,7 +75,7 @@ import ChevronDownIcon from '@square/maker-icons/ChevronDown';
  */
 export default {
 	components: {
-		ChevronDownIcon,
+		MIcon,
 	},
 
 	inheritAttrs: false,
