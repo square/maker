@@ -41,7 +41,7 @@ export default {
 		},
 
 		/**
-		 * size of icon
+		 * size of icon, medium = 16px, large = 24px
 		 */
 		size: {
 			type: String,
