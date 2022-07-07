@@ -147,6 +147,14 @@ export default {
 		border-color: var(--color-error);
 	}
 
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		box-shadow: 0 0 0 9999px var(--color-foreground) inset, 0 0 0 9999px var(--color-foreground);
+		-webkit-text-fill-color: var(--color-background);
+	}
+
 	&:hover:not(:disabled, :invalid) {
 		border-color: var(--color-border-active);
 	}
