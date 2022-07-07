@@ -230,34 +230,14 @@ export default {
 </script>
 ```
 ### Configurable options
-
-#### `modalApi.open`
-
 The `modalApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
 
 ```ts
 {
 	// Modal will close when clicked outside of it - default false
 	closeOnClickOutside: boolean;
-
-	// Modal will call this async function to determine if it should close
-	// You can also set this with the Modal `beforeClose` prop, which will overwrite the `open` option
-	beforeCloseHook: (closeData?: any) => Promise<boolean>;
-
-	// Modal will call this function after the modal has been dismissed
-	afterCloseHook?: (closeData?: any) => void;
 }
 ```
-
-To hook into the close function, you can either:
-1. add the `beforeCloseHook` property on the open options object. The function must be an async function that returns a boolean - true to close the modal or false to block closing.
-2. add the `afterCloseHook` property on the open options object. This will be called once the modal has been fully closed, and does not block the modal from being closed. 
-
-Either option will be passed the `closeData` that `modalApi.close` is called with (see below).
-
-#### `modalApi.close`
-
-The `modalApi.close` function has an optional parameter to pass data to the `afterCloseHook` callback defined in `modalApi.open`.
 
 To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
 
@@ -305,161 +285,6 @@ export default {
 </script>
 ```
 ## Examples
-
-
-### closeData and before/afterCloseHook
-
-```vue
-<template>
-	<div>
-		<m-button @click="openModal">
-			Open Modal
-		</m-button>
-
-		Selected Option: {{ selectedOption }}
-		<m-modal-layer />
-	</div>
-</template>
-
-<script>
-import { MButton } from '@square/maker/components/Button';
-import { MModalLayer } from '@square/maker/components/Modal';
-import CloseDataAndHooksDemoModal from 'doc/CloseDataAndHooksDemoModal.vue';
-
-export default {
-	name: 'CloseDataAndHooksSetup',
-
-	components: {
-		MModalLayer,
-		MButton,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	data() {
-		return {
-			selectedOption: undefined,
-		};
-	},
-
-	methods: {
-		openModal() {
-			this.modalApi.open(() => <CloseDataAndHooksDemoModal />, {
-				beforeCloseHook: (selectedOption) => {
-					const shouldClose = selectedOption !== 'option-1';
-
-					if (!shouldClose) {
-						// eslint-disable-next-line no-alert
-						alert('Modal was blocked from closing!');
-					}
-
-					return shouldClose;
-				},
-
-				afterCloseHook: (selectedOption) => {
-					this.selectedOption = selectedOption;
-				},
-			});
-		},
-	},
-};
-</script>
-```
-
-_CloseDataAndHooksDemoModal.vue_
-```vue
-<template>
-	<m-modal>
-		<m-modal-content>
-			<m-text
-				pattern="title"
-				:size="3"
-			>
-				Close Hooks Demo
-			</m-text>
-			<m-text>
-				Please Select An Option
-			</m-text>
-
-			<m-radio
-				v-model="selectedOption"
-				value="option-1"
-			>
-				Option 1 (blocks the modal from closing)
-			</m-radio>
-			<m-radio
-				v-model="selectedOption"
-				value="option-2"
-			>
-				Option 2
-			</m-radio>
-			<m-radio
-				v-model="selectedOption"
-				value="option-3"
-			>
-				Option 3
-			</m-radio>
-
-			<m-inline-action-bar>
-				<m-action-bar-button
-					key="close"
-					color="#f6f6f6"
-					full-width
-					@click="modalApi.close()"
-				>
-					Cancel
-				</m-action-bar-button>
-				<m-action-bar-button
-					key="confirm"
-					:disabled="!selectedOption"
-					full-width
-					@click="modalApi.close(selectedOption)"
-				>
-					Confirm Selection
-				</m-action-bar-button>
-			</m-inline-action-bar>
-		</m-modal-content>
-	</m-modal>
-</template>
-
-<script>
-import { MText } from '@square/maker/components/Text';
-import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MRadio } from '@square/maker/components/Radio';
-
-export default {
-	name: 'CloseDataAndHooksDemoDialog',
-
-	components: {
-		MModal,
-		MText,
-		MModalContent,
-		MInlineActionBar,
-		MActionBarButton,
-		MRadio,
-	},
-
-	inject: {
-		modalApi,
-	},
-
-	data() {
-		return {
-			selectedOption: undefined,
-		};
-	},
-};
-</script>
-
-<style scoped>
-.hook-choice {
-	display: flex;
-	flex-direction: column;
-}
-```
 
 ### Modal + ActionBar
 

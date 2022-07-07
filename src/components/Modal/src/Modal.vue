@@ -94,10 +94,7 @@ export default {
 		beforeClose: {
 			immediate: true,
 			handler(hook) {
-				if (hook) {
-					// parentModal refers to the layer that this modal is actually in
-					this.modalApi.state.parentModal.state.options.beforeCloseHook = hook;
-				}
+				this.modalApi.state.options.beforeCloseHook = hook;
 			},
 		},
 	},

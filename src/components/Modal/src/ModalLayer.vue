@@ -84,13 +84,12 @@ const apiMixin = {
 				};
 			},
 
-			async close(closeData) {
+			async close() {
 				const isModalActive = !this.state.vnode; // Verify there's no modal on top
-				const currentState = vm.currentLayer.state;
 
 				if (isModalActive && vm.currentLayer) {
-					if (typeof currentState.options.beforeCloseHook === 'function') {
-						if (!(await currentState.options.beforeCloseHook(closeData))) {
+					if (typeof this.state.options.beforeCloseHook === 'function') {
+						if (!(await this.state.options.beforeCloseHook())) {
 							return; // cancel
 						}
 					}
@@ -100,8 +99,7 @@ const apiMixin = {
 					// causes a weird content shift as the modal fades away.
 					vm.popoverApi?.closePopover();
 					vm.$nextTick(() => {
-						currentState.vnode = undefined;
-						currentState.options.afterCloseHook?.(closeData);
+						vm.currentLayer.state.vnode = undefined;
 					});
 				}
 			},
