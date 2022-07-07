@@ -120,6 +120,8 @@ export default {
 </script>
 
 <style module="$s">
+/* stylelint-disable no-descending-specificity */
+
 .TextButton {
 	position: relative;
 	display: inline-flex;
@@ -164,6 +166,10 @@ export default {
 		}
 	}
 
+	& > .Loading {
+		opacity: 1;
+	}
+
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
@@ -179,7 +185,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--maker-color-neutral-90);
+	color: var(--color, var(--maker-color-neutral-90));
 	background-color: transparent;
 }
 
