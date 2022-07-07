@@ -120,6 +120,8 @@ export default {
 </script>
 
 <style module="$s">
+/* stylelint-disable no-descending-specificity */
+
 .TextButton {
 	position: relative;
 	display: inline-flex;
@@ -164,7 +166,6 @@ export default {
 		}
 	}
 
-	/* stylelint-disable-next-line no-descending-specificity */
 	& > .Loading {
 		opacity: 1;
 	}
