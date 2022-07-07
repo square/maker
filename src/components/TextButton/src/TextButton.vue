@@ -164,6 +164,7 @@ export default {
 		}
 	}
 
+	/* stylelint-disable-next-line no-descending-specificity */
 	& > .Loading {
 		opacity: 1;
 	}
