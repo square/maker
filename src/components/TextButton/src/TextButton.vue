@@ -162,6 +162,10 @@ export default {
 		& > * {
 			opacity: 0.5;
 		}
+
+		& > .Loading {
+			opacity: 1;
+		}
 	}
 
 	&.loading {
@@ -179,7 +183,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--maker-color-neutral-90);
+	color: var(--color, var(--maker-color-neutral-90));
 	background-color: transparent;
 }
 
