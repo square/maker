@@ -162,10 +162,10 @@ export default {
 		& > * {
 			opacity: 0.5;
 		}
+	}
 
-		& > .Loading {
-			opacity: 1;
-		}
+	& > .Loading {
+		opacity: 1;
 	}
 
 	&.loading {
