@@ -83,14 +83,14 @@ export default {
 		 * if truthy or equal to expandKey the accordion will expand, otherwise it will collapse
 		 */
 		expanded: {
-			type: undefined,
+			type: [Boolean, String],
 			default: undefined,
 		},
 		/**
 		 * used to orchestrate the collapsing & expanding of multiple accordions
 		 */
 		expandKey: {
-			type: undefined,
+			type: String,
 			default: undefined,
 		},
 		/**
@@ -113,8 +113,7 @@ export default {
 
 	data() {
 		return {
-			// empty string values are truthy for accordion
-			internalExpanded: !!this.expanded || this.expanded === '',
+			internalExpanded: !!this.expanded,
 		};
 	},
 
@@ -126,8 +125,7 @@ export default {
 				return this.internalExpanded;
 			}
 			if (isUndefined(this.expandKey)) {
-				// empty string values are truthy for accordion
-				return !!this.expanded || this.expanded === '';
+				return !!this.expanded;
 			}
 			return this.expanded === this.expandKey;
 		},
