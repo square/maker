@@ -353,6 +353,7 @@ export default {
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
+		opacity: 1;
 	}
 }
 
