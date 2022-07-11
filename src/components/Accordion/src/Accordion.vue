@@ -4,8 +4,10 @@
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
-		<div
+		<button
 			:class="$s.AccordionHeader"
+			type="button"
+			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
 		>
 			<div
@@ -41,10 +43,11 @@
 					</m-text>
 				</slot>
 			</div>
-		</div>
+		</button>
 		<m-transition-collapse>
 			<div
 				v-if="isExpanded"
+				:aria-hidden="!isExpanded"
 				:class="$s.ContentWrapper"
 			>
 				<!-- @slot content to expand & collapse -->
@@ -178,6 +181,11 @@ export default {
 }
 
 .AccordionHeader {
+	display: block;
+	width: 100%;
+	text-align: left;
+	background: none;
+	border: none;
 	cursor: pointer;
 }
 
