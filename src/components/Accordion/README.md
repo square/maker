@@ -258,6 +258,7 @@ If you'd like to stack multiple Accordions and have at most one expanded at a ti
 				accordion content and stuff
 			</div>
 		</m-accordion>
+		<m-divider class="divider" />
 		<m-accordion
 			v-model="expandKey"
 			expand-key="2"
@@ -267,6 +268,7 @@ If you'd like to stack multiple Accordions and have at most one expanded at a ti
 				accordion content and stuff
 			</div>
 		</m-accordion>
+		<m-divider class="divider" />
 		<m-accordion
 			v-model="expandKey"
 			expand-key="3"
@@ -282,11 +284,13 @@ If you'd like to stack multiple Accordions and have at most one expanded at a ti
 <script>
 import { MRadio } from '@square/maker/components/Radio';
 import { MAccordion } from '@square/maker/components/Accordion';
+import { MDivider } from '@square/maker/components/Divider';
 
 export default {
 	components: {
 		MAccordion,
 		MRadio,
+		MDivider,
 	},
 	data() {
 		return {
@@ -306,6 +310,9 @@ export default {
 	justify-content: center;
 	align-items: center;
 	background-color: #ccc;
+}
+.divider {
+	margin: 16px 0;
 }
 </style>
 ```
