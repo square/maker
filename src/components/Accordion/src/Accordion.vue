@@ -1,39 +1,27 @@
 <template>
 	<div
-		:class="$s.Accordion"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
-		<button
+		<m-row
 			:class="$s.AccordionHeader"
 			type="button"
+			element="button"
 			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
 		>
-			<div
-				:class="$s.TitleIconAligner"
-			>
-				<div :class="$s.Title">
-					<!-- @slot title of accordion -->
-					<slot name="title">
-						<m-text
-							pattern="title"
-							:size="-2"
-							text-transform="uppercase"
-						>
-							{{ title }}
-						</m-text>
-					</slot>
-				</div>
-				<div :class="$s.Icon">
-					<!-- @slot open & close icon -->
-					<slot name="icon">
-						<m-icon :name="iconName" />
-					</slot>
-				</div>
-			</div>
-			<div :class="$s.Secondary">
-				<!-- @slot secondary info, goes under title -->
+			<template #default>
+				<slot name="title">
+					<m-text
+						pattern="title"
+						:size="-2"
+						text-transform="uppercase"
+					>
+						{{ title }}
+					</m-text>
+				</slot>
+			</template>
+			<template #secondary>
 				<slot name="secondary">
 					<m-text
 						pattern="paragraph"
@@ -42,8 +30,13 @@
 						{{ secondary }}
 					</m-text>
 				</slot>
-			</div>
-		</button>
+			</template>
+			<template #suffix>
+				<slot name="icon">
+					<m-icon :name="iconName" />
+				</slot>
+			</template>
+		</m-row>
 		<m-transition-collapse>
 			<div
 				v-if="isExpanded"
@@ -59,6 +52,7 @@
 
 <script>
 import { isUndefined } from 'lodash';
+import { MRow } from '@square/maker/utils/Row';
 import { MText } from '@square/maker/components/Text';
 import { MIcon } from '@square/maker/components/Icon';
 import { MTransitionCollapse } from '@square/maker/utils/TransitionCollapse';
@@ -71,6 +65,7 @@ export default {
 	components: {
 		MText,
 		MIcon,
+		MRow,
 		MTransitionCollapse,
 	},
 
@@ -176,35 +171,17 @@ export default {
 </script>
 
 <style module="$s">
-.Accordion {
-	display: block;
-}
-
 .AccordionHeader {
-	display: block;
-	width: 100%;
-	text-align: left;
 	background: none;
 	border: none;
 	cursor: pointer;
 }
 
-.TitleIconAligner {
-	display: flex;
-	align-items: center;
-}
-
-.Title {
-	flex-grow: 1;
-	flex-shrink: 1;
-}
-
-.Icon {
-	flex-grow: 0;
-	flex-shrink: 0;
-}
-
 .ContentWrapper {
 	overflow: hidden;
+}
+
+.ContentWrapper > *:first-child {
+	margin-top: 16px;
 }
 </style>
