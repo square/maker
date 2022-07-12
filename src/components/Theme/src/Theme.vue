@@ -72,13 +72,11 @@ function mergeStrategy(value, mergeValue) {
 function resolveTheme(data, parentTheme, theme, profileId) {
 	mergeWith(data, parentTheme, theme, mergeStrategy);
 	if (profileId) {
-		const foundProfile = data.profiles.find((profile) => profile.id === profileId);
+		const foundProfile = data.profiles[profileId];
 		if (foundProfile) {
 			mergeWith(data, foundProfile, mergeStrategy);
 		} else {
-			const validIds = data.profiles
-				.map((profile) => profile.id)
-				.filter((id) => id);
+			const validIds = Object.keys(data.profiles);
 			showWarning(`profile ${profileId} doesn't exist within theme, only found: ${validIds}`, 'Theme');
 		}
 	}
@@ -120,6 +118,11 @@ export default {
 		return data;
 	},
 	computed: {
+		providedTheme() {
+			const theme = {};
+			resolveTheme(theme, this.parentTheme, this.theme, this.profile);
+			return theme;
+		},
 		styles() {
 			const { colors, fonts, shapes } = this;
 			const MAX_THUMBNAIL_RADIUS = 8;
@@ -149,6 +152,15 @@ export default {
 				'--maker-shape-image-border-radius': shapes.imageBorderRadius,
 				'--maker-shape-thumbnail-border-radius': `${clamp(shapes.imageBorderRadius, 0, MAX_THUMBNAIL_RADIUS)}px`,
 			};
+		},
+	},
+	watch: {
+		parentTheme: {
+			handler() {
+				resolveTheme(this.$data, this.parentTheme, this.theme, this.profile);
+			},
+			deep: true,
+			immediate: true,
 		},
 	},
 	beforeUpdate() {
