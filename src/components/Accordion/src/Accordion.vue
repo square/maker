@@ -11,6 +11,7 @@
 			@click="toggleExpanded"
 		>
 			<template #default>
+				<!-- @slot title of accordion -->
 				<slot name="title">
 					<m-text
 						pattern="title"
@@ -22,6 +23,7 @@
 				</slot>
 			</template>
 			<template #secondary>
+				<!-- @slot secondary info, goes under title -->
 				<slot name="secondary">
 					<m-text
 						pattern="paragraph"
@@ -32,6 +34,7 @@
 				</slot>
 			</template>
 			<template #suffix>
+				<!-- @slot open & close icon -->
 				<slot name="icon">
 					<m-icon :name="iconName" />
 				</slot>

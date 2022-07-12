@@ -102,7 +102,9 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+| Prop    | Type     | Default | Possible values | Description                                |
+| ------- | -------- | ------- | --------------- | ------------------------------------------ |
+| element | `string` | `'div'` | —               | topmost wrapper element around row content |
 
 
 ## Slots
@@ -115,9 +117,4 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | side           | —           |
 | side-secondary | —           |
 | suffix         | —           |
-
-
-## Events
-
-Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 <!-- api-tables:end -->

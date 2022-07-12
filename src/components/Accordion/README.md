@@ -329,8 +329,8 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | Slot      | Description                      |
 | --------- | -------------------------------- |
 | title     | title of accordion               |
-| icon      | open & close icon                |
 | secondary | secondary info, goes under title |
+| icon      | open & close icon                |
 | default   | content to expand & collapse     |
 
 
