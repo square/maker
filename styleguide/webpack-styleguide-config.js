@@ -14,19 +14,39 @@ const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
 
 const componentsDirectory = path.resolve('./src/components/');
-function generateRoutes() {
-	const componentNames = fs.readdirSync(componentsDirectory);
-	const routes = componentNames.map((componentName) => ({
-		name: componentName,
-		path: `/${componentName}`,
-		component: `|importComponentDocument('${componentName}')|`,
-		navLabel: componentName,
-	}));
+const utilsDirectory = path.resolve('./src/utils/');
 
+function generateRoutes(directory, importFnName, category) {
+	const files = fs.readdirSync(directory, {
+		withFileTypes: true,
+	});
+	const routes = files
+		.filter((file) => file.isDirectory())
+		.map((file) => ({
+			name: file.name,
+			path: `/${file.name}`,
+			component: `|${importFnName}('${file.name}')|`,
+			navLabel: file.name,
+			category,
+		}));
 	return routes;
 }
 
-const COMPONENT_ROUTES = JSON.stringify(generateRoutes()).replace(/"\|(.+?)\|"/g, '$1');
+function stringifyRoutes(routes) {
+	return JSON.stringify(routes).replace(/"\|(.+?)\|"/g, '$1');
+}
+
+const COMPONENTS_ROUTES = stringifyRoutes(generateRoutes(
+	componentsDirectory,
+	'importComponentsDocument',
+	'components',
+));
+
+const UTILS_ROUTES = stringifyRoutes(generateRoutes(
+	utilsDirectory,
+	'importUtilsDocument',
+	'utils',
+));
 
 const config = merge({}, webpackBaseConfig, {
 	entry,
@@ -90,7 +110,8 @@ const config = merge({}, webpackBaseConfig, {
 
 	plugins: [
 		new webpack.DefinePlugin({
-			COMPONENT_ROUTES,
+			COMPONENTS_ROUTES,
+			UTILS_ROUTES,
 		}),
 		new JustSsrPlugin({
 			createAppPath: './styleguide/create-app.js',
