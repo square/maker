@@ -118,11 +118,6 @@ export default {
 		return data;
 	},
 	computed: {
-		providedTheme() {
-			const theme = {};
-			resolveTheme(theme, this.parentTheme, this.theme, this.profile);
-			return theme;
-		},
 		styles() {
 			const { colors, fonts, shapes } = this;
 			const MAX_THUMBNAIL_RADIUS = 8;
