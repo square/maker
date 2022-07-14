@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
+import { MTransitionSpringUp } from '@square/maker/utils/TransitionSpringUp';
 
 export default {
 	components: {
