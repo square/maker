@@ -18,7 +18,7 @@
 import { colord } from 'colord';
 import { throttle } from 'lodash';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { MTouchCapture } from '@square/maker/components/TouchCapture';
+import { MTouchCapture } from '@square/maker/utils/TouchCapture';
 import modalApi from './modal-api';
 
 export default {
