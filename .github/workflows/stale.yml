@@ -1,0 +1,27 @@
+# adapted from https://github.com/actions/stale/blob/main/.github/workflows/stale.yml
+# readme docs: https://github.com/actions/stale#close-stale-issues-and-prs
+
+name: 'Stale issue & PR handler'
+on:
+  workflow_dispatch: # allows manually running workflow from UI
+  schedule:
+    - cron: '0 18 * * 5' # run at 6PM UTC every Friday
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@main
+        id: stale
+        with:
+          days-before-issue-stale: 180 # 6 months
+          days-before-pr-stale: 90 # 3 months
+          days-before-close: 0 # close immediately when marked stale
+          exempt-issue-labels: 'blocked,must'
+          exempt-pr-labels: 'blocked,must'
+          stale-issue-label: 'stale'
+          stale-pr-label: 'stale'
+          close-issue-message: "This issue has been automatically closed because it hasn't received any activity in over 6 months"
+          close-pr-message: "This PR has been automatically closed because it hasn't received any activity in over 3 months"
+      - name: Print outputs
+        run: echo ${{ join(steps.stale.outputs.*, ',') }}
