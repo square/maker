@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 
 export default {
 	components: {
