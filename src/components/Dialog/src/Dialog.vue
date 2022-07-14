@@ -16,7 +16,7 @@
 <script>
 import { colord } from 'colord';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { MTouchCapture } from '@square/maker/components/TouchCapture';
+import { MTouchCapture } from '@square/maker/utils/TouchCapture';
 import dialogApi from './dialog-api';
 
 export default {
