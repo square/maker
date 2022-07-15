@@ -1,17 +1,34 @@
 <template>
 	<div>
 		<nav class="nav">
-			<template
-				v-for="navLink in navLinks"
+			<router-link
+				to="/components"
+				class="header-link link"
 			>
-				<router-link
-					:key="navLink.path.name"
-					:to="navLink.path"
-					class="link"
-				>
-					{{ navLink.label }}
-				</router-link>
-			</template>
+				components
+			</router-link>
+			<router-link
+				v-for="componentLink in componentsLinks"
+				:key="componentLink.path.name"
+				:to="componentLink.path"
+				class="link"
+			>
+				{{ componentLink.label }}
+			</router-link>
+			<router-link
+				to="/utils"
+				class="header-link link"
+			>
+				utils
+			</router-link>
+			<router-link
+				v-for="utilLink in utilsLinks"
+				:key="utilLink.path.name"
+				:to="utilLink.path"
+				class="link"
+			>
+				{{ utilLink.label }}
+			</router-link>
 		</nav>
 	</div>
 </template>
@@ -28,22 +45,39 @@ export default {
 					path: {
 						name: route.name,
 					},
+					category: route.category,
 				}));
+		},
+		componentsLinks() {
+			return this.navLinks
+				.filter((link) => link.category === 'components');
+		},
+		utilsLinks() {
+			return this.navLinks
+				.filter((link) => link.category === 'utils');
 		},
 	},
 };
 </script>
 
 <style scoped>
-.nav a {
+.nav .link {
 	display: block;
 	color: #5f666c;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.75;
 	text-decoration: none;
 }
 
-.nav a:hover {
+.nav .link:hover {
 	color: #006aff;
+}
+
+.nav .header-link {
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 2.5;
+	letter-spacing: 1px;
+	text-transform: uppercase;
 }
 </style>

@@ -5,7 +5,7 @@ name: 'Stale issue & PR handler'
 on:
   workflow_dispatch: # allows manually running workflow from UI
   schedule:
-    - cron: '0 18 * * 5' # run at 6PM UTC every Friday
+    - cron: '0 12 * * 5' # run at 12PM UTC every Friday
 
 jobs:
   stale:
