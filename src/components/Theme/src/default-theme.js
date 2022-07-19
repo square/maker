@@ -145,7 +145,7 @@ export default function defaultTheme() {
 			},
 		},
 		choice: {
-			selectedColor: undefined,
+			selectedColor: '@button.color',
 		},
 		stepper: {
 			color: '@colors["neutral-10"]',
