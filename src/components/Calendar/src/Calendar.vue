@@ -386,7 +386,7 @@ export default {
 
 	&.selected {
 		color: var(--maker-color-background, #fff);
-		background-color: var(--maker-color-primary, #000);
+		background-color: var(--maker-color-body, #000);
 	}
 
 	&.today {
