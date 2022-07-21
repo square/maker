@@ -74,7 +74,7 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Props
+## RadioControl Props
 
 Supports attributes from [`<input type="radio">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio).
 
@@ -86,7 +86,28 @@ Supports attributes from [`<input type="radio">`](https://developer.mozilla.org/
 | disabled | `boolean`   | `false` | —               | Toggles radio disabled state   |
 
 
-## Slots
+## RadioControl Events
+
+Supports events from [`<input type="radio">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio).
+
+| Event        | Type | Description |
+| ------------ | ---- | ----------- |
+| radio:update | -    | —           |
+
+
+## RadioFormItem Props
+
+Supports attributes from [`<input type="radio">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio).
+
+| Prop     | Type        | Default | Possible values | Description                    |
+| -------- | ----------- | ------- | --------------- | ------------------------------ |
+| value*   | `undefined` | —       | —               | Value to return from v-model   |
+| v-model  | `undefined` | —       | —               | Toggles radio's selected state |
+| invalid  | `boolean`   | `false` | —               | Toggles radio's invalid state  |
+| disabled | `boolean`   | `false` | —               | Toggles radio disabled state   |
+
+
+## RadioFormItem Slots
 
 | Slot     | Description    |
 | -------- | -------------- |
@@ -94,7 +115,7 @@ Supports attributes from [`<input type="radio">`](https://developer.mozilla.org/
 | sublabel | Radio sublabel |
 
 
-## Events
+## RadioFormItem Events
 
 Supports events from [`<input type="radio">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio).
 

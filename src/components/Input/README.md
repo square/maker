@@ -288,7 +288,7 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Props
+## InputControl Props
 
 Supports attributes from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
 
@@ -300,7 +300,44 @@ Supports attributes from [`<input type="text">`](https://developer.mozilla.org/e
 | align    | `string`  | `'left'` | `left`, `right`   | Aligns text within input     |
 
 
-## Slots
+## InputControl Slots
+
+| Slot   | Description  |
+| ------ | ------------ |
+| prefix | Input prefix |
+| suffix | Input suffix |
+
+
+## InputControl Events
+
+Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
+
+| Event        | Type | Description |
+| ------------ | ---- | ----------- |
+| input:update | -    | —           |
+
+
+## InputControl Methods
+
+| Method | Description   |
+| ------ | ------------- |
+| focus  | focuses input |
+| blur   | blurs input   |
+
+
+## InputFormItem Props
+
+Supports attributes from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
+
+| Prop     | Type      | Default  | Possible values   | Description                  |
+| -------- | --------- | -------- | ----------------- | ---------------------------- |
+| variant  | `string`  | `'fill'` | `fill`, `outline` | Input variant                |
+| disabled | `boolean` | `false`  | —                 | Toggles input disabled state |
+| invalid  | `boolean` | `false`  | —                 | Toggles input invalid state  |
+| align    | `string`  | `'left'` | `left`, `right`   | Aligns text within input     |
+
+
+## InputFormItem Slots
 
 | Slot    | Description      |
 | ------- | ---------------- |
@@ -310,7 +347,7 @@ Supports attributes from [`<input type="text">`](https://developer.mozilla.org/e
 | error   | Input error slot |
 
 
-## Events
+## InputFormItem Events
 
 Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
 
@@ -319,7 +356,7 @@ Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US
 | input:update | -    | —           |
 
 
-## Methods
+## InputFormItem Methods
 
 | Method | Description   |
 | ------ | ------------- |

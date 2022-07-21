@@ -74,7 +74,7 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Props
+## ToggleControl Props
 
 Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
 
@@ -84,7 +84,26 @@ Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.o
 | invalid | `boolean` | `false` | —               | Toggles Toggle invalid state |
 
 
-## Slots
+## ToggleControl Events
+
+Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
+
+| Event         | Type      | Description            |
+| ------------- | --------- | ---------------------- |
+| toggle:update | `boolean` | toggle's updated value |
+
+
+## ToggleFormItem Props
+
+Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
+
+| Prop    | Type      | Default | Possible values | Description                  |
+| ------- | --------- | ------- | --------------- | ---------------------------- |
+| v-model | `boolean` | `false` | —               | Current toggled state        |
+| invalid | `boolean` | `false` | —               | Toggles Toggle invalid state |
+
+
+## ToggleFormItem Slots
 
 | Slot     | Description     |
 | -------- | --------------- |
@@ -92,7 +111,7 @@ Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.o
 | sublabel | toggle sublabel |
 
 
-## Events
+## ToggleFormItem Events
 
 Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
 

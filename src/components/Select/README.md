@@ -401,7 +401,7 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## Props
+## SelectControl Props
 
 Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select).
 
@@ -414,7 +414,37 @@ Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/W
 | invalid     | `boolean` | `false`  | —                 | Toggles select invalid state |
 
 
-## Slots
+## SelectControl Slots
+
+| Slot    | Description   |
+| ------- | ------------- |
+| default | —             |
+| prefix  | Select prefix |
+
+
+## SelectControl Events
+
+Supports events from [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select).
+
+| Event         | Type | Description |
+| ------------- | ---- | ----------- |
+| select:update | -    | —           |
+
+
+## SelectFormItem Props
+
+Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select).
+
+| Prop        | Type      | Default  | Possible values   | Description                  |
+| ----------- | --------- | -------- | ----------------- | ---------------------------- |
+| variant     | `string`  | `'fill'` | `fill`, `outline` | Select variant               |
+| v-model     | `string`  | —        | —                 | current selected value       |
+| placeholder | `string`  | `''`     | —                 | Select placeholder           |
+| options     | `array`   | `[]`     | —                 | Select options               |
+| invalid     | `boolean` | `false`  | —                 | Toggles select invalid state |
+
+
+## SelectFormItem Slots
 
 | Slot    | Description             |
 | ------- | ----------------------- |
@@ -422,7 +452,7 @@ Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/W
 | error   | slot for error messages |
 
 
-## Events
+## SelectFormItem Events
 
 Supports events from [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select).
 

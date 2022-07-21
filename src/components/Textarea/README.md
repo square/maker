@@ -179,7 +179,7 @@ export default {
 
 
 <!-- api-tables:start -->
-## Props
+## TextareaControl Props
 
 Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
 
@@ -191,14 +191,35 @@ Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs
 | resizable | `boolean` | `false`  | —                 | Toggles whether textarea is resizable |
 
 
-## Slots
+## TextareaControl Events
+
+Supports events from [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
+
+| Event           | Type     | Description            |
+| --------------- | -------- | ---------------------- |
+| textarea:update | `string` | updated textarea value |
+
+
+## TextareaFormItem Props
+
+Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
+
+| Prop      | Type      | Default  | Possible values   | Description                           |
+| --------- | --------- | -------- | ----------------- | ------------------------------------- |
+| variant   | `string`  | `'fill'` | `fill`, `outline` | textarea variant                      |
+| v-model   | `string`  | `''`     | —                 | textarea's current value              |
+| invalid   | `boolean` | `false`  | —                 | Toggle textarea's invalid state       |
+| resizable | `boolean` | `false`  | —                 | Toggles whether textarea is resizable |
+
+
+## TextareaFormItem Slots
 
 | Slot  | Description             |
 | ----- | ----------------------- |
 | error | slot for error messages |
 
 
-## Events
+## TextareaFormItem Events
 
 Supports events from [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
 
