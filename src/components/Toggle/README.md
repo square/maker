@@ -74,6 +74,33 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Toggle Props
+
+Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
+
+| Prop    | Type      | Default | Possible values | Description                  |
+| ------- | --------- | ------- | --------------- | ---------------------------- |
+| v-model | `boolean` | `false` | —               | Current toggled state        |
+| invalid | `boolean` | `false` | —               | Toggles Toggle invalid state |
+
+
+## Toggle Slots
+
+| Slot     | Description     |
+| -------- | --------------- |
+| default  | toggle label    |
+| sublabel | toggle sublabel |
+
+
+## Toggle Events
+
+Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
+
+| Event         | Type      | Description            |
+| ------------- | --------- | ---------------------- |
+| toggle:update | `boolean` | toggle's updated value |
+
+
 ## ToggleControl Props
 
 Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
@@ -85,33 +112,6 @@ Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.o
 
 
 ## ToggleControl Events
-
-Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
-
-| Event         | Type      | Description            |
-| ------------- | --------- | ---------------------- |
-| toggle:update | `boolean` | toggle's updated value |
-
-
-## ToggleFormItem Props
-
-Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
-
-| Prop    | Type      | Default | Possible values | Description                  |
-| ------- | --------- | ------- | --------------- | ---------------------------- |
-| v-model | `boolean` | `false` | —               | Current toggled state        |
-| invalid | `boolean` | `false` | —               | Toggles Toggle invalid state |
-
-
-## ToggleFormItem Slots
-
-| Slot     | Description     |
-| -------- | --------------- |
-| default  | toggle label    |
-| sublabel | toggle sublabel |
-
-
-## ToggleFormItem Events
 
 Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
 
