@@ -288,7 +288,7 @@ export default {
 ```
 
 <!-- api-tables:start -->
-## InputControl Props
+## Props
 
 Supports attributes from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
 
@@ -300,7 +300,7 @@ Supports attributes from [`<input type="text">`](https://developer.mozilla.org/e
 | align    | `string`  | `'left'` | `left`, `right`   | Aligns text within input     |
 
 
-## InputControl Slots
+## Slots
 
 | Slot   | Description  |
 | ------ | ------------ |
@@ -308,7 +308,7 @@ Supports attributes from [`<input type="text">`](https://developer.mozilla.org/e
 | suffix | Input suffix |
 
 
-## InputControl Events
+## Events
 
 Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
 
@@ -317,46 +317,7 @@ Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US
 | input:update | -    | —           |
 
 
-## InputControl Methods
-
-| Method | Description   |
-| ------ | ------------- |
-| focus  | focuses input |
-| blur   | blurs input   |
-
-
-## InputFormItem Props
-
-Supports attributes from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
-
-| Prop     | Type      | Default  | Possible values   | Description                  |
-| -------- | --------- | -------- | ----------------- | ---------------------------- |
-| variant  | `string`  | `'fill'` | `fill`, `outline` | Input variant                |
-| disabled | `boolean` | `false`  | —                 | Toggles input disabled state |
-| invalid  | `boolean` | `false`  | —                 | Toggles input invalid state  |
-| align    | `string`  | `'left'` | `left`, `right`   | Aligns text within input     |
-
-
-## InputFormItem Slots
-
-| Slot    | Description      |
-| ------- | ---------------- |
-| prefix  | Input prefix     |
-| suffix  | Input suffix     |
-| default | —                |
-| error   | Input error slot |
-
-
-## InputFormItem Events
-
-Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
-
-| Event        | Type | Description |
-| ------------ | ---- | ----------- |
-| input:update | -    | —           |
-
-
-## InputFormItem Methods
+## Methods
 
 | Method | Description   |
 | ------ | ------------- |
