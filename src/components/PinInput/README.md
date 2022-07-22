@@ -296,7 +296,7 @@ export default {
 </style>
 ```
 <!-- api-tables:start -->
-## PinInputControl Props
+## Props
 
 | Prop       | Type      | Default              | Possible values   | Description                 |
 | ---------- | --------- | -------------------- | ----------------- | --------------------------- |
@@ -306,31 +306,7 @@ export default {
 | disabled   | `boolean` | `false`              | —                 | Disable the inputs          |
 
 
-## PinInputControl Events
-
-| Event    | Type | Description |
-| -------- | ---- | ----------- |
-| complete | -    | —           |
-
-
-## PinInputControl Methods
-
-| Method              | Description                |
-| ------------------- | -------------------------- |
-| shakeAndClearInputs | shakes and clears pininput |
-
-
-## PinInputFormItem Props
-
-| Prop       | Type      | Default              | Possible values   | Description                 |
-| ---------- | --------- | -------------------- | ----------------- | --------------------------- |
-| pin-length | `number`  | `DEFAULT_INPUT_SIZE` | —                 | Lenth of pin                |
-| variant    | `string`  | `'fill'`             | `fill`, `outline` | Input variant               |
-| invalid    | `boolean` | `false`              | —                 | Toggles input invalid state |
-| disabled   | `boolean` | `false`              | —                 | Disable the inputs          |
-
-
-## PinInputFormItem Slots
+## Slots
 
 | Slot    | Description             |
 | ------- | ----------------------- |
@@ -338,14 +314,14 @@ export default {
 | error   | slot for error messages |
 
 
-## PinInputFormItem Events
+## Events
 
 | Event    | Type | Description |
 | -------- | ---- | ----------- |
 | complete | -    | —           |
 
 
-## PinInputFormItem Methods
+## Methods
 
 | Method              | Description                |
 | ------------------- | -------------------------- |
