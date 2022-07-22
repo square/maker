@@ -81,6 +81,35 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Checkbox Props
+
+Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
+
+| Prop     | Type            | Default | Possible values | Description                    |
+| -------- | --------------- | ------- | --------------- | ------------------------------ |
+| v-model  | `boolean|array` | —       | —               | Toggles checkbox checked state |
+| value    | `undefined`     | —       | —               | Value to return from v-model   |
+| invalid  | `boolean`       | `false` | —               | Toggles checkbox invalid state |
+| disabled | `boolean`       | `false` | —               | Toggles radio disabled state   |
+
+
+## Checkbox Slots
+
+| Slot     | Description       |
+| -------- | ----------------- |
+| default  | Checkbox label    |
+| sublabel | Checkbox sublabel |
+
+
+## Checkbox Events
+
+Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
+
+| Event           | Type | Description |
+| --------------- | ---- | ----------- |
+| checkbox:update | -    | —           |
+
+
 ## CheckboxControl Props
 
 Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
@@ -94,35 +123,6 @@ Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.o
 
 
 ## CheckboxControl Events
-
-Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
-
-| Event           | Type | Description |
-| --------------- | ---- | ----------- |
-| checkbox:update | -    | —           |
-
-
-## CheckboxFormItem Props
-
-Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
-
-| Prop     | Type            | Default | Possible values | Description                    |
-| -------- | --------------- | ------- | --------------- | ------------------------------ |
-| v-model  | `boolean|array` | —       | —               | Toggles checkbox checked state |
-| value    | `undefined`     | —       | —               | Value to return from v-model   |
-| invalid  | `boolean`       | `false` | —               | Toggles checkbox invalid state |
-| disabled | `boolean`       | `false` | —               | Toggles radio disabled state   |
-
-
-## CheckboxFormItem Slots
-
-| Slot     | Description       |
-| -------- | ----------------- |
-| default  | Checkbox label    |
-| sublabel | Checkbox sublabel |
-
-
-## CheckboxFormItem Events
 
 Supports events from [`<input type="checkbox">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox).
 
