@@ -58,16 +58,16 @@
 					:key="index"
 					:class="[
 						$s.ProfileSet,
-						profile.id,
+						index,
 						{
-							[$s.active]: profile.id === themeProfile,
+							[$s.active]: index === themeProfile,
 						},
 					]"
 					:style="{
 						backgroundColor : profile.colors['background'],
 						color : profile.colors['body']
 					}"
-					@click="changeProfile(profile.id)"
+					@click="changeProfile(index)"
 				>
 					<div>
 						<div
@@ -321,7 +321,7 @@ export default {
 			this.showThemes = !this.showThemes;
 		},
 		getProfile(id) {
-			return themeStore.theme.profiles.find((profile) => profile.id === id);
+			return themeStore.theme.profiles[id];
 		},
 		changeProfile(id) {
 			if (this.themeProfile !== id) {

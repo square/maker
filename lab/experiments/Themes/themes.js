@@ -20,9 +20,8 @@ export const websiteTheme = {
 		elevation: '#ffffff',
 		overlay: 'rgba(0, 0, 0, 0.32)',
 	},
-	profiles: [
-		{
-			id: 'custom-profile',
+	profiles: {
+		'custom-profile': {
 			colors: {
 				'neutral-0': '#ffffff',
 				'neutral-10': '#f1f1f1',
@@ -40,8 +39,7 @@ export const websiteTheme = {
 				overlay: 'rgba(0, 0, 0, 0.32)',
 			},
 		},
-		{
-			id: 'primary-light-bold',
+		'primary-light-bold': {
 			colors: {
 				'neutral-0': '#ffffff',
 				'neutral-10': '#f1f1f1',
@@ -59,8 +57,7 @@ export const websiteTheme = {
 				overlay: 'rgba(0, 0, 0, 0.32)',
 			},
 		},
-		{
-			id: 'primary-light-neutral',
+		'primary-light-neutral': {
 			colors: {
 				'neutral-0': '#f8f7f7',
 				'neutral-10': '#eae9e9',
@@ -78,8 +75,7 @@ export const websiteTheme = {
 				overlay: 'rgba(0, 0, 0, 0.32)',
 			},
 		},
-		{
-			id: 'primary-muted-bold',
+		'primary-muted-bold': {
 			colors: {
 				'neutral-0': '#f2f5ef',
 				'neutral-10': '#e4e7e2',
@@ -97,8 +93,7 @@ export const websiteTheme = {
 				overlay: 'rgba(0, 0, 0, 0.32)',
 			},
 		},
-		{
-			id: 'primary-bold',
+		'primary-bold': {
 			colors: {
 				'neutral-0': '#7bbd4b',
 				'neutral-10': '#75b348',
@@ -116,8 +111,7 @@ export const websiteTheme = {
 				overlay: 'rgba(0, 0, 0, 0.32)',
 			},
 		},
-		{
-			id: 'primary-dark-bold',
+		'primary-dark-bold': {
 			colors: {
 				'neutral-0': '#000000',
 				'neutral-10': '#3c3c3c',
@@ -135,7 +129,7 @@ export const websiteTheme = {
 				overlay: 'rgba(255, 255, 255, 0.32)',
 			},
 		},
-	],
+	},
 	fonts: {
 		baseSize: 16,
 		sizeScale: 1.17,
