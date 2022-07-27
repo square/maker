@@ -1,23 +1,23 @@
-# Transition Spring Up
+# Transition Fade In
 
 ```vue
 <template>
 	<div class="container">
-		<m-transition-spring-up>
+		<m-transition-fade-in>
 			<div
 				v-if="visible"
 				class="gray-box"
 			/>
-		</m-transition-spring-up>
+		</m-transition-fade-in>
 	</div>
 </template>
 
 <script>
-import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp';
+import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 
 export default {
 	components: {
-		MTransitionSpringUp,
+		MTransitionFadeIn,
 	},
 
 	data() {
@@ -43,9 +43,8 @@ export default {
 }
 
 .gray-box {
-    width: 100%;
-    height: 100%;
-    border-radius: 16px 16px 0 0;
+    width: 300px;
+    height: 500px;
     background-color: #ccc;
 }
 </style>
@@ -54,7 +53,7 @@ export default {
 <!-- api-tables:start -->
 ## Slots
 
-| Slot    | Description          |
-| ------- | -------------------- |
-| default | content to spring up |
+| Slot    | Description              |
+| ------- | ------------------------ |
+| default | content to fade in & out |
 <!-- api-tables:end -->

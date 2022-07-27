@@ -190,6 +190,10 @@ export default {
 			this.$set(this, 'pin', newArray);
 		},
 
+		/**
+		 * shakes and clears pininput
+		 * @public
+		 */
 		shakeAndClearInputs() {
 			this.resetPin();
 			this.focusOnPinCell(0);

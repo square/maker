@@ -1,5 +1,6 @@
 <template>
-	<div
+	<component
+		:is="element"
 		:class="$s.Row"
 		v-bind="$attrs"
 		v-on="$listeners"
@@ -44,17 +45,22 @@
 		>
 			<slot name="suffix" />
 		</div>
-	</div>
+	</component>
 </template>
 
 <script>
-
-/**
- * @inheritAttrs div
- * @inheritListeners div
- */
 export default {
 	inheritAttrs: false,
+
+	props: {
+		/**
+		 * topmost wrapper element around row content
+		 */
+		element: {
+			type: String,
+			default: 'div',
+		},
+	},
 };
 </script>
 

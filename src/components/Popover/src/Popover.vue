@@ -29,7 +29,7 @@
 
 <script>
 import { throwError } from '@square/maker/utils/debug';
-import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { Portal } from '@linusborg/vue-simple-portal';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 import PopoverInstance from './PopoverInstance.vue';
@@ -190,14 +190,26 @@ export default {
 	},
 
 	methods: {
+		/**
+		 * opens popover, use from external element
+		 * @public
+		 */
 		open(...ignoreElements) {
 			this.actionAPI.open(...ignoreElements);
 		},
 
+		/**
+		 * closes popover
+		 * @public
+		 */
 		close() {
 			this.actionAPI.close();
 		},
 
+		/**
+		 * toggles popover, use from external element
+		 * @public
+		 */
 		toggle(...ignoreElements) {
 			this.actionAPI.toggle(...ignoreElements);
 		},

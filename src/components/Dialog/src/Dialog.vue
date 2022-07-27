@@ -1,21 +1,33 @@
 <template>
-	<div
+	<m-touch-capture
+		ref="dialog"
 		:class="$s.Dialog"
 		:style="style"
+		:prevent-default="preventDefault"
+		@on-drag-down="onDragDown"
+		@on-drag-end="onDragEnd"
+		@on-swipe-down="onSwipeDown"
 	>
 		<!-- @slot Dialog content -->
 		<slot />
-	</div>
+	</m-touch-capture>
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import { MTouchCapture } from '@square/maker/utils/TouchCapture';
+import dialogApi from './dialog-api';
 
 export default {
 	name: 'Dialog',
 
+	components: {
+		MTouchCapture,
+	},
+
 	inject: {
+		dialogApi,
 		theme: {
 			default: defaultTheme(),
 			from: MThemeKey,
@@ -29,7 +41,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Text color of container
@@ -37,8 +49,15 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
+	},
+
+	data() {
+		return {
+			dialogStyles: {},
+			preventDefault: false,
+		};
 	},
 
 	computed: {
@@ -48,7 +67,36 @@ export default {
 			return {
 				'--bg-color': this.resolvedBgColor,
 				'--color': this.resolvedColor,
+				...this.dialogStyles,
 			};
+		},
+	},
+
+	methods: {
+		onSwipeDown() {
+			this.preventDefault = true;
+			this.dialogApi.close();
+		},
+
+		onDragDown(gesture) {
+			this.preventDefault = true;
+			this.dialogStyles = {
+				transform: `translateY(${gesture.changeY}px)`,
+				'backface-visibility': 'hidden',
+				overflow: 'hidden',
+				transition: 'none',
+			};
+		},
+
+		onDragEnd(gesture) {
+			// Pixels dialog must be dragged to close on release
+			const minDragCloseDistance = 50;
+			if (gesture.changeY > minDragCloseDistance) {
+				this.dialogApi.close();
+			} else {
+				this.preventDefault = false;
+				this.dialogStyles = {};
+			}
 		},
 	},
 };

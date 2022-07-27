@@ -1,14 +1,19 @@
-import chroma from 'chroma-js';
+import { colord, extend } from 'colord';
+import a11yPlugin from 'colord/plugins/a11y';
 
-function getContrast(chromaBg, targetChromaFg) {
-	const contrastAccessibilityThreshold = 3;
-	if (!targetChromaFg
-		|| chroma.contrast(chromaBg, targetChromaFg) < contrastAccessibilityThreshold) {
-		const isLightThreshold = 0.32;
-		const isLight = chromaBg.luminance() > isLightThreshold;
-		return chroma(isLight ? '#000' : '#fff');
+extend([a11yPlugin]);
+
+export const DARK_COLOR_LUMINANCE_THRESHOLD = 0.32;
+export const WCAG_CONTRAST_TEXT = 4.5;
+export const WCAG_CONTRAST_TITLE = 3;
+
+export function getContrast(background, foreground, contrastThreshold = WCAG_CONTRAST_TITLE) {
+	let contrast = foreground;
+
+	if (!foreground || colord(foreground).contrast(background) < contrastThreshold) {
+		const isDarkColor = colord(background).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
+		contrast = isDarkColor ? '#ffffff' : '#000000';
 	}
-	return targetChromaFg;
-}
 
-export default getContrast;
+	return contrast;
+}

@@ -200,6 +200,13 @@ export default {
 | menu:update | -    | —           |
 
 
+## Menu Methods
+
+| Method | Description     |
+| ------ | --------------- |
+| close  | closes the menu |
+
+
 ## MenuOption Props
 
 | Prop          | Type        | Default | Possible values | Description |

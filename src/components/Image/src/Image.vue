@@ -1,6 +1,5 @@
 <template>
 	<div
-		ref="image-wrapper"
 		:class="$s.ImageWrapper"
 	>
 		<m-skeleton-block
@@ -12,7 +11,7 @@
 		/>
 		<m-transition-fade-in>
 			<img
-				v-if="loaded"
+				v-show="loaded"
 				:class="{
 					[$s.Image]: true,
 					[$s[`shape_${resolvedShape}`]]: resolvedShape,
@@ -21,6 +20,7 @@
 				:style="style"
 				:src="src"
 				:srcset="srcset"
+				:sizes="sizes"
 				v-bind="$attrs"
 				v-on="$listeners"
 			>
@@ -34,7 +34,7 @@
 <script>
 import PseudoWindow from 'vue-pseudo-window';
 import { throttle } from 'lodash';
-import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
@@ -86,6 +86,10 @@ export default {
 			default: undefined,
 		},
 		srcset: {
+			type: String,
+			default: undefined,
+		},
+		sizes: {
 			type: String,
 			default: undefined,
 		},
@@ -172,6 +176,12 @@ export default {
 				img.srcset = this.srcset;
 			}
 
+			// Needed to not load the full size image
+			// and match the size loaded in the UI
+			if (this.sizes) {
+				img.sizes = this.sizes;
+			}
+
 			img.addEventListener('load', () => {
 				imgCache.add(this.src + this.srcset);
 				this.loaded = true;
@@ -180,8 +190,8 @@ export default {
 		},
 
 		getImageDimensions() {
-			this.height = this.$refs['image-wrapper'].offsetHeight || '0';
-			this.width = this.$refs['image-wrapper'].offsetWidth || '0';
+			this.height = this.$el?.offsetHeight || '0';
+			this.width = this.$el?.offsetWidth || '0';
 		},
 	},
 };

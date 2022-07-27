@@ -47,6 +47,10 @@ export default {
 	},
 
 	methods: {
+		/**
+		 * shakes and clears pininput
+		 * @public
+		 */
 		shakeAndClearInputs() {
 			this.$refs.pinInputControl.shakeAndClearInputs();
 		},

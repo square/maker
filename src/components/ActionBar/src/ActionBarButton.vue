@@ -49,28 +49,31 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import PseudoWindow from 'vue-pseudo-window';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import getContrast from '@square/maker/utils/get-contrast';
+import { getContrast } from '@square/maker/utils/get-contrast';
 
-// TODO: refactor the code below so it's shared with Button component
+function setColorVariables(tokens) {
+	const colorMainObject = colord(tokens.color);
+	const colorContrast = getContrast(tokens.color, tokens.textColor);
 
-function getFocus(chromaColor) {
-	const arbitraryAlphaValue = 0.8;
-	return chromaColor.alpha(arbitraryAlphaValue);
-}
+	// Define each state adjustment and generated color
+	const stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
+	const hoverStateAdjust = 0.08;
+	const activeStateAdjust = 0.16;
+	const focusAlphaAdjust = 0.3;
+	const colorHover = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
+	const colorActive = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
+	const colorFocus = colorMainObject.alpha(focusAlphaAdjust).toHex();
 
-function fill(tokens) {
-	const color = chroma(tokens.color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
-	const focusColor = getFocus(color);
 	return {
-		'--color-main': color.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-focus': focusColor.hex(),
+		'--color-main': tokens.color,
+		'--color-contrast': colorContrast,
+		'--color-hover': colorHover,
+		'--color-active': colorActive,
+		'--color-focus': colorFocus,
 	};
 }
 
@@ -115,7 +118,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Text color of button
@@ -123,7 +126,7 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Shape of button
@@ -160,21 +163,22 @@ export default {
 	computed: {
 		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
 		style() {
+			let tokens = {
+				color: this.resolvedColor,
+				textColor: this.resolvedTextColor,
+			};
 			/**
 			 * Return different default theme colors for icon buttons
 			 * This can be removed if the action bar icon button ever
 			 * becomes its own component or if we add theming for patterns
 			 */
 			if (this.isSingleChild()) {
-				return fill({
+				tokens = {
 					color: this.color || this.theme.colors.elevation || '#000',
 					textColor: this.textColor || this.resolvedColor,
-				});
+				};
 			}
-			return fill({
-				color: this.resolvedColor,
-				textColor: this.resolvedTextColor,
-			});
+			return setColorVariables(tokens);
 		},
 
 		isDisabled() {

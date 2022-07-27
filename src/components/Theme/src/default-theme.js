@@ -58,7 +58,7 @@ export default function defaultTheme() {
 			buttonBorderRadius: '4px',
 			imageBorderRadius: '0px',
 		},
-		profiles: [],
+		profiles: {},
 		button: {
 			size: 'medium',
 			variant: 'primary',
@@ -145,7 +145,7 @@ export default function defaultTheme() {
 			},
 		},
 		choice: {
-			selectedColor: undefined,
+			selectedColor: '@colors.primary',
 		},
 		stepper: {
 			color: '@colors["neutral-10"]',
