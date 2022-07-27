@@ -33,9 +33,19 @@
 				discount icons
 			</m-text>
 			<div class="icons">
-				<m-icon name="discount" />
+				<m-icon
+					class="inline-discount-icon"
+					name="discount"
+				/>
 				<div class="blocky-discount-icon">
 					<m-icon name="discount" />
+				</div>
+				<m-icon
+					class="inline-discount-icon"
+					name="discountTag"
+				/>
+				<div class="blocky-discount-icon">
+					<m-icon name="discountTag" />
 				</div>
 			</div>
 			<m-text pattern="title">
@@ -178,7 +188,6 @@
 </template>
 
 <script>
-import { colord } from 'colord';
 import { MTheme, defaultTheme } from '@square/maker/components/Theme';
 import { MPill } from '@square/maker/components/Pill';
 import { MNotice } from '@square/maker/components/Notice';
@@ -187,6 +196,7 @@ import { MText } from '@square/maker/components/Text';
 import { MIcon } from '@square/maker/components/Icon';
 import { MTextButton } from '@square/maker/components/TextButton';
 import ZapIcon from '@square/maker-icons/Zap';
+import TagIcon from '@square/maker-icons/Tag';
 import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
@@ -201,19 +211,19 @@ export default {
 	},
 	data() {
 		return {
-			primaryColor: '#006aff', // blue
+			primaryColor: '#cd2026', // critical
 			backgroundColor: '#ffffff', // white
 			defaultPillPatterns: Object.keys(defaultTheme().pill.patterns),
 		};
 	},
 	computed: {
-		primarySubtleColor() {
-			const LIGHTEN = 0.4;
-			return colord(this.primaryColor).lighten(LIGHTEN).toHex();
-		},
 		inlineStyles() {
+			const colors = this.discountTheme.colors.contextualPrimary;
 			return {
-				'--color-primary-subtle': this.primarySubtleColor,
+				'--color-primary-subtle': colors.subtle,
+				'--color-primary-fill': colors.fill,
+				'--color-primary-on-fill': colors.onFill,
+				'--color-primary-text': colors.text,
 			};
 		},
 		discountTheme() {
@@ -221,6 +231,7 @@ export default {
 				colors: makerColors(this.backgroundColor, this.primaryColor),
 				icons: {
 					discount: ZapIcon,
+					discountTag: TagIcon,
 				},
 				pill: {
 					patterns: {
@@ -251,7 +262,7 @@ export default {
 				textbutton: {
 					patterns: {
 						discount: {
-							color: '@colors.primary',
+							color: '@colors.contextualPrimary.text',
 						},
 					},
 				},
@@ -276,13 +287,17 @@ export default {
 	width: 400px;
 }
 
+.inline-discount-icon {
+	color: var(--color-primary-text);
+}
+
 .blocky-discount-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	width: 48px;
 	height: 48px;
-	color: var(--maker-color-primary);
+	color: var(--color-primary-text);
 	background-color: var(--color-primary-subtle);
 	border-radius: var(--maker-shape-default-border-radius);
 }
