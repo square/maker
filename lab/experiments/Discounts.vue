@@ -7,6 +7,15 @@
 		<div class="theme-controls">
 			<label>
 				<m-text pattern="title">
+					background color
+				</m-text>
+				<input
+					v-model="backgroundColor"
+					type="color"
+				>
+			</label>
+			<label>
+				<m-text pattern="title">
 					primary color
 				</m-text>
 				<input
@@ -38,6 +47,28 @@
 				</m-pill>
 				<m-pill pattern="discount">
 					BUY 3, GET 50% OFF
+				</m-pill>
+				<m-pill pattern="discountOutline">
+					BUY 1, GET 10% OFF
+				</m-pill>
+				<m-pill pattern="discountOutline">
+					BUY 3, GET 50% OFF
+				</m-pill>
+				<m-pill pattern="discountSubtle">
+					BUY 1, GET 10% OFF
+				</m-pill>
+				<m-pill pattern="discountSubtle">
+					BUY 3, GET 50% OFF
+				</m-pill>
+				<m-text pattern="title">
+					regular pills
+				</m-text>
+				<m-pill
+					v-for="pattern in defaultPillPatterns"
+					:key="pattern"
+					:pattern="pattern"
+				>
+					{{ pattern }} pill
 				</m-pill>
 			</div>
 			<m-text pattern="title">
@@ -147,8 +178,8 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
-import { MTheme } from '@square/maker/components/Theme';
+import { colord } from 'colord';
+import { MTheme, defaultTheme } from '@square/maker/components/Theme';
 import { MPill } from '@square/maker/components/Pill';
 import { MNotice } from '@square/maker/components/Notice';
 import { MCard } from '@square/maker/components/Card';
@@ -156,6 +187,7 @@ import { MText } from '@square/maker/components/Text';
 import { MIcon } from '@square/maker/components/Icon';
 import { MTextButton } from '@square/maker/components/TextButton';
 import ZapIcon from '@square/maker-icons/Zap';
+import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
 	components: {
@@ -169,13 +201,15 @@ export default {
 	},
 	data() {
 		return {
-			primaryColor: '#006AFF', // blue
+			primaryColor: '#006aff', // blue
+			backgroundColor: '#ffffff', // white
+			defaultPillPatterns: Object.keys(defaultTheme().pill.patterns),
 		};
 	},
 	computed: {
 		primarySubtleColor() {
-			const BRIGHTEN = 2.5;
-			return chroma(this.primaryColor).brighten(BRIGHTEN).hex();
+			const LIGHTEN = 0.4;
+			return colord(this.primaryColor).lighten(LIGHTEN).toHex();
 		},
 		inlineStyles() {
 			return {
@@ -184,18 +218,23 @@ export default {
 		},
 		discountTheme() {
 			return {
-				colors: {
-					primary: this.primaryColor,
-					primarySubtle: this.primarySubtleColor,
-				},
+				colors: makerColors(this.backgroundColor, this.primaryColor),
 				icons: {
 					discount: ZapIcon,
 				},
 				pill: {
 					patterns: {
 						discount: {
-							textColor: '@colors.primary',
-							bgColor: '@colors.primarySubtle',
+							textColor: '@colors.contextualPrimary.onFill',
+							bgColor: '@colors.contextualPrimary.fill',
+						},
+						discountOutline: {
+							textColor: '@colors.contextualPrimary.text',
+							bgColor: 'transparent',
+						},
+						discountSubtle: {
+							textColor: '@colors.contextualPrimary.text',
+							bgColor: '@colors.contextualPrimary.subtle',
 						},
 					},
 				},
@@ -203,9 +242,9 @@ export default {
 					patterns: {
 						discount: {
 							iconName: 'discount',
-							iconColor: '@colors.primary',
-							color: '@colors.primary',
-							bgColor: '@colors.primarySubtle',
+							iconColor: '@colors.contextualPrimary.fill',
+							color: '@colors.contextualPrimary.text',
+							bgColor: '@colors.contextualPrimary.subtle',
 						},
 					},
 				},
