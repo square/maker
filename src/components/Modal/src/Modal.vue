@@ -83,11 +83,6 @@ export default {
 				...this.modalStyles,
 			};
 		},
-
-		scrollTop() {
-			return this.$refs.modal && this.$refs.modal.$el
-				? this.$refs.modal.$el.scrollTop : 0;
-		},
 	},
 
 	watch: {
@@ -101,7 +96,8 @@ export default {
 
 	methods: {
 		setScrollTop() {
-			this.isScrolledToTop = this.scrollTop <= 0;
+			const scrollTop = this.$refs?.modal?.$el?.scrollTop || 0;
+			this.isScrolledToTop = scrollTop <= 0;
 		},
 
 		onSwipeDown() {

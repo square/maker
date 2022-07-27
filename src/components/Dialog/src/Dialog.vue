@@ -4,6 +4,7 @@
 		:class="$s.Dialog"
 		:style="style"
 		:prevent-default="preventDefault"
+		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
@@ -15,6 +16,7 @@
 
 <script>
 import { colord } from 'colord';
+import { throttle } from 'lodash';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MTouchCapture } from '@square/maker/utils/TouchCapture';
 import dialogApi from './dialog-api';
@@ -54,8 +56,11 @@ export default {
 	},
 
 	data() {
+		const scrollCheckDelay = 800;
 		return {
 			dialogStyles: {},
+			isScrolledToTop: true,
+			onScroll: throttle(this.setScrollTop, scrollCheckDelay),
 			preventDefault: false,
 		};
 	},
@@ -73,25 +78,35 @@ export default {
 	},
 
 	methods: {
+		setScrollTop() {
+			const scrollTop = this.$refs?.dialog?.$el?.scrollTop || 0;
+			this.isScrolledToTop = scrollTop <= 0;
+		},
+
 		onSwipeDown() {
-			this.preventDefault = true;
-			this.dialogApi.close();
+			if (this.isScrolledToTop) {
+				this.preventDefault = true;
+				this.dialogApi.close();
+			}
 		},
 
 		onDragDown(gesture) {
-			this.preventDefault = true;
-			this.dialogStyles = {
-				transform: `translateY(${gesture.changeY}px)`,
-				'backface-visibility': 'hidden',
-				overflow: 'hidden',
-				transition: 'none',
-			};
+			if (this.isScrolledToTop) {
+				this.preventDefault = true;
+				this.dialogStyles = {
+					transform: `translateY(${gesture.changeY}px)`,
+					'backface-visibility': 'hidden',
+					overflow: 'hidden',
+					transition: 'none',
+				};
+			}
 		},
 
 		onDragEnd(gesture) {
 			// Pixels dialog must be dragged to close on release
 			const minDragCloseDistance = 50;
-			if (gesture.changeY > minDragCloseDistance) {
+			if (this.isScrolledToTop
+			&& gesture.changeY > minDragCloseDistance) {
 				this.dialogApi.close();
 			} else {
 				this.preventDefault = false;
@@ -104,9 +119,15 @@ export default {
 
 <style module="$s">
 .Dialog {
+	max-height: calc(100vh - 48px);
 	overflow: auto;
 	color: var(--color, inherit);
 	background: var(--bg-color, #f5f6f7);
+	border-radius:
+		var(--maker-shape-default-border-radius, 8px)
+		var(--maker-shape-default-border-radius, 8px)
+		0 0;
+	transition: transform 0.2s linear;
 }
 
 @media screen and (--for-tablet-landscape-up) {

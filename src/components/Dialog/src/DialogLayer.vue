@@ -164,7 +164,7 @@ export default {
 	position: relative;
 	width: 100%;
 	max-height: calc(100% - 48px);
-	overflow: auto;
+	overflow: hidden;
 	border-radius:
 		var(--maker-shape-default-border-radius, 8px)
 		var(--maker-shape-default-border-radius, 8px)
