@@ -119,10 +119,14 @@ function generateContextualPrimaryColors(background = '#fff', primary = '#000', 
 	if (isDarkBg) {
 		primaryColors.subtle = neutralColors['neutral-10'];
 	} else {
-		const LIGHTEN_PRIMARY_FOR_SUBTLE = 0.9;
-		primaryColors.subtle = colord(primary)
-			.mix(background, LIGHTEN_PRIMARY_FOR_SUBTLE)
-			.toHex();
+		const SUBTLE_SATURATION = 25;
+		const SUBTLE_LIGHTNESS = 95;
+		const primaryHsl = colord(primary).toHsl();
+		primaryColors.subtle = colord({
+			h: primaryHsl.h,
+			s: SUBTLE_SATURATION,
+			l: SUBTLE_LIGHTNESS,
+		}).toHex();
 	}
 	return primaryColors;
 }
