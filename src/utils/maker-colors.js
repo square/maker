@@ -112,7 +112,7 @@ function generateContextualPrimaryColors(background = '#fff', primary = '#000', 
 		if (isDarkBg) {
 			primaryColors.subtle = neutralColors['neutral-10'];
 		} else {
-			const LIGHTEN_PRIMARY_FOR_SUBTLE = 0.8;
+			const LIGHTEN_PRIMARY_FOR_SUBTLE = 0.9;
 			primaryColors.subtle = colord(primary)
 				.mix(background, LIGHTEN_PRIMARY_FOR_SUBTLE)
 				.toHex();
