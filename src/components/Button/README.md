@@ -7,6 +7,16 @@ You should almost always use this component for standalone buttons in your app. 
 ```vue
 <template>
 	<div>
+<pre><code><style contenteditable style="display: block; tab-size: 2em;">
+.m-button {
+	background-color: blue;
+	color: white;
+	margin: 4px;
+}
+.m-button:hover:not(:disabled) {
+	background-color: green;
+}
+</style></code></pre>
 		<label>
 			Color picker
 			<input
@@ -46,6 +56,55 @@ You should almost always use this component for standalone buttons in your app. 
 							variant="primary"
 							size="large"
 							:color="color"
+							shape="squared"
+						>
+							Squared
+						</m-button>
+						<m-button
+							variant="primary"
+							size="large"
+							:color="color"
+							shape="pill"
+						>
+							Pill
+						</m-button>
+						<m-button
+							variant="primary"
+							size="large"
+							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="large"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="large"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="large"
+							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -71,7 +130,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="primary"
@@ -94,6 +153,55 @@ You should almost always use this component for standalone buttons in your app. 
 							variant="secondary"
 							size="large"
 							:color="color"
+							shape="squared"
+						>
+							Squared
+						</m-button>
+						<m-button
+							variant="secondary"
+							size="large"
+							:color="color"
+							shape="pill"
+						>
+							Pill
+						</m-button>
+						<m-button
+							variant="secondary"
+							size="large"
+							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="secondary"
+							size="large"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="secondary"
+							size="large"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="secondary"
+							size="large"
+							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -119,7 +227,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="secondary"
@@ -137,6 +245,55 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 						>
 							Button
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="large"
+							:color="color"
+							shape="squared"
+						>
+							Squared
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="large"
+							:color="color"
+							shape="pill"
+						>
+							Pill
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="large"
+							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="large"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="large"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -195,6 +352,39 @@ You should almost always use this component for standalone buttons in your app. 
 							variant="primary"
 							size="medium"
 							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="medium"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="medium"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="medium"
+							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -220,7 +410,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="primary"
@@ -268,7 +458,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="secondary"
@@ -286,6 +476,39 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 						>
 							Button
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="medium"
+							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="medium"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="medium"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -316,7 +539,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -344,6 +567,39 @@ You should almost always use this component for standalone buttons in your app. 
 							variant="primary"
 							size="small"
 							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="small"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="small"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="primary"
+							size="small"
+							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -369,7 +625,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="primary"
@@ -417,7 +673,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="secondary"
@@ -435,6 +691,39 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 						>
 							Button
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="small"
+							:color="color"
+							align="center"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="small"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+						<m-button
+							variant="tertiary"
+							size="small"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
 						</m-button>
 						<m-button
 							variant="tertiary"
@@ -465,7 +754,7 @@ You should almost always use this component for standalone buttons in your app. 
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
 						<m-button
 							variant="tertiary"
