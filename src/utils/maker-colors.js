@@ -109,20 +109,20 @@ function generateContextualPrimaryColors(background = '#fff', primary = '#000', 
 		primaryColors.text = colord(primary)
 			.mix(backgroundContrast, DARKEN_PRIMARY_FOR_TEXT)
 			.toHex();
-		if (isDarkBg) {
-			primaryColors.subtle = neutralColors['neutral-10'];
-		} else {
-			const LIGHTEN_PRIMARY_FOR_SUBTLE = 0.9;
-			primaryColors.subtle = colord(primary)
-				.mix(background, LIGHTEN_PRIMARY_FOR_SUBTLE)
-				.toHex();
-		}
 		primaryColors.onFill = getContrast(primaryColors.fill);
 	} else {
 		primaryColors.fill = backgroundContrast;
 		primaryColors.text = backgroundContrast;
-		primaryColors.subtle = neutralColors['neutral-10'];
+		// primaryColors.subtle = neutralColors['neutral-10'];
 		primaryColors.onFill = primary;
+	}
+	if (isDarkBg) {
+		primaryColors.subtle = neutralColors['neutral-10'];
+	} else {
+		const LIGHTEN_PRIMARY_FOR_SUBTLE = 0.9;
+		primaryColors.subtle = colord(primary)
+			.mix(background, LIGHTEN_PRIMARY_FOR_SUBTLE)
+			.toHex();
 	}
 	return primaryColors;
 }
