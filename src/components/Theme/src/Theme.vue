@@ -123,24 +123,49 @@ export default {
 			const MAX_THUMBNAIL_RADIUS = 8;
 
 			return {
+				// neutral colors
 				'--maker-color-neutral-0': colors['neutral-0'],
 				'--maker-color-neutral-10': colors['neutral-10'],
 				'--maker-color-neutral-20': colors['neutral-20'],
 				'--maker-color-neutral-80': colors['neutral-80'],
 				'--maker-color-neutral-90': colors['neutral-90'],
 				'--maker-color-neutral-100': colors['neutral-100'],
+
+				// general colors
 				'--maker-color-primary': colors.primary,
 				'--maker-color-background': colors.background,
 				'--maker-color-heading': colors.heading,
 				'--maker-color-body': colors.body,
 				'--maker-color-elevation': colors.elevation,
 				'--maker-color-overlay': colors.overlay,
+
+				// contextual colors
+				'--maker-color-primary-fill': colors.contextualPrimary.fill,
+				'--maker-color-primary-on-fill': colors.contextualPrimary.onFill,
+				'--maker-color-primary-text': colors.contextualPrimary.text,
+				'--maker-color-primary-subtle': colors.contextualPrimary.subtle,
+				'--maker-color-critical-fill': colors.critical.fill,
+				'--maker-color-critical-on-fill': colors.critical.onFill,
+				'--maker-color-critical-text': colors.critical.text,
+				'--maker-color-critical-subtle': colors.critical.subtle,
+				'--maker-color-warning-fill': colors.warning.fill,
+				'--maker-color-warning-on-fill': colors.warning.onFill,
+				'--maker-color-warning-text': colors.warning.text,
+				'--maker-color-warning-subtle': colors.warning.subtle,
+				'--maker-color-success-fill': colors.success.fill,
+				'--maker-color-success-on-fill': colors.success.onFill,
+				'--maker-color-success-text': colors.success.text,
+				'--maker-color-success-subtle': colors.success.subtle,
+
+				// typography
 				'--maker-font-heading-font-family': fonts.heading.fontFamily,
 				'--maker-font-heading-font-weight': fonts.heading.fontWeight,
 				'--maker-font-body-font-family': fonts.body.fontFamily,
 				'--maker-font-body-font-weight': fonts.body.fontWeight,
 				'--maker-font-label-font-family': fonts.label.fontFamily,
 				'--maker-font-label-font-weight': fonts.label.fontWeight,
+
+				// shape
 				'--maker-shape-default-border-radius': shapes.defaultBorderRadius,
 				'--maker-shape-card-border-radius': shapes.cardBorderRadius,
 				'--maker-shape-button-border-radius': shapes.buttonBorderRadius,
