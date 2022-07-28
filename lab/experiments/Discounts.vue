@@ -2,7 +2,6 @@
 	<m-theme
 		class="demo"
 		:theme="discountTheme"
-		:style="inlineStyles"
 	>
 		<div class="theme-controls">
 			<label>
@@ -49,36 +48,26 @@
 				</div>
 			</div>
 			<m-text pattern="title">
-				discount pills
+				discount pills (use primary pattern)
 			</m-text>
 			<div class="pills">
-				<m-pill pattern="discount">
+				<m-pill pattern="primary">
 					BUY 1, GET 10% OFF
 				</m-pill>
-				<m-pill pattern="discount">
+				<m-pill pattern="primary">
 					BUY 3, GET 50% OFF
 				</m-pill>
-				<m-pill pattern="discountOutline">
+				<m-pill pattern="primaryOutline">
 					BUY 1, GET 10% OFF
 				</m-pill>
-				<m-pill pattern="discountOutline">
+				<m-pill pattern="primaryOutline">
 					BUY 3, GET 50% OFF
 				</m-pill>
-				<m-pill pattern="discountSubtle">
+				<m-pill pattern="primarySubtle">
 					BUY 1, GET 10% OFF
 				</m-pill>
-				<m-pill pattern="discountSubtle">
+				<m-pill pattern="primarySubtle">
 					BUY 3, GET 50% OFF
-				</m-pill>
-				<m-text pattern="title">
-					regular pills
-				</m-text>
-				<m-pill
-					v-for="pattern in defaultPillPatterns"
-					:key="pattern"
-					:pattern="pattern"
-				>
-					{{ pattern }} pill
 				</m-pill>
 			</div>
 			<m-text pattern="title">
@@ -189,7 +178,7 @@
 </template>
 
 <script>
-import { MTheme, defaultTheme } from '@square/maker/components/Theme';
+import { MTheme } from '@square/maker/components/Theme';
 import { MPill } from '@square/maker/components/Pill';
 import { MNotice } from '@square/maker/components/Notice';
 import { MCard } from '@square/maker/components/Card';
@@ -212,43 +201,17 @@ export default {
 	},
 	data() {
 		return {
-			primaryColor: '#cd2026', // critical
+			primaryColor: '#006aff', // blue
 			backgroundColor: '#ffffff', // white
-			defaultPillPatterns: Object.keys(defaultTheme().pill.patterns),
 		};
 	},
 	computed: {
-		inlineStyles() {
-			const colors = this.discountTheme.colors.contextualPrimary;
-			return {
-				'--color-primary-subtle': colors.subtle,
-				'--color-primary-fill': colors.fill,
-				'--color-primary-on-fill': colors.onFill,
-				'--color-primary-text': colors.text,
-			};
-		},
 		discountTheme() {
 			return {
 				colors: makerColors(this.backgroundColor, this.primaryColor),
 				icons: {
 					discount: ZapIcon,
 					discountTag: TagIcon,
-				},
-				pill: {
-					patterns: {
-						discount: {
-							textColor: '@colors.contextualPrimary.onFill',
-							bgColor: '@colors.contextualPrimary.fill',
-						},
-						discountOutline: {
-							textColor: '@colors.contextualPrimary.text',
-							bgColor: 'transparent',
-						},
-						discountSubtle: {
-							textColor: '@colors.contextualPrimary.text',
-							bgColor: '@colors.contextualPrimary.subtle',
-						},
-					},
 				},
 				notice: {
 					patterns: {
@@ -289,7 +252,7 @@ export default {
 }
 
 .inline-discount-icon {
-	color: var(--color-primary-text);
+	color: var(--maker-color-primary-text);
 }
 
 .blocky-discount-icon {
@@ -298,8 +261,8 @@ export default {
 	justify-content: center;
 	width: 48px;
 	height: 48px;
-	color: var(--color-primary-text);
-	background-color: var(--color-primary-subtle);
+	color: var(--maker-color-primary-text);
+	background-color: var(--maker-color-primary-subtle);
 	border-radius: var(--maker-shape-default-border-radius);
 }
 
