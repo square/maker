@@ -30,26 +30,6 @@ const NEUTRAL_RATIOS = {
 	},
 };
 
-const PRIMARY_RATIOS = {
-	light: {
-		'fill': 0,
-		'text': 0.05,
-		// 'primarySubtle': 0.155,
-		//'subtle': 0.527,
-		// 'subtle': 0.9,
-		// 'onFill': 1,
-		'subtle': 0.8,
-	},
-	dark: {
-		'fill': 0,
-		'text': 0.255,
-		// 'primarySubtle': 0.37,
-		// 'primarySubtle': 0.55,
-		// 'subtle': 0.95,
-		// 'onFill': 1,
-	},
-};
-
 const CONTEXTUAL_COLORS = {
 	light: {
 		critical: {
@@ -93,15 +73,9 @@ function enoughContrastForFill(hex1, hex2) {
 	return colord(hex1).contrast(hex2) >= WCAG_CONTRAST_TITLE;
 }
 
-function enoughContrastForText(hex1, hex2) {
-	return colord(hex1).contrast(hex2) >= WCAG_CONTRAST_TEXT;
-}
-
 function generateContextualPrimaryColors(background = '#fff', primary = '#000', neutralColors) {
 	const isDarkBg = isDark(background);
-	const isDarkPrimary = isDark(primary);
 	const backgroundContrast = getContrast(background);
-	const primaryContrast = getContrast(primary);
 	const primaryColors = {};
 	if (enoughContrastForFill(primary, background)) {
 		primaryColors.fill = primary;
@@ -113,7 +87,6 @@ function generateContextualPrimaryColors(background = '#fff', primary = '#000', 
 	} else {
 		primaryColors.fill = backgroundContrast;
 		primaryColors.text = backgroundContrast;
-		// primaryColors.subtle = neutralColors['neutral-10'];
 		primaryColors.onFill = primary;
 	}
 	if (isDarkBg) {
@@ -151,22 +124,6 @@ export default function makerColors(background = '#fff', primary = '#000') {
 		? cloneDeep(CONTEXTUAL_COLORS.dark) : cloneDeep(CONTEXTUAL_COLORS.light);
 
 	// derive contextual primary colors
-	// const isDarkPrimary = colord(primary).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
-	// const primaryRatios = isDarkBg ? PRIMARY_RATIOS.dark : PRIMARY_RATIOS.light;
-	// const primaryBlend = background;
-	// const primaryContrast = getContrast(primary);
-	// contextualColors.contextualPrimary = {};
-	// Object.entries(primaryRatios).forEach(([name, ratio]) => {
-	// 	contextualColors.contextualPrimary[name] = colord(primary).mix(primaryBlend, ratio).toHex();
-	// });
-	// contextualColors.contextualPrimary.onFill = getContrast(contextualColors.contextualPrimary.fill);
-	// if (!contextualColors.contextualPrimary.subtle) {
-	// 	contextualColors.contextualPrimary.subtle = neutralColors['neutral-10'];
-	// }
-	// if (colord(contextualColors.contextualPrimary.text).contrast(background) < WCAG_CONTRAST_TEXT) {
-	// 	contextualColors.contextualPrimary.text = getContrast(background);
-	// }
-
 	contextualColors.contextualPrimary = generateContextualPrimaryColors(
 		background,
 		primary,
@@ -190,7 +147,6 @@ export default function makerColors(background = '#fff', primary = '#000') {
 		background,
 		heading: getContrast(background),
 		body: getContrast(background),
-		// ...primaryColors,
 		...neutralColors,
 		...contextualColors,
 		elevation: isDarkBg ? neutralColors['neutral-20'] : '#ffffff',

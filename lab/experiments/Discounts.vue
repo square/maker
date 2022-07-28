@@ -89,7 +89,7 @@
 					pattern="discount"
 					variant="inline"
 				>
-					BUY 1, GET 10% OFF (inline)
+					BUY 1, GET 10% OFF
 					<template #actions>
 						<m-text-button pattern="discount">
 							Redeem
@@ -98,9 +98,10 @@
 				</m-notice>
 				<m-notice
 					pattern="discount"
+					icon-name="discountTag"
 					variant="block"
 				>
-					BUY 3, GET 50% OFF (block)
+					BUY 3, GET 50% OFF
 					<template #actions>
 						<m-text-button pattern="discount">
 							Redeem
@@ -165,7 +166,7 @@
 					<div
 						class="blocky-discount-icon justify-end-self"
 					>
-						<m-icon name="discount" />
+						<m-icon name="discountTag" />
 					</div>
 					<m-text-button
 						class="align-end-self"
