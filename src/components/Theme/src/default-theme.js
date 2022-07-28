@@ -195,6 +195,10 @@ export default function defaultTheme() {
 			bgColor: '@colors["neutral-90"]',
 			patterns: {
 				// filled patterns
+				primary: {
+					textColor: '@colors.contextualPrimary.onFill',
+					bgColor: '@colors.contextualPrimary.fill',
+				},
 				error: {
 					textColor: '@colors.critical.onFill',
 					bgColor: '@colors.critical.fill',
@@ -209,6 +213,10 @@ export default function defaultTheme() {
 				},
 				info: {}, // component default
 				// outline patterns
+				primaryOutline: {
+					textColor: '@colors.contextualPrimary.text',
+					bgColor: 'transparent',
+				},
 				errorOutline: {
 					textColor: '@colors.critical.text',
 					bgColor: 'transparent',
@@ -226,6 +234,10 @@ export default function defaultTheme() {
 					bgColor: 'transparent',
 				},
 				// subtle patterns
+				primarySubtle: {
+					textColor: '@colors.contextualPrimary.text',
+					bgColor: '@colors.contextualPrimary.subtle',
+				},
 				errorSubtle: {
 					textColor: '@colors.critical.text',
 					bgColor: '@colors.critical.subtle',
