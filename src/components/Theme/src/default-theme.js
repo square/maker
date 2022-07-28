@@ -16,6 +16,12 @@ export default function defaultTheme() {
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
+			contextualPrimary: {
+				fill: '#000000',
+				onFill: '#ffffff',
+				text: '#000000',
+				subtle: '#f5efef',
+			},
 			critical: {
 				fill: '#cd2026',
 				onFill: '#ffffff',
