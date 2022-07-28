@@ -16,6 +16,7 @@
 					[$s.Image]: true,
 					[$s[`shape_${resolvedShape}`]]: resolvedShape,
 					[$s.thumbnail]: isThumbnail,
+					'm-image': true,
 				}"
 				:style="style"
 				:src="src"

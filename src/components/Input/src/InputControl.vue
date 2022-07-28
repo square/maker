@@ -7,6 +7,7 @@
 				[$s.disabled]: disabled,
 				[$s.invalid]: invalid,
 			},
+			'm-input',
 		]"
 		@click="focus"
 	>

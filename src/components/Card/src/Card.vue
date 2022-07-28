@@ -3,6 +3,7 @@
 		:class="[
 			$s.Card,
 			$s[`shape_${resolvedShape}`],
+			'm-card',
 		]"
 		v-bind="$attrs"
 		v-on="$listeners"

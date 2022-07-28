@@ -10,7 +10,9 @@
 				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild() && !resolvedFullWidth,
 				[$s.loading]: loading,
-			}
+			},
+			'm-button',
+			`m-button-${resolvedVariant}`
 		]"
 		:type="type"
 		:disabled="isDisabled"
