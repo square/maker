@@ -14,28 +14,17 @@
 					>
 					Site Background
 				</label>
-				<label>
+				<h3
+					:class="$s.ComponentTitle"
+				>
+					Heading
+				</h3>
+				<div :class="$s.Choice">
 					<input
 						v-model="theme.colors.heading"
 						type="color"
 						@input="updateColors"
 					>
-					Heading
-				</label>
-				<label>
-					<input
-						v-model="theme.colors.body"
-						type="color"
-						@input="updateColors"
-					>
-					Body
-				</label>
-				<h3
-					:class="$s.subcomponentTitle"
-				>
-					Heading
-				</h3>
-				<div :class="$s.fontChoice">
 					<select
 						v-model="theme.fonts.heading.fontFamily"
 						:class="$s.familyChoice"
@@ -65,11 +54,16 @@
 					</select>
 				</div>
 				<h3
-					:class="$s.subcomponentTitle"
+					:class="$s.ComponentTitle"
 				>
 					Body
 				</h3>
-				<div :class="$s.fontChoice">
+				<div :class="$s.Choice">
+					<input
+						v-model="theme.colors.body"
+						type="color"
+						@input="updateColors"
+					>
 					<select
 						v-model="theme.fonts.body.fontFamily"
 						:class="$s.familyChoice"
@@ -98,35 +92,472 @@
 						</template>
 					</select>
 				</div>
-				<label>
-					<input
-						v-model="theme.fonts.baseSize"
-						type="range"
-						min="16"
-						max="22"
-						step="1"
-					>
-					Base font size
-				</label>
-				<label>
-					<input
-						v-model="theme.fonts.sizeScale"
-						type="range"
-						min="1.067"
-						max="1.618"
-						step="0.01"
-					>
-					Contrast
-				</label>
+				<h3
+					:class="$s.ComponentTitle"
+				>
+					Button{{ buttonHover ? ':hover': '' }}
+					<label>
+						<input
+							v-model="buttonHover"
+							type="checkbox"
+						>
+						Edit hover state
+					</label>
+				</h3>
+				<div
+					v-show="!buttonHover"
+				>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.colors.primary"
+								type="color"
+								@input="updateColors"
+							>
+							Button
+						</label>
+						<label>
+							<input
+								v-model="theme.button.textColor"
+								type="color"
+								@input="updateColors"
+							>
+							Text
+						</label>
+						<select
+							v-model="theme.button.custom.fontFamily"
+							:class="$s.familyChoice"
+							@change="updateFont"
+						>
+							<template
+								v-for="(value, index) in [
+									theme.fonts.heading.fontFamily,
+									theme.fonts.body.fontFamily
+								]"
+							>
+								<option
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</template>
+						</select>
+						<select
+							v-model="theme.button.custom.fontWeight"
+							@change="updateFont"
+						>
+							<template v-for="(value, index) in defaultWeights">
+								<option
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</template>
+						</select>
+					</div>
+					<p><strong>Border</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.button.custom.borderRadius"
+								type="number"
+								min="0"
+								max="32"
+								step="2"
+							>
+							Radius
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.borderWidth"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Thickness
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.borderColor"
+								type="color"
+							>
+							Color
+						</label>
+					</div>
+					<p><strong>Box shadow</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.button.custom.boxShadowHorizontal"
+								type="number"
+								min="0"
+								max="32"
+								step="2"
+							>
+							Horizontal
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.boxShadowVertical"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Vertical
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.boxShadowBlurRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Blur
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.boxShadowSpreadRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Spread
+						</label>
+						<input
+							v-model="theme.button.custom.boxShadowColor"
+							type="color"
+						>
+					</div>
+				</div>
+				<div
+					v-show="buttonHover"
+				>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.button.custom.hoverColor"
+								type="color"
+								@input="updateColors"
+							>
+							Button
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.hoverTextColor"
+								type="color"
+								@input="updateColors"
+							>
+							Text
+						</label>
+					</div>
+					<p><strong>Border</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.button.custom.hoverBorderWidth"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Thickness
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.hoverBorderColor"
+								type="color"
+							>
+							Color
+						</label>
+					</div>
+					<p><strong>Box shadow</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.button.custom.hoverBoxShadowHorizontal"
+								type="number"
+								min="0"
+								max="32"
+								step="2"
+							>
+							Horizontal
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.hoverBoxShadowVertical"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Vertical
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.hoverBoxShadowBlurRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Blur
+						</label>
+						<label>
+							<input
+								v-model="theme.button.custom.hoverBoxShadowSpreadRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Spread
+						</label>
+						<input
+							v-model="theme.button.custom.hoverBoxShadowColor"
+							type="color"
+						>
+					</div>
+				</div>
+				<h3
+					:class="$s.ComponentTitle"
+				>
+					Card{{ cardHover ? ':hover': '' }}
+					<label>
+						<input
+							v-model="cardHover"
+							type="checkbox"
+						>
+						Edit hover state
+					</label>
+				</h3>
+				<div
+					v-show="!cardHover"
+				>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.colors.primary"
+								type="color"
+								@input="updateColors"
+							>
+							Card
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.titleColor"
+								type="color"
+								@input="updateColors"
+							>
+							Title
+						</label>
+						<label>
+							<input
+								v-model="theme.card.textColor"
+								type="color"
+								@input="updateColors"
+							>
+							Text
+						</label>
+					</div>
+					<p><strong>Border</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.card.custom.borderRadius"
+								type="number"
+								min="0"
+								max="32"
+								step="2"
+							>
+							Radius
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.borderWidth"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Thickness
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.borderColor"
+								type="color"
+							>
+							Color
+						</label>
+					</div>
+					<p><strong>Box shadow</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.card.custom.boxShadowHorizontal"
+								type="number"
+								min="0"
+								max="32"
+								step="2"
+							>
+							Horizontal
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.boxShadowVertical"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Vertical
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.boxShadowBlurRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Blur
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.boxShadowSpreadRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Spread
+						</label>
+						<input
+							v-model="theme.card.custom.boxShadowColor"
+							type="color"
+						>
+					</div>
+				</div>
+				<div
+					v-show="cardHover"
+				>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.card.custom.hoverColor"
+								type="color"
+								@input="updateColors"
+							>
+							Card
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.hoverTitleColor"
+								type="color"
+								@input="updateColors"
+							>
+							Title
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.hoverTextColor"
+								type="color"
+								@input="updateColors"
+							>
+							Text
+						</label>
+					</div>
+					<p><strong>Border</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.card.custom.hoverBorderWidth"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Thickness
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.hoverBorderColor"
+								type="color"
+							>
+							Color
+						</label>
+					</div>
+					<p><strong>Box shadow</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.card.custom.hoverBoxShadowHorizontal"
+								type="number"
+								min="0"
+								max="32"
+								step="2"
+							>
+							Horizontal
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.hoverBoxShadowVertical"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Vertical
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.hoverBoxShadowBlurRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Blur
+						</label>
+						<label>
+							<input
+								v-model="theme.card.custom.hoverBoxShadowSpreadRadius"
+								type="number"
+								min="0"
+								max="10"
+							>
+							Spread
+						</label>
+						<input
+							v-model="theme.card.custom.hoverBoxShadowColor"
+							type="color"
+						>
+					</div>
+				</div>
+				<h3
+					:class="$s.ComponentTitle"
+				>
+					Section width
+				</h3>
+				<div :class="$s.Choice">
+					<label>
+						<input
+							v-model="theme.section.custom.maxWidth"
+							type="radio"
+							value="5000px"
+							name="width"
+						>
+						Full width
+					</label>
+					<label>
+						<input
+							v-model="theme.section.custom.maxWidth"
+							type="radio"
+							value="1000px"
+							name="width"
+						>
+						1000px
+					</label>
+				</div>
 				<!-- eslint-disable vue/no-textarea-mustache -->
-				<textarea rows="20">
-{{ theme }}
-				</textarea>
+				<!-- <textarea rows="20">
+					{{ theme }}
+				</textarea> -->
 			</div>
 		</div>
 		<m-theme
 			:theme="theme"
-			:profile="themeProfile"
+			:style="styles"
 		>
 			<preview />
 		</m-theme>
@@ -143,6 +574,11 @@ import { fontOptions } from './utils/fonts';
 
 const WebFont = require('webfontloader');
 
+function returnPixelValue(value) {
+	// eslint-disable-next-line no-magic-numbers
+	return !Number.isNaN(Number.parseInt(value, 10)) && Number.parseInt(value, 10) < 50 ? `${value}px` : value;
+}
+
 export default {
 	components: {
 		MTheme,
@@ -153,10 +589,14 @@ export default {
 		return {
 			fontOptions,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
+			buttonHover: false,
+			cardHover: false,
 			theme: {
 				...defaultTheme(),
 				...{
 					fonts: {
+						baseSize: 16,
+						sizeScale: 1.12,
 						heading: {
 							fontFamily: 'Rubik',
 							fontWeight: '700',
@@ -164,6 +604,26 @@ export default {
 						body: {
 							fontFamily: 'Karla',
 							fontWeight: '500',
+						},
+					},
+					button: {
+						custom: {
+							fontFamily: 'Karla',
+							fontWeight: '500',
+							borderRadius: 0,
+							borderWidth: 1,
+						},
+					},
+					section: {
+						custom: {
+							maxWidth: '1000px',
+						},
+					},
+					card: {
+						custom: {
+							borderRadius: 0,
+							borderWidth: 1,
+							borderColor: '#e1e1e1',
 						},
 					},
 				},
@@ -186,6 +646,18 @@ export default {
 
 			return font;
 		},
+
+		styles() {
+			const customVars = {};
+			Object.entries(this.theme).forEach(([component, props]) => {
+				if (props.custom) {
+					Object.entries(props.custom).forEach(([key, value]) => {
+						customVars[`--m-${component}-${key.replace(/([\da-z]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase()}`] = returnPixelValue(value);
+					});
+				}
+			});
+			return customVars;
+		},
 	},
 
 	mounted() {
@@ -201,11 +673,17 @@ export default {
 			});
 		},
 		updateColors() {
-			const { background, heading, body } = this.theme.colors;
+			const {
+				background,
+				heading,
+				body,
+				primary,
+			} = this.theme.colors;
 			const colors = {
 				...makerColors(background),
 				heading: getContrast(background, heading),
 				body: getContrast(background, body, WCAG_CONTRAST_TEXT),
+				primary: getContrast(background, primary),
 			};
 			this.theme.colors = colors;
 		},
@@ -214,9 +692,10 @@ export default {
 };
 </script>
 <style module="$s">
+/* stylelint-disable no-descending-specificity */
 .App {
 	display: grid;
-	grid-template-columns: minmax(300px, 1fr) 3fr;
+	grid-template-columns: minmax(450px, 1fr) 4fr;
 	height: 100vh;
 }
 
@@ -224,9 +703,15 @@ export default {
 	padding: 15px;
 	overflow-y: scroll;
 	color: #000;
-	font-size: 14px;
+	font-size: 12px;
 	font-family: -apple-system, 'Helvetica Neue', sans-serif;
 	background-color: #fff;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0.5em 0;
 }
 
 .Options {
@@ -234,46 +719,142 @@ export default {
 	flex-direction: column;
 
 	& label {
-		margin-bottom: 8px;
+		display: flex;
+		align-items: center;
+
+		& input {
+			margin-right: 4px;
+		}
+
+		&:not(:last-child) {
+			margin-right: 4px;
+		}
 	}
 
-	& input {
-		margin-right: 16px;
+	& input[type="color"] {
+		height: 36px;
+	}
+
+	& input[type="number"] {
+		height: 28px;
+	}
+
+	& p {
+		margin: 0.5em 0;
 	}
 }
 
-.fontChoice {
+.Choice {
 	display: flex;
-	gap: 8px;
-	margin-bottom: 20px;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-bottom: 4px;
 }
 
 .familyChoice {
 	flex-grow: 2;
 }
 
-.fontChoice > select {
+.Choice > select {
 	padding: 8px;
 }
 
-.componentTitle {
-	margin: 0 0 1rem 0;
-	font-size: 1rem;
+.ComponentTitle {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.25em;
+
+	& label {
+		font-weight: normal;
+		font-size: 0.85em;
+	}
 }
 </style>
 
 <style>
 .m-button {
-	color: white !important;
-	background-color: red !important;
-	border-radius: 14px !important;
-	box-shadow: 2px 2px 0 4px rgba(201, 40, 201, 1) !important;
+	font-weight: var(--m-button-font-weight) !important;
+	font-family: var(--m-button-font-family) !important;
+	border-radius: var(--m-button-border-radius) !important;
 }
 
-.m-button:hover {
-	color: white !important;
-	background-color: rgba(201, 40, 201, 1) !important;
-	border-radius: 14px !important;
-	box-shadow: 2px 2px 0 4px rgba(255, 255, 255, 1) !important;
+.m-button-primary {
+	border: solid var(--m-button-border-width) var(--m-button-border-color) !important;
+	box-shadow:
+		var(--m-button-box-shadow-horizontal)
+		var(--m-button-box-shadow-vertical)
+		var(--m-button-box-shadow-blur-radius)
+		var(--m-button-box-shadow-spread-radius)
+		var(--m-button-box-shadow-color) !important;
 }
+
+.m-button-secondary {
+	--outline-border: inset 0 0 0 var(--m-button-border-width) var(--color-main) !important;
+	--box-shadow-border:
+		var(--m-button-box-shadow-horizontal)
+		var(--m-button-box-shadow-vertical)
+		var(--m-button-box-shadow-blur-radius)
+		var(--m-button-box-shadow-spread-radius)
+		var(--m-button-box-shadow-color);
+
+	box-shadow: var(--outline-border), var(--box-shadow-border, var(--focus-border, 0 0)) !important;
+}
+
+.m-button-primary:hover {
+	color: var(--m-button-hover-text-color, var(--color-contrast)) !important;
+	background: var(--m-button-hover-color, var(--color-main)) !important;
+	border: solid var(--m-button-hover-border-width) var(--m-button-hover-border-color) !important;
+	box-shadow:
+		var(--m-button-hover-box-shadow-horizontal)
+		var(--m-button-hover-box-shadow-vertical)
+		var(--m-button-hover-box-shadow-blur-radius)
+		var(--m-button-hover-box-shadow-spread-radius)
+		var(--m-button-hover-box-shadow-color) !important;
+}
+
+.m-button-secondary:hover {
+	--outline-border:
+		inset 0 0 0 var(--m-button-hover-border-width, var(--m-button-border-width))
+		var(--m-button-hover-color, var(--color-main)) !important;
+	--box-shadow-border:
+		var(--m-button-hover-box-shadow-horizontal)
+		var(--m-button-hover-box-shadow-vertical)
+		var(--m-button-hover-box-shadow-blur-radius)
+		var(--m-button-hover-box-shadow-spread-radius)
+		var(--m-button-hover-box-shadow-color);
+
+	color: var(--m-button-hover-color, var(--color-main)) !important;
+	box-shadow: var(--outline-border), var(--box-shadow-border, var(--focus-border, 0 0)) !important;
+}
+
+.m-card {
+	color: var(--m-card-text-color, var(--maker-color-body)) !important;
+	font-weight: var(--m-card-font-weight) !important;
+	font-family: var(--m-card-font-family) !important;
+	background: var(--m-card-color, var(--maker-color-background)) !important;
+	border: solid var(--m-card-border-width) var(--m-card-border-color) !important;
+	border-radius: var(--m-card-border-radius) !important;
+	box-shadow:
+		var(--m-card-box-shadow-horizontal)
+		var(--m-card-box-shadow-vertical)
+		var(--m-card-box-shadow-blur-radius)
+		var(--m-card-box-shadow-spread-radius)
+		var(--m-card-box-shadow-color) !important;
+	cursor: pointer;
+}
+
+.m-card:hover {
+	color: var(--m-card-hover-text-color, var(--maker-color-body)) !important;
+	background: var(--m-card-hover-color, var(--maker-color-background)) !important;
+	border:
+		solid var(--m-card-hover-border-width, var(--m-card-border-width))
+		var(--m-card-hover-border-color, var(--m-card-border-color)) !important;
+	box-shadow:
+		var(--m-card-hover-box-shadow-horizontal)
+		var(--m-card-hover-box-shadow-vertical)
+		var(--m-card-hover-box-shadow-blur-radius)
+		var(--m-card-hover-box-shadow-spread-radius)
+		var(--m-card-hover-box-shadow-color) !important;
+}
+
 </style>

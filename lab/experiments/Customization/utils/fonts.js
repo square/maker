@@ -29,10 +29,6 @@ export const fontOptions = [
 		fallback: 'sans-serif',
 	},
 	{
-		name: 'Source Sans 3',
-		fallback: 'sans-serif',
-	},
-	{
 		name: 'Work Sans',
 		fallback: 'sans-serif',
 	},

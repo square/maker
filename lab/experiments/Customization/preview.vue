@@ -7,7 +7,12 @@
 					class="header"
 				>
 					<menu-icon class="icon" />
-					<span class="logo">Kafo</span>
+					<m-text
+						pattern="headline"
+						:size="3"
+					>
+						Kafo
+					</m-text>
 					<shopping-bag-icon class="icon" />
 				</div>
 				<div
@@ -35,7 +40,10 @@
 							<m-button class="button">
 								Shop now
 							</m-button>
-							<m-button class="button">
+							<m-button
+								class="button"
+								pattern="secondary"
+							>
 								Learn more
 							</m-button>
 						</div>
@@ -127,7 +135,12 @@
 					]"
 				>
 					<div :class="$s.Column">
-						<span class="logo">Kafo</span>
+						<m-text
+							pattern="headline"
+							:size="2"
+						>
+							Kafo
+						</m-text>
 						<m-text>
 							&copy; 2022 Kafo roasters
 						</m-text>
@@ -215,8 +228,8 @@ export default {
 .Preview {
 	display: grid;
 	height: 100%;
-	max-height: calc(100vh - 40px);
-	padding: 40px 40px 0;
+	max-height: calc(100vh - 30px);
+	padding: 30px 30px 0;
 	background-color: #f7f7f7;
 }
 
@@ -229,7 +242,7 @@ export default {
 	font-weight: var(--font-weights-text, normal);
 	font-size: var(--font-base-size);
 	font-family: var(--maker-font-body-font-family, inherit);
-	background-color: var(--maker-color-background);
+	background-color: #fff;
 	border-radius: 30px 30px 0 0;
 	box-shadow: 0 0.900783px 1.80157px rgb(0 0 0 / 10%), 0 0 3.60313px rgb(0 0 0 / 10%);
 }
@@ -240,6 +253,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	overflow: scroll;
+	background-color: var(--maker-color-background);
 	border: 1px solid #ebedef;
 	border-radius: 4px 4px 0 0;
 }
@@ -248,8 +262,9 @@ export default {
 	display: flex;
 	gap: 40px;
 	justify-content: space-between;
+	box-sizing: border-box;
 	width: 100%;
-	max-width: 1000px;
+	max-width: var(--m-section-max-width, 1000px);
 	margin: 0 auto;
 	padding: 20px;
 
@@ -276,19 +291,26 @@ body {
 	overflow: hidden;
 }
 
-.logo {
-	font-weight: bold;
-	font-size: 32px;
-	font-family: Palatino, Palladio, "Century Schoolbook L", Georgia, serif;
-}
-
 .icon {
 	width: 24px;
 	height: 24px;
+	fill: currentColor;
 }
 
 .banner {
 	align-items: center;
+}
+
+.banner > .image {
+	flex: 3;
+}
+
+.banner > div:last-child {
+	flex: 2;
+}
+
+.items > .title {
+	text-align: center;
 }
 
 .item {
@@ -296,14 +318,11 @@ body {
 	gap: 5px !important;
 }
 
-.item .image {
-	width: 100%;
-}
-
 .footer {
 	padding: 40px 20px !important;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .footer div {
 	flex: 1;
 }
