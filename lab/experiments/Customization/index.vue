@@ -4,7 +4,13 @@
 	>
 		<div :class="$s.Editor">
 			<h1>Advanced customization</h1>
-
+			<p
+				v-for="(preset, index) in presets"
+				:key="index"
+				@click="setPreset(preset)"
+			>
+				<strong>{{ index }}</strong>
+			</p>
 			<div :class="$s.Options">
 				<label>
 					<input
@@ -193,8 +199,7 @@
 								v-model="theme.button.custom.boxShadowHorizontal"
 								type="number"
 								min="0"
-								max="32"
-								step="2"
+								max="20"
 							>
 							Horizontal
 						</label>
@@ -202,8 +207,8 @@
 							<input
 								v-model="theme.button.custom.boxShadowVertical"
 								type="number"
-								min="1"
-								max="10"
+								min="0"
+								max="20"
 							>
 							Vertical
 						</label>
@@ -212,7 +217,7 @@
 								v-model="theme.button.custom.boxShadowBlurRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Blur
 						</label>
@@ -221,7 +226,7 @@
 								v-model="theme.button.custom.boxShadowSpreadRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Spread
 						</label>
@@ -278,8 +283,7 @@
 								v-model="theme.button.custom.hoverBoxShadowHorizontal"
 								type="number"
 								min="0"
-								max="32"
-								step="2"
+								max="20"
 							>
 							Horizontal
 						</label>
@@ -287,8 +291,8 @@
 							<input
 								v-model="theme.button.custom.hoverBoxShadowVertical"
 								type="number"
-								min="1"
-								max="10"
+								min="0"
+								max="20"
 							>
 							Vertical
 						</label>
@@ -297,7 +301,7 @@
 								v-model="theme.button.custom.hoverBoxShadowBlurRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Blur
 						</label>
@@ -306,7 +310,7 @@
 								v-model="theme.button.custom.hoverBoxShadowSpreadRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Spread
 						</label>
@@ -334,7 +338,7 @@
 					<div :class="$s.Choice">
 						<label>
 							<input
-								v-model="theme.colors.primary"
+								v-model="theme.card.custom.color"
 								type="color"
 								@input="updateColors"
 							>
@@ -350,7 +354,7 @@
 						</label>
 						<label>
 							<input
-								v-model="theme.card.textColor"
+								v-model="theme.card.custom.textColor"
 								type="color"
 								@input="updateColors"
 							>
@@ -393,8 +397,7 @@
 								v-model="theme.card.custom.boxShadowHorizontal"
 								type="number"
 								min="0"
-								max="32"
-								step="2"
+								max="20"
 							>
 							Horizontal
 						</label>
@@ -402,8 +405,8 @@
 							<input
 								v-model="theme.card.custom.boxShadowVertical"
 								type="number"
-								min="1"
-								max="10"
+								min="0"
+								max="20"
 							>
 							Vertical
 						</label>
@@ -412,7 +415,7 @@
 								v-model="theme.card.custom.boxShadowBlurRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Blur
 						</label>
@@ -421,7 +424,7 @@
 								v-model="theme.card.custom.boxShadowSpreadRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Spread
 						</label>
@@ -486,8 +489,7 @@
 								v-model="theme.card.custom.hoverBoxShadowHorizontal"
 								type="number"
 								min="0"
-								max="32"
-								step="2"
+								max="20"
 							>
 							Horizontal
 						</label>
@@ -495,8 +497,8 @@
 							<input
 								v-model="theme.card.custom.hoverBoxShadowVertical"
 								type="number"
-								min="1"
-								max="10"
+								min="0"
+								max="20"
 							>
 							Vertical
 						</label>
@@ -505,7 +507,7 @@
 								v-model="theme.card.custom.hoverBoxShadowBlurRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Blur
 						</label>
@@ -514,7 +516,7 @@
 								v-model="theme.card.custom.hoverBoxShadowSpreadRadius"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 							>
 							Spread
 						</label>
@@ -550,9 +552,24 @@
 					</label>
 				</div>
 				<!-- eslint-disable vue/no-textarea-mustache -->
-				<!-- <textarea rows="20">
-					{{ theme }}
-				</textarea> -->
+				<textarea rows="20">
+{{
+{
+	colors: theme.colors,
+	fonts: {
+		heading: theme.fonts.heading,
+		body: theme.fonts.body,
+	},
+	button: {
+		color: theme.button.color,
+		textColor: theme.button.textColor,
+		custom: theme.button.custom,
+	},
+	card: theme.card,
+	section: theme.section,
+}
+}}
+				</textarea>
 			</div>
 		</div>
 		<m-theme
@@ -571,6 +588,7 @@ import makerColors from '@square/maker/utils/maker-colors';
 
 import Preview from './preview.vue';
 import { fontOptions } from './utils/fonts';
+import { presets } from './utils/presets';
 
 const WebFont = require('webfontloader');
 
@@ -578,6 +596,42 @@ function returnPixelValue(value) {
 	// eslint-disable-next-line no-magic-numbers
 	return !Number.isNaN(Number.parseInt(value, 10)) && Number.parseInt(value, 10) < 50 ? `${value}px` : value;
 }
+
+const customDefaults = {
+	fonts: {
+		baseSize: 16,
+		sizeScale: 1.12,
+		heading: {
+			fontFamily: 'Rubik',
+			fontWeight: '700',
+		},
+		body: {
+			fontFamily: 'Karla',
+			fontWeight: '500',
+		},
+	},
+	button: {
+		custom: {
+			fontFamily: 'Karla',
+			fontWeight: '500',
+			borderRadius: 0,
+			borderWidth: 1,
+		},
+	},
+	section: {
+		custom: {
+			maxWidth: '1000px',
+		},
+	},
+	card: {
+		custom: {
+			color: '#ffffff',
+			borderRadius: 0,
+			borderWidth: 1,
+			borderColor: '#e1e1e1',
+		},
+	},
+};
 
 export default {
 	components: {
@@ -587,46 +641,14 @@ export default {
 
 	data() {
 		return {
+			presets,
 			fontOptions,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
 			buttonHover: false,
 			cardHover: false,
 			theme: {
 				...defaultTheme(),
-				...{
-					fonts: {
-						baseSize: 16,
-						sizeScale: 1.12,
-						heading: {
-							fontFamily: 'Rubik',
-							fontWeight: '700',
-						},
-						body: {
-							fontFamily: 'Karla',
-							fontWeight: '500',
-						},
-					},
-					button: {
-						custom: {
-							fontFamily: 'Karla',
-							fontWeight: '500',
-							borderRadius: 0,
-							borderWidth: 1,
-						},
-					},
-					section: {
-						custom: {
-							maxWidth: '1000px',
-						},
-					},
-					card: {
-						custom: {
-							borderRadius: 0,
-							borderWidth: 1,
-							borderColor: '#e1e1e1',
-						},
-					},
-				},
+				...customDefaults,
 			},
 		};
 	},
@@ -686,6 +708,13 @@ export default {
 				primary: getContrast(background, primary),
 			};
 			this.theme.colors = colors;
+		},
+		setPreset(preset) {
+			this.theme = {
+				...defaultTheme(),
+				...customDefaults,
+				...preset,
+			};
 		},
 	},
 
@@ -841,6 +870,11 @@ h3 {
 		var(--m-card-box-shadow-spread-radius)
 		var(--m-card-box-shadow-color) !important;
 	cursor: pointer;
+	transition:
+		color 0.2s ease-in,
+		background-color 0.2s ease-in,
+		filter 0.2s ease-in,
+		box-shadow 0.2s ease-in;
 }
 
 .m-card:hover {

@@ -72,10 +72,12 @@
 							<m-image
 								:src="item.photo"
 								class="image"
+								shape="square"
 							/>
 							<m-text
 								pattern="title"
 								:size="0"
+								:color="cardTitleColor"
 								class="title"
 							>
 								{{ item.name }}
@@ -88,6 +90,7 @@
 							</m-text>
 							<m-text
 								:size="-1"
+								:color="cardTextColor"
 								class="description"
 							>
 								{{ item.description }}
@@ -104,10 +107,12 @@
 							<m-image
 								:src="item.photoalt"
 								class="image"
+								shape="square"
 							/>
 							<m-text
 								pattern="title"
 								:size="0"
+								:color="cardTitleColor"
 								class="title"
 							>
 								{{ item.name }}
@@ -120,6 +125,7 @@
 							</m-text>
 							<m-text
 								:size="-1"
+								:color="cardTextColor"
 								class="description"
 							>
 								{{ item.description }}
@@ -164,6 +170,7 @@ import { MImage } from '@square/maker/components/Image';
 import { MButton } from '@square/maker/components/Button';
 import { MCard } from '@square/maker/components/Card';
 import { MInput } from '@square/maker/components/Input';
+import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 export default {
 	components: {
@@ -176,13 +183,20 @@ export default {
 		MInput,
 	},
 
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
 	data() {
 		return {
 			items: [
 				{
 					id: 1,
 					name: 'Americano',
-					description: 'Italian espresso gets the American treatment; hot water fills the cup for a rich alternative to drip coffee.',
+					description: 'Italian espresso gets the American treatment; hot water fills the cup for a rich alternative to drip.',
 					photo: 'https://source.unsplash.com/900x600/?coffee',
 					photoalt: 'https://source.unsplash.com/900x600/?espresso',
 					categories: [
@@ -213,7 +227,19 @@ export default {
 					price: '$9.50',
 				},
 			],
+			cardTitleColor: undefined,
+			cardTextColor: undefined,
 		};
+	},
+
+	watch: {
+		theme: {
+			handler(theme) {
+				this.cardTitleColor = theme.card.custom.titleColor;
+				this.cardTextColor = theme.card.custom.textColor;
+			},
+			deep: true,
+		},
 	},
 
 	methods: {
@@ -316,6 +342,12 @@ body {
 .item {
 	flex: 1;
 	gap: 5px !important;
+}
+
+.item .image {
+	position: relative;
+	width: calc(100% + 48px);
+	margin: -16px -24px 16px;
 }
 
 .footer {
