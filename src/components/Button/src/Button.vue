@@ -1,36 +1,33 @@
 <template>
 	<button
 		:class="[
-			$s.Button,
-			$s[`variant_${resolvedVariant}`],
-			$s[`size_${resolvedSize}`],
-			$s[`shape_${resolvedShape}`],
-			$s[`align_${resolvedAlign}`],
-			{
-				[$s.fullWidth]: resolvedFullWidth,
-				[$s.iconButton]: isSingleChild() && !resolvedFullWidth,
-				[$s.loading]: loading,
-			},
+			// component internal styles
+			buttonClass,
+			// tagged classes for external
+			// targeting & styling
 			'm-button',
+			'p-'+resolvedPattern,
+			{
+				's-loading': loading,
+			},
 		]"
 		:type="type"
 		:disabled="isDisabled"
-		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
 		<m-loading
 			v-if="loading"
-			:class="$s.Loading"
+			:class="loadingClass"
 		/>
-		<span :class="$s.MainText">
+		<span :class="mainTextClass">
 			<!-- @slot Button label -->
 			<slot />
 		</span>
 
 		<span
 			v-if="$scopedSlots.information"
-			:class="$s.InformationText"
+			:class="informationTextClass"
 		>
 			<!-- @slot Information label -->
 			<slot
@@ -41,6 +38,7 @@
 </template>
 
 <script>
+import { css } from '@emotion/css';
 import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
 import { MLoading } from '@square/maker/components/Loading';
@@ -72,6 +70,220 @@ function setColorVariables(tokens, variant) {
 		'--color-focus': colorFocus,
 	};
 }
+
+const ButtonStyles = {
+	'--radius-rounded-button': '8px',
+	'--radius-pill-button': '32px',
+
+	position: 'relative',
+	display: 'inline-flex',
+	alignItems: 'center',
+	minWidth: '0',
+	color: 'var(--color-contrast, #fff)',
+	fontWeight: 'var(--maker-font-label-font-weight, 500)',
+	fontFamily: 'var(--maker-font-label-font-family, inherit)',
+	verticalAlign: 'middle',
+	backgroundColor: 'var(--color-main, var(--maker-color-primary, #000))',
+	border: 'none',
+	borderRadius: 'var(--maker-shape-button-border-radius, var(--radius-rounded-button))',
+	outline: 'none',
+	boxShadow:
+		`var(--outline-border, 0 0),
+		var(--focus-border, 0 0)`,
+	cursor: 'pointer',
+	transition:
+		`color 0.2s ease-in,
+		background-color 0.2s ease-in,
+		filter 0.2s ease-in,
+		box-shadow 0.2s ease-in`,
+	userSelect: 'none',
+	touchAction: 'manipulation',
+	fill: 'currentColor',
+
+	'&:disabled': {
+		cursor: 'not-allowed',
+		opacity: '0.5',
+	},
+
+	'&:focus': {
+		'--focus-border':
+			`0 0 0 1px var(--maker-color-neutral-20, #fff),
+			0 0 0 3px var(--color-focus)`,
+	},
+
+	'&:hover:not(:disabled)': {
+		backgroundColor: 'var(--color-hover)',
+	},
+
+	'&:active:not(:disabled)': {
+		backgroundColor: 'var(--color-active)',
+	},
+};
+
+const IconButtonStyles = {
+	justifyContent: 'center',
+	minWidth: 'max-content',
+	'& > *': {
+		lineHeight: '0',
+	},
+};
+
+const ButtonLoadingStyles = {
+	color: 'transparent !important',
+	opacity: '1',
+};
+
+const ShapeStyles = {
+	squared: {
+		borderRadius: '0',
+	},
+	rounded: {
+		borderRadius: 'var(--radius-rounded-button)',
+	},
+	pill: {
+		borderRadius: 'var(--radius-pill-button)',
+	},
+};
+
+const ButtonAlignStyles = {
+	center: {
+		justifyContent: 'center',
+	},
+	stack: {
+		flexDirection: 'column',
+		justifyContent: 'center',
+	},
+	'space-between': {
+		flexDirection: 'row-reverse',
+		justifyContent: 'space-between',
+	},
+};
+
+const FullWidthStyles = {
+	width: '100%',
+};
+
+const MainTextStyles = {
+	display: 'flex',
+	gap: '8px',
+	alignItems: 'center',
+	width: 'max-content',
+	maxWidth: '100%',
+	overflow: 'hidden',
+	lineHeight: '1',
+	whiteSpace: 'nowrap',
+	textOverflow: 'ellipsis',
+};
+
+const InformationTextStyles = {
+	width: 'min-content',
+	maxWidth: '100%',
+	overflow: 'hidden',
+	lineHeight: '1',
+	whiteSpace: 'nowrap',
+	textOverflow: 'ellipsis',
+	opacity: '0.6',
+};
+
+const InformationTextAlignStyles = {
+	center: {
+		marginLeft: '8px',
+	},
+	stack: {},
+	'space-between': {
+		marginRight: '8px',
+	},
+};
+
+const LoadingStyles = {
+	position: 'absolute',
+	top: '4px',
+	right: '4px',
+	bottom: '4px',
+	left: '4px',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	backgroundColor: 'transparent',
+};
+
+const ButtonSizeStyles = {
+	small: {
+		height: '32px',
+		padding: 'var(--small-padding)',
+		fontSize: '12px',
+		'& > *': {
+			lineHeight: '1.4',
+		},
+	},
+	medium: {
+		height: '48px',
+		padding: 'var(--medium-padding)',
+		fontSize: '14px',
+		'& > *': {
+			lineHeight: '1.77',
+		},
+	},
+	large: {
+		height: '64px',
+		padding: 'var(--large-padding)',
+		fontSize: '16px',
+		'& > *': {
+			lineHeight: '1.5',
+		},
+	},
+};
+
+const IconButtonSizeStyles = {
+	small: {
+		width: '32px',
+		padding: '0',
+	},
+	medium: {
+		width: '48px',
+		padding: '0',
+	},
+	large: {
+		width: '64px',
+		padding: '0',
+	},
+};
+
+const ButtonVariantStyles = {
+	primary: {
+		'--small-padding': '0 16px',
+		'--medium-padding': '0 24px',
+		'--large-padding': '0 32px',
+	},
+	secondary: {
+		'--small-padding': '0 16px',
+		'--medium-padding': '0 24px',
+		'--large-padding': '0 32px',
+		'--outline-border': 'inset 0 0 0 1px var(--color-main)',
+		color: 'var(--color-main)',
+		backgroundColor: 'transparent',
+	},
+	tertiary: {
+		'--small-padding': '0 8px',
+		'--medium-padding': '0 12px',
+		'--large-padding': '0 20px',
+		color: 'var(--color-main)',
+		backgroundColor: 'transparent',
+	},
+};
+
+const LoadingVariantStyles = {
+	primary: {
+		color: 'var(--color-contrast)',
+	},
+	secondary: {
+		color: 'var(--color-main)',
+	},
+	tertiary: {
+		color: 'var(--color-main)',
+	},
+};
+
 
 /**
  * Button component
@@ -169,7 +381,7 @@ export default {
 		align: {
 			type: String,
 			default: undefined,
-			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
+			validator: (align) => ['center', 'stack', 'space-between'].includes(align),
 		},
 		/**
 		 * Toggles button loading state
@@ -191,7 +403,53 @@ export default {
 			'fullWidth',
 			'pattern',
 		]),
-		style() {
+		buttonClass() {
+			const classes = [];
+			classes.push(ButtonStyles);
+			if (this.isIconButton) {
+				classes.push(IconButtonStyles);
+			}
+			if (this.loading) {
+				classes.push(ButtonLoadingStyles);
+			}
+			classes.push(ShapeStyles[this.resolvedShape]);
+			if (this.align) {
+				classes.push(ButtonAlignStyles[this.resolvedAlign]);
+			}
+			if (this.fullWidth) {
+				classes.push(FullWidthStyles);
+			}
+			if (this.size) {
+				classes.push(ButtonSizeStyles[this.resolvedSize]);
+				if (this.isIconButton) {
+					classes.push(IconButtonSizeStyles[this.resolvedSize]);
+				}
+			}
+			classes.push(ButtonVariantStyles[this.resolvedVariant]);
+			classes.push(this.buttonStyle);
+			return css(classes);
+		},
+		mainTextClass() {
+			return css(MainTextStyles);
+		},
+		informationTextClass() {
+			const classes = [];
+			classes.push(InformationTextStyles);
+			if (this.resolvedAlign) {
+				classes.push(InformationTextAlignStyles[this.resolvedAlign]);
+			}
+			return css(classes);
+		},
+		loadingClass() {
+			return css([
+				LoadingStyles,
+				LoadingVariantStyles[this.resolvedVariant],
+			]);
+		},
+		isIconButton() {
+			return this.isSingleChild() && !this.resolvedFullWidth;
+		},
+		buttonStyle() {
 			const tokens = {
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,
@@ -258,24 +516,6 @@ export default {
 		line-height: 0;
 	}
 
-	&.fullWidth {
-		width: 100%;
-	}
-
-	&.align_center {
-		justify-content: center;
-	}
-
-	&.align_stack {
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	&.align_space-between {
-		flex-direction: row-reverse;
-		justify-content: space-between;
-	}
-
 	&:disabled {
 		cursor: not-allowed;
 		opacity: 0.5;
@@ -300,6 +540,24 @@ export default {
 		color: transparent !important;
 		opacity: 1;
 	}
+}
+
+.align_center {
+	justify-content: center;
+}
+
+.align_stack {
+	flex-direction: column;
+	justify-content: center;
+}
+
+.align_space-between {
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+
+.fullWidth {
+	width: 100%;
 }
 
 .shape_squared {
