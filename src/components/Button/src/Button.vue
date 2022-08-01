@@ -419,7 +419,7 @@ export default {
 			if (this.fullWidth) {
 				classes.push(FullWidthStyles);
 			}
-			if (this.size) {
+			if (this.resolvedSize) {
 				classes.push(ButtonSizeStyles[this.resolvedSize]);
 				if (this.isIconButton) {
 					classes.push(IconButtonSizeStyles[this.resolvedSize]);
