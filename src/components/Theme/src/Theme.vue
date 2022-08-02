@@ -139,24 +139,6 @@ export default {
 				'--maker-color-elevation': colors.elevation,
 				'--maker-color-overlay': colors.overlay,
 
-				// contextual colors
-				'--maker-color-primary-fill': colors.contextualPrimary.fill,
-				'--maker-color-primary-on-fill': colors.contextualPrimary.onFill,
-				'--maker-color-primary-text': colors.contextualPrimary.text,
-				'--maker-color-primary-subtle': colors.contextualPrimary.subtle,
-				'--maker-color-critical-fill': colors.critical.fill,
-				'--maker-color-critical-on-fill': colors.critical.onFill,
-				'--maker-color-critical-text': colors.critical.text,
-				'--maker-color-critical-subtle': colors.critical.subtle,
-				'--maker-color-warning-fill': colors.warning.fill,
-				'--maker-color-warning-on-fill': colors.warning.onFill,
-				'--maker-color-warning-text': colors.warning.text,
-				'--maker-color-warning-subtle': colors.warning.subtle,
-				'--maker-color-success-fill': colors.success.fill,
-				'--maker-color-success-on-fill': colors.success.onFill,
-				'--maker-color-success-text': colors.success.text,
-				'--maker-color-success-subtle': colors.success.subtle,
-
 				// typography
 				'--maker-font-heading-font-family': fonts.heading.fontFamily,
 				'--maker-font-heading-font-weight': fonts.heading.fontWeight,

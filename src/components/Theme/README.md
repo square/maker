@@ -746,27 +746,6 @@ Variable | Purpose
 --maker-color-elevation | elevation color, e.g. color of elevated elements, like ActionBarButtons or selected Segments in SegmentedControl
 --maker-color-overlay | overlay color, e.g. color of Modal layer, Dialog layer, etc
 
-#### Contextual colors
-
-Variable | Purpose
--|-
---maker-color-primary-fill | primary fill color, same as primary color
---maker-color-primary-on-fill | color with good contrast against primary fill color
---maker-color-primary-subtle | primary subtle color: much lighter and less saturated than primary color
---maker-color-primary-text | primary text color, has good contrast against background color & primary subtle color
---maker-color-critical-fill | critical fill color, use to alert users of some error
---maker-color-critical-on-fill | color with good contrast against critical fill color
---maker-color-critical-subtle | critical subtle color: much lighter and less saturated than critical color
---maker-color-critical-text | critical text color, has good contrast against background color & critical subtle color
---maker-color-warning-fill | warning fill color, use to warn users of some issue
---maker-color-warning-on-fill | color with good contrast against warning fill color
---maker-color-warning-subtle | warning subtle color: much lighter and less saturated than warning color
---maker-color-warning-text | warning text color, has good contrast against background color & warning subtle color
---maker-color-success-fill | success fill color, use to alert users of some successful action
---maker-color-success-on-fill | color with good contrast against success fill color
---maker-color-success-subtle | success subtle color: much lighter and less saturated than success color
---maker-color-success-text | success text color, has good contrast against background color & success subtle color
-
 ### Typography
 
 Variable | Purpose
