@@ -247,6 +247,9 @@ The `dialogApi.open()` function has a second optional object parameter that offe
 	// Dialog will close when clicked outside of it - default false
 	closeOnClickOutside: boolean;
 
+	// Dialog will close when esc key is pressed - default false
+	closeOnEsc: boolean;
+
 	// Dialog will call this async function to determine if it should close
 	beforeCloseHook: (closeData?: any) => Promise<boolean>;
 
@@ -257,7 +260,7 @@ The `dialogApi.open()` function has a second optional object parameter that offe
 
 To hook into the close function, you can either:
 1. add the `beforeCloseHook` property on the open options object. The function must be an async function that returns a boolean - true to close the dialog or false to block closing.
-2. add the `afterCloseHook` property on the open options object. This will be called once the dialog has been fully closed, and does not block the dialog from being closed. 
+2. add the `afterCloseHook` property on the open options object. This will be called once the dialog has been fully closed, and does not block the dialog from being closed.
 
 Either option will be passed the `closeData` that `dialogApi.close` is called with (see below).
 
@@ -309,6 +312,9 @@ export default {
 	methods: {
 		openDialog() {
 			this.dialogApi.open(() => <CloseDataAndHooksDemoDialog />, {
+				closeOnClickOutside: true,
+				closeOnEsc: true,
+
 				beforeCloseHook: (selectedOption) => {
 					const shouldClose = selectedOption !== 'option-1';
 
