@@ -14,7 +14,7 @@ You should almost always use this component for standalone buttons in your app. 
 				type="color"
 			>
 		</label><br><br>
-		<table>
+		<table class="ButtonTable">
 			<thead>
 				<tr>
 					<td />
@@ -36,146 +36,29 @@ You should almost always use this component for standalone buttons in your app. 
 					</th>
 					<td>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="large"
 							:color="color"
 						>
-							Button
-						</m-button>
-						<m-button
-							variant="primary"
-							size="large"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="primary"
-							size="large"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="primary"
-							size="large"
-							:color="color"
-						>
-							<x class="icon" />
-						</m-button>
-						<m-button
-							variant="primary"
-							size="large"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="primary"
-							size="large"
-							:color="color"
-							loading
-						>
-							Loading
+							Large
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="large"
 							:color="color"
 						>
-							Button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="large"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="large"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="large"
-							:color="color"
-						>
-							<x class="icon" />
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="large"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="large"
-							:color="color"
-							loading
-						>
-							Loading
+							Large
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="large"
 							:color="color"
 						>
-							Button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="large"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="large"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="large"
-							:color="color"
-						>
-							<x class="icon" />
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="large"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="large"
-							:color="color"
-							loading
-						>
-							Loading
+							Large
 						</m-button>
 					</td>
 				</tr>
@@ -185,146 +68,29 @@ You should almost always use this component for standalone buttons in your app. 
 					</th>
 					<td>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="medium"
 							:color="color"
 						>
-							Button
-						</m-button>
-						<m-button
-							variant="primary"
-							size="medium"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="primary"
-							size="medium"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="primary"
-							size="medium"
-							:color="color"
-						>
-							<x class="icon" />
-						</m-button>
-						<m-button
-							variant="primary"
-							size="medium"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="primary"
-							size="medium"
-							:color="color"
-							loading
-						>
-							Loading
+							Medium
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							variant="secondary"
+							pattern="secondary"
 							size="medium"
 							:color="color"
 						>
-							Button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="medium"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="medium"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="medium"
-							:color="color"
-						>
-							<x class="icon" />
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="medium"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="medium"
-							:color="color"
-							loading
-						>
-							Loading
+							Medium
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							variant="tertiary"
+							pattern="tertiary"
 							size="medium"
 							:color="color"
 						>
-							Button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="medium"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="medium"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="medium"
-							:color="color"
-						>
-							<x class="icon" />
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="medium"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="medium"
-							:color="color"
-							loading
-						>
-							Loading
+							Medium
 						</m-button>
 					</td>
 				</tr>
@@ -334,46 +100,71 @@ You should almost always use this component for standalone buttons in your app. 
 					</th>
 					<td>
 						<m-button
-							variant="primary"
+							pattern="primary"
 							size="small"
 							:color="color"
 						>
-							Button
+							Small
 						</m-button>
+					</td>
+					<td>
 						<m-button
-							variant="primary"
+							pattern="secondary"
 							size="small"
 							:color="color"
 						>
-							<plus class="icon" />
-							Button
+							Small
 						</m-button>
+					</td>
+					<td>
 						<m-button
-							variant="primary"
+							pattern="tertiary"
 							size="small"
 							:color="color"
 						>
-							Button
-							<plus class="icon" />
+							Small
 						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Disabled
+					</th>
+					<td>
 						<m-button
-							variant="primary"
-							size="small"
-							:color="color"
-						>
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="primary"
-							size="small"
+							pattern="primary"
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-button>
+					</td>
+					<td>
 						<m-button
-							variant="primary"
-							size="small"
+							pattern="secondary"
+							:color="color"
+							disabled
+						>
+							Disabled
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							:color="color"
+							disabled
+						>
+							Disabled
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Loading
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
 							:color="color"
 							loading
 						>
@@ -382,46 +173,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							variant="secondary"
-							size="small"
-							:color="color"
-						>
-							Button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="small"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="small"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="small"
-							:color="color"
-						>
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="small"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="secondary"
-							size="small"
+							pattern="secondary"
 							:color="color"
 							loading
 						>
@@ -430,46 +182,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							variant="tertiary"
-							size="small"
-							:color="color"
-						>
-							Button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="small"
-							:color="color"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="small"
-							:color="color"
-						>
-							Button
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="small"
-							:color="color"
-						>
-							<plus class="icon" />
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="small"
-							:color="color"
-							disabled
-						>
-							Disabled button
-						</m-button>
-						<m-button
-							variant="tertiary"
-							size="small"
+							pattern="tertiary"
 							:color="color"
 							loading
 						>
@@ -477,14 +190,317 @@ You should almost always use this component for standalone buttons in your app. 
 						</m-button>
 					</td>
 				</tr>
+				<tr>
+					<th>
+						Icon
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							:color="color"
+						>
+							<x class="icon" />
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							:color="color"
+						>
+							<x class="icon" />
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							:color="color"
+						>
+							<x class="icon" />
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Icon + Text
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							:color="color"
+						>
+							<plus class="icon" />
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							:color="color"
+						>
+							<plus class="icon" />
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							:color="color"
+						>
+							<plus class="icon" />
+							Button
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Info slot
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							:color="color"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							:color="color"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							:color="color"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Info slot (stacked)
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							:color="color"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Info slot (reversed)
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							:color="color"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Squared
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							shape="squared"
+							:color="color"
+						>
+							Squared
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							shape="squared"
+							:color="color"
+						>
+							Squared
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							shape="squared"
+							:color="color"
+						>
+							Squared
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Rounded
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							shape="rounded"
+							:color="color"
+						>
+							Rounded
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							shape="rounded"
+							:color="color"
+						>
+							Rounded
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							shape="rounded"
+							:color="color"
+						>
+							Rounded
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Pill
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							shape="pill"
+							:color="color"
+						>
+							Pill
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							shape="pill"
+							:color="color"
+						>
+							Pill
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							shape="pill"
+							:color="color"
+						>
+							Pill
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Full width
+					</th>
+					<td>
+						<m-button
+							pattern="primary"
+							full-width
+							:color="color"
+						>
+							Full width
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							full-width
+							:color="color"
+						>
+							Full width
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							full-width
+							:color="color"
+						>
+							Full width
+						</m-button>
+					</td>
+				</tr>
 			</tbody>
 		</table>
-		<m-button
-			color="#fff"
-			:text-color="color"
-		>
-			One-Off Reversed Button
-		</m-button>
 	</div>
 </template>
 
@@ -507,13 +523,11 @@ export default {
 };
 </script>
 
-<style>
-body {
-	background-color: #f9f9f9;
-}
-</style>
-
 <style scoped>
+.ButtonTable {
+	border-spacing: 16px;
+	border-collapse: separate;
+}
 .icon {
 	width: 16px;
 	height: 16px;
