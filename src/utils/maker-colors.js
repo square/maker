@@ -2,7 +2,12 @@ import { colord, extend } from 'colord';
 import a11yPlugin from 'colord/plugins/a11y';
 import mixPlugin from 'colord/plugins/mix';
 import { cloneDeep } from 'lodash';
-import { WCAG_CONTRAST_TEXT, DARK_COLOR_LUMINANCE_THRESHOLD, getContrast } from './get-contrast';
+import {
+	WCAG_CONTRAST_TEXT,
+	WCAG_CONTRAST_TITLE,
+	DARK_COLOR_LUMINANCE_THRESHOLD,
+	getContrast,
+} from './get-contrast';
 
 extend([a11yPlugin, mixPlugin]);
 
@@ -60,23 +65,72 @@ const CONTEXTUAL_COLORS = {
 	},
 };
 
+function isDark(hex) {
+	return colord(hex).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
+}
+
+function enoughContrastForFill(hex1, hex2) {
+	return colord(hex1).contrast(hex2) >= WCAG_CONTRAST_TITLE;
+}
+
+function generateContextualPrimaryColors(background = '#fff', primary = '#000', neutralColors) {
+	const isDarkBg = isDark(background);
+	const backgroundContrast = getContrast(background);
+	const primaryColors = {};
+	if (enoughContrastForFill(primary, background)) {
+		primaryColors.fill = primary;
+		const DARKEN_PRIMARY_FOR_TEXT = 0.2;
+		primaryColors.text = colord(primary)
+			.mix(backgroundContrast, DARKEN_PRIMARY_FOR_TEXT)
+			.toHex();
+		primaryColors.onFill = getContrast(primaryColors.fill);
+	} else {
+		primaryColors.fill = backgroundContrast;
+		primaryColors.text = backgroundContrast;
+		primaryColors.onFill = primary;
+	}
+	if (isDarkBg) {
+		primaryColors.subtle = neutralColors['neutral-10'];
+	} else {
+		const SUBTLE_SATURATION = 25;
+		const SUBTLE_LIGHTNESS = 95;
+		const primaryHsl = colord(primary).toHsl();
+		primaryColors.subtle = colord({
+			h: primaryHsl.h,
+			s: SUBTLE_SATURATION,
+			l: SUBTLE_LIGHTNESS,
+		}).toHex();
+	}
+	return primaryColors;
+}
+
 /**
  * @param {String} background
  * @return {Object}
  */
-export default function makerColors(background = '#fff') {
+export default function makerColors(background = '#fff', primary = '#000') {
 	const isDarkBg = colord(background).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
 	const neutralRatios = isDarkBg ? NEUTRAL_RATIOS.dark : NEUTRAL_RATIOS.light;
 	const neutralContrast = getContrast(background);
 	const neutralColors = {};
 
+	// derive neutral colors
 	Object.entries(neutralRatios).forEach(([name, ratio]) => {
 		neutralColors[name] = colord(background).mix(neutralContrast, ratio).toHex();
 	});
 
+	// derive contextual colors
 	const contextualColors = isDarkBg
 		? cloneDeep(CONTEXTUAL_COLORS.dark) : cloneDeep(CONTEXTUAL_COLORS.light);
 
+	// derive contextual primary colors
+	contextualColors.contextualPrimary = generateContextualPrimaryColors(
+		background,
+		primary,
+		neutralColors,
+	);
+
+	// derive contextual critical, warning, success colors
 	['critical', 'warning', 'success'].forEach((name) => {
 		if (colord(contextualColors[name].text).contrast(background) < WCAG_CONTRAST_TEXT) {
 			contextualColors[name].onFill = contextualColors[name].fill;

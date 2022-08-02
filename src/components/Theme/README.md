@@ -503,6 +503,7 @@ export default {
 ```
 
 ## Neutral colors
+
 We have a preset scale of neutral colors that are used within most components. Depending on the background color of your site you may want to alter those colors. There are six neutrals and they can be overriden in the `colors` object. We recommend `neutral-0` to be the same or close to your background with each color getting progressively lighter or darker depending on your background.
 
 ```vue
@@ -723,20 +724,27 @@ The Theme component makes these reusable CSS variables available to all DOM node
 
 ### Colors
 
+#### Neutral colors
+
 Variable | Purpose
 -|-
---maker-color-neutral-0 | neutral-0
+--maker-color-neutral-0 | neutral-0 (min contrast against background)
 --maker-color-neutral-10 | neutral-10
 --maker-color-neutral-20 | neutral-20
 --maker-color-neutral-80 | neutral-80
 --maker-color-neutral-90 | neutral-80
---maker-color-neutral-100 | neutral-100
+--maker-color-neutral-100 | neutral-100 (max contrast against background)
+
+#### General colors
+
+Variable | Purpose
+-|-
 --maker-color-primary | primary color
 --maker-color-background | background color
---maker-color-heading | heading color
+--maker-color-heading | heading text color
 --maker-color-body | body text color
---maker-color-elevation | elevation color
---maker-color-overlay | overlay color
+--maker-color-elevation | elevation color, e.g. color of elevated elements, like ActionBarButtons or selected Segments in SegmentedControl
+--maker-color-overlay | overlay color, e.g. color of Modal layer, Dialog layer, etc
 
 ### Typography
 
@@ -748,6 +756,16 @@ Variable | Purpose
 --maker-font-body-font-weight | body text font weight
 --maker-font-label-font-family | label font family
 --maker-font-label-font-weight | label font weight
+
+### Shape
+
+Variable | Purpose
+-|-
+--maker-shape-default-border-radius | default border radius
+--maker-shape-card-border-radius | card border radius
+--maker-shape-button-border-radius | button border radius
+--maker-shape-image-border-radius | image border radius
+--maker-shape-thumbnail-border-radius | thumbnail image border radius
 
 <!-- api-tables:start -->
 ## Props
