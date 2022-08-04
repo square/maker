@@ -317,4 +317,12 @@ Supports events from [`<input type="text">`](https://developer.mozilla.org/en-US
 | Event        | Type | Description |
 | ------------ | ---- | ----------- |
 | input:update | -    | —           |
+
+
+## Methods
+
+| Method | Description   |
+| ------ | ------------- |
+| focus  | focuses input |
+| blur   | blurs input   |
 <!-- api-tables:end -->

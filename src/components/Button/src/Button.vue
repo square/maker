@@ -2,6 +2,7 @@
 	<button
 		:class="[
 			$s.Button,
+			$s[`variant_${resolvedVariant}`],
 			$s[`size_${resolvedSize}`],
 			$s[`shape_${resolvedShape}`],
 			$s[`align_${resolvedAlign}`],
@@ -39,95 +40,37 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
+import { getContrast } from '@square/maker/utils/get-contrast';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import getContrast from '@square/maker/utils/get-contrast';
 
-function getFocus(chromaColor) {
-	const arbitraryAlphaValue = 0.3;
-	return chromaColor.alpha(arbitraryAlphaValue);
-}
+function setColorVariables(tokens, variant) {
+	const colorMainObject = colord(tokens.color);
+	const colorContrast = getContrast(tokens.color, tokens.textColor);
+	// Determine state adjustment type
+	let stateAdjustment;
+	if (variant === 'primary') {
+		stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
+	} else {
+		stateAdjustment = 'alpha';
+	}
+	// Define each state adjustment and generated color
+	const hoverStateAdjust = 0.08;
+	const activeStateAdjust = 0.16;
+	const focusAlphaAdjust = 0.3;
+	const colorHover = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
+	const colorActive = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
+	const colorFocus = colorMainObject.alpha(focusAlphaAdjust).toHex();
 
-function getHover(chromaColor) {
-	// mix color with 5% black
-	const arbitraryValue = 0.05;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
-}
-
-function getActive(chromaColor) {
-	// mix color with 10% black
-	const arbitraryValue = 0.1;
-	return chroma.mix(chromaColor, '#000', arbitraryValue);
-}
-
-function fill(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const textColor = tokens.textColor ? chroma(tokens.textColor) : undefined;
-	const contrastColor = getContrast(color, textColor);
-	const contrastColorHover = getHover(contrastColor);
-	const contrastColorActive = getActive(contrastColor);
-	const focusColor = getFocus(color);
 	return {
-		'--small-padding': '0 16px',
-		'--medium-padding': '0 24px',
-		'--large-padding': '0 32px',
-		'--color-main': color.hex(),
-		'--color-main-hover': colorHover.hex(),
-		'--color-main-active': colorActive.hex(),
-		'--color-contrast': contrastColor.hex(),
-		'--color-contrast-hover': contrastColorHover.hex(),
-		'--color-contrast-active': contrastColorActive.hex(),
-		'--color-focus': focusColor.hex(),
+		'--color-main': tokens.color,
+		'--color-contrast': colorContrast,
+		'--color-hover': colorHover,
+		'--color-active': colorActive,
+		'--color-focus': colorFocus,
 	};
 }
-
-function outline(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '0 16px',
-		'--medium-padding': '0 24px',
-		'--large-padding': '0 32px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
-		'--outline-border': 'inset 0 0 0 1px var(--color-contrast)',
-	};
-}
-
-function ghost(tokens) {
-	const color = chroma(tokens.color);
-	const colorHover = getHover(color);
-	const colorActive = getActive(color);
-	const focusColor = getFocus(color);
-	return {
-		'--small-padding': '0 8px',
-		'--medium-padding': '0 12px',
-		'--large-padding': '0 20px',
-		'--color-main': 'transparent',
-		'--color-main-hover': 'rgba(0, 0, 0, 0.05)',
-		'--color-main-active': 'rgba(0, 0, 0, 0.1)',
-		'--color-contrast': color.hex(),
-		'--color-contrast-hover': colorHover.hex(),
-		'--color-contrast-active': colorActive.hex(),
-		'--color-focus': focusColor.hex(),
-	};
-}
-
-const VARIANTS = {
-	primary: fill,
-	secondary: outline,
-	tertiary: ghost,
-};
 
 /**
  * Button component
@@ -185,7 +128,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Text color of button
@@ -193,7 +136,7 @@ export default {
 		textColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Variant
@@ -248,10 +191,11 @@ export default {
 			'pattern',
 		]),
 		style() {
-			return VARIANTS[this.resolvedVariant]({
+			const tokens = {
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,
-			});
+			};
+			return setColorVariables(tokens, this.resolvedVariant);
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
@@ -284,11 +228,11 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--color-contrast);
+	color: var(--color-contrast, #fff);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
-	background-color: var(--color-main);
+	background-color: var(--color-main, var(--maker-color-primary, #000));
 	border: none;
 	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 	outline: none;
@@ -299,6 +243,7 @@ export default {
 	transition:
 		color 0.2s ease-in,
 		background-color 0.2s ease-in,
+		filter 0.2s ease-in,
 		box-shadow 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
@@ -398,18 +343,17 @@ export default {
 	}
 
 	&:hover:not(:disabled) {
-		color: var(--color-contrast-hover);
-		background-color: var(--color-main-hover);
+		background-color: var(--color-hover);
 	}
 
 	&:active:not(:disabled) {
-		color: var(--color-contrast-active);
-		background-color: var(--color-main-active);
+		background-color: var(--color-active);
 	}
 
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
+		opacity: 1;
 	}
 }
 
@@ -422,8 +366,39 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-contrast);
 	background-color: transparent;
+}
+
+/* Variants */
+.Button.variant_primary,
+.Button.variant_secondary {
+	--small-padding: 0 16px;
+	--medium-padding: 0 24px;
+	--large-padding: 0 32px;
+}
+
+.Button.variant_primary .Loading {
+	color: var(--color-contrast);
+}
+
+.Button.variant_secondary {
+	--outline-border: inset 0 0 0 1px var(--color-main);
+}
+
+.Button.variant_tertiary {
+	--small-padding: 0 8px;
+	--medium-padding: 0 12px;
+	--large-padding: 0 20px;
+}
+
+.Button.variant_secondary,
+.Button.variant_tertiary {
+	color: var(--color-main);
+	background-color: transparent;
+
+	& .Loading {
+		color: var(--color-main);
+	}
 }
 
 .MainText {

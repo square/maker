@@ -1,23 +1,29 @@
 <template>
-	<div
+	<!--
+		PopoverContent is expected to render outside the Popover's Mtheme wrapper,
+		due to the recommended placement of MPopoverLayer.
+		Returning a new MTheme wrapper for PopoverContent allows us to ensure that
+		the MTheme context of Popover and PopoverContent area always identical.
+	-->
+	<m-theme
 		:class="$s.PopoverContent"
-		:style="computedStyles"
+		:style="styles"
+		:theme="theme"
 	>
 		<!-- @slot Popover container content -->
 		<slot />
-	</div>
+	</m-theme>
 </template>
 
 <script>
-import chroma from 'chroma-js';
-import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
+import { colord } from 'colord';
+import { MTheme } from '@square/maker/components/Theme';
+import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
+import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
-	inject: {
-		theme: {
-			default: defaultTheme(),
-			from: MThemeKey,
-		},
+	components: {
+		MTheme,
 	},
 
 	props: {
@@ -27,7 +33,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Background color of the popover
@@ -35,7 +41,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Popover padding
@@ -54,21 +60,23 @@ export default {
 	},
 
 	computed: {
-		computedStyles() {
-			// PopoverContent can be rendered outside the current Mtheme wrapper
-			// depending on placement of MPopoverLayer so we need to make sure
-			// it receives the correct Mtheme color variables
-			const themeColorVars = {};
-			Object.entries(this.theme.colors).forEach(([color, hex]) => {
-				const name = color.includes('neutral') ? `--${color}` : `--color-${color}`;
-				themeColorVars[name] = hex;
-			});
+		styles() {
+			return {
+				'--padding': this.padding,
+			};
+		},
+
+		theme() {
+			let colors = {};
+			if (this.bgColor) {
+				colors = makerColors(this.bgColor);
+			}
+			if (this.color) {
+				colors.body = getContrast(colors.background, this.color, WCAG_CONTRAST_TEXT);
+			}
 
 			return {
-				'--popover-color': this.color,
-				'--popover-bg-color': this.bgColor,
-				'--padding': this.padding,
-				...themeColorVars,
+				colors,
 			};
 		},
 	},
@@ -78,8 +86,8 @@ export default {
 <style module="$s">
 .PopoverContent {
 	padding: var(--padding);
-	color: var(--popover-color, var(--maker-color-body, black));
-	background-color: var(--popover-bg-color, var(--maker-color-background, white));
+	color: var(--maker-color-body, black);
+	background-color: var(--maker-color-background, white);
 	border: 1px solid var(--maker-color-neutral-10);
 	border-radius: var(--maker-shape-default-border-radius, 8px);
 	box-shadow: 0 0 18px 6px rgba(0, 0, 0, 0.2);

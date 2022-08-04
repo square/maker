@@ -25,17 +25,10 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import assert from '@square/maker/utils/assert';
-
-function textButton(tokens) {
-	const textColor = tokens.color ? chroma(tokens.color) : undefined;
-	return {
-		color: textColor ? textColor.hex() : undefined,
-	};
-}
 
 /**
  * TextButton component
@@ -85,7 +78,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Toggles button disabled state
@@ -110,9 +103,9 @@ export default {
 			'color',
 		]),
 		style() {
-			return textButton({
-				color: this.resolvedColor,
-			});
+			return {
+				'--color': this.resolvedColor,
+			};
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
@@ -127,12 +120,14 @@ export default {
 </script>
 
 <style module="$s">
+/* stylelint-disable no-descending-specificity */
+
 .TextButton {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
-	color: var(--maker-color-neutral-90);
+	color: var(--color, var(--maker-color-neutral-90));
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
@@ -171,6 +166,10 @@ export default {
 		}
 	}
 
+	& > .Loading {
+		opacity: 1;
+	}
+
 	&.loading {
 		/* don't inherit color in loading state on hover/active */
 		color: transparent !important;
@@ -186,7 +185,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--maker-color-neutral-90);
+	color: var(--color, var(--maker-color-neutral-90));
 	background-color: transparent;
 }
 

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { MTransitionResize } from '@square/maker/components/TransitionResize';
+import { MTransitionResize } from '@square/maker/utils/TransitionResize';
 
 export default {
 	components: {

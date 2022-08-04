@@ -31,7 +31,7 @@
 import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
-import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
 	springUpFn,
@@ -69,13 +69,13 @@ const apiMixin = {
 				};
 			},
 
-			async close() {
+			async close(closeData) {
 				// Close the open popover (if present) and then close the dialog in the next tick.
 				// Closing at the same time will result in the popover content becoming inline and
 				// causes a weird content shift as the dialog fades away.
 
 				if (this.state.vnode && typeof this.state.options.beforeCloseHook === 'function') {
-					if (!(await this.state.options.beforeCloseHook())) {
+					if (!(await this.state.options.beforeCloseHook(closeData))) {
 						return; // cancel
 					}
 				}
@@ -83,6 +83,7 @@ const apiMixin = {
 				vm.popoverApi?.closePopover();
 				vm.$nextTick(() => {
 					this.state.vnode = undefined;
+					this.state.options.afterCloseHook?.(closeData);
 				});
 			},
 		};
@@ -163,7 +164,7 @@ export default {
 	position: relative;
 	width: 100%;
 	max-height: calc(100% - 48px);
-	overflow: auto;
+	overflow: hidden;
 	border-radius:
 		var(--maker-shape-default-border-radius, 8px)
 		var(--maker-shape-default-border-radius, 8px)

@@ -36,7 +36,7 @@
 import Vue from 'vue';
 import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
-import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
 	fadeOutFn,

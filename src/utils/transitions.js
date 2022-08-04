@@ -102,9 +102,8 @@ export function fadeInFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		// duration: 3000,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -120,8 +119,8 @@ export function delayedFadeInFn({ element, onComplete }) {
 		animate({
 			...animationDirection,
 			...spring,
-			onUpdate(number) {
-				elementStyler.set(styleFn(number));
+			onUpdate(progress) {
+				elementStyler.set(styleFn(progress));
 			},
 			onComplete,
 		});
@@ -137,8 +136,8 @@ export function fadeOutFn({ element, onComplete }) {
 	animate({
 		...animateDown,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -153,8 +152,8 @@ export function springUpFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -169,8 +168,8 @@ export function springDownFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -185,8 +184,8 @@ export function springLeftFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -201,8 +200,8 @@ export function springRightFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -217,8 +216,8 @@ export function floatUpFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -234,8 +233,8 @@ export function delayedFloatUpFn({ element, onComplete }) {
 		animate({
 			...animationDirection,
 			...spring,
-			onUpdate(number) {
-				elementStyler.set(styleFn(number));
+			onUpdate(progress) {
+				elementStyler.set(styleFn(progress));
 			},
 			onComplete,
 		});
@@ -254,8 +253,8 @@ export function staggeredFloatUpFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...springSubtle,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number, endValue));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress, endValue));
 		},
 		onComplete,
 	});
@@ -270,8 +269,8 @@ export function floatDownFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...spring,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -286,8 +285,8 @@ export function springUpBounceFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...springBounce,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});
@@ -302,8 +301,8 @@ export function springDownBounceFn({ element, onComplete }) {
 	animate({
 		...animationDirection,
 		...springBounce,
-		onUpdate(number) {
-			elementStyler.set(styleFn(number));
+		onUpdate(progress) {
+			elementStyler.set(styleFn(progress));
 		},
 		onComplete,
 	});

@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { colord } from 'colord';
 import { throttle } from 'lodash';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { MTouchCapture } from '@square/maker/components/TouchCapture';
+import { MTouchCapture } from '@square/maker/utils/TouchCapture';
 import modalApi from './modal-api';
 
 export default {
@@ -51,7 +51,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 		/**
 		 * Text color of container
@@ -59,7 +59,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => chroma.valid(color),
+			validator: (color) => colord(color).isValid(),
 		},
 	},
 
@@ -83,11 +83,6 @@ export default {
 				...this.modalStyles,
 			};
 		},
-
-		scrollTop() {
-			return this.$refs.modal && this.$refs.modal.$el
-				? this.$refs.modal.$el.scrollTop : 0;
-		},
 	},
 
 	watch: {
@@ -101,7 +96,8 @@ export default {
 
 	methods: {
 		setScrollTop() {
-			this.isScrolledToTop = this.scrollTop <= 0;
+			const scrollTop = this.$refs?.modal?.$el?.scrollTop || 0;
+			this.isScrolledToTop = scrollTop <= 0;
 		},
 
 		onSwipeDown() {

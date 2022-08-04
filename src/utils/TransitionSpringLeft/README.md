@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { MTransitionSpringLeft } from '@square/maker/components/TransitionSpringLeft';
+import { MTransitionSpringLeft } from '@square/maker/utils/TransitionSpringLeft';
 
 export default {
 	components: {
