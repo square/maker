@@ -238,6 +238,24 @@ export default function defaultTheme() {
 				},
 			},
 		},
+		badge: {
+			bgColor: '@colors["neutral-90"]',
+			patterns: {
+				primary: {
+					bgColor: '@colors.primary',
+				},
+				error: {
+					bgColor: '@colors.critical.fill',
+				},
+				success: {
+					bgColor: '@colors.success.fill',
+				},
+				warning: {
+					bgColor: '@colors.warning.fill',
+				},
+				info: {}, // component default
+			},
+		},
 		modal: {
 			color: undefined,
 			bgColor: undefined,
