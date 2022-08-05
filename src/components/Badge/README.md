@@ -15,7 +15,14 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 				v-model="primaryColor"
 				type="color"
 			>
-		</label><br><br>
+		</label><br>
+		<label>
+			background color picker
+			<input
+				v-model="backgroundColor"
+				type="color"
+			>
+		</label><br>
 		<table>
 			<thead>
 				<tr>
@@ -423,6 +430,7 @@ export default {
 	data() {
 		return {
 			primaryColor: '#0064ff', // blue
+			backgroundColor: '#ffffff', // white
 			patterns: Object.keys(defaultTheme().badge.patterns),
 		};
 	},
@@ -431,7 +439,7 @@ export default {
 			return {
 				colors: {
 					primary: this.primaryColor,
-					...makerColors('#fff', this.primaryColor),
+					...makerColors(this.backgroundColor, this.primaryColor),
 				},
 			};
 		},
@@ -641,6 +649,7 @@ export default {
 | no-relative   | `boolean` | `false`    | —                 | skip setting `position: relative` on default slot |
 | pseudo-target | `string`  | `'after'`  | `before`, `after` | default slot's pseudo-element target              |
 | bg-color      | `string`  | —          | —                 | bg color, as a valid hex string                   |
+| text-color    | `string`  | —          | —                 | text color, as a valid hex string                 |
 
 
 ## Slots

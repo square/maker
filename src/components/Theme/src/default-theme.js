@@ -257,18 +257,23 @@ export default function defaultTheme() {
 			},
 		},
 		badge: {
+			textColor: '@colors["neutral-0"]',
 			bgColor: '@colors["neutral-90"]',
 			patterns: {
 				primary: {
-					bgColor: '@colors.primary',
+					textColor: '@colors.contextualPrimary.onFill',
+					bgColor: '@colors.contextualPrimary.fill',
 				},
 				error: {
+					textColor: '@colors.critical.onFill',
 					bgColor: '@colors.critical.fill',
 				},
 				success: {
+					textColor: '@colors.success.onFill',
 					bgColor: '@colors.success.fill',
 				},
 				warning: {
+					textColor: '@colors.warning.onFill',
 					bgColor: '@colors.warning.fill',
 				},
 				info: {}, // component default

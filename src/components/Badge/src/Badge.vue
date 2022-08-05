@@ -83,12 +83,22 @@ export default {
 			// uses colord validator so that contrast can be checked
 			validator: (color) => colord(color).isValid(),
 		},
+		/**
+		 * text color, as a valid hex string
+		 */
+		textColor: {
+			type: String,
+			default: undefined,
+			// uses colord validator so that contrast can be checked
+			validator: (color) => colord(color).isValid(),
+		},
 	},
 
 	computed: {
 		...resolveThemeableProps('badge', [
 			'pattern',
 			'bgColor',
+			'textColor',
 		]),
 		isNotificationDot() {
 			return !this.label;
@@ -116,7 +126,7 @@ export default {
 		},
 		styles() {
 			const bgColor = this.resolvedBgColor || '#000';
-			const textColor = getContrast(bgColor);
+			const textColor = this.resolvedTextColor || getContrast(bgColor);
 			const label = this.label || ' ';
 			const quotedLabel = `'${label}'`;
 			const styles = {
@@ -143,7 +153,7 @@ export default {
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	background-color: var(--badge-bg-color);
-	border: 1px solid var(--maker-background-color, #fff);
+	border: 1px solid var(--maker-color-background, #fff);
 	border-radius: 100px;
 }
 
