@@ -46,7 +46,7 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+Supports attributes from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
 
 | Prop       | Type     | Default | Possible values | Description                                  |
 | ---------- | -------- | ------- | --------------- | -------------------------------------------- |
@@ -64,5 +64,5 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Events
 
-Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+Supports events from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
 <!-- api-tables:end -->

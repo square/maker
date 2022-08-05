@@ -15,8 +15,8 @@ import cssValidator from '@square/maker/utils/css-validator';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 /**
- * @inheritAttrs div
- * @inheritListeners div
+ * @inheritAttrs span
+ * @inheritListeners span
  */
 export default {
 	inject: {
@@ -80,9 +80,9 @@ export default {
 	padding: 4px 8px;
 	color: var(--text-color, #1b1b1b);
 	font-weight: var(--maker-font-label-font-weight, 500);
-	font-size: 12px;
+	font-size: 12px; /* TODO: refactor to font-size step -2 later? */
 	font-family: var(--maker-font-label-font-family, inherit);
-	line-height: 16px;
+	line-height: 16px; /* TODO: refactor to line-height step -2 later? */
 	background-color: var(--bg-color);
 	border: 1px solid var(--border-color);
 	border-radius: 100px;
