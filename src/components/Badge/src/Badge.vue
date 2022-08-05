@@ -126,7 +126,7 @@ export default {
 		},
 		styles() {
 			const bgColor = this.resolvedBgColor || '#000';
-			const textColor = this.resolvedTextColor || getContrast(bgColor);
+			const textColor = getContrast(bgColor, this.resolvedTextColor);
 			const label = this.label || ' ';
 			const quotedLabel = `'${label}'`;
 			const styles = {
