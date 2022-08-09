@@ -279,6 +279,11 @@ export default function defaultTheme() {
 				info: {}, // component default
 			},
 		},
+		progresscircle: {
+			color: '@colors.contextualPrimary.fill',
+			iconColor: '@colors.contextualPrimary.fill',
+			iconName: undefined,
+		},
 		modal: {
 			color: undefined,
 			bgColor: undefined,
