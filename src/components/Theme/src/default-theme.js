@@ -79,9 +79,11 @@ export default function defaultTheme() {
 				},
 				secondary: {
 					variant: 'secondary',
+					color: '@colors.contextualPrimary.fill',
 				},
 				tertiary: {
 					variant: 'tertiary',
+					color: '@colors.contextualPrimary.fill',
 				},
 			},
 		},
