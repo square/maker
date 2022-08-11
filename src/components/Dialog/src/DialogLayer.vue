@@ -16,6 +16,10 @@
 					body
 					:class="$s.disableScroll"
 				/>
+				<pseudo-window
+					document
+					@keyup.esc="closeOnEsc"
+				/>
 				<div
 					ref="dialog"
 					:class="$s.DialogContentWrapper"
@@ -57,6 +61,7 @@ const apiMixin = {
 				this.state.vnode = vnode;
 				this.state.options = {
 					closeOnClickOutside: false,
+					closeOnEsc: false,
 					beforeCloseHook: async () => true,
 					...options,
 				};
@@ -139,6 +144,14 @@ export default {
 				this.dialogApi.close();
 			}
 		},
+		closeOnEsc() {
+			const { closeOnEsc } = this.dialogApi.state.options;
+			const { dialog } = this.$refs;
+
+			if (dialog && closeOnEsc) {
+				this.dialogApi.close();
+			}
+		},
 	},
 };
 </script>
@@ -164,7 +177,7 @@ export default {
 	position: relative;
 	width: 100%;
 	max-height: calc(100% - 48px);
-	overflow: auto;
+	overflow: hidden;
 	border-radius:
 		var(--maker-shape-default-border-radius, 8px)
 		var(--maker-shape-default-border-radius, 8px)

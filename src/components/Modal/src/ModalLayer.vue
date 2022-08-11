@@ -20,6 +20,10 @@
 					body
 					:class="$s.disableScroll"
 				/>
+				<pseudo-window
+					document
+					@keyup.esc="closeOnEsc"
+				/>
 				<div
 					ref="modal"
 					:class="$s.Container"
@@ -200,6 +204,14 @@ export default {
 			const { closeOnClickOutside } = this.currentLayer.state.options;
 			const { modal } = this.$refs;
 			if (modal && closeOnClickOutside && !modal.contains(event.target)) {
+				this.modalApi.close();
+			}
+		},
+		closeOnEsc() {
+			const { closeOnEsc } = this.currentLayer.state.options;
+			const { modal } = this.$refs;
+
+			if (modal && closeOnEsc) {
 				this.modalApi.close();
 			}
 		},

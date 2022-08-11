@@ -236,10 +236,14 @@ The `modalApi.open()` function has a second optional object parameter that offer
 {
 	// Modal will close when clicked outside of it - default false
 	closeOnClickOutside: boolean;
+
+	// Modal will close when esc key is pressed - default false
+	// Only use this in Modals without ActionBars
+	closeOnEsc: boolean;
 }
 ```
 
-To close a modal on ESC, use the `@window-esc` from the `MActionBarButton` component.
+If the modal has an action bar, and you'd like it to close on the escape key, it's more semantic to use the `@window-esc` from the `MActionBarButton` component.
 
 To hook into the close function, add the `beforeClose` prop on the modal component.
 The function must return a boolean - true to close the modal or false to block closing.

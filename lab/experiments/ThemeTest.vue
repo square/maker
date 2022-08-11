@@ -705,7 +705,7 @@ export default {
 	data() {
 		return {
 			backgroundColor: '#ffffff',
-			primaryColor: '#14433d',
+			primaryColor: '#006aff',
 			headingColor: '#000000',
 			bodyColor: '#000000',
 			choice: '10am',
@@ -831,7 +831,7 @@ export default {
 			const icons = this.iconStyle === 'filled' ? filledIcons : outlineIcons;
 			const theme = {
 				colors: {
-					...makerColors(this.backgroundColor),
+					...makerColors(this.backgroundColor, this.primaryColor),
 					primary: this.primaryColor,
 					heading: getContrast(this.backgroundColor, this.headingColor),
 					body: getContrast(this.backgroundColor, this.bodyColor, WCAG_CONTRAST_TEXT),

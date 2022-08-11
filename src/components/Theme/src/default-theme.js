@@ -16,6 +16,12 @@ export default function defaultTheme() {
 			elevation: '#ffffff',
 			overlay: 'rgba(0, 0, 0, 0.3)',
 			primary: '#000000',
+			contextualPrimary: {
+				fill: '#000000',
+				onFill: '#ffffff',
+				text: '#000000',
+				subtle: '#f5efef',
+			},
 			critical: {
 				fill: '#cd2026',
 				onFill: '#ffffff',
@@ -189,6 +195,10 @@ export default function defaultTheme() {
 			bgColor: '@colors["neutral-90"]',
 			patterns: {
 				// filled patterns
+				primary: {
+					textColor: '@colors.contextualPrimary.onFill',
+					bgColor: '@colors.contextualPrimary.fill',
+				},
 				error: {
 					textColor: '@colors.critical.onFill',
 					bgColor: '@colors.critical.fill',
@@ -203,6 +213,10 @@ export default function defaultTheme() {
 				},
 				info: {}, // component default
 				// outline patterns
+				primaryOutline: {
+					textColor: '@colors.contextualPrimary.text',
+					bgColor: 'transparent',
+				},
 				errorOutline: {
 					textColor: '@colors.critical.text',
 					bgColor: 'transparent',
@@ -220,6 +234,10 @@ export default function defaultTheme() {
 					bgColor: 'transparent',
 				},
 				// subtle patterns
+				primarySubtle: {
+					textColor: '@colors.contextualPrimary.text',
+					bgColor: '@colors.contextualPrimary.subtle',
+				},
 				errorSubtle: {
 					textColor: '@colors.critical.text',
 					bgColor: '@colors.critical.subtle',
@@ -236,6 +254,29 @@ export default function defaultTheme() {
 					textColor: '@colors["neutral-90"]',
 					bgColor: '@colors["neutral-10"]',
 				},
+			},
+		},
+		badge: {
+			textColor: '@colors["neutral-0"]',
+			bgColor: '@colors["neutral-90"]',
+			patterns: {
+				primary: {
+					textColor: '@colors.contextualPrimary.onFill',
+					bgColor: '@colors.contextualPrimary.fill',
+				},
+				error: {
+					textColor: '@colors.critical.onFill',
+					bgColor: '@colors.critical.fill',
+				},
+				success: {
+					textColor: '@colors.success.onFill',
+					bgColor: '@colors.success.fill',
+				},
+				warning: {
+					textColor: '@colors.warning.onFill',
+					bgColor: '@colors.warning.fill',
+				},
+				info: {}, // component default
 			},
 		},
 		modal: {
