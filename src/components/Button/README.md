@@ -6,14 +6,21 @@ You should almost always use this component for standalone buttons in your app. 
 
 ```vue
 <template>
-	<div>
+	<m-theme :theme="theme">
 		<label>
-			Color picker
+			primary color picker
 			<input
-				v-model="color"
+				v-model="primaryColor"
 				type="color"
 			>
-		</label><br><br>
+		</label><br>
+		<label>
+			background color picker
+			<input
+				v-model="bgColor"
+				type="color"
+			>
+		</label><br>
 		<table class="ButtonTable">
 			<thead>
 				<tr>
@@ -38,7 +45,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							size="large"
-							:color="color"
 						>
 							Large
 						</m-button>
@@ -47,7 +53,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							size="large"
-							:color="color"
 						>
 							Large
 						</m-button>
@@ -56,7 +61,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							size="large"
-							:color="color"
 						>
 							Large
 						</m-button>
@@ -70,7 +74,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							size="medium"
-							:color="color"
 						>
 							Medium
 						</m-button>
@@ -79,7 +82,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							size="medium"
-							:color="color"
 						>
 							Medium
 						</m-button>
@@ -88,7 +90,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							size="medium"
-							:color="color"
 						>
 							Medium
 						</m-button>
@@ -102,7 +103,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							size="small"
-							:color="color"
 						>
 							Small
 						</m-button>
@@ -111,7 +111,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							size="small"
-							:color="color"
 						>
 							Small
 						</m-button>
@@ -120,7 +119,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							size="small"
-							:color="color"
 						>
 							Small
 						</m-button>
@@ -133,7 +131,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 							disabled
 						>
 							Disabled
@@ -142,7 +139,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 							disabled
 						>
 							Disabled
@@ -151,7 +147,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 							disabled
 						>
 							Disabled
@@ -165,7 +160,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 							loading
 						>
 							Loading
@@ -174,7 +168,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 							loading
 						>
 							Loading
@@ -183,7 +176,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 							loading
 						>
 							Loading
@@ -197,7 +189,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
@@ -205,7 +196,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
@@ -213,7 +203,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 						>
 							<x class="icon" />
 						</m-button>
@@ -226,7 +215,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -235,7 +223,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -244,7 +231,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 						>
 							<plus class="icon" />
 							Button
@@ -258,7 +244,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 						>
 							Button
 							<template #information>
@@ -269,7 +254,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 						>
 							Button
 							<template #information>
@@ -280,7 +264,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 						>
 							Button
 							<template #information>
@@ -296,7 +279,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 							align="stack"
 						>
 							Button
@@ -308,7 +290,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 							align="stack"
 						>
 							Button
@@ -320,7 +301,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 							align="stack"
 						>
 							Button
@@ -337,7 +317,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="primary"
-							:color="color"
 							align="space-between"
 						>
 							Button
@@ -349,7 +328,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="secondary"
-							:color="color"
 							align="space-between"
 						>
 							Button
@@ -361,7 +339,6 @@ You should almost always use this component for standalone buttons in your app. 
 					<td>
 						<m-button
 							pattern="tertiary"
-							:color="color"
 							align="space-between"
 						>
 							Button
@@ -379,7 +356,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							shape="squared"
-							:color="color"
 						>
 							Squared
 						</m-button>
@@ -388,7 +364,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							shape="squared"
-							:color="color"
 						>
 							Squared
 						</m-button>
@@ -397,7 +372,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							shape="squared"
-							:color="color"
 						>
 							Squared
 						</m-button>
@@ -411,7 +385,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							shape="rounded"
-							:color="color"
 						>
 							Rounded
 						</m-button>
@@ -420,7 +393,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							shape="rounded"
-							:color="color"
 						>
 							Rounded
 						</m-button>
@@ -429,7 +401,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							shape="rounded"
-							:color="color"
 						>
 							Rounded
 						</m-button>
@@ -443,7 +414,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							shape="pill"
-							:color="color"
 						>
 							Pill
 						</m-button>
@@ -452,7 +422,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							shape="pill"
-							:color="color"
 						>
 							Pill
 						</m-button>
@@ -461,7 +430,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							shape="pill"
-							:color="color"
 						>
 							Pill
 						</m-button>
@@ -475,7 +443,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="primary"
 							full-width
-							:color="color"
 						>
 							Full width
 						</m-button>
@@ -484,7 +451,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="secondary"
 							full-width
-							:color="color"
 						>
 							Full width
 						</m-button>
@@ -493,7 +459,6 @@ You should almost always use this component for standalone buttons in your app. 
 						<m-button
 							pattern="tertiary"
 							full-width
-							:color="color"
 						>
 							Full width
 						</m-button>
@@ -501,24 +466,39 @@ You should almost always use this component for standalone buttons in your app. 
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</m-theme>
 </template>
 
 <script>
 import X from '@square/maker-icons/X';
 import Plus from '@square/maker-icons/Plus';
 import { MButton } from '@square/maker/components/Button';
+import { MTheme } from '@square/maker/components/Theme';
+import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
 	components: {
+		MTheme,
 		MButton,
 		Plus,
 		X,
 	},
 	data() {
 		return {
-			color: '#000',
+			primaryColor: '#000000',
+			bgColor: '#ffffff',
 		};
+	},
+	computed: {
+		theme() {
+			return {
+				colors: {
+					primary: this.primaryColor,
+					background: this.bgColor,
+					...makerColors(this.bgColor, this.primaryColor),
+				},
+			};
+		},
 	},
 };
 </script>
