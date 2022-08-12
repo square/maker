@@ -1,5 +1,40 @@
 // Don't need weights for this demo because their variable fonts
 export const presets = {
+	resetStyles: {
+		fonts: {
+			baseSize: 16,
+			sizeScale: 1.12,
+			heading: {
+				fontFamily: 'Work Sans',
+				fontWeight: '700',
+			},
+			body: {
+				fontFamily: 'Open Sans',
+				fontWeight: '500',
+			},
+		},
+		section: {
+			custom: {
+				maxWidth: '1000px',
+			},
+		},
+		button: {
+			custom: {
+				fontFamily: 'Open Sans',
+				fontWeight: '500',
+				borderRadius: 0,
+				borderWidth: 1,
+			},
+		},
+		card: {
+			custom: {
+				color: '#ffffff',
+				borderRadius: 0,
+				borderWidth: 1,
+				borderColor: '#e1e1e1',
+			},
+		},
+	},
 	presetOne: {
 		shapes: {
 			imageBorderRadius: '8px',
@@ -41,6 +76,11 @@ export const presets = {
 			body: {
 				fontFamily: 'Karla',
 				fontWeight: '500',
+			},
+		},
+		section: {
+			custom: {
+				maxWidth: '1000px',
 			},
 		},
 		button: {

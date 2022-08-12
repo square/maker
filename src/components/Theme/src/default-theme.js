@@ -70,7 +70,7 @@ export default function defaultTheme() {
 			variant: 'primary',
 			shape: undefined,
 			color: '@colors.primary',
-			textColor: undefined,
+			textColor: '@colors.contextualPrimary.onFill',
 			fullWidth: false,
 			align: 'center',
 			patterns: {

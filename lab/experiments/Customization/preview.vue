@@ -170,7 +170,6 @@ import { MImage } from '@square/maker/components/Image';
 import { MButton } from '@square/maker/components/Button';
 import { MCard } from '@square/maker/components/Card';
 import { MInput } from '@square/maker/components/Input';
-import { MThemeKey, defaultTheme } from '@square/maker/components/Theme';
 
 export default {
 	components: {
@@ -183,10 +182,14 @@ export default {
 		MInput,
 	},
 
-	inject: {
-		theme: {
-			default: defaultTheme(),
-			from: MThemeKey,
+	props: {
+		cardTitleColor: {
+			type: String,
+			default: undefined,
+		},
+		cardTextColor: {
+			type: String,
+			default: undefined,
 		},
 	},
 
@@ -227,19 +230,8 @@ export default {
 					price: '$9.50',
 				},
 			],
-			cardTitleColor: undefined,
-			cardTextColor: undefined,
-		};
-	},
 
-	watch: {
-		theme: {
-			handler(theme) {
-				this.cardTitleColor = theme.card.custom.titleColor;
-				this.cardTextColor = theme.card.custom.textColor;
-			},
-			deep: true,
-		},
+		};
 	},
 
 	methods: {

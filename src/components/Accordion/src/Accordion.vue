@@ -26,6 +26,7 @@
 				<!-- @slot secondary info, goes under title -->
 				<slot name="secondary">
 					<m-text
+						v-if="secondary"
 						pattern="paragraph"
 						:size="-1"
 					>

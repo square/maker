@@ -4,13 +4,15 @@
 	>
 		<div :class="$s.Editor">
 			<h1>Advanced customization</h1>
-			<p
-				v-for="(preset, index) in presets"
-				:key="index"
-				@click="setPreset(preset)"
-			>
-				<strong>{{ index }}</strong>
-			</p>
+			<div :class="$s.Presets">
+				<div
+					v-for="(preset, index) in presets"
+					:key="index"
+					@click="setPreset(preset)"
+				>
+					<strong>{{ index }}</strong>
+				</div>
+			</div>
 			<div :class="$s.Options">
 				<label>
 					<input
@@ -20,137 +22,39 @@
 					>
 					Site Background
 				</label>
-				<h3
-					:class="$s.ComponentTitle"
+				<m-accordion
+					v-model="expandKey"
+					expand-key="1"
 				>
-					Heading
-				</h3>
-				<div :class="$s.Choice">
-					<input
-						v-model="theme.colors.heading"
-						type="color"
-						@input="updateColors"
-					>
-					<select
-						v-model="theme.fonts.heading.fontFamily"
-						:class="$s.familyChoice"
-						@change="updateFont"
-					>
-						<template v-for="(value, index) in fontOptions">
-							<option
-								:key="index"
-								:value="value.name"
-							>
-								{{ value.name }}
-							</option>
-						</template>
-					</select>
-					<select
-						v-model="theme.fonts.heading.fontWeight"
-						@change="updateFont"
-					>
-						<template v-for="(value, index) in defaultWeights">
-							<option
-								:key="index"
-								:value="value"
-							>
-								{{ value }}
-							</option>
-						</template>
-					</select>
-				</div>
-				<h3
-					:class="$s.ComponentTitle"
-				>
-					Body
-				</h3>
-				<div :class="$s.Choice">
-					<input
-						v-model="theme.colors.body"
-						type="color"
-						@input="updateColors"
-					>
-					<select
-						v-model="theme.fonts.body.fontFamily"
-						:class="$s.familyChoice"
-						@change="updateFont"
-					>
-						<template v-for="(value, index) in fontOptions">
-							<option
-								:key="index"
-								:value="value.name"
-							>
-								{{ value.name }}
-							</option>
-						</template>
-					</select>
-					<select
-						v-model="theme.fonts.body.fontWeight"
-						@change="updateFont"
-					>
-						<template v-for="(value, index) in defaultWeights">
-							<option
-								:key="index"
-								:value="value"
-							>
-								{{ value }}
-							</option>
-						</template>
-					</select>
-				</div>
-				<h3
-					:class="$s.ComponentTitle"
-				>
-					Button{{ buttonHover ? ':hover': '' }}
-					<label>
-						<input
-							v-model="buttonHover"
-							type="checkbox"
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
 						>
-						Edit hover state
-					</label>
-				</h3>
-				<div
-					v-show="!buttonHover"
-				>
+							Heading
+						</h3>
+					</template>
 					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.colors.primary"
-								type="color"
-								@input="updateColors"
-							>
-							Button
-						</label>
-						<label>
-							<input
-								v-model="theme.button.textColor"
-								type="color"
-								@input="updateColors"
-							>
-							Text
-						</label>
+						<input
+							v-model="theme.colors.heading"
+							type="color"
+							@input="updateColors"
+						>
 						<select
-							v-model="theme.button.custom.fontFamily"
+							v-model="theme.fonts.heading.fontFamily"
 							:class="$s.familyChoice"
 							@change="updateFont"
 						>
-							<template
-								v-for="(value, index) in [
-									theme.fonts.heading.fontFamily,
-									theme.fonts.body.fontFamily
-								]"
-							>
+							<template v-for="(value, index) in fontOptions">
 								<option
 									:key="index"
-									:value="value"
+									:value="value.name"
 								>
-									{{ value }}
+									{{ value.name }}
 								</option>
 							</template>
 						</select>
 						<select
-							v-model="theme.button.custom.fontWeight"
+							v-model="theme.fonts.heading.fontWeight"
 							@change="updateFont"
 						>
 							<template v-for="(value, index) in defaultWeights">
@@ -163,396 +67,554 @@
 							</template>
 						</select>
 					</div>
-					<p><strong>Border</strong></p>
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="2"
+				>
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
+						>
+							Body
+						</h3>
+					</template>
 					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.button.custom.borderRadius"
-								type="number"
-								min="0"
-								max="32"
-								step="2"
-							>
-							Radius
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.borderWidth"
-								type="number"
-								min="1"
-								max="10"
-							>
-							Thickness
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.borderColor"
-								type="color"
-							>
-							Color
-						</label>
-					</div>
-					<p><strong>Box shadow</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.button.custom.boxShadowHorizontal"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Horizontal
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.boxShadowVertical"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Vertical
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.boxShadowBlurRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Blur
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.boxShadowSpreadRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Spread
-						</label>
 						<input
-							v-model="theme.button.custom.boxShadowColor"
+							v-model="theme.colors.body"
 							type="color"
+							@input="updateColors"
 						>
+						<select
+							v-model="theme.fonts.body.fontFamily"
+							:class="$s.familyChoice"
+							@change="updateFont"
+						>
+							<template v-for="(value, index) in fontOptions">
+								<option
+									:key="index"
+									:value="value.name"
+								>
+									{{ value.name }}
+								</option>
+							</template>
+						</select>
+						<select
+							v-model="theme.fonts.body.fontWeight"
+							@change="updateFont"
+						>
+							<template v-for="(value, index) in defaultWeights">
+								<option
+									:key="index"
+									:value="value"
+								>
+									{{ value }}
+								</option>
+							</template>
+						</select>
 					</div>
-				</div>
-				<div
-					v-show="buttonHover"
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="3"
 				>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.button.custom.hoverColor"
-								type="color"
-								@input="updateColors"
-							>
-							Button
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.hoverTextColor"
-								type="color"
-								@input="updateColors"
-							>
-							Text
-						</label>
-					</div>
-					<p><strong>Border</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.button.custom.hoverBorderWidth"
-								type="number"
-								min="1"
-								max="10"
-							>
-							Thickness
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.hoverBorderColor"
-								type="color"
-							>
-							Color
-						</label>
-					</div>
-					<p><strong>Box shadow</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.button.custom.hoverBoxShadowHorizontal"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Horizontal
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.hoverBoxShadowVertical"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Vertical
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.hoverBoxShadowBlurRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Blur
-						</label>
-						<label>
-							<input
-								v-model="theme.button.custom.hoverBoxShadowSpreadRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Spread
-						</label>
-						<input
-							v-model="theme.button.custom.hoverBoxShadowColor"
-							type="color"
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
 						>
+							Button{{ buttonHover ? ':hover': '' }}
+						</h3>
+					</template>
+					<template
+						v-if="expandKey==='3'"
+						#secondary
+					>
+						<label @click.stop>
+							<input
+								v-model="buttonHover"
+								type="checkbox"
+							>
+							Edit hover state
+						</label>
+					</template>
+					<div :class="$s.Choice">
+						<div
+							v-show="!buttonHover"
+						>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.colors.primary"
+										type="color"
+										@input="updateColors"
+									>
+									Button
+								</label>
+								<label>
+									<input
+										v-model="theme.button.textColor"
+										type="color"
+										@input="updateColors"
+									>
+									Text
+								</label>
+								<select
+									v-model="theme.button.custom.fontFamily"
+									:class="$s.familyChoice"
+									@change="updateFont"
+								>
+									<template
+										v-for="(value, index) in [
+											theme.fonts.heading.fontFamily,
+											theme.fonts.body.fontFamily
+										]"
+									>
+										<option
+											:key="index"
+											:value="value"
+										>
+											{{ value }}
+										</option>
+									</template>
+								</select>
+								<select
+									v-model="theme.button.custom.fontWeight"
+									@change="updateFont"
+								>
+									<template v-for="(value, index) in defaultWeights">
+										<option
+											:key="index"
+											:value="value"
+										>
+											{{ value }}
+										</option>
+									</template>
+								</select>
+							</div>
+							<p><strong>Border</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.button.custom.borderRadius"
+										type="number"
+										min="0"
+										max="32"
+										step="2"
+									>
+									Radius
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.borderWidth"
+										type="number"
+										min="1"
+										max="10"
+									>
+									Thickness
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.borderColor"
+										type="color"
+									>
+									Color
+								</label>
+							</div>
+							<p><strong>Box shadow</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.button.custom.boxShadowHorizontal"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Horizontal
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.boxShadowVertical"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Vertical
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.boxShadowBlurRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Blur
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.boxShadowSpreadRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Spread
+								</label>
+								<input
+									v-model="theme.button.custom.boxShadowColor"
+									type="color"
+								>
+							</div>
+						</div>
+						<div
+							v-show="buttonHover"
+						>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.button.custom.hoverColor"
+										type="color"
+										@input="updateColors"
+									>
+									Button
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.hoverTextColor"
+										type="color"
+										@input="updateColors"
+									>
+									Text
+								</label>
+							</div>
+							<p><strong>Border</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.button.custom.hoverBorderWidth"
+										type="number"
+										min="1"
+										max="10"
+									>
+									Thickness
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.hoverBorderColor"
+										type="color"
+									>
+									Color
+								</label>
+							</div>
+							<p><strong>Box shadow</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.button.custom.hoverBoxShadowHorizontal"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Horizontal
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.hoverBoxShadowVertical"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Vertical
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.hoverBoxShadowBlurRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Blur
+								</label>
+								<label>
+									<input
+										v-model="theme.button.custom.hoverBoxShadowSpreadRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Spread
+								</label>
+								<input
+									v-model="theme.button.custom.hoverBoxShadowColor"
+									type="color"
+								>
+							</div>
+						</div>
 					</div>
-				</div>
-				<h3
-					:class="$s.ComponentTitle"
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="4"
 				>
-					Card{{ cardHover ? ':hover': '' }}
-					<label>
-						<input
-							v-model="cardHover"
-							type="checkbox"
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
 						>
-						Edit hover state
-					</label>
-				</h3>
-				<div
-					v-show="!cardHover"
+							Card{{ cardHover ? ':hover': '' }}
+						</h3>
+					</template>
+					<template
+						v-if="expandKey==='4'"
+						#secondary
+					>
+						<label @click.stop>
+							<input
+								v-model="cardHover"
+								type="checkbox"
+							>
+							Edit hover state
+						</label>
+					</template>
+					<div :class="$s.Choice">
+						<div
+							v-show="!cardHover"
+						>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.color"
+										type="color"
+										@input="updateColors"
+									>
+									Card
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.titleColor"
+										type="color"
+										@input="updateColors"
+									>
+									Title
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.textColor"
+										type="color"
+										@input="updateColors"
+									>
+									Text
+								</label>
+							</div>
+							<p><strong>Border</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.borderRadius"
+										type="number"
+										min="0"
+										max="32"
+										step="2"
+									>
+									Radius
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.borderWidth"
+										type="number"
+										min="1"
+										max="10"
+									>
+									Thickness
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.borderColor"
+										type="color"
+									>
+									Color
+								</label>
+							</div>
+							<p><strong>Box shadow</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowHorizontal"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Horizontal
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowVertical"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Vertical
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowBlurRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Blur
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowSpreadRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Spread
+								</label>
+								<input
+									v-model="theme.card.custom.boxShadowColor"
+									type="color"
+								>
+							</div>
+						</div>
+						<div
+							v-show="cardHover"
+						>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.hoverColor"
+										type="color"
+										@input="updateColors"
+									>
+									Card
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverTitleColor"
+										type="color"
+										@input="updateColors"
+									>
+									Title
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverTextColor"
+										type="color"
+										@input="updateColors"
+									>
+									Text
+								</label>
+							</div>
+							<p><strong>Border</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBorderWidth"
+										type="number"
+										min="1"
+										max="10"
+									>
+									Thickness
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBorderColor"
+										type="color"
+									>
+									Color
+								</label>
+							</div>
+							<p><strong>Box shadow</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowHorizontal"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Horizontal
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowVertical"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Vertical
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowBlurRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Blur
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowSpreadRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Spread
+								</label>
+								<input
+									v-model="theme.card.custom.hoverBoxShadowColor"
+									type="color"
+								>
+							</div>
+						</div>
+					</div>
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="5"
 				>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.card.custom.color"
-								type="color"
-								@input="updateColors"
-							>
-							Card
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.titleColor"
-								type="color"
-								@input="updateColors"
-							>
-							Title
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.textColor"
-								type="color"
-								@input="updateColors"
-							>
-							Text
-						</label>
-					</div>
-					<p><strong>Border</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.card.custom.borderRadius"
-								type="number"
-								min="0"
-								max="32"
-								step="2"
-							>
-							Radius
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.borderWidth"
-								type="number"
-								min="1"
-								max="10"
-							>
-							Thickness
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.borderColor"
-								type="color"
-							>
-							Color
-						</label>
-					</div>
-					<p><strong>Box shadow</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.card.custom.boxShadowHorizontal"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Horizontal
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.boxShadowVertical"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Vertical
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.boxShadowBlurRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Blur
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.boxShadowSpreadRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Spread
-						</label>
-						<input
-							v-model="theme.card.custom.boxShadowColor"
-							type="color"
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
 						>
+							Section width
+						</h3>
+					</template>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.section.custom.maxWidth"
+								type="radio"
+								value="5000px"
+								name="width"
+							>
+							Full width
+						</label>
+						<label>
+							<input
+								v-model="theme.section.custom.maxWidth"
+								type="radio"
+								value="1000px"
+								name="width"
+							>
+							1000px
+						</label>
 					</div>
-				</div>
-				<div
-					v-show="cardHover"
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="6"
 				>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.card.custom.hoverColor"
-								type="color"
-								@input="updateColors"
-							>
-							Card
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.hoverTitleColor"
-								type="color"
-								@input="updateColors"
-							>
-							Title
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.hoverTextColor"
-								type="color"
-								@input="updateColors"
-							>
-							Text
-						</label>
-					</div>
-					<p><strong>Border</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.card.custom.hoverBorderWidth"
-								type="number"
-								min="1"
-								max="10"
-							>
-							Thickness
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.hoverBorderColor"
-								type="color"
-							>
-							Color
-						</label>
-					</div>
-					<p><strong>Box shadow</strong></p>
-					<div :class="$s.Choice">
-						<label>
-							<input
-								v-model="theme.card.custom.hoverBoxShadowHorizontal"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Horizontal
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.hoverBoxShadowVertical"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Vertical
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.hoverBoxShadowBlurRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Blur
-						</label>
-						<label>
-							<input
-								v-model="theme.card.custom.hoverBoxShadowSpreadRadius"
-								type="number"
-								min="0"
-								max="20"
-							>
-							Spread
-						</label>
-						<input
-							v-model="theme.card.custom.hoverBoxShadowColor"
-							type="color"
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
 						>
-					</div>
-				</div>
-				<h3
-					:class="$s.ComponentTitle"
-				>
-					Section width
-				</h3>
-				<div :class="$s.Choice">
-					<label>
-						<input
-							v-model="theme.section.custom.maxWidth"
-							type="radio"
-							value="5000px"
-							name="width"
-						>
-						Full width
-					</label>
-					<label>
-						<input
-							v-model="theme.section.custom.maxWidth"
-							type="radio"
-							value="1000px"
-							name="width"
-						>
-						1000px
-					</label>
-				</div>
-				<!-- eslint-disable vue/no-textarea-mustache -->
-				<textarea rows="20">
+							Theme props
+						</h3>
+					</template>
+					<!-- eslint-disable vue/no-textarea-mustache -->
+					<textarea rows="20">
 {{
 {
 	colors: theme.colors,
@@ -569,20 +631,26 @@
 	section: theme.section,
 }
 }}
-				</textarea>
+					</textarea>
+				</m-accordion>
 			</div>
 		</div>
 		<m-theme
 			:theme="theme"
 			:style="styles"
 		>
-			<preview />
+			<preview
+				:card-title-color="theme.card.custom.titleColor"
+				:card-text-color="theme.card.custom.textColor"
+			/>
 		</m-theme>
 	</div>
 </template>
 
 <script>
+import { merge } from 'lodash';
 import { MTheme, defaultTheme } from '@square/maker/components/Theme';
+import { MAccordion } from '@square/maker/components/Accordion';
 import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
 import makerColors from '@square/maker/utils/maker-colors';
 
@@ -597,59 +665,22 @@ function returnPixelValue(value) {
 	return !Number.isNaN(Number.parseInt(value, 10)) && Number.parseInt(value, 10) < 50 ? `${value}px` : value;
 }
 
-const customDefaults = {
-	fonts: {
-		baseSize: 16,
-		sizeScale: 1.12,
-		heading: {
-			fontFamily: 'Rubik',
-			fontWeight: '700',
-		},
-		body: {
-			fontFamily: 'Karla',
-			fontWeight: '500',
-		},
-	},
-	button: {
-		custom: {
-			fontFamily: 'Karla',
-			fontWeight: '500',
-			borderRadius: 0,
-			borderWidth: 1,
-		},
-	},
-	section: {
-		custom: {
-			maxWidth: '1000px',
-		},
-	},
-	card: {
-		custom: {
-			color: '#ffffff',
-			borderRadius: 0,
-			borderWidth: 1,
-			borderColor: '#e1e1e1',
-		},
-	},
-};
-
 export default {
 	components: {
+		MAccordion,
 		MTheme,
 		Preview,
 	},
 
 	data() {
 		return {
+			expandKey: '1',
 			presets,
 			fontOptions,
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
 			buttonHover: false,
 			cardHover: false,
-			theme: {
-				...defaultTheme(),
-				...customDefaults,
-			},
+			theme: merge(defaultTheme(), presets.resetStyles),
 		};
 	},
 
@@ -710,11 +741,8 @@ export default {
 			this.theme.colors = colors;
 		},
 		setPreset(preset) {
-			this.theme = {
-				...defaultTheme(),
-				...customDefaults,
-				...preset,
-			};
+			this.theme = merge(defaultTheme(), preset);
+			this.updateFont();
 		},
 	},
 
@@ -729,6 +757,9 @@ export default {
 }
 
 .Editor {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 	padding: 15px;
 	overflow-y: scroll;
 	color: #000;
@@ -740,23 +771,25 @@ export default {
 h1,
 h2,
 h3 {
-	margin: 0.5em 0;
+	margin: 0;
+}
+
+.Presets {
+	display: flex;
+	gap: 8px;
 }
 
 .Options {
 	display: flex;
 	flex-direction: column;
+	gap: 8px;
 
 	& label {
 		display: flex;
 		align-items: center;
 
 		& input {
-			margin-right: 4px;
-		}
-
-		&:not(:last-child) {
-			margin-right: 4px;
+			margin: 0 4px 0 0;
 		}
 	}
 
@@ -777,7 +810,7 @@ h3 {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 4px;
-	margin-bottom: 4px;
+	margin: 0;
 }
 
 .familyChoice {
@@ -797,6 +830,10 @@ h3 {
 		font-weight: normal;
 		font-size: 0.85em;
 	}
+}
+
+textarea {
+	width: calc(100% - 8px);
 }
 </style>
 
