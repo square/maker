@@ -134,6 +134,42 @@
 					</div>
 				</div>
 				<div
+					:class="[
+						$s.Section,
+						$s.Row
+					]"
+					class="text-and-image"
+				>
+					<div :class="$s.Column">
+						<m-image
+							class="image"
+							src="https://source.unsplash.com/800x600/?macarons"
+						/>
+						<m-text
+							pattern="title"
+						>
+							Distinctive and bold
+						</m-text>
+						<m-text>
+							Simple, affordable, memorable
+						</m-text>
+					</div>
+					<div :class="$s.Column">
+						<m-image
+							class="image"
+							src="https://source.unsplash.com/800x600/?chocolates"
+						/>
+						<m-text
+							pattern="title"
+						>
+							Distinctive and bold
+						</m-text>
+						<m-text>
+							Simple, affordable, memorable
+						</m-text>
+					</div>
+				</div>
+				<div
 					class="footer"
 					:class="[
 						$s.Section,
@@ -284,7 +320,7 @@ export default {
 	width: 100%;
 	max-width: var(--m-section-max-width, 1000px);
 	margin: 0 auto;
-	padding: 20px;
+	padding: 40px 20px;
 
 	& div {
 		display: flex;
@@ -315,6 +351,10 @@ body {
 	fill: currentColor;
 }
 
+.header {
+	padding: 20px !important;
+}
+
 .banner {
 	align-items: center;
 }
@@ -340,10 +380,6 @@ body {
 	position: relative;
 	width: calc(100% + 48px);
 	margin: -16px -24px 16px;
-}
-
-.footer {
-	padding: 40px 20px !important;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */

@@ -34,6 +34,13 @@ export const presets = {
 				borderColor: '#e1e1e1',
 			},
 		},
+		image: {
+			custom: {
+				borderRadius: 0,
+				borderWidth: 0,
+				borderColor: '#ffffff',
+			},
+		},
 	},
 	presetOne: {
 		shapes: {
@@ -128,6 +135,13 @@ export const presets = {
 				hoverBoxShadowBlurRadius: '0',
 			},
 		},
+		image: {
+			custom: {
+				borderRadius: 0,
+				borderWidth: 0,
+				borderColor: '#ffffff',
+			},
+		},
 	},
 	presetTwo: {
 		colors: {
@@ -211,6 +225,13 @@ export const presets = {
 				hoverBoxShadowBlurRadius: '3',
 				hoverBoxShadowColor: '#bab991',
 				hoverBoxShadowSpreadRadius: '1',
+			},
+		},
+		image: {
+			custom: {
+				borderRadius: 0,
+				borderWidth: 0,
+				borderColor: '#ffffff',
 			},
 		},
 		section: {

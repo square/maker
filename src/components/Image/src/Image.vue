@@ -16,7 +16,7 @@
 					[$s.Image]: true,
 					[$s[`shape_${resolvedShape}`]]: resolvedShape,
 					[$s.thumbnail]: isThumbnail,
-					'm-image': true,
+					'm-image': resolvedShape !== 'square',
 				}"
 				:style="style"
 				:src="src"

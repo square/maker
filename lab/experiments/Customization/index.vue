@@ -578,6 +578,312 @@
 						<h3
 							:class="$s.ComponentTitle"
 						>
+							Image
+						</h3>
+					</template>
+					<div :class="$s.Choice">
+						<p><strong>Border</strong></p>
+						<div :class="$s.Choice">
+							<label>
+								<input
+									v-model="theme.image.custom.borderRadius"
+									type="number"
+									min="0"
+									max="72"
+									step="2"
+								>
+								Radius
+							</label>
+							<label>
+								<input
+									v-model="theme.image.custom.borderWidth"
+									type="number"
+									min="1"
+									max="10"
+								>
+								Thickness
+							</label>
+							<label>
+								<input
+									v-model="theme.image.custom.borderColor"
+									type="color"
+								>
+								Color
+							</label>
+						</div>
+						<p><strong>Box shadow</strong></p>
+						<div :class="$s.Choice">
+							<label>
+								<input
+									v-model="theme.image.custom.boxShadowHorizontal"
+									type="number"
+									min="0"
+									max="20"
+								>
+								Horizontal
+							</label>
+							<label>
+								<input
+									v-model="theme.image.custom.boxShadowVertical"
+									type="number"
+									min="0"
+									max="20"
+								>
+								Vertical
+							</label>
+							<label>
+								<input
+									v-model="theme.image.custom.boxShadowBlurRadius"
+									type="number"
+									min="0"
+									max="20"
+								>
+								Blur
+							</label>
+							<label>
+								<input
+									v-model="theme.image.custom.boxShadowSpreadRadius"
+									type="number"
+									min="0"
+									max="20"
+								>
+								Spread
+							</label>
+							<input
+								v-model="theme.image.custom.boxShadowColor"
+								type="color"
+							>
+						</div>
+					</div>
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="6"
+				>
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
+						>
+							Form Input{{ cardHover ? ':hover': '' }}
+						</h3>
+					</template>
+					<template
+						v-if="expandKey==='6'"
+						#secondary
+					>
+						<label @click.stop>
+							<input
+								v-model="formHover"
+								type="checkbox"
+							>
+							Edit hover state
+						</label>
+					</template>
+					<div :class="$s.Choice">
+						<div
+							v-show="!formHover"
+						>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.color"
+										type="color"
+										@input="updateColors"
+									>
+									Card
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.titleColor"
+										type="color"
+										@input="updateColors"
+									>
+									Title
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.textColor"
+										type="color"
+										@input="updateColors"
+									>
+									Text
+								</label>
+							</div>
+							<p><strong>Border</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.borderRadius"
+										type="number"
+										min="0"
+										max="32"
+										step="2"
+									>
+									Radius
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.borderWidth"
+										type="number"
+										min="1"
+										max="10"
+									>
+									Thickness
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.borderColor"
+										type="color"
+									>
+									Color
+								</label>
+							</div>
+							<p><strong>Box shadow</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowHorizontal"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Horizontal
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowVertical"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Vertical
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowBlurRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Blur
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.boxShadowSpreadRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Spread
+								</label>
+								<input
+									v-model="theme.card.custom.boxShadowColor"
+									type="color"
+								>
+							</div>
+						</div>
+						<div
+							v-show="formHover"
+						>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.hoverColor"
+										type="color"
+										@input="updateColors"
+									>
+									Card
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverTitleColor"
+										type="color"
+										@input="updateColors"
+									>
+									Title
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverTextColor"
+										type="color"
+										@input="updateColors"
+									>
+									Text
+								</label>
+							</div>
+							<p><strong>Border</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBorderWidth"
+										type="number"
+										min="1"
+										max="10"
+									>
+									Thickness
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBorderColor"
+										type="color"
+									>
+									Color
+								</label>
+							</div>
+							<p><strong>Box shadow</strong></p>
+							<div :class="$s.Choice">
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowHorizontal"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Horizontal
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowVertical"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Vertical
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowBlurRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Blur
+								</label>
+								<label>
+									<input
+										v-model="theme.card.custom.hoverBoxShadowSpreadRadius"
+										type="number"
+										min="0"
+										max="20"
+									>
+									Spread
+								</label>
+								<input
+									v-model="theme.card.custom.hoverBoxShadowColor"
+									type="color"
+								>
+							</div>
+						</div>
+					</div>
+				</m-accordion>
+				<m-accordion
+					v-model="expandKey"
+					expand-key="7"
+				>
+					<template #title>
+						<h3
+							:class="$s.ComponentTitle"
+						>
 							Section width
 						</h3>
 					</template>
@@ -604,7 +910,7 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="6"
+					expand-key="8"
 				>
 					<template #title>
 						<h3
@@ -662,7 +968,7 @@ const WebFont = require('webfontloader');
 
 function returnPixelValue(value) {
 	// eslint-disable-next-line no-magic-numbers
-	return !Number.isNaN(Number.parseInt(value, 10)) && Number.parseInt(value, 10) < 50 ? `${value}px` : value;
+	return !Number.isNaN(Number.parseInt(value, 10)) && Number.parseInt(value, 10) < 100 ? `${value}px` : value;
 }
 
 export default {
@@ -680,6 +986,7 @@ export default {
 			defaultWeights: ['200', '300', '400', '500', '600', '700', '800'],
 			buttonHover: false,
 			cardHover: false,
+			formHover: false,
 			theme: merge(defaultTheme(), presets.resetStyles),
 		};
 	},
@@ -928,4 +1235,14 @@ textarea {
 		var(--m-card-hover-box-shadow-color) !important;
 }
 
+.m-image {
+	border: solid var(--m-image-border-width) var(--m-image-border-color) !important;
+	border-radius: var(--m-image-border-radius) !important;
+	box-shadow:
+		var(--m-image-box-shadow-horizontal)
+		var(--m-image-box-shadow-vertical)
+		var(--m-image-box-shadow-blur-radius)
+		var(--m-image-box-shadow-spread-radius)
+		var(--m-image-box-shadow-color) !important;
+}
 </style>
