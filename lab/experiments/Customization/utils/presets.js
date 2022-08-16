@@ -1,6 +1,7 @@
 // Don't need weights for this demo because their variable fonts
 export const presets = {
 	resetStyles: {
+		name: 'Reset styles',
 		fonts: {
 			baseSize: 16,
 			sizeScale: 1.12,
@@ -41,8 +42,15 @@ export const presets = {
 				borderColor: '#ffffff',
 			},
 		},
+		form: {
+			custom: {
+				borderRadius: 0,
+				borderWidth: 1,
+			},
+		},
 	},
 	presetOne: {
+		name: 'Preset one',
 		shapes: {
 			imageBorderRadius: '8px',
 		},
@@ -135,15 +143,9 @@ export const presets = {
 				hoverBoxShadowBlurRadius: '0',
 			},
 		},
-		image: {
-			custom: {
-				borderRadius: 0,
-				borderWidth: 0,
-				borderColor: '#ffffff',
-			},
-		},
 	},
 	presetTwo: {
+		name: 'Preset two',
 		colors: {
 			background: '#f0f0ef',
 			heading: '#635303',
@@ -225,13 +227,6 @@ export const presets = {
 				hoverBoxShadowBlurRadius: '3',
 				hoverBoxShadowColor: '#bab991',
 				hoverBoxShadowSpreadRadius: '1',
-			},
-		},
-		image: {
-			custom: {
-				borderRadius: 0,
-				borderWidth: 0,
-				borderColor: '#ffffff',
 			},
 		},
 		section: {

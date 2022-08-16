@@ -188,7 +188,10 @@
 						</m-text>
 					</div>
 					<div :class="$s.Row">
-						<m-input placeholder="Sign up for news and updates" />
+						<m-input
+							variant="outline"
+							placeholder="Sign up for news and updates"
+						/>
 						<m-button>
 							Sign up
 						</m-button>

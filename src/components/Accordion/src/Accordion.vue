@@ -176,6 +176,7 @@ export default {
 
 <style module="$s">
 .AccordionHeader {
+	padding: 0;
 	background: none;
 	border: none;
 	cursor: pointer;

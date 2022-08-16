@@ -5,23 +5,15 @@
 		<div :class="$s.Editor">
 			<h1>Advanced customization</h1>
 			<div :class="$s.Presets">
-				<div
+				<a
 					v-for="(preset, index) in presets"
 					:key="index"
 					@click="setPreset(preset)"
 				>
-					<strong>{{ index }}</strong>
-				</div>
+					<strong>{{ preset.name }}</strong>
+				</a>
 			</div>
 			<div :class="$s.Options">
-				<label>
-					<input
-						v-model="theme.colors.background"
-						type="color"
-						@input="updateColors"
-					>
-					Site Background
-				</label>
 				<m-accordion
 					v-model="expandKey"
 					expand-key="1"
@@ -30,9 +22,16 @@
 						<h3
 							:class="$s.ComponentTitle"
 						>
-							Heading
+							Site styles
 						</h3>
 					</template>
+					<p><strong>Site Background</strong></p>
+					<input
+						v-model="theme.colors.background"
+						type="color"
+						@input="updateColors"
+					>
+					<p><strong>Headings</strong></p>
 					<div :class="$s.Choice">
 						<input
 							v-model="theme.colors.heading"
@@ -67,18 +66,7 @@
 							</template>
 						</select>
 					</div>
-				</m-accordion>
-				<m-accordion
-					v-model="expandKey"
-					expand-key="2"
-				>
-					<template #title>
-						<h3
-							:class="$s.ComponentTitle"
-						>
-							Body
-						</h3>
-					</template>
+					<p><strong>Paragraph</strong></p>
 					<div :class="$s.Choice">
 						<input
 							v-model="theme.colors.body"
@@ -116,7 +104,7 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="3"
+					expand-key="2"
 				>
 					<template #title>
 						<h3
@@ -126,7 +114,7 @@
 						</h3>
 					</template>
 					<template
-						v-if="expandKey==='3'"
+						v-if="expandKey==='2'"
 						#secondary
 					>
 						<label @click.stop>
@@ -352,7 +340,7 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="4"
+					expand-key="3"
 				>
 					<template #title>
 						<h3
@@ -362,7 +350,7 @@
 						</h3>
 					</template>
 					<template
-						v-if="expandKey==='4'"
+						v-if="expandKey==='3'"
 						#secondary
 					>
 						<label @click.stop>
@@ -572,7 +560,7 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="5"
+					expand-key="4"
 				>
 					<template #title>
 						<h3
@@ -658,17 +646,17 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="6"
+					expand-key="5"
 				>
 					<template #title>
 						<h3
 							:class="$s.ComponentTitle"
 						>
-							Form Input{{ cardHover ? ':hover': '' }}
+							Form input{{ formHover ? ':hover': '' }}
 						</h3>
 					</template>
 					<template
-						v-if="expandKey==='6'"
+						v-if="expandKey==='5'"
 						#secondary
 					>
 						<label @click.stop>
@@ -686,23 +674,15 @@
 							<div :class="$s.Choice">
 								<label>
 									<input
-										v-model="theme.card.custom.color"
+										v-model="theme.form.custom.bgColor"
 										type="color"
 										@input="updateColors"
 									>
-									Card
+									Background
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.titleColor"
-										type="color"
-										@input="updateColors"
-									>
-									Title
-								</label>
-								<label>
-									<input
-										v-model="theme.card.custom.textColor"
+										v-model="theme.form.custom.textColor"
 										type="color"
 										@input="updateColors"
 									>
@@ -713,7 +693,7 @@
 							<div :class="$s.Choice">
 								<label>
 									<input
-										v-model="theme.card.custom.borderRadius"
+										v-model="theme.form.custom.borderRadius"
 										type="number"
 										min="0"
 										max="32"
@@ -723,7 +703,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.borderWidth"
+										v-model="theme.form.custom.borderWidth"
 										type="number"
 										min="1"
 										max="10"
@@ -732,7 +712,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.borderColor"
+										v-model="theme.form.custom.borderColor"
 										type="color"
 									>
 									Color
@@ -742,7 +722,7 @@
 							<div :class="$s.Choice">
 								<label>
 									<input
-										v-model="theme.card.custom.boxShadowHorizontal"
+										v-model="theme.form.custom.boxShadowHorizontal"
 										type="number"
 										min="0"
 										max="20"
@@ -751,7 +731,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.boxShadowVertical"
+										v-model="theme.form.custom.boxShadowVertical"
 										type="number"
 										min="0"
 										max="20"
@@ -760,7 +740,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.boxShadowBlurRadius"
+										v-model="theme.form.custom.boxShadowBlurRadius"
 										type="number"
 										min="0"
 										max="20"
@@ -769,7 +749,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.boxShadowSpreadRadius"
+										v-model="theme.form.custom.boxShadowSpreadRadius"
 										type="number"
 										min="0"
 										max="20"
@@ -777,7 +757,7 @@
 									Spread
 								</label>
 								<input
-									v-model="theme.card.custom.boxShadowColor"
+									v-model="theme.form.custom.boxShadowColor"
 									type="color"
 								>
 							</div>
@@ -788,23 +768,15 @@
 							<div :class="$s.Choice">
 								<label>
 									<input
-										v-model="theme.card.custom.hoverColor"
+										v-model="theme.form.custom.hoverBgColor"
 										type="color"
 										@input="updateColors"
 									>
-									Card
+									Background
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.hoverTitleColor"
-										type="color"
-										@input="updateColors"
-									>
-									Title
-								</label>
-								<label>
-									<input
-										v-model="theme.card.custom.hoverTextColor"
+										v-model="theme.form.custom.hoverTextColor"
 										type="color"
 										@input="updateColors"
 									>
@@ -815,7 +787,7 @@
 							<div :class="$s.Choice">
 								<label>
 									<input
-										v-model="theme.card.custom.hoverBorderWidth"
+										v-model="theme.form.custom.hoverBorderWidth"
 										type="number"
 										min="1"
 										max="10"
@@ -824,7 +796,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.hoverBorderColor"
+										v-model="theme.form.custom.hoverBorderColor"
 										type="color"
 									>
 									Color
@@ -834,7 +806,7 @@
 							<div :class="$s.Choice">
 								<label>
 									<input
-										v-model="theme.card.custom.hoverBoxShadowHorizontal"
+										v-model="theme.form.custom.hoverBoxShadowHorizontal"
 										type="number"
 										min="0"
 										max="20"
@@ -843,7 +815,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.hoverBoxShadowVertical"
+										v-model="theme.form.custom.hoverBoxShadowVertical"
 										type="number"
 										min="0"
 										max="20"
@@ -852,7 +824,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.hoverBoxShadowBlurRadius"
+										v-model="theme.form.custom.hoverBoxShadowBlurRadius"
 										type="number"
 										min="0"
 										max="20"
@@ -861,7 +833,7 @@
 								</label>
 								<label>
 									<input
-										v-model="theme.card.custom.hoverBoxShadowSpreadRadius"
+										v-model="theme.form.custom.hoverBoxShadowSpreadRadius"
 										type="number"
 										min="0"
 										max="20"
@@ -869,7 +841,7 @@
 									Spread
 								</label>
 								<input
-									v-model="theme.card.custom.hoverBoxShadowColor"
+									v-model="theme.form.custom.hoverBoxShadowColor"
 									type="color"
 								>
 							</div>
@@ -878,7 +850,7 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="7"
+					expand-key="6"
 				>
 					<template #title>
 						<h3
@@ -910,7 +882,7 @@
 				</m-accordion>
 				<m-accordion
 					v-model="expandKey"
-					expand-key="8"
+					expand-key="7"
 				>
 					<template #title>
 						<h3
@@ -954,7 +926,7 @@
 </template>
 
 <script>
-import { merge } from 'lodash';
+import { merge, cloneDeep } from 'lodash';
 import { MTheme, defaultTheme } from '@square/maker/components/Theme';
 import { MAccordion } from '@square/maker/components/Accordion';
 import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contrast';
@@ -964,7 +936,9 @@ import Preview from './preview.vue';
 import { fontOptions } from './utils/fonts';
 import { presets } from './utils/presets';
 
-const WebFont = require('webfontloader');
+const WEBFONT = require('webfontloader');
+
+const THEME_RESET = merge(defaultTheme(), presets.resetStyles);
 
 function returnPixelValue(value) {
 	// eslint-disable-next-line no-magic-numbers
@@ -987,7 +961,7 @@ export default {
 			buttonHover: false,
 			cardHover: false,
 			formHover: false,
-			theme: merge(defaultTheme(), presets.resetStyles),
+			theme: cloneDeep(THEME_RESET),
 		};
 	},
 
@@ -1026,7 +1000,7 @@ export default {
 
 	methods: {
 		updateFont() {
-			WebFont.load({
+			WEBFONT.load({
 				google: {
 					families: this.fontLoad,
 				},
@@ -1048,7 +1022,8 @@ export default {
 			this.theme.colors = colors;
 		},
 		setPreset(preset) {
-			this.theme = merge(defaultTheme(), preset);
+			const reset = cloneDeep(THEME_RESET);
+			this.theme = merge(reset, preset);
 			this.updateFont();
 		},
 	},
@@ -1066,7 +1041,7 @@ export default {
 .Editor {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 16px;
 	padding: 15px;
 	overflow-y: scroll;
 	color: #000;
@@ -1083,13 +1058,17 @@ h3 {
 
 .Presets {
 	display: flex;
-	gap: 8px;
+	gap: 16px;
+
+	& a {
+		color: blue;
+	}
 }
 
 .Options {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 16px;
 
 	& label {
 		display: flex;
@@ -1131,7 +1110,7 @@ h3 {
 .ComponentTitle {
 	display: flex;
 	justify-content: space-between;
-	font-size: 1.25em;
+	font-size: 1em;
 
 	& label {
 		font-weight: normal;
@@ -1145,104 +1124,5 @@ textarea {
 </style>
 
 <style>
-.m-button {
-	font-weight: var(--m-button-font-weight) !important;
-	font-family: var(--m-button-font-family) !important;
-	border-radius: var(--m-button-border-radius) !important;
-}
-
-.m-button-primary {
-	border: solid var(--m-button-border-width) var(--m-button-border-color) !important;
-	box-shadow:
-		var(--m-button-box-shadow-horizontal)
-		var(--m-button-box-shadow-vertical)
-		var(--m-button-box-shadow-blur-radius)
-		var(--m-button-box-shadow-spread-radius)
-		var(--m-button-box-shadow-color) !important;
-}
-
-.m-button-secondary {
-	--outline-border: inset 0 0 0 var(--m-button-border-width) var(--color-main) !important;
-	--box-shadow-border:
-		var(--m-button-box-shadow-horizontal)
-		var(--m-button-box-shadow-vertical)
-		var(--m-button-box-shadow-blur-radius)
-		var(--m-button-box-shadow-spread-radius)
-		var(--m-button-box-shadow-color);
-
-	box-shadow: var(--outline-border), var(--box-shadow-border, var(--focus-border, 0 0)) !important;
-}
-
-.m-button-primary:hover {
-	color: var(--m-button-hover-text-color, var(--color-contrast)) !important;
-	background: var(--m-button-hover-color, var(--color-main)) !important;
-	border: solid var(--m-button-hover-border-width) var(--m-button-hover-border-color) !important;
-	box-shadow:
-		var(--m-button-hover-box-shadow-horizontal)
-		var(--m-button-hover-box-shadow-vertical)
-		var(--m-button-hover-box-shadow-blur-radius)
-		var(--m-button-hover-box-shadow-spread-radius)
-		var(--m-button-hover-box-shadow-color) !important;
-}
-
-.m-button-secondary:hover {
-	--outline-border:
-		inset 0 0 0 var(--m-button-hover-border-width, var(--m-button-border-width))
-		var(--m-button-hover-color, var(--color-main)) !important;
-	--box-shadow-border:
-		var(--m-button-hover-box-shadow-horizontal)
-		var(--m-button-hover-box-shadow-vertical)
-		var(--m-button-hover-box-shadow-blur-radius)
-		var(--m-button-hover-box-shadow-spread-radius)
-		var(--m-button-hover-box-shadow-color);
-
-	color: var(--m-button-hover-color, var(--color-main)) !important;
-	box-shadow: var(--outline-border), var(--box-shadow-border, var(--focus-border, 0 0)) !important;
-}
-
-.m-card {
-	color: var(--m-card-text-color, var(--maker-color-body)) !important;
-	font-weight: var(--m-card-font-weight) !important;
-	font-family: var(--m-card-font-family) !important;
-	background: var(--m-card-color, var(--maker-color-background)) !important;
-	border: solid var(--m-card-border-width) var(--m-card-border-color) !important;
-	border-radius: var(--m-card-border-radius) !important;
-	box-shadow:
-		var(--m-card-box-shadow-horizontal)
-		var(--m-card-box-shadow-vertical)
-		var(--m-card-box-shadow-blur-radius)
-		var(--m-card-box-shadow-spread-radius)
-		var(--m-card-box-shadow-color) !important;
-	cursor: pointer;
-	transition:
-		color 0.2s ease-in,
-		background-color 0.2s ease-in,
-		filter 0.2s ease-in,
-		box-shadow 0.2s ease-in;
-}
-
-.m-card:hover {
-	color: var(--m-card-hover-text-color, var(--maker-color-body)) !important;
-	background: var(--m-card-hover-color, var(--maker-color-background)) !important;
-	border:
-		solid var(--m-card-hover-border-width, var(--m-card-border-width))
-		var(--m-card-hover-border-color, var(--m-card-border-color)) !important;
-	box-shadow:
-		var(--m-card-hover-box-shadow-horizontal)
-		var(--m-card-hover-box-shadow-vertical)
-		var(--m-card-hover-box-shadow-blur-radius)
-		var(--m-card-hover-box-shadow-spread-radius)
-		var(--m-card-hover-box-shadow-color) !important;
-}
-
-.m-image {
-	border: solid var(--m-image-border-width) var(--m-image-border-color) !important;
-	border-radius: var(--m-image-border-radius) !important;
-	box-shadow:
-		var(--m-image-box-shadow-horizontal)
-		var(--m-image-box-shadow-vertical)
-		var(--m-image-box-shadow-blur-radius)
-		var(--m-image-box-shadow-spread-radius)
-		var(--m-image-box-shadow-color) !important;
-}
+@import url(styles.css);
 </style>

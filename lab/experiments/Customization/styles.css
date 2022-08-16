@@ -1,0 +1,132 @@
+.m-button {
+	font-weight: var(--m-button-font-weight) !important;
+	font-family: var(--m-button-font-family) !important;
+	border-radius: var(--m-button-border-radius) !important;
+}
+
+.m-button-primary {
+	border: solid var(--m-button-border-width) var(--m-button-border-color) !important;
+	box-shadow:
+		var(--m-button-box-shadow-horizontal)
+		var(--m-button-box-shadow-vertical)
+		var(--m-button-box-shadow-blur-radius)
+		var(--m-button-box-shadow-spread-radius)
+		var(--m-button-box-shadow-color) !important;
+}
+
+.m-button-secondary {
+	--outline-border: inset 0 0 0 var(--m-button-border-width) var(--color-main) !important;
+	--box-shadow-border:
+		var(--m-button-box-shadow-horizontal)
+		var(--m-button-box-shadow-vertical)
+		var(--m-button-box-shadow-blur-radius)
+		var(--m-button-box-shadow-spread-radius)
+		var(--m-button-box-shadow-color);
+
+	box-shadow: var(--outline-border), var(--box-shadow-border, var(--focus-border, 0 0)) !important;
+}
+
+.m-button-primary:hover {
+	color: var(--m-button-hover-text-color, var(--color-contrast)) !important;
+	background: var(--m-button-hover-color, var(--color-main)) !important;
+	border: solid var(--m-button-hover-border-width) var(--m-button-hover-border-color) !important;
+	box-shadow:
+		var(--m-button-hover-box-shadow-horizontal)
+		var(--m-button-hover-box-shadow-vertical)
+		var(--m-button-hover-box-shadow-blur-radius)
+		var(--m-button-hover-box-shadow-spread-radius)
+		var(--m-button-hover-box-shadow-color) !important;
+}
+
+.m-button-secondary:hover {
+	--outline-border:
+		inset 0 0 0 var(--m-button-hover-border-width, var(--m-button-border-width))
+		var(--m-button-hover-color, var(--color-main)) !important;
+	--box-shadow-border:
+		var(--m-button-hover-box-shadow-horizontal)
+		var(--m-button-hover-box-shadow-vertical)
+		var(--m-button-hover-box-shadow-blur-radius)
+		var(--m-button-hover-box-shadow-spread-radius)
+		var(--m-button-hover-box-shadow-color);
+
+	color: var(--m-button-hover-color, var(--color-main)) !important;
+	box-shadow: var(--outline-border), var(--box-shadow-border, var(--focus-border, 0 0)) !important;
+}
+
+.m-card {
+	color: var(--m-card-text-color, var(--maker-color-body)) !important;
+	font-weight: var(--m-card-font-weight) !important;
+	font-family: var(--m-card-font-family) !important;
+	background: var(--m-card-color, var(--maker-color-background)) !important;
+	border: solid var(--m-card-border-width) var(--m-card-border-color) !important;
+	border-radius: var(--m-card-border-radius) !important;
+	box-shadow:
+		var(--m-card-box-shadow-horizontal)
+		var(--m-card-box-shadow-vertical)
+		var(--m-card-box-shadow-blur-radius)
+		var(--m-card-box-shadow-spread-radius)
+		var(--m-card-box-shadow-color) !important;
+	cursor: pointer;
+	transition:
+		color 0.2s ease-in,
+		background-color 0.2s ease-in,
+		box-shadow 0.2s ease-in;
+}
+
+.m-card:hover {
+	color: var(--m-card-hover-text-color, var(--maker-color-body)) !important;
+	background: var(--m-card-hover-color, var(--maker-color-background)) !important;
+	border:
+		solid var(--m-card-hover-border-width, var(--m-card-border-width))
+		var(--m-card-hover-border-color, var(--m-card-border-color)) !important;
+	box-shadow:
+		var(--m-card-hover-box-shadow-horizontal)
+		var(--m-card-hover-box-shadow-vertical)
+		var(--m-card-hover-box-shadow-blur-radius)
+		var(--m-card-hover-box-shadow-spread-radius)
+		var(--m-card-hover-box-shadow-color) !important;
+}
+
+.m-image {
+	border: solid var(--m-image-border-width) var(--m-image-border-color) !important;
+	border-radius: var(--m-image-border-radius) !important;
+	box-shadow:
+		var(--m-image-box-shadow-horizontal)
+		var(--m-image-box-shadow-vertical)
+		var(--m-image-box-shadow-blur-radius)
+		var(--m-image-box-shadow-spread-radius)
+		var(--m-image-box-shadow-color) !important;
+}
+
+.m-form {
+	color: var(--m-form-text-color, var(--color-foreground)) !important;
+	background-color: var(--m-form-bg-color, var(--color-background, #fff)) !important;
+	border: solid var(--m-form-border-width, 1px) var(--m-form-border-color, var(--color-border)) !important;
+	border-radius: var(--m-form-border-radius, var(--maker-shape-default-border-radius, 8px)) !important;
+	box-shadow:
+		var(--m-form-box-shadow-horizontal)
+		var(--m-form-box-shadow-vertical)
+		var(--m-form-box-shadow-blur-radius)
+		var(--m-form-box-shadow-spread-radius)
+		var(--m-form-box-shadow-color) !important;
+	cursor: pointer;
+	transition:
+		color 0.2s ease-in,
+		background-color 0.2s ease-in,
+		box-shadow 0.2s ease-in;
+}
+
+.m-form:hover,
+.m-form:focus-within {
+	color: var(--m-form-hover-text-color, var(--m-form-text-color, var(--color-foreground))) !important;
+	background: var(--m-form-hover-bg-color, var(--m-form-bg-color, var(--color-background))) !important;
+	border:
+		solid var(--m-form-hover-border-width, var(--m-form-border-width, 1px))
+		var(--m-form-hover-border-color, var(--m-form-border-color, var(--color-border-active))) !important;
+	box-shadow:
+		var(--m-form-hover-box-shadow-horizontal)
+		var(--m-form-hover-box-shadow-vertical)
+		var(--m-form-hover-box-shadow-blur-radius)
+		var(--m-form-hover-box-shadow-spread-radius)
+		var(--m-form-hover-box-shadow-color) !important;
+}
