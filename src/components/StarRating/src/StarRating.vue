@@ -1,10 +1,14 @@
 <template>
-	<div :style="starComputedStyles">
-		<star
+	<div
+		:style="starComputedStyles"
+		v-bind="$attrs"
+		v-on="$listeners"
+	>
+		<m-star
 			v-for="star in MAX_RATING"
 			:key="star"
 			:fill="fillForStarRating(star)"
-			:color="color"
+			:color="resolvedColor"
 			:class="$s.Star"
 			@mouseenter="hoverStar(star)"
 			@mouseleave="unhoverStar(star)"
@@ -14,8 +18,9 @@
 </template>
 
 <script>
-import { colord } from 'colord';
-import Star from './Star.vue';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import cssValidator from '@square/maker/utils/css-validator';
+import { MStar } from '@square/maker/components/StarRating';
 
 const MIN_RATING = 0;
 const MAX_RATING = 5;
@@ -36,12 +41,23 @@ const STAR_STYLES = {
 	},
 };
 
+/**
+ * @inheritAttrs div
+ * @inheritListeners div
+ */
 export default {
-	name: 'StarRating',
-
 	components: {
-		Star,
+		MStar,
 	},
+
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
+	inheritAttrs: false,
 
 	props: {
 		/**
@@ -52,7 +68,6 @@ export default {
 			default: 0,
 			validator: (rating) => rating >= MIN_RATING && rating <= MAX_RATING,
 		},
-
 		/**
 		 * Size of rating component
 		 */
@@ -66,10 +81,9 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#FFBF00',
-			validator: (color) => colord(color).isValid(),
+			default: undefined,
+			validator: cssValidator('color'),
 		},
-
 		/**
 		 * Determines whether to bubble up click/hover events and show pointer cursor
 		 */
@@ -87,6 +101,10 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('starrating', [
+			'color',
+		]),
+
 		displayedRating() {
 			return this.hoveredRating || this.rating;
 		},

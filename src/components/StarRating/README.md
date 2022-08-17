@@ -1,177 +1,177 @@
 # StarRating
 
+Use Star Rating to display an item's rating in stars.
+
+## Examples
+
+You can pass a number between 0.0 and 5.0 to the `rating` prop and Star Rating will render it rounded to the nearest number of half-stars:
+
 ```vue
 <template>
-	<div :class="$s.StarDemos">
-		<label>
-			Color picker
+	<div>
+		<div>
+			Rating ({{ rating }} stars):
+			<br>
 			<input
-				v-model="color"
-				type="color"
+				v-model="rating"
+				type="range"
+				min="0"
+				max="5"
+				step="0.1"
 			>
-		</label>
-		<div>
-			<m-text
-				pattern="title"
-				:class="$s.StarDemoHeader"
-				:size="1"
-			>
-				Star States
-			</m-text>
-
-			<div>
-				<div
-					v-for="fill in ['full', 'half', 'empty']"
-					:key="fill"
-					:class="$s.StarState"
-				>
-					{{ fill }}
-					<m-star
-						:fill="fill"
-						:color="color"
-					/>
-				</div>
-			</div>
 		</div>
 
-		<div>
-			<m-text
-				pattern="title"
-				:class="$s.StarDemoHeader"
-				:size="1"
-			>
-				Star Rating
-			</m-text>
-
-			<div>
-				Rating ({{ avgRating }} Stars):
-				<br>
-				<input
-					v-model="avgRating"
-					type="range"
-					min="0"
-					max="5"
-					step="0.1"
-				>
-			</div>
-
-			<div
-				v-for="size in ['small', 'medium', 'large']"
-				:key="size"
-			>
-				{{ size }}
-				<m-star-rating
-					:rating="avgRating"
-					:size="size"
-					:color="color"
-				/>
-			</div>
-		</div>
-
-		<div>
-			<m-text
-				pattern="title"
-				:class="$s.StarDemoHeader"
-				:size="1"
-			>
-				Editable Star Rating
-			</m-text>
-
-			<div>
-				Rating: ({{ formRating }} Stars)
-			</div>
-
-			<div
-				v-for="size in ['small', 'medium', 'large']"
-				:key="size"
-			>
-				{{ size }}
-				<m-star-rating
-					:rating="formRating"
-					:size="size"
-					:is-editable="true"
-					:color="color"
-					@star-click="setFormRating"
-				/>
-			</div>
+		<div
+			v-for="size in ['small', 'medium', 'large']"
+			:key="size"
+		>
+			{{ size }}
+			<m-star-rating
+				:rating="rating"
+				:size="size"
+				:color="color"
+			/>
 		</div>
 	</div>
 </template>
 
 <script>
-import { MStar, MStarRating } from '@square/maker/components/StarRating';
-import { MText } from '@square/maker/components/Text';
+import { MStarRating } from '@square/maker/components/StarRating';
 
 export default {
 	components: {
-		MStar,
 		MStarRating,
-		MText,
 	},
 	data() {
 		return {
-			avgRating: 2.5,
-			formRating: 0,
-			color: '#FFBF00',
+			rating: 2.5,
 		};
 	},
+};
+</script>
+```
 
-	methods: {
-		setFormRating(rating) {
-			this.formRating = rating;
+Star Rating can be made interactive and editable by adding the `is-editable` prop and then listening to state changes via `@star-click` event:
+
+```vue
+<template>
+	<div>
+		<div>
+			Rating: ({{ rating }} Stars)
+		</div>
+
+		<div
+			v-for="size in ['small', 'medium', 'large']"
+			:key="size"
+		>
+			{{ size }}
+			<m-star-rating
+				:rating="rating"
+				:size="size"
+				is-editable
+				@star-click="rating = $event"
+			/>
+		</div>
+	</div>
+</template>
+
+<script>
+import { MStarRating } from '@square/maker/components/StarRating';
+
+export default {
+	components: {
+		MStarRating,
+	},
+	data() {
+		return {
+			rating: 0,
+		};
+	},
+};
+</script>
+```
+
+Although Star Rating has a `color` prop, it's better to leave it omitted and let Maker's theming system the best color for the rating given contrast requirements against the background.
+
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		<label>
+			background color
+			<input
+				v-model="bgColor"
+				type="color"
+			>
+		</label>
+		<m-star-rating
+			v-for="rating in [1, 2, 3, 4, 5]"
+			:key="rating"
+			:rating="rating"
+		/>
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import makerColors from '@square/maker/utils/maker-colors';
+import { MStarRating } from '@square/maker/components/StarRating';
+
+export default {
+	components: {
+		MTheme,
+		MStarRating,
+	},
+	data() {
+		return {
+			bgColor: '#ffffff',
+		};
+	},
+	computed: {
+		theme() {
+			return {
+				colors: {
+					background: this.bgColor,
+					...makerColors(this.bgColor),
+				},
+			};
 		},
 	},
 };
 </script>
-
-<style module="$s">
-.StarDemos {
-	display: flex;
-	flex-direction: column;
-	gap: 32px;
-}
-
-.StarDemoHeader {
-	margin-bottom: 8px;
-}
-
-.StarState {
-	display: inline-flex;
-	align-items: center;
-	margin-right: 8px;
-}
-</style>
 ```
 
 <!-- api-tables:start -->
 ## Star Props
 
+Supports attributes from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg).
+
 | Prop  | Type     | Default     | Possible values         | Description                           |
 | ----- | -------- | ----------- | ----------------------- | ------------------------------------- |
 | fill  | `string` | `'full'`    | `full`, `half`, `empty` | Determines the fill style of the star |
-| color | `string` | `'#FFBF00'` | —                       | Color of the star                     |
+| color | `string` | `'#ffbf00'` | —                       | Color of the star                     |
 
 
 ## Star Events
 
-| Event      | Type | Description |
-| ---------- | ---- | ----------- |
-| mouseenter | -    | —           |
-| mouseleave | -    | —           |
-| click      | -    | —           |
+Supports events from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg).
 
 
 ## StarRating Props
 
-| Prop        | Type      | Default     | Possible values            | Description                                                                |
-| ----------- | --------- | ----------- | -------------------------- | -------------------------------------------------------------------------- |
-| rating      | `number`  | `0`         | —                          | Rating value from 0-5, determines fill state of stars                      |
-| size        | `string`  | `'medium'`  | `small`, `medium`, `large` | Size of rating component                                                   |
-| color       | `string`  | `'#FFBF00'` | —                          | Color of the star                                                          |
-| is-editable | `boolean` | `false`     | —                          | Determines whether to bubble up click/hover events and show pointer cursor |
+Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+
+| Prop        | Type      | Default    | Possible values            | Description                                                                |
+| ----------- | --------- | ---------- | -------------------------- | -------------------------------------------------------------------------- |
+| rating      | `number`  | `0`        | —                          | Rating value from 0-5, determines fill state of stars                      |
+| size        | `string`  | `'medium'` | `small`, `medium`, `large` | Size of rating component                                                   |
+| color       | `string`  | —          | —                          | Color of the star                                                          |
+| is-editable | `boolean` | `false`    | —                          | Determines whether to bubble up click/hover events and show pointer cursor |
 
 
 ## StarRating Events
+
+Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
 | Event        | Type | Description |
 | ------------ | ---- | ----------- |
