@@ -77,20 +77,21 @@
 							<m-text
 								pattern="title"
 								:size="0"
-								:color="cardTitleColor"
+								color="var(--card-title-color)"
 								class="title"
 							>
 								{{ item.name }}
 							</m-text>
 							<m-text
 								:size="0"
+								color="var(--card-text-color)"
 								class="price"
 							>
 								{{ item.price }}
 							</m-text>
 							<m-text
 								:size="-1"
-								:color="cardTextColor"
+								color="var(--card-text-color)"
 								class="description"
 							>
 								{{ item.description }}
@@ -112,20 +113,21 @@
 							<m-text
 								pattern="title"
 								:size="0"
-								:color="cardTitleColor"
+								color="var(--card-title-color)"
 								class="title"
 							>
 								{{ item.name }}
 							</m-text>
 							<m-text
 								:size="0"
+								color="var(--card-text-color)"
 								class="price"
 							>
 								{{ item.price }}
 							</m-text>
 							<m-text
 								:size="-1"
-								:color="cardTextColor"
+								color="var(--card-text-color)"
 								class="description"
 							>
 								{{ item.description }}
@@ -219,17 +221,6 @@ export default {
 		MButton,
 		MCard,
 		MInput,
-	},
-
-	props: {
-		cardTitleColor: {
-			type: String,
-			default: undefined,
-		},
-		cardTextColor: {
-			type: String,
-			default: undefined,
-		},
 	},
 
 	data() {
@@ -375,8 +366,16 @@ body {
 }
 
 .item {
+	--card-title-color: var(--m-card-title-color);
+	--card-text-color: var(--m-card-text-color);
+
 	flex: 1;
 	gap: 5px !important;
+}
+
+.item:hover {
+	--card-title-color: var(--m-card-hover-title-color);
+	--card-text-color: var(--m-card-hover-text-color);
 }
 
 .item .image {

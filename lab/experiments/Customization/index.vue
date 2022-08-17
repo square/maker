@@ -906,6 +906,8 @@
 		custom: theme.button.custom,
 	},
 	card: theme.card,
+	image: theme.image,
+	form: theme.form,
 	section: theme.section,
 }
 }}
@@ -917,10 +919,7 @@
 			:theme="theme"
 			:style="styles"
 		>
-			<preview
-				:card-title-color="theme.card.custom.titleColor"
-				:card-text-color="theme.card.custom.textColor"
-			/>
+			<preview />
 		</m-theme>
 	</div>
 </template>
