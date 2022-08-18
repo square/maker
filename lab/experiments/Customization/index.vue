@@ -917,6 +917,15 @@
 					</textarea>
 				</m-accordion>
 			</div>
+			<p>
+				Complete list of proposed
+				<a
+					href="https://coda.io/d/ECOM-Website_dM7hmP2aSPk/Current-list-of-exposed-properties_su-Sg#_luxrf"
+					target="_blank"
+				>
+					Advanced customization options
+				</a>
+			</p>
 		</div>
 		<m-theme
 			:theme="theme"
