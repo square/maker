@@ -569,79 +569,77 @@
 							Image
 						</h3>
 					</template>
+					<p><strong>Border</strong></p>
 					<div :class="$s.Choice">
-						<p><strong>Border</strong></p>
-						<div :class="$s.Choice">
-							<label>
-								<input
-									v-model="theme.image.custom.borderRadius"
-									type="number"
-									min="0"
-									max="72"
-									step="2"
-								>
-								Radius
-							</label>
-							<label>
-								<input
-									v-model="theme.image.custom.borderWidth"
-									type="number"
-									min="1"
-									max="10"
-								>
-								Thickness
-							</label>
-							<label>
-								<input
-									v-model="theme.image.custom.borderColor"
-									type="color"
-								>
-								Color
-							</label>
-						</div>
-						<p><strong>Box shadow</strong></p>
-						<div :class="$s.Choice">
-							<label>
-								<input
-									v-model="theme.image.custom.boxShadowHorizontal"
-									type="number"
-									min="0"
-									max="20"
-								>
-								Horizontal
-							</label>
-							<label>
-								<input
-									v-model="theme.image.custom.boxShadowVertical"
-									type="number"
-									min="0"
-									max="20"
-								>
-								Vertical
-							</label>
-							<label>
-								<input
-									v-model="theme.image.custom.boxShadowBlurRadius"
-									type="number"
-									min="0"
-									max="20"
-								>
-								Blur
-							</label>
-							<label>
-								<input
-									v-model="theme.image.custom.boxShadowSpreadRadius"
-									type="number"
-									min="0"
-									max="20"
-								>
-								Spread
-							</label>
+						<label>
 							<input
-								v-model="theme.image.custom.boxShadowColor"
+								v-model="theme.image.custom.borderRadius"
+								type="number"
+								min="0"
+								max="72"
+								step="2"
+							>
+							Radius
+						</label>
+						<label>
+							<input
+								v-model="theme.image.custom.borderWidth"
+								type="number"
+								min="1"
+								max="10"
+							>
+							Thickness
+						</label>
+						<label>
+							<input
+								v-model="theme.image.custom.borderColor"
 								type="color"
 							>
-						</div>
+							Color
+						</label>
+					</div>
+					<p><strong>Box shadow</strong></p>
+					<div :class="$s.Choice">
+						<label>
+							<input
+								v-model="theme.image.custom.boxShadowHorizontal"
+								type="number"
+								min="0"
+								max="20"
+							>
+							Horizontal
+						</label>
+						<label>
+							<input
+								v-model="theme.image.custom.boxShadowVertical"
+								type="number"
+								min="0"
+								max="20"
+							>
+							Vertical
+						</label>
+						<label>
+							<input
+								v-model="theme.image.custom.boxShadowBlurRadius"
+								type="number"
+								min="0"
+								max="20"
+							>
+							Blur
+						</label>
+						<label>
+							<input
+								v-model="theme.image.custom.boxShadowSpreadRadius"
+								type="number"
+								min="0"
+								max="20"
+							>
+							Spread
+						</label>
+						<input
+							v-model="theme.image.custom.boxShadowColor"
+							type="color"
+						>
 					</div>
 				</m-accordion>
 				<m-accordion
@@ -895,7 +893,12 @@
 					<textarea rows="20">
 {{
 {
-	colors: theme.colors,
+	colors: {
+		primary: theme.colors.primary,
+		background: theme.colors.background,
+		heading: theme.colors.heading,
+		body: theme.colors.body,
+	},
 	fonts: {
 		heading: theme.fonts.heading,
 		body: theme.fonts.body,

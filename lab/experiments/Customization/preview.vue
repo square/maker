@@ -371,11 +371,12 @@ body {
 
 	flex: 1;
 	gap: 5px !important;
+	overflow: hidden;
 }
 
 .item:hover {
-	--card-title-color: var(--m-card-hover-title-color);
-	--card-text-color: var(--m-card-hover-text-color);
+	--card-title-color: var(--m-card-hover-title-color, var(--m-card-title-color));
+	--card-text-color: var(--m-card-hover-text-color, var(--m-card-text-color));
 }
 
 .item .image {

@@ -55,33 +55,10 @@ export const presets = {
 			imageBorderRadius: '8px',
 		},
 		colors: {
+			primary: '#f50f7e',
 			background: '#c7f4f4',
 			heading: '#0061bd',
 			body: '#0051a8',
-			'neutral-0': '#c7f4f4',
-			'neutral-10': '#bce6e6',
-			'neutral-20': '#a5caca',
-			'neutral-80': '#5a6c6c',
-			'neutral-90': '#181b1b',
-			'neutral-100': '#000000',
-			critical: {
-				fill: '#cd2026',
-				text: '#a82826',
-				subtle: '#f6eceb',
-			},
-			warning: {
-				fill: '#ffbf00',
-				text: '#7e662a',
-				subtle: '#f9eecf',
-			},
-			success: {
-				fill: '#008000',
-				text: '#0a7A06',
-				subtle: '#ebf1eb',
-			},
-			elevation: '#ffffff',
-			overlay: 'rgba(0, 0, 0, 0.32)',
-			primary: '#f50f7e',
 		},
 		fonts: {
 			heading: {
@@ -145,7 +122,7 @@ export const presets = {
 		},
 		image: {
 			custom: {
-				borderRadius: '16',
+				borderRadius: '8',
 				borderWidth: '2',
 				borderColor: '#c7f4f4',
 				boxShadowHorizontal: '0',
@@ -201,25 +178,15 @@ export const presets = {
 			color: '@colors.primary',
 			textColor: '#292928',
 			custom: {
-				fontFamily: 'Playfair Display',
+				fontFamily: 'Libre Franklin',
 				fontWeight: '400',
 				borderRadius: '2',
 				borderWidth: '1',
 				borderColor: '#2d2c25',
-				boxShadowHorizontal: '0',
-				boxShadowVertical: '0',
-				boxShadowBlurRadius: '1',
-				boxShadowSpreadRadius: '0',
-				boxShadowColor: '#5f5f49',
 				hoverColor: '#c3c497',
 				hoverTextColor: '#292928',
 				hoverBorderWidth: '1',
 				hoverBorderColor: '#2d2c25',
-				hoverBoxShadowHorizontal: '0',
-				hoverBoxShadowVertical: '0',
-				hoverBoxShadowBlurRadius: '0',
-				hoverBoxShadowSpreadRadius: '2',
-				hoverBoxShadowColor: '#5f5f49',
 			},
 		},
 		card: {
@@ -247,7 +214,7 @@ export const presets = {
 		},
 		image: {
 			custom: {
-				borderRadius: '8',
+				borderRadius: '4',
 				borderWidth: '1',
 				borderColor: '#5d5e50',
 			},
@@ -265,6 +232,80 @@ export const presets = {
 		section: {
 			custom: {
 				maxWidth: '5000px',
+			},
+		},
+	},
+	presetThree: {
+		name: 'Preset three',
+		colors: {
+			primary: '#25007a',
+			background: '#fff6f5',
+			heading: '#d62471',
+			body: '#982557',
+		},
+		fonts: {
+			heading: {
+				fontFamily: 'Comfortaa',
+				fontWeight: '700',
+			},
+			body: {
+				fontFamily: 'Karla',
+				fontWeight: '500',
+			},
+		},
+		button: {
+			color: '@colors.primary',
+			textColor: '#fef6f5',
+			custom: {
+				fontFamily: 'Comfortaa',
+				fontWeight: '700',
+				borderRadius: '32',
+				borderWidth: '3',
+				hoverBorderWidth: '3',
+				hoverColor: '#6c46c3',
+			},
+		},
+		card: {
+			custom: {
+				color: '#f4d0cd',
+				borderRadius: '28',
+				borderWidth: '0',
+				titleColor: '#25007a',
+				textColor: '#25007a',
+				hoverColor: '#ffe8e5',
+				hoverBoxShadowVertical: '2',
+				hoverBoxShadowBlurRadius: '8',
+				hoverBoxShadowColor: '#c19d9a',
+				hoverBoxShadowSpreadRadius: '1',
+				hoverBoxShadowHorizontal: '0',
+				hoverTitleColor: '#3502ac',
+				hoverTextColor: '#3501ac',
+				boxShadowHorizontal: '0',
+				boxShadowVertical: '2',
+				boxShadowBlurRadius: '4',
+				boxShadowSpreadRadius: '1',
+			},
+		},
+		image: {
+			custom: {
+				borderRadius: '32',
+				borderWidth: 0,
+				borderColor: '#ffffff',
+			},
+		},
+		form: {
+			custom: {
+				borderRadius: '32',
+				borderWidth: '3',
+				bgColor: '#fef6f5',
+				textColor: '#25007a',
+				hoverBgColor: '#f4d0cd',
+				borderColor: '#25007a',
+			},
+		},
+		section: {
+			custom: {
+				maxWidth: '1000px',
 			},
 		},
 	},
