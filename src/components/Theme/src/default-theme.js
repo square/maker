@@ -289,6 +289,11 @@ export default function defaultTheme() {
 			iconColor: '@colors.contextualPrimary.fill',
 			iconName: undefined,
 		},
+		progressbar: {
+			color: '@colors["neutral-100"]',
+			size: 'medium',
+			shape: undefined,
+		},
 		modal: {
 			color: undefined,
 			bgColor: undefined,
