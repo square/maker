@@ -195,7 +195,7 @@ export default {
 		},
 
 		afterEnter() {
-			this.$emit('image:loaded');
+			this.$emit('image:visible');
 		},
 	},
 };

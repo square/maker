@@ -8,7 +8,7 @@
 			class="image"
 			src="https://source.unsplash.com/random/400x600"
 			:shape="shape"
-			@image:loaded="imageLoaded"
+			@image:visible="imageVisible"
 		/>
 		<m-image
 			class="image image-tall"
@@ -61,7 +61,7 @@ export default {
 	},
 
 	methods: {
-		imageLoaded() {
+		imageVisible() {
 			this.fadedInComplete = 'Fade in completed';
 		},
 	},
@@ -113,5 +113,5 @@ Supports events from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML
 
 | Event        | Type | Description                                        |
 | ------------ | ---- | -------------------------------------------------- |
-| image:loaded | -    | Image is loaded and fade in transition is complete |
+| image:visible | -    | Image is loaded and fade in transition is complete |
 <!-- api-tables:end -->
