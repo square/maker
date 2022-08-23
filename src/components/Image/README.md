@@ -8,6 +8,7 @@
 			class="image"
 			src="https://source.unsplash.com/random/400x600"
 			:shape="shape"
+			@image:loaded="imageLoaded"
 		/>
 		<m-image
 			class="image image-tall"
@@ -19,6 +20,8 @@
 			src="https://source.unsplash.com/random/400x600"
 			:shape="shape"
 		/>
+		<br>
+		{{ fadedInComplete }}
 		<br>
 		<label>
 			Shape
@@ -53,7 +56,14 @@ export default {
 				'circle',
 				'arch',
 			],
+			fadedInComplete: 'Fade in not completed',
 		};
+	},
+
+	methods: {
+		imageLoaded() {
+			this.fadedInComplete = 'Fade in completed';
+		},
 	},
 };
 </script>
@@ -100,4 +110,8 @@ Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/
 ## Events
 
 Supports events from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
+
+| Event        | Type | Description                                        |
+| ------------ | ---- | -------------------------------------------------- |
+| image:loaded | -    | Image is loaded and fade in transition is complete |
 <!-- api-tables:end -->

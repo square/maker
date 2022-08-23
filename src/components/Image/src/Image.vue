@@ -9,7 +9,7 @@
 				$s[`shape_${resolvedShape}`],
 			]"
 		/>
-		<m-transition-fade-in>
+		<m-transition-fade-in @after-enter="afterEnter">
 			<img
 				v-show="loaded"
 				:class="{
@@ -192,6 +192,10 @@ export default {
 		getImageDimensions() {
 			this.height = this.$el?.offsetHeight || '0';
 			this.width = this.$el?.offsetWidth || '0';
+		},
+
+		afterEnter() {
+			this.$emit('image:loaded');
 		},
 	},
 };
