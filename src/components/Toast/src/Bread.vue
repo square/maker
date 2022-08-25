@@ -53,7 +53,6 @@ export default {
 <style module="$s">
 .Bread {
 	margin: 8px 0;
-	padding: 8px;
 	background-color: var(--maker-color-background, #fff);
 	border-radius: var(--maker-shape-default-border-radius);
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 32px rgba(0, 0, 0, 0.1);

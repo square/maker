@@ -193,6 +193,60 @@ export default {
 </script>
 ```
 
+### Reactive props
+
+Props used within the render function retain reactivity even after being passed to `toastApi.open`. This allows you to control things within the toast from the parent component. Example with progressbar:
+
+```vue
+<template>
+	<div>
+		<button @click="openToast">
+			open toast
+		</button>
+		<br>
+		<label>
+			progress {{ progress }}%
+			<br>
+			<input
+				v-model="progress"
+				type="range"
+				step="1"
+				min="0"
+				max="100"
+			>
+		</label>
+		<m-toast-layer />
+	</div>
+</template>
+
+<script>
+import { MProgressBar } from '@square/maker/components/ProgressBar';
+import { MToastLayer, MBread } from '@square/maker/components/Toast';
+
+export default {
+	components: {
+		MToastLayer,
+	},
+
+	mixins: [
+		MToastLayer.apiMixin,
+	],
+
+	data() {
+		return {
+			progress: 50,
+		};
+	},
+
+	methods: {
+		openToast() {
+			this.toastApi.open(() => <MBread style="min-width: 200px">progress toast {this.progress}%<MProgressBar progress={this.progress} /></MBread>);
+		},
+	},
+};
+</script>
+```
+
 ## Advanced
 
 ### Dodging Actionbars
@@ -206,7 +260,10 @@ Use `actionbarOffset: true` when opening the toast.
 ```vue
 <template>
 	<div>
-		<m-action-bar-layer class="FixInlineActionBarLayerDemosInStyleguide">
+		<m-action-bar-layer
+			class="FixInlineActionBarLayerDemosInStyleguide"
+			style="padding-bottom: 0"
+		>
 			<div class="showOnMobile">
 				<button @click="showActionbar = !showActionbar">
 					{{ showActionbar ? 'hide' : 'show' }}
