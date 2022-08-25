@@ -1,8 +1,22 @@
 # Progress Bar
 
+Use Progress Bar to display progress.
+
+## Examples
+
 ```vue
 <template>
 	<div :class="$s.Container">
+		<m-text
+			pattern="title"
+			:size="2"
+		>
+			default progressbar
+		</m-text>
+		<m-progress-bar
+			:progress="progress"
+		/>
+
 		<div :class="$s.Section">
 			<label>
 				Color picker
@@ -71,14 +85,10 @@ export default {
 
 	data() {
 		return {
-			color: '#000',
+			color: '#000000',
 			progress: 50,
 		};
 	},
-
-	computed: {},
-
-	methods: {},
 };
 </script>
 
@@ -102,10 +112,18 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop     | Type     | Default    | Possible values                      | Description                                |
-| -------- | -------- | ---------- | ------------------------------------ | ------------------------------------------ |
-| size     | `string` | `'medium'` | `xsmall`, `small`, `medium`, `large` | Size (height) of the progress bar          |
-| shape    | `string` | —          | `squared`, `rounded`, `pill`         | Shape of the progress bar                  |
-| color    | `string` | `'#000'`   | —                                    | Color of the progress bar (not background) |
-| progress | `number` | `0`        | —                                    | Progress/width of the bar (0-100)          |
+Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+
+| Prop     | Type     | Default | Possible values                      | Description                                |
+| -------- | -------- | ------- | ------------------------------------ | ------------------------------------------ |
+| pattern  | `string` | —       | —                                    | pattern defined at theme level             |
+| size     | `string` | —       | `xsmall`, `small`, `medium`, `large` | Size (height) of the progress bar          |
+| shape    | `string` | —       | `squared`, `rounded`, `pill`         | Shape of the progress bar                  |
+| color    | `string` | —       | —                                    | Color of the progress bar (not background) |
+| progress | `number` | `0`     | —                                    | Progress (width) of the bar (0 - 100)      |
+
+
+## Events
+
+Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 <!-- api-tables:end -->

@@ -281,10 +281,18 @@ export default function defaultTheme() {
 				info: {}, // component default
 			},
 		},
+		starrating: {
+			color: '@colors.warning.fill',
+		},
 		progresscircle: {
 			color: '@colors.contextualPrimary.fill',
 			iconColor: '@colors.contextualPrimary.fill',
 			iconName: undefined,
+		},
+		progressbar: {
+			color: '@colors["neutral-100"]',
+			size: 'medium',
+			shape: undefined,
 		},
 		modal: {
 			color: undefined,
