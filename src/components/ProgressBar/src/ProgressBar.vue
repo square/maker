@@ -2,14 +2,16 @@
 	<div
 		:class="[
 			$s.ProgressBarContainer,
-			$s[`size_${size}`],
-			$s[`shape_${shape}`],
+			$s[`size_${resolvedSize}`],
+			$s[`shape_${resolvedShape}`],
 		]"
+		v-bind="$attrs"
+		v-on="$listeners"
 	>
 		<div
 			:class="[
 				$s.ProgressBar,
-				$s[`shape_${shape}`],
+				$s[`shape_${resolvedShape}`],
 			]"
 			:style="barStyles"
 		/>
@@ -17,21 +19,40 @@
 </template>
 
 <script>
-import { colord } from 'colord';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import cssValidator from '@square/maker/utils/css-validator';
 
 const MIN_PROGRESS = 0;
 const MAX_PROGRESS = 100;
 
+/**
+ * @inheritAttrs div
+ * @inheritListeners div
+ */
 export default {
-	name: 'ProgressBar',
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
+	inheritAttrs: false,
 
 	props: {
+		/**
+		 * pattern defined at theme level
+		 */
+		pattern: {
+			type: String,
+			default: undefined,
+		},
 		/**
 		 * Size (height) of the progress bar
 		 */
 		size: {
 			type: String,
-			default: 'medium',
+			default: undefined,
 			validator: (size) => ['xsmall', 'small', 'medium', 'large'].includes(size),
 		},
 		/**
@@ -43,15 +64,15 @@ export default {
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
-		 * Color of the progress bar (not background)
+		 * Color of the progress bar
 		 */
 		color: {
 			type: String,
-			default: '#000',
-			validator: (color) => colord(color).isValid(),
+			default: undefined,
+			validator: cssValidator('color'),
 		},
 		/**
-		 * Progress/width of the bar (0-100)
+		 * Progress (width) of the bar (0 - 100)
 		 */
 		progress: {
 			type: Number,
@@ -61,9 +82,15 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('progressbar', [
+			'pattern',
+			'color',
+			'size',
+			'shape',
+		]),
 		barStyles() {
 			return {
-				'--bar-color': this.color,
+				'--bar-color': this.resolvedColor,
 				'--fill-percent': `${this.progress}%`,
 			};
 		},
