@@ -2,7 +2,7 @@
 
 TextButton was made to be used inside the `#actions` slots of other components such as [Notice](#/Notice) or [Card](#/Card).
 
-**DO NOT** use this component if you need a visually lightweight standalone button. It has no padding. It also does not have any focus, hover, or active states. Use a tertiary [Button](#/Button).
+**DO NOT** use this component if you need a visually lightweight standalone button. It has no padding. It also does not have an active state. Use a tertiary [Button](#/Button).
 
 **DO NOT** use this component if you need to navigate the user to another page, for that use [Link](#/Link).
 
@@ -19,6 +19,14 @@ TextButton was made to be used inside the `#actions` slots of other components s
 			>
 		</label><br><br>
 		<table>
+			<thead>
+				<tr>
+					<td />
+					<th>Normal</th>
+					<th>Disabled</th>
+					<th>Loading</th>
+				</tr>
+			</thead>
 			<tbody>
 				<tr>
 					<th>
@@ -31,13 +39,17 @@ TextButton was made to be used inside the `#actions` slots of other components s
 						>
 							Button
 						</m-text-button>
+					</td>
+					<td>
 						<m-text-button
 							size="large"
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-text-button>
+					</td>
+					<td>
 						<m-text-button
 							size="large"
 							:color="color"
@@ -59,13 +71,17 @@ TextButton was made to be used inside the `#actions` slots of other components s
 						>
 							Button
 						</m-text-button>
+					</td>
+					<td>
 						<m-text-button
 							size="medium"
 							:color="color"
 							disabled
 						>
-							Disabled button
+							Disabled
 						</m-text-button>
+					</td>
+					<td>
 						<m-text-button
 							size="medium"
 							:color="color"
@@ -89,19 +105,15 @@ export default {
 	},
 	data() {
 		return {
-			color: '#000',
+			color: '#000000',
 		};
 	},
 };
 </script>
 
-<style>
-body {
-	background-color: #f9f9f9;
-}
-
-th {
-	padding-right: 32px;
+<style scoped>
+th, td {
+	padding: 8px;
 }
 </style>
 ```
