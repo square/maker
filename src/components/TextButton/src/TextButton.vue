@@ -127,6 +127,7 @@ export default {
 	display: inline-flex;
 	align-items: center;
 	min-width: 0;
+	padding: 0;
 	color: var(--color, var(--maker-color-neutral-90));
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
@@ -136,7 +137,7 @@ export default {
 	border-radius: var(--maker-shape-default-border-radius, 4px);
 	outline-color: currentColor;
 	cursor: pointer;
-	transition: box-shadow 0.2s ease-in;
+	transition: box-shadow 0.2s ease-in, opacity 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -153,8 +154,11 @@ export default {
 		font-size: 16px;
 	}
 
-	&:active,
-	&:focus {
+	&:hover:not(:disabled) {
+		opacity: 0.8;
+	}
+
+	&:focus-visible {
 		box-shadow: 0 0 0 1px currentColor;
 	}
 
