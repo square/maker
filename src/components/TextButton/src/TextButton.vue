@@ -136,7 +136,7 @@ export default {
 	border-radius: var(--maker-shape-default-border-radius, 4px);
 	outline-color: currentColor;
 	cursor: pointer;
-	transition: box-shadow 0.2s ease-in;
+	transition: box-shadow 0.2s ease-in, opacity 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -153,8 +153,11 @@ export default {
 		font-size: 16px;
 	}
 
-	&:active,
-	&:focus {
+	&:hover:not(:disabled) {
+		opacity: 0.8;
+	}
+
+	&:focus-visible {
 		box-shadow: 0 0 0 1px currentColor;
 	}
 
