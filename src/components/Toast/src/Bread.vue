@@ -54,9 +54,10 @@ export default {
 .Bread {
 	margin: 8px 0;
 	background-color: var(--maker-color-background, #fff);
-	border-radius: var(--maker-shape-default-border-radius);
+	border-radius: var(--maker-shape-default-border-radius, 4px);
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 32px rgba(0, 0, 0, 0.1);
 	transition: all 0.5s;
 	pointer-events: auto;
+	overflow: hidden;
 }
 </style>

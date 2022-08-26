@@ -15,6 +15,7 @@ export default {
 		};
 
 		toastApiWithCloseSelf.closeSelf = () => {
+			console.log('in close self');
 			this.parentToastApi.close(this.renderFn);
 		};
 

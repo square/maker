@@ -8,16 +8,22 @@ Use MToast to notify users of things.
 		<button @click="openToast">
 			open toast
 		</button>
+		<m-icon
+			name="close"
+			@click="console.log.bind(console)"
+		/>
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
-import { MToastLayer, MBread } from '@square/maker/components/Toast';
+import { MIcon } from '@square/maker/components/Icon';
+import { MToastLayer, MToast } from '@square/maker/components/Toast';
 
 export default {
 	components: {
 		MToastLayer,
+		MIcon,
 	},
 
 	mixins: [
@@ -26,7 +32,15 @@ export default {
 
 	methods: {
 		openToast() {
-			this.toastApi.open(() => <MBread>mmm toasted bread</MBread>);
+			this.toastApi.open(() => <MToast
+				persistent
+				text={'Sooo much toast text it just keeps going and going and going and going and going and hopefully it is long enough to force the actions into wrapping!'}
+				progress={50}
+				actions={[
+					{ text: 'Undo', click: console.log.bind(console)},
+					{ text: 'Redo', click: console.log.bind(console)},
+				]}
+			/>);
 		},
 	},
 };
@@ -74,6 +88,37 @@ type toastApi = {
 put MToast examples here once I have a working MToast component
 
 Relationship between MToast MBread: MToast is gonna be the opinionated pre-made Toast component that will work & look out-of-the-box how designers and engineers expect. MBread is a lower-level component that specific unique toasts for specific unique circumstances can be built upon.
+
+```vue
+<template>
+	<div>
+		<button @click="openToast">
+			open toast
+		</button>
+		<m-toast-layer />
+	</div>
+</template>
+
+<script>
+import { MToastLayer, MToast } from '@square/maker/components/Toast';
+
+export default {
+	components: {
+		MToastLayer,
+	},
+
+	mixins: [
+		MToastLayer.apiMixin,
+	],
+
+	methods: {
+		openToast() {
+			this.toastApi.open(() => <MToast>mmm toast</MToast>);
+		},
+	},
+};
+</script>
+```
 
 ### MBread
 
@@ -514,6 +559,27 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 
 ## Bread Events
+
+Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+
+
+## Toast Props
+
+Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
+
+| Prop          | Type      | Default          | Possible values | Description                                               |
+| ------------- | --------- | ---------------- | --------------- | --------------------------------------------------------- |
+| persistent    | `boolean` | `false`          | —               | make toast persistent (no auto-dismiss)                   |
+| dismiss-after | `number`  | `5000`           | —               | auto-dismiss after x milliseconds (ignored if persistent) |
+| icon-name     | `string`  | `'info'`         | —               | name of icon to show                                      |
+| text          | `string`  | `'default text'` | —               | toast text content                                        |
+| progress      | `number`  | —                | —               | optional toast progress (0 - 100)                         |
+| color         | `string`  | —                | —               | toast text, icon, & button color                          |
+| bg-color      | `string`  | —                | —               | toast background color                                    |
+| actions       | `array`   | `[]`             | —               | toast actions                                             |
+
+
+## Toast Events
 
 Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
