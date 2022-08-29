@@ -5,9 +5,8 @@
 		viewBox="0 0 16 16"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
-		@mouseenter="$emit('mouseenter')"
-		@mouseleave="$emit('mouseleave')"
-		@click="$emit('click')"
+		v-bind="$attrs"
+		v-on="$listeners"
 	>
 		<path
 			v-if="fill === 'full'"
@@ -17,7 +16,6 @@
 			stroke-linecap="round"
 			stroke-linejoin="round"
 		/>
-
 		<path
 			v-if="fill === 'empty'"
 			d="M8.00001 1.5L10.0433 5.00814C10.1846 5.25074 10.4214 5.42277 10.6958 5.48219L14.6636 6.34141L11.9586 9.36878C11.7716 9.57814 11.6811 9.85649 11.7094 10.1358L12.1184 14.175L8.40325 12.5379C8.14634 12.4246 7.85367 12.4246 7.59676 12.5379L3.88166 14.175L4.29062 10.1358C4.3189 9.85649 4.22846 9.57814 4.0414 9.36878L1.33637 6.34141L5.30423 5.48219C5.57862 5.42277 5.8154 5.25074 5.9567 5.00814L8.00001 1.5Z"
@@ -25,7 +23,6 @@
 			stroke-linecap="round"
 			stroke-linejoin="round"
 		/>
-
 		<template v-if="fill === 'half'">
 			<path
 				d="M8 1.5L10.0433 5.00814C10.1846 5.25074 10.4214 5.42277 10.6958 5.48219L14.6636 6.34141L11.9586 9.36878C11.7716 9.57814 11.6811 9.85648 11.7094 10.1358L12.1184 14.175L8.40325 12.5379C8.14634 12.4246 7.85367 12.4246 7.59676 12.5379L3.88166 14.175L4.29062 10.1358C4.3189 9.85649 4.22846 9.57814 4.0414 9.36878L1.33637 6.34141L5.30423 5.48219C5.57862 5.42277 5.8154 5.25074 5.9567 5.00814L8 1.5Z"
@@ -42,10 +39,14 @@
 </template>
 
 <script>
-import { colord } from 'colord';
+import cssValidator from '@square/maker/utils/css-validator';
 
+/**
+ * @inheritAttrs svg
+ * @inheritListeners svg
+ */
 export default {
-	name: 'Star',
+	inheritAttrs: false,
 
 	props: {
 		/**
@@ -61,8 +62,8 @@ export default {
 		 */
 		color: {
 			type: String,
-			default: '#FFBF00',
-			validator: (color) => colord(color).isValid(),
+			default: '#ffbf00',
+			validator: cssValidator('color'),
 		},
 	},
 };
