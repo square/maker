@@ -22,14 +22,21 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span :class="$s.MainText">
+		<span
+			:class="[
+				$s.MainText,
+				{
+					[$s.TruncateText]: !isSingleChild(),
+				}
+			]"
+		>
 			<!-- @slot Button label -->
 			<slot />
 		</span>
 
 		<span
 			v-if="$scopedSlots.information"
-			:class="$s.InformationText"
+			:class="[$s.InformationText, $s.TruncateText]"
 		>
 			<!-- @slot Information label -->
 			<slot
@@ -324,6 +331,11 @@ export default {
 
 	&.align_stack {
 		flex-direction: column;
+		justify-content: center;
+
+		& > * {
+			line-height: 1.1;
+		}
 	}
 
 	&.align_space-between {
@@ -402,25 +414,37 @@ export default {
 }
 
 .MainText {
-	display: flex;
 	gap: 8px;
-	align-items: center;
 	width: max-content;
-	max-width: 100%;
-	overflow: hidden;
-	line-height: 1;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+}
+
+.iconButton .MainText {
+	display: flex;
 }
 
 .InformationText {
 	width: min-content;
-	max-width: 100%;
-	overflow: hidden;
-	line-height: 1;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 	opacity: 0.6;
+}
+
+.TruncateText {
+	/* -webkit-box is supported by all modern browsers */
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	width: fit-content;
+	overflow: hidden;
+	line-height: 1.1 !important;
+	text-overflow: ellipsis;
+
+	/* stylelint-disable-next-line no-descending-specificity */
+	& > * {
+		vertical-align: bottom;
+	}
+}
+
+.align_stack .TruncateText {
+	-webkit-line-clamp: 1;
 }
 
 .Button.align_center .InformationText {
