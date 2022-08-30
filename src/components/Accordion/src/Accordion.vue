@@ -26,6 +26,7 @@
 				<!-- @slot secondary info, goes under title -->
 				<slot name="secondary">
 					<m-text
+						v-if="secondary"
 						pattern="paragraph"
 						:size="-1"
 					>
@@ -175,6 +176,7 @@ export default {
 
 <style module="$s">
 .AccordionHeader {
+	padding: 0;
 	background: none;
 	border: none;
 	cursor: pointer;
