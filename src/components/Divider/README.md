@@ -1,5 +1,7 @@
 # Divider
 
+Use Divider to horizontally separate similar content.
+
 ```vue
 <template>
 	<div>
