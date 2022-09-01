@@ -1,32 +1,42 @@
 <template>
 	<m-bread
 		:class="$s.Toast"
-		:persistent="persistent"
-		:dismiss-after="dismissAfter"
+		:persistent="resolvedPersistent"
+		:dismiss-after="resolvedDismissAfter"
+		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
 		<div :class="$s.ToastContent">
 			<m-icon
 				:class="$s.Icon"
-				:name="iconName"
+				:name="resolvedIconName"
 			/>
 			<div :class="$s.TextAndActions">
 				<m-text
 					element="span"
 					:class="$s.Text"
+					:color="resolvedColor"
 				>
 					{{ text }}
 				</m-text>
 				<div :class="$s.Actions">
-					<m-text-button
-						v-for="action in actions"
-						:key="action.text"
-						size="large"
-						@click="action.click"
+					<template
+						v-for="(action, index) in actions"
 					>
-						{{ action.text }}
-					</m-text-button>
+						<m-text-button
+							:key="action.text + 'button'"
+							size="large"
+							:color="resolvedColor"
+							@click="action.click"
+						>
+							{{ action.text }}
+						</m-text-button>
+						<m-vertical-divider
+							v-if="index !== actions.length - 1"
+							:key="action.text + 'divider'"
+						/>
+					</template>
 				</div>
 			</div>
 			<div
@@ -34,7 +44,7 @@
 				@click="toastApi.closeSelf"
 			>
 				<m-icon
-					:class="$s.Icon"
+					:class="$s.CloseIcon"
 					name="close"
 				/>
 			</div>
@@ -49,6 +59,8 @@
 </template>
 
 <script>
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import { MVerticalDivider } from '@square/maker/components/VerticalDivider';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
 import { MTextButton } from '@square/maker/components/TextButton';
 import { MIcon } from '@square/maker/components/Icon';
@@ -71,42 +83,54 @@ export default {
 		MProgressBar,
 		MTextButton,
 		MText,
+		MVerticalDivider,
 	},
 
 	inject: {
 		toastApi,
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
 	},
 
 	inheritAttrs: false,
 
 	props: {
 		/**
+		 * pattern defined at theme level
+		 */
+		pattern: {
+			type: String,
+			default: undefined,
+		},
+		/**
 		 * make toast persistent (no auto-dismiss)
 		 */
 		persistent: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * auto-dismiss after x milliseconds (ignored if persistent)
 		 */
 		dismissAfter: {
 			type: Number,
-			default: 5000,
+			default: undefined,
 		},
 		/**
 		 * name of icon to show
 		 */
 		iconName: {
 			type: String,
-			default: 'info',
+			default: undefined,
 		},
 		/**
 		 * toast text content
 		 */
 		text: {
 			type: String,
-			default: 'default text',
+			default: '',
 		},
 		/**
 		 * optional toast progress (0 - 100)
@@ -117,7 +141,7 @@ export default {
 			validator: (progress) => progress >= MIN_PROGRESS && progress <= MAX_PROGRESS,
 		},
 		/**
-		 * toast text, icon, & button color
+		 * toast text & button color
 		 */
 		color: {
 			type: String,
@@ -125,12 +149,20 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
+		 * toast icon color
+		 */
+		iconColor: {
+			type: String,
+			default: undefined,
+			validator: (iconColor) => colord(iconColor).isValid(),
+		},
+		/**
 		 * toast background color
 		 */
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => colord(color).isValid(),
+			validator: (bgColor) => colord(bgColor).isValid(),
 		},
 		/**
 		 * toast actions
@@ -150,15 +182,35 @@ export default {
 	},
 
 	computed: {
+		...resolveThemeableProps('toast', [
+			'pattern',
+			'persistent',
+			'dismissAfter',
+			'color',
+			'bgColor',
+			'iconColor',
+			'iconName',
+		]),
 		hasProgress() {
 			return this.progress || this.progress === 0;
+		},
+		style() {
+			const styles = {};
+			if (this.resolvedIconColor) {
+				styles['--toast-icon-color'] = this.resolvedIconColor;
+			}
+			if (this.resolvedBgColor) {
+				styles['--toast-bg-color'] = this.resolvedBgColor;
+			}
+			if (this.resolvedColor) {
+				styles['--toast-color'] = this.resolvedColor;
+			}
+			return styles;
 		},
 	},
 
 	methods: {
-		yell() {
-			console.log("FOR THE LOVE OF GOD!!");
-		},
+
 	},
 };
 </script>
@@ -167,28 +219,31 @@ export default {
 .Toast {
 	width: 100%;
 	max-width: 600px;
+	background-color: var(--toast-bg-color);
 }
 
 .ToastContent {
-	padding: 16px;
 	display: flex;
 	gap: 16px;
 	align-items: flex-start;
+	padding: 16px;
 }
 
-.ToastBody {
-
+.Icon,
+.CloseIcon {
+	flex-shrink: 0;
+	height: 24px;
 }
 
 .Icon {
-	height: 24px;
-	flex-shrink: 0;
+	color: var(--toast-icon-color);
 }
 
 .ToastClose {
-	cursor: pointer;
-	height: 24px;
 	flex-shrink: 0;
+	height: 24px;
+	color: var(--toast-color);
+	cursor: pointer;
 }
 
 .TextAndActions {
@@ -203,6 +258,7 @@ export default {
 }
 
 .Actions {
-
+	display: flex;
+	gap: 4px;
 }
 </style>

@@ -281,6 +281,30 @@ export default function defaultTheme() {
 				info: {}, // component default
 			},
 		},
+		toast: {
+			persistent: false,
+			dismissAfter: 5000,
+			iconName: 'info',
+			bgColor: '@colors.background',
+			color: '@colors["neutral-100"]',
+			iconColor: '@colors.contextualPrimary.fill',
+			patterns: {
+				info: {}, // component default
+				success: {
+					iconName: 'success',
+					iconColor: '@colors.success.fill',
+				},
+				warning: {
+					iconName: 'warning',
+					iconColor: '@colors.warning.fill',
+				},
+				error: {
+					iconName: 'critical',
+					iconColor: '@colors.critical.fill',
+				},
+			},
+
+		},
 		starrating: {
 			color: '@colors.warning.fill',
 		},
