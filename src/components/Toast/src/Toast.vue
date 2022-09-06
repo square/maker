@@ -35,6 +35,7 @@
 						<m-vertical-divider
 							v-if="index !== actions.length - 1"
 							:key="action.text + 'divider'"
+							:style="dividerStyle"
 						/>
 					</template>
 				</div>
@@ -204,6 +205,14 @@ export default {
 			}
 			if (this.resolvedColor) {
 				styles['--toast-color'] = this.resolvedColor;
+			}
+			return styles;
+		},
+		dividerStyle() {
+			const styles = {};
+			if (this.resolvedColor) {
+				styles.backgroundColor = this.resolvedColor;
+				styles.opacity = '0.4';
 			}
 			return styles;
 		},
