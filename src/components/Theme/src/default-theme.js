@@ -295,12 +295,16 @@ export default function defaultTheme() {
 			shape: undefined,
 		},
 		modal: {
-			color: undefined,
-			bgColor: undefined,
+			color: '@colors.body',
+			bgColor: '@colors.background',
 		},
 		dialog: {
-			color: undefined,
-			bgColor: undefined,
+			color: '@colors.body',
+			bgColor: '@colors.background',
+		},
+		blade: {
+			color: '@colors.body',
+			bgColor: '@colors.background',
 		},
 		container: {
 			color: undefined,

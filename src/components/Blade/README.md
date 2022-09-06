@@ -216,6 +216,14 @@ export default {
 ```
 
 <!-- api-tables:start -->
+## Blade Props
+
+| Prop     | Type     | Default | Possible values | Description               |
+| -------- | -------- | ------- | --------------- | ------------------------- |
+| bg-color | `string` | —       | —               | Background color of blade |
+| color    | `string` | —       | —               | Text color of blade       |
+
+
 ## Blade Slots
 
 | Slot    | Description   |
