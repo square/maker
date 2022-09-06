@@ -287,7 +287,7 @@ export default function defaultTheme() {
 			iconName: 'info',
 			bgColor: '@colors.background',
 			color: '@colors["neutral-100"]',
-			iconColor: '@colors.contextualPrimary.fill',
+			iconColor: '@colors["neutral-100"]',
 			patterns: {
 				info: {}, // component default
 				success: {
