@@ -2,11 +2,12 @@
 	<m-transition-stack
 		:class="[
 			$s.FullScreenFixed,
+			$s[`position_${position}`],
 			{
 				[$s.ActionbarOffset]: addActionbarOffset,
 			}
 		]"
-		transition-from="bottom"
+		:transition-from="transitionFrom"
 	>
 		<render-fn
 			v-for="toast in toastApi.state.toasts"
@@ -107,6 +108,25 @@ export default {
 
 	inheritAttrs: false,
 
+	props: {
+		/**
+		 * items transition from direction
+		 */
+		transitionFrom: {
+			type: String,
+			default: 'bottom',
+			validator: (from) => ['bottom', 'top', 'left', 'right'].includes(from),
+		},
+		/**
+		 * position of toasts on the screen
+		 */
+		position: {
+			type: String,
+			default: 'bottom',
+			validator: (position) => ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'].includes(position),
+		},
+	},
+
 	apiMixin,
 
 	computed: {
@@ -129,13 +149,46 @@ export default {
 	left: 0;
 	z-index: 1;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-end;
-	padding: 0 16px;
+	padding: 16px;
 	padding-bottom: var(--initial-bottom-padding);
 	transition: padding-bottom 0.5s;
 	pointer-events: none;
+}
+
+.position_bottom {
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.position_bottom-left {
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-end;
+}
+
+.position_bottom-right {
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.position_top {
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.position_top-left {
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	justify-content: flex-end;
+}
+
+.position_top-right {
+	flex-direction: column-reverse;
+	align-items: flex-end;
+	justify-content: flex-end;
 }
 
 /* calculations imported from ActionBarLayer */
