@@ -38,7 +38,7 @@ export default {
 
 	props: {
 		/**
-		 * Background color of container
+		 * Background color of dialog
 		 */
 		bgColor: {
 			type: String,
@@ -46,7 +46,7 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Text color of container
+		 * Text color of dialog
 		 */
 		color: {
 			type: String,

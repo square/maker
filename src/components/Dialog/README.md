@@ -669,10 +669,10 @@ export default {
 <!-- api-tables:start -->
 ## Dialog Props
 
-| Prop     | Type     | Default | Possible values | Description                   |
-| -------- | -------- | ------- | --------------- | ----------------------------- |
-| bg-color | `string` | —       | —               | Background color of container |
-| color    | `string` | —       | —               | Text color of container       |
+| Prop     | Type     | Default | Possible values | Description                |
+| -------- | -------- | ------- | --------------- | -------------------------- |
+| bg-color | `string` | —       | —               | Background color of dialog |
+| color    | `string` | —       | —               | Text color of dialog       |
 
 
 ## Dialog Slots
