@@ -286,21 +286,21 @@ export default function defaultTheme() {
 			dismissAfter: 5000,
 			iconName: 'info',
 			bgColor: '@colors.background',
-			color: '@colors["neutral-100"]',
-			iconColor: '@colors["neutral-100"]',
+			color: '@colors.body',
+			accentColor: '@colors.body',
 			patterns: {
 				info: {}, // component default
 				success: {
 					iconName: 'success',
-					iconColor: '@colors.success.fill',
+					accentColor: '@colors.success.fill',
 				},
 				warning: {
 					iconName: 'warning',
-					iconColor: '@colors.warning.fill',
+					accentColor: '@colors.warning.fill',
 				},
 				error: {
 					iconName: 'critical',
-					iconColor: '@colors.critical.fill',
+					accentColor: '@colors.critical.fill',
 				},
 			},
 

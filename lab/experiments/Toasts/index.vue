@@ -204,46 +204,44 @@
 			<br>
 
 			<br>
-			<b>toast width</b> {{ maxWidth }}
+			<b>toast progress</b> {{ progress === '-1'? 'none' : progress }}
 			<br>
 			<label>
 				<input
-					v-model="maxWidth"
-					type="radio"
-					name="max-width"
-					value="400px"
+					v-model="progress"
+					type="range"
+					step="1"
+					min="-1"
+					max="100"
 				>
-				400px
-			</label>
-			<label>
-				<input
-					v-model="maxWidth"
-					type="radio"
-					name="max-width"
-					value="500px"
-				>
-				500px
-			</label>
-			<label>
-				<input
-					v-model="maxWidth"
-					type="radio"
-					name="max-width"
-					value="600px"
-				>
-				600px
 			</label>
 			<br>
 
 			<br>
-			<b>persistent</b> {{ persistent }}
+			<b>toast width</b> {{ maxWidthText }}
 			<br>
 			<label>
 				<input
-					v-model="persistent"
-					type="checkbox"
+					v-model="maxWidth"
+					type="range"
+					step="100"
+					min="400"
+					max="700"
 				>
-				persistent
+			</label>
+			<br>
+
+			<br>
+			<b>toast duration</b> {{ durationText }}
+			<br>
+			<label>
+				<input
+					v-model="duration"
+					type="range"
+					step="1"
+					min="1"
+					max="6"
+				>
 			</label>
 			<br>
 
@@ -285,7 +283,9 @@ import { MModalLayer } from '@square/maker/components/Modal';
 import { MDialogLayer } from '@square/maker/components/Dialog';
 import { MBladeLayer } from '@square/maker/components/Blade';
 import AdvancedToastLayer from './AdvancedToastLayer.vue';
-import ToastBlade from './ToastBlade.vue';
+import ActionBarBlade from '../../components/ActionBarBlade.vue';
+import ActionBarDialog from '../../components/ActionBarDialog.vue';
+import ActionBarModal from '../../components/ActionBarModal.vue';
 
 export default {
 	components: {
@@ -309,10 +309,11 @@ export default {
 			position: 'bottom',
 			toastTheme: 'neutral',
 			length: 'short',
-			maxWidth: '600px',
+			maxWidth: '600',
 			primaryColor: '#006aff',
 			bgColor: '#ffffff',
-			persistent: false,
+			duration: '5',
+			progress: '-1',
 		};
 	},
 
@@ -333,11 +334,11 @@ export default {
 					patterns: {
 						primary: {
 							iconName: 'info',
-							iconColor: '@colors.contextualPrimary.fill',
+							accentColor: '@colors.contextualPrimary.fill',
 						},
 						primarySaturated: {
 							iconName: 'info',
-							iconColor: '@colors.contextualPrimary.onFill',
+							accentColor: '@colors.contextualPrimary.onFill',
 							color: '@colors.contextualPrimary.onFill',
 							bgColor: '@colors.contextualPrimary.fill',
 						},
@@ -345,23 +346,23 @@ export default {
 							iconName: 'info',
 							bgColor: '@colors["neutral-100"]',
 							color: '@colors["neutral-0"]',
-							iconColor: '@colors["neutral-0"]',
+							accentColor: '@colors["neutral-0"]',
 						},
 						successSaturated: {
 							iconName: 'success',
-							iconColor: '@colors.success.onFill',
+							accentColor: '@colors.success.onFill',
 							color: '@colors.success.onFill',
 							bgColor: '@colors.success.fill',
 						},
 						warningSaturated: {
 							iconName: 'warning',
-							iconColor: '@colors.warning.onFill',
+							accentColor: '@colors.warning.onFill',
 							color: '@colors.warning.onFill',
 							bgColor: '@colors.warning.fill',
 						},
 						errorSaturated: {
 							iconName: 'critical',
-							iconColor: '@colors.critical.onFill',
+							accentColor: '@colors.critical.onFill',
 							color: '@colors.critical.onFill',
 							bgColor: '@colors.critical.fill',
 						},
@@ -411,6 +412,18 @@ export default {
 				},
 			];
 		},
+		durationText() {
+			if (this.duration === '6') {
+				return 'persistent';
+			}
+			return `auto-dismiss (${this.duration}s)`;
+		},
+		maxWidthText() {
+			if (this.maxWidth === '700') {
+				return 'full-width';
+			}
+			return `${this.maxWidth}px`;
+		},
 	},
 
 	watch: {
@@ -429,13 +442,13 @@ export default {
 
 	methods: {
 		openModal() {
-
+			this.modalApi.open(() => <ActionBarModal openToast={this.openToast} />);
 		},
 		openDialog() {
-
+			this.dialogApi.open(() => <ActionBarDialog openToast={this.openToast} />);
 		},
 		openBlade() {
-			this.bladeApi.open(() => <ToastBlade />);
+			this.bladeApi.open(() => <ActionBarBlade openToast={this.openToast} />);
 		},
 		openLiteralToast() {
 			this.toastApi.open(() =>
@@ -444,10 +457,17 @@ export default {
 				</svg>
 			</MBread>);
 		},
-		openToast(pattern = 'info') {
+		openToast(pattern = 'info', options) {
+			options = options || { actionbarOffset: false };
 			const text = this.getText(pattern);
-			const style = { maxWidth: this.maxWidth + '' };
-			const persistent = !!this.persistent;
+			let maxWidth = `${this.maxWidth}px`;
+			if (maxWidth === '700px') {
+				maxWidth = '100%';
+			}
+			const style = { maxWidth };
+			const persistent = this.duration === '6';
+			const SECONDS_TO_MS_MULTIPLIER = 1000;
+			const dismissAfter = Number.parseInt(this.duration, 10) * SECONDS_TO_MS_MULTIPLIER;
 			const actions = this.actions;
 			if (this.toastTheme === 'saturated') {
 				pattern += 'Saturated';
@@ -458,7 +478,9 @@ export default {
 				actions={actions}
 				style={style}
 				persistent={persistent}
-			/>);
+				dismissAfter={dismissAfter}
+				progress={this.progress === '-1' ? undefined : Number.parseInt(this.progress, 10)}
+			/>, options);
 		},
 		getText(pattern = 'info') {
 			let text = '';
@@ -497,9 +519,17 @@ export default {
 		"Segoe UI Emoji";
 }
 
-input[type="radio"],
+input,
 label,
 button {
 	cursor: pointer;
+}
+
+input[type="range"] {
+	cursor: grab;
+}
+
+input[type="progress"]:active {
+	cursor: grabbing;
 }
 </style>

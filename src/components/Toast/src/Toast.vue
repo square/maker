@@ -35,6 +35,7 @@
 						<m-vertical-divider
 							v-if="index !== actions.length - 1"
 							:key="action.text + 'divider'"
+							:class="$s.ActionDivider"
 							:style="dividerStyle"
 						/>
 					</template>
@@ -54,6 +55,8 @@
 			v-if="hasProgress"
 			shape="squared"
 			size="xsmall"
+			:class="$s.ToastProgressBar"
+			:color="resolvedAccentColor"
 			:progress="progress"
 		/>
 	</m-bread>
@@ -150,12 +153,12 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * toast icon color
+		 * toast icon & progress color
 		 */
-		iconColor: {
+		accentColor: {
 			type: String,
 			default: undefined,
-			validator: (iconColor) => colord(iconColor).isValid(),
+			validator: (accentColor) => colord(accentColor).isValid(),
 		},
 		/**
 		 * toast background color
@@ -189,7 +192,7 @@ export default {
 			'dismissAfter',
 			'color',
 			'bgColor',
-			'iconColor',
+			'accentColor',
 			'iconName',
 		]),
 		hasProgress() {
@@ -197,8 +200,8 @@ export default {
 		},
 		style() {
 			const styles = {};
-			if (this.resolvedIconColor) {
-				styles['--toast-icon-color'] = this.resolvedIconColor;
+			if (this.resolvedAccentColor) {
+				styles['--toast-accent-color'] = this.resolvedAccentColor;
 			}
 			if (this.resolvedBgColor) {
 				styles['--toast-bg-color'] = this.resolvedBgColor;
@@ -216,10 +219,6 @@ export default {
 			}
 			return styles;
 		},
-	},
-
-	methods: {
-
 	},
 };
 </script>
@@ -245,7 +244,7 @@ export default {
 }
 
 .Icon {
-	color: var(--toast-icon-color);
+	color: var(--toast-accent-color);
 }
 
 .ToastClose {
@@ -269,5 +268,13 @@ export default {
 .Actions {
 	display: flex;
 	gap: 4px;
+}
+
+.ActionDivider {
+	margin: 0 4px;
+}
+
+.ToastProgressBar {
+	background-color: var(--toast-bg-color);
 }
 </style>
