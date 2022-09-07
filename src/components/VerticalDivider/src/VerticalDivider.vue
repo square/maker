@@ -23,7 +23,7 @@ export default {
 	align-self: center;
 	width: 1px;
 	height: 0.5em;
-	margin: 0 4px;
+	margin: 0;
 	padding: 0;
 	vertical-align: middle;
 	background-color: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.08));

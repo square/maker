@@ -46,7 +46,7 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * Background color of container
+		 * Background color of modal
 		 */
 		bgColor: {
 			type: String,
@@ -54,7 +54,7 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Text color of container
+		 * Text color of modal
 		 */
 		color: {
 			type: String,
@@ -140,8 +140,8 @@ export default {
 .Modal {
 	height: 100%;
 	overflow: auto;
-	color: var(--color, inherit);
-	background: var(--bg-color, #f5f6f7);
+	color: var(--color, var(--maker-color-body, inherit));
+	background: var(--bg-color, var(--maker-color-background, #f5f6f7));
 	transition: transform 0.2s linear;
 }
 
