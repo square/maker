@@ -541,6 +541,18 @@
 							open blade
 						</m-button>
 					</div>
+					<m-divider />
+					<div>
+						<m-progress-bar
+							:progress="50"
+						/>
+						<m-progress-circle
+							:progress="50"
+						/>
+						<m-star-rating
+							:rating="3.5"
+						/>
+					</div>
 				</div>
 				<div
 					:class="$s.Preview"
@@ -657,6 +669,9 @@ import { WCAG_CONTRAST_TEXT, getContrast } from '@square/maker/utils/get-contras
 import makerColors from '@square/maker/utils/maker-colors';
 import { MLink } from '@square/maker/components/Link';
 import { MIcon } from '@square/maker/components/Icon';
+import { MProgressBar } from '@square/maker/components/ProgressBar';
+import { MProgressCircle } from '@square/maker/components/ProgressCircle';
+import { MStarRating } from '@square/maker/components/StarRating';
 
 import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
 import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
@@ -723,6 +738,9 @@ export default {
 		MIcon,
 		MBladeLayer,
 		MDialogLayer,
+		MProgressBar,
+		MProgressCircle,
+		MStarRating,
 	},
 
 	mixins: [
