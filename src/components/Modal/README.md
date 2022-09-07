@@ -854,8 +854,8 @@ export default {
 | Prop         | Type     | Default | Possible values | Description                          |
 | ------------ | -------- | ------- | --------------- | ------------------------------------ |
 | before-close | `func`   | —       | —               | Before close hook, can block closing |
-| bg-color     | `string` | —       | —               | Background color of container        |
-| color        | `string` | —       | —               | Text color of container              |
+| bg-color     | `string` | —       | —               | Background color of modal            |
+| color        | `string` | —       | —               | Text color of modal                  |
 
 
 ## Modal Slots

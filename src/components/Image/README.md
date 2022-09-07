@@ -111,7 +111,7 @@ Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/
 
 Supports events from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
 
-| Event        | Type | Description                                        |
-| ------------ | ---- | -------------------------------------------------- |
-| image:visible | -    | Image is loaded and fade in transition is complete |
+| Event         | Type | Description |
+| ------------- | ---- | ----------- |
+| image:visible | -    | —           |
 <!-- api-tables:end -->

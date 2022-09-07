@@ -1,5 +1,10 @@
 <template>
-	<div :class="$s.BladeContainer">
+	<div
+		:class="$s.BladeContainer"
+		:style="style"
+		v-bind="$attrs"
+		v-on="$listeners"
+	>
 		<div :class="$s.Blade">
 			<!-- @slot Blade content -->
 			<slot />
@@ -7,18 +12,67 @@
 	</div>
 </template>
 
+<script>
+import { colord } from 'colord';
+import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+
+export default {
+	inject: {
+		theme: {
+			default: defaultTheme(),
+			from: MThemeKey,
+		},
+	},
+
+	inheritAttrs: false,
+
+	props: {
+		/**
+		 * Background color of blade
+		 */
+		bgColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Text color of blade
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+	},
+
+	computed: {
+		...resolveThemeableProps('blade', [
+			'bgColor',
+			'color',
+		]),
+		style() {
+			return {
+				'--bg-color': this.resolvedBgColor,
+				'--color': this.resolvedColor,
+			};
+		},
+	},
+};
+</script>
+
 <style module="$s">
 .BladeContainer {
 	position: relative;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	color: var(--color, var(--maker-color-body, inherit));
+	background-color: var(--bg-color, var(--maker-color-background, #f5f6f7));
 }
 
 .Blade {
 	height: 100%;
 	overflow: auto;
-	background: #f5f6f7;
 }
 
 @media screen and (--for-tablet-landscape-up) {
