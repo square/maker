@@ -30,22 +30,6 @@ The most common use-case would be to visually separate a row of TextButtons sinc
 ```vue
 <template>
 	<div>
-		✅ row of buttons (clear visual separation)
-		<br>
-		<m-button>
-			add
-		</m-button>
-		<m-button>
-			remove
-		</m-button>
-		<m-button>
-			clear
-		</m-button>
-		<m-button>
-			reset
-		</m-button>
-		<br>
-		<br>
 		❌ row of textbuttons (visually ambiguous)
 		<br>
 		<m-text-button>
@@ -67,15 +51,15 @@ The most common use-case would be to visually separate a row of TextButtons sinc
 		<m-text-button>
 			add
 		</m-text-button>
-		<m-vertical-divider />
+		<m-vertical-divider class="divider" />
 		<m-text-button>
 			remove
 		</m-text-button>
-		<m-vertical-divider />
+		<m-vertical-divider class="divider" />
 		<m-text-button>
 			clear
 		</m-text-button>
-		<m-vertical-divider />
+		<m-vertical-divider class="divider" />
 		<m-text-button>
 			reset
 		</m-text-button>
@@ -85,7 +69,6 @@ The most common use-case would be to visually separate a row of TextButtons sinc
 </template>
 
 <script>
-import { MButton } from '@square/maker/components/Button';
 import { MTextButton } from '@square/maker/components/TextButton';
 import { MVerticalDivider } from '@square/maker/components/VerticalDivider';
 
@@ -93,10 +76,15 @@ export default {
 	components: {
 		MVerticalDivider,
 		MTextButton,
-		MButton,
 	},
 };
 </script>
+
+<style scoped>
+.divider {
+	margin: 0 4px;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
