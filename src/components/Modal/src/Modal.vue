@@ -140,8 +140,8 @@ export default {
 .Modal {
 	height: 100%;
 	overflow: auto;
-	color: var(--color, inherit);
-	background: var(--bg-color, #f5f6f7);
+	color: var(--color, var(--maker-color-body, inherit));
+	background: var(--bg-color, var(--maker-color-background, #f5f6f7));
 	transition: transform 0.2s linear;
 }
 

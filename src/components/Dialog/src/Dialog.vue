@@ -121,8 +121,8 @@ export default {
 .Dialog {
 	max-height: calc(100vh - 48px);
 	overflow: auto;
-	color: var(--color, inherit);
-	background: var(--bg-color, #f5f6f7);
+	color: var(--color, var(--maker-color-body, inherit));
+	background: var(--bg-color, var(--maker-color-background, #f5f6f7));
 	border-radius:
 		var(--maker-shape-default-border-radius, 8px)
 		var(--maker-shape-default-border-radius, 8px)
