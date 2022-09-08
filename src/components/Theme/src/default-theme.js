@@ -285,8 +285,8 @@ export default function defaultTheme() {
 			color: '@colors.warning.fill',
 		},
 		progresscircle: {
-			color: '@colors.contextualPrimary.fill',
-			iconColor: '@colors.contextualPrimary.fill',
+			color: '@colors["neutral-100"]',
+			iconColor: '@colors["neutral-100"]',
 			iconName: undefined,
 		},
 		progressbar: {
