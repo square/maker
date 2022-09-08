@@ -376,9 +376,8 @@
 					<div>
 						<m-button
 							full-width
-							@click="openItemModal(item)"
 						>
-							Open modal
+							Order now
 						</m-button>
 						<m-button
 							full-width
@@ -523,6 +522,27 @@
 					</div>
 					<m-divider />
 					<div>
+						<m-button
+							full-width
+							@click="openModal"
+						>
+							open modal
+						</m-button>
+						<m-button
+							full-width
+							@click="openDialog"
+						>
+							open dialog
+						</m-button>
+						<m-button
+							full-width
+							@click="openBlade"
+						>
+							open blade
+						</m-button>
+					</div>
+					<m-divider />
+					<div>
 						<m-progress-bar
 							:progress="50"
 						/>
@@ -612,7 +632,9 @@
 					</div>
 				</div>
 			</div>
+			<m-blade-layer />
 			<m-modal-layer />
+			<m-dialog-layer />
 		</m-theme>
 	</div>
 </template>
@@ -637,6 +659,8 @@ import { MSegmentedControl, MSegment } from '@square/maker/components/SegmentedC
 import { MCard } from '@square/maker/components/Card';
 import { MImage } from '@square/maker/components/Image';
 import { MModalLayer } from '@square/maker/components/Modal';
+import { MBladeLayer } from '@square/maker/components/Blade';
+import { MDialogLayer } from '@square/maker/components/Dialog';
 import { MContainer } from '@square/maker/components/Container';
 import { MPinInput } from '@square/maker/components/PinInput';
 import { MToggle } from '@square/maker/components/Toggle';
@@ -664,8 +688,9 @@ import {
 	formatISO,
 } from 'date-fns';
 
-import ItemModal from './SiteApp/ItemModal.vue';
-import storeData from './SiteApp/data';
+import ActionBarBlade from '../components/ActionBarBlade.vue';
+import ActionBarModal from '../components/ActionBarModal.vue';
+import ActionBarDialog from '../components/ActionBarDialog.vue';
 
 const filledIcons = {
 	critical: AlertCircleFilled,
@@ -711,6 +736,8 @@ export default {
 		Info,
 		MLink,
 		MIcon,
+		MBladeLayer,
+		MDialogLayer,
 		MProgressBar,
 		MProgressCircle,
 		MStarRating,
@@ -718,6 +745,8 @@ export default {
 
 	mixins: [
 		MModalLayer.apiMixin,
+		MBladeLayer.apiMixin,
+		MDialogLayer.apiMixin,
 	],
 
 	data() {
@@ -764,7 +793,6 @@ export default {
 			],
 			selected: 'medium',
 			images: [],
-			item: storeData.items[0],
 			fontsBaseSize: '16',
 			fontsTypeScale: '1.17',
 			textPatterns: {
@@ -911,16 +939,14 @@ export default {
 		setImages(images) {
 			this.images = images;
 		},
-
-		openItemModal(item) {
-			this.modalApi.open((h) => h(
-				ItemModal,
-				{
-					props: {
-						item,
-					},
-				},
-			));
+		openModal() {
+			this.modalApi.open(() => <ActionBarModal />);
+		},
+		openDialog() {
+			this.dialogApi.open(() => <ActionBarDialog />);
+		},
+		openBlade() {
+			this.bladeApi.open(() => <ActionBarBlade />);
 		},
 	},
 };
