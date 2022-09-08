@@ -85,6 +85,69 @@ export default function defaultTheme() {
 					variant: 'tertiary',
 					color: '@colors.contextualPrimary.fill',
 				},
+				// filled patterns
+				primaryFilled: {
+					color: '@colors.contextualPrimary.fill',
+					textColor: '@colors.contextualPrimary.onFill',
+				},
+				errorFilled: {
+					color: '@colors.critical.fill',
+					textColor: '@colors.critical.onFill',
+				},
+				successFilled: {
+					color: '@colors.success.fill',
+					textColor: '@colors.success.onFill',
+				},
+				warningFilled: {
+					color: '@colors.warning.fill',
+					textColor: '@colors.warning.onFill',
+				},
+				infoFilled: {
+					color: '@colors["neutral-90"]',
+					textColor: '@colors["neutral-10"]',
+				},
+				// outline patterns
+				primaryOutline: {
+					variant: 'secondary',
+					color: '@colors.contextualPrimary.text',
+				},
+				errorOutline: {
+					variant: 'secondary',
+					color: '@colors.critical.text',
+				},
+				successOutline: {
+					variant: 'secondary',
+					color: '@colors.success.text',
+				},
+				warningOutline: {
+					variant: 'secondary',
+					color: '@colors.warning.text',
+				},
+				infoOutline: {
+					variant: 'secondary',
+					color: '@colors["neutral-90"]',
+				},
+				// subtle patterns
+				primarySubtle: {
+					textColor: '@colors.contextualPrimary.text',
+					color: '@colors.contextualPrimary.subtle',
+				},
+				errorSubtle: {
+					textColor: '@colors.critical.text',
+					color: '@colors.critical.subtle',
+				},
+				successSubtle: {
+					textColor: '@colors.success.text',
+					color: '@colors.success.subtle',
+				},
+				warningSubtle: {
+					textColor: '@colors.warning.text',
+					color: '@colors.warning.subtle',
+				},
+				infoSubtle: {
+					textColor: '@colors["neutral-90"]',
+					color: '@colors["neutral-10"]',
+				},
 			},
 		},
 		link: {

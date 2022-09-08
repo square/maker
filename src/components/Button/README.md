@@ -2,31 +2,33 @@
 
 You should almost always use this component for standalone buttons in your app. If you very specifically need a visually lightweight button to be used inside of a [Notice](#/Notice) or [Card](#/Card) that has no padding and no focus, hover, or active states then use [TextButton](#/TextButton). If you need a button that navigates the user to another page that's not a button, that's a link, so use [Link](#/Link).
 
-## Styles & Sizes
+## Examples
 
 ```vue
 <template>
 	<m-theme :theme="theme">
 		<label>
-			primary color picker
+			primary color
 			<input
 				v-model="primaryColor"
 				type="color"
 			>
-		</label><br>
+		</label>&nbsp;
 		<label>
-			background color picker
+			background
 			<input
 				v-model="bgColor"
 				type="color"
 			>
-		</label><br>
+		</label><br><br>
 		<table class="ButtonTable">
 			<thead>
 				<tr>
-					<td />
+					<th class="title">
+						Sizes
+					</th>
 					<th>
-						Primary / Fill
+						Primary (Fill)
 					</th>
 					<th>
 						Secondary / Outline
@@ -38,14 +40,15 @@ You should almost always use this component for standalone buttons in your app. 
 			</thead>
 			<tbody>
 				<tr>
-					<th>
+					<td>
 						Large
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
 							size="large"
 						>
+							<plus class="icon" />
 							Large
 						</m-button>
 					</td>
@@ -54,6 +57,7 @@ You should almost always use this component for standalone buttons in your app. 
 							pattern="secondary"
 							size="large"
 						>
+							<plus class="icon" />
 							Large
 						</m-button>
 					</td>
@@ -62,19 +66,21 @@ You should almost always use this component for standalone buttons in your app. 
 							pattern="tertiary"
 							size="large"
 						>
+							<plus class="icon" />
 							Large
 						</m-button>
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<td>
 						Medium
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
 							size="medium"
 						>
+							<plus class="icon" />
 							Medium
 						</m-button>
 					</td>
@@ -83,6 +89,7 @@ You should almost always use this component for standalone buttons in your app. 
 							pattern="secondary"
 							size="medium"
 						>
+							<plus class="icon" />
 							Medium
 						</m-button>
 					</td>
@@ -91,19 +98,21 @@ You should almost always use this component for standalone buttons in your app. 
 							pattern="tertiary"
 							size="medium"
 						>
+							<plus class="icon" />
 							Medium
 						</m-button>
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<td>
 						Small
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
 							size="small"
 						>
+							<plus class="icon" />
 							Small
 						</m-button>
 					</td>
@@ -112,6 +121,7 @@ You should almost always use this component for standalone buttons in your app. 
 							pattern="secondary"
 							size="small"
 						>
+							<plus class="icon" />
 							Small
 						</m-button>
 					</td>
@@ -120,14 +130,25 @@ You should almost always use this component for standalone buttons in your app. 
 							pattern="tertiary"
 							size="small"
 						>
+							<plus class="icon" />
 							Small
 						</m-button>
 					</td>
 				</tr>
+			</tbody>
+			<tbody>
 				<tr>
-					<th>
+					<th class="title">
+						States
+					</th>
+					<th />
+					<th />
+					<th />
+				</tr>
+				<tr>
+					<td>
 						Disabled
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -154,9 +175,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<td>
 						Loading
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -183,9 +204,46 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<td>
+						Full-width
+					</td>
+					<td>
+						<m-button
+							pattern="primary"
+							full-width
+						>
+							Full width
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="secondary"
+							full-width
+						>
+							Full width
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="tertiary"
+							full-width
+						>
+							Full width
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th class="title">
+						Styles
+					</th>
+					<th />
+					<th />
+					<th />
+				</tr>
+				<tr>
+					<td>
 						Icon
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -209,38 +267,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
-						Icon + Text
-					</th>
 					<td>
-						<m-button
-							pattern="primary"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
+						Information slot
 					</td>
-					<td>
-						<m-button
-							pattern="secondary"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-					</td>
-					<td>
-						<m-button
-							pattern="tertiary"
-						>
-							<plus class="icon" />
-							Button
-						</m-button>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						Info slot
-					</th>
 					<td>
 						<m-button
 							pattern="primary"
@@ -273,9 +302,10 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
-						Info slot (stacked)
-					</th>
+					<td>
+						Information slot<br>
+						Align stacked
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -311,9 +341,10 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
-						Info slot (reversed)
-					</th>
+					<td>
+						Information slot<br>
+						Align space-between
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -349,9 +380,18 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<th class="title">
+						Shapes
+					</th>
+					<th />
+					<th />
+					<th />
+				</tr>
+
+				<tr>
+					<td>
 						Squared
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -378,9 +418,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<td>
 						Rounded
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -407,9 +447,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 				</tr>
 				<tr>
-					<th>
+					<td>
 						Pill
-					</th>
+					</td>
 					<td>
 						<m-button
 							pattern="primary"
@@ -435,32 +475,154 @@ You should almost always use this component for standalone buttons in your app. 
 						</m-button>
 					</td>
 				</tr>
+			</tbody>
+		</table>
+		<table class="ButtonTable">
+			<thead>
 				<tr>
-					<th>
-						Full width
+					<th class="title">
+						Patterns
 					</th>
+					<th>
+						Fill
+					</th>
+					<th>
+						Outline
+					</th>
+					<th>
+						Subtle
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>
+						Primary
+					</td>
 					<td>
 						<m-button
-							pattern="primary"
-							full-width
+							pattern="primaryFilled"
 						>
-							Full width
+							primaryFilled
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
-							full-width
+							pattern="primaryOutline"
 						>
-							Full width
+							primaryOutline
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
-							full-width
+							pattern="primarySubtle"
 						>
-							Full width
+							primarySubtle
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Error
+					</td>
+					<td>
+						<m-button
+							pattern="errorFilled"
+						>
+							errorFilled
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="errorOutline"
+						>
+							errorOutline
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="errorSubtle"
+						>
+							errorSubtle
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Success
+					</td>
+					<td>
+						<m-button
+							pattern="successFilled"
+						>
+							successFilled
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="successOutline"
+						>
+							successOutline
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="successSubtle"
+						>
+							successSubtle
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Warning
+					</td>
+					<td>
+						<m-button
+							pattern="warningFilled"
+						>
+							warningFilled
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="warningOutline"
+						>
+							warningOutline
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="warningSubtle"
+						>
+							warningSubtle
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Info
+					</td>
+					<td>
+						<m-button
+							pattern="infoFilled"
+						>
+							infoFilled
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="infoOutline"
+						>
+							infoOutline
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							pattern="infoSubtle"
+						>
+							infoSubtle
 						</m-button>
 					</td>
 				</tr>
@@ -485,7 +647,7 @@ export default {
 	},
 	data() {
 		return {
-			primaryColor: '#000000',
+			primaryColor: '#9142ff',
 			bgColor: '#ffffff',
 		};
 	},
@@ -505,8 +667,30 @@ export default {
 
 <style scoped>
 .ButtonTable {
-	border-spacing: 16px;
+	min-width: 50%;
 	border-collapse: separate;
+	border-spacing: 0 16px;
+	text-align: left;
+
+	& td {
+		padding: 0 8px;
+	}
+
+	& th {
+		padding: 0 8px;
+	}
+
+	& th {
+		background: var(--maker-color-neutral-10);
+		color: var(--maker-color-neutral-90);
+		font-weight: 500;
+	}
+
+	& .title {
+		color: var(--maker-color-neutral-100);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
 }
 .icon {
 	width: 16px;
