@@ -1,6 +1,11 @@
 <template>
 	<m-bread
-		:class="$s.Toast"
+		:class="[
+			$s.Toast,
+			{
+				[$s.EnhanceContrast]: enhanceContrast,
+			},
+		]"
 		:persistent="resolvedPersistent"
 		:dismiss-after="resolvedDismissAfter"
 		:style="style"
@@ -195,6 +200,16 @@ export default {
 			'accentColor',
 			'iconName',
 		]),
+		/**
+		 * if the toast bg color is the same as the page bg color
+		 * it's easy for the toast to get lost or blend into the
+		 * page too much so we check for this condition and if it's
+		 * true we enhance contrast by adding a subtle border to
+		 * the toast
+		 */
+		enhanceContrast() {
+			return this.resolvedBgColor === this.theme.colors.background;
+		},
 		hasProgress() {
 			return this.progress || this.progress === 0;
 		},
@@ -225,9 +240,14 @@ export default {
 
 <style module="$s">
 .Toast {
+	box-sizing: border-box;
 	width: 100%;
 	max-width: 600px;
 	background-color: var(--toast-bg-color);
+}
+
+.EnhanceContrast {
+	border: 1px solid var(--maker-color-neutral-10, #f1f1f1);
 }
 
 .ToastContent {
