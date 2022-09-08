@@ -71,9 +71,9 @@
 					v-model="toastTheme"
 					type="radio"
 					name="toast-theme"
-					value="neutral"
+					value="plain"
 				>
-				neutral
+				plain
 			</label>
 			<label>
 				<input
@@ -307,7 +307,7 @@ export default {
 		return {
 			transitionFrom: 'bottom',
 			position: 'bottom',
-			toastTheme: 'neutral',
+			toastTheme: 'plain',
 			length: 'short',
 			maxWidth: '600',
 			primaryColor: '#006aff',
