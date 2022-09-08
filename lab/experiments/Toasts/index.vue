@@ -3,265 +3,284 @@
 		class="toasts-lab"
 		:theme="theme"
 	>
-		<div class="toasts-controls">
-			<b>open toast</b>
-			<br>
-			<button @click="openToast('info')">
-				info
-			</button>
-			<button @click="openToast('success')">
-				success
-			</button>
-			<button @click="openToast('warning')">
-				warning
-			</button>
-			<button @click="openToast('error')">
-				error
-			</button>
-			<button @click="openToast('primary')">
-				primary
-			</button>
-			<button @click="openLiteralToast">
-				literal
-			</button>
-			<br>
+		<div class="toast-controls">
+			<div class="control-group">
+				<b>Actions</b>
+				<br>
 
-			<br>
-			<b>open others</b>
-			<br>
-			<button @click="openModal">
-				modal
-			</button>
-			<button @click="openDialog">
-				dialog
-			</button>
-			<button @click="openBlade">
-				blade
-			</button>
-			<br>
+				<br>
+				<b>Open toasts</b>
+				<br>
+				<button @click="openToast('info')">
+					info
+				</button>
+				<button @click="openToast('success')">
+					success
+				</button>
+				<button @click="openToast('warning')">
+					warning
+				</button>
+				<button @click="openToast('error')">
+					error
+				</button>
+				<button @click="openToast('primary')">
+					primary
+				</button>
+				<button @click="openLiteralToast">
+					literal
+				</button>
+				<br>
 
-			<br>
-			<b>toast length</b> {{ length }}
-			<br>
-			<label>
-				<input
-					v-model="length"
-					type="radio"
-					name="length"
-					value="short"
-				>
-				short
-			</label>
-			<label>
-				<input
-					v-model="length"
-					type="radio"
-					name="length"
-					value="long"
-				>
-				long
-			</label>
-			<br>
+				<br>
+				<b>Open others</b>
+				<br>
+				<button @click="openModal">
+					modal
+				</button>
+				<button @click="openDialog">
+					dialog
+				</button>
+				<button @click="openBlade">
+					blade
+				</button>
+				<br>
+			</div>
 
-			<br>
-			<b>toast theme</b> {{ toastTheme }}
-			<br>
-			<label>
-				<input
-					v-model="toastTheme"
-					type="radio"
-					name="toast-theme"
-					value="plain"
-				>
-				plain
-			</label>
-			<label>
-				<input
-					v-model="toastTheme"
-					type="radio"
-					name="toast-theme"
-					value="saturated"
-				>
-				saturated
-			</label>
-			<br>
+			<div class="control-group">
+				<b>Toast customizations</b>
+				<br>
 
-			<br>
-			<b>toast position</b> {{ position }}
-			<br>
-			<table>
-				<tr>
-					<td>
-						<label>
-							<input
-								v-model="position"
-								type="radio"
-								name="position"
-								value="top-left"
-							>
-							top-left
-						</label>
-					</td>
-					<td>
-						<label>
-							<input
-								v-model="position"
-								type="radio"
-								name="position"
-								value="top"
-							>
-							top
-						</label>
-					</td>
-					<td>
-						<label>
-							<input
-								v-model="position"
-								type="radio"
-								name="position"
-								value="top-right"
-							>
-							top-right
-						</label>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>
-							<input
-								v-model="position"
-								type="radio"
-								name="position"
-								value="bottom-left"
-							>
-							bottom-left
-						</label>
-					</td>
-					<td>
-						<label>
-							<input
-								v-model="position"
-								type="radio"
-								name="position"
-								value="bottom"
-							>
-							bottom
-						</label>
-					</td>
-					<td>
-						<label>
-							<input
-								v-model="position"
-								type="radio"
-								name="position"
-								value="bottom-right"
-							>
-							bottom-right
-						</label>
-					</td>
-				</tr>
-			</table>
+				<br>
+				<b>Variant</b>
+				<br>
+				<label>
+					<input
+						v-model="toastTheme"
+						type="radio"
+						name="toast-theme"
+						value="plain"
+					>
+					plain
+				</label>
+				<label>
+					<input
+						v-model="toastTheme"
+						type="radio"
+						name="toast-theme"
+						value="saturated"
+					>
+					saturated
+				</label>
+				<br>
 
-			<br>
-			<b>toast transition from</b> {{ transitionFrom }}
-			<br>
-			<label>
-				<input
-					v-model="transitionFrom"
-					type="radio"
-					name="transition-from"
-					value="top"
-				>
-				top
-			</label>
-			<label>
-				<input
-					v-model="transitionFrom"
-					type="radio"
-					name="transition-from"
-					value="bottom"
-				>
-				bottom
-			</label>
-			<label>
-				<input
-					v-model="transitionFrom"
-					type="radio"
-					name="transition-from"
-					value="left"
-				>
-				left
-			</label>
-			<label>
-				<input
-					v-model="transitionFrom"
-					type="radio"
-					name="transition-from"
-					value="right"
-				>
-				right
-			</label>
-			<br>
+				<br>
+				<b>Position</b>
+				<br>
+				<table>
+					<tr>
+						<td>
+							<label>
+								<input
+									v-model="position"
+									type="radio"
+									name="position"
+									value="top-left"
+								>
+								top-left
+							</label>
+						</td>
+						<td>
+							<label>
+								<input
+									v-model="position"
+									type="radio"
+									name="position"
+									value="top"
+								>
+								top
+							</label>
+						</td>
+						<td>
+							<label>
+								<input
+									v-model="position"
+									type="radio"
+									name="position"
+									value="top-right"
+								>
+								top-right
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>
+								<input
+									v-model="position"
+									type="radio"
+									name="position"
+									value="bottom-left"
+								>
+								bottom-left
+							</label>
+						</td>
+						<td>
+							<label>
+								<input
+									v-model="position"
+									type="radio"
+									name="position"
+									value="bottom"
+								>
+								bottom
+							</label>
+						</td>
+						<td>
+							<label>
+								<input
+									v-model="position"
+									type="radio"
+									name="position"
+									value="bottom-right"
+								>
+								bottom-right
+							</label>
+						</td>
+					</tr>
+				</table>
 
-			<br>
-			<b>toast progress</b> {{ progress === '-1'? 'none' : progress+'%' }}
-			<br>
-			<label>
+				<br>
+				<b>Animate from</b>
+				<br>
+				<label>
+					<input
+						v-model="transitionFrom"
+						type="radio"
+						name="transition-from"
+						value="top"
+					>
+					top
+				</label>
+				<label>
+					<input
+						v-model="transitionFrom"
+						type="radio"
+						name="transition-from"
+						value="bottom"
+					>
+					bottom
+				</label>
+				<label>
+					<input
+						v-model="transitionFrom"
+						type="radio"
+						name="transition-from"
+						value="left"
+					>
+					left
+				</label>
+				<label>
+					<input
+						v-model="transitionFrom"
+						type="radio"
+						name="transition-from"
+						value="right"
+					>
+					right
+				</label>
+				<br>
+
+				<br>
+				<b>Persist duration</b>
+				<br>
+				<label>
+					<input
+						v-model="duration"
+						type="range"
+						step="1"
+						min="1"
+						max="6"
+					>
+					{{ durationText }}
+				</label>
+				<br>
+
+				<br>
+				<b>Content length</b>
+				<br>
+				<label>
+					<input
+						v-model="length"
+						type="radio"
+						name="length"
+						value="short"
+					>
+					short
+				</label>
+				<label>
+					<input
+						v-model="length"
+						type="radio"
+						name="length"
+						value="long"
+					>
+					long
+				</label>
+				<br>
+
+				<br>
+				<b>Width</b>
+				<br>
+				<label>
+					<input
+						v-model="maxWidth"
+						type="range"
+						step="100"
+						min="400"
+						max="700"
+					>
+					{{ maxWidthText }}
+				</label>
+				<br>
+
+				<br>
+				<b>Progress bar</b>
+				<br>
+				<label>
+					<input
+						v-model="progress"
+						type="range"
+						step="1"
+						min="-1"
+						max="100"
+					>
+					{{ progress === '-1'? 'none' : progress+'%' }}
+				</label>
+				<br>
+			</div>
+
+			<div class="control-group">
+				<b>Site colors</b>
+				<br>
+
+				<br>
+				<b>Primary</b> {{ primaryColor }}
+				<br>
 				<input
-					v-model="progress"
-					type="range"
-					step="1"
-					min="-1"
-					max="100"
+					v-model="primaryColor"
+					type="color"
 				>
-			</label>
-			<br>
+				<br>
 
-			<br>
-			<b>toast width</b> {{ maxWidthText }}
-			<br>
-			<label>
+				<br>
+				<b>Background</b> {{ bgColor }}
+				<br>
 				<input
-					v-model="maxWidth"
-					type="range"
-					step="100"
-					min="400"
-					max="700"
+					v-model="bgColor"
+					type="color"
 				>
-			</label>
-			<br>
-
-			<br>
-			<b>toast duration</b> {{ durationText }}
-			<br>
-			<label>
-				<input
-					v-model="duration"
-					type="range"
-					step="1"
-					min="1"
-					max="6"
-				>
-			</label>
-			<br>
-
-			<br>
-			<b>site primary color</b> {{ primaryColor }}
-			<br>
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-			<br>
-
-			<br>
-			<b>site bg color</b> {{ bgColor }}
-			<br>
-			<input
-				v-model="bgColor"
-				type="color"
-			>
-			<br>
+				<br>
+			</div>
 		</div>
 
 		<m-blade-layer />
@@ -414,9 +433,9 @@ export default {
 		},
 		durationText() {
 			if (this.duration === '6') {
-				return 'persistent';
+				return 'indefinite';
 			}
-			return `auto-dismiss (${this.duration}s)`;
+			return `${this.duration}s`;
 		},
 		maxWidthText() {
 			if (this.maxWidth === '700') {
@@ -542,6 +561,18 @@ export default {
 		sans-serif,
 		"Apple Color Emoji",
 		"Segoe UI Emoji";
+}
+
+.toast-controls {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 8px;
+}
+
+.control-group {
+	padding: 8px;
+	border: 2px solid var(--maker-color-neutral-20);
+	border-radius: 4px;
 }
 
 input,
