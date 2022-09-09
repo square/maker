@@ -44,6 +44,14 @@
 					blade
 				</button>
 				<br>
+
+				<br>
+				<b>Close toasts</b>
+				<br>
+				<button @click="closeAllToasts">
+					all
+				</button>
+				<br>
 			</div>
 
 			<div class="control-group">
@@ -51,7 +59,7 @@
 				<br>
 
 				<br>
-				<b>Variant</b>
+				<b>Style</b>
 				<br>
 				<label>
 					<input
@@ -222,6 +230,15 @@
 						v-model="length"
 						type="radio"
 						name="length"
+						value="medium"
+					>
+					medium
+				</label>
+				<label>
+					<input
+						v-model="length"
+						type="radio"
+						name="length"
 						value="long"
 					>
 					long
@@ -260,25 +277,50 @@
 			</div>
 
 			<div class="control-group">
-				<b>Site colors</b>
+				<b>Site styles</b>
 				<br>
 
 				<br>
-				<b>Primary</b> {{ primaryColor }}
+				<b>Primary color</b>
 				<br>
 				<input
 					v-model="primaryColor"
 					type="color"
 				>
+				{{ primaryColor }}
 				<br>
 
 				<br>
-				<b>Background</b> {{ bgColor }}
+				<b>Background color</b>
 				<br>
 				<input
 					v-model="bgColor"
 					type="color"
 				>
+				{{ bgColor }}
+				<br>
+
+				<br>
+				<b>Icons</b>
+				<br>
+				<label>
+					<input
+						v-model="iconStyle"
+						type="radio"
+						name="icon-style"
+						value="filled"
+					>
+					filled
+				</label>
+				<label>
+					<input
+						v-model="iconStyle"
+						type="radio"
+						name="icon-style"
+						value="outlined"
+					>
+					outlined
+				</label>
 				<br>
 			</div>
 		</div>
@@ -301,10 +343,34 @@ import { MToast, MBread } from '@square/maker/components/Toast';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MDialogLayer } from '@square/maker/components/Dialog';
 import { MBladeLayer } from '@square/maker/components/Blade';
+
+import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
+import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
+import CheckCircleFilled from '@square/maker-icons/CheckCircleFilled';
+import InfoFilled from '@square/maker-icons/InfoFilled';
+import AlertTriangle from '@square/maker-icons/AlertTriangle';
+import AlertCircle from '@square/maker-icons/AlertCircle';
+import CheckCircle from '@square/maker-icons/CheckCircle';
+import Info from '@square/maker-icons/Info';
+
 import AdvancedToastLayer from './AdvancedToastLayer.vue';
 import ActionBarBlade from '../../components/ActionBarBlade.vue';
 import ActionBarDialog from '../../components/ActionBarDialog.vue';
 import ActionBarModal from '../../components/ActionBarModal.vue';
+
+const filledIcons = {
+	critical: AlertCircleFilled,
+	warning: AlertTriangleFilled,
+	success: CheckCircleFilled,
+	info: InfoFilled,
+};
+
+const outlineIcons = {
+	critical: AlertCircle,
+	warning: AlertTriangle,
+	success: CheckCircle,
+	info: Info,
+};
 
 export default {
 	components: {
@@ -327,113 +393,116 @@ export default {
 			transitionFrom: 'bottom',
 			position: 'bottom',
 			toastTheme: 'plain',
-			length: 'short',
+			length: 'medium',
 			maxWidth: '600',
 			primaryColor: '#006aff',
 			bgColor: '#ffffff',
 			duration: '5',
 			progress: '-1',
+			iconStyle: 'filled',
 		};
 	},
 
 	computed: {
 		theme() {
+			const colors = {
+				primary: this.primaryColor,
+				background: this.bgColor,
+				...makerColors(this.bgColor, this.primaryColor),
+			};
+			const icons = this.iconStyle === 'filled' ? filledIcons : outlineIcons;
+			const toast = {
+				patterns: {
+					primary: {
+						iconName: 'info',
+						accentColor: '@colors.contextualPrimary.fill',
+					},
+					primarySaturated: {
+						iconName: 'info',
+						accentColor: '@colors.contextualPrimary.onFill',
+						color: '@colors.contextualPrimary.onFill',
+						bgColor: '@colors.contextualPrimary.fill',
+					},
+					infoSaturated: {
+						iconName: 'info',
+						bgColor: '@colors["neutral-100"]',
+						color: '@colors["neutral-0"]',
+						accentColor: '@colors["neutral-0"]',
+					},
+					successSaturated: {
+						iconName: 'success',
+						accentColor: '@colors.success.onFill',
+						color: '@colors.success.onFill',
+						bgColor: '@colors.success.fill',
+					},
+					warningSaturated: {
+						iconName: 'warning',
+						accentColor: '@colors.warning.onFill',
+						color: '@colors.warning.onFill',
+						bgColor: '@colors.warning.fill',
+					},
+					errorSaturated: {
+						iconName: 'critical',
+						accentColor: '@colors.critical.onFill',
+						color: '@colors.critical.onFill',
+						bgColor: '@colors.critical.fill',
+					},
+				},
+			};
 			return {
-				fonts: {
-					label: {
-						fontWeight: '500',
-					},
-				},
-				colors: {
-					primary: this.primaryColor,
-					background: this.bgColor,
-					...makerColors(this.bgColor, this.primaryColor),
-				},
-				toast: {
-					patterns: {
-						primary: {
-							iconName: 'info',
-							accentColor: '@colors.contextualPrimary.fill',
-						},
-						primarySaturated: {
-							iconName: 'info',
-							accentColor: '@colors.contextualPrimary.onFill',
-							color: '@colors.contextualPrimary.onFill',
-							bgColor: '@colors.contextualPrimary.fill',
-						},
-						infoSaturated: {
-							iconName: 'info',
-							bgColor: '@colors["neutral-100"]',
-							color: '@colors["neutral-0"]',
-							accentColor: '@colors["neutral-0"]',
-						},
-						successSaturated: {
-							iconName: 'success',
-							accentColor: '@colors.success.onFill',
-							color: '@colors.success.onFill',
-							bgColor: '@colors.success.fill',
-						},
-						warningSaturated: {
-							iconName: 'warning',
-							accentColor: '@colors.warning.onFill',
-							color: '@colors.warning.onFill',
-							bgColor: '@colors.warning.fill',
-						},
-						errorSaturated: {
-							iconName: 'critical',
-							accentColor: '@colors.critical.onFill',
-							color: '@colors.critical.onFill',
-							bgColor: '@colors.critical.fill',
-						},
-					},
-				},
+				colors,
+				icons,
+				toast,
 			};
 		},
 		primaryText() {
 			if (this.length === 'short') {
+				return 'Something branded happened.';
+			}
+			if (this.length === 'medium') {
 				return 'I\'m a primary toast, whatever that means.';
 			}
 			return 'I\'m a primary toast, what does that mean? Something branded happened? Okay. Something very on brand happened.';
 		},
 		infoText() {
 			if (this.length === 'short') {
+				return 'Something happened.';
+			}
+			if (this.length === 'medium') {
 				return 'Hello. Something happened.';
 			}
 			return 'Hello. A lot of things happened. So many things. Some of them are still happening. More will happen in the future.';
 		},
 		successText() {
 			if (this.length === 'short') {
+				return 'Something happened!';
+			}
+			if (this.length === 'medium') {
 				return 'Success! The thing happened!';
 			}
 			return 'Success! So many things happened, and they were all excellent and brought much joy all across the land hooray!';
 		},
 		warningText() {
 			if (this.length === 'short') {
+				return 'Something barely happened.';
+			}
+			if (this.length === 'medium') {
 				return 'Warning. Something barely happened.';
 			}
 			return 'Warning. A lot of things happened, and all of them were kinda off. You should be concerned, but only slightly.';
 		},
 		errorText() {
 			if (this.length === 'short') {
+				return 'Something did NOT happen!';
+			}
+			if (this.length === 'medium') {
 				return 'Error! Something did NOT happen!';
 			}
 			return 'Error! Nothing happened! Literally none of the things you wanted to happen actually happened. It all broke. Oops.';
 		},
-		actions() {
-			return [
-				{
-					text: 'Undo',
-					click: () => console.log('undo clicked'),
-				},
-				{
-					text: 'Redo',
-					click: () => console.log('redo clicked'),
-				},
-			];
-		},
 		durationText() {
 			if (this.duration === '6') {
-				return 'indefinite';
+				return 'forever';
 			}
 			return `${this.duration}s`;
 		},
@@ -495,6 +564,10 @@ export default {
 			if (this.toastTheme === 'saturated') {
 				pattern += 'Saturated';
 			}
+			let hideIcon = false;
+			if (this.length === 'short') {
+				hideIcon = true;
+			}
 			this.toastApi.open(() => <MToast
 				pattern={pattern}
 				text={text}
@@ -502,8 +575,12 @@ export default {
 				style={style}
 				persistent={persistent}
 				dismissAfter={dismissAfter}
+				hideIcon={hideIcon}
 				progress={this.progress === '-1' ? undefined : Number.parseInt(this.progress, 10)}
 			/>, options);
+		},
+		closeAllToasts() {
+			this.toastApi.closeAll();
 		},
 		getText(pattern = 'info') {
 			let text = '';
@@ -522,8 +599,11 @@ export default {
 			}
 			return text;
 		},
-		getActions(length = 'short') {
+		getActions(length = 'medium') {
 			if (length === 'short') {
+				return [];
+			}
+			if (length === 'medium') {
 				return [
 					{
 						text: 'Okay',

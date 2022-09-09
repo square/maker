@@ -14,6 +14,7 @@
 	>
 		<div :class="$s.ToastContent">
 			<m-icon
+				v-if="!hideIcon"
 				:class="$s.Icon"
 				:name="resolvedIconName"
 			/>
@@ -133,6 +134,13 @@ export default {
 		iconName: {
 			type: String,
 			default: undefined,
+		},
+		/**
+		 * hides icon
+		 */
+		hideIcon: {
+			type: Boolean,
+			default: false,
 		},
 		/**
 		 * toast text content
