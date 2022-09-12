@@ -67,7 +67,7 @@ export default {
 	height: 100%;
 	overflow: hidden;
 	color: var(--color, var(--maker-color-body, inherit));
-	background-color: var(--bg-color, var(--maker-color-background, #f5f6f7));
+	background-color: var(--bg-color, var(--maker-color-background, #fff));
 }
 
 .Blade {

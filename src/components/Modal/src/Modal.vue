@@ -141,7 +141,7 @@ export default {
 	height: 100%;
 	overflow: auto;
 	color: var(--color, var(--maker-color-body, inherit));
-	background: var(--bg-color, var(--maker-color-background, #f5f6f7));
+	background: var(--bg-color, var(--maker-color-background, #fff));
 	transition: transform 0.2s linear;
 }
 

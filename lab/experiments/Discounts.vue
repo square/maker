@@ -252,7 +252,7 @@ export default {
 }
 
 .inline-discount-icon {
-	color: var(--maker-color-primary-text);
+	color: inherit;
 }
 
 .blocky-discount-icon {
@@ -261,8 +261,6 @@ export default {
 	justify-content: center;
 	width: 48px;
 	height: 48px;
-	color: var(--maker-color-primary-text);
-	background-color: var(--maker-color-primary-subtle);
 	border-radius: var(--maker-shape-default-border-radius);
 }
 
@@ -291,7 +289,7 @@ input {
 }
 
 .icons {
-	color: var(--maker-color-primary);
+	color: inherit;
 }
 
 .icons > *,

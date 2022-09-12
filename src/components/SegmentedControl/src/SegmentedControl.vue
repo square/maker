@@ -76,7 +76,7 @@ export default {
 	font-size: 14px;
 	font-family: var(--maker-font-label-font-family, inherit);
 	line-height: 24px;
-	background-color: var(--maker-color-neutral-10, #f6f7f9);
+	background-color: var(--maker-color-neutral-10, #f1f1f1);
 	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
 }
 

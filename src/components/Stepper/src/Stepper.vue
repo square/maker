@@ -237,7 +237,7 @@ export default {
 
 .QuantityReadonly,
 .QuantityManualInput {
-	color: var(--maker-color-neutral-90, inherit);
+	color: var(--maker-color-neutral-90, #1b1b1b);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: inherit;
 	font-family: var(--maker-font-label-font-family, inherit);

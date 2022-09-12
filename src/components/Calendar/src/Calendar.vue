@@ -400,6 +400,6 @@ export default {
 }
 
 .DateCell:hover .DateCellButton:not(.selected):not(.disabled) {
-	background-color: var(--maker-color-neutral-10, rgba(0, 0, 0, 0.1));
+	background-color: var(--maker-color-neutral-10, #f1f1f1);
 }
 </style>

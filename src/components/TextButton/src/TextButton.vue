@@ -128,7 +128,7 @@ export default {
 	align-items: center;
 	min-width: 0;
 	padding: 0;
-	color: var(--color, var(--maker-color-neutral-90));
+	color: var(--color, var(--maker-color-neutral-90, #1b1b1b));
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
@@ -189,7 +189,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color, var(--maker-color-neutral-90));
+	color: var(--color, var(--maker-color-neutral-90, #1b1b1b));
 	background-color: transparent;
 }
 

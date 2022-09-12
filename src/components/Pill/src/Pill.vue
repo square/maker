@@ -61,7 +61,7 @@ export default {
 			'bgColor',
 		]),
 		style() {
-			const textColor = this.resolvedTextColor || 'var(--maker-color-neutral-90)';
+			const textColor = this.resolvedTextColor || 'var(--maker-color-neutral-90, #1b1b1b)';
 			const bgColor = this.resolvedBgColor || 'transparent';
 			const borderColor = bgColor === 'transparent' ? textColor : bgColor;
 			return {

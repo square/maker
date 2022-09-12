@@ -44,7 +44,7 @@ export default {
 	--radius-pill-button: 32px;
 
 	flex: 1 0 0;
-	color: var(--maker-color-neutral-90, black);
+	color: var(--maker-color-neutral-90, #1b1b1b);
 	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
@@ -69,8 +69,8 @@ export default {
 }
 
 .selected {
-	color: var(--maker-color-neutral-90, black);
-	background-color: var(--maker-color-elevation, white);
+	color: var(--maker-color-neutral-90, #1b1b1b);
+	background-color: var(--maker-color-elevation, #fff);
 	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
 }
 </style>

@@ -99,9 +99,9 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
-	--color-border-focus: var(--maker-color-body, rgba(0, 0, 0, 0.9));
-	--color-active: var(--maker-color-body, rgba(0, 0, 0, 0.9));
+	--color-border: var(--maker-color-neutral-20, #d3d3d3);
+	--color-border-focus: var(--maker-color-body, inherit);
+	--color-active: var(--maker-color-body, inherit);
 	--color-error: rgba(206, 50, 23, 1);
 }
 

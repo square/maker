@@ -174,9 +174,9 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--maker-color-body);
-	font-weight: var(--maker-font-body-font-weight);
-	font-family: var(--maker-font-body-font-family);
-	background-color: var(--maker-color-background);
+	color: var(--maker-color-body, inherit);
+	font-weight: var(--maker-font-body-font-weight, 400);
+	font-family: var(--maker-font-body-font-family, inherit);
+	background-color: var(--maker-color-background, #fff);
 }
 </style>
