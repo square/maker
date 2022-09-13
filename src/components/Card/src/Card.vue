@@ -52,9 +52,9 @@ export default {
 	--radius-pill-default: 4px;
 
 	padding: 16px 24px;
-	background-color: var(--maker-color-background, #fff);
-	border: 1px solid var(--maker-color-neutral-20, #d3d3d3);
-	border-radius: var(--maker-shape-card-border-radius, var(--radius-rounded-default));
+	background-color: $maker-color-background;
+	border: 1px solid $maker-color-neutral-20;
+	border-radius: $maker-shape-card-border-radius;
 
 	&.shape_squared {
 		border-radius: 0;

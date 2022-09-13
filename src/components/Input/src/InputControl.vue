@@ -134,13 +134,13 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: var(--maker-color-neutral-10, #f1f1f1);
+	--color-background: $maker-color-neutral-10;
 	--color-border: transparent;
 }
 
 .variant_outline {
-	--color-background: var(--maker-color-background, #fff);
-	--color-border: var(--maker-color-neutral-20, #d3d3d3);
+	--color-background: $maker-color-background;
+	--color-border: $maker-color-neutral-20;
 }
 
 .Affix {
@@ -167,9 +167,9 @@ export default {
 }
 
 .InputContainer {
-	--color-placeholder: var(--maker-color-neutral-80, #707070);
-	--color-foreground: var(--maker-color-neutral-90, #1b1b1b);
-	--color-border-active: var(--maker-color-neutral-80, #707070);
+	--color-placeholder: $maker-color-neutral-80;
+	--color-foreground: $maker-color-neutral-90;
+	--color-border-active: $maker-color-neutral-80;
 	--color-error: rgba(206, 50, 23, 1);
 
 	display: flex;
@@ -183,7 +183,7 @@ export default {
 	font-size: 16px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	border-radius: $maker-shape-default-border-radius;
 	transition: border-color 0.2s ease;
 
 	&:not(.disabled, .invalid):hover,

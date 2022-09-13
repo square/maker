@@ -147,20 +147,20 @@ export default {
 .Checkbox:checked::after {
 	left: var(--tb-left-checked);
 
-	--tb-background-color: var(--maker-color-background, #fff);
+	--tb-background-color: $maker-color-background;
 }
 
 .Checkbox:disabled {
-	border-color: var(--maker-color-neutral-20, #d3d3d3);
+	border-color: $maker-color-neutral-20;
 
 	&:not(:checked) {
-		background-color: var(--maker-color-neutral-10, #f1f1f1);
+		background-color: $maker-color-neutral-10;
 
-		--tb-background-color: var(--maker-color-neutral-20, #d3d3d3);
+		--tb-background-color: $maker-color-neutral-20;
 	}
 
 	&:checked {
-		background-color: var(--maker-color-neutral-20, #d3d3d3);
+		background-color: $maker-color-neutral-20;
 	}
 }
 
@@ -170,7 +170,7 @@ export default {
 	}
 
 	&:not(:checked) + .Toggle {
-		background-color: var(--maker-color-background, #fff);
+		background-color: $maker-color-background;
 
 		--tb-background-color: var(--color-error);
 	}
@@ -181,25 +181,25 @@ export default {
 }
 
 .Checkbox:not(:disabled, :invalid) {
-	border-color: var(--maker-color-neutral-20, #d3d3d3);
+	border-color: $maker-color-neutral-20;
 
 	&:not(:checked) {
-		background-color: var(--maker-color-background, #fff);
+		background-color: $maker-color-background;
 
-		--tb-background-color: var(--maker-color-neutral-20, #d3d3d3);
+		--tb-background-color: $maker-color-neutral-20;
 
 		&:hover,
 		&:active,
 		&:focus {
-			border-color: var(--maker-color-body, inherit);
+			border-color: $maker-color-body;
 
-			--tb-background-color: var(--maker-color-body, inherit);
+			--tb-background-color: $maker-color-body;
 		}
 	}
 
 	&:checked {
-		background-color: var(--maker-color-body, inherit);
-		border-color: var(--maker-color-body, inherit);
+		background-color: $maker-color-body;
+		border-color: $maker-color-body;
 	}
 }
 </style>

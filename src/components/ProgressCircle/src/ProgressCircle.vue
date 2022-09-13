@@ -148,7 +148,7 @@ export default {
 
 .ProgressBackground {
 	transform-origin: center;
-	stroke: var(--maker-color-neutral-10, #f1f1f1);
+	stroke: $maker-color-neutral-10;
 	stroke-width: var(--stroke-width);
 }
 

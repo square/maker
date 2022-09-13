@@ -26,7 +26,7 @@ export default {
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;
-	background-color: var(--maker-color-neutral-20, #d3d3d3);
+	background-color: $maker-color-neutral-20;
 	border: none;
 }
 </style>

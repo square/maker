@@ -175,26 +175,26 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: var(--maker-color-neutral-10, #f1f1f1);
+	--color-background: $maker-color-neutral-10;
 	--color-border: transparent;
 }
 
 .variant_outline {
-	--color-background: var(--maker-color-background, #fff);
-	--color-border: var(--maker-color-neutral-20, #d3d3d3);
+	--color-background: $maker-color-background;
+	--color-border: $maker-color-neutral-20;
 }
 
 .SelectContainer {
-	--color-placeholder: var(--maker-color-neutral-80, #707070);
-	--color-foreground: var(--maker-color-neutral-90, #1b1b1b);
-	--color-border-active: var(--maker-color-neutral-80, #707070);
+	--color-placeholder: $maker-color-neutral-80;
+	--color-foreground: $maker-color-neutral-90;
+	--color-border-active: $maker-color-neutral-80;
 	--color-error: rgba(206, 50, 23, 1);
 
 	position: relative;
 	box-sizing: border-box;
 	min-width: 80px;
 	font-size: 16px;
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	border-radius: $maker-shape-default-border-radius;
 }
 
 .Prefix {

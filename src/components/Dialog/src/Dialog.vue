@@ -121,11 +121,11 @@ export default {
 .Dialog {
 	max-height: calc(100vh - 48px);
 	overflow: auto;
-	color: var(--color, var(--maker-color-body, inherit));
-	background: var(--bg-color, var(--maker-color-background, #fff));
+	color: var(--color, $maker-color-body);
+	background: var(--bg-color, $maker-color-background);
 	border-radius:
-		var(--maker-shape-default-border-radius, 8px)
-		var(--maker-shape-default-border-radius, 8px)
+		$maker-shape-default-border-radius
+		$maker-shape-default-border-radius
 		0 0;
 	transition: transform 0.2s linear;
 }

@@ -128,13 +128,13 @@ export default {
 	align-items: center;
 	min-width: 0;
 	padding: 0;
-	color: var(--color, var(--maker-color-neutral-90, #1b1b1b));
+	color: var(--color, $maker-color-neutral-90);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
 	background-color: transparent;
 	border: none;
-	border-radius: var(--maker-shape-default-border-radius, 4px);
+	border-radius: $maker-shape-default-border-radius;
 	outline-color: currentColor;
 	cursor: pointer;
 	transition: box-shadow 0.2s ease-in, opacity 0.2s ease-in;
@@ -189,7 +189,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color, var(--maker-color-neutral-90, #1b1b1b));
+	color: var(--color, $maker-color-neutral-90);
 	background-color: transparent;
 }
 
