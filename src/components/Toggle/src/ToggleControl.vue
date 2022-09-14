@@ -1,22 +1,16 @@
 <template>
-	<div :class="$s.ToggleContainer">
-		<input
-			ref="checkbox"
-			v-model="toggleValue"
-			type="checkbox"
-			:class="$s.Checkbox"
-			v-bind="$attrs"
-			v-on="$listeners"
-		>
-		<div :class="$s.Toggle">
-			<div :class="$s.ToggleBall" />
-		</div>
-	</div>
+	<input
+		ref="checkbox"
+		v-model="toggleValue"
+		type="checkbox"
+		:class="$s.Checkbox"
+		v-bind="$attrs"
+		v-on="$listeners"
+	>
 </template>
 
 <script>
 /**
- * Toggle control
  * @inheritAttrs input[type="checkbox"]
  * @inheritListeners input[type="checkbox"]
  */
@@ -80,13 +74,8 @@ export default {
 <style module="$s">
 /* stylelint-disable no-descending-specificity */
 
-.ToggleContainer {
-	position: relative;
-	display: inline-block;
-	line-height: 0;
-	cursor: pointer;
-	user-select: none;
-
+/* default unchecked state */
+.Checkbox {
 	/* general vars */
 	--color-error: rgba(206, 50, 23, 1);
 	--transition: 0.2s ease;
@@ -102,10 +91,8 @@ export default {
 	--tb-top: calc(var(--tb-inset) - var(--t-border));
 	--tb-left-unchecked: var(--tb-inset);
 	--tb-left-checked: calc(var(--t-width) - var(--tb-dim) - var(--tb-inset) - 2 * var(--t-border));
-	--tb-background-color: var(--color-black-05);
-}
+	--tb-background-color: $maker-color-neutral-20;
 
-.Checkbox {
 	position: relative;
 	display: inline-block;
 	box-sizing: border-box;
@@ -114,8 +101,9 @@ export default {
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;
-	border: var(--t-border) solid;
+	border: var(--t-border) solid var(--tb-background-color);
 	border-radius: calc(var(--t-width) / 2);
+	cursor: pointer;
 	transition:
 		background-color var(--transition)
 		border-color var(--transition);
@@ -139,67 +127,56 @@ export default {
 	}
 }
 
-.Checkbox:focus {
-	outline: 1px dotted #212121;
-	outline: 5px auto -webkit-focus-ring-color;
-}
-
+/* move toggle ball to the left */
 .Checkbox:checked::after {
 	left: var(--tb-left-checked);
-
-	--tb-background-color: $maker-color-background;
 }
 
 .Checkbox:disabled {
+	background-color: $maker-color-neutral-10;
 	border-color: $maker-color-neutral-20;
 
-	&:not(:checked) {
-		background-color: $maker-color-neutral-10;
-
-		--tb-background-color: $maker-color-neutral-20;
-	}
+	--tb-background-color: $maker-color-neutral-20;
 
 	&:checked {
 		background-color: $maker-color-neutral-20;
+
+		--tb-background-color: $maker-color-background;
 	}
 }
 
 .Checkbox:invalid {
-	& + .Toggle {
-		border-color: var(--color-error);
-	}
+	background-color: $maker-color-background;
+	border-color: var(--color-error);
 
-	&:not(:checked) + .Toggle {
-		background-color: $maker-color-background;
+	--tb-background-color: var(--color-error);
 
-		--tb-background-color: var(--color-error);
-	}
-
-	&:checked + .Toggle {
+	&:checked {
 		background-color: var(--color-error);
+
+		--tb-background-color: $maker-color-background;
 	}
 }
 
 .Checkbox:not(:disabled, :invalid) {
+	background-color: $maker-color-background;
 	border-color: $maker-color-neutral-20;
 
-	&:not(:checked) {
-		background-color: $maker-color-background;
+	--tb-background-color: $maker-color-neutral-20;
 
-		--tb-background-color: $maker-color-neutral-20;
+	&:hover,
+	&:active,
+	&:focus {
+		border-color: $maker-color-body;
 
-		&:hover,
-		&:active,
-		&:focus {
-			border-color: $maker-color-body;
-
-			--tb-background-color: $maker-color-body;
-		}
+		--tb-background-color: $maker-color-body;
 	}
 
 	&:checked {
 		background-color: $maker-color-body;
 		border-color: $maker-color-body;
+
+		--tb-background-color: $maker-color-background;
 	}
 }
 </style>
