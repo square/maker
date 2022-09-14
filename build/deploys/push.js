@@ -33,4 +33,7 @@ const EXIT_ERROR_CODE = 1;
 		console.error('failed to push changes to remote');
 		process.exit(EXIT_ERROR_CODE);
 	}
-}());
+}()).catch((error) => {
+	console.error(error.message);
+	process.exit(1);
+});
