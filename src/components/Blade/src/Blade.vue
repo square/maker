@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { colord } from 'colord';
+import cssValidator from '@square/maker/utils/css-validator';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 export default {
@@ -33,7 +33,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => colord(color).isValid(),
+			validator: cssValidator('color'),
 		},
 		/**
 		 * Text color of blade
@@ -41,7 +41,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => colord(color).isValid(),
+			validator: cssValidator('color'),
 		},
 	},
 
