@@ -172,7 +172,6 @@ export default {
 				},
 				profiles: {
 					profile1: {
-						id: 'profile1',
 						colors: {
 							background: '#002a57',
 							body: '#fbf9c1',
@@ -181,7 +180,6 @@ export default {
 						},
 					},
 					profile2: {
-						id: 'profile2',
 						colors: {
 							background: '#e5d7cc',
 							body: '#333333',
