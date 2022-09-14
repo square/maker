@@ -3,12 +3,18 @@
 ```vue
 <template>
 	<div>
-		<h4>loading text</h4>
+		<h4 style="margin-top: 0;">
+			loading text
+		</h4>
 		<m-skeleton-text :lines="3" />
 
 		<h4>loaded text</h4>
 		<m-skeleton-text>
-			some loaded text
+			here's some actual
+			<br>
+			loaded lines of text
+			<br>
+			yippie
 		</m-skeleton-text>
 
 		<h4>loading block</h4>
@@ -16,7 +22,10 @@
 
 		<h4>loaded block</h4>
 		<m-skeleton-block>
-			loaded content here
+			<img
+				class="cover-photo"
+				src="https://picsum.photos/300/300"
+			>
 		</m-skeleton-block>
 	</div>
 </template>
@@ -34,8 +43,10 @@ export default {
 
 <style scoped>
 .loadingBlock {
-	height: 100px;
+	height: 300px;
+	width: 300px;
 }
+</style>
 ```
 
 <!-- api-tables:start -->

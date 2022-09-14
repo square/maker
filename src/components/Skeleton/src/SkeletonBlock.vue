@@ -25,9 +25,12 @@ export default {
 		}
 
 		return h('div', {
-			class: [this.$s.SkeletonBlock, {
-				[this.$s.loading]: !this.loaded,
-			}],
+			class: [
+				this.$s.SkeletonBlock,
+				{
+					[this.$s.loading]: !this.loaded,
+				},
+			],
 			on: this.$listeners,
 			attrs: this.$attrs,
 		});
