@@ -2,6 +2,10 @@
 	<div
 		:class="$s.ProgressCircleContainer"
 		:style="styles"
+		role="progressbar"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		:aria-valuenow="progress"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>

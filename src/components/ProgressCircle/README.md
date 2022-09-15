@@ -19,7 +19,7 @@ Amount of progress to show can be passed via the `progress` prop as a number bet
 			max="100"
 		>
 		<br>
-		<m-progress-circle :progress="parseInt(progress, 10)" />
+		<m-progress-circle :progress="Number.parseInt(progress, 10)" />
 	</div>
 </template>
 
