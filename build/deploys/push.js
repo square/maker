@@ -35,5 +35,5 @@ const EXIT_ERROR_CODE = 1;
 	}
 }()).catch((error) => {
 	console.error(error.message);
-	process.exit(1);
+	process.exit(EXIT_ERROR_CODE);
 });
