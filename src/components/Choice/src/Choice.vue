@@ -92,9 +92,9 @@ export default {
 		style() {
 			if (this.resolvedSelectedColor) {
 				return {
-					'--selected-background-color': this.resolvedSelectedColor,
-					'--selected-text-color': this.contrastColor,
-					'--selected-disabled-text-color': this.disabledContrastColor,
+					'--selected-color': this.resolvedSelectedColor,
+					'--selected-contrast-color': this.contrastColor,
+					'--selected-contrast-color-40': this.disabledContrastColor,
 				};
 			}
 			return {};
@@ -156,6 +156,8 @@ export default {
 	--line-height: 24px;
 
 	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
 	box-sizing: border-box;
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: var(--font-size);

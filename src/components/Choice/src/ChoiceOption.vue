@@ -52,9 +52,9 @@ export default {
 <style module="$s">
 /*
 	Defined in Choice component:
-	--selected-background-color
-	--selected-text-color
-	--selected-disabled-text-color
+	--selected-color
+	--selected-contrast-color
+	--selected-contrast-color-40
 */
 .ChoiceOption {
 	--button-padding: 12px 24px;
@@ -74,10 +74,6 @@ export default {
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;
 
-	&:not(:last-child) {
-		margin-right: 8px;
-	}
-
 	&:focus {
 		--focus-border:
 			0 0 0 1px $maker-color-neutral-10,
@@ -91,11 +87,11 @@ export default {
 }
 
 .selected {
-	color: var(--selected-text-color, $maker-color-neutral-10);
-	background-color: var(--selected-background-color, $maker-color-neutral-90);
+	color: var(--selected-contrast-color, $maker-color-neutral-10);
+	background-color: var(--selected-color, $maker-color-neutral-90);
 
 	&:disabled {
-		color: var(--selected-disabled-text-color, $maker-color-neutral-20);
+		color: var(--selected-contrast-color-40, $maker-color-neutral-20);
 	}
 }
 </style>
