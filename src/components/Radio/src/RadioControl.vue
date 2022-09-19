@@ -99,9 +99,9 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
-	--color-border-focus: var(--maker-color-body, rgba(0, 0, 0, 0.9));
-	--color-active: var(--maker-color-body, rgba(0, 0, 0, 0.9));
+	--color-border: $maker-color-neutral-20;
+	--color-border-focus: $maker-color-body;
+	--color-active: $maker-color-body;
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -112,7 +112,7 @@ export default {
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;
-	background-color: var(--maker-color-background, #fff);
+	background-color: $maker-color-background;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
 	outline: none;
@@ -128,7 +128,7 @@ export default {
 		width: 6px;
 		height: 6px;
 		margin: 6px;
-		background-color: var(--maker-color-background, #fff);
+		background-color: $maker-color-background;
 		border-radius: 50%;
 	}
 

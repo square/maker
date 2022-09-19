@@ -681,13 +681,13 @@ export default {
 	}
 
 	& th {
-		background: var(--maker-color-neutral-10);
-		color: var(--maker-color-neutral-90);
+		background: var(--maker-color-neutral-10, #f1f1f1);
+		color: var(--maker-color-neutral-90, #1b1b1b);
 		font-weight: 500;
 	}
 
 	& .title {
-		color: var(--maker-color-neutral-100);
+		color: var(--maker-color-neutral-100, #000000);
 		font-weight: 700;
 		text-transform: uppercase;
 	}

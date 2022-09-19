@@ -162,7 +162,7 @@ export default {
 	color: var(--color);
 	font-size: 14px;
 	line-height: 24px;
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	border-radius: $maker-shape-default-border-radius;
 }
 
 .IconContentWrapper {
@@ -212,9 +212,9 @@ export default {
 }
 
 .type_info {
-	--color: var(--maker-color-neutral-90, #1b1b1b);
-	--color-icon: var(--maker-color-neutral-80, #707070);
-	--color-bg: var(--maker-color-neutral-10, #f1f1f1);
+	--color: $maker-color-neutral-90;
+	--color-icon: $maker-color-neutral-80;
+	--color-bg: $maker-color-neutral-10;
 }
 
 .variant_block {

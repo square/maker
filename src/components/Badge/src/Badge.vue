@@ -153,7 +153,7 @@ export default {
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	background-color: var(--badge-bg-color);
-	border: 1px solid var(--maker-color-background, #fff);
+	border: 1px solid $maker-color-background;
 	border-radius: 100px;
 }
 

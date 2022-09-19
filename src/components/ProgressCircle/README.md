@@ -178,10 +178,10 @@ While it's possible customize the `color`, `icon-name`, and `icon-color` props f
 			>
 		</label>
 		<br>
-		default themed example:
+		primary themed example:
 		<br>
 		<m-progress-circle
-			icon-name="info"
+			pattern="primary"
 			:progress="50"
 		/>
 		<br>
@@ -224,6 +224,11 @@ export default {
 				},
 				progresscircle: {
 					patterns: {
+						primary: {
+							color: '@colors.contextualPrimary.fill',
+							iconName: 'info',
+							iconColor: '@colors.contextualPrimary.fill',
+						},
 						critical: {
 							color: '@colors.critical.fill',
 							iconName: 'critical',

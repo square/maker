@@ -7,13 +7,15 @@ import ChevronDown from '@square/maker-icons/ChevronDown';
 import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
 
-export default {
-	critical: AlertCircleFilled,
-	warning: AlertTriangleFilled,
-	success: CheckCircleFilled,
-	info: InfoFilled,
-	chevronUp: ChevronUp,
-	chevronDown: ChevronDown,
-	chevronLeft: ChevronLeft,
-	chevronRight: ChevronRight,
-};
+export default function defaultIcons() {
+	return {
+		critical: AlertCircleFilled,
+		warning: AlertTriangleFilled,
+		success: CheckCircleFilled,
+		info: InfoFilled,
+		chevronUp: ChevronUp,
+		chevronDown: ChevronDown,
+		chevronLeft: ChevronLeft,
+		chevronRight: ChevronRight,
+	};
+}

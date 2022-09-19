@@ -106,7 +106,7 @@ export default {
 .ProgressBarContainer {
 	width: 100%;
 	overflow: hidden;
-	background-color: var(--maker-color-neutral-10, #f1f1f1);
+	background-color: $maker-color-neutral-10;
 	border-radius: var(--maker-default-border-radius, 16px);
 
 	&.shape_squared {

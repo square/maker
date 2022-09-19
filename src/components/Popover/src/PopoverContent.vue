@@ -86,10 +86,10 @@ export default {
 <style module="$s">
 .PopoverContent {
 	padding: var(--padding);
-	color: var(--maker-color-body, black);
-	background-color: var(--maker-color-background, white);
-	border: 1px solid var(--maker-color-neutral-10);
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	color: $maker-color-body;
+	background-color: $maker-color-background;
+	border: 1px solid $maker-color-neutral-10;
+	border-radius: $maker-shape-default-border-radius;
 	box-shadow: 0 0 18px 6px rgba(0, 0, 0, 0.2);
 }
 </style>
