@@ -2,7 +2,7 @@
 	<div :class="$s.Layer">
 		<m-transition-fade-in>
 			<div
-				v-if="currentLayer.state.vnode"
+				v-if="currentLayer.state.renderFn"
 				:class="[
 					$s.Translucent,
 					{ [$s.Transparent]: currentLayer.state.isStacked },
@@ -11,7 +11,7 @@
 		</m-transition-fade-in>
 		<m-transition-responsive :transitions="transitions">
 			<div
-				v-if="currentLayer.state.vnode"
+				v-if="currentLayer.state.renderFn"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
 				@click.capture="closeOnClickOutside"
@@ -28,17 +28,16 @@
 					ref="modal"
 					:class="$s.Container"
 				>
-					<v :nodes="currentLayer.state.vnode" />
+					<render-fn :render-fn="currentLayer.state.renderFn" />
 				</div>
 			</div>
 		</m-transition-responsive>
-		<modal-layer v-if="currentLayer.state.vnode" />
+		<modal-layer v-if="currentLayer.state.renderFn" />
 	</div>
 </template>
 
 <script>
 import Vue from 'vue';
-import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
@@ -54,7 +53,8 @@ import {
 	mobileMinWidth,
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
-import modalApi from './modal-api';
+import { modalApi } from '@square/maker/components/Modal';
+import RenderFn from '@square/maker/utils/RenderFn';
 import { PopoverAPIKey } from '../../Popover/src/keys';
 
 const apiMixin = {
@@ -69,7 +69,7 @@ const apiMixin = {
 		const vm = this;
 		const api = {
 			state: Vue.observable({
-				vnode: undefined,
+				renderFn: undefined,
 				options: {},
 				isStacked: !!vm.currentLayer,
 				// return parent modal to allow to close child and parent modals at the same time
@@ -77,19 +77,18 @@ const apiMixin = {
 			}),
 
 			open(renderFn, options = {}) {
-				const vnode = renderFn(vm.$createElement);
-				this.state.vnode = vnode;
+				this.state.renderFn = renderFn;
 				this.state.options = options;
 				// returned method only closes this specific modal
 				return () => {
-					if (this.state.vnode === vnode) {
-						this.state.vnode = undefined;
+					if (this.state.renderFn === renderFn) {
+						this.state.renderFn = undefined;
 					}
 				};
 			},
 
 			async close() {
-				const isModalActive = !this.state.vnode; // Verify there's no modal on top
+				const isModalActive = !this.state.renderFn; // Verify there's no modal on top
 
 				if (isModalActive && vm.currentLayer) {
 					if (typeof this.state.options.beforeCloseHook === 'function') {
@@ -103,7 +102,7 @@ const apiMixin = {
 					// causes a weird content shift as the modal fades away.
 					vm.popoverApi?.closePopover();
 					vm.$nextTick(() => {
-						vm.currentLayer.state.vnode = undefined;
+						vm.currentLayer.state.renderFn = undefined;
 					});
 				}
 			},
@@ -123,7 +122,7 @@ export default {
 	name: 'ModalLayer',
 
 	components: {
-		V,
+		RenderFn,
 		PseudoWindow,
 		MTransitionFadeIn,
 		MTransitionResponsive,
@@ -166,10 +165,10 @@ export default {
 
 	mounted() {
 		const vm = this;
-		this.unwatchStackedModal = this.$watch(() => vm.modalApi.state.vnode, () => {
+		this.unwatchStackedModal = this.$watch(() => vm.modalApi.state.renderFn, () => {
 			const isTablet = window.innerWidth >= tabletMinWidth;
 			const isMobile = !isTablet;
-			const isOpeningStackedModal = !!vm.modalApi.state.vnode;
+			const isOpeningStackedModal = !!vm.modalApi.state.renderFn;
 			const isClosingStackedModal = !isOpeningStackedModal;
 			const element = this.$refs.baseModalLayer;
 
