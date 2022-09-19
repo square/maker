@@ -11,6 +11,9 @@
 			<m-text>
 				blade content
 			</m-text>
+			<m-text v-if="count">
+				count is {{ count }}
+			</m-text>
 			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
@@ -49,6 +52,13 @@ export default {
 
 	inject: {
 		bladeApi,
+	},
+
+	props: {
+		count: {
+			type: Number,
+			default: 0,
+		},
 	},
 };
 </script>

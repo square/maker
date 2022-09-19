@@ -10,6 +10,9 @@
 			<m-text>
 				Did you know that adult male polar bears can weight over 1,500 lbs?
 			</m-text>
+			<m-text v-if="count">
+				count is {{ count }}
+			</m-text>
 			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
@@ -50,6 +53,13 @@ export default {
 
 	inject: {
 		dialogApi,
+	},
+
+	props: {
+		count: {
+			type: Number,
+			default: 0,
+		},
 	},
 };
 </script>
