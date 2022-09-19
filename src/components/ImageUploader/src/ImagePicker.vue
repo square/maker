@@ -192,6 +192,7 @@ export default {
 	border-radius: $maker-shape-default-border-radius;
 	cursor: pointer;
 	transition: background-color 150ms linear;
+	fill: $maker-color-neutral-20;
 }
 
 .ImagePickerInputContainer.isDragged {
