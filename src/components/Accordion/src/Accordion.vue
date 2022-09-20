@@ -34,6 +34,31 @@
 					</m-text>
 				</slot>
 			</template>
+			<template #side>
+				<!-- @slot side info, goes left of open/close icon -->
+				<slot name="side">
+					<m-text
+						v-if="side"
+						pattern="title"
+						:size="-2"
+						text-transform="uppercase"
+					>
+						{{ side }}
+					</m-text>
+				</slot>
+			</template>
+			<template #side-secondary>
+				<!-- @slot side secondary info, goes under side slot -->
+				<slot name="side-secondary">
+					<m-text
+						v-if="sideSecondary"
+						pattern="paragraph"
+						:size="-1"
+					>
+						{{ sideSecondary }}
+					</m-text>
+				</slot>
+			</template>
 			<template #suffix>
 				<!-- @slot open & close icon -->
 				<slot name="icon">
@@ -107,6 +132,22 @@ export default {
 		 * secondary info, will be overridden if secondary slot is used
 		 */
 		secondary: {
+			type: String,
+			required: false,
+			default: '',
+		},
+		/**
+		 * accordion side title, will be overriden if title slot is used
+		 */
+		side: {
+			type: String,
+			required: false,
+			default: '',
+		},
+		/**
+		 * secondary side info, will be overridden if side-secondary slot is used
+		 */
+		sideSecondary: {
 			type: String,
 			required: false,
 			default: '',

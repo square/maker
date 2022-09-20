@@ -14,6 +14,8 @@ Accordions must have titles and can optionally have secondary info and content. 
 		class="container"
 		title="my accordion title"
 		secondary="optional secondary info"
+		side="side title"
+		side-secondary="side secondary info"
 	>
 		<div class="content">
 			accordion content and stuff
@@ -263,6 +265,7 @@ If you'd like to stack multiple Accordions and have at most one expanded at a ti
 			v-model="expandKey"
 			expand-key="2"
 			title="2nd Accordion"
+			side="Side title"
 		>
 			<div class="content">
 				accordion content and stuff
@@ -333,12 +336,14 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 ## Slots
 
-| Slot      | Description                      |
-| --------- | -------------------------------- |
-| title     | title of accordion               |
-| secondary | secondary info, goes under title |
-| icon      | open & close icon                |
-| default   | content to expand & collapse     |
+| Slot           | Description                               |
+| -------------- | ----------------------------------------- |
+| title          | title of accordion                        |
+| secondary      | secondary info, goes under title          |
+| side           | side info, goes left of open/close icon   |
+| side-secondary | side secondary info, goes under side slot |
+| icon           | open & close icon                         |
+| default        | content to expand & collapse              |
 
 
 ## Events
