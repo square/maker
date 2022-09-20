@@ -367,23 +367,23 @@ export default {
 				return 'center';
 			}
 		},
-		stackJustify() {
+		stackDirection() {
 			switch (this.position) {
 			case 'top':
 			case 'top-left':
 			case 'top-right':
-				return 'flex-start';
+				return 'column-reverse';
 			case 'bottom':
 			case 'bottom-left':
 			case 'bottom-right':
 			default:
-				return 'flex-end';
+				return 'column';
 			}
 		},
 		stackStyle() {
 			return {
+				flexDirection: this.stackDirection,
 				alignItems: this.stackAlign,
-				justifyContent: this.stackJustify,
 			};
 		},
 		transitionFrom() {
@@ -406,18 +406,10 @@ export default {
 	methods: {
 		insertItem() {
 			const item = randomItem();
-			if (this.position.startsWith('top')) {
-				this.items.unshift(item);
-			} else { // starts with bottom
-				this.items.push(item);
-			}
+			this.items.push(item);
 		},
 		removeItem() {
-			if (this.position.startsWith('top')) {
-				this.items.pop();
-			} else { // starts with bottom
-				this.items.shift();
-			}
+			this.items.shift();
 		},
 		cyclePosition() {
 			this.position = cycle(
@@ -441,6 +433,7 @@ button {
 .stack {
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-end;
 	position: fixed;
 	top: 0;
 	right: 0;
