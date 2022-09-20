@@ -40,8 +40,6 @@ import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dia
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'ActionBarDemoDialog',
-
 	components: {
 		MDialog,
 		MText,
