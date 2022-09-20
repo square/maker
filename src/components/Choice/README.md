@@ -336,9 +336,9 @@ export default {
 
 ## ChoiceCard Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description         |
+| ------- | ------------------- |
+| default | has `selected` prop |
 
 
 ## ChoiceOption Props

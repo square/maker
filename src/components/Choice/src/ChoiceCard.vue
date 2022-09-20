@@ -10,7 +10,10 @@
 		:disabled="isDisabled"
 		@click="selectSelf"
 	>
-		<slot />
+		<!-- @slot has `selected` prop -->
+		<slot
+			:selected="isSelected"
+		/>
 	</m-card>
 </template>
 
