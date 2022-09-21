@@ -19,7 +19,7 @@ Amount of progress to show can be passed via the `progress` prop as a number bet
 			max="100"
 		>
 		<br>
-		<m-progress-circle :progress="parseInt(progress, 10)" />
+		<m-progress-circle :progress="Number.parseInt(progress, 10)" />
 	</div>
 </template>
 
@@ -178,10 +178,10 @@ While it's possible customize the `color`, `icon-name`, and `icon-color` props f
 			>
 		</label>
 		<br>
-		default themed example:
+		primary themed example:
 		<br>
 		<m-progress-circle
-			icon-name="info"
+			pattern="primary"
 			:progress="50"
 		/>
 		<br>
@@ -224,6 +224,11 @@ export default {
 				},
 				progresscircle: {
 					patterns: {
+						primary: {
+							color: '@colors.contextualPrimary.fill',
+							iconName: 'info',
+							iconColor: '@colors.contextualPrimary.fill',
+						},
 						critical: {
 							color: '@colors.critical.fill',
 							iconName: 'critical',

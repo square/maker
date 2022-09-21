@@ -53,7 +53,7 @@ export default {
 	data() {
 		return {
 			selected: 'choice-1',
-			color: '#222',
+			color: '#006aff',
 		};
 	},
 };

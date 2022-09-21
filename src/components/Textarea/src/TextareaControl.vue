@@ -98,19 +98,19 @@ export default {
 	until we get a Theme Context component
 */
 .variant_fill {
-	--color-background: var(--maker-color-neutral-10, #f6f7f9);
+	--color-background: $maker-color-neutral-10;
 	--color-border: transparent;
 }
 
 .variant_outline {
-	--color-background: var(--maker-color-background);
-	--color-border: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
+	--color-background: $maker-color-background;
+	--color-border: $maker-color-neutral-20;
 }
 
 .Textarea {
-	--color-placeholder: var(--maker-color-neutral-80, rgba(0, 0, 0, 0.55));
-	--color-foreground: var(--maker-color-neutral-90, rgba(0, 0, 0, 0.9));
-	--color-border-active: var(--maker-color-neutral-80, #222);
+	--color-placeholder: $maker-color-neutral-80;
+	--color-foreground: $maker-color-neutral-90;
+	--color-border-active: $maker-color-neutral-80;
 	--color-error: rgba(206, 50, 23, 1);
 
 	box-sizing: border-box;
@@ -120,13 +120,13 @@ export default {
 	min-height: calc(12px * 2 + 24px * 3);
 	padding: 12px 16px;
 	color: var(--color-foreground);
-	font-weight: var(--maker-font-body-font-weight, inherit);
+	font-weight: $maker-font-body-font-weight;
 	font-size: 16px;
-	font-family: var(--maker-font-body-font-family, inherit);
+	font-family: $maker-font-body-font-family;
 	line-height: 24px;
 	background-color: var(--color-background, #fff);
 	border: 1px solid var(--color-border);
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	border-radius: $maker-shape-default-border-radius;
 	outline: none;
 	transition:
 		border 0.2s ease,

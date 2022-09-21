@@ -99,9 +99,9 @@ export default {
 
 	/* these should later be pulled from
 	the ThemeProvider component */
-	--color-border: var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
-	--color-border-focus: var(--maker-color-body, rgba(0, 0, 0, 0.9));
-	--color-active: var(--maker-color-body, rgba(0, 0, 0, 0.9));
+	--color-border: $maker-color-neutral-20;
+	--color-border-focus: $maker-color-body;
+	--color-active: $maker-color-body;
 	--color-error: rgba(206, 50, 23, 1);
 }
 
@@ -111,7 +111,7 @@ export default {
 	height: 20px;
 	margin: 0;
 	padding: 0;
-	background-color: var(--maker-color-background, #fff);
+	background-color: $maker-color-background;
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
 	outline: none;
@@ -150,7 +150,7 @@ export default {
 	transition: opacity 0.2s ease;
 	pointer-events: none;
 	fill: none;
-	stroke: var(--maker-color-background, #fff);
+	stroke: $maker-color-background;
 	stroke-width: 2px;
 	stroke-linecap: round;
 	stroke-linejoin: round;

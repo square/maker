@@ -170,9 +170,8 @@ export default {
 					heading: '#e5d7cc',
 					primary: '#e5d7cc',
 				},
-				profiles: [
-					{
-						id: 'profile1',
+				profiles: {
+					profile1: {
 						colors: {
 							background: '#002a57',
 							body: '#fbf9c1',
@@ -180,8 +179,7 @@ export default {
 							primary: '#e5d7cc',
 						},
 					},
-					{
-						id: 'profile2',
+					profile2: {
 						colors: {
 							background: '#e5d7cc',
 							body: '#333333',
@@ -189,7 +187,7 @@ export default {
 							primary: '#000000',
 						},
 					},
-				],
+				},
 			},
 			profile: '',
 			profileOptions: [
@@ -223,17 +221,14 @@ export default {
 		},
 
 		themeColors() {
-			return this.theme.profiles.find((p) => p.id === this.profile)?.colors
-				|| this.theme.colors;
+			return this.theme.profiles[this.profile]?.colors || this.theme.colors;
 		},
 	},
 
 	watch: {
-		profile(newProfile) {
-			const profileColors = this.theme.profiles.find((p) => p.id === newProfile)?.colors
-				|| this.theme.colors;
-			this.color = profileColors.body;
-			this.bgColor = profileColors.background;
+		profile() {
+			this.color = this.themeColors.body;
+			this.bgColor = this.themeColors.background;
 		},
 	},
 };
@@ -393,7 +388,7 @@ _DemoModal.vue_
 	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/800/300"
+			src="https://picsum.photos/600/300"
 		>
 		<m-modal-content>
 			<m-text pattern="title">
@@ -455,6 +450,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+</style>
 ```
 
 _DemoDialog.vue_

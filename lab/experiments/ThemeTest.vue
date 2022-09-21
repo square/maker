@@ -1011,7 +1011,7 @@ hr.Divider {
 }
 
 .Preview {
-	border: 1px solid var(--maker-color-neutral-20);
+	border: 1px solid var(--maker-color-neutral-20, #d3d3d3);
 
 	/* stylelint-disable-next-line no-descending-specificity */
 	& > div {

@@ -1,69 +1,15 @@
 import defaultIcons from './default-icons';
 import { resolve, getPath } from './utils';
+import defaultColors from './default-colors';
+import defaultFonts from './default-fonts';
+import defaultShapes from './default-shapes';
 
 export default function defaultTheme() {
 	return {
-		colors: {
-			'neutral-0': '#ffffff',
-			'neutral-10': '#f1f1f1',
-			'neutral-20': '#d3d3d3',
-			'neutral-80': '#707070',
-			'neutral-90': '#1b1b1b',
-			'neutral-100': '#000000',
-			background: '#ffffff',
-			heading: 'inherit',
-			body: 'inherit',
-			elevation: '#ffffff',
-			overlay: 'rgba(0, 0, 0, 0.3)',
-			primary: '#000000',
-			contextualPrimary: {
-				fill: '#000000',
-				onFill: '#ffffff',
-				text: '#000000',
-				subtle: '#f5efef',
-			},
-			critical: {
-				fill: '#cd2026',
-				onFill: '#ffffff',
-				text: '#a82826',
-				subtle: '#f6eceb',
-			},
-			warning: {
-				fill: '#ffbf00',
-				onFill: '#000000',
-				text: '#7e662a',
-				subtle: '#f9eecf',
-			},
-			success: {
-				fill: '#008000',
-				onFill: '#ffffff',
-				text: '#0a7A06',
-				subtle: '#ebf1eb',
-			},
-		},
-		fonts: {
-			baseSize: 16,
-			sizeScale: 1.17,
-			heading: {
-				fontFamily: 'inherit',
-				fontWeight: '500',
-			},
-			body: {
-				fontFamily: 'inherit',
-				fontWeight: '400',
-			},
-			label: {
-				fontFamily: 'inherit',
-				fontWeight: '500',
-			},
-		},
-		icons: defaultIcons,
-		shapes: {
-			defaultBorderRadius: '4px',
-			cardBorderRadius: '4px',
-			buttonBorderRadius: '4px',
-			imageBorderRadius: '0px',
-		},
+		colors: defaultColors(),
+		fonts: defaultFonts(),
+		icons: defaultIcons(),
+		shapes: defaultShapes(),
 		profiles: {},
 		button: {
 			size: 'medium',
@@ -84,6 +30,69 @@ export default function defaultTheme() {
 				tertiary: {
 					variant: 'tertiary',
 					color: '@colors.contextualPrimary.fill',
+				},
+				// filled patterns
+				primaryFilled: {
+					color: '@colors.contextualPrimary.fill',
+					textColor: '@colors.contextualPrimary.onFill',
+				},
+				errorFilled: {
+					color: '@colors.critical.fill',
+					textColor: '@colors.critical.onFill',
+				},
+				successFilled: {
+					color: '@colors.success.fill',
+					textColor: '@colors.success.onFill',
+				},
+				warningFilled: {
+					color: '@colors.warning.fill',
+					textColor: '@colors.warning.onFill',
+				},
+				infoFilled: {
+					color: '@colors["neutral-90"]',
+					textColor: '@colors["neutral-10"]',
+				},
+				// outline patterns
+				primaryOutline: {
+					variant: 'secondary',
+					color: '@colors.contextualPrimary.text',
+				},
+				errorOutline: {
+					variant: 'secondary',
+					color: '@colors.critical.text',
+				},
+				successOutline: {
+					variant: 'secondary',
+					color: '@colors.success.text',
+				},
+				warningOutline: {
+					variant: 'secondary',
+					color: '@colors.warning.text',
+				},
+				infoOutline: {
+					variant: 'secondary',
+					color: '@colors["neutral-90"]',
+				},
+				// subtle patterns
+				primarySubtle: {
+					textColor: '@colors.contextualPrimary.text',
+					color: '@colors.contextualPrimary.subtle',
+				},
+				errorSubtle: {
+					textColor: '@colors.critical.text',
+					color: '@colors.critical.subtle',
+				},
+				successSubtle: {
+					textColor: '@colors.success.text',
+					color: '@colors.success.subtle',
+				},
+				warningSubtle: {
+					textColor: '@colors.warning.text',
+					color: '@colors.warning.subtle',
+				},
+				infoSubtle: {
+					textColor: '@colors["neutral-90"]',
+					color: '@colors["neutral-10"]',
 				},
 			},
 		},
@@ -285,8 +294,8 @@ export default function defaultTheme() {
 			color: '@colors.warning.fill',
 		},
 		progresscircle: {
-			color: '@colors.contextualPrimary.fill',
-			iconColor: '@colors.contextualPrimary.fill',
+			color: '@colors["neutral-100"]',
+			iconColor: '@colors["neutral-100"]',
 			iconName: undefined,
 		},
 		progressbar: {
