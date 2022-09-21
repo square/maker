@@ -8,14 +8,16 @@ import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
 import X from '@square/maker-icons/X';
 
-export default {
-	critical: AlertCircleFilled,
-	warning: AlertTriangleFilled,
-	success: CheckCircleFilled,
-	info: InfoFilled,
-	chevronUp: ChevronUp,
-	chevronDown: ChevronDown,
-	chevronLeft: ChevronLeft,
-	chevronRight: ChevronRight,
-	close: X,
-};
+export default function defaultIcons() {
+	return {
+		critical: AlertCircleFilled,
+		warning: AlertTriangleFilled,
+		success: CheckCircleFilled,
+		info: InfoFilled,
+		chevronUp: ChevronUp,
+		chevronDown: ChevronDown,
+		chevronLeft: ChevronLeft,
+		chevronRight: ChevronRight,
+		close: X,
+	};
+}

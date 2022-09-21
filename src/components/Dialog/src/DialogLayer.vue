@@ -179,8 +179,8 @@ export default {
 	max-height: calc(100% - 48px);
 	overflow: hidden;
 	border-radius:
-		var(--maker-shape-default-border-radius, 8px)
-		var(--maker-shape-default-border-radius, 8px)
+		$maker-shape-default-border-radius
+		$maker-shape-default-border-radius
 		0 0;
 }
 
@@ -206,7 +206,7 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: var(--maker-color-overlay, rgba(0, 0, 0, 0.3));
+	background-color: $maker-color-overlay;
 }
 
 /**

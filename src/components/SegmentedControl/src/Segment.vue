@@ -44,14 +44,14 @@ export default {
 	--radius-pill-button: 32px;
 
 	flex: 1 0 0;
-	color: var(--maker-color-neutral-90, black);
+	color: $maker-color-neutral-90;
 	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
 	line-height: inherit;
 	background-color: transparent;
 	border: none;
-	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
+	border-radius: $maker-shape-button-border-radius;
 	outline: none;
 	cursor: pointer;
 }
@@ -69,8 +69,8 @@ export default {
 }
 
 .selected {
-	color: var(--maker-color-neutral-90, black);
-	background-color: var(--maker-color-elevation, white);
+	color: $maker-color-neutral-90;
+	background-color: $maker-color-elevation;
 	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
 }
 </style>

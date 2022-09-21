@@ -1,5 +1,10 @@
+const variables = require('./src/styles/default-variables.js');
+
 module.exports = {
 	plugins: [
+		require('postcss-simple-vars')({
+			variables,
+		}),
 		require('postcss-preset-env')({
 			stage: 0,
 			preserve: false,

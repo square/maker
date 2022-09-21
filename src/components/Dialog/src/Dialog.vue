@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { colord } from 'colord';
+import cssValidator from '@square/maker/utils/css-validator';
 import { throttle } from 'lodash';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MTouchCapture } from '@square/maker/utils/TouchCapture';
@@ -43,7 +43,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (color) => colord(color).isValid(),
+			validator: cssValidator('color'),
 		},
 		/**
 		 * Text color of dialog
@@ -51,7 +51,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => colord(color).isValid(),
+			validator: cssValidator('color'),
 		},
 	},
 
@@ -121,11 +121,11 @@ export default {
 .Dialog {
 	max-height: calc(100vh - 48px);
 	overflow: auto;
-	color: var(--color, var(--maker-color-body, inherit));
-	background: var(--bg-color, var(--maker-color-background, #f5f6f7));
+	color: var(--color, $maker-color-body);
+	background: var(--bg-color, $maker-color-background);
 	border-radius:
-		var(--maker-shape-default-border-radius, 8px)
-		var(--maker-shape-default-border-radius, 8px)
+		$maker-shape-default-border-radius
+		$maker-shape-default-border-radius
 		0 0;
 	transition: transform 0.2s linear;
 }

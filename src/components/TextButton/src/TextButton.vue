@@ -17,7 +17,13 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span :class="$s.MainText">
+		<span
+			:class="[
+				$s.MainText,
+				{
+					[$s.TruncateText]: truncateText,
+				}]"
+		>
 			<!-- @slot Button label -->
 			<slot />
 		</span>
@@ -94,6 +100,13 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Truncate text if it overflows container
+		 */
+		truncateText: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	computed: {
@@ -128,13 +141,14 @@ export default {
 	align-items: center;
 	min-width: 0;
 	padding: 0;
-	color: var(--color, var(--maker-color-neutral-90));
+	color: var(--color, $maker-color-neutral-90);
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
+	text-align: inherit;
 	vertical-align: middle;
 	background-color: transparent;
 	border: none;
-	border-radius: var(--maker-shape-default-border-radius, 4px);
+	border-radius: $maker-shape-default-border-radius;
 	outline-color: currentColor;
 	cursor: pointer;
 	transition: box-shadow 0.2s ease-in, opacity 0.2s ease-in;
@@ -189,7 +203,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color, var(--maker-color-neutral-90));
+	color: var(--color, $maker-color-neutral-90);
 	background-color: transparent;
 }
 
@@ -204,4 +218,18 @@ export default {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+
+.TruncateText {
+	/* -webkit-box is supported by all modern browsers */
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	width: fit-content;
+	overflow: hidden;
+	line-height: 1.1 !important;
+	white-space: initial;
+	text-align: inherit;
+	text-overflow: ellipsis;
+}
+
 </style>

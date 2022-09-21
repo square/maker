@@ -123,14 +123,15 @@ th, td {
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Prop     | Type      | Default    | Possible values   | Description                    |
-| -------- | --------- | ---------- | ----------------- | ------------------------------ |
-| pattern  | `string`  | —          | —                 | pattern defined at theme level |
-| type     | `string`  | `'button'` | —                 | Type of the button             |
-| size     | `string`  | —          | `medium`, `large` | Size of the button label text  |
-| color    | `string`  | —          | —                 | Text color of button           |
-| disabled | `boolean` | `false`    | —                 | Toggles button disabled state  |
-| loading  | `boolean` | `false`    | —                 | Toggles button loading state   |
+| Prop          | Type      | Default    | Possible values   | Description                             |
+| ------------- | --------- | ---------- | ----------------- | --------------------------------------- |
+| pattern       | `string`  | —          | —                 | pattern defined at theme level          |
+| type          | `string`  | `'button'` | —                 | Type of the button                      |
+| size          | `string`  | —          | `medium`, `large` | Size of the button label text           |
+| color         | `string`  | —          | —                 | Text color of button                    |
+| disabled      | `boolean` | `false`    | —                 | Toggles button disabled state           |
+| loading       | `boolean` | `false`    | —                 | Toggles button loading state            |
+| truncate-text | `boolean` | `false`    | —                 | Truncate text if it overflows container |
 
 
 ## Slots
