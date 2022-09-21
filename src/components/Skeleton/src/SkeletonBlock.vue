@@ -25,9 +25,12 @@ export default {
 		}
 
 		return h('div', {
-			class: [this.$s.SkeletonBlock, {
-				[this.$s.loading]: !this.loaded,
-			}],
+			class: [
+				this.$s.SkeletonBlock,
+				{
+					[this.$s.loading]: !this.loaded,
+				},
+			],
 			on: this.$listeners,
 			attrs: this.$attrs,
 		});
@@ -46,7 +49,7 @@ export default {
 }
 
 @keyframes pulsing {
-	0% { background-color: var(--maker-color-neutral-10, #ebedef); }
-	100% { background-color: var(--maker-color-neutral-20, #f5f6f7); }
+	0% { background-color: $maker-color-neutral-10; }
+	100% { background-color: $maker-color-neutral-20; }
 }
 </style>

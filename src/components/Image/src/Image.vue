@@ -213,10 +213,10 @@ export default {
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	border-radius: var(--maker-shape-image-border-radius, 0);
+	border-radius: $maker-shape-image-border-radius;
 
 	&.thumbnail {
-		border-radius: var(--maker-shape-thumbnail-border-radius, 0);
+		border-radius: $maker-shape-thumbnail-border-radius;
 	}
 
 	&.shape_square {

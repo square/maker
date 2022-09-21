@@ -629,7 +629,7 @@ Many websites will support multiple page or section output. For example, a hero 
 			</m-button>
 		</section>
 
-		<m-theme :profile="theme.profiles[0].id">
+		<m-theme profile="profile1">
 			<section class="profile-demo">
 				<m-text pattern="title">
 					Profile 1
@@ -644,7 +644,7 @@ Many websites will support multiple page or section output. For example, a hero 
 				</m-button>
 			</section>
 		</m-theme>
-		<m-theme :profile="theme.profiles[1].id">
+		<m-theme profile="profile2">
 			<section class="profile-demo">
 				<m-text pattern="title">
 					Profile 2
@@ -682,9 +682,8 @@ export default {
 					heading: '#e5d7cc',
 					primary: '#e5d7cc',
 				},
-				profiles: [
-					{
-						id: 'profile1',
+				profiles: {
+					profile1: {
 						colors: {
 							background: '#b05d54',
 							body: '#e5d7cc',
@@ -692,8 +691,7 @@ export default {
 							primary: '#e5d7cc',
 						},
 					},
-					{
-						id: 'profile2',
+					profile2: {
 						colors: {
 							background: '#e5d7cc',
 							body: '#000000',
@@ -701,7 +699,7 @@ export default {
 							primary: '#000000',
 						},
 					},
-				],
+				},
 			},
 		};
 	},

@@ -5,6 +5,10 @@
 			$s[`size_${resolvedSize}`],
 			$s[`shape_${resolvedShape}`],
 		]"
+		role="progressbar"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		:aria-valuenow="progress"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -102,7 +106,7 @@ export default {
 .ProgressBarContainer {
 	width: 100%;
 	overflow: hidden;
-	background-color: var(--maker-color-neutral-10, #f1f1f1);
+	background-color: $maker-color-neutral-10;
 	border-radius: var(--maker-default-border-radius, 16px);
 
 	&.shape_squared {

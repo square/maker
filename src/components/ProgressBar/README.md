@@ -14,7 +14,7 @@ Use Progress Bar to display progress.
 			default progressbar
 		</m-text>
 		<m-progress-bar
-			:progress="progress"
+			:progress="Number.parseInt(progress, 10)"
 		/>
 
 		<div :class="$s.Section">
@@ -66,7 +66,7 @@ Use Progress Bar to display progress.
 					:shape="shape"
 					:size="size"
 					:color="color"
-					:progress="progress"
+					:progress="Number.parseInt(progress, 10)"
 				/>
 			</div>
 		</div>

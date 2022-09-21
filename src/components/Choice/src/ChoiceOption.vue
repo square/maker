@@ -58,19 +58,18 @@ export default {
 */
 .ChoiceOption {
 	--button-padding: 12px 24px;
-	--radius-rounded-default: 4px;
 
 	flex-shrink: 0;
 	padding: var(--button-padding);
-	color: var(--maker-color-neutral-90, #222);
+	color: $maker-color-neutral-90;
 	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;
 	line-height: inherit;
 	text-align: left;
-	background-color: var(--maker-color-neutral-10, #f2f2f2);
+	background-color: $maker-color-neutral-10;
 	border: none;
-	border-radius: var(--maker-shape-default-border-radius, var(--radius-rounded-default));
+	border-radius: $maker-shape-default-border-radius;
 	outline: none;
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;
@@ -81,8 +80,8 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--maker-color-neutral-10, #fff),
-			0 0 0 3px var(--maker-color-neutral-20, rgba(0, 0, 0, 0.3));
+			0 0 0 1px $maker-color-neutral-10,
+			0 0 0 3px $maker-color-neutral-20;
 	}
 
 	&:disabled {
@@ -92,11 +91,11 @@ export default {
 }
 
 .selected {
-	color: var(--selected-text-color, var(--maker-color-neutral-10, #f1f1f1));
-	background-color: var(--selected-background-color, var(--maker-color-neutral-90, #222));
+	color: var(--selected-text-color, $maker-color-neutral-10);
+	background-color: var(--selected-background-color, $maker-color-neutral-90);
 
 	&:disabled {
-		color: var(--selected-disabled-text-color, var(--maker-color-neutral-20, #666));
+		color: var(--selected-disabled-text-color, $maker-color-neutral-20);
 	}
 }
 </style>
