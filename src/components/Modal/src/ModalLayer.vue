@@ -53,8 +53,8 @@ import {
 	mobileMinWidth,
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
-import { modalApi } from '@square/maker/components/Modal';
 import RenderFn from '@square/maker/utils/RenderFn';
+import modalApi from './modal-api';
 import { PopoverAPIKey } from '../../Popover/src/keys';
 
 const apiMixin = {

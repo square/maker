@@ -34,8 +34,8 @@ import {
 	mobileMinWidth,
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
-import { bladeApi } from '@square/maker/components/Blade';
 import RenderFn from '@square/maker/utils/RenderFn';
+import bladeApi from './blade-api';
 
 const apiMixin = {
 	provide() {
