@@ -326,12 +326,14 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop       | Type             | Default | Possible values | Description                                                                           |
-| ---------- | ---------------- | ------- | --------------- | ------------------------------------------------------------------------------------- |
-| v-model    | `boolean|string` | —       | —               | if truthy or equal to expandKey the accordion will expand, otherwise it will collapse |
-| expand-key | `string`         | —       | —               | used to orchestrate the collapsing & expanding of multiple accordions                 |
-| title      | `string`         | `''`    | —               | accordion title, will be overriden if title slot is used                              |
-| secondary  | `string`         | `''`    | —               | secondary info, will be overridden if secondary slot is used                          |
+| Prop           | Type             | Default | Possible values | Description                                                                           |
+| -------------- | ---------------- | ------- | --------------- | ------------------------------------------------------------------------------------- |
+| v-model        | `boolean|string` | —       | —               | if truthy or equal to expandKey the accordion will expand, otherwise it will collapse |
+| expand-key     | `string`         | —       | —               | used to orchestrate the collapsing & expanding of multiple accordions                 |
+| title          | `string`         | `''`    | —               | accordion title, will be overriden if title slot is used                              |
+| secondary      | `string`         | `''`    | —               | secondary info, will be overridden if secondary slot is used                          |
+| side           | `string`         | `''`    | —               | accordion side title, will be overriden if title slot is used                         |
+| side-secondary | `string`         | `''`    | —               | secondary side info, will be overridden if side-secondary slot is used                |
 
 
 ## Slots

@@ -44,8 +44,8 @@ import {
 	mobileMinWidth,
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
-import { dialogApi } from '@square/maker/components/Dialog';
 import RenderFn from '@square/maker/utils/RenderFn';
+import dialogApi from './dialog-api';
 
 const apiMixin = {
 	provide() {
