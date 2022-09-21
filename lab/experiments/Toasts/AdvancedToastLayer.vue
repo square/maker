@@ -2,12 +2,13 @@
 	<m-transition-stack
 		:class="[
 			$s.FullScreenFixed,
-			$s[`position_${position}`],
+			$s[`mobile-position_${mobilePosition}`],
+			$s[`desktop-position_${desktopPosition}`],
 			{
 				[$s.ActionbarOffset]: addActionbarOffset,
 			}
 		]"
-		:transition-from="transitionFrom"
+		:before-enter-class="beforeEnterClass"
 	>
 		<render-fn
 			v-for="toast in toastApi.state.toasts"
@@ -110,17 +111,24 @@ export default {
 
 	props: {
 		/**
-		 * items transition from direction
+		 * items before enter transition
 		 */
-		transitionFrom: {
+		beforeEnterClass: {
 			type: String,
-			default: 'bottom',
-			validator: (from) => ['bottom', 'top', 'left', 'right'].includes(from),
+			default: undefined,
 		},
 		/**
-		 * position of toasts on the screen
+		 * position of toasts on mobile
 		 */
-		position: {
+		mobilePosition: {
+			type: String,
+			default: 'bottom',
+			validator: (position) => ['top', 'bottom'].includes(position),
+		},
+		/**
+		 * position of toasts on desktop
+		 */
+		desktopPosition: {
 			type: String,
 			default: 'bottom',
 			validator: (position) => ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'].includes(position),
@@ -156,34 +164,46 @@ export default {
 	pointer-events: none;
 }
 
-.position_bottom {
+.mobile-position_bottom {
 	flex-direction: column;
 	align-items: center;
 }
 
-.position_bottom-left {
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-.position_bottom-right {
-	flex-direction: column;
-	align-items: flex-end;
-}
-
-.position_top {
+.mobile-position_top {
 	flex-direction: column-reverse;
 	align-items: center;
 }
 
-.position_top-left {
-	flex-direction: column-reverse;
-	align-items: flex-start;
-}
+@media screen and (--for-tablet-landscape-up) {
+	.desktop-position_bottom {
+		flex-direction: column;
+		align-items: center;
+	}
 
-.position_top-right {
-	flex-direction: column-reverse;
-	align-items: flex-end;
+	.desktop-position_bottom-left {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.desktop-position_bottom-right {
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.desktop-position_top {
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+
+	.desktop-position_top-left {
+		flex-direction: column-reverse;
+		align-items: flex-start;
+	}
+
+	.desktop-position_top-right {
+		flex-direction: column-reverse;
+		align-items: flex-end;
+	}
 }
 
 /* calculations imported from ActionBarLayer */

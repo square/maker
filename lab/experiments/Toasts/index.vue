@@ -2,6 +2,7 @@
 	<m-theme
 		class="toasts-lab"
 		:theme="theme"
+		:style="style"
 	>
 		<div class="toast-controls">
 			<div class="control-group">
@@ -81,122 +82,203 @@
 				</label>
 				<br>
 
-				<br>
-				<b>Position</b>
-				<br>
-				<table>
-					<tr>
-						<td>
-							<label>
-								<input
-									v-model="position"
-									type="radio"
-									name="position"
-									value="top-left"
-								>
-								top-left
-							</label>
-						</td>
-						<td>
-							<label>
-								<input
-									v-model="position"
-									type="radio"
-									name="position"
-									value="top"
-								>
-								top
-							</label>
-						</td>
-						<td>
-							<label>
-								<input
-									v-model="position"
-									type="radio"
-									name="position"
-									value="top-right"
-								>
-								top-right
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label>
-								<input
-									v-model="position"
-									type="radio"
-									name="position"
-									value="bottom-left"
-								>
-								bottom-left
-							</label>
-						</td>
-						<td>
-							<label>
-								<input
-									v-model="position"
-									type="radio"
-									name="position"
-									value="bottom"
-								>
-								bottom
-							</label>
-						</td>
-						<td>
-							<label>
-								<input
-									v-model="position"
-									type="radio"
-									name="position"
-									value="bottom-right"
-								>
-								bottom-right
-							</label>
-						</td>
-					</tr>
-				</table>
+				<div class="hide-on_mobile">
+					<br>
+					<b>Position (desktop)</b>
+					<br>
+					<table>
+						<tr>
+							<td>
+								<label>
+									<input
+										v-model="positionDesktop"
+										type="radio"
+										name="positionDesktop"
+										value="top-left"
+									>
+									top-left
+								</label>
+							</td>
+							<td>
+								<label>
+									<input
+										v-model="positionDesktop"
+										type="radio"
+										name="positionDesktop"
+										value="top"
+									>
+									top
+								</label>
+							</td>
+							<td>
+								<label>
+									<input
+										v-model="positionDesktop"
+										type="radio"
+										name="positionDesktop"
+										value="top-right"
+									>
+									top-right
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>
+									<input
+										v-model="positionDesktop"
+										type="radio"
+										name="positionDesktop"
+										value="bottom-left"
+									>
+									bottom-left
+								</label>
+							</td>
+							<td>
+								<label>
+									<input
+										v-model="positionDesktop"
+										type="radio"
+										name="positionDesktop"
+										value="bottom"
+									>
+									bottom
+								</label>
+							</td>
+							<td>
+								<label>
+									<input
+										v-model="positionDesktop"
+										type="radio"
+										name="positionDesktop"
+										value="bottom-right"
+									>
+									bottom-right
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-				<br>
-				<b>Animate from</b>
-				<br>
-				<label>
-					<input
-						v-model="transitionFrom"
-						type="radio"
-						name="transition-from"
-						value="top"
-					>
-					top
-				</label>
-				<label>
-					<input
-						v-model="transitionFrom"
-						type="radio"
-						name="transition-from"
-						value="bottom"
-					>
-					bottom
-				</label>
-				<label>
-					<input
-						v-model="transitionFrom"
-						type="radio"
-						name="transition-from"
-						value="left"
-					>
-					left
-				</label>
-				<label>
-					<input
-						v-model="transitionFrom"
-						type="radio"
-						name="transition-from"
-						value="right"
-					>
-					right
-				</label>
-				<br>
+				<div class="hide-on_desktop">
+					<br>
+					<b>Position (mobile)</b>
+					<br>
+					<table>
+						<tr>
+							<td>
+								<label>
+									<input
+										v-model="positionMobile"
+										type="radio"
+										name="positionMobile"
+										value="top"
+									>
+									top
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>
+									<input
+										v-model="positionMobile"
+										type="radio"
+										name="positionMobile"
+										value="bottom"
+									>
+									bottom
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="hide-on_mobile">
+					<br>
+					<b>Animate from (desktop)</b>
+					<br>
+					<label>
+						<input
+							v-model="transitionFromDesktop"
+							type="radio"
+							name="transition-from-desktop"
+							value="top"
+						>
+						top
+					</label>
+					<label>
+						<input
+							v-model="transitionFromDesktop"
+							type="radio"
+							name="transition-from-desktop"
+							value="bottom"
+						>
+						bottom
+					</label>
+					<label>
+						<input
+							v-model="transitionFromDesktop"
+							type="radio"
+							name="transition-from-desktop"
+							value="left"
+						>
+						left
+					</label>
+					<label>
+						<input
+							v-model="transitionFromDesktop"
+							type="radio"
+							name="transition-from-desktop"
+							value="right"
+						>
+						right
+					</label>
+					<br>
+				</div>
+
+				<div class="hide-on_desktop">
+					<br>
+					<b>Animate from (mobile)</b>
+					<br>
+					<label>
+						<input
+							v-model="transitionFromMobile"
+							type="radio"
+							name="transition-from-mobile"
+							value="top"
+						>
+						top
+					</label>
+					<label>
+						<input
+							v-model="transitionFromMobile"
+							type="radio"
+							name="transition-from-mobile"
+							value="bottom"
+						>
+						bottom
+					</label>
+					<label>
+						<input
+							v-model="transitionFromMobile"
+							type="radio"
+							name="transition-from-mobile"
+							value="left"
+						>
+						left
+					</label>
+					<label>
+						<input
+							v-model="transitionFromMobile"
+							type="radio"
+							name="transition-from-mobile"
+							value="right"
+						>
+						right
+					</label>
+					<br>
+				</div>
 
 				<br>
 				<b>Persist duration</b>
@@ -242,21 +324,6 @@
 						value="long"
 					>
 					long
-				</label>
-				<br>
-
-				<br>
-				<b>Width</b>
-				<br>
-				<label>
-					<input
-						v-model="maxWidth"
-						type="range"
-						step="100"
-						min="400"
-						max="700"
-					>
-					{{ maxWidthText }}
 				</label>
 				<br>
 
@@ -329,8 +396,9 @@
 		<m-modal-layer />
 		<m-dialog-layer />
 		<advanced-toast-layer
-			:position="position"
-			:transition-from="transitionFrom"
+			:mobile-position="positionMobile"
+			:desktop-position="positionDesktop"
+			:before-enter-class="$s['toast-before-enter']"
 		/>
 	</m-theme>
 </template>
@@ -390,11 +458,12 @@ export default {
 
 	data() {
 		return {
-			transitionFrom: 'bottom',
-			position: 'bottom',
+			transitionFromDesktop: 'bottom',
+			positionDesktop: 'bottom',
+			transitionFromMobile: 'bottom',
+			positionMobile: 'bottom',
 			toastTheme: 'plain',
 			length: 'medium',
-			maxWidth: '600',
 			primaryColor: '#006aff',
 			bgColor: '#ffffff',
 			duration: '5',
@@ -455,6 +524,14 @@ export default {
 				toast,
 			};
 		},
+		style() {
+			const desktopTransform = this.getTransform(this.transitionFromDesktop);
+			const mobileTransform = this.getTransform(this.transitionFromMobile);
+			return {
+				'--desktop-toast-transform': desktopTransform,
+				'--mobile-toast-transform': mobileTransform,
+			};
+		},
 		primaryText() {
 			if (this.length === 'short') {
 				return 'Something branded happened.';
@@ -506,24 +583,29 @@ export default {
 			}
 			return `${this.duration}s`;
 		},
-		maxWidthText() {
-			if (this.maxWidth === '700') {
-				return 'full-width';
-			}
-			return `${this.maxWidth}px`;
-		},
 	},
 
 	watch: {
-		position(newValue) {
+		positionDesktop(newValue) {
 			if (newValue === 'bottom') {
-				this.transitionFrom = 'bottom';
+				this.transitionFromDesktop = 'bottom';
 			} else if (newValue === 'top') {
-				this.transitionFrom = 'top';
+				this.transitionFromDesktop = 'top';
 			} else if (newValue.endsWith('left')) {
-				this.transitionFrom = 'left';
+				this.transitionFromDesktop = 'left';
 			} else { // ends with right
-				this.transitionFrom = 'right';
+				this.transitionFromDesktop = 'right';
+			}
+		},
+		positionMobile(newValue) {
+			if (newValue === 'bottom') {
+				this.transitionFromMobile = 'bottom';
+			} else if (newValue === 'top') {
+				this.transitionFromMobile = 'top';
+			} else if (newValue.endsWith('left')) {
+				this.transitionFromMobile = 'left';
+			} else { // ends with right
+				this.transitionFromMobile = 'right';
 			}
 		},
 	},
@@ -552,11 +634,7 @@ export default {
 		openToast(pattern = 'info', options) {
 			options = options || { actionbarOffset: false };
 			const text = this.getText(pattern);
-			let maxWidth = `${this.maxWidth}px`;
-			if (maxWidth === '700px') {
-				maxWidth = '100%';
-			}
-			const style = { maxWidth };
+			const style = {}; // maybe add stuff here later
 			const persistent = this.duration === '6';
 			const SECONDS_TO_MS_MULTIPLIER = 1000;
 			const dismissAfter = Number.parseInt(this.duration, 10) * SECONDS_TO_MS_MULTIPLIER;
@@ -581,6 +659,19 @@ export default {
 		},
 		closeAllToasts() {
 			this.toastApi.closeAll();
+		},
+		getTransform(transitionFrom) {
+			if (transitionFrom === 'bottom') {
+				return 'translateY(50%)';
+			}
+			if (transitionFrom === 'top') {
+				return 'translateY(-50%)';
+			}
+			if (transitionFrom === 'left') {
+				return 'translateX(-50%)';
+			}
+			// right
+			return 'translateX(50%)';
 		},
 		getText(pattern = 'info') {
 			let text = '';
@@ -627,6 +718,19 @@ export default {
 };
 </script>
 
+<style module="$s">
+.toast-before-enter {
+	transform: var(--mobile-toast-transform);
+	opacity: 0;
+}
+
+@media screen and (--for-tablet-landscape-up) {
+	.toast-before-enter {
+		transform: var(--desktop-toast-transform);
+	}
+}
+</style>
+
 <style scoped>
 .toasts-lab {
 	box-sizing: border-box;
@@ -641,6 +745,18 @@ export default {
 		sans-serif,
 		"Apple Color Emoji",
 		"Segoe UI Emoji";
+}
+
+@media screen and (--for-tablet-landscape-down) {
+	.hide-on_mobile {
+		display: none;
+	}
+}
+
+@media screen and (--for-tablet-landscape-up) {
+	.hide-on_desktop {
+		display: none;
+	}
 }
 
 .toast-controls {
