@@ -10,7 +10,7 @@
 		]"
 		:before-enter-class="beforeEnterClass"
 	>
-		<render-fn
+		<toast-render-fn
 			v-for="toast in toastApi.state.toasts"
 			:key="toast.key"
 			:render-fn="toast.renderFn"
@@ -22,7 +22,7 @@
 import Vue from 'vue';
 import { MTransitionStack } from '@square/maker/utils/TransitionStack';
 import { toastApi } from '@square/maker/components/Toast';
-import RenderFn from './RenderFn';
+import ToastRenderFn from './ToastRenderFn';
 
 function randomKey() {
 	const HEXADECIMAL_RADIX = 36;
@@ -84,7 +84,7 @@ const apiMixin = {
 				}
 			},
 
-			// closeSelf() is implemented in ./RenderFn.js
+			// closeSelf() is implemented in ./ToastRenderFn.js
 		};
 
 		if (!this.toastApi) {
@@ -100,7 +100,7 @@ const apiMixin = {
 export default {
 	components: {
 		MTransitionStack,
-		RenderFn,
+		ToastRenderFn,
 	},
 
 	inject: {
