@@ -269,13 +269,14 @@ Toasts have the following built-in default patterns: `info` (default), `success`
 ```vue
 <template>
 	<div>
+		open toast:
 		<button
 			v-for="pattern in defaultToastPatterns"
 			:key="pattern"
 			class="toastbutton"
 			@click="openToast(pattern)"
 		>
-			open {{ pattern }} toast
+			{{ pattern }}
 		</button>
 		<m-toast-layer />
 	</div>
@@ -644,7 +645,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | persistent    | `boolean` | —       | —               | make toast persistent (no auto-dismiss)                   |
 | dismiss-after | `number`  | —       | —               | auto-dismiss after x milliseconds (ignored if persistent) |
 | icon-name     | `string`  | —       | —               | name of icon to show                                      |
-| hide-icon     | `boolean` | `false` | —               | hides icon                                                |
+| hide-icon     | `boolean` | —       | —               | hides icon                                                |
 | text          | `string`  | `''`    | —               | toast text content                                        |
 | progress      | `number`  | —       | —               | optional toast progress (0 - 100)                         |
 | color         | `string`  | —       | —               | toast text & button color                                 |

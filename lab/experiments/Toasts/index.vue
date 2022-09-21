@@ -420,6 +420,7 @@ import AlertTriangle from '@square/maker-icons/AlertTriangle';
 import AlertCircle from '@square/maker-icons/AlertCircle';
 import CheckCircle from '@square/maker-icons/CheckCircle';
 import Info from '@square/maker-icons/Info';
+import Zap from '@square/maker-icons/Zap';
 
 import AdvancedToastLayer from './AdvancedToastLayer.vue';
 import ActionBarBlade from '../../components/ActionBarBlade.vue';
@@ -431,6 +432,7 @@ const filledIcons = {
 	warning: AlertTriangleFilled,
 	success: CheckCircleFilled,
 	info: InfoFilled,
+	primary: Zap,
 };
 
 const outlineIcons = {
@@ -438,6 +440,7 @@ const outlineIcons = {
 	warning: AlertTriangle,
 	success: CheckCircle,
 	info: Info,
+	primary: Zap,
 };
 
 export default {
@@ -483,35 +486,41 @@ export default {
 			const toast = {
 				patterns: {
 					primary: {
-						iconName: 'info',
+						iconName: 'primary',
+						hideIcon: true,
 						accentColor: '@colors.contextualPrimary.fill',
 					},
 					primarySaturated: {
-						iconName: 'info',
+						iconName: 'primary',
+						hideIcon: true,
 						accentColor: '@colors.contextualPrimary.onFill',
 						color: '@colors.contextualPrimary.onFill',
 						bgColor: '@colors.contextualPrimary.fill',
 					},
 					infoSaturated: {
 						iconName: 'info',
+						hideIcon: true,
 						bgColor: '@colors["neutral-100"]',
 						color: '@colors["neutral-0"]',
 						accentColor: '@colors["neutral-0"]',
 					},
 					successSaturated: {
 						iconName: 'success',
+						hideIcon: false,
 						accentColor: '@colors.success.onFill',
 						color: '@colors.success.onFill',
 						bgColor: '@colors.success.fill',
 					},
 					warningSaturated: {
 						iconName: 'warning',
+						hideIcon: false,
 						accentColor: '@colors.warning.onFill',
 						color: '@colors.warning.onFill',
 						bgColor: '@colors.warning.fill',
 					},
 					errorSaturated: {
 						iconName: 'critical',
+						hideIcon: false,
 						accentColor: '@colors.critical.onFill',
 						color: '@colors.critical.onFill',
 						bgColor: '@colors.critical.fill',
@@ -642,10 +651,6 @@ export default {
 			if (this.toastTheme === 'saturated') {
 				pattern += 'Saturated';
 			}
-			let hideIcon = false;
-			if (this.length === 'short') {
-				hideIcon = true;
-			}
 			this.toastApi.open(() => <MToast
 				pattern={pattern}
 				text={text}
@@ -653,7 +658,6 @@ export default {
 				style={style}
 				persistent={persistent}
 				dismissAfter={dismissAfter}
-				hideIcon={hideIcon}
 				progress={this.progress === '-1' ? undefined : Number.parseInt(this.progress, 10)}
 			/>, options);
 		},

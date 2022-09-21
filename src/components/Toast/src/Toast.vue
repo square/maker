@@ -14,7 +14,7 @@
 	>
 		<div :class="$s.ToastContent">
 			<m-icon
-				v-if="!hideIcon"
+				v-if="!resolvedHideIcon"
 				:class="$s.Icon"
 				:name="resolvedIconName"
 			/>
@@ -140,7 +140,7 @@ export default {
 		 */
 		hideIcon: {
 			type: Boolean,
-			default: false,
+			default: undefined,
 		},
 		/**
 		 * toast text content
@@ -207,6 +207,7 @@ export default {
 			'bgColor',
 			'accentColor',
 			'iconName',
+			'hideIcon',
 		]),
 		/**
 		 * if the toast bg color is the same as the page bg color
