@@ -103,6 +103,9 @@ export default function defaultTheme() {
 			color: '@colors.primary',
 			size: 'medium',
 			patterns: {
+				primary: {
+					color: '@colors.contextualPrimary.text',
+				},
 				error: {
 					color: '@colors.critical.text',
 				},
