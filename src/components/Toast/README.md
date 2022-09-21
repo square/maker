@@ -166,7 +166,7 @@ Toasts can have actions which can be passed via the `actions` prop. Every action
 			open toast
 		</button>
 		<br>
-		counter: {{ count }}
+		count: {{ count }}
 		<m-toast-layer />
 	</div>
 </template>
@@ -192,7 +192,7 @@ export default {
 	methods: {
 		openToast() {
 			this.toastApi.open(() => <MToast
-				text={`I keep count: ${this.count}!`}
+				text={`I keep count: ${this.count}`}
 				actions={[
 					{ text: 'Increment', click: this.increment },
 					{ text: 'Decrement', click: this.decrement },

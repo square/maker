@@ -132,7 +132,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
-	padding: 0 16px;
+	padding: 0 24px;
 	padding-bottom: var(--initial-bottom-padding);
 	transition: padding-bottom 0.5s;
 	pointer-events: none;

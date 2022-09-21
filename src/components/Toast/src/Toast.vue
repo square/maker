@@ -247,11 +247,18 @@ export default {
 </script>
 
 <style module="$s">
+/* toasts are full-width on mobile */
 .Toast {
 	box-sizing: border-box;
 	width: 100%;
-	max-width: 600px;
 	background-color: var(--toast-bg-color);
+}
+
+/* toasts are 600px width on desktop */
+@media screen and (--for-tablet-landscape-up) {
+	.Toast {
+		max-width: 600px;
+	}
 }
 
 .EnhanceContrast {

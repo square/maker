@@ -218,7 +218,7 @@ export default {
 	overflow: hidden;
 }
 
-@media (--for-tablet-landscape-up) {
+@media screen and (--for-tablet-landscape-up) {
 	.disableScroll {
 		position: initial;
 	}
