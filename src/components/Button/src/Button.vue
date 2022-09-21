@@ -79,6 +79,21 @@ function setColorVariables(tokens, variant) {
 	};
 }
 
+function setCustomizationVariables(tokens) {
+	const hoverTokens = {};
+	if (tokens.hover) {
+		Object.entries(tokens.hover).forEach((key, value) => {
+			hoverTokens[`--hover-${key}`] = value;
+		});
+	}
+	return {
+		'--border-radius': tokens.shape,
+		'--border': tokens.border,
+		'--box-shadow': tokens.boxShadow,
+		...hoverTokens,
+	};
+}
+
 /**
  * Button component
  * @inheritAttrs button
@@ -156,11 +171,34 @@ export default {
 		},
 		/**
 		 * Shape of button
+		 * @values squared, rounded, pill
 		 */
 		shape: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape) || shape.match(/\d*\.?\d+(?:px|%)/i),
+		},
+		/**
+		 * Border of button
+		 */
+		border: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Box-shadow of button
+		 */
+		boxShadow: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Hover props of button
+		 */
+		hover: {
+			type: Object,
+			default: undefined,
+			validator: (hover) => Object.keys(hover).forEach((key) => ['color, textColor, shape, border, boxShadow'].includes(hover[key])),
 		},
 		/**
 		 * Toggles button disabled state
@@ -196,13 +234,25 @@ export default {
 			'align',
 			'fullWidth',
 			'pattern',
+			'border',
+			'boxShadow',
+			'hover',
 		]),
 		style() {
 			const tokens = {
 				color: this.resolvedColor,
 				textColor: this.resolvedTextColor,
 			};
-			return setColorVariables(tokens, this.resolvedVariant);
+			const customizationTokens = {
+				shape: this.resolvedShape,
+				border: this.resolvedBorder,
+				boxShadow: this.resolvedBoxShadow,
+				hover: this.resolvedHover,
+			};
+			return {
+				...setColorVariables(tokens, this.resolvedVariant),
+				...setCustomizationVariables(customizationTokens),
+			};
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
