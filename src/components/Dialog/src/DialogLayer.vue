@@ -2,13 +2,13 @@
 	<div :class="$s.Layer">
 		<m-transition-fade-in>
 			<div
-				v-if="dialogApi.state.vnode"
+				v-if="dialogApi.state.renderFn"
 				:class="$s.Translucent"
 			/>
 		</m-transition-fade-in>
 		<m-transition-responsive :transitions="transitions">
 			<div
-				v-if="dialogApi.state.vnode"
+				v-if="dialogApi.state.renderFn"
 				:class="$s.DialogLayer"
 				@click.capture="closeOnClickOutside"
 			>
@@ -24,7 +24,7 @@
 					ref="dialog"
 					:class="$s.DialogContentWrapper"
 				>
-					<v :nodes="dialogApi.state.vnode" />
+					<render-fn :render-fn="dialogApi.state.renderFn" />
 				</div>
 			</div>
 		</m-transition-responsive>
@@ -33,7 +33,6 @@
 
 <script>
 import Vue from 'vue';
-import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
@@ -45,20 +44,20 @@ import {
 	mobileMinWidth,
 	tabletMinWidth,
 } from '@square/maker/utils/transitions';
-import dialogApi from './dialog-api';
+import { dialogApi } from '@square/maker/components/Dialog';
+import RenderFn from '@square/maker/utils/RenderFn';
 
 const apiMixin = {
 	provide() {
 		const vm = this;
 		const api = {
 			state: Vue.observable({
-				vnode: undefined,
+				renderFn: undefined,
 				options: {},
 			}),
 
 			open(renderFn, options = {}) {
-				const vnode = renderFn(vm.$createElement);
-				this.state.vnode = vnode;
+				this.state.renderFn = renderFn;
 				this.state.options = {
 					closeOnClickOutside: false,
 					closeOnEsc: false,
@@ -68,7 +67,7 @@ const apiMixin = {
 
 				// function that only closes this specific Dialog
 				return () => {
-					if (this.state.vnode === vnode) {
+					if (this.state.renderFn === renderFn) {
 						this.close();
 					}
 				};
@@ -79,7 +78,7 @@ const apiMixin = {
 				// Closing at the same time will result in the popover content becoming inline and
 				// causes a weird content shift as the dialog fades away.
 
-				if (this.state.vnode && typeof this.state.options.beforeCloseHook === 'function') {
+				if (this.state.renderFn && typeof this.state.options.beforeCloseHook === 'function') {
 					if (!(await this.state.options.beforeCloseHook(closeData))) {
 						return; // cancel
 					}
@@ -87,7 +86,7 @@ const apiMixin = {
 
 				vm.popoverApi?.closePopover();
 				vm.$nextTick(() => {
-					this.state.vnode = undefined;
+					this.state.renderFn = undefined;
 					this.state.options.afterCloseHook?.(closeData);
 				});
 			},
@@ -104,10 +103,8 @@ const apiMixin = {
 };
 
 export default {
-	name: 'DialogLayer',
-
 	components: {
-		V,
+		RenderFn,
 		PseudoWindow,
 		MTransitionFadeIn,
 		MTransitionResponsive,
