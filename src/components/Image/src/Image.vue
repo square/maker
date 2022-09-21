@@ -139,6 +139,11 @@ export default {
 	},
 
 	mounted() {
+		// Emit image:visible right away if Image is cached,
+		// since it will just render instead of transitioning in
+		if (this.loaded) {
+			this.$emit('image:visible');
+		}
 		if (!this.lazyload) {
 			this.load();
 		} else {
