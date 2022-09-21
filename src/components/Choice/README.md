@@ -222,6 +222,85 @@ export default {
 </style>
 ```
 
+### Options as Cards
+
+```vue
+<template>
+	<div class="wrapper">
+		<m-choice
+			v-model="selected"
+		>
+			<m-choice-card value="choice-1">
+				Choice
+				<m-select
+					v-model="selectValue"
+					placeholder="Placeholder"
+					:options="selectOptions"
+					variant="outline"
+				/>
+			</m-choice-card>
+			<m-choice-card value="choice-2">
+				Choice<br>second line
+			</m-choice-card>
+			<m-choice-card value="choice-3">
+				Choice longer text
+			</m-choice-card>
+			<m-choice-card
+				:disabled="true"
+				value="choice-4"
+			>
+				Choice disabled
+			</m-choice-card>
+		</m-choice>
+		<br>
+		<p>Selected value: {{ selected }}</p>
+	</div>
+</template>
+
+<script>
+import { MChoice, MChoiceCard } from '@square/maker/components/Choice';
+import { MSelect } from '@square/maker/components/Select';
+
+export default {
+	components: {
+		MChoice,
+		MChoiceCard,
+		MSelect,
+	},
+	data() {
+		return {
+			selected: 'choice-1',
+			selectValue: undefined,
+			selectOptions: [
+				{
+					value: '1',
+					label: 'Option 1',
+				},
+				{
+					value: '2',
+					label: 'Option 2',
+				},
+				{
+					value: '3',
+					label: 'Option 3',
+				},
+				{
+					value: '4',
+					disabled: true,
+					label: 'Disabled Option 4',
+				},
+			],
+		};
+	},
+};
+</script>
+<style scoped>
+.wrapper {
+	max-width: 600px;
+}
+</style>
+```
+
 <!-- api-tables:start -->
 ## Choice Props
 
@@ -245,6 +324,21 @@ export default {
 | Event         | Type | Description |
 | ------------- | ---- | ----------- |
 | choice:update | -    | —           |
+
+
+## ChoiceCard Props
+
+| Prop     | Type        | Default | Possible values | Description |
+| -------- | ----------- | ------- | --------------- | ----------- |
+| value*   | `undefined` | —       | —               | —           |
+| disabled | `boolean`   | `false` | —               | —           |
+
+
+## ChoiceCard Slots
+
+| Slot    | Description         |
+| ------- | ------------------- |
+| default | has `selected` prop |
 
 
 ## ChoiceOption Props
