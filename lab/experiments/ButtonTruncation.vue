@@ -13,6 +13,9 @@
 					<th>
 						Tertiary / Ghost
 					</th>
+					<th>
+						TextButton
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,6 +47,14 @@
 							{{ buttonText }}
 						</m-button>
 					</td>
+					<td>
+						<m-text-button
+							size="large"
+							truncate-text
+						>
+							{{ buttonText }}
+						</m-text-button>
+					</td>
 				</tr>
 				<tr>
 					<th>
@@ -72,6 +83,11 @@
 						>
 							{{ buttonText }}
 						</m-button>
+					</td>
+					<td>
+						<m-text-button truncate-text>
+							{{ buttonText }}
+						</m-text-button>
 					</td>
 				</tr>
 				<tr>
@@ -102,6 +118,7 @@
 							{{ buttonText }}
 						</m-button>
 					</td>
+					<td />
 				</tr>
 				<tr>
 					<th>
@@ -317,6 +334,9 @@
 					<th>
 						Tertiary / Ghost
 					</th>
+					<th>
+						TextButton
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -348,6 +368,13 @@
 							Button
 						</m-button>
 					</td>
+					<td>
+						<m-text-button
+							size="large"
+						>
+							Button
+						</m-text-button>
+					</td>
 				</tr>
 				<tr>
 					<th>
@@ -376,6 +403,11 @@
 						>
 							Button
 						</m-button>
+					</td>
+					<td>
+						<m-text-button>
+							Button
+						</m-text-button>
 					</td>
 				</tr>
 				<tr>
@@ -613,10 +645,12 @@
 <script>
 import Plus from '@square/maker-icons/Plus';
 import { MButton } from '@square/maker/components/Button';
+import { MTextButton } from '@square/maker/components/TextButton';
 
 export default {
 	components: {
 		MButton,
+		MTextButton,
 		Plus,
 	},
 	data() {

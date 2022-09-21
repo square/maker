@@ -9,11 +9,11 @@
 
 <script>
 import { merge, mergeWith } from 'lodash';
-import { BASE_TEN } from '@square/maker/utils/constants';
 import { showWarning } from '@square/maker/utils/debug';
 import key from './key';
 import defaultTheme from './default-theme';
 import { resolve, getPath } from './utils';
+import publicizeVars from './publicize-vars';
 
 // naive check, just checks for presence of a render field,
 // which is assumed to be a function, which is fine for now
@@ -84,10 +84,6 @@ function resolveTheme(data, parentTheme, theme, profileId) {
 	data.getPath = getPath;
 }
 
-function clamp(value, min, max) {
-	return Math.min(Math.max(Number.parseInt(value, BASE_TEN), min), max);
-}
-
 export default {
 	inject: {
 		parentTheme: {
@@ -119,41 +115,7 @@ export default {
 	},
 	computed: {
 		styles() {
-			const { colors, fonts, shapes } = this;
-			const MAX_THUMBNAIL_RADIUS = 8;
-
-			return {
-				// neutral colors
-				'--maker-color-neutral-0': colors['neutral-0'],
-				'--maker-color-neutral-10': colors['neutral-10'],
-				'--maker-color-neutral-20': colors['neutral-20'],
-				'--maker-color-neutral-80': colors['neutral-80'],
-				'--maker-color-neutral-90': colors['neutral-90'],
-				'--maker-color-neutral-100': colors['neutral-100'],
-
-				// general colors
-				'--maker-color-primary': colors.primary,
-				'--maker-color-background': colors.background,
-				'--maker-color-heading': colors.heading,
-				'--maker-color-body': colors.body,
-				'--maker-color-elevation': colors.elevation,
-				'--maker-color-overlay': colors.overlay,
-
-				// typography
-				'--maker-font-heading-font-family': fonts.heading.fontFamily,
-				'--maker-font-heading-font-weight': fonts.heading.fontWeight,
-				'--maker-font-body-font-family': fonts.body.fontFamily,
-				'--maker-font-body-font-weight': fonts.body.fontWeight,
-				'--maker-font-label-font-family': fonts.label.fontFamily,
-				'--maker-font-label-font-weight': fonts.label.fontWeight,
-
-				// shape
-				'--maker-shape-default-border-radius': shapes.defaultBorderRadius,
-				'--maker-shape-card-border-radius': shapes.cardBorderRadius,
-				'--maker-shape-button-border-radius': shapes.buttonBorderRadius,
-				'--maker-shape-image-border-radius': shapes.imageBorderRadius,
-				'--maker-shape-thumbnail-border-radius': `${clamp(shapes.imageBorderRadius, 0, MAX_THUMBNAIL_RADIUS)}px`,
-			};
+			return publicizeVars(this);
 		},
 	},
 	watch: {
@@ -174,9 +136,9 @@ export default {
 
 <style module="$s">
 .Theme {
-	color: var(--maker-color-body);
-	font-weight: var(--maker-font-body-font-weight);
-	font-family: var(--maker-font-body-font-family);
-	background-color: var(--maker-color-background);
+	color: $maker-color-body;
+	font-weight: $maker-font-body-font-weight;
+	font-family: $maker-font-body-font-family;
+	background-color: $maker-color-background;
 }
 </style>

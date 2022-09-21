@@ -242,7 +242,7 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: var(--maker-color-overlay, rgba(0, 0, 0, 0.3));
+	background-color: $maker-color-overlay;
 }
 
 .Transparent {
@@ -265,7 +265,7 @@ export default {
 		display: inline-block;
 		width: auto;
 		height: auto;
-		border-radius: var(--maker-shape-default-border-radius, 8px);
+		border-radius: $maker-shape-default-border-radius;
 		box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
 	}
 }

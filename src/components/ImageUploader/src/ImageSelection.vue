@@ -118,8 +118,8 @@ export default {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	border: 1px solid var(--maker-color-neutral-20, rgba(0, 0, 0, 0.15));
-	border-radius: var(--maker-shape-default-border-radius, 8px);
+	border: 1px solid $maker-color-neutral-20;
+	border-radius: $maker-shape-default-border-radius;
 	transition: background-image linear 150ms;
 
 	--color-error: rgba(206, 50, 23, 1);

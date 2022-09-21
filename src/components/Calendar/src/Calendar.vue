@@ -328,8 +328,8 @@ export default {
 	font-size: var(--font-size);
 	font-family: inherit;
 	line-height: var(--line-height);
-	background-color: var(--maker-color-background, #fff);
-	border-radius: var(--maker-shape-default-border-radius, 4px);
+	background-color: $maker-color-background;
+	border-radius: $maker-shape-default-border-radius;
 }
 
 .CalendarHeader {
@@ -340,7 +340,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: var(--maker-color-primary, #000);
+	color: $maker-color-primary;
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 }
@@ -377,7 +377,7 @@ export default {
 	font-family: inherit;
 	background-color: inherit;
 	border: none;
-	border-radius: var(--maker-shape-button-border-radius, 8px);
+	border-radius: $maker-shape-button-border-radius;
 	outline: none;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in;
@@ -385,8 +385,8 @@ export default {
 	touch-action: manipulation;
 
 	&.selected {
-		color: var(--maker-color-background, #fff);
-		background-color: var(--maker-color-body, #000);
+		color: $maker-color-background;
+		background-color: $maker-color-body;
 	}
 
 	&.today {
@@ -400,6 +400,6 @@ export default {
 }
 
 .DateCell:hover .DateCellButton:not(.selected):not(.disabled) {
-	background-color: var(--maker-color-neutral-10, rgba(0, 0, 0, 0.1));
+	background-color: $maker-color-neutral-10;
 }
 </style>

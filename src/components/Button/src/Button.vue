@@ -239,9 +239,9 @@ export default {
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 	vertical-align: middle;
-	background-color: var(--color-main, var(--maker-color-primary, #000));
+	background-color: var(--color-main, $maker-color-primary);
 	border: none;
-	border-radius: var(--maker-shape-button-border-radius, var(--radius-rounded-button));
+	border-radius: $maker-shape-button-border-radius;
 	outline: none;
 	box-shadow:
 		var(--outline-border, 0 0),
@@ -350,7 +350,7 @@ export default {
 
 	&:focus {
 		--focus-border:
-			0 0 0 1px var(--maker-color-neutral-20, #fff),
+			0 0 0 1px $maker-color-neutral-20,
 			0 0 0 3px var(--color-focus);
 	}
 
