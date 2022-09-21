@@ -15,6 +15,8 @@
 <script>
 /* eslint-disable unicorn/no-null */
 
+const arbitraryShortDelayMs = 50;
+
 /**
  * @inheritAttrs div
  * @inheritListeners div
@@ -24,42 +26,35 @@ export default {
 
 	props: {
 		/**
-		 * items transition from direction
+		 * how to animate the stack items before they enter
 		 */
-		transitionFrom: {
+		beforeEnterClass: {
 			type: String,
-			default: 'bottom',
-			validator: (from) => ['bottom', 'top', 'left', 'right'].includes(from),
+			default: undefined,
 		},
 	},
 
 	methods: {
 		beforeEnter(node) {
-			// defaults for bottom
-			let translate = 'Y';
-			let sign = '';
-			if (this.transitionFrom === 'top') {
-				sign = '-';
-			} else if (this.transitionFrom === 'left') {
-				translate = 'X';
-				sign = '-';
-			} else if (this.transitionFrom === 'right') {
-				translate = 'X';
+			if (this.beforeEnterClass) {
+				node.classList.add(this.beforeEnterClass);
+			} else {
+				Object.assign(node.style, {
+					opacity: '0',
+				});
 			}
-			Object.assign(node.style, {
-				transform: `translate${translate}(${sign}50%)`,
-				opacity: '0',
-			});
 		},
 		enter(node) {
 			// idk why but Vue consistently runs this
-			// hook TOO EARLY, so we slow it down by 50ms
-			const arbitraryShortDelayMs = 50;
+			// hook TOO EARLY, so we slow it down a little
 			setTimeout(() => {
-				Object.assign(node.style, {
-					transform: null,
-					opacity: null,
-				});
+				if (this.beforeEnterClass) {
+					node.classList.remove(this.beforeEnterClass);
+				} else {
+					Object.assign(node.style, {
+						opacity: null,
+					});
+				}
 			}, arbitraryShortDelayMs);
 		},
 		beforeLeave(node) {
@@ -68,8 +63,7 @@ export default {
 		},
 		leave(node) {
 			// idk why but Vue consistently runs this
-			// hook TOO EARLY, so we slow it down by 50ms
-			const arbitraryShortDelayMs = 50;
+			// hook TOO EARLY, so we slow it down a little
 			setTimeout(() => {
 				Object.assign(node.style, {
 					maxHeight: '0',

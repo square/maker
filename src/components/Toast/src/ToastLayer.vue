@@ -6,7 +6,7 @@
 				[$s.ActionbarOffset]: addActionbarOffset,
 			}
 		]"
-		transition-from="bottom"
+		:before-enter-class="$s.fade_bottom"
 	>
 		<render-fn
 			v-for="toast in toastApi.state.toasts"
@@ -136,6 +136,11 @@ export default {
 	padding-bottom: var(--initial-bottom-padding);
 	transition: padding-bottom 0.5s;
 	pointer-events: none;
+}
+
+.fade_bottom {
+	transform: translateY(50%);
+	opacity: 0;
 }
 
 /* calculations imported from ActionBarLayer */

@@ -149,6 +149,7 @@ export default {
 	left: 0;
 	z-index: 1;
 	display: flex;
+	justify-content: flex-end;
 	padding: 16px;
 	padding-bottom: var(--initial-bottom-padding);
 	transition: padding-bottom 0.5s;
@@ -158,37 +159,31 @@ export default {
 .position_bottom {
 	flex-direction: column;
 	align-items: center;
-	justify-content: flex-end;
 }
 
 .position_bottom-left {
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: flex-end;
 }
 
 .position_bottom-right {
 	flex-direction: column;
 	align-items: flex-end;
-	justify-content: flex-end;
 }
 
 .position_top {
 	flex-direction: column-reverse;
 	align-items: center;
-	justify-content: flex-end;
 }
 
 .position_top-left {
 	flex-direction: column-reverse;
 	align-items: flex-start;
-	justify-content: flex-end;
 }
 
 .position_top-right {
 	flex-direction: column-reverse;
 	align-items: flex-end;
-	justify-content: flex-end;
 }
 
 /* calculations imported from ActionBarLayer */

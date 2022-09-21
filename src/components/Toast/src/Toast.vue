@@ -75,7 +75,7 @@ import { MProgressBar } from '@square/maker/components/ProgressBar';
 import { MTextButton } from '@square/maker/components/TextButton';
 import { MIcon } from '@square/maker/components/Icon';
 import { MText } from '@square/maker/components/Text';
-import { colord } from 'colord';
+import cssValidator from '@square/maker/utils/css-validator';
 import { MBread } from '@square/maker/components/Toast';
 import toastApi from './toast-api';
 
@@ -163,7 +163,7 @@ export default {
 		color: {
 			type: String,
 			default: undefined,
-			validator: (color) => colord(color).isValid(),
+			validator: cssValidator('color'),
 		},
 		/**
 		 * toast icon & progress color
@@ -171,7 +171,7 @@ export default {
 		accentColor: {
 			type: String,
 			default: undefined,
-			validator: (accentColor) => colord(accentColor).isValid(),
+			validator: cssValidator('color'),
 		},
 		/**
 		 * toast background color
@@ -179,7 +179,7 @@ export default {
 		bgColor: {
 			type: String,
 			default: undefined,
-			validator: (bgColor) => colord(bgColor).isValid(),
+			validator: cssValidator('color'),
 		},
 		/**
 		 * toast actions

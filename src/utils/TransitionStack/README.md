@@ -41,7 +41,7 @@ How items are animated into the stack can be controlled via the `transition-from
 		</div>
 		<m-transition-stack
 			class="stack"
-			:transition-from="transitionFrom"
+			:before-enter-class="beforeEnterClass"
 			:style="{
 				alignItems: align,
 			}"
@@ -167,6 +167,12 @@ export default {
 		};
 	},
 
+	computed: {
+		beforeEnterClass() {
+			return this.$s[`fade_${this.transitionFrom}`];
+		},
+	},
+
 	methods: {
 		insertItem() {
 			const item = randomItem();
@@ -226,6 +232,27 @@ button {
 	align-items: center;
 }
 </style>
+
+<style module="$s">
+.fade_top,
+.fade_bottom,
+.fade_left,
+.fade_right {
+	opacity: 0;
+}
+.fade_top {
+	transform: translateY(-50%);
+}
+.fade_bottom {
+	transform: translateY(50%);
+}
+.fade_left {
+	transform: translateX(-50%);
+}
+.fade_right {
+	transform: translateX(50%);
+}
+</style>
 ```
 
 It's possible to turn MTransitionStack into a full-screen overlay with `position: fixed` and `pointer-events: none` styles on it. If the items are interactive then `pointer-events: auto` should be added back to them. Where the stack is positioned on the screen can be controlled with simple CSS flex properties. How the items are added & removed from the stack can be controlled with JS. How the items transition can be controlled via their `transition` property and via the `transition-from` prop on the MTransitionStack component. Example illustrates all of these techniques:
@@ -252,7 +279,7 @@ It's possible to turn MTransitionStack into a full-screen overlay with `position
 		</div>
 		<m-transition-stack
 			class="stack"
-			:transition-from="transitionFrom"
+			:before-enter-class="beforeEnterClass"
 			:style="stackStyle"
 		>
 			<div
@@ -380,6 +407,9 @@ export default {
 				return 'column';
 			}
 		},
+		beforeEnterClass() {
+			return this.$s[`fade_${this.transitionFrom}`];
+		},
 		stackStyle() {
 			return {
 				flexDirection: this.stackDirection,
@@ -452,6 +482,27 @@ button {
 	align-items: center;
 }
 </style>
+
+<style module="$s">
+.fade_top,
+.fade_bottom,
+.fade_left,
+.fade_right {
+	opacity: 0;
+}
+.fade_top {
+	transform: translateY(-50%);
+}
+.fade_bottom {
+	transform: translateY(50%);
+}
+.fade_left {
+	transform: translateX(-50%);
+}
+.fade_right {
+	transform: translateX(50%);
+}
+</style>
 ```
 
 
@@ -460,9 +511,9 @@ button {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop            | Type     | Default    | Possible values                  | Description                     |
-| --------------- | -------- | ---------- | -------------------------------- | ------------------------------- |
-| transition-from | `string` | `'bottom'` | `bottom`, `top`, `left`, `right` | items transition from direction |
+| Prop               | Type     | Default | Possible values | Description                                      |
+| ------------------ | -------- | ------- | --------------- | ------------------------------------------------ |
+| before-enter-class | `string` | —       | —               | how to animate the stack items before they enter |
 
 
 ## Slots
