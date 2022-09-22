@@ -11,6 +11,9 @@
 			<m-text>
 				modal content
 			</m-text>
+			<m-text v-if="count">
+				count is {{ count }}
+			</m-text>
 			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
@@ -23,9 +26,9 @@
 				<m-action-bar-button
 					key="confirm"
 					full-width
-					@click="modalApi.close()"
+					@click="openNestedModal"
 				>
-					Confirm
+					Open nested modal
 				</m-action-bar-button>
 			</m-inline-action-bar>
 		</m-modal-content>
@@ -37,10 +40,9 @@ import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
+import NestedModal from './NestedModal.vue';
 
 export default {
-	name: 'ActionBarDemoModal',
-
 	components: {
 		MText,
 		MModal,
@@ -52,6 +54,19 @@ export default {
 
 	inject: {
 		modalApi,
+	},
+
+	props: {
+		count: {
+			type: Number,
+			default: 0,
+		},
+	},
+
+	methods: {
+		openNestedModal() {
+			this.modalApi.open(() => <NestedModal count={this.count} />);
+		},
 	},
 };
 </script>

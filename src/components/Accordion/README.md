@@ -14,6 +14,8 @@ Accordions must have titles and can optionally have secondary info and content. 
 		class="container"
 		title="my accordion title"
 		secondary="optional secondary info"
+		side="side title"
+		side-secondary="side secondary info"
 	>
 		<div class="content">
 			accordion content and stuff
@@ -263,6 +265,7 @@ If you'd like to stack multiple Accordions and have at most one expanded at a ti
 			v-model="expandKey"
 			expand-key="2"
 			title="2nd Accordion"
+			side="Side title"
 		>
 			<div class="content">
 				accordion content and stuff
@@ -323,22 +326,26 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop       | Type             | Default | Possible values | Description                                                                           |
-| ---------- | ---------------- | ------- | --------------- | ------------------------------------------------------------------------------------- |
-| v-model    | `boolean|string` | —       | —               | if truthy or equal to expandKey the accordion will expand, otherwise it will collapse |
-| expand-key | `string`         | —       | —               | used to orchestrate the collapsing & expanding of multiple accordions                 |
-| title      | `string`         | `''`    | —               | accordion title, will be overriden if title slot is used                              |
-| secondary  | `string`         | `''`    | —               | secondary info, will be overridden if secondary slot is used                          |
+| Prop           | Type             | Default | Possible values | Description                                                                           |
+| -------------- | ---------------- | ------- | --------------- | ------------------------------------------------------------------------------------- |
+| v-model        | `boolean|string` | —       | —               | if truthy or equal to expandKey the accordion will expand, otherwise it will collapse |
+| expand-key     | `string`         | —       | —               | used to orchestrate the collapsing & expanding of multiple accordions                 |
+| title          | `string`         | `''`    | —               | accordion title, will be overriden if title slot is used                              |
+| secondary      | `string`         | `''`    | —               | secondary info, will be overridden if secondary slot is used                          |
+| side           | `string`         | `''`    | —               | accordion side title, will be overriden if title slot is used                         |
+| side-secondary | `string`         | `''`    | —               | secondary side info, will be overridden if side-secondary slot is used                |
 
 
 ## Slots
 
-| Slot      | Description                      |
-| --------- | -------------------------------- |
-| title     | title of accordion               |
-| secondary | secondary info, goes under title |
-| icon      | open & close icon                |
-| default   | content to expand & collapse     |
+| Slot           | Description                               |
+| -------------- | ----------------------------------------- |
+| title          | title of accordion                        |
+| secondary      | secondary info, goes under title          |
+| side           | side info, goes left of open/close icon   |
+| side-secondary | side secondary info, goes under side slot |
+| icon           | open & close icon                         |
+| default        | content to expand & collapse              |
 
 
 ## Events

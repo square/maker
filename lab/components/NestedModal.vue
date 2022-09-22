@@ -1,15 +1,15 @@
 <template>
-	<m-blade>
+	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/400/300"
+			src="https://picsum.photos/600/300"
 		>
-		<m-blade-content>
+		<m-modal-content>
 			<m-text pattern="title">
-				Blade heading
+				Nested modal heading
 			</m-text>
 			<m-text>
-				blade content
+				nested modal content
 			</m-text>
 			<m-text v-if="count">
 				count is {{ count }}
@@ -18,40 +18,41 @@
 				<m-action-bar-button
 					key="close"
 					color="#f6f6f6"
-					@click="bladeApi.close()"
+					@click="modalApi.close()"
+					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
 				<m-action-bar-button
 					key="confirm"
 					full-width
-					@click="bladeApi.close()"
+					@click="modalApi.close()"
 				>
 					Confirm
 				</m-action-bar-button>
 			</m-inline-action-bar>
-		</m-blade-content>
-	</m-blade>
+		</m-modal-content>
+	</m-modal>
 </template>
 
 <script>
-import { MBlade, MBladeContent, bladeApi } from '@square/maker/components/Blade';
 import { MText } from '@square/maker/components/Text';
+import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
 	components: {
-		MBlade,
-		MBladeContent,
 		MText,
-		MInlineActionBar,
+		MModal,
 		MActionBarButton,
+		MInlineActionBar,
+		MModalContent,
 		XIcon,
 	},
 
 	inject: {
-		bladeApi,
+		modalApi,
 	},
 
 	props: {
