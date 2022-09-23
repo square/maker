@@ -174,6 +174,11 @@ export default function defaultTheme() {
 		notice: {
 			type: 'info',
 			patterns: {
+				primary: {
+					iconColor: '@colors.contextualPrimary.fill',
+					color: '@colors.contextualPrimary.text',
+					bgColor: '@colors.contextualPrimary.subtle',
+				},
 				error: {
 					type: 'error',
 					iconName: 'critical',
