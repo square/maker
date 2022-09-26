@@ -20,7 +20,7 @@
 <script>
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import cssValidator from '@square/maker/utils/css-validator';
-import { MStar } from '@square/maker/components/StarRating';
+import MStar from './Star.vue';
 
 const MIN_RATING = 0;
 const MAX_RATING = 5;
