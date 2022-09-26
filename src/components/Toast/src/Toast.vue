@@ -13,11 +13,17 @@
 		v-on="$listeners"
 	>
 		<div :class="$s.ToastContent">
-			<m-icon
+			<div
 				v-if="!resolvedHideIcon"
-				:class="$s.Icon"
-				:name="resolvedIconName"
-			/>
+				:class="$s.IconContainer"
+			>
+				<!-- @slot icon slot, prefer using iconName prop tho -->
+				<slot name="icon">
+					<m-icon
+						:name="resolvedIconName"
+					/>
+				</slot>
+			</div>
 			<div :class="$s.TextAndActions">
 				<m-text
 					element="span"
@@ -273,13 +279,15 @@ export default {
 	padding: 16px;
 }
 
-.Icon,
+.IconContainer,
 .CloseIcon {
 	flex-shrink: 0;
 	height: 24px;
 }
 
-.Icon {
+.IconContainer {
+	display: flex;
+	align-items: center;
 	color: var(--toast-accent-color);
 }
 

@@ -342,7 +342,6 @@ Use `actionbarOffset: true` when opening the toast.
 				<div
 					v-if="showActionbar"
 				>
-					<!-- <demo-action-bar /> -->
 					<m-action-bar>
 						<m-action-bar-button
 							key="close"
@@ -652,6 +651,13 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | accent-color  | `string`  | —       | —               | toast icon & progress color                               |
 | bg-color      | `string`  | —       | —               | toast background color                                    |
 | actions       | `array`   | `[]`    | —               | toast actions                                             |
+
+
+## Toast Slots
+
+| Slot | Description                               |
+| ---- | ----------------------------------------- |
+| icon | icon slot, prefer using iconName prop tho |
 
 
 ## Toast Events
