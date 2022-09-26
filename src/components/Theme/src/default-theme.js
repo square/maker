@@ -315,8 +315,10 @@ export default function defaultTheme() {
 					hideIcon: false,
 					accentColor: '@colors.critical.fill',
 				},
+				primary: {
+					accentColor: '@colors.contextualPrimary.fill',
+				},
 			},
-
 		},
 		starrating: {
 			color: '@colors.warning.fill',

@@ -264,7 +264,7 @@ export default {
 </script>
 ```
 
-Toasts have the following built-in default patterns: `info` (default), `success`, `warning`, `error`. Any of these values can be passed to the `pattern` prop without needing a parent Theme component, but if you do have a parent Theme component you can also define your own custom patterns. Toast style can be more finely-controlled using the `color`, `bgColor`, `accentColor`, and `iconName` props.
+Toasts have the following built-in default patterns: `info` (default), `success`, `warning`, `error`, and `primary`. Any of these values can be passed to the `pattern` prop without needing a parent Theme component, but if you do have a parent Theme component you can also define your own custom patterns. Toast style can be more finely-controlled using the `color`, `bgColor`, `accentColor`, and `iconName` props.
 
 ```vue
 <template>
