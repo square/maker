@@ -82,7 +82,7 @@ import { MTextButton } from '@square/maker/components/TextButton';
 import { MIcon } from '@square/maker/components/Icon';
 import { MText } from '@square/maker/components/Text';
 import cssValidator from '@square/maker/utils/css-validator';
-import { MBread } from '@square/maker/components/Toast';
+import MBread from './Bread.vue';
 import toastApi from './toast-api';
 
 const MIN_PROGRESS = 0;

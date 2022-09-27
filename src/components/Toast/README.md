@@ -837,7 +837,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | persistent    | `boolean` | —       | —               | make toast persistent (no auto-dismiss)                   |
 | dismiss-after | `number`  | —       | —               | auto-dismiss after x milliseconds (ignored if persistent) |
 | icon-name     | `string`  | —       | —               | name of icon to show                                      |
-| hide-icon     | `boolean` | —       | —               | hides icon                                                |
+| show-icon     | `boolean` | —       | —               | shows icon                                                |
 | text          | `string`  | `''`    | —               | toast text content                                        |
 | progress      | `number`  | —       | —               | optional toast progress (0 - 100)                         |
 | color         | `string`  | —       | —               | toast text & button color                                 |
