@@ -335,6 +335,9 @@
 								{{ pattern }} pill
 							</m-pill>
 						</div>
+						<m-notice pattern="primary">
+							Here's a primary notice
+						</m-notice>
 						<m-notice pattern="info">
 							Here's some info for you
 						</m-notice>
@@ -346,6 +349,12 @@
 						</m-notice>
 						<m-notice pattern="success">
 							Action has been successfully completed
+						</m-notice>
+						<m-notice
+							pattern="primary"
+							variant="block"
+						>
+							Here's a primary notice
 						</m-notice>
 						<m-notice
 							pattern="info"

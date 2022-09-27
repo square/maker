@@ -11,10 +11,13 @@
 	>
 		<div :class="$s.IconContentWrapper">
 			<div :class="$s.IconAligner">
-				<m-icon
-					:name="finalIconName"
-					:class="$s.Icon"
-				/>
+				<!-- @slot icon in notice -->
+				<slot name="icon">
+					<m-icon
+						:name="finalIconName"
+						:class="$s.Icon"
+					/>
+				</slot>
 			</div>
 			<div>
 				<!-- @slot notice content -->
@@ -183,6 +186,8 @@ export default {
 	align-items: center;
 	height: 24px;
 	margin-right: 8px;
+	color: var(--color-icon);
+	fill: var(--color-icon);
 }
 
 .Icon {

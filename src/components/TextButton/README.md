@@ -117,7 +117,117 @@ th, td {
 }
 </style>
 ```
+## Patterns
+```vue
+<template>
+	<m-theme :theme="theme">
+		<label>
+			primary color
+			<input
+				v-model="primaryColor"
+				type="color"
+			>
+		</label>&nbsp;
+		<label>
+			background
+			<input
+				v-model="bgColor"
+				type="color"
+			>
+		</label><br><br>
+		<table>
+			<thead>
+				<tr>
+					<th>Pattern</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<m-text-button
+							pattern="primary"
+						>
+							primary
+						</m-text-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<m-text-button
+							pattern="error"
+						>
+							error
+						</m-text-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<m-text-button
+							pattern="success"
+						>
+							success
+						</m-text-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<m-text-button
+							pattern="warning"
+						>
+							warning
+						</m-text-button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<m-text-button
+							pattern="info"
+						>
+							info
+						</m-text-button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</m-theme>
+</template>
 
+<script>
+import { MTextButton } from '@square/maker/components/TextButton';
+import { MTheme } from '@square/maker/components/Theme';
+import makerColors from '@square/maker/utils/maker-colors';
+
+export default {
+	components: {
+		MTextButton,
+		MTheme,
+	},
+	data() {
+		return {
+			primaryColor: '#9142ff',
+			bgColor: '#ffffff',
+		};
+	},
+	computed: {
+		theme() {
+			return {
+				colors: {
+					primary: this.primaryColor,
+					background: this.bgColor,
+					...makerColors(this.bgColor, this.primaryColor),
+				},
+			};
+		},
+	},
+};
+</script>
+
+<style scoped>
+th, td {
+	padding: 8px;
+}
+</style>
+```
 <!-- api-tables:start -->
 ## Props
 

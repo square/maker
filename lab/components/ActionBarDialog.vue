@@ -36,6 +36,9 @@
 			<m-text v-else>
 				content content content
 			</m-text>
+			<m-text v-if="count">
+				count is {{ count }}
+			</m-text>
 			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
@@ -80,6 +83,10 @@ export default {
 		openToast: {
 			type: Function,
 			default: undefined,
+		},
+		count: {
+			type: Number,
+			default: 0,
 		},
 	},
 };

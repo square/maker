@@ -103,6 +103,9 @@ export default function defaultTheme() {
 			color: '@colors.primary',
 			size: 'medium',
 			patterns: {
+				primary: {
+					color: '@colors.contextualPrimary.text',
+				},
 				error: {
 					color: '@colors.critical.text',
 				},
@@ -171,6 +174,11 @@ export default function defaultTheme() {
 		notice: {
 			type: 'info',
 			patterns: {
+				primary: {
+					iconColor: '@colors.contextualPrimary.fill',
+					color: '@colors.contextualPrimary.text',
+					bgColor: '@colors.contextualPrimary.subtle',
+				},
 				error: {
 					type: 'error',
 					iconName: 'critical',

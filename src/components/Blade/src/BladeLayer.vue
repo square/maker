@@ -2,20 +2,20 @@
 	<div :class="$s.Layer">
 		<m-transition-fade-in>
 			<div
-				v-if="bladeApi.state.vnode"
+				v-if="bladeApi.state.renderFn"
 				:class="$s.Translucent"
 			/>
 		</m-transition-fade-in>
 		<m-transition-responsive :transitions="transitions">
 			<div
-				v-if="bladeApi.state.vnode"
+				v-if="bladeApi.state.renderFn"
 				:class="$s.BladeLayer"
 			>
 				<pseudo-window
 					body
 					:class="$s.disableScroll"
 				/>
-				<v :nodes="bladeApi.state.vnode" />
+				<render-fn :render-fn="bladeApi.state.renderFn" />
 			</div>
 		</m-transition-responsive>
 	</div>
@@ -23,36 +23,39 @@
 
 <script>
 import Vue from 'vue';
-import V from 'vue-v';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
-	springUpFn, springDownFn, springLeftFn, springRightFn, mobileMinWidth, tabletMinWidth,
+	springUpFn,
+	springDownFn,
+	springLeftFn,
+	springRightFn,
+	mobileMinWidth,
+	tabletMinWidth,
 } from '@square/maker/utils/transitions';
+import RenderFn from '@square/maker/utils/RenderFn';
 import bladeApi from './blade-api';
 
 const apiMixin = {
 	provide() {
-		const vm = this;
 		const api = {
 			state: Vue.observable({
-				vnode: undefined,
+				renderFn: undefined,
 			}),
 
 			open(renderFn) {
-				const vnode = renderFn(vm.$createElement);
-				this.state.vnode = vnode;
-				// Method that only closes this specific blade
+				this.state.renderFn = renderFn;
+				// function that only closes this specific blade
 				return () => {
-					if (this.state.vnode === vnode) {
-						this.state.vnode = undefined;
+					if (this.state.renderFn === renderFn) {
+						this.state.renderFn = undefined;
 					}
 				};
 			},
 
 			close() {
-				this.state.vnode = undefined;
+				this.state.renderFn = undefined;
 			},
 		};
 
@@ -67,13 +70,11 @@ const apiMixin = {
 };
 
 export default {
-	name: 'BladeLayer',
-
 	components: {
-		V,
 		PseudoWindow,
 		MTransitionFadeIn,
 		MTransitionResponsive,
+		RenderFn,
 	},
 
 	inject: {
