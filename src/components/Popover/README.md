@@ -11,7 +11,6 @@ Use the popover to provide the user with more context or options. The Popover La
 		<m-popover>
 			<template #action="popover">
 				<m-button
-					:variant="'primary'"
 					@click="popover.toggle()"
 				>
 					Popover Toggle
@@ -105,7 +104,6 @@ export default {
 				>
 					<template #action="popover">
 						<m-button
-							:variant="'primary'"
 							@click="popover.toggle()"
 						>
 							Popover Toggle

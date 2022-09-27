@@ -13,22 +13,22 @@ export default function defaultTheme() {
 		profiles: {},
 		button: {
 			size: 'medium',
-			variant: 'primary',
+			variant: 'filled',
 			shape: undefined,
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
 			patterns: {
-				primary: {
-					variant: 'primary',
+				filled: {
+					variant: 'filled',
 				},
-				secondary: {
-					variant: 'secondary',
+				outline: {
+					variant: 'outline',
 					color: '@colors.contextualPrimary.fill',
 				},
-				tertiary: {
-					variant: 'tertiary',
+				ghost: {
+					variant: 'ghost',
 					color: '@colors.contextualPrimary.fill',
 				},
 				// filled patterns
@@ -54,23 +54,23 @@ export default function defaultTheme() {
 				},
 				// outline patterns
 				primaryOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.contextualPrimary.text',
 				},
 				errorOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.critical.text',
 				},
 				successOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.success.text',
 				},
 				warningOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.warning.text',
 				},
 				infoOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors["neutral-90"]',
 				},
 				// subtle patterns
