@@ -8,7 +8,30 @@ Notice has the following built-in patterns: error, warning, success, info.
 
 ```vue
 <template>
-	<div class="spaceout">
+	<m-theme
+		:theme="theme"
+		class="spaceout"
+	>
+		<label>
+			<input
+				v-model="primaryColor"
+				type="color"
+			>
+			primary color picker
+		</label><br>
+		<label>
+			<input
+				v-model="backgroundColor"
+				type="color"
+			>
+			background color picker
+		</label><br><br>
+		<m-notice pattern="primary">
+			<template #icon>
+				<plus class="icon" />
+			</template>
+			Primary inline message
+		</m-notice>
 		<m-notice pattern="error">
 			Error inline message
 		</m-notice>
@@ -22,6 +45,23 @@ Notice has the following built-in patterns: error, warning, success, info.
 			Info inline message
 		</m-notice>
 
+		<m-notice
+			pattern="primary"
+			variant="block"
+		>
+			<template #icon>
+				<plus class="icon" />
+			</template>
+			Primary block message
+			<template #actions>
+				<m-text-button pattern="primary">
+					Button
+				</m-text-button>
+				<m-text-button pattern="primary">
+					Dismiss
+				</m-text-button>
+			</template>
+		</m-notice>
 		<m-notice
 			pattern="error"
 			variant="block"
@@ -78,17 +118,38 @@ Notice has the following built-in patterns: error, warning, success, info.
 				</m-text-button>
 			</template>
 		</m-notice>
-	</div>
+	</m-theme>
 </template>
 
 <script>
 import { MNotice } from '@square/maker/components/Notice';
 import { MTextButton } from '@square/maker/components/TextButton';
+import { MTheme } from '@square/maker/components/Theme';
+import makerColors from '@square/maker/utils/maker-colors';
+import Plus from '@square/maker-icons/Plus';
 
 export default {
 	components: {
 		MNotice,
 		MTextButton,
+		Plus,
+		MTheme,
+	},
+	data() {
+		return {
+			primaryColor: '#9142ff',
+			bgColor: '#ffffff',
+		};
+	},
+	computed: {
+		theme() {
+			return {
+				colors: {
+					primary: this.primaryColor,
+					...makerColors(this.bgColor, this.primaryColor),
+				},
+			};
+		},
 	},
 };
 </script>
@@ -103,6 +164,10 @@ export default {
 .spaceout {
 	max-width: 400px;
 	padding: 16px;
+}
+.icon {
+	width: 16px;
+	height: 16px;
 }
 </style>
 ```
@@ -127,6 +192,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Slot    | Description           |
 | ------- | --------------------- |
+| icon    | icon in notice        |
 | default | notice content        |
 | actions | put text buttons here |
 

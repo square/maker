@@ -29,7 +29,6 @@ You can pass a number between 0.0 and 5.0 to the `rating` prop and Star Rating w
 			<m-star-rating
 				:rating="rating"
 				:size="size"
-				:color="color"
 			/>
 		</div>
 	</div>

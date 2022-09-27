@@ -195,7 +195,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						in button  w/label
 					</th>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="primary"
@@ -205,7 +205,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="info"
@@ -215,7 +215,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="error"
@@ -225,7 +225,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="warning"
@@ -235,7 +235,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="success"
@@ -255,7 +255,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -266,7 +266,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -277,7 +277,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -288,7 +288,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -299,7 +299,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -310,7 +310,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						in button no label
 					</th>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="primary"
@@ -319,7 +319,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="info"
@@ -328,7 +328,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="error"
@@ -337,7 +337,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="warning"
@@ -346,7 +346,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="secondary">
+						<m-button pattern="outline">
 							button
 							<m-badge
 								pattern="success"
@@ -364,7 +364,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="primary"
 							size="small"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -374,7 +374,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="info"
 							size="small"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -384,7 +384,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="error"
 							size="small"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -394,7 +394,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="warning"
 							size="small"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>
@@ -404,7 +404,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="success"
 							size="small"
 						>
-							<m-button pattern="secondary">
+							<m-button pattern="outline">
 								button
 							</m-button>
 						</m-badge>

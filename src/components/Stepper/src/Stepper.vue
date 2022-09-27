@@ -3,7 +3,7 @@
 		:class="$s.Stepper"
 	>
 		<m-button
-			variant="primary"
+			variant="fill"
 			size="small"
 			:color="resolvedColor"
 			:text-color="resolvedTextColor"
@@ -40,7 +40,7 @@
 			</span>
 		</div>
 		<m-button
-			variant="primary"
+			variant="fill"
 			size="small"
 			:color="resolvedColor"
 			:text-color="resolvedTextColor"
