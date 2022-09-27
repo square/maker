@@ -298,6 +298,36 @@ export default function defaultTheme() {
 				info: {}, // component default
 			},
 		},
+		toast: {
+			persistent: false,
+			dismissAfter: 5000,
+			iconName: 'info',
+			showIcon: false,
+			bgColor: '@colors.background',
+			color: '@colors.body',
+			accentColor: '@colors.body',
+			patterns: {
+				info: {}, // component default
+				success: {
+					iconName: 'success',
+					showIcon: true,
+					accentColor: '@colors.success.fill',
+				},
+				warning: {
+					iconName: 'warning',
+					showIcon: true,
+					accentColor: '@colors.warning.fill',
+				},
+				error: {
+					iconName: 'critical',
+					showIcon: true,
+					accentColor: '@colors.critical.fill',
+				},
+				primary: {
+					accentColor: '@colors.contextualPrimary.fill',
+				},
+			},
+		},
 		starrating: {
 			color: '@colors.warning.fill',
 		},

@@ -122,7 +122,8 @@ export default {
 .ProgressBar {
 	width: var(--fill-percent, 0);
 	height: 100%;
-	background-color: var(--bar-color);
+	color: var(--bar-color);
+	background-color: currentColor;
 	border-radius: var(--maker-default-border-radius, 16px);
 	transition: width 100ms linear;
 
