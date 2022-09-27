@@ -6,6 +6,7 @@ import ChevronUp from '@square/maker-icons/ChevronUp';
 import ChevronDown from '@square/maker-icons/ChevronDown';
 import ChevronLeft from '@square/maker-icons/ChevronLeft';
 import ChevronRight from '@square/maker-icons/ChevronRight';
+import X from '@square/maker-icons/X';
 
 export default function defaultIcons() {
 	return {
@@ -17,5 +18,6 @@ export default function defaultIcons() {
 		chevronDown: ChevronDown,
 		chevronLeft: ChevronLeft,
 		chevronRight: ChevronRight,
+		close: X,
 	};
 }
