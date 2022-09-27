@@ -45,7 +45,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							size="large"
 						>
 							<plus class="icon" />
@@ -77,7 +77,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -109,7 +109,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							size="small"
 						>
 							<plus class="icon" />
@@ -151,7 +151,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							disabled
 						>
 							Disabled
@@ -180,7 +180,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							loading
 						>
 							Loading
@@ -209,7 +209,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							full-width
 						>
 							Full width
@@ -246,7 +246,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 						>
 							<x class="icon" />
 						</m-button>
@@ -272,7 +272,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 						>
 							Button
 							<template #information>
@@ -308,7 +308,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							align="stack"
 						>
 							Button
@@ -347,7 +347,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							align="space-between"
 						>
 							Button
@@ -394,7 +394,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							shape="squared"
 						>
 							Squared
@@ -423,7 +423,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							shape="rounded"
 						>
 							Rounded
@@ -452,7 +452,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="filled"
+							pattern="fill"
 							shape="pill"
 						>
 							Pill
@@ -712,7 +712,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | full-width | `boolean` | —          | —                                  | Whether to make the button full-width   |
 | color      | `string`  | —          | —                                  | Background color of button              |
 | text-color | `string`  | —          | —                                  | Text color of button                    |
-| variant    | `string`  | —          | `filled`, `outline`, `ghost`       | Variant                                 |
+| variant    | `string`  | —          | `fill`, `outline`, `ghost`         | Variant                                 |
 | shape      | `string`  | —          | `squared`, `rounded`, `pill`       | Shape of button                         |
 | disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state           |
 | align      | `string`  | —          | `center`, `stack`, `space-between` | How to align button's contents          |

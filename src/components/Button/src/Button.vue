@@ -57,7 +57,7 @@ function setColorVariables(tokens, variant) {
 	const colorContrast = getContrast(tokens.color, tokens.textColor);
 	// Determine state adjustment type
 	let stateAdjustment;
-	if (variant === 'filled') {
+	if (variant === 'fill') {
 		stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
 	} else {
 		stateAdjustment = 'alpha';
@@ -147,12 +147,12 @@ export default {
 		},
 		/**
 		 * Variant
-		 * @values filled, outline, ghost
+		 * @values fill, outline, ghost
 		 */
 		variant: {
 			type: String,
 			default: undefined,
-			validator: (variant) => ['filled', 'outline', 'ghost'].includes(variant),
+			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
 		},
 		/**
 		 * Shape of button
@@ -382,14 +382,14 @@ export default {
 }
 
 /* Variants */
-.Button.variant_filled,
+.Button.variant_fill,
 .Button.variant_outline {
 	--small-padding: 0 16px;
 	--medium-padding: 0 24px;
 	--large-padding: 0 32px;
 }
 
-.Button.variant_filled .Loading {
+.Button.variant_fill .Loading {
 	color: var(--color-contrast);
 }
 

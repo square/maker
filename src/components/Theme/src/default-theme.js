@@ -13,15 +13,15 @@ export default function defaultTheme() {
 		profiles: {},
 		button: {
 			size: 'medium',
-			variant: 'filled',
+			variant: 'fill',
 			shape: undefined,
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
 			patterns: {
-				filled: {
-					variant: 'filled',
+				fill: {
+					variant: 'fill',
 				},
 				outline: {
 					variant: 'outline',
@@ -31,7 +31,7 @@ export default function defaultTheme() {
 					variant: 'ghost',
 					color: '@colors.contextualPrimary.fill',
 				},
-				// filled patterns
+				// fill contextual color patterns
 				primaryFilled: {
 					color: '@colors.contextualPrimary.fill',
 					textColor: '@colors.contextualPrimary.onFill',
@@ -52,7 +52,7 @@ export default function defaultTheme() {
 					color: '@colors["neutral-90"]',
 					textColor: '@colors["neutral-10"]',
 				},
-				// outline patterns
+				// outline contextual color patterns
 				primaryOutline: {
 					variant: 'outline',
 					color: '@colors.contextualPrimary.text',
@@ -73,7 +73,7 @@ export default function defaultTheme() {
 					variant: 'outline',
 					color: '@colors["neutral-90"]',
 				},
-				// subtle patterns
+				// subtle contextual color patterns
 				primarySubtle: {
 					textColor: '@colors.contextualPrimary.text',
 					color: '@colors.contextualPrimary.subtle',

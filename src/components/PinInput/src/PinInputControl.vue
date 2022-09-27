@@ -17,7 +17,7 @@
 			:maxlength="i === 0 ? pinLength : 1"
 			:class="{
 				[$s.PinInputCell]: true,
-				[$s.filled]: variant === 'fill',
+				[$s.fill]: variant === 'fill',
 				[$s.error]: invalid,
 			}"
 			type="text"
@@ -243,7 +243,7 @@ export default {
 	caret-color: currentColor;
 	cursor: pointer;
 
-	&.filled {
+	&.fill {
 		background: $maker-color-neutral-10;
 	}
 
