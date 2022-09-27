@@ -9,7 +9,7 @@
 				v-bind="calendarNavButtons"
 				:disabled="isCalendarNavDisabled(-1)"
 				size="medium"
-				variant="primary"
+				variant="fill"
 				@click="incrementMonth(-1)"
 			>
 				<m-icon
@@ -26,7 +26,7 @@
 				v-bind="calendarNavButtons"
 				:disabled="isCalendarNavDisabled(1)"
 				size="medium"
-				variant="primary"
+				variant="fill"
 				@click="incrementMonth(1)"
 			>
 				<m-icon
