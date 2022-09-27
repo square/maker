@@ -28,13 +28,13 @@ You should almost always use this component for standalone buttons in your app. 
 						Sizes
 					</th>
 					<th>
-						Primary (Fill)
+						Fill
 					</th>
 					<th>
-						Secondary / Outline
+						Outline
 					</th>
 					<th>
-						Tertiary / Ghost
+						Ghost
 					</th>
 				</tr>
 			</thead>
@@ -45,7 +45,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							size="large"
 						>
 							<plus class="icon" />
@@ -54,7 +54,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							size="large"
 						>
 							<plus class="icon" />
@@ -63,7 +63,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							size="large"
 						>
 							<plus class="icon" />
@@ -77,7 +77,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -86,7 +86,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -95,7 +95,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -109,7 +109,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							size="small"
 						>
 							<plus class="icon" />
@@ -118,7 +118,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							size="small"
 						>
 							<plus class="icon" />
@@ -127,7 +127,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							size="small"
 						>
 							<plus class="icon" />
@@ -151,7 +151,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							disabled
 						>
 							Disabled
@@ -159,7 +159,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							disabled
 						>
 							Disabled
@@ -167,7 +167,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							disabled
 						>
 							Disabled
@@ -180,7 +180,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							loading
 						>
 							Loading
@@ -188,7 +188,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							loading
 						>
 							Loading
@@ -196,7 +196,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							loading
 						>
 							Loading
@@ -209,7 +209,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							full-width
 						>
 							Full width
@@ -217,7 +217,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							full-width
 						>
 							Full width
@@ -225,7 +225,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							full-width
 						>
 							Full width
@@ -246,21 +246,21 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 						>
 							<x class="icon" />
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 						>
 							<x class="icon" />
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 						>
 							<x class="icon" />
 						</m-button>
@@ -272,7 +272,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 						>
 							Button
 							<template #information>
@@ -282,7 +282,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 						>
 							Button
 							<template #information>
@@ -292,7 +292,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 						>
 							Button
 							<template #information>
@@ -308,7 +308,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							align="stack"
 						>
 							Button
@@ -319,7 +319,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							align="stack"
 						>
 							Button
@@ -330,7 +330,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							align="stack"
 						>
 							Button
@@ -347,7 +347,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							align="space-between"
 						>
 							Button
@@ -358,7 +358,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							align="space-between"
 						>
 							Button
@@ -369,7 +369,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							align="space-between"
 						>
 							Button
@@ -394,7 +394,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							shape="squared"
 						>
 							Squared
@@ -402,7 +402,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							shape="squared"
 						>
 							Squared
@@ -410,7 +410,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							shape="squared"
 						>
 							Squared
@@ -423,7 +423,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							shape="rounded"
 						>
 							Rounded
@@ -431,7 +431,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							shape="rounded"
 						>
 							Rounded
@@ -439,7 +439,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							shape="rounded"
 						>
 							Rounded
@@ -452,7 +452,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primary"
+							pattern="fill"
 							shape="pill"
 						>
 							Pill
@@ -460,7 +460,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="secondary"
+							pattern="outline"
 							shape="pill"
 						>
 							Pill
@@ -468,7 +468,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="tertiary"
+							pattern="ghost"
 							shape="pill"
 						>
 							Pill
@@ -498,7 +498,7 @@ You should almost always use this component for standalone buttons in your app. 
 			<tbody>
 				<tr>
 					<td>
-						Primary
+						Primary color
 					</td>
 					<td>
 						<m-button
@@ -712,7 +712,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | full-width | `boolean` | —          | —                                  | Whether to make the button full-width   |
 | color      | `string`  | —          | —                                  | Background color of button              |
 | text-color | `string`  | —          | —                                  | Text color of button                    |
-| variant    | `string`  | —          | `primary`, `secondary`, `tertiary` | Variant                                 |
+| variant    | `string`  | —          | `fill`, `outline`, `ghost`         | Variant                                 |
 | shape      | `string`  | —          | `squared`, `rounded`, `pill`       | Shape of button                         |
 | disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state           |
 | align      | `string`  | —          | `center`, `stack`, `space-between` | How to align button's contents          |

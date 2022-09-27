@@ -311,7 +311,7 @@
 						/>
 					</div>
 					<m-button
-						variant="secondary"
+						variant="outline"
 						full-width
 					>
 						Add more items

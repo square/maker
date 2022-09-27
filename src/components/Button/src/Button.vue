@@ -57,7 +57,7 @@ function setColorVariables(tokens, variant) {
 	const colorContrast = getContrast(tokens.color, tokens.textColor);
 	// Determine state adjustment type
 	let stateAdjustment;
-	if (variant === 'primary') {
+	if (variant === 'fill') {
 		stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
 	} else {
 		stateAdjustment = 'alpha';
@@ -147,12 +147,12 @@ export default {
 		},
 		/**
 		 * Variant
-		 * @values primary, secondary, tertiary
+		 * @values fill, outline, ghost
 		 */
 		variant: {
 			type: String,
 			default: undefined,
-			validator: (variant) => ['primary', 'secondary', 'tertiary'].includes(variant),
+			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
 		},
 		/**
 		 * Shape of button
@@ -382,29 +382,29 @@ export default {
 }
 
 /* Variants */
-.Button.variant_primary,
-.Button.variant_secondary {
+.Button.variant_fill,
+.Button.variant_outline {
 	--small-padding: 0 16px;
 	--medium-padding: 0 24px;
 	--large-padding: 0 32px;
 }
 
-.Button.variant_primary .Loading {
+.Button.variant_fill .Loading {
 	color: var(--color-contrast);
 }
 
-.Button.variant_secondary {
+.Button.variant_outline {
 	--outline-border: inset 0 0 0 1px var(--color-main);
 }
 
-.Button.variant_tertiary {
+.Button.variant_ghost {
 	--small-padding: 0 8px;
 	--medium-padding: 0 12px;
 	--large-padding: 0 20px;
 }
 
-.Button.variant_secondary,
-.Button.variant_tertiary {
+.Button.variant_outline,
+.Button.variant_ghost {
 	color: var(--color-main);
 	background-color: transparent;
 
