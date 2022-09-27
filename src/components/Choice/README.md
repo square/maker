@@ -229,6 +229,7 @@ export default {
 	<div class="wrapper">
 		<m-choice
 			v-model="selected"
+			wrap-choices
 		>
 			<m-choice-card value="choice-1">
 				Choice
@@ -310,6 +311,7 @@ export default {
 | disabled       | `boolean`   | `false`           | —                               | Disables choice option                                  |
 | mode           | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
 | selected-color | `string`    | —                 | —                               | Background color of a selected option                   |
+| wrap-choices   | `boolean`   | `false`           | —                               | Wraps the choice options                                |
 
 
 ## Choice Slots
