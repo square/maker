@@ -71,6 +71,10 @@ type toastApi = {
 
 ## Examples
 
+
+### Controlling toast timeouts
+
+
 Toasts will auto-dismiss after 5000 milliseconds (5 seconds) by default. You can change this by passing a custom millisecond value to the `dismiss-after` prop. If you would like the Toast to persistent indefinitely programmatically closed or explicitly closed by the user pass the value `true` to the `persistent` prop. While on the subject of programmatically closing toasts, there are 4 ways to do so:
 1. Calling the close function returned from the initial call to `toastApi.open`.
 2. Calling `toastApi.close` and passing it the same render function that was originally passed to `toastApi.open` to open the toast.
@@ -157,6 +161,8 @@ export default {
 </script>
 ```
 
+### Adding actions to toasts
+
 Toasts can have actions which can be passed via the `actions` prop. Every action is described with an object that has a `text` field and a `click` field.
 
 ```vue
@@ -209,6 +215,8 @@ export default {
 };
 </script>
 ```
+
+### Showing progress in toasts
 
 Toasts can also optionally display progress. To render a progress bar pass a 0 - 100 value to the `progress` prop.
 
@@ -264,6 +272,8 @@ export default {
 </script>
 ```
 
+### Using built-in toast patterns
+
 Toasts have the following built-in default patterns: `info` (default), `success`, `warning`, `error`, and `primary`. Any of these values can be passed to the `pattern` prop without needing a parent Theme component, but if you do have a parent Theme component you can also define your own custom patterns. Toast style can be more finely-controlled using the `color`, `bgColor`, `accentColor`, and `iconName` props.
 
 ```vue
@@ -318,6 +328,134 @@ export default {
 }
 </style>
 ```
+
+### Everything altogether
+
+An example combining all of the features above that you can copy & paste into your code and remove what you don't need.
+
+```vue
+<template>
+	<div>
+		<button @click="openToast">
+			open toast
+		</button>
+		<m-toast-layer />
+	</div>
+</template>
+
+<script>
+/* eslint-disable no-return-assign */
+import { MToastLayer, MToast } from '@square/maker/components/Toast';
+
+export default {
+	components: {
+		MToastLayer,
+	},
+
+	mixins: [
+		MToastLayer.apiMixin,
+	],
+
+	data() {
+		return {
+			progress: 9,
+		};
+	},
+
+	methods: {
+		openToast() {
+			const DELTA = 10;
+			const MAX = 99;
+			const MIN = 9;
+			this.toastApi.open(() => <MToast
+				pattern={'success'}
+				persistent
+				text={`I'm loading... ${this.progress}%`}
+				progress={this.progress}
+				actions={[
+					{
+						text: 'Progress',
+						click: () => this.progress = Math.min(MAX, this.progress + DELTA),
+					},
+					{
+						text: 'Regress',
+						click: () => this.progress = Math.max(MIN, this.progress - DELTA),
+					},
+				]}
+			/>);
+		},
+	},
+};
+</script>
+```
+
+### Showing or hiding icons
+
+By default, icons are hidden for `info` and `primary` patterns and shown for the `success`, `warning`, and `error` patterns. This can be overridden using the `show-icon` prop.
+
+```vue
+<template>
+	<div>
+		open toast:
+		<button
+			v-for="config in invertedShowIcons"
+			:key="config.pattern"
+			class="toastbutton"
+			@click="openToast(config.pattern, config.showIcon)"
+		>
+			{{ config.pattern }} {{ config.showIcon ? 'with' : 'without' }} an icon
+		</button>
+		<m-toast-layer />
+	</div>
+</template>
+
+<script>
+import { defaultTheme } from '@square/maker/components/Theme';
+import { MToastLayer, MToast } from '@square/maker/components/Toast';
+
+export default {
+	components: {
+		MToastLayer,
+	},
+
+	mixins: [
+		MToastLayer.apiMixin,
+	],
+
+	data() {
+		const defaultToastTheme = defaultTheme().toast;
+		const defaultToastPatterns = Object.keys(defaultToastTheme.patterns);
+		const invertedShowIcons = [];
+		for (const pattern of defaultToastPatterns) {
+			invertedShowIcons.push({
+				pattern,
+				showIcon: !defaultToastTheme.patterns[pattern].showIcon,
+			});
+		}
+		return {
+			invertedShowIcons,
+		};
+	},
+
+	methods: {
+		openToast(pattern, showIcon) {
+			this.toastApi.open(() => <MToast
+				pattern={pattern}
+				showIcon={showIcon}
+				text={`This is a ${pattern} toast ${showIcon ? 'with' : 'without'} an icon.`}
+			/>);
+		},
+	},
+};
+</script>
+
+<style scoped>
+.toastbutton {
+	margin-right: 0.5ch;
+}
+</style>
+```
+
 
 ## Advanced examples
 
@@ -574,6 +712,61 @@ export default {
 	height: 24px;
 }
 </style>
+```
+
+### Customizing icons
+
+The close icon can be customized by changing the `close` icon in the `icons` section of the site's theme. The prefix icons for each pattern can be by customizing the `info`, `success`, `warning`, and `critical` icons in the `icons` section of the site's theme. One-off icons can also be added as custom icons to the `icons` section of the site's theme and then referenced by their name via the `iconName` prop on Toasts. One-off icons can also be set on Toasts using the `icon` slot.
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		<button @click="openZapToast">
+			open zap toast
+		</button>
+		<m-toast-layer />
+	</m-theme>
+</template>
+
+<script>
+import { MTheme } from '@square/maker/components/Theme';
+import { MToastLayer, MToast } from '@square/maker/components/Toast';
+import Zap from '@square/maker-icons/Zap';
+import ChevronRight from '@square/maker-icons/ChevronRight';
+
+export default {
+	components: {
+		MTheme,
+		MToastLayer,
+	},
+
+	mixins: [
+		MToastLayer.apiMixin,
+	],
+
+	computed: {
+		theme() {
+			const icons = {
+				zap: Zap,
+				close: ChevronRight,
+			};
+			return {
+				icons,
+			};
+		},
+	},
+
+	methods: {
+		openZapToast() {
+			this.toastApi.open(() => <MToast
+				showIcon={true}
+				iconName={'zap'}
+				text={'Zap! Click the right chevron to close.'}
+			/>);
+		},
+	},
+};
+</script>
 ```
 
 ### Custom toasts

@@ -294,7 +294,7 @@ export default function defaultTheme() {
 			persistent: false,
 			dismissAfter: 5000,
 			iconName: 'info',
-			hideIcon: true,
+			showIcon: false,
 			bgColor: '@colors.background',
 			color: '@colors.body',
 			accentColor: '@colors.body',
@@ -302,17 +302,17 @@ export default function defaultTheme() {
 				info: {}, // component default
 				success: {
 					iconName: 'success',
-					hideIcon: false,
+					showIcon: true,
 					accentColor: '@colors.success.fill',
 				},
 				warning: {
 					iconName: 'warning',
-					hideIcon: false,
+					showIcon: true,
 					accentColor: '@colors.warning.fill',
 				},
 				error: {
 					iconName: 'critical',
-					hideIcon: false,
+					showIcon: true,
 					accentColor: '@colors.critical.fill',
 				},
 				primary: {

@@ -14,7 +14,7 @@
 	>
 		<div :class="$s.ToastContent">
 			<div
-				v-if="!resolvedHideIcon"
+				v-if="resolvedShowIcon"
 				:class="$s.IconContainer"
 			>
 				<!-- @slot icon slot, prefer using iconName prop tho -->
@@ -142,9 +142,9 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * hides icon
+		 * shows icon
 		 */
-		hideIcon: {
+		showIcon: {
 			type: Boolean,
 			default: undefined,
 		},
@@ -213,7 +213,7 @@ export default {
 			'bgColor',
 			'accentColor',
 			'iconName',
-			'hideIcon',
+			'showIcon',
 		]),
 		/**
 		 * if the toast bg color is the same as the page bg color
