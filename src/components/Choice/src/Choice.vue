@@ -1,6 +1,9 @@
 <template>
 	<div
-		:class="$s.Choice"
+		:class="{
+			[$s.Choice]: true,
+			[$s.wrapChoices]: wrapChoices
+		}"
 		:style="style"
 	>
 		<slot />
@@ -68,6 +71,13 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (color) => colord(color).isValid,
+		},
+		/**
+		 * Wraps the choice options
+		 */
+		wrapChoices: {
+			type: Boolean,
+			default: false,
 		},
 	},
 
@@ -156,12 +166,15 @@ export default {
 	--line-height: 24px;
 
 	display: flex;
-	flex-wrap: wrap;
 	gap: 8px;
 	box-sizing: border-box;
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-size: var(--font-size);
 	font-family: var(--maker-font-label-font-family, inherit);
 	line-height: var(--line-height);
+
+	&.wrapChoices {
+		flex-wrap: wrap;
+	}
 }
 </style>
