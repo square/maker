@@ -175,7 +175,7 @@ export default {
 		align: {
 			type: String,
 			default: undefined,
-			validator: (variant) => ['center', 'stack', 'space-between'].includes(variant),
+			validator: (align) => ['center', 'stack', 'space-between'].includes(align),
 		},
 		/**
 		 * Toggles button loading state
