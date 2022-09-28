@@ -9,6 +9,8 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency: changes-deploys
+
     steps:
       - name: Checkout Maker master branch
         uses: actions/checkout@v2
@@ -37,4 +39,4 @@ jobs:
           git config user.email github-actions@github.com
           cd ..
           export DEPLOY_NAME=library_version
-          npm run deploy-all
+          npm run deploy-all-ci

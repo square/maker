@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 
+const path = require('path');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
-const ensureDeployDirectory = require('./ensure');
 
+const EXIT_SUCCESS_CODE = 0;
 const EXIT_ERROR_CODE = 1;
 
 (async function pushDeploys() {
-	const deployDirectory = await ensureDeployDirectory();
+	const deployDirectory = path.resolve('./', '.dist');
 	process.chdir(deployDirectory);
 
 	// add all changes
@@ -21,17 +22,18 @@ const EXIT_ERROR_CODE = 1;
 	} catch {
 		// this would fail if the above command did not
 		// add any files to the staging index, so
-		// it's okay to let this command to fail as well
-		console.log('no files changed, nothing to push');
-		return;
+		// it's okay to let this command fail
+		// and we exit early successfully
+		console.log('no files changed, nothing to push, exiting early');
+		process.exit(EXIT_SUCCESS_CODE);
 	}
 
 	// push
 	try {
 		await exec('git push');
-	} catch {
+	} catch (error) {
 		console.error('failed to push changes to remote');
-		process.exit(EXIT_ERROR_CODE);
+		throw error;
 	}
 }()).catch((error) => {
 	console.error(error.message);
