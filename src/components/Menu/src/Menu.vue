@@ -7,6 +7,8 @@
 		<m-popover
 			ref="popover"
 			placement="bottom-start"
+			@open="$emit('menu:open')"
+			@close="$emit('menu:close')"
 		>
 			<template #action="popover">
 				<select-control

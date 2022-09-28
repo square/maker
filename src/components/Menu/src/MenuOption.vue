@@ -125,6 +125,8 @@ export default {
 			}
 
 			this.controlState.currentValue = currentValue;
+
+			this.$emit('option:click');
 		},
 
 		handleKeyboardEvent(event) {
