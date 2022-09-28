@@ -15,6 +15,7 @@
 			color: black;
 			background-color: white;
 			font-family: var(--sans-serif-stack);
+			padding: 0 16px;
 		}
 		h1, h2, h3, h4, h5, h6 {
 			margin: 0 0 0.5em 0;
@@ -42,7 +43,7 @@
 		}
 		.categories {
 			gap: 32px;
-			margin-bottom: 16px;
+			margin: 16px 0;
 		}
 		.deploy-links {
 			margin: 0;
@@ -99,7 +100,7 @@
 	</span>
 	<script>
 		// calc absolute time in locale
-		const lastUpdated = new Date(1664386676928);
+		const lastUpdated = new Date(1664387636201);
 		document
 			.querySelector('.updated-absolute')
 			.innerText = lastUpdated.toLocaleString();
