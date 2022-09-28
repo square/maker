@@ -53,12 +53,16 @@ import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
 function setColorVariables(tokens, variant) {
-	const colorMainObject = colord(tokens.color);
+	const colorMain = colord(tokens.color);
+	const colorMainHover = tokens.colorHover ? colord(tokens.colorHover) : colorMain;
 	const colorContrast = getContrast(tokens.color, tokens.textColor);
+	const colorContrastHover = tokens.textColorHover
+		? getContrast(colorMainHover, tokens.textColorHover)
+		: getContrast(colorMainHover, tokens.textColor);
 	// Determine state adjustment type
 	let stateAdjustment;
 	if (variant === 'fill') {
-		stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
+		stateAdjustment = colorMainHover.isDark() ? 'lighten' : 'darken';
 	} else {
 		stateAdjustment = 'alpha';
 	}
@@ -66,31 +70,26 @@ function setColorVariables(tokens, variant) {
 	const hoverStateAdjust = 0.08;
 	const activeStateAdjust = 0.16;
 	const focusAlphaAdjust = 0.3;
-	const colorHover = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
-	const colorActive = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
-	const colorFocus = colorMainObject.alpha(focusAlphaAdjust).toHex();
+	const colorHover = colorMainHover[stateAdjustment](hoverStateAdjust).toHex();
+	const colorActive = colorMainHover[stateAdjustment](activeStateAdjust).toHex();
+	const colorFocus = colorMainHover.alpha(focusAlphaAdjust).toHex();
 
 	return {
 		'--color-main': tokens.color,
+		'--color-main-hover': tokens.colorHover || tokens.color,
 		'--color-contrast': colorContrast,
+		'--color-contrast-hover': colorContrastHover,
 		'--color-hover': colorHover,
 		'--color-active': colorActive,
 		'--color-focus': colorFocus,
-	};
-}
-
-function setCustomizationVariables(tokens) {
-	const hoverTokens = {};
-	if (tokens.hover) {
-		Object.entries(tokens.hover).forEach((key, value) => {
-			hoverTokens[`--hover-${key}`] = value;
-		});
-	}
-	return {
 		'--border-radius': tokens.shape,
-		'--border': tokens.border,
+		'--border-radius-hover': tokens.shapeHover || tokens.shape,
+		'--border-width': tokens.borderWidth || '1px',
+		'--border-width-hover': tokens.borderWidthHover || tokens.borderWidth || '1px',
+		'--border-color': tokens.borderColor,
+		'--border-color-hover': tokens.borderColorHover || tokens.borderColor,
 		'--box-shadow': tokens.boxShadow,
-		...hoverTokens,
+		'--box-shadow-hover': tokens.boxShadowHover || tokens.boxShadow,
 	};
 }
 
@@ -145,7 +144,7 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * Background color of button
+		 * Main color of button
 		 */
 		color: {
 			type: String,
@@ -153,9 +152,25 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Text color of button
+		 * Main hover color of button
+		 */
+		colorHover: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Text color of button (only applied on fill buttons)
 		 */
 		textColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Text hover color of button (only applied on fill buttons)
+		 */
+		textColorHover: {
 			type: String,
 			default: undefined,
 			validator: (color) => colord(color).isValid(),
@@ -171,7 +186,7 @@ export default {
 		},
 		/**
 		 * Shape of button
-		 * @values squared, rounded, pill
+		 * @values squared, rounded, pill, 'Npx', 'N%'
 		 */
 		shape: {
 			type: String,
@@ -179,26 +194,60 @@ export default {
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape) || shape.match(/\d*\.?\d+(?:px|%)/i),
 		},
 		/**
-		 * Border of button
+		 * Shape of button
+		 * @values 'Npx', 'N%'
 		 */
-		border: {
+		shapeHover: {
+			type: String,
+			default: undefined,
+			validator: (shape) => shape.match(/\d*\.?\d+(?:px|%)/i),
+		},
+		/**
+		 * Border width of button (e.g. '3px')
+		 */
+		borderWidth: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Box-shadow of button
+		 * Border hover width of button (e.g. '3px')
+		 */
+		borderWidthHover: {
+			type: String,
+			default: undefined,
+		},
+
+		/**
+		 * Border color of button (only applied on fill buttons)
+		 */
+		borderColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Border hover color of button (only applied on fill buttons)
+		 */
+		borderColorHover: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Box-shadow of button (e.g. 0px 0px 1px 3px #000000 or 0px 0px 1px 3px rgba(0, 0, 0, 0.5))
 		 */
 		boxShadow: {
 			type: String,
 			default: undefined,
+			validator: (boxShadow) => boxShadow.match(/(\d*\.?\d+px\s+){4}(#[\da-z]{6}|rgba\((\s*\d+\s*,){3}\s*[\d.]+\))/i),
 		},
 		/**
-		 * Hover props of button
+		 * Box-shadow hover of button
 		 */
-		hover: {
-			type: Object,
+		boxShadowHover: {
+			type: String,
 			default: undefined,
-			validator: (hover) => Object.keys(hover).forEach((key) => ['color, textColor, shape, border, boxShadow'].includes(hover[key])),
+			validator: (boxShadow) => boxShadow.match(/(\d*\.?\d+px\s+){4}(#[\da-z]{6}|rgba\((\s*\d+\s*,){3}\s*[\d.]+\))/i),
 		},
 		/**
 		 * Toggles button disabled state
@@ -227,31 +276,40 @@ export default {
 	computed: {
 		...resolveThemeableProps('button', [
 			'color',
+			'colorHover',
 			'size',
 			'textColor',
+			'textColorHover',
 			'variant',
 			'shape',
+			'shapeHover',
 			'align',
 			'fullWidth',
 			'pattern',
-			'border',
+			'borderWidth',
+			'borderWidthHover',
+			'borderColor',
+			'borderColorHover',
 			'boxShadow',
-			'hover',
+			'boxShadowHover',
 		]),
 		style() {
 			const tokens = {
 				color: this.resolvedColor,
+				colorHover: this.resolvedColorHover,
 				textColor: this.resolvedTextColor,
-			};
-			const customizationTokens = {
+				textColorHover: this.resolvedTextColorHover,
 				shape: this.resolvedShape,
-				border: this.resolvedBorder,
+				shapeHover: this.resolvedShapeHover,
+				borderWidth: this.resolvedBorderWidth,
+				borderWidthHover: this.resolvedBorderWidthHover,
+				borderColor: this.resolvedBorderColor,
+				borderColorHover: this.resolvedBorderColorHover,
 				boxShadow: this.resolvedBoxShadow,
-				hover: this.resolvedHover,
+				boxShadowHover: this.resolvedBoxShadowHover,
 			};
 			return {
 				...setColorVariables(tokens, this.resolvedVariant),
-				...setCustomizationVariables(customizationTokens),
 			};
 		},
 		isDisabled() {
@@ -291,17 +349,19 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main, $maker-color-primary);
 	border: none;
-	border-radius: $maker-shape-button-border-radius;
+	border-radius: var(--border-radius, $maker-shape-button-border-radius);
 	outline: none;
 	box-shadow:
-		var(--outline-border, 0 0),
+		var(--border, 0 0),
+		var(--box-shadow, 0 0),
 		var(--focus-border, 0 0);
 	cursor: pointer;
 	transition:
 		color 0.2s ease-in,
 		background-color 0.2s ease-in,
 		filter 0.2s ease-in,
-		box-shadow 0.2s ease-in;
+		box-shadow 0.2s ease-in,
+		border-radius 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -405,7 +465,13 @@ export default {
 	}
 
 	&:hover:not(:disabled) {
+		color: var(--color-contrast-hover);
 		background-color: var(--color-hover);
+		border-radius: var(--border-radius-hover, $maker-shape-button-border-radius);
+		box-shadow:
+			var(--border-hover, 0 0),
+			var(--box-shadow-hover, 0 0),
+			var(--focus-border, 0 0);
 	}
 
 	&:active:not(:disabled) {
@@ -443,8 +509,14 @@ export default {
 	color: var(--color-contrast);
 }
 
+.Button.Button.variant_fill {
+	--border: inset 0 0 0 var(--border-width) var(--border-color);
+	--border-hover: inset 0 0 0 var(--border-width-hover) var(--border-color-hover);
+}
+
 .Button.variant_outline {
-	--outline-border: inset 0 0 0 1px var(--color-main);
+	--border: inset 0 0 0 var(--border-width) var(--color-main);
+	--border-hover: inset 0 0 0 var(--border-width-hover) var(--color-main-hover);
 }
 
 .Button.variant_ghost {
@@ -460,6 +532,10 @@ export default {
 
 	& .Loading {
 		color: var(--color-main);
+	}
+
+	&:hover:not(:disabled) {
+		color: var(--color-main-hover);
 	}
 }
 
