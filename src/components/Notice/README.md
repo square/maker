@@ -4,7 +4,7 @@ Use Notice to notify users of things.
 
 ## Examples
 
-Notice has the following built-in patterns: error, warning, success, info.
+Notice has the following built-in patterns: primary, error, warning, success, info.
 
 ```vue
 <template>
@@ -21,7 +21,7 @@ Notice has the following built-in patterns: error, warning, success, info.
 		</label><br>
 		<label>
 			<input
-				v-model="backgroundColor"
+				v-model="bgColor"
 				type="color"
 			>
 			background color picker
@@ -47,7 +47,7 @@ Notice has the following built-in patterns: error, warning, success, info.
 
 		<m-notice
 			pattern="primary"
-			variant="block"
+			display="block"
 		>
 			<template #icon>
 				<plus class="icon" />
@@ -64,7 +64,7 @@ Notice has the following built-in patterns: error, warning, success, info.
 		</m-notice>
 		<m-notice
 			pattern="error"
-			variant="block"
+			display="block"
 		>
 			Error block message
 			<template #actions>
@@ -78,7 +78,7 @@ Notice has the following built-in patterns: error, warning, success, info.
 		</m-notice>
 		<m-notice
 			pattern="success"
-			variant="block"
+			display="block"
 		>
 			Success block message
 			<template #actions>
@@ -92,7 +92,7 @@ Notice has the following built-in patterns: error, warning, success, info.
 		</m-notice>
 		<m-notice
 			pattern="warning"
-			variant="block"
+			display="block"
 		>
 			Warning block message
 			<template #actions>
@@ -106,7 +106,7 @@ Notice has the following built-in patterns: error, warning, success, info.
 		</m-notice>
 		<m-notice
 			pattern="info"
-			variant="block"
+			display="block"
 		>
 			Info block message
 			<template #actions>
@@ -181,7 +181,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | ---------- | -------- | ---------- | ------------------------------------- | ---------------------------------- |
 | pattern    | `string` | —          | —                                     | pattern defined at theme level     |
 | type       | `string` | —          | `error`, `success`, `warning`, `info` | type of notice                     |
-| variant    | `string` | `'inline'` | `inline`, `block`                     | notice variant                     |
+| display    | `string` | `'inline'` | `inline`, `block`                     | notice display                     |
 | icon-name  | `string` | —          | —                                     | name of icon, defined in theme     |
 | icon-color | `string` | —          | —                                     | icon color                         |
 | color      | `string` | —          | —                                     | text color for inline notices      |
