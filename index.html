@@ -4,17 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
-	<title>Maker Deploys</title>
 	<style>
-		:root {
-			--sans-serif-stack: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-			--monospace-stack: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-		}
 		body {
-			color: black;
-			background-color: white;
-			font-family: var(--sans-serif-stack);
+			font-family: sans-serif;
 		}
 		h1, h2, h3, h4, h5, h6 {
 			margin: 0 0 0.5em 0;
@@ -45,7 +37,7 @@
 			margin: 0;
 			padding: 0;
 			list-style-type: none;
-			font-family: var(--monospace-stack);
+			font-family: monospace;
 			font-size: 16px;
 		}
 		.deploy-link {
@@ -63,33 +55,13 @@
 		.deploy-link:hover:visited {
 			background-color: purple;
 		}
-		@media (prefers-color-scheme: dark) {
-			body {
-				color: white;
-				background-color: black;
-			}
-			.maker-link:hover {
-				color: black;
-				background-color: white;
-			}
-			.deploy-link {
-				color: cyan;
-			}
-			.deploy-link:visited {
-				color: violet;
-			}
-			.deploy-link:hover {
-				color: black;
-				background-color: cyan;
-			}
-			.deploy-link:hover:visited {
-				background-color: violet;
-			}
+		.updated-msg {
+			font-style: italic;
 		}
 	</style>
 </head>
 <body>
-	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys</h1>
+	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys 🚀</h1>
 
 	<div class="categories">
 		<div class="category">
@@ -98,7 +70,7 @@
 				<div class="subcategory">
 					<h3>Releases</h3>
 					<ul class="deploy-links">
-<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest-stable/#/" target="_blank" rel="noopener noreferrer">latest-stable</a></li>
+						<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest-stable/#/" target="_blank" rel="noopener noreferrer">latest-stable</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/latest-beta/#/" target="_blank" rel="noopener noreferrer">latest-beta</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/14.17.0/#/" target="_blank" rel="noopener noreferrer">14.17.0</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/14.16.2/#/" target="_blank" rel="noopener noreferrer">14.16.2</a></li>
@@ -323,7 +295,7 @@
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/class-tagging/#/" target="_blank" rel="noopener noreferrer">class-tagging</a></li>
+						<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/class-tagging/#/" target="_blank" rel="noopener noreferrer">class-tagging</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/customization-lab/#/" target="_blank" rel="noopener noreferrer">customization-lab</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/default-primary-to-blue/#/" target="_blank" rel="noopener noreferrer">default-primary-to-blue</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/double-pull/#/" target="_blank" rel="noopener noreferrer">double-pull</a></li>
@@ -339,7 +311,7 @@
 				<div class="subcategory">
 					<h3>Releases</h3>
 					<ul class="deploy-links">
-<li><a class="deploy-link" href="https://square.github.io/maker/lab/latest-stable/#/" target="_blank" rel="noopener noreferrer">latest-stable</a></li>
+						<li><a class="deploy-link" href="https://square.github.io/maker/lab/latest-stable/#/" target="_blank" rel="noopener noreferrer">latest-stable</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/14.17.0/#/" target="_blank" rel="noopener noreferrer">14.17.0</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/14.16.2/#/" target="_blank" rel="noopener noreferrer">14.16.2</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/14.16.1/#/" target="_blank" rel="noopener noreferrer">14.16.1</a></li>
@@ -409,7 +381,7 @@
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-<li><a class="deploy-link" href="https://square.github.io/maker/lab/class-tagging/#/" target="_blank" rel="noopener noreferrer">class-tagging</a></li>
+						<li><a class="deploy-link" href="https://square.github.io/maker/lab/class-tagging/#/" target="_blank" rel="noopener noreferrer">class-tagging</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/customization-lab/#/" target="_blank" rel="noopener noreferrer">customization-lab</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/default-primary-to-blue/#/" target="_blank" rel="noopener noreferrer">default-primary-to-blue</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/double-pull/#/" target="_blank" rel="noopener noreferrer">double-pull</a></li>
@@ -419,5 +391,16 @@
 			</div>
 		</div>
 	</div>
+
+	<span class="updated-msg">
+		Last updated on <span class="updated-time"></span>
+	</span>
+
+	<script>
+		const lastUpdated = new Date(1664375807674);
+		document
+			.querySelector('.updated-time')
+			.innerText = lastUpdated.toLocaleString();
+	</script>
 </body>
 </html>
