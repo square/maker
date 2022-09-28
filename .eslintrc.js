@@ -99,6 +99,9 @@ module.exports = {
 				// Disabled until github.com/vuejs/eslint-plugin-vue/issues/1260
 				'vue/custom-event-name-casing': 'off',
 
+				// this rule is only for vue 3.x but we're on vue 2.x
+				'vue/no-v-for-template-key-on-child': 'off',
+
 				'vue/no-deprecated-slot-attribute': ['error'],
 				'vue/no-deprecated-slot-scope-attribute': ['error'],
 				'vue/no-deprecated-scope-attribute': ['error'],
