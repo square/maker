@@ -93,6 +93,7 @@ const BUILT_INDEX = `
 			color: black;
 			background-color: white;
 			font-family: var(--sans-serif-stack);
+			padding: 0 16px;
 		}
 		h1, h2, h3, h4, h5, h6 {
 			margin: 0 0 0.5em 0;
@@ -120,7 +121,7 @@ const BUILT_INDEX = `
 		}
 		.categories {
 			gap: 32px;
-			margin-bottom: 16px;
+			margin: 16px 0;
 		}
 		.deploy-links {
 			margin: 0;
