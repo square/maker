@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 
+const path = require('path');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
-const ensureDeployDirectory = require('./ensure');
 
 const EXIT_SUCCESS_CODE = 0;
 const EXIT_ERROR_CODE = 1;
 
 (async function pushDeploys() {
-	const deployDirectory = await ensureDeployDirectory();
+	const deployDirectory = path.resolve('./', '.dist');
 	process.chdir(deployDirectory);
 
 	// add all changes
@@ -22,39 +22,16 @@ const EXIT_ERROR_CODE = 1;
 	} catch {
 		// this would fail if the above command did not
 		// add any files to the staging index, so
-		// it's okay to let this command to fail as well
+		// it's okay to let this command fail
 		// and we exit early successfully
 		console.log('no files changed, nothing to push, exiting early');
 		process.exit(EXIT_SUCCESS_CODE);
-	}
-
-	// pull
-	try {
-		// this command isn't strictly necessary, but it reduces
-		// the failure rate of the next command which is necessary,
-		// so it's worth running
-		await exec('git pull --rebase');
-		// if local is up-to-date with remote, or if remote's changes
-		// can be auto-merged into local, then this command succeeds
-	} catch (error) {
-		// if this command fails then the next would certainly fail,
-		// so we log the error and exit early unsuccessfully
-		console.error('remote had changes we couldn\'t auto-merge locally');
-		throw error;
 	}
 
 	// push
 	try {
 		await exec('git push');
 	} catch (error) {
-		// this command usually only fails if remote has
-		// changes that we don't have locally, which usually
-		// only occurs if multiple CI jobs which push changes
-		// to the "deploys" branch are run within the same
-		// few minutes of each other, there's no automatic
-		// way to solve these failures, an engineer just has
-		// to notice that the job failed and manually re-run it
-		// from the github UI 🤷
 		console.error('failed to push changes to remote');
 		throw error;
 	}

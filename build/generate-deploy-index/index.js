@@ -110,6 +110,9 @@ const BUILT_INDEX = `
 			color: white;
 			background-color: black;
 		}
+		.updated-msg {
+			font-style: italic;
+		}
 		.categories, .subcategories {
 			display: flex;
 			flex-wrap: wrap;
@@ -169,6 +172,28 @@ const BUILT_INDEX = `
 <body>
 	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys</h1>
 
+	<span class="updated-msg">
+		Last updated on <span class="updated-absolute"></span> (<span class="updated-relative"></span>).
+	</span>
+	<script>
+		// calc absolute time in locale
+		const lastUpdated = new Date(${Date.now()});
+		document
+			.querySelector('.updated-absolute')
+			.innerText = lastUpdated.toLocaleString();
+
+		// calc relative time in locale
+		// https://github.com/yairEO/relative-time/blob/v1.0.2/relative-time.min.js
+		!function(e,t){var o=o||{};"function"==typeof o&&o.amd?o([],t):"object"==typeof exports&&"object"==typeof module?module.exports=t():"object"==typeof exports?exports.RelativeTime=t():e.RelativeTime=t()}(this,(function(){const e={year:31536e6,month:2628e6,day:864e5,hour:36e5,minute:6e4,second:1e3},t="en",o={numeric:"auto"};function n(e){e={locale:(e=e||{}).locale||t,options:{...o,...e.options}},this.rtf=new Intl.RelativeTimeFormat(e.locale,e.options)}return n.prototype={from(t,o){const n=t-(o||new Date);for(let t in e)if(Math.abs(n)>e[t]||"second"==t)return this.rtf.format(Math.round(n/e[t]),t)}},n}));
+		// adds RelativeTime to global scope
+		// https://github.com/yairEO/relative-time/tree/v1.0.2
+
+		const relativeTime = new RelativeTime();
+		document
+			.querySelector('.updated-relative')
+			.innerText = relativeTime.from(lastUpdated);
+	</script>
+
 	<div class="categories">
 		<div class="category">
 			<h2>Styleguides</h2>
@@ -176,13 +201,13 @@ const BUILT_INDEX = `
 				<div class="subcategory">
 					<h3>Releases</h3>
 					<ul class="deploy-links">
-${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
+						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
+						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 					</ul>
 				</div>
 			</div>
@@ -194,13 +219,13 @@ ${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isn
 				<div class="subcategory">
 					<h3>Releases</h3>
 					<ul class="deploy-links">
-${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
+						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
+						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
 					</ul>
 				</div>
 			</div>

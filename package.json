@@ -19,6 +19,7 @@
     "styleguide-deploy": "npm run pull-deploys && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "generate-deploy-index": "node ./build/generate-deploy-index",
     "deploy-all": "npm run pull-deploys && npm run lab-build && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
+		"deploy-all-ci": "npm run lab-build && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint --format=pretty --ext vue,js,md --cache src lab styleguide build",
     "lint:css": "stylelint src/**/*.{vue,css}",
