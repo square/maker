@@ -13,13 +13,13 @@ module.exports = function defaultColors() {
 		heading: '#000000',
 		body: '#000000',
 		elevation: '#ffffff',
-		overlay: 'rgba(0, 0, 0, 0.3)',
-		primary: '#000000',
+		overlay: 'rgba(0, 0, 0, 0.32)',
+		primary: '#006aff',
 		contextualPrimary: {
-			fill: '#000000',
+			fill: '#006aff',
 			onFill: '#ffffff',
-			text: '#000000',
-			subtle: '#f5efef',
+			subtle: '#eff2f5',
+			text: '#1c54c7',
 		},
 		critical: {
 			fill: '#cd2026',
