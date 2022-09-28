@@ -227,4 +227,11 @@ export default {
 | side           | —           |
 | side-secondary | —           |
 | suffix         | —           |
+
+
+## MenuOption Events
+
+| Event        | Type | Description |
+| ------------ | ---- | ----------- |
+| option:click | -    | —           |
 <!-- api-tables:end -->
