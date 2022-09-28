@@ -8,6 +8,9 @@ import {
 	DARK_COLOR_LUMINANCE_THRESHOLD,
 	getContrast,
 } from './get-contrast';
+import defaultColors from '../components/Theme/src/default-colors';
+
+const DEFAULT_COLORS = defaultColors();
 
 extend([a11yPlugin, mixPlugin]);
 
@@ -73,7 +76,11 @@ function enoughContrastForFill(hex1, hex2) {
 	return colord(hex1).contrast(hex2) >= WCAG_CONTRAST_TITLE;
 }
 
-function generateContextualPrimaryColors(background = '#fff', primary = '#000', neutralColors) {
+function generateContextualPrimaryColors(
+	background = DEFAULT_COLORS.background,
+	primary = DEFAULT_COLORS.primary,
+	neutralColors,
+) {
 	const isDarkBg = isDark(background);
 	const backgroundContrast = getContrast(background);
 	const primaryColors = {};
@@ -108,15 +115,18 @@ function generateContextualPrimaryColors(background = '#fff', primary = '#000', 
  * @param {String} background
  * @return {Object}
  */
-export default function makerColors(background = '#fff', primary = '#000') {
-	const isDarkBg = colord(background).luminance() < DARK_COLOR_LUMINANCE_THRESHOLD;
+export default function makerColors(
+	background = DEFAULT_COLORS.background,
+	primary = DEFAULT_COLORS.primary,
+) {
+	const isDarkBg = isDark(background);
+	const backgroundContrast = getContrast(background);
 	const neutralRatios = isDarkBg ? NEUTRAL_RATIOS.dark : NEUTRAL_RATIOS.light;
-	const neutralContrast = getContrast(background);
 	const neutralColors = {};
 
 	// derive neutral colors
 	Object.entries(neutralRatios).forEach(([name, ratio]) => {
-		neutralColors[name] = colord(background).mix(neutralContrast, ratio).toHex();
+		neutralColors[name] = colord(background).mix(backgroundContrast, ratio).toHex();
 	});
 
 	// derive contextual colors
@@ -134,16 +144,21 @@ export default function makerColors(background = '#fff', primary = '#000') {
 	['critical', 'warning', 'success'].forEach((name) => {
 		if (colord(contextualColors[name].text).contrast(background) < WCAG_CONTRAST_TEXT) {
 			contextualColors[name].onFill = contextualColors[name].fill;
-			contextualColors[name].text = getContrast(background);
-			contextualColors[name].fill = getContrast(background);
+			contextualColors[name].text = backgroundContrast;
+			contextualColors[name].fill = backgroundContrast;
 		}
 
 		if (!contextualColors[name].subtle) {
 			contextualColors[name].subtle = neutralColors['neutral-10'];
 		}
+
+		if (!contextualColors[name].onFill) {
+			contextualColors[name].onFill = getContrast(contextualColors[name].fill);
+		}
 	});
 
 	return {
+		primary,
 		background,
 		heading: getContrast(background),
 		body: getContrast(background),

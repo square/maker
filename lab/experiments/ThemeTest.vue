@@ -649,6 +649,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import { MTheme, defaultTheme } from '@square/maker/components/Theme';
 import { MChoice, MChoiceOption } from '@square/maker/components/Choice';
 import { MDivider } from '@square/maker/components/Divider';
@@ -920,6 +921,8 @@ export default {
 					},
 				},
 			};
+			// console.log({ theme });
+			// console.log({ defaultMakerColors: makerColors() });
 			return theme;
 		},
 	},
