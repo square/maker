@@ -82,9 +82,17 @@ const BUILT_INDEX = `
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+	<title>Maker Deploys</title>
 	<style>
+		:root {
+			--sans-serif-stack: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+			--monospace-stack: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+		}
 		body {
-			font-family: sans-serif;
+			color: black;
+			background-color: white;
+			font-family: var(--sans-serif-stack);
 		}
 		h1, h2, h3, h4, h5, h6 {
 			margin: 0 0 0.5em 0;
@@ -115,7 +123,7 @@ const BUILT_INDEX = `
 			margin: 0;
 			padding: 0;
 			list-style-type: none;
-			font-family: monospace;
+			font-family: var(--monospace-stack);
 			font-size: 16px;
 		}
 		.deploy-link {
@@ -133,13 +141,33 @@ const BUILT_INDEX = `
 		.deploy-link:hover:visited {
 			background-color: purple;
 		}
-		.updated-msg {
-			font-style: italic;
+		@media (prefers-color-scheme: dark) {
+			body {
+				color: white;
+				background-color: black;
+			}
+			.maker-link:hover {
+				color: black;
+				background-color: white;
+			}
+			.deploy-link {
+				color: cyan;
+			}
+			.deploy-link:visited {
+				color: violet;
+			}
+			.deploy-link:hover {
+				color: black;
+				background-color: cyan;
+			}
+			.deploy-link:hover:visited {
+				background-color: violet;
+			}
 		}
 	</style>
 </head>
 <body>
-	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys 🚀</h1>
+	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys</h1>
 
 	<div class="categories">
 		<div class="category">
@@ -148,13 +176,13 @@ const BUILT_INDEX = `
 				<div class="subcategory">
 					<h3>Releases</h3>
 					<ul class="deploy-links">
-						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
+${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-						${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
+${toDeployLinks(STYLEGUIDE_URL_PREFIX, URL_SUFFIX, STYLEGUIDE_DEPLOYS.filter(isntVersion))}
 					</ul>
 				</div>
 			</div>
@@ -166,29 +194,18 @@ const BUILT_INDEX = `
 				<div class="subcategory">
 					<h3>Releases</h3>
 					<ul class="deploy-links">
-						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
+${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isVersion), true)}
 					</ul>
 				</div>
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-						${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
+${toDeployLinks(LAB_URL_PREFIX, URL_SUFFIX, LAB_DEPLOYS.filter(isntVersion))}
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<span class="updated-msg">
-		Last updated on <span class="updated-time"></span>
-	</span>
-
-	<script>
-		const lastUpdated = new Date(${Date.now()});
-		document
-			.querySelector('.updated-time')
-			.innerText = lastUpdated.toLocaleString();
-	</script>
 </body>
 </html>
 `;

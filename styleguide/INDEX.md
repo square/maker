@@ -16,7 +16,7 @@ npx i-peers -a
 
 ## Other versions
 
-You can browse every version of the styleguide that has ever been deployed by visiting the [Maker Deploys 🚀](https://square.github.io/maker/) page. You can find docs for older versions, pre-release versions, and WIP features & fixes on this page.
+You can browse every version of the styleguide that has ever been deployed by visiting the [Maker Deploys](https://square.github.io/maker/) page. You can find docs for older versions, pre-release versions, and WIP features & fixes on this page.
 
 ## Other links
 
