@@ -509,7 +509,7 @@ export default {
 	color: var(--color-contrast);
 }
 
-.Button.Button.variant_fill {
+.Button.variant_fill {
 	--border: inset 0 0 0 var(--border-width) var(--border-color);
 	--border-hover: inset 0 0 0 var(--border-width-hover) var(--border-color-hover);
 }

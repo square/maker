@@ -8,8 +8,34 @@
 			<m-text pattern="title">
 				Blade heading
 			</m-text>
-			<m-text>
-				blade content
+			<template
+				v-if="openToast"
+			>
+				<m-text>
+					open toast
+				</m-text>
+				<button @click="openToast('info', { actionbarOffset: true })">
+					info
+				</button>
+				<button @click="openToast('success', { actionbarOffset: true })">
+					success
+				</button>
+				<button @click="openToast('warning', { actionbarOffset: true })">
+					warning
+				</button>
+				<button @click="openToast('error', { actionbarOffset: true })">
+					error
+				</button>
+				<button @click="openToast('primary', { actionbarOffset: true })">
+					primary
+				</button>
+				<m-text>
+					note: resize viewport above & below 840px breakpoint to
+					see mobile vs desktop behavior
+				</m-text>
+			</template>
+			<m-text v-else>
+				content content content
 			</m-text>
 			<m-text v-if="count">
 				count is {{ count }}
@@ -55,6 +81,10 @@ export default {
 	},
 
 	props: {
+		openToast: {
+			type: Function,
+			default: undefined,
+		},
 		count: {
 			type: Number,
 			default: 0,

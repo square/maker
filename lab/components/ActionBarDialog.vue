@@ -5,10 +5,36 @@
 				pattern="title"
 				:size="3"
 			>
-				Whoa, hold on!
+				Dialog heading
 			</m-text>
-			<m-text>
-				Did you know that adult male polar bears can weight over 1,500 lbs?
+			<template
+				v-if="openToast"
+			>
+				<m-text>
+					open toast
+				</m-text>
+				<button @click="openToast('info', { actionbarOffset: true })">
+					info
+				</button>
+				<button @click="openToast('success', { actionbarOffset: true })">
+					success
+				</button>
+				<button @click="openToast('warning', { actionbarOffset: true })">
+					warning
+				</button>
+				<button @click="openToast('error', { actionbarOffset: true })">
+					error
+				</button>
+				<button @click="openToast('primary', { actionbarOffset: true })">
+					primary
+				</button>
+				<m-text>
+					note: resize viewport above & below 840px breakpoint to
+					see mobile vs desktop behavior
+				</m-text>
+			</template>
+			<m-text v-else>
+				content content content
 			</m-text>
 			<m-text v-if="count">
 				count is {{ count }}
@@ -26,7 +52,7 @@
 					full-width
 					@click="dialogApi.close()"
 				>
-					Now I do! Thanks!
+					Confirm
 				</m-action-bar-button>
 			</m-inline-action-bar>
 		</m-dialog-content>
@@ -54,6 +80,10 @@ export default {
 	},
 
 	props: {
+		openToast: {
+			type: Function,
+			default: undefined,
+		},
 		count: {
 			type: Number,
 			default: 0,
