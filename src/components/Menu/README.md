@@ -197,6 +197,8 @@ export default {
 
 | Event       | Type | Description |
 | ----------- | ---- | ----------- |
+| menu:open   | -    | —           |
+| menu:close  | -    | —           |
 | menu:update | -    | —           |
 
 
