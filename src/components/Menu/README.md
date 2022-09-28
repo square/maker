@@ -197,6 +197,8 @@ export default {
 
 | Event       | Type | Description |
 | ----------- | ---- | ----------- |
+| menu:open   | -    | —           |
+| menu:close  | -    | —           |
 | menu:update | -    | —           |
 
 
@@ -225,4 +227,11 @@ export default {
 | side           | —           |
 | side-secondary | —           |
 | suffix         | —           |
+
+
+## MenuOption Events
+
+| Event        | Type | Description |
+| ------------ | ---- | ----------- |
+| option:click | -    | —           |
 <!-- api-tables:end -->
