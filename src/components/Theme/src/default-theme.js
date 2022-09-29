@@ -20,17 +20,6 @@ export default function defaultTheme() {
 			fullWidth: false,
 			align: 'center',
 			patterns: {
-				fill: {
-					variant: 'fill',
-				},
-				outline: {
-					variant: 'outline',
-					color: '@colors.contextualPrimary.fill',
-				},
-				ghost: {
-					variant: 'ghost',
-					color: '@colors.contextualPrimary.fill',
-				},
 				// fill contextual color patterns
 				primaryFilled: {
 					color: '@colors.contextualPrimary.fill',
@@ -93,6 +82,27 @@ export default function defaultTheme() {
 				infoSubtle: {
 					textColor: '@colors["neutral-90"]',
 					color: '@colors["neutral-10"]',
+				},
+				// ghost contextual color patterns
+				primaryGhost: {
+					variant: 'ghost',
+					color: '@colors.contextualPrimary.text',
+				},
+				errorGhost: {
+					variant: 'ghost',
+					color: '@colors.critical.text',
+				},
+				successGhost: {
+					variant: 'ghost',
+					color: '@colors.success.text',
+				},
+				warningGhost: {
+					variant: 'ghost',
+					color: '@colors.warning.text',
+				},
+				infoGhost: {
+					variant: 'ghost',
+					color: '@colors["neutral-90"]',
 				},
 			},
 		},
