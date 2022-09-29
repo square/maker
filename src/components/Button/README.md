@@ -6,21 +6,7 @@ You should almost always use this component for standalone buttons in your app. 
 
 ```vue
 <template>
-	<m-theme :theme="theme">
-		<label>
-			primary color
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-		</label>&nbsp;
-		<label>
-			background
-			<input
-				v-model="bgColor"
-				type="color"
-			>
-		</label><br><br>
+	<div>
 		<table class="ButtonTable">
 			<thead>
 				<tr>
@@ -45,7 +31,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							size="large"
 						>
 							<plus class="icon" />
@@ -54,7 +40,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							size="large"
 						>
 							<plus class="icon" />
@@ -63,7 +49,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							size="large"
 						>
 							<plus class="icon" />
@@ -77,7 +63,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -86,7 +72,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -95,7 +81,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							size="medium"
 						>
 							<plus class="icon" />
@@ -109,7 +95,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							size="small"
 						>
 							<plus class="icon" />
@@ -118,7 +104,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							size="small"
 						>
 							<plus class="icon" />
@@ -127,7 +113,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							size="small"
 						>
 							<plus class="icon" />
@@ -151,7 +137,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							disabled
 						>
 							Disabled
@@ -159,7 +145,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							disabled
 						>
 							Disabled
@@ -167,7 +153,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							disabled
 						>
 							Disabled
@@ -180,7 +166,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							loading
 						>
 							Loading
@@ -188,7 +174,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							loading
 						>
 							Loading
@@ -196,7 +182,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							loading
 						>
 							Loading
@@ -209,7 +195,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							full-width
 						>
 							Full width
@@ -217,7 +203,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							full-width
 						>
 							Full width
@@ -225,7 +211,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							full-width
 						>
 							Full width
@@ -246,21 +232,21 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 						>
 							<x class="icon" />
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 						>
 							<x class="icon" />
 						</m-button>
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 						>
 							<x class="icon" />
 						</m-button>
@@ -272,7 +258,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 						>
 							Button
 							<template #information>
@@ -282,7 +268,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 						>
 							Button
 							<template #information>
@@ -292,7 +278,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 						>
 							Button
 							<template #information>
@@ -308,7 +294,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							align="stack"
 						>
 							Button
@@ -319,7 +305,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							align="stack"
 						>
 							Button
@@ -330,7 +316,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							align="stack"
 						>
 							Button
@@ -347,7 +333,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							align="space-between"
 						>
 							Button
@@ -358,7 +344,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							align="space-between"
 						>
 							Button
@@ -369,7 +355,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							align="space-between"
 						>
 							Button
@@ -394,7 +380,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							shape="squared"
 						>
 							Squared
@@ -402,7 +388,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							shape="squared"
 						>
 							Squared
@@ -410,7 +396,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							shape="squared"
 						>
 							Squared
@@ -423,7 +409,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							shape="rounded"
 						>
 							Rounded
@@ -431,7 +417,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							shape="rounded"
 						>
 							Rounded
@@ -439,7 +425,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							shape="rounded"
 						>
 							Rounded
@@ -452,7 +438,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="fill"
+							variant="fill"
 							shape="pill"
 						>
 							Pill
@@ -460,7 +446,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="outline"
+							variant="outline"
 							shape="pill"
 						>
 							Pill
@@ -468,7 +454,7 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="ghost"
+							variant="ghost"
 							shape="pill"
 						>
 							Pill
@@ -477,6 +463,76 @@ You should almost always use this component for standalone buttons in your app. 
 				</tr>
 			</tbody>
 		</table>
+	</div>
+</template>
+
+<script>
+import X from '@square/maker-icons/X';
+import Plus from '@square/maker-icons/Plus';
+import { MButton } from '@square/maker/components/Button';
+
+export default {
+	components: {
+		MButton,
+		Plus,
+		X,
+	},
+};
+</script>
+
+<style scoped>
+.ButtonTable {
+	min-width: 50%;
+	border-collapse: separate;
+	border-spacing: 0 16px;
+	text-align: left;
+
+	& td {
+		padding: 0 8px;
+	}
+
+	& th {
+		padding: 0 8px;
+	}
+
+	& th {
+		background: var(--maker-color-neutral-10, #f1f1f1);
+		color: var(--maker-color-neutral-90, #1b1b1b);
+		font-weight: 500;
+	}
+
+	& .title {
+		color: var(--maker-color-neutral-100, #000000);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+}
+.icon {
+	width: 16px;
+	height: 16px;
+}
+</style>
+```
+
+## Patterns
+
+```vue
+<template>
+	<m-theme :theme="theme">
+		<label>
+			primary color
+			<input
+				v-model="primaryColor"
+				type="color"
+			>
+		</label>&nbsp;
+		<label>
+			background
+			<input
+				v-model="bgColor"
+				type="color"
+			>
+		</label><br><br>
 		<table class="ButtonTable">
 			<thead>
 				<tr>
@@ -492,6 +548,9 @@ You should almost always use this component for standalone buttons in your app. 
 					<th>
 						Subtle
 					</th>
+					<th>
+						Ghost
+					</th>
 				</tr>
 			</thead>
 
@@ -502,9 +561,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="primaryFilled"
+							pattern="primaryFill"
 						>
-							primaryFilled
+							primaryFill
 						</m-button>
 					</td>
 					<td>
@@ -521,6 +580,13 @@ You should almost always use this component for standalone buttons in your app. 
 							primarySubtle
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							pattern="primaryGhost"
+						>
+							primaryGhost
+						</m-button>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -528,9 +594,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="errorFilled"
+							pattern="errorFill"
 						>
-							errorFilled
+							errorFill
 						</m-button>
 					</td>
 					<td>
@@ -547,6 +613,13 @@ You should almost always use this component for standalone buttons in your app. 
 							errorSubtle
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							pattern="errorGhost"
+						>
+							errorGhost
+						</m-button>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -554,9 +627,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="successFilled"
+							pattern="successFill"
 						>
-							successFilled
+							successFill
 						</m-button>
 					</td>
 					<td>
@@ -573,6 +646,13 @@ You should almost always use this component for standalone buttons in your app. 
 							successSubtle
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							pattern="successGhost"
+						>
+							successGhost
+						</m-button>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -580,9 +660,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="warningFilled"
+							pattern="warningFill"
 						>
-							warningFilled
+							warningFill
 						</m-button>
 					</td>
 					<td>
@@ -599,6 +679,13 @@ You should almost always use this component for standalone buttons in your app. 
 							warningSubtle
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							pattern="warningGhost"
+						>
+							warningGhost
+						</m-button>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -606,9 +693,9 @@ You should almost always use this component for standalone buttons in your app. 
 					</td>
 					<td>
 						<m-button
-							pattern="infoFilled"
+							pattern="infoFill"
 						>
-							infoFilled
+							infoFill
 						</m-button>
 					</td>
 					<td>
@@ -625,6 +712,13 @@ You should almost always use this component for standalone buttons in your app. 
 							infoSubtle
 						</m-button>
 					</td>
+					<td>
+						<m-button
+							pattern="infoGhost"
+						>
+							infoGhost
+						</m-button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -632,8 +726,6 @@ You should almost always use this component for standalone buttons in your app. 
 </template>
 
 <script>
-import X from '@square/maker-icons/X';
-import Plus from '@square/maker-icons/Plus';
 import { MButton } from '@square/maker/components/Button';
 import { MTheme } from '@square/maker/components/Theme';
 import makerColors from '@square/maker/utils/maker-colors';
@@ -642,8 +734,6 @@ export default {
 	components: {
 		MTheme,
 		MButton,
-		Plus,
-		X,
 	},
 	data() {
 		return {

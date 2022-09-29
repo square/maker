@@ -303,7 +303,7 @@
 						</m-card>
 						<m-notice
 							type="info"
-							variant="block"
+							display="block"
 						>
 							Switching to shipping will change the scheduled time you selected
 						</m-notice>
@@ -352,31 +352,31 @@
 						</m-notice>
 						<m-notice
 							pattern="primary"
-							variant="block"
+							display="block"
 						>
 							Here's a primary notice
 						</m-notice>
 						<m-notice
 							pattern="info"
-							variant="block"
+							display="block"
 						>
 							Here's some info for you
 						</m-notice>
 						<m-notice
 							pattern="error"
-							variant="block"
+							display="block"
 						>
 							There has been error notice
 						</m-notice>
 						<m-notice
 							pattern="warning"
-							variant="block"
+							display="block"
 						>
 							Warning please take note
 						</m-notice>
 						<m-notice
 							pattern="success"
-							variant="block"
+							display="block"
 						>
 							Action has been successfully completed
 						</m-notice>
