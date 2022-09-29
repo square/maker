@@ -20,35 +20,24 @@ export default function defaultTheme() {
 			fullWidth: false,
 			align: 'center',
 			patterns: {
-				fill: {
-					variant: 'fill',
-				},
-				outline: {
-					variant: 'outline',
-					color: '@colors.contextualPrimary.fill',
-				},
-				ghost: {
-					variant: 'ghost',
-					color: '@colors.contextualPrimary.fill',
-				},
 				// fill contextual color patterns
-				primaryFilled: {
+				primaryFill: {
 					color: '@colors.contextualPrimary.fill',
 					textColor: '@colors.contextualPrimary.onFill',
 				},
-				errorFilled: {
+				errorFill: {
 					color: '@colors.critical.fill',
 					textColor: '@colors.critical.onFill',
 				},
-				successFilled: {
+				successFill: {
 					color: '@colors.success.fill',
 					textColor: '@colors.success.onFill',
 				},
-				warningFilled: {
+				warningFill: {
 					color: '@colors.warning.fill',
 					textColor: '@colors.warning.onFill',
 				},
-				infoFilled: {
+				infoFill: {
 					color: '@colors["neutral-90"]',
 					textColor: '@colors["neutral-10"]',
 				},
@@ -93,6 +82,27 @@ export default function defaultTheme() {
 				infoSubtle: {
 					textColor: '@colors["neutral-90"]',
 					color: '@colors["neutral-10"]',
+				},
+				// ghost contextual color patterns
+				primaryGhost: {
+					variant: 'ghost',
+					color: '@colors.contextualPrimary.text',
+				},
+				errorGhost: {
+					variant: 'ghost',
+					color: '@colors.critical.text',
+				},
+				successGhost: {
+					variant: 'ghost',
+					color: '@colors.success.text',
+				},
+				warningGhost: {
+					variant: 'ghost',
+					color: '@colors.warning.text',
+				},
+				infoGhost: {
+					variant: 'ghost',
+					color: '@colors["neutral-90"]',
 				},
 			},
 		},
