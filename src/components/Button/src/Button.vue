@@ -22,17 +22,22 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span
+		<m-text
 			:class="[
 				$s.MainText,
 				{
 					[$s.TruncateText]: !isSingleChild(),
 				}
 			]"
+			:pattern="textPattern"
+			:font-size="fontSize"
+			:font-weight="fontWeight"
+			element="span"
+			color="inherit"
 		>
 			<!-- @slot Button label -->
 			<slot />
-		</span>
+		</m-text>
 
 		<span
 			v-if="$scopedSlots.information"
@@ -51,6 +56,7 @@ import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
 
 function setColorVariables(tokens, variant) {
 	const colorMain = colord(tokens.color);
@@ -101,6 +107,7 @@ function setColorVariables(tokens, variant) {
 export default {
 	components: {
 		MLoading,
+		MText,
 	},
 
 	inject: {
@@ -134,13 +141,20 @@ export default {
 		size: {
 			type: String,
 			default: undefined,
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
+			validator: (size) => ['small', 'medium', 'large', 'expandable'].includes(size),
 		},
 		/**
 		 * Whether to make the button full-width
 		 */
 		fullWidth: {
 			type: Boolean,
+			default: undefined,
+		},
+		/**
+		 * MText pattern in button label. Pattern's size only applies on (`size: undefined`) buttons.
+		 */
+		textPattern: {
+			type: String,
 			default: undefined,
 		},
 		/**
@@ -315,6 +329,21 @@ export default {
 		isDisabled() {
 			return this.disabled || this.loading;
 		},
+		fontSize() {
+			switch (this.resolvedSize) {
+			case 'small':
+				return '12px';
+			case 'medium':
+				return '14px';
+			case 'large':
+				return '16px';
+			default:
+				return undefined;
+			}
+		},
+		fontWeight() {
+			return this.resolvedSize === 'expandable' ? undefined : '500';
+		},
 	},
 
 	methods: {
@@ -337,7 +366,7 @@ export default {
 <style module="$s">
 .Button {
 	--radius-rounded-button: 8px;
-	--radius-pill-button: 32px;
+	--radius-pill-button: 36px;
 
 	position: relative;
 	display: inline-flex;
@@ -382,8 +411,13 @@ export default {
 		min-width: max-content;
 	}
 
+	&.size_expandable {
+		min-height: 48px;
+		padding: 5px 20px;
+	}
+
 	&.size_small {
-		height: 32px;
+		height: 36px;
 		padding: var(--small-padding);
 		font-size: 12px;
 
@@ -392,7 +426,7 @@ export default {
 		}
 
 		&.iconButton {
-			width: 32px;
+			width: 36px;
 			padding: 0;
 		}
 	}

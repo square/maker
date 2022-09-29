@@ -13,6 +13,22 @@
 			</label>
 			<h3>Button settings</h3>
 			<p>* - Not applied on outline buttons</p>
+			<select
+				v-model="textPattern"
+			>
+				<option>
+					paragraph
+				</option>
+				<option>
+					label
+				</option>
+				<option>
+					title
+				</option>
+				<option>
+					headline
+				</option>
+			</select>
 			<label>
 				<input
 					v-model="color"
@@ -270,6 +286,29 @@
 				</tr>
 				<tr>
 					<th>
+						Expandable
+					</th>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							pattern="fill"
+							size="expandable"
+						>
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							pattern="outline"
+							size="expandable"
+						>
+							Button
+						</m-button>
+					</td>
+				</tr>
+				<tr>
+					<th>
 						Disabled
 					</th>
 					<td>
@@ -410,6 +449,7 @@ import { MTheme } from '@square/maker/components/Theme';
 import makerColors from '@square/maker/utils/maker-colors';
 
 const defaultButtonProps = {
+	textPattern: 'paragraph',
 	color: '#9142ff',
 	colorHover: undefined,
 	textColor: '#ffffff',
@@ -458,10 +498,25 @@ export default {
 					background: this.bgColor,
 					...makerColors(this.bgColor),
 				},
+				fonts: {
+					heading: {
+						fontFamily: 'Georgia',
+						fontWeight: '600',
+					},
+					body: {
+						fontFamily: 'Verdana',
+						fontWeight: '400',
+					},
+					label: {
+						fontFamily: 'Monospace',
+						fontWeight: '500',
+					},
+				},
 			};
 		},
 		buttonProps() {
 			const {
+				textPattern,
 				color,
 				colorHover,
 				textColor,
@@ -490,6 +545,7 @@ export default {
 			boxShadowBlurRadiusHover, boxShadowSpreadRadiusHover, boxShadowColorHover);
 
 			return {
+				textPattern,
 				color,
 				colorHover,
 				textColor,
@@ -532,10 +588,6 @@ h3 {
 	font-family: -apple-system, 'Helvetica Neue', sans-serif;
 	border-collapse: separate;
 	border-spacing: 16px;
-}
-
-button {
-	max-width: 180px;
 }
 
 .icon {
