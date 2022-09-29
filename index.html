@@ -4,9 +4,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+	<title>Maker Deploys</title>
 	<style>
+		:root {
+			--sans-serif-stack: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+			--monospace-stack: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+		}
 		body {
-			font-family: sans-serif;
+			color: black;
+			background-color: white;
+			font-family: var(--sans-serif-stack);
+			padding: 0 16px;
 		}
 		h1, h2, h3, h4, h5, h6 {
 			margin: 0 0 0.5em 0;
@@ -24,6 +33,9 @@
 			color: white;
 			background-color: black;
 		}
+		.updated-msg {
+			font-style: italic;
+		}
 		.categories, .subcategories {
 			display: flex;
 			flex-wrap: wrap;
@@ -31,13 +43,13 @@
 		}
 		.categories {
 			gap: 32px;
-			margin-bottom: 16px;
+			margin: 16px 0;
 		}
 		.deploy-links {
 			margin: 0;
 			padding: 0;
 			list-style-type: none;
-			font-family: monospace;
+			font-family: var(--monospace-stack);
 			font-size: 16px;
 		}
 		.deploy-link {
@@ -55,13 +67,55 @@
 		.deploy-link:hover:visited {
 			background-color: purple;
 		}
-		.updated-msg {
-			font-style: italic;
+		@media (prefers-color-scheme: dark) {
+			body {
+				color: white;
+				background-color: black;
+			}
+			.maker-link:hover {
+				color: black;
+				background-color: white;
+			}
+			.deploy-link {
+				color: cyan;
+			}
+			.deploy-link:visited {
+				color: violet;
+			}
+			.deploy-link:hover {
+				color: black;
+				background-color: cyan;
+			}
+			.deploy-link:hover:visited {
+				background-color: violet;
+			}
 		}
 	</style>
 </head>
 <body>
-	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys 🚀</h1>
+	<h1><a class="maker-link" href="https://github.com/square/maker" target="_blank" rel="noopener noreferrer">Maker</a> Deploys</h1>
+
+	<span class="updated-msg">
+		Last updated on <span class="updated-absolute"></span> (<span class="updated-relative"></span>).
+	</span>
+	<script>
+		// calc absolute time in locale
+		const lastUpdated = new Date(1664468177823);
+		document
+			.querySelector('.updated-absolute')
+			.innerText = lastUpdated.toLocaleString();
+
+		// calc relative time in locale
+		// https://github.com/yairEO/relative-time/blob/v1.0.2/relative-time.min.js
+		!function(e,t){var o=o||{};"function"==typeof o&&o.amd?o([],t):"object"==typeof exports&&"object"==typeof module?module.exports=t():"object"==typeof exports?exports.RelativeTime=t():e.RelativeTime=t()}(this,(function(){const e={year:31536e6,month:2628e6,day:864e5,hour:36e5,minute:6e4,second:1e3},t="en",o={numeric:"auto"};function n(e){e={locale:(e=e||{}).locale||t,options:{...o,...e.options}},this.rtf=new Intl.RelativeTimeFormat(e.locale,e.options)}return n.prototype={from(t,o){const n=t-(o||new Date);for(let t in e)if(Math.abs(n)>e[t]||"second"==t)return this.rtf.format(Math.round(n/e[t]),t)}},n}));
+		// adds RelativeTime to global scope
+		// https://github.com/yairEO/relative-time/tree/v1.0.2
+
+		const relativeTime = new RelativeTime();
+		document
+			.querySelector('.updated-relative')
+			.innerText = relativeTime.from(lastUpdated);
+	</script>
 
 	<div class="categories">
 		<div class="category">
@@ -297,7 +351,8 @@
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-						<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/button-customization/#/" target="_blank" rel="noopener noreferrer">button-customization</a></li>
+						<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/backport-ci-updates/#/" target="_blank" rel="noopener noreferrer">backport-ci-updates</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/styleguide/button-customization/#/" target="_blank" rel="noopener noreferrer">button-customization</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/class-tagging/#/" target="_blank" rel="noopener noreferrer">class-tagging</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/styleguide/customization-lab/#/" target="_blank" rel="noopener noreferrer">customization-lab</a></li>
 					</ul>
@@ -383,7 +438,8 @@
 				<div class="subcategory">
 					<h3>PRs</h3>
 					<ul class="deploy-links">
-						<li><a class="deploy-link" href="https://square.github.io/maker/lab/button-customization/#/" target="_blank" rel="noopener noreferrer">button-customization</a></li>
+						<li><a class="deploy-link" href="https://square.github.io/maker/lab/backport-ci-updates/#/" target="_blank" rel="noopener noreferrer">backport-ci-updates</a></li>
+<li><a class="deploy-link" href="https://square.github.io/maker/lab/button-customization/#/" target="_blank" rel="noopener noreferrer">button-customization</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/class-tagging/#/" target="_blank" rel="noopener noreferrer">class-tagging</a></li>
 <li><a class="deploy-link" href="https://square.github.io/maker/lab/customization-lab/#/" target="_blank" rel="noopener noreferrer">customization-lab</a></li>
 					</ul>
@@ -391,16 +447,5 @@
 			</div>
 		</div>
 	</div>
-
-	<span class="updated-msg">
-		Last updated on <span class="updated-time"></span>
-	</span>
-
-	<script>
-		const lastUpdated = new Date(1664460621523);
-		document
-			.querySelector('.updated-time')
-			.innerText = lastUpdated.toLocaleString();
-	</script>
 </body>
 </html>
