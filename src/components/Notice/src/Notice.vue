@@ -3,7 +3,7 @@
 		:class="[
 			$s.Notice,
 			$s[`type_${resolvedType}`],
-			$s[`variant_${variant}`],
+			$s[`display_${display}`],
 		]"
 		:style="style"
 		v-bind="$attrs"
@@ -75,12 +75,12 @@ export default {
 			validator: (type) => ['error', 'success', 'warning', 'info'].includes(type),
 		},
 		/**
-		 * notice variant
+		 * notice display
 		 */
-		variant: {
+		display: {
 			type: String,
 			default: 'inline',
-			validator: (variant) => ['inline', 'block'].includes(variant),
+			validator: (display) => ['inline', 'block'].includes(display),
 		},
 		/**
 		 * name of icon, defined in theme
@@ -140,10 +140,10 @@ export default {
 			return 'info';
 		},
 		showActions() {
-			return this.$slots.actions && this.variant === 'block';
+			return this.$slots.actions && this.display === 'block';
 		},
 		style() {
-			const textColor = this.variant === 'inline'
+			const textColor = this.display === 'inline'
 				? this.resolvedColor
 				: 'var(--maker-color-neutral-90, #1b1b1b)';
 			return {
@@ -155,7 +155,7 @@ export default {
 	},
 
 	created() {
-		assert.warn(!(this.variant === 'inline' && this.$slots.actions), 'inline Notices cannot have an actions slot');
+		assert.warn(!(this.display === 'inline' && this.$slots.actions), 'inline Notices cannot have an actions slot');
 	},
 };
 </script>
@@ -222,7 +222,7 @@ export default {
 	--color-bg: $maker-color-neutral-10;
 }
 
-.variant_block {
+.display_block {
 	padding: 16px;
 	background-color: var(--color-bg);
 }

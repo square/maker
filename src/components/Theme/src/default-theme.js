@@ -13,67 +13,56 @@ export default function defaultTheme() {
 		profiles: {},
 		button: {
 			size: 'medium',
-			variant: 'primary',
+			variant: 'fill',
 			shape: undefined,
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
 			patterns: {
-				primary: {
-					variant: 'primary',
-				},
-				secondary: {
-					variant: 'secondary',
-					color: '@colors.contextualPrimary.fill',
-				},
-				tertiary: {
-					variant: 'tertiary',
-					color: '@colors.contextualPrimary.fill',
-				},
-				// filled patterns
-				primaryFilled: {
+				// fill contextual color patterns
+				primaryFill: {
 					color: '@colors.contextualPrimary.fill',
 					textColor: '@colors.contextualPrimary.onFill',
 				},
-				errorFilled: {
+				errorFill: {
 					color: '@colors.critical.fill',
 					textColor: '@colors.critical.onFill',
 				},
-				successFilled: {
+				successFill: {
 					color: '@colors.success.fill',
 					textColor: '@colors.success.onFill',
 				},
-				warningFilled: {
+				warningFill: {
 					color: '@colors.warning.fill',
 					textColor: '@colors.warning.onFill',
 				},
-				infoFilled: {
+				infoFill: {
 					color: '@colors["neutral-90"]',
 					textColor: '@colors["neutral-10"]',
 				},
-				// outline patterns
+				// outline contextual color patterns
 				primaryOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.contextualPrimary.text',
 				},
 				errorOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.critical.text',
 				},
 				successOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.success.text',
 				},
 				warningOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors.warning.text',
 				},
 				infoOutline: {
-					variant: 'secondary',
+					variant: 'outline',
 					color: '@colors["neutral-90"]',
 				},
-				// subtle patterns
+				// subtle contextual color patterns
 				primarySubtle: {
 					textColor: '@colors.contextualPrimary.text',
 					color: '@colors.contextualPrimary.subtle',
@@ -93,6 +82,27 @@ export default function defaultTheme() {
 				infoSubtle: {
 					textColor: '@colors["neutral-90"]',
 					color: '@colors["neutral-10"]',
+				},
+				// ghost contextual color patterns
+				primaryGhost: {
+					variant: 'ghost',
+					color: '@colors.contextualPrimary.text',
+				},
+				errorGhost: {
+					variant: 'ghost',
+					color: '@colors.critical.text',
+				},
+				successGhost: {
+					variant: 'ghost',
+					color: '@colors.success.text',
+				},
+				warningGhost: {
+					variant: 'ghost',
+					color: '@colors.warning.text',
+				},
+				infoGhost: {
+					variant: 'ghost',
+					color: '@colors["neutral-90"]',
 				},
 			},
 		},
