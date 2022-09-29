@@ -561,9 +561,9 @@ export default {
 					</td>
 					<td>
 						<m-button
-							pattern="primaryFilled"
+							pattern="primaryFill"
 						>
-							primaryFilled
+							primaryFill
 						</m-button>
 					</td>
 					<td>
@@ -594,9 +594,9 @@ export default {
 					</td>
 					<td>
 						<m-button
-							pattern="errorFilled"
+							pattern="errorFill"
 						>
-							errorFilled
+							errorFill
 						</m-button>
 					</td>
 					<td>
@@ -627,9 +627,9 @@ export default {
 					</td>
 					<td>
 						<m-button
-							pattern="successFilled"
+							pattern="successFill"
 						>
-							successFilled
+							successFill
 						</m-button>
 					</td>
 					<td>
@@ -660,9 +660,9 @@ export default {
 					</td>
 					<td>
 						<m-button
-							pattern="warningFilled"
+							pattern="warningFill"
 						>
-							warningFilled
+							warningFill
 						</m-button>
 					</td>
 					<td>
@@ -693,9 +693,9 @@ export default {
 					</td>
 					<td>
 						<m-button
-							pattern="infoFilled"
+							pattern="infoFill"
 						>
-							infoFilled
+							infoFill
 						</m-button>
 					</td>
 					<td>

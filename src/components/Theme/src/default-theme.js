@@ -21,23 +21,23 @@ export default function defaultTheme() {
 			align: 'center',
 			patterns: {
 				// fill contextual color patterns
-				primaryFilled: {
+				primaryFill: {
 					color: '@colors.contextualPrimary.fill',
 					textColor: '@colors.contextualPrimary.onFill',
 				},
-				errorFilled: {
+				errorFill: {
 					color: '@colors.critical.fill',
 					textColor: '@colors.critical.onFill',
 				},
-				successFilled: {
+				successFill: {
 					color: '@colors.success.fill',
 					textColor: '@colors.success.onFill',
 				},
-				warningFilled: {
+				warningFill: {
 					color: '@colors.warning.fill',
 					textColor: '@colors.warning.onFill',
 				},
-				infoFilled: {
+				infoFill: {
 					color: '@colors["neutral-90"]',
 					textColor: '@colors["neutral-10"]',
 				},
@@ -223,7 +223,7 @@ export default function defaultTheme() {
 			textColor: '@colors["neutral-0"]',
 			bgColor: '@colors["neutral-90"]',
 			patterns: {
-				// filled patterns
+				// fill patterns
 				primary: {
 					textColor: '@colors.contextualPrimary.onFill',
 					bgColor: '@colors.contextualPrimary.fill',
