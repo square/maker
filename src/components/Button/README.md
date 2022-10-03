@@ -798,7 +798,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | ------------------ | --------- | ---------- | --------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | pattern            | `string`  | —          | `pattern defined in theme`                    | patterns are defined at the theme level                                                    |
 | type               | `string`  | `'button'` | —                                             | Type of the button                                                                         |
-| size               | `string`  | —          | `small`, `medium`, `large`                    | Size of the button                                                                         |
+| size               | `string`  | —          | `small`, `medium`, `large`, `expandable`      | Size of the button                                                                         |
 | full-width         | `boolean` | —          | —                                             | Whether to make the button full-width                                                      |
 | text-pattern       | `string`  | —          | —                                             | MText pattern in button label. Pattern's size only applies on (`size: undefined`) buttons. |
 | color              | `string`  | —          | —                                             | Main color of button                                                                       |

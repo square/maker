@@ -31,7 +31,6 @@
 			]"
 			:pattern="textPattern"
 			:font-size="fontSize"
-			:font-weight="fontWeight"
 			element="span"
 			color="inherit"
 		>
@@ -39,19 +38,24 @@
 			<slot />
 		</m-text>
 
-		<span
+		<m-text
 			v-if="$scopedSlots.information"
 			:class="[$s.InformationText, $s.TruncateText]"
+			:pattern="textPattern"
+			:font-size="fontSize"
+			element="span"
+			color="inherit"
 		>
 			<!-- @slot Information label -->
 			<slot
 				name="information"
 			/>
-		</span>
+		</m-text>
 	</button>
 </template>
 
 <script>
+import cssValidator from '@square/maker/utils/css-validator';
 import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
 import { MLoading } from '@square/maker/components/Loading';
@@ -88,8 +92,8 @@ function setColorVariables(tokens, variant) {
 		'--color-hover': colorHover,
 		'--color-active': colorActive,
 		'--color-focus': colorFocus,
-		'--border-radius': tokens.shape,
-		'--border-radius-hover': tokens.shapeHover || tokens.shape,
+		'--border-radius': tokens.borderRadius,
+		'--border-radius-hover': tokens.borderRadiusHover || tokens.borderRadius,
 		'--border-width': tokens.borderWidth || '1px',
 		'--border-width-hover': tokens.borderWidthHover || tokens.borderWidth || '1px',
 		'--border-color': tokens.borderColor,
@@ -141,7 +145,7 @@ export default {
 		size: {
 			type: String,
 			default: undefined,
-			validator: (size) => ['small', 'medium', 'large', 'expandable'].includes(size),
+			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
 		 * Whether to make the button full-width
@@ -151,11 +155,19 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * MText pattern in button label. Pattern's size only applies on (`size: undefined`) buttons.
+		 * MText pattern in button label
 		 */
 		textPattern: {
 			type: String,
+			default: 'label',
+		},
+		/**
+		 * MText size in button label
+		 */
+		textSize: {
+			type: String,
 			default: undefined,
+			validator: cssValidator('font-size'),
 		},
 		/**
 		 * Main color of button
@@ -199,22 +211,31 @@ export default {
 			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
 		},
 		/**
-		 * Shape of button
-		 * @values squared, rounded, pill, 'Npx', 'N%'
+		 * Shape of preset button (overridden by borderRadius prop)
+		 * @values squared, rounded, pill
 		 */
 		shape: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape) || shape.match(/\d*\.?\d+(?:px|%)/i),
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
 		 * Shape of button
 		 * @values 'Npx', 'N%'
 		 */
-		shapeHover: {
+		borderRadius: {
 			type: String,
 			default: undefined,
-			validator: (shape) => shape.match(/\d*\.?\d+(?:px|%)/i),
+			validator: cssValidator('border-radius'),
+		},
+		/**
+		 * Shape of button
+		 * @values 'Npx', 'N%'
+		 */
+		borderRadiusHover: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('border-radius'),
 		},
 		/**
 		 * Border width of button (e.g. '3px')
@@ -222,6 +243,7 @@ export default {
 		borderWidth: {
 			type: String,
 			default: undefined,
+			validator: cssValidator('border-width'),
 		},
 		/**
 		 * Border hover width of button (e.g. '3px')
@@ -229,6 +251,7 @@ export default {
 		borderWidthHover: {
 			type: String,
 			default: undefined,
+			validator: cssValidator('border-width'),
 		},
 
 		/**
@@ -248,12 +271,12 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Box-shadow of button (e.g. 0px 0px 1px 3px #000000 or 0px 0px 1px 3px rgba(0, 0, 0, 0.5))
+		 * Box-shadow of button
 		 */
 		boxShadow: {
 			type: String,
 			default: undefined,
-			validator: (boxShadow) => boxShadow.match(/(\d*\.?\d+px\s+){4}(#[\da-z]{6}|rgba\((\s*\d+\s*,){3}\s*[\d.]+\))/i),
+			validator: cssValidator('box-shadow'),
 		},
 		/**
 		 * Box-shadow hover of button
@@ -261,7 +284,7 @@ export default {
 		boxShadowHover: {
 			type: String,
 			default: undefined,
-			validator: (boxShadow) => boxShadow.match(/(\d*\.?\d+px\s+){4}(#[\da-z]{6}|rgba\((\s*\d+\s*,){3}\s*[\d.]+\))/i),
+			validator: cssValidator('box-shadow'),
 		},
 		/**
 		 * Toggles button disabled state
@@ -292,11 +315,13 @@ export default {
 			'color',
 			'colorHover',
 			'size',
+			'textSize',
 			'textColor',
 			'textColorHover',
 			'variant',
 			'shape',
-			'shapeHover',
+			'borderRadius',
+			'borderRadiusHover',
 			'align',
 			'fullWidth',
 			'pattern',
@@ -313,8 +338,8 @@ export default {
 				colorHover: this.resolvedColorHover,
 				textColor: this.resolvedTextColor,
 				textColorHover: this.resolvedTextColorHover,
-				shape: this.resolvedShape,
-				shapeHover: this.resolvedShapeHover,
+				borderRadius: this.resolvedBorderRadius,
+				borderRadiusHover: this.resolvedBorderRadiusHover,
 				borderWidth: this.resolvedBorderWidth,
 				borderWidthHover: this.resolvedBorderWidthHover,
 				borderColor: this.resolvedBorderColor,
@@ -330,19 +355,19 @@ export default {
 			return this.disabled || this.loading;
 		},
 		fontSize() {
-			switch (this.resolvedSize) {
-			case 'small':
-				return '12px';
-			case 'medium':
-				return '14px';
-			case 'large':
-				return '16px';
-			default:
-				return undefined;
+			if (!this.resolvedTextSize) {
+				switch (this.resolvedSize) {
+				case 'small':
+					return '12px';
+				case 'medium':
+					return '14px';
+				case 'large':
+					return '16px';
+				default:
+					return undefined;
+				}
 			}
-		},
-		fontWeight() {
-			return this.resolvedSize === 'expandable' ? undefined : '500';
+			return this.resolvedTextSize;
 		},
 	},
 
@@ -366,7 +391,7 @@ export default {
 <style module="$s">
 .Button {
 	--radius-rounded-button: 8px;
-	--radius-pill-button: 36px;
+	--radius-pill-button: 32px;
 
 	position: relative;
 	display: inline-flex;
@@ -411,13 +436,8 @@ export default {
 		min-width: max-content;
 	}
 
-	&.size_expandable {
-		min-height: 48px;
-		padding: 5px 20px;
-	}
-
 	&.size_small {
-		height: 36px;
+		height: 32px;
 		padding: var(--small-padding);
 		font-size: 12px;
 
@@ -426,7 +446,7 @@ export default {
 		}
 
 		&.iconButton {
-			width: 36px;
+			width: 32px;
 			padding: 0;
 		}
 	}

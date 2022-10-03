@@ -13,22 +13,35 @@
 			</label>
 			<h3>Button settings</h3>
 			<p>* - Not applied on outline buttons</p>
-			<select
-				v-model="textPattern"
-			>
-				<option>
-					paragraph
-				</option>
-				<option>
-					label
-				</option>
-				<option>
-					title
-				</option>
-				<option>
-					headline
-				</option>
-			</select>
+			<label>
+				<select
+					v-model="textPattern"
+				>
+					<option>
+						paragraph
+					</option>
+					<option>
+						label
+					</option>
+					<option>
+						title
+					</option>
+					<option>
+						headline
+					</option>
+				</select>
+				Text style
+			</label>
+			<label>
+				<input
+					v-model="textSize"
+					type="range"
+					min="12"
+					max="32"
+					step="2"
+				>
+				Text size: {{ textSize }}
+			</label>
 			<label>
 				<input
 					v-model="color"
@@ -61,7 +74,7 @@
 			<div class="choice">
 				<label>
 					<input
-						v-model="shape"
+						v-model="borderRadius"
 						type="number"
 						min="0"
 						max="32"
@@ -90,7 +103,7 @@
 			<div class="choice">
 				<label>
 					<input
-						v-model="shapeHover"
+						v-model="borderRadiusHover"
 						type="number"
 						min="0"
 						max="32"
@@ -212,6 +225,9 @@
 					<th>
 						Outline
 					</th>
+					<th>
+						Ghost
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -222,7 +238,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							size="large"
 						>
 							Button
@@ -231,7 +247,16 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+							size="large"
+						>
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 							size="large"
 						>
 							Button
@@ -245,7 +270,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							size="medium"
 						>
 							Button
@@ -254,7 +279,16 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+							size="medium"
+						>
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 							size="medium"
 						>
 							Button
@@ -268,7 +302,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							size="small"
 						>
 							Button
@@ -277,31 +311,17 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
 							size="small"
 						>
 							Button
 						</m-button>
 					</td>
-				</tr>
-				<tr>
-					<th>
-						Expandable
-					</th>
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
-							size="expandable"
-						>
-							Button
-						</m-button>
-					</td>
-					<td>
-						<m-button
-							v-bind="buttonProps"
-							pattern="outline"
-							size="expandable"
+							variant="ghost"
+							size="small"
 						>
 							Button
 						</m-button>
@@ -314,7 +334,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							disabled
 						>
 							Button
@@ -323,7 +343,16 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+							disabled
+						>
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 							disabled
 						>
 							Button
@@ -337,7 +366,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 						>
 							Button
 							<template #information>
@@ -348,7 +377,18 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 						>
 							Button
 							<template #information>
@@ -364,7 +404,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							align="stack"
 						>
 							Button
@@ -376,7 +416,19 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+							align="stack"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 							align="stack"
 						>
 							Button
@@ -393,7 +445,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							align="space-between"
 						>
 							Button
@@ -405,7 +457,19 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+							align="space-between"
+						>
+							Button
+							<template #information>
+								Information
+							</template>
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 							align="space-between"
 						>
 							Button
@@ -422,7 +486,7 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="fill"
+							variant="fill"
 							full-width
 						>
 							Button
@@ -431,7 +495,16 @@
 					<td>
 						<m-button
 							v-bind="buttonProps"
-							pattern="outline"
+							variant="outline"
+							full-width
+						>
+							Button
+						</m-button>
+					</td>
+					<td>
+						<m-button
+							v-bind="buttonProps"
+							variant="ghost"
 							full-width
 						>
 							Button
@@ -449,13 +522,14 @@ import { MTheme } from '@square/maker/components/Theme';
 import makerColors from '@square/maker/utils/maker-colors';
 
 const defaultButtonProps = {
-	textPattern: 'paragraph',
+	textPattern: 'label',
 	color: '#9142ff',
 	colorHover: undefined,
+	textSize: undefined,
 	textColor: '#ffffff',
 	textColorHover: undefined,
-	shape: undefined,
-	shapeHover: undefined,
+	borderRadius: undefined,
+	borderRadiusHover: undefined,
 	borderWidth: undefined,
 	borderWidthHover: undefined,
 	borderColor: undefined,
@@ -517,12 +591,13 @@ export default {
 		buttonProps() {
 			const {
 				textPattern,
+				textSize,
 				color,
 				colorHover,
 				textColor,
 				textColorHover,
-				shape,
-				shapeHover,
+				borderRadius,
+				borderRadiusHover,
 				borderWidth,
 				borderWidthHover,
 				borderColor,
@@ -554,8 +629,9 @@ export default {
 				borderColorHover,
 				boxShadow,
 				boxShadowHover,
-				...(shape && { shape: `${shape}px` }),
-				...(shapeHover && { shapeHover: `${shapeHover}px` }),
+				...(textSize && { textSize: `${textSize}px` }),
+				...(borderRadius && { borderRadius: `${borderRadius}px` }),
+				...(borderRadiusHover && { borderRadiusHover: `${borderRadiusHover}px` }),
 				...(borderWidth && { borderWidth: `${borderWidth}px` }),
 				...(borderWidthHover && { borderWidthHover: `${borderWidthHover}px` }),
 			};
