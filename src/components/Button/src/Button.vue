@@ -3,7 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`variant_${resolvedVariant}`],
-			$s[`size_${resolvedSize}`],
+			$s[`size_${adjustedSize}`],
 			$s[`shape_${resolvedShape}`],
 			$s[`align_${resolvedAlign}`],
 			{
@@ -30,7 +30,7 @@
 				}
 			]"
 			:pattern="textPattern"
-			:font-size="fontSize"
+			:font-size="resolvedTextSize || 'inherit'"
 			element="span"
 			color="inherit"
 		>
@@ -42,7 +42,7 @@
 			v-if="$scopedSlots.information"
 			:class="[$s.InformationText, $s.TruncateText]"
 			:pattern="textPattern"
-			:font-size="fontSize"
+			:font-size="resolvedTextSize || 'inherit'"
 			element="span"
 			color="inherit"
 		>
@@ -58,6 +58,7 @@
 import cssValidator from '@square/maker/utils/css-validator';
 import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
+import { BASE_TEN } from '@square/maker/utils/constants';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MText } from '@square/maker/components/Text';
@@ -140,7 +141,7 @@ export default {
 			default: 'button',
 		},
 		/**
-		 * Size of the button
+		 * Size of the button (overridden by `textSize`)
 		 */
 		size: {
 			type: String,
@@ -162,7 +163,7 @@ export default {
 			default: 'label',
 		},
 		/**
-		 * MText size in button label
+		 * MText size in button label (overrides `size`)
 		 */
 		textSize: {
 			type: String,
@@ -354,20 +355,21 @@ export default {
 		isDisabled() {
 			return this.disabled || this.loading;
 		},
-		fontSize() {
-			if (!this.resolvedTextSize) {
-				switch (this.resolvedSize) {
-				case 'small':
-					return '12px';
-				case 'medium':
-					return '14px';
-				case 'large':
-					return '16px';
-				default:
-					return undefined;
+		adjustedSize() {
+			// Scale button size to textSize if one is set
+			if (this.resolvedTextSize) {
+				const fontSize = Number.parseInt(this.resolvedTextSize, BASE_TEN);
+				const SMALL_MAX = 14;
+				const MEDIUM_MAX = 24;
+				if (fontSize > MEDIUM_MAX) {
+					return 'large';
 				}
+				if (fontSize > SMALL_MAX) {
+					return 'medium';
+				}
+				return 'small';
 			}
-			return this.resolvedTextSize;
+			return this.resolvedSize;
 		},
 	},
 
