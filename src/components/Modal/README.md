@@ -822,12 +822,14 @@ export default {
 
 	methods: {
 		closeAll() {
-			this.modalApi.close();
+			// this.modalApi.closeAll();
 
-			const { parentModal } = this.modalApi.state;
-			if (parentModal) {
-				parentModal.close();
-			}
+			this.modalApi.forceCloseParent();
+
+			// const { parentModal } = this.modalApi.state;
+			// if (parentModal) {
+			// 	parentModal.close();
+			// }
 		},
 	},
 };

@@ -19,6 +19,6 @@ export default {
 <style>
 body {
 	margin: 0;
-	background-color: #f8f8fb;
+	font-family: -apple-system, 'Helvetica Neue', sans-serif;
 }
 </style>

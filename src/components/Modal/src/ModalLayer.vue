@@ -57,6 +57,10 @@ import RenderFn from '@square/maker/utils/RenderFn';
 import modalApi from './modal-api';
 import { PopoverAPIKey } from '../../Popover/src/keys';
 
+function isPromise(thing) {
+	return typeof thing === 'object' && typeof thing.then === 'function';
+}
+
 const apiMixin = {
 	inject: {
 		currentLayer: {
@@ -87,25 +91,121 @@ const apiMixin = {
 				};
 			},
 
-			async close() {
-				const isModalActive = !this.state.renderFn; // Verify there's no modal on top
+			close() {
+				const modalOnTop = !!this.state.renderFn;
+				// can't close modal if it has another modal on top
+				if (modalOnTop) {
+					return false;
+				}
+				const noLayer = !vm.currentLayer;
+				// no modal to close, so "closing" is successful
+				if (noLayer) {
+					return true;
+				}
 
-				if (isModalActive && vm.currentLayer) {
-					if (typeof this.state.options.beforeCloseHook === 'function') {
-						if (!(await this.state.options.beforeCloseHook())) {
-							return; // cancel
+				if (typeof this.state.options.beforeCloseHook === 'function') {
+					const canClose = this.state.options.beforeCloseHook();
+					if (isPromise(canClose)) {
+						return new Promise(async (resolve, reject) => {
+							let resolvedCanClose = true;
+							try {
+								resolvedCanClose = await canClose;
+							} catch (e) {
+								reject(e);
+								return;
+							}
+							if (!resolvedCanClose) {
+								resolve(false);
+								return;
+							}
+							// Close the open popover (if present) and then close the modal in the next tick.
+							// Closing at the same time will result in the popover content becoming inline and
+							// causes a weird content shift as the modal fades away.
+							if (vm.popoverApi?.currentInstance) {
+								vm.popoverApi.closePopover();
+								vm.$nextTick(() => {
+									vm.currentLayer.state.renderFn = undefined;
+									resolve(true);
+								});
+								return;
+							// no popover open
+							} else {
+								vm.currentLayer.state.renderFn = undefined;
+								resolve(true);
+								return;
+							}
+						});
+					// canClose is not a promise
+					} else {
+						if (!canClose) {
+							return false;
 						}
 					}
+				}
 
-					// Close the open popover (if present) and then close the modal in the next tick.
-					// Closing at the same time will result in the popover content becoming inline and
-					// causes a weird content shift as the modal fades away.
-					vm.popoverApi?.closePopover();
-					vm.$nextTick(() => {
-						vm.currentLayer.state.renderFn = undefined;
+				// no beforeCloseHook, safe to close
+
+				// Close the open popover (if present) and then close the modal in the next tick.
+				// Closing at the same time will result in the popover content becoming inline and
+				// causes a weird content shift as the modal fades away.
+				if (vm.popoverApi?.currentInstance) {
+					vm.popoverApi.closePopover();
+					return new Promise((resolve, _reject) => {
+						vm.$nextTick(() => {
+							vm.currentLayer.state.renderFn = undefined;
+							resolve(true);
+						});
 					});
+				// no popover open
+				} else {
+					vm.currentLayer.state.renderFn = undefined;
+					return true;
 				}
 			},
+
+			closeAll() {
+				const closed = this.close();
+
+				if (isPromise(closed)) {
+					return new Promise(async (resolve, reject) => {
+						let resolvedClose = true;
+						try {
+							resolvedClose = await closed;
+						} catch (e) {
+							reject(e);
+							return;
+						}
+						if (!resolvedClose) {
+							resolve(false);
+							return;
+						}
+						if (vm.currentLayer) {
+							const resolvedClosedAll = await vm.currentLayer.closeAll();
+							resolve(resolvedClosedAll);
+							return;
+						}
+					});
+				// closed is not a promise
+				} else {
+					if (!closed) {
+						return false;
+					}
+				}
+
+				if (vm.currentLayer) {
+					return vm.currentLayer.closeAll();
+				}
+
+				// closed
+				return true;
+			},
+
+			forceCloseParent() {
+				if (vm.currentLayer && vm.currentLayer.state.parentModal) {
+					vm.currentLayer.state.parentModal.state.renderFn = undefined;
+				}
+				return true;
+			}
 		};
 
 		if (!this.modalApi) {
