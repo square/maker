@@ -1,17 +1,22 @@
 <template>
+	<!--
+		a modal is always opened from the "parent"
+		which is why every layer's template references
+		the parentModalApi instead of the modalApi
+	-->
 	<div :class="$s.Layer">
 		<m-transition-fade-in>
 			<div
-				v-if="currentLayer.state.renderFn"
+				v-if="parentModalApi.state.renderFn"
 				:class="[
 					$s.Translucent,
-					{ [$s.Transparent]: currentLayer.state.isStacked },
+					{ [$s.Transparent]: parentModalApi.state.isStacked },
 				]"
 			/>
 		</m-transition-fade-in>
 		<m-transition-responsive :transitions="transitions">
 			<div
-				v-if="currentLayer.state.renderFn"
+				v-if="parentModalApi.state.renderFn"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
 				@click.capture="closeOnClickOutside"
@@ -28,11 +33,11 @@
 					ref="modal"
 					:class="$s.Container"
 				>
-					<render-fn :render-fn="currentLayer.state.renderFn" />
+					<render-fn :render-fn="parentModalApi.state.renderFn" />
 				</div>
 			</div>
 		</m-transition-responsive>
-		<modal-layer v-if="currentLayer.state.renderFn" />
+		<modal-layer v-if="parentModalApi.state.renderFn" />
 	</div>
 </template>
 
@@ -156,8 +161,10 @@ function closeModal(api) {
 }
 
 const apiMixin = {
+	// parentModalApi contains the renderFn, options,
+	// and beforeClose hooks to be used for this layer
 	inject: {
-		currentLayer: {
+		parentModalApi: {
 			default: undefined,
 			from: modalApi,
 		},
@@ -176,11 +183,11 @@ const apiMixin = {
 				// options passed via api.open
 				options: {},
 				// true if this modal has a modal beneath it
-				isStacked: !!vm.currentLayer,
+				isStacked: !!vm.parentModalApi,
 				// although parentModal is not used within Maker it's used
 				// by some of our users so removing it would be a breaking
 				// change and require a major release
-				parentModal: vm.currentLayer,
+				parentModal: vm.parentModalApi,
 			}),
 
 			// only called from parent
@@ -215,28 +222,28 @@ const apiMixin = {
 			// only called from parent
 			countChild() {
 				this.state.children += ONE;
-				if (vm.currentLayer) {
-					vm.currentLayer.countChild();
+				if (vm.parentModalApi) {
+					vm.parentModalApi.countChild();
 				}
 			},
 
 			// only called from parent
 			uncountChild() {
 				this.state.children -= ONE;
-				if (vm.currentLayer) {
-					vm.currentLayer.uncountChild();
+				if (vm.parentModalApi) {
+					vm.parentModalApi.uncountChild();
 				}
 			},
 
 			// only called from child
 			// allows child modal to register hook with parent
 			registerBeforeCloseHook(hook) {
-				vm.currentLayer.state.localBeforeCloseHook = hook;
+				vm.parentModalApi.state.localBeforeCloseHook = hook;
 			},
 
 			// only called from child
 			close() {
-				return closeModal(vm.currentLayer);
+				return closeModal(vm.parentModalApi);
 			},
 
 			// only called from child
@@ -254,8 +261,8 @@ const apiMixin = {
 								return false;
 							}
 							// async resolve closing parents
-							if (vm.currentLayer) {
-								return vm.currentLayer.closeAll();
+							if (vm.parentModalApi) {
+								return vm.parentModalApi.closeAll();
 							}
 							// closing was successful
 							return true;
@@ -269,8 +276,8 @@ const apiMixin = {
 				}
 
 				// sync resolve closing parents
-				if (vm.currentLayer) {
-					return vm.currentLayer.closeAll();
+				if (vm.parentModalApi) {
+					return vm.parentModalApi.closeAll();
 				}
 
 				// closing was successful
@@ -309,7 +316,7 @@ export default {
 	data() {
 		let tabletEnterFn = floatUpFn;
 		let tabletLeaveFn = floatDownFn;
-		if (this.currentLayer.state.isStacked) {
+		if (this.parentModalApi.state.isStacked) {
 			tabletEnterFn = delayedFloatUpFn;
 			tabletLeaveFn = floatDownFn;
 		}
@@ -361,14 +368,14 @@ export default {
 
 	methods: {
 		closeOnClickOutside(event) {
-			const { closeOnClickOutside } = this.currentLayer.state.options;
+			const { closeOnClickOutside } = this.parentModalApi.state.options;
 			const { modal } = this.$refs;
 			if (modal && closeOnClickOutside && !modal.contains(event.target)) {
 				this.modalApi.close();
 			}
 		},
 		closeOnEsc() {
-			const { closeOnEsc } = this.currentLayer.state.options;
+			const { closeOnEsc } = this.parentModalApi.state.options;
 			const { modal } = this.$refs;
 
 			if (modal && closeOnEsc) {

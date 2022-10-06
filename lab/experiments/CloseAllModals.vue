@@ -4,7 +4,7 @@
 			open modal
 		</button>
 		<button @click="openAndCloseModal">
-			open & close modal
+			open & close modal in 5 secs
 		</button>
 		<m-modal-layer />
 	</div>
