@@ -9,7 +9,7 @@
 
 <script>
 import { MModalLayer } from '@square/maker/components/Modal';
-import ActionBarModal from '../components/ActionBarModal.vue';
+import MultiModal from '../components/MultiModal.vue';
 
 export default {
 	components: {
@@ -20,15 +20,9 @@ export default {
 		MModalLayer.apiMixin,
 	],
 
-	data() {
-		return {
-			count: 0,
-		};
-	},
-
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <ActionBarModal />);
+			this.modalApi.open(() => <MultiModal />);
 		},
 	},
 };

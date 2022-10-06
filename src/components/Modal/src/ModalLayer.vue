@@ -55,10 +55,113 @@ import {
 } from '@square/maker/utils/transitions';
 import RenderFn from '@square/maker/utils/RenderFn';
 import modalApi from './modal-api';
-import { PopoverAPIKey } from '../../Popover/src/keys';
 
 function isPromise(thing) {
 	return typeof thing === 'object' && typeof thing.then === 'function';
+}
+
+/**
+ * The reason this function is so complicated is because half of
+ * it is written expecting the beforeClose hooks to be sync and
+ * the other half of it is written expecting the beforeClose hooks
+ * to be async. It could be greatly simplified if we just assumed
+ * the beforeClose hooks were async BUT that would slow down closing
+ * a stack of multiple modals and creates some visual oddities SO
+ * for the sake of user experience we expect the HAPPY PATH for there to
+ * be no beforeClose hooks or for all the beforeClose hooks to be sync
+ * so we can close all the modals as quickly as possible without causing
+ * any visual hiccups.
+ */
+function closeModal(api) {
+	// no api means no layer means no modal to close
+	if (!api) {
+		return true;
+	}
+
+	// check beforeCloseHook set via Modal's beforeClose prop
+	if (typeof api.state.localBeforeCloseHook === 'function') {
+		const canCloseLocal = api.state.localBeforeCloseHook();
+		// check if result is a promise, i.e. hook is async
+		if (isPromise(canCloseLocal)) {
+			// resolve async result
+			return new Promise(async (resolve, reject) => {
+				let resolvedCanCloseLocal = true;
+				try {
+					resolvedCanCloseLocal = await canCloseLocal;
+				} catch (error) {
+					reject(error);
+					return;
+				}
+				// async block closing if beforeClose returned false
+				if (!resolvedCanCloseLocal) {
+					resolve(false);
+					return;
+				}
+				// async check beforeCloseHook set via api options
+				if (typeof api.state.options.beforeCloseHook === 'function') {
+					let resolvedCanCloseOpt = true;
+					try {
+						resolvedCanCloseOpt = await api.state.options.beforeCloseHook();
+					} catch (error) {
+						reject(error);
+						return;
+					}
+					// async block closing if beforeClose returned false
+					if (!resolvedCanCloseOpt) {
+						resolve(false);
+						return;
+					}
+				}
+				// async close modal
+				api.state.renderFn = undefined;
+				resolve(true);
+			});
+		}
+		// canCloseLocal is not a promise, i.e. hook is sync
+		// sync block closing if beforeClose returned false
+		if (!canCloseLocal) {
+			return false;
+		}
+	}
+
+	// sync check beforeCloseHook set via api options
+	if (typeof api.state.options.beforeCloseHook === 'function') {
+		const canCloseOpt = api.state.options.beforeCloseHook();
+		// check if result is a promise, i.e. hook is async
+		if (isPromise(canCloseOpt)) {
+			// resolve async result
+			return new Promise(async (resolve, reject) => {
+				let resolvedCanCloseOpt = true;
+				try {
+					resolvedCanCloseOpt = await canCloseOpt;
+				} catch (error) {
+					reject(error);
+					return;
+				}
+				// async block closing if beforeClose returned false
+				if (!resolvedCanCloseOpt) {
+					resolve(false);
+					return;
+				}
+				// async close modal
+				api.state.renderFn = undefined;
+				resolve(true);
+			});
+		}
+		// canCloseOpt is not a promise, i.e. hook is sync
+		// sync block closing if beforeClose returned false
+		if (!canCloseOpt) {
+			return false;
+		}
+	}
+
+	// execution can only reach this point if:
+	// 1. there were no registered beforeClose hooks or
+	// 2. all beforeClose hooks were sync and returned true
+
+	// sync close modal
+	api.state.renderFn = undefined;
+	return true;
 }
 
 const apiMixin = {
@@ -74,9 +177,12 @@ const apiMixin = {
 		const api = {
 			state: Vue.observable({
 				renderFn: undefined,
+				localBeforeCloseHook: undefined,
 				options: {},
 				isStacked: !!vm.currentLayer,
-				// return parent modal to allow to close child and parent modals at the same time
+				// although parentModal is not used within Maker it's used
+				// by some of our users so removing it would be a breaking
+				// change and require a major release
 				parentModal: vm.currentLayer,
 			}),
 
@@ -91,121 +197,62 @@ const apiMixin = {
 				};
 			},
 
+			// allows child modal to register hook with parent layer
+			registerBeforeCloseHook(hook) {
+				vm.currentLayer.state.localBeforeCloseHook = hook;
+			},
+
 			close() {
 				const modalOnTop = !!this.state.renderFn;
-				// can't close modal if it has another modal on top
+				// can't close this modal if it currently
+				// has another modal on top of it
 				if (modalOnTop) {
 					return false;
 				}
-				const noLayer = !vm.currentLayer;
-				// no modal to close, so "closing" is successful
-				if (noLayer) {
-					return true;
-				}
-
-				if (typeof this.state.options.beforeCloseHook === 'function') {
-					const canClose = this.state.options.beforeCloseHook();
-					if (isPromise(canClose)) {
-						return new Promise(async (resolve, reject) => {
-							let resolvedCanClose = true;
-							try {
-								resolvedCanClose = await canClose;
-							} catch (e) {
-								reject(e);
-								return;
-							}
-							if (!resolvedCanClose) {
-								resolve(false);
-								return;
-							}
-							// Close the open popover (if present) and then close the modal in the next tick.
-							// Closing at the same time will result in the popover content becoming inline and
-							// causes a weird content shift as the modal fades away.
-							if (vm.popoverApi?.currentInstance) {
-								vm.popoverApi.closePopover();
-								vm.$nextTick(() => {
-									vm.currentLayer.state.renderFn = undefined;
-									resolve(true);
-								});
-								return;
-							// no popover open
-							} else {
-								vm.currentLayer.state.renderFn = undefined;
-								resolve(true);
-								return;
-							}
-						});
-					// canClose is not a promise
-					} else {
-						if (!canClose) {
-							return false;
-						}
-					}
-				}
-
-				// no beforeCloseHook, safe to close
-
-				// Close the open popover (if present) and then close the modal in the next tick.
-				// Closing at the same time will result in the popover content becoming inline and
-				// causes a weird content shift as the modal fades away.
-				if (vm.popoverApi?.currentInstance) {
-					vm.popoverApi.closePopover();
-					return new Promise((resolve, _reject) => {
-						vm.$nextTick(() => {
-							vm.currentLayer.state.renderFn = undefined;
-							resolve(true);
-						});
-					});
-				// no popover open
-				} else {
-					vm.currentLayer.state.renderFn = undefined;
-					return true;
-				}
+				return closeModal(vm.currentLayer);
 			},
 
 			closeAll() {
 				const closed = this.close();
 
+				// check if closed is a promise, i.e. close ran async
 				if (isPromise(closed)) {
+					// resolve async result
 					return new Promise(async (resolve, reject) => {
 						let resolvedClose = true;
 						try {
 							resolvedClose = await closed;
-						} catch (e) {
-							reject(e);
+						} catch (error) {
+							reject(error);
 							return;
 						}
+						// async block closing if closed returned false
 						if (!resolvedClose) {
 							resolve(false);
 							return;
 						}
+						// async recursively resolve parent layers
 						if (vm.currentLayer) {
 							const resolvedClosedAll = await vm.currentLayer.closeAll();
 							resolve(resolvedClosedAll);
-							return;
 						}
 					});
-				// closed is not a promise
-				} else {
-					if (!closed) {
-						return false;
-					}
 				}
 
+				// closed is not a promise, i.e. close ran sync
+				// sync block closing if closed returned false
+				if (!closed) {
+					return false;
+				}
+
+				// sync resolve parent layers
 				if (vm.currentLayer) {
 					return vm.currentLayer.closeAll();
 				}
 
-				// closed
+				// closing all layers was successful
 				return true;
 			},
-
-			forceCloseParent() {
-				if (vm.currentLayer && vm.currentLayer.state.parentModal) {
-					vm.currentLayer.state.parentModal.state.renderFn = undefined;
-				}
-				return true;
-			}
 		};
 
 		if (!this.modalApi) {
@@ -231,13 +278,6 @@ export default {
 	mixins: [
 		apiMixin,
 	],
-
-	inject: {
-		popoverApi: {
-			from: PopoverAPIKey,
-			default: undefined,
-		},
-	},
 
 	inheritAttrs: false,
 
@@ -272,10 +312,8 @@ export default {
 			const isClosingStackedModal = !isOpeningStackedModal;
 			const element = this.$refs.baseModalLayer;
 
-			/*
-			element can be undefined when closing child modal and parent modal at the same so
-			we need to check if element exists before applying transitions
-			*/
+			// element can be undefined when closing child modal and parent modal
+			// at once so we check if element exists before applying transitions
 			if (!element) {
 				return;
 			}
