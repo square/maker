@@ -80,17 +80,18 @@
 			async beforeClose hooks: mixed
 			<br>
 			<button @click="openNested({ propSync: false, propReturn: true, optSync: false, optReturn: false })">
-				async prop: true, sync option: false
+				async prop: true, async option: false
 			</button>
 			<br>
 			<button @click="openNested({ propSync: false, propReturn: false, optSync: false, optReturn: true })">
-				async prop: false, sync option: true
+				async prop: false, async option: true
 			</button>
 			<br>
 			mixed a/sync beforeClose hooks: mixed
 			<br>
-			<!-- todo implement this part -->
-
+			<button @click="openNested({ propSync: false, propReturn: true, optSync: false, optReturn: false })">
+				async prop: true, sync option: false
+			</button>
 			<br>
 			closing via popover
 			<br>

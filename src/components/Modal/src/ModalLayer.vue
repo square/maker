@@ -56,6 +56,8 @@ import {
 import RenderFn from '@square/maker/utils/RenderFn';
 import modalApi from './modal-api';
 
+const ONE = 1;
+
 function isPromise(thing) {
 	return typeof thing === 'object' && typeof thing.then === 'function';
 }
@@ -76,6 +78,12 @@ function closeModal(api) {
 	// no api means no layer means no modal to close
 	if (!api) {
 		return true;
+	}
+
+	// can't close modal if there is another modal stacked
+	// on top if it, must close that stacked modal first
+	if (api.state.children > ONE) {
+		return false;
 	}
 
 	// check beforeCloseHook set via Modal's beforeClose prop
@@ -114,6 +122,7 @@ function closeModal(api) {
 				}
 				// async close modal
 				api.state.renderFn = undefined;
+				api.uncountChild();
 				resolve(true);
 			});
 		}
@@ -145,6 +154,7 @@ function closeModal(api) {
 				}
 				// async close modal
 				api.state.renderFn = undefined;
+				api.uncountChild();
 				resolve(true);
 			});
 		}
@@ -161,6 +171,7 @@ function closeModal(api) {
 
 	// sync close modal
 	api.state.renderFn = undefined;
+	api.uncountChild();
 	return true;
 }
 
@@ -176,9 +187,15 @@ const apiMixin = {
 		const vm = this;
 		const api = {
 			state: Vue.observable({
+				// modal render function, passed via api.open
 				renderFn: undefined,
+				// modal beforeClose, set via beforeClose prop
 				localBeforeCloseHook: undefined,
+				// number of child modals stacked on this layer
+				children: 0,
+				// options passed via api.open
 				options: {},
+				// true if this modal has a modal beneath it
 				isStacked: !!vm.currentLayer,
 				// although parentModal is not used within Maker it's used
 				// by some of our users so removing it would be a breaking
@@ -186,22 +203,58 @@ const apiMixin = {
 				parentModal: vm.currentLayer,
 			}),
 
+			// only called from parent
 			open(renderFn, options = {}) {
+				// can't open modal in a layer where
+				// another modal is already open
+				if (this.state.renderFn) {
+					return false;
+				}
 				this.state.renderFn = renderFn;
 				this.state.options = options;
+				this.countChild();
+
+				// only called from parent
 				// returned method only closes this specific modal
 				return () => {
+					// close specific opened modal
 					if (this.state.renderFn === renderFn) {
-						this.state.renderFn = undefined;
+						closeModal(this);
+						return true;
 					}
+					// if no modal is open then "closing" it
+					// is of course trivially "successful"
+					if (!this.state.renderFn) {
+						return true;
+					}
+					// modal not closed
+					return false;
 				};
 			},
 
+			// only called from parent
+			countChild() {
+				this.state.children += ONE;
+				if (vm.currentLayer) {
+					vm.currentLayer.countChild();
+				}
+			},
+
+			// only called from parent
+			uncountChild() {
+				this.state.children -= ONE;
+				if (vm.currentLayer) {
+					vm.currentLayer.uncountChild();
+				}
+			},
+
+			// only called from child
 			// allows child modal to register hook with parent layer
 			registerBeforeCloseHook(hook) {
 				vm.currentLayer.state.localBeforeCloseHook = hook;
 			},
 
+			// only called from child
 			close() {
 				const modalOnTop = !!this.state.renderFn;
 				// can't close this modal if it currently
@@ -212,6 +265,7 @@ const apiMixin = {
 				return closeModal(vm.currentLayer);
 			},
 
+			// only called from child
 			closeAll() {
 				const closed = this.close();
 
