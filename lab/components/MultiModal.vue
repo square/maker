@@ -89,7 +89,7 @@
 			<br>
 			mixed a/sync beforeClose hooks: mixed
 			<br>
-			<button @click="openNested({ propSync: false, propReturn: true, optSync: false, optReturn: false })">
+			<button @click="openNested({ propSync: false, propReturn: true, optSync: true, optReturn: false })">
 				async prop: true, sync option: false
 			</button>
 			<br>

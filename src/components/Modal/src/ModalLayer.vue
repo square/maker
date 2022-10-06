@@ -63,16 +63,14 @@ function isPromise(thing) {
 }
 
 /**
- * The reason this function is so complicated is because half of
- * it is written expecting the beforeClose hooks to be sync and
- * the other half of it is written expecting the beforeClose hooks
- * to be async. It could be greatly simplified if we just assumed
- * the beforeClose hooks were async BUT that would slow down closing
- * a stack of multiple modals and creates some visual oddities SO
- * for the sake of user experience we expect the HAPPY PATH for there to
- * be no beforeClose hooks or for all the beforeClose hooks to be sync
- * so we can close all the modals as quickly as possible without causing
- * any visual hiccups.
+ * This function can be simplified if refactored into an async function
+ * HOWEVER it was intentionally written using explicit Promises because
+ * it allows us to optimize for the HAPPY PATH where all of the steps
+ * can be executed synchronously which closes a stack of modals much
+ * faster and with fewer visual hiccups which creates a better user
+ * experience. So please do not attempt to refactor this into an async
+ * function to "clean up" the code because you'll be making it slower.
+ * @return {boolean} true if no modal or modal was closed, false otherwise
  */
 function closeModal(api) {
 	// no api means no layer means no modal to close
@@ -92,39 +90,28 @@ function closeModal(api) {
 		// check if result is a promise, i.e. hook is async
 		if (isPromise(canCloseLocal)) {
 			// resolve async result
-			return new Promise(async (resolve, reject) => {
-				let resolvedCanCloseLocal = true;
-				try {
-					resolvedCanCloseLocal = await canCloseLocal;
-				} catch (error) {
-					reject(error);
-					return;
-				}
-				// async block closing if beforeClose returned false
-				if (!resolvedCanCloseLocal) {
-					resolve(false);
-					return;
-				}
-				// async check beforeCloseHook set via api options
-				if (typeof api.state.options.beforeCloseHook === 'function') {
-					let resolvedCanCloseOpt = true;
-					try {
-						resolvedCanCloseOpt = await api.state.options.beforeCloseHook();
-					} catch (error) {
-						reject(error);
-						return;
+			return canCloseLocal
+				.then((resolvedCanCloseLocal) => {
+					// block closing if returned false
+					if (!resolvedCanCloseLocal) {
+						return false;
 					}
-					// async block closing if beforeClose returned false
+					// check beforeClose hook set via options in api.open
+					if (typeof api.state.options.beforeCloseHook === 'function') {
+						return api.state.options.beforeCloseHook();
+					}
+					// return true to signal that we can close
+					return true;
+				}).then((resolvedCanCloseOpt) => {
+					// block closing if returned false
 					if (!resolvedCanCloseOpt) {
-						resolve(false);
-						return;
+						return false;
 					}
-				}
-				// async close modal
-				api.state.renderFn = undefined;
-				api.uncountChild();
-				resolve(true);
-			});
+					// async close modal
+					api.state.renderFn = undefined;
+					api.uncountChild();
+					return true;
+				});
 		}
 		// canCloseLocal is not a promise, i.e. hook is sync
 		// sync block closing if beforeClose returned false
@@ -139,24 +126,17 @@ function closeModal(api) {
 		// check if result is a promise, i.e. hook is async
 		if (isPromise(canCloseOpt)) {
 			// resolve async result
-			return new Promise(async (resolve, reject) => {
-				let resolvedCanCloseOpt = true;
-				try {
-					resolvedCanCloseOpt = await canCloseOpt;
-				} catch (error) {
-					reject(error);
-					return;
-				}
-				// async block closing if beforeClose returned false
-				if (!resolvedCanCloseOpt) {
-					resolve(false);
-					return;
-				}
-				// async close modal
-				api.state.renderFn = undefined;
-				api.uncountChild();
-				resolve(true);
-			});
+			return canCloseOpt
+				.then((resolvedCanCloseOpt) => {
+					// block closing if returned false
+					if (!resolvedCanCloseOpt) {
+						return false;
+					}
+					// async close modal
+					api.state.renderFn = undefined;
+					api.uncountChild();
+					return true;
+				});
 		}
 		// canCloseOpt is not a promise, i.e. hook is sync
 		// sync block closing if beforeClose returned false
@@ -222,8 +202,8 @@ const apiMixin = {
 						closeModal(this);
 						return true;
 					}
-					// if no modal is open then "closing" it
-					// is of course trivially "successful"
+					// if no modal is open then "closing"
+					// it trivially "successful"
 					if (!this.state.renderFn) {
 						return true;
 					}
@@ -249,48 +229,37 @@ const apiMixin = {
 			},
 
 			// only called from child
-			// allows child modal to register hook with parent layer
+			// allows child modal to register hook with parent
 			registerBeforeCloseHook(hook) {
 				vm.currentLayer.state.localBeforeCloseHook = hook;
 			},
 
 			// only called from child
 			close() {
-				const modalOnTop = !!this.state.renderFn;
-				// can't close this modal if it currently
-				// has another modal on top of it
-				if (modalOnTop) {
-					return false;
-				}
 				return closeModal(vm.currentLayer);
 			},
 
 			// only called from child
 			closeAll() {
+				// try closing this modal
 				const closed = this.close();
 
 				// check if closed is a promise, i.e. close ran async
 				if (isPromise(closed)) {
 					// resolve async result
-					return new Promise(async (resolve, reject) => {
-						let resolvedClose = true;
-						try {
-							resolvedClose = await closed;
-						} catch (error) {
-							reject(error);
-							return;
-						}
-						// async block closing if closed returned false
-						if (!resolvedClose) {
-							resolve(false);
-							return;
-						}
-						// async recursively resolve parent layers
-						if (vm.currentLayer) {
-							const resolvedClosedAll = await vm.currentLayer.closeAll();
-							resolve(resolvedClosedAll);
-						}
-					});
+					return closed
+						.then((resolvedClose) => {
+							// block closing if returned false
+							if (!resolvedClose) {
+								return false;
+							}
+							// async resolve closing parents
+							if (vm.currentLayer) {
+								return vm.currentLayer.closeAll();
+							}
+							// closing was successful
+							return true;
+						});
 				}
 
 				// closed is not a promise, i.e. close ran sync
@@ -299,12 +268,12 @@ const apiMixin = {
 					return false;
 				}
 
-				// sync resolve parent layers
+				// sync resolve closing parents
 				if (vm.currentLayer) {
 					return vm.currentLayer.closeAll();
 				}
 
-				// closing all layers was successful
+				// closing was successful
 				return true;
 			},
 		};
