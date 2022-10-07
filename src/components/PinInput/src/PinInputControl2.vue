@@ -1,5 +1,8 @@
 <template>
-	<div :class="$s.PinInputContainer">
+	<div
+		:class="$s.PinInputContainer"
+		:style="computedStyles"
+	>
 		<input
 			ref="input"
 			:class="$s.PinInput"
@@ -22,6 +25,7 @@
 				:class="{
 					[$s.PinInputCell]: true,
 					[$s.isFocused]: isCellFocused(pinPosition - 1),
+					[$s.fill]: variant === 'fill',
 				}"
 			>
 				{{ inputValue[pinPosition - 1] }}
@@ -45,6 +49,15 @@ export default {
 			default: DEFAULT_INPUT_SIZE,
 			validator: (value) => value > 0 && value <= DEFAULT_INPUT_SIZE,
 		},
+
+		/**
+		 * Input variant
+		 */
+		variant: {
+			type: String,
+			default: 'fill',
+			validator: (variant) => ['fill', 'outline'].includes(variant),
+		},
 	},
 
 	data() {
@@ -53,6 +66,16 @@ export default {
 			isFocused: false,
 			caretPosition: undefined,
 		};
+	},
+
+	computed: {
+		computedStyles() {
+			const pinInputWidth = (this.pinLength * 50) + ((this.pinLength - 1) * 8);
+
+			return {
+				'--pin-input-width': `${pinInputWidth}px`,
+			};
+		},
 	},
 
 	methods: {
@@ -124,6 +147,7 @@ export default {
 <style module="$s">
 .PinInputContainer {
 	position: relative;
+	width: var(--pin-input-width);
 }
 
 .PinInput {
@@ -173,6 +197,10 @@ export default {
 
 	&.isFocused {
 		border: 2px solid $maker-color-neutral-80;
+	}
+
+	&.fill {
+		background: $maker-color-neutral-10;
 	}
 }
 </style>
