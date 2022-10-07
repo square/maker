@@ -107,6 +107,104 @@ export default {
 };
 </script>
 ```
+### With smaller pin length
+
+```vue
+<template>
+	<m-pin-input
+		ref="pinInput"
+		:pin-length="3"
+		:invalid="invalidEntry"
+		@complete="onPinComplete"
+	>
+		<template
+			v-if="invalidEntry"
+			#error
+		>
+			<m-notice type="error">
+				Error slot
+			</m-notice>
+		</template>
+	</m-pin-input>
+</template>
+
+<script>
+import { MPinInput } from '@square/maker/components/PinInput';
+import { MNotice } from '@square/maker/components/Notice';
+
+export default {
+	components: {
+		MPinInput,
+		MNotice,
+	},
+	data() {
+		return {
+			testCode: '123',
+			invalidEntry: false,
+		};
+	},
+	methods: {
+		onPinComplete(code) {
+			if (this.testCode === code) {
+				this.invalidEntry = false;
+			} else {
+				this.invalidEntry = true;
+				this.$refs.pinInput.shakeAndClearInputs();
+			}
+		},
+	},
+};
+</script>
+```
+### With larger pin length
+
+```vue
+<template>
+	<m-pin-input
+		ref="pinInput"
+		:pin-length="9"
+		:invalid="invalidEntry"
+		@complete="onPinComplete"
+	>
+		<template
+			v-if="invalidEntry"
+			#error
+		>
+			<m-notice type="error">
+				Error slot
+			</m-notice>
+		</template>
+	</m-pin-input>
+</template>
+
+<script>
+import { MPinInput } from '@square/maker/components/PinInput';
+import { MNotice } from '@square/maker/components/Notice';
+
+export default {
+	components: {
+		MPinInput,
+		MNotice,
+	},
+	data() {
+		return {
+			testCode: '123456789',
+			invalidEntry: false,
+		};
+	},
+	methods: {
+		onPinComplete(code) {
+			if (this.testCode === code) {
+				this.invalidEntry = false;
+			} else {
+				this.invalidEntry = true;
+				this.$refs.pinInput.shakeAndClearInputs();
+			}
+		},
+	},
+};
+</script>
+```
 
 ### With mocked API latency
 

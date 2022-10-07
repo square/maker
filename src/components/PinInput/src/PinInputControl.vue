@@ -60,7 +60,7 @@ export default {
 		pinLength: {
 			type: Number,
 			default: DEFAULT_INPUT_SIZE,
-			validator: (value) => value > 0 && value <= DEFAULT_INPUT_SIZE,
+			validator: (value) => value > 0,
 		},
 
 		/**
