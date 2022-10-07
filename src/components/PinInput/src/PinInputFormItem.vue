@@ -1,7 +1,7 @@
 <template>
 	<m-block-form-control-layout>
 		<template #control>
-			<pin-input-control-two
+			<pin-input-control
 				ref="pinInputControl"
 				:invalid="isInvalid"
 				v-bind="$attrs"
@@ -15,22 +15,7 @@
 						:name="slot"
 					/>
 				</template>
-			</pin-input-control-two>
-			<pin-input-control-old
-				ref="pinInputControl"
-				:invalid="isInvalid"
-				v-bind="$attrs"
-				v-on="$listeners"
-			>
-				<template
-					v-for="(_, slot) of $slots"
-					#[slot]
-				>
-					<slot
-						:name="slot"
-					/>
-				</template>
-			</pin-input-control-old>
+			</pin-input-control>
 		</template>
 		<template #error>
 			<!-- @slot slot for error messages -->
@@ -41,8 +26,7 @@
 
 <script>
 import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLayout';
-import PinInputControlTwo from './PinInputControl2.vue';
-import PinInputControlOld from './PinInputControl.vue';
+import PinInputControl from './PinInputControl.vue';
 
 /**
  * @inheritAttrs ./PinInputControl.vue
@@ -51,8 +35,7 @@ import PinInputControlOld from './PinInputControl.vue';
 export default {
 	components: {
 		MBlockFormControlLayout,
-		PinInputControlTwo,
-		PinInputControlOld,
+		PinInputControl,
 	},
 
 	inheritAttrs: false,

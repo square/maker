@@ -1,51 +1,65 @@
 <template>
 	<div
-		:class="{
-			[$s.PinInputContainer]: true,
-			[$s.shake]: isShaking,
-			[$s.disabled]: disabled,
-			[$s.error]: Boolean($slots.error),
-		}"
+		:class="$s.PinInputContainer"
+		:style="computedStyles"
 	>
 		<input
-			v-for="(val, i) in pin"
-			:key="i"
-			:ref="getPinCellRef(i)"
-			:value="val"
-			:autocomplete="i === 0 ? 'one-time-code' : 'off'"
-			:disabled="disabled"
-			:maxlength="i === 0 ? pinLength : 1"
-			:class="{
-				[$s.PinInputCell]: true,
-				[$s.fill]: variant === 'fill',
-				[$s.error]: invalid,
-			}"
+			ref="input"
+			:class="$s.PinInput"
+			:maxlength="pinLength"
+			:value="inputValue"
 			type="text"
 			inputmode="numeric"
 			pattern="[0-9]*"
-			required
-			@input="onInputPin($event, i)"
-			@paste="onPastePin($event, i)"
-			@focus="onFocusPin($event, i)"
-			@keydown.delete="onDelete($event, i)"
+			:disabled="disabled || isShaking"
+			@keypress="sanitizePinInput"
+			@keyup="updateCaretPosition"
+			@input="onInputPin"
+			@focus="setFocus(true)"
+			@blur="setFocus(false)"
 		>
+
+		<div
+			:class="{
+				[$s.PinInputCells]: true,
+				[$s.isShaking]: isShaking,
+			}"
+		>
+			<div
+				v-for="pinPosition in pinLength"
+				:key="pinPosition"
+				:class="{
+					[$s.PinInputCell]: true,
+					[$s.isFocused]: isCellFocused(pinPosition - 1),
+					[$s.fill]: variant === 'fill',
+					[$s.error]: invalid,
+				}"
+			>
+				{{ inputValue[pinPosition - 1] }}
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-import { BASE_TEN } from '@square/maker/utils/constants';
+const INPUT_FILTER_REGEX = /\D/gi;
+const INPUT_KEY_REGEX = /\d/;
 
 const DEFAULT_INPUT_SIZE = 6;
+const PIN_CELL_WIDTH = 50;
+const PIN_CELL_SPACING = 8;
+const ONE = 1;
+const COMPLETE_TIMEOUT_MS = 500;
 
 export default {
 	props: {
 		/**
-		 * Lenth of pin
+		 * Length of pin
 		 */
 		pinLength: {
 			type: Number,
 			default: DEFAULT_INPUT_SIZE,
-			validator: (value) => value > 0,
+			validator: (value) => value > 0 && value <= DEFAULT_INPUT_SIZE,
 		},
 
 		/**
@@ -76,118 +90,92 @@ export default {
 
 	data() {
 		return {
-			pin: new Array(this.pinLength).fill(''),
+			inputValue: '',
+			isFocused: false,
+			caretPosition: undefined,
+			completeTimeout: undefined,
 			isShaking: false,
 		};
 	},
 
 	computed: {
-		currentPin() {
-			return this.pin.join('');
-		},
-	},
+		computedStyles() {
+			const pinInputWidth = (this.pinLength * PIN_CELL_WIDTH)
+				+ ((this.pinLength - ONE) * PIN_CELL_SPACING);
 
-	watch: {
-		// Refocus on first input when re-enabled
-		disabled(isDisabled) {
-			if (!isDisabled) {
-				this.focusOnPinCell(0);
-			}
+			return {
+				'--pin-input-width': `${pinInputWidth}px`,
+			};
 		},
-	},
-
-	mounted() {
-		this.focusOnPinCell(0);
 	},
 
 	methods: {
-		findFirstIncompletePinCellIndex() {
-			return this.pin.findIndex((value) => value === '');
+		setFocus(focusState) {
+			this.isFocused = focusState;
+			this.updateCaretPosition();
 		},
 
-		getPinCellRef(index) {
-			return `pin-cell-${index}`;
-		},
+		isCellFocused(pinIndex) {
+			const isCurrentIndex = this.caretPosition === pinIndex;
+			const isLastIndex = this.pinLength === pinIndex + ONE;
+			const isActiveIndex = isLastIndex
+				? isCurrentIndex || this.caretPosition === this.pinLength
+				: isCurrentIndex;
 
-		// Focus on verification code cell input at given index.
-		focusOnPinCell(index) {
-			const cellReference = this.$refs[this.getPinCellRef(index)];
-			if (cellReference?.[0]?.focus) {
-				cellReference[0].focus();
+			if (!this.isFocused) {
+				return false;
 			}
+
+			return this.isFocused && isActiveIndex;
 		},
 
-		onInputPin(event, index) {
+		onInputPin(event) {
 			const input = event?.target?.value;
-			if (!input) {
-				return;
-			}
-			// Only allow integers in input
-			const inputValue = Number.isInteger(Number.parseInt(input, BASE_TEN)) ? input : '';
-
-			// One-time-code autofill is treated as an input, not a paste
-			if (this.attemptSplitPinIntoInputs(inputValue, index)) {
-				return;
-			}
-
-			this.$set(this.pin, index, inputValue);
-
-			const firstIncompleteCellIndex = this.findFirstIncompletePinCellIndex();
-
-			// eslint-disable-next-line no-magic-numbers
-			if (firstIncompleteCellIndex === -1) {
-				this.handleComplete(this.currentPin);
-				return;
-			}
-
-			// This allows us to auto jump to the next code cell input as the user types.
-			this.focusOnPinCell(firstIncompleteCellIndex);
+			this.handlePinChange(input);
 		},
 
-		attemptSplitPinIntoInputs(value, inputIndex) {
-			if (inputIndex === 0
-				&& value?.length === this.pinLength
-				&& Number.isInteger(Number.parseInt(value, BASE_TEN))
-			) {
-				this.$set(this, 'pin', value.split(''));
+		onPastePin(event) {
+			event.preventDefault();
+			const pastedValue = (event.clipboardData || window.clipboardData).getData('text');
+			this.handlePinChange(pastedValue);
+		},
 
-				// Having a timeout here gives the user a chance to see their code before success/failure
-				const TIMEOUT_LENGTH_MS = 500;
-				setTimeout(() => { this.handleComplete(this.currentPin); }, TIMEOUT_LENGTH_MS);
-				return true;
+		handlePinChange(input) {
+			this.updateCaretPosition();
+			clearTimeout(this.completeTimeout);
+			if (!input) {
+				this.inputValue = input ?? '';
+				return;
 			}
-			return false;
+
+			this.inputValue = this.sanitizePinValue(input);
+
+			if (this.inputValue.length === this.pinLength) {
+				this.handleComplete(this.inputValue);
+			}
+		},
+
+		sanitizePinValue(input = '') {
+			return input
+				.replaceAll(INPUT_FILTER_REGEX, '')
+				.slice(0, this.pinLength);
+		},
+
+		sanitizePinInput(event) {
+			if (!event.key?.match(INPUT_KEY_REGEX)) {
+				event.preventDefault();
+				event.stopPropagation();
+			}
+		},
+
+		updateCaretPosition() {
+			this.caretPosition = this.isFocused
+				? this.$refs.input.selectionStart
+				: undefined;
 		},
 
 		handleComplete(pin) {
-			this.$emit('complete', pin);
-		},
-
-		onPastePin(event, index) {
-			event.preventDefault();
-			const pastedValue = (event.clipboardData || window.clipboardData).getData('text');
-			this.attemptSplitPinIntoInputs(pastedValue, index);
-		},
-
-		onDelete(event, index) {
-			// Reset current index, and then focus on previous cell
-			this.$set(this.pin, index, '');
-
-			// eslint-disable-next-line no-magic-numbers
-			const newIndex = index - 1;
-			if (newIndex >= 0) {
-				this.focusOnPinCell(newIndex);
-			}
-		},
-
-		onFocusPin(event, index) {
-			event.preventDefault();
-			this.$set(this.pin, index, '');
-		},
-
-		resetPin() {
-			const newArray = (new Array(this.pinLength)).fill('');
-			this.$set(this, 'pin', newArray);
+			this.completeTimeout = setTimeout(() => this.$emit('complete', pin), COMPLETE_TIMEOUT_MS);
 		},
 
 		/**
@@ -195,8 +183,7 @@ export default {
 		 * @public
 		 */
 		shakeAndClearInputs() {
-			this.resetPin();
-			this.focusOnPinCell(0);
+			this.inputValue = '';
 			this.isShaking = true;
 			const TIMEOUT_LENGTH_MS = 1000;
 			setTimeout(() => {
@@ -209,16 +196,33 @@ export default {
 
 <style module="$s">
 .PinInputContainer {
-	display: flex;
-	flex-wrap: nowrap;
-	gap: 8px;
-	align-items: center;
-	font-weight: var(--maker-font-label-font-weight, 500);
-	font-family: var(--maker-font-label-font-family, inherit);
+	position: relative;
+	width: var(--pin-input-width);
+}
 
-	&.error {
-		padding-bottom: 8px;
-	}
+.PinInput {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	padding-left: 20px;
+	color: transparent;
+	caret-color: $maker-color-body;
+	font-size: 20px;
+	font-family: monospace;
+	letter-spacing: 2.3em;
+	background: transparent;
+	border: 0;
+	outline: 0;
+}
+
+.PinInputCells {
+	position: relative;
+	z-index: 0;
+	display: flex;
+	gap: 8px;
 }
 
 .PinInputCell {
@@ -231,7 +235,6 @@ export default {
 	min-width: 0;
 	height: 50px;
 	padding: 0;
-	color: $maker-color-neutral-90;
 	font-weight: inherit;
 	font-size: 16px;
 	font-family: inherit;
@@ -240,8 +243,11 @@ export default {
 	border: 1px solid $maker-color-neutral-20;
 	border-radius: $maker-shape-default-border-radius;
 	outline: none;
-	caret-color: currentColor;
 	cursor: pointer;
+
+	&.isFocused {
+		border: 2px solid $maker-color-neutral-80;
+	}
 
 	&.fill {
 		background: $maker-color-neutral-10;
@@ -250,19 +256,9 @@ export default {
 	&.error {
 		border-color: rgba(206, 50, 23, 1);
 	}
-
-	&.disabled {
-		opacity: 0.6;
-	}
-
-	&:focus,
-	&:valid,
-	&:hover {
-		border: 2px solid $maker-color-neutral-80;
-	}
 }
 
-.shake {
+.isShaking {
 	animation: invalidpinshake 500ms linear;
 }
 
