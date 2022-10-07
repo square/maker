@@ -108,6 +108,14 @@ export default {
 			};
 		},
 	},
+	watch: {
+		// Refocus on first input when re-enabled
+		disabled(isDisabled) {
+			if (!isDisabled) {
+				this.$refs.input.focus();
+			}
+		},
+	},
 
 	methods: {
 		setFocus(focusState) {
@@ -188,6 +196,7 @@ export default {
 			const TIMEOUT_LENGTH_MS = 1000;
 			setTimeout(() => {
 				this.isShaking = false;
+				this.$refs.input.focus();
 			}, TIMEOUT_LENGTH_MS);
 		},
 	},
