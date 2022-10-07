@@ -3,22 +3,6 @@
 		:class="$s.PinInputContainer"
 		:style="computedStyles"
 	>
-		<input
-			ref="input"
-			:class="$s.PinInput"
-			:maxlength="pinLength"
-			:value="inputValue"
-			type="text"
-			inputmode="numeric"
-			pattern="[0-9]*"
-			:disabled="disabled || isShaking"
-			@keypress="sanitizePinInput"
-			@keyup="updateCaretPosition"
-			@input="onInputPin"
-			@focus="setFocus(true)"
-			@blur="setFocus(false)"
-		>
-
 		<div
 			:class="{
 				[$s.PinInputCells]: true,
@@ -38,6 +22,23 @@
 				{{ inputValue[pinPosition - 1] }}
 			</div>
 		</div>
+
+		<input
+			ref="input"
+			:class="$s.PinInput"
+			:maxlength="pinLength"
+			:value="inputValue"
+			type="text"
+			inputmode="numeric"
+			pattern="[0-9]*"
+			:disabled="disabled || isShaking"
+			@keypress="sanitizePinInput"
+			@input="onInputPin"
+			@keyup="updateCaretPosition"
+			@click="updateCaretPosition"
+			@focus="setFocus(true)"
+			@blur="setFocus(false)"
+		>
 	</div>
 </template>
 
@@ -49,7 +50,7 @@ const DEFAULT_INPUT_SIZE = 6;
 const PIN_CELL_WIDTH = 50;
 const PIN_CELL_SPACING = 8;
 const ONE = 1;
-const COMPLETE_TIMEOUT_MS = 500;
+const SHAKE_TIMEOUT = 1000;
 
 export default {
 	props: {
@@ -93,7 +94,7 @@ export default {
 			inputValue: '',
 			isFocused: false,
 			caretPosition: undefined,
-			completeTimeout: undefined,
+			shakeTimeout: undefined,
 			isShaking: false,
 		};
 	},
@@ -102,12 +103,25 @@ export default {
 		computedStyles() {
 			const pinInputWidth = (this.pinLength * PIN_CELL_WIDTH)
 				+ ((this.pinLength - ONE) * PIN_CELL_SPACING);
+			const caretColor = this.shouldShowCaret
+				? 'var(--maker-color-body, #000000)'
+				: 'transparent';
 
 			return {
 				'--pin-input-width': `${pinInputWidth}px`,
+				'--pin-cell-caret-color': caretColor,
 			};
 		},
+
+		shouldShowCaret() {
+			if (!this.isFocused) {
+				return false;
+			}
+
+			return this.caretPosition === this.inputValue.length && this.caretPosition !== this.pinLength;
+		},
 	},
+
 	watch: {
 		// Refocus on first input when re-enabled
 		disabled(isDisabled) {
@@ -115,6 +129,10 @@ export default {
 				this.$refs.input.focus();
 			}
 		},
+	},
+
+	beforeDestroy() {
+		clearTimeout(this.shakeTimeout);
 	},
 
 	methods: {
@@ -142,15 +160,8 @@ export default {
 			this.handlePinChange(input);
 		},
 
-		onPastePin(event) {
-			event.preventDefault();
-			const pastedValue = (event.clipboardData || window.clipboardData).getData('text');
-			this.handlePinChange(pastedValue);
-		},
-
 		handlePinChange(input) {
 			this.updateCaretPosition();
-			clearTimeout(this.completeTimeout);
 			if (!input) {
 				this.inputValue = input ?? '';
 				return;
@@ -183,7 +194,7 @@ export default {
 		},
 
 		handleComplete(pin) {
-			this.completeTimeout = setTimeout(() => this.$emit('complete', pin), COMPLETE_TIMEOUT_MS);
+			this.$emit('complete', pin);
 		},
 
 		/**
@@ -193,11 +204,11 @@ export default {
 		shakeAndClearInputs() {
 			this.inputValue = '';
 			this.isShaking = true;
-			const TIMEOUT_LENGTH_MS = 1000;
-			setTimeout(() => {
+			clearTimeout(this.shakeTimeout);
+			this.shakeTimeout = setTimeout(() => {
 				this.isShaking = false;
 				this.$refs.input.focus();
-			}, TIMEOUT_LENGTH_MS);
+			}, SHAKE_TIMEOUT);
 		},
 	},
 };
@@ -215,10 +226,9 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 1;
-	padding-left: 20px;
+	padding-left: 25px;
 	color: transparent;
-	caret-color: $maker-color-body;
+	caret-color: var(--pin-cell-caret-color);
 	font-size: 20px;
 	font-family: monospace;
 	letter-spacing: 2.3em;
@@ -229,7 +239,6 @@ export default {
 
 .PinInputCells {
 	position: relative;
-	z-index: 0;
 	display: flex;
 	gap: 8px;
 }
