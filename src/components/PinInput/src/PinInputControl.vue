@@ -32,6 +32,7 @@
 			inputmode="numeric"
 			pattern="[0-9]*"
 			:disabled="disabled || isShaking"
+			@keydown="handleKeyDown"
 			@keypress="sanitizePinInput"
 			@input="onInputPin"
 			@keyup="updateCaretPosition"
@@ -138,7 +139,9 @@ export default {
 	methods: {
 		setFocus(focusState) {
 			this.isFocused = focusState;
-			this.updateCaretPosition();
+			if (this.isFocused) {
+				this.$nextTick(() => this.setCaretPositionToEnd());
+			}
 		},
 
 		isCellFocused(pinIndex) {
@@ -174,6 +177,12 @@ export default {
 			}
 		},
 
+		handleKeyDown(event) {
+			if (event.key === 'Backspace') {
+				this.handleBackspace(event);
+			}
+		},
+
 		sanitizePinValue(input = '') {
 			return input
 				.replaceAll(INPUT_FILTER_REGEX, '')
@@ -193,8 +202,30 @@ export default {
 				: undefined;
 		},
 
+		setCaretPositionToEnd() {
+			this.caretPosition = this.inputValue.length;
+			this.$refs.input.selectionStart = this.caretPosition;
+			this.$refs.input.selectionEnd = this.caretPosition;
+		},
+
 		handleComplete(pin) {
 			this.$emit('complete', pin);
+		},
+
+		handleBackspace(event) {
+			if (this.caretPosition < this.inputValue.length) {
+				event.preventDefault();
+				event.stopPropagation();
+
+				const position = this.caretPosition;
+				this.inputValue = this.inputValue.slice(0, position)
+					+ this.inputValue.slice(position + ONE);
+
+				this.$nextTick(() => {
+					this.$refs.input.selectionStart = position;
+					this.$refs.input.selectionEnd = position;
+				});
+			}
 		},
 
 		/**
