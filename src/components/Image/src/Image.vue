@@ -18,9 +18,9 @@
 					[$s.thumbnail]: isThumbnail,
 				}"
 				:style="style"
-				:src="src"
 				:srcset="srcset"
 				:sizes="sizes"
+				:src="src"
 				v-bind="$attrs"
 				v-on="$listeners"
 			>
