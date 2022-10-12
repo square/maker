@@ -1,11 +1,6 @@
 name: Lint PR title
 
-on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
+on: pull_request
 
 jobs:
   lint-pr-title:
