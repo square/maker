@@ -1,8 +1,6 @@
 name: Package size report
 
-on:
-  pull_request:
-    branches: [master, next, next-major, beta, alpha, '[0-9]+.x']
+on: pull_request
 
 jobs:
   pkg-size-report:
