@@ -1,10 +1,6 @@
 name: Lint code
 
-on:
-  push:
-    branches: [master, next, next-major, beta, alpha]
-  pull_request:
-    branches: [master, next, next-major, beta, alpha]
+on: pull_request
 
 jobs:
   lint-code:
