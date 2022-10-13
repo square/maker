@@ -49,7 +49,6 @@ import dialogApi from './dialog-api';
 
 const apiMixin = {
 	provide() {
-		const vm = this;
 		const api = {
 			state: Vue.observable({
 				renderFn: undefined,
@@ -58,37 +57,42 @@ const apiMixin = {
 
 			open(renderFn, options = {}) {
 				this.state.renderFn = renderFn;
-				this.state.options = {
-					closeOnClickOutside: false,
-					closeOnEsc: false,
-					beforeCloseHook: async () => true,
-					...options,
-				};
+				this.state.options = options;
 
-				// function that only closes this specific Dialog
+				// function that only closes this specific dialog
 				return () => {
-					if (this.state.renderFn === renderFn) {
-						this.close();
+					// no dialog open, so closing trivially "succeeds"
+					if (!this.state.renderFn) {
+						return true;
 					}
+					// we can attempt to close this dialog
+					if (this.state.renderFn === renderFn) {
+						// BUT closing might still be blocked by
+						// a beforeClose hook
+						return this.close();
+					}
+					// dialog changed since we returned this function
+					// hence we cannot close a dialog we did not open
+					return false;
 				};
 			},
 
 			async close(closeData) {
-				// Close the open popover (if present) and then close the dialog in the next tick.
-				// Closing at the same time will result in the popover content becoming inline and
-				// causes a weird content shift as the dialog fades away.
+				// no dialog to close, so closing is "successful"
+				if (!this.state.renderFn) {
+					return true;
+				}
 
-				if (this.state.renderFn && typeof this.state.options.beforeCloseHook === 'function') {
+				// check beforeClose hook, if present
+				if (typeof this.state.options.beforeCloseHook === 'function') {
 					if (!(await this.state.options.beforeCloseHook(closeData))) {
-						return; // cancel
+						return false; // closing failed
 					}
 				}
 
-				vm.popoverApi?.closePopover();
-				vm.$nextTick(() => {
-					this.state.renderFn = undefined;
-					this.state.options.afterCloseHook?.(closeData);
-				});
+				this.state.renderFn = undefined;
+				this.state.options.afterCloseHook?.(closeData);
+				return true;
 			},
 		};
 
