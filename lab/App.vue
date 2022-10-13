@@ -19,5 +19,6 @@ export default {
 <style>
 body {
 	margin: 0;
+	background-color: #f8f8fb;
 }
 </style>
