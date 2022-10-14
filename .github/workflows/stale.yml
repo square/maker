@@ -21,7 +21,7 @@ jobs:
           exempt-pr-labels: 'blocked,must'
           stale-issue-label: 'stale'
           stale-pr-label: 'stale'
-          close-issue-message: "This issue has been automatically closed because it hasn't received any activity in over 6 months"
-          close-pr-message: "This PR has been automatically closed because it hasn't received any activity in over 3 months"
+          close-issue-message: "This issue has been automatically closed because it hasn't received any activity in over 6 months."
+          close-pr-message: "This PR has been automatically closed because it hasn't received any activity in over 3 months."
       - name: Print outputs
         run: echo ${{ join(steps.stale.outputs.*, ',') }}
