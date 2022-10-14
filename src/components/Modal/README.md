@@ -21,8 +21,6 @@ import { MModalLayer } from '@square/maker/components/Modal';
 import DemoModal from 'doc/DemoModal.vue';
 
 export default {
-	name: 'DemoSetup',
-
 	components: {
 		MModalLayer,
 		MButton,
@@ -34,12 +32,7 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(
-				() => <DemoModal />,
-				{
-					closeOnClickOutside: true,
-				},
-			);
+			this.modalApi.open(() => <DemoModal />);
 		},
 	},
 };
@@ -50,9 +43,7 @@ _DemoModal.vue_
 
 ```vue
 <template>
-	<m-modal
-		:before-close="beforeCloseHook"
-	>
+	<m-modal>
 		<img
 			class="cover-photo"
 			src="https://picsum.photos/800/300"
@@ -62,7 +53,9 @@ _DemoModal.vue_
 				Modal heading
 			</m-text>
 			<m-text>
-				Modal content
+				<slot>
+					Modal content
+				</slot>
 			</m-text>
 			<m-button
 				size="small"
@@ -80,8 +73,6 @@ import { MText } from '@square/maker/components/Text';
 import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
 
 export default {
-	name: 'DemoModal',
-
 	components: {
 		MModal,
 		MButton,
@@ -91,13 +82,6 @@ export default {
 
 	inject: {
 		modalApi,
-	},
-
-	methods: {
-		beforeCloseHook() {
-			// intercept close here
-			return true; // or false if you want to block modal from closing
-		},
 	},
 };
 </script>
@@ -143,12 +127,7 @@ export default {
 	methods: {
 		openMyModal() {
 			// this.modalApi is provided by MModalLayer.apiMixin
-			this.modalApi.open(
-				() => <MyModal />,
-				{
-					closeOnClickOutside: true,
-				},
-			);
+			this.modalApi.open(() => <MyModal />);
 		}
 	}
 };
@@ -157,7 +136,7 @@ export default {
 
 ## Usage
 
-Modals must always be created in its own Single File Component (SFC) file to separate concerns because it introduces a new mode or context to your app. Use the `MModal` component at the root of your Modal SFC to signify the modal and to communicate with the Modal Layer.
+Modals must always be created in their own Single File Component (SFC) file to separate concerns because it introduces a new mode or context to your app. Use the `MModal` component at the root of your Modal SFC to signify the modal and to communicate with the Modal Layer.
 
 ```html
 <template>
@@ -186,7 +165,7 @@ export default {
 </script>
 ```
 
-To open a modal programmatically, import `modalApi` and _inject_ it into your component to access the Modal Layer API. In the function you want to open the modal from (eg. a click-event handler), invoke `this.modalApi.open()` with a function that returns the modal instance. This function receives [`createElement`](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) (aliased to `h`) as an argument to instantiate the modal component with, but it's recommended to use the [Vue JSX Babel plugin](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) instead for better readability.
+To open a modal programmatically, import `modalApi` and _inject_ it into your component to access the Modal Layer API. In the function you want to open the modal from (e.g. a click-event handler), invoke `this.modalApi.open()` with a function that returns the modal instance. This function receives [`createElement`](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) (aliased to `h`) as an argument to instantiate the modal component with, but it's recommended to use the [Vue JSX Babel plugin](https://vuejs.org/v2/guide/render-function.html#createElement-Arguments) instead for better readability.
 
 ```html
 <template>
@@ -229,70 +208,129 @@ export default {
 };
 </script>
 ```
-### Configurable options
-The `modalApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
+## modalApi
+
+Full type definitions for `modalApi`:
 
 ```ts
-{
-	// Modal will close when clicked outside of it - default false
+// Vue render function
+type VueRenderFn = () => VueVNodes;
+
+type OpenOptions = {
+	// Modal will close when clicked outside of it - default false.
 	closeOnClickOutside: boolean;
 
-	// Modal will close when esc key is pressed - default false
-	// Only use this in Modals without ActionBars
+	// Modal will close when esc key is pressed - default false.
+	// Only use this in Modals without ActionBars, if the Modal
+	// has an ActionBar it's strongly encouraged to use listen
+	// on the window-esc event emitted from ActionBarButtons.
 	closeOnEsc: boolean;
+
+	// Hook that will run right before the Modal is closed. If
+	// the hook returns false then closing is cancelled. This
+	// hook can be async, e.g. it returns a Promise that resolves
+	// to a boolean.
+	beforeCloseHook: () => boolean | Promise<boolean>;
+}
+
+// Closes a specific instance of an opened modal.
+type CloseOpenedModalFn = () => void;
+
+type modalApi = {
+	// Renders modal into nearest parent modal layer using
+	// the render function & provided options, returns
+	// a function to close that specific opened modal if called.
+	open: (VueRenderFn, OptionOptions) => CloseOpenedModalFn;
+
+	// This method only works inside of modals. Will attempt
+	// to close the current modal and will return true if closing
+	// was successful and false otherwise. Can be async.
+	close: () => boolean | Promise<boolean>;
+
+	// This method only works inside of modals. Will attempt
+	// to close the current modal and all modals beneath it. Returns
+	// true if successful, false otherwise. Can be async.
+	closeAll: () => boolean | Promise<boolean>;
 }
 ```
 
-If the modal has an action bar, and you'd like it to close on the escape key, it's more semantic to use the `@window-esc` from the `MActionBarButton` component.
+## Examples
 
-To hook into the close function, add the `beforeClose` prop on the modal component.
-The function must return a boolean - true to close the modal or false to block closing.
+### beforeCloseHook
 
-```html
+```vue
 <template>
-	<m-modal
-		:before-close="beforeCloseHook"
-	>
-		Modal content
-
-		<!-- modalApi is provided by the injected the modalApi key below -->
-		<m-action-bar-button
-			@click="modalApi.close()"
-			@window-esc="modalApi.close()"
+	<div>
+		<m-button
+			size="small"
+			@click="openModal"
 		>
-			Close modal
-		</m-action-bar-button>
-	</m-modal>
+			Open modal
+		</m-button>
+		<m-modal-layer />
+	</div>
 </template>
 
 <script>
-import { MModal, modalApi } from '@square/maker/components/Modal';
-import { MActionBarButton } from '@square/maker/components/ActionBar';
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoModal from 'doc/DemoModal.vue';
 
 export default {
 	components: {
-		MModal,
-		MActionBarButton,
+		MModalLayer,
+		MButton,
 	},
 
-	inject: {
-		modalApi,
-	},
+	mixins: [
+		MModalLayer.apiMixin,
+	],
 
 	methods: {
-		async beforeCloseHook() {
-			// intercept close here
-			return true; // or false if you want to block modal from closing
+		openModal() {
+			let firstCall = true;
+			const beforeCloseHook = () => {
+				// synchronously blocks closing
+				// on first invocation
+				if (firstCall) {
+					firstCall = false;
+					return false;
+				}
+
+				// asynchronously allows closing
+				// on second invocation
+				const ONE_SECOND = 1000;
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						resolve(true);
+					}, ONE_SECOND);
+				});
+			};
+			const content = 'This modal can be closed by clicking outside or pressing esc key. The first close will be synchronously blocked by the beforeCloseHook and the second close will be asynchronously allowed after one second.';
+			this.modalApi.open(
+				// 1st param: render function
+				() => <DemoModal>{content}</DemoModal>,
+				// 2nd param: options
+				{
+					// runs right before close, can block or delay closing
+					beforeCloseHook,
+					// this modal will close if user clicks outside
+					closeOnClickOutside: true,
+					// this modal will close if user presses esc key
+					closeOnEsc: true,
+				},
+			);
 		},
 	},
 };
 </script>
 ```
-## Examples
+
+A hook can also be passed via the Modal's `beforeClose` prop but setting the hook via the `modalApi`'s options is recommended. If different hooks are set via the prop and via the options both will be run right before close, and both can block or delay closing.
 
 ### Modal + ActionBar
 
-Modals are responsive and should be used with `InlineActionBar` which renders the `ActionBar` inline inside the modal instead of the root `ActionBarLayer`.
+Modals are responsive and should be used with `InlineActionBar` which renders the `ActionBar` inline inside the modal.
 
 ```vue
 <template>
@@ -313,8 +351,6 @@ import { MModalLayer } from '@square/maker/components/Modal';
 import ActionBarDemoModal from 'doc/ActionBarDemoModal.vue';
 
 export default {
-	name: 'ActionBarDemoSetup',
-
 	components: {
 		MModalLayer,
 		MButton,
@@ -340,7 +376,7 @@ _ActionBarDemoModal.vue_
 	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/600/300"
+			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
 			<m-text pattern="title">
@@ -354,7 +390,6 @@ _ActionBarDemoModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
-					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
@@ -377,8 +412,6 @@ import { MInlineActionBar, MActionBarButton } from '@square/maker/components/Act
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'ActionBarDemoModal',
-
 	components: {
 		MText,
 		MModal,
@@ -411,7 +444,7 @@ export default {
 
 ### Stacking modals
 
-It's possible to stack modals, i.e. open another modal from inside a modal.
+It's possible to stack modals, i.e. open another modal from inside a modal. Simply call `modalApi.open` from within one modal to open another on top. Each modal can be closed by calling `modalApi.close`, but if you'd like to close all of them at once then call `modalApi.closeAll`.
 
 ```vue
 <template>
@@ -432,8 +465,6 @@ import { MModalLayer } from '@square/maker/components/Modal';
 import StackingDemoFirstModal from 'doc/StackingDemoFirstModal.vue';
 
 export default {
-	name: 'StackingDemoSetup',
-
 	components: {
 		MModalLayer,
 		MButton,
@@ -445,12 +476,7 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(
-				() => <StackingDemoFirstModal />,
-				{
-					closeOnClickOutside: true,
-				},
-			);
+			this.modalApi.open(() => <StackingDemoFirstModal />);
 		},
 	},
 };
@@ -464,7 +490,7 @@ _StackingDemoFirstModal.vue_
 	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/600/300"
+			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
 			<m-text pattern="title">
@@ -478,7 +504,6 @@ _StackingDemoFirstModal.vue_
 					key="close"
 					color="#f6f6f6"
 					@click="modalApi.close()"
-					@window-esc="modalApi.close()"
 				>
 					<x-icon class="icon" />
 				</m-action-bar-button>
@@ -502,8 +527,6 @@ import StackingDemoSecondModal from 'doc/StackingDemoSecondModal.vue';
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'StackingDemoFirstModal',
-
 	components: {
 		MModal,
 		MText,
@@ -519,15 +542,7 @@ export default {
 
 	methods: {
 		openSecondModal() {
-			this.modalApi.open(
-				() => <StackingDemoSecondModal />,
-				{
-					closeOnClickOutside: true,
-				},
-			);
-		},
-		closeFirst() {
-			this.modalApi.close();
+			this.modalApi.open(() => <StackingDemoSecondModal />);
 		},
 	},
 };
@@ -536,7 +551,7 @@ export default {
 <style scoped>
 .cover-photo {
 	width: 100%;
-	height: 600px;
+	height: 300px;
 	object-fit: cover;
 	object-position: center;
 }
@@ -555,7 +570,7 @@ _StackingDemoSecondModal.vue_
 	<m-modal>
 		<img
 			class="cover-photo"
-			src="https://picsum.photos/400/300"
+			src="https://picsum.photos/800/300"
 		>
 		<m-modal-content>
 			<m-text pattern="title">
@@ -575,221 +590,7 @@ _StackingDemoSecondModal.vue_
 				<m-action-bar-button
 					key="confirm"
 					full-width
-					@click="modalApi.close()"
-				>
-					Confirm
-				</m-action-bar-button>
-			</m-inline-action-bar>
-		</m-modal-content>
-	</m-modal>
-</template>
-
-<script>
-import { MText } from '@square/maker/components/Text';
-import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import XIcon from '@square/maker-icons/X';
-
-export default {
-	name: 'StackingDemoSecondModal',
-
-	components: {
-		MModal,
-		MText,
-		MModalContent,
-		MActionBarButton,
-		XIcon,
-		MInlineActionBar,
-	},
-
-	inject: {
-		modalApi,
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 400px;
-	object-fit: cover;
-	object-position: center;
-}
-
-.icon {
-	width: 24px;
-	height: 24px;
-}
-</style>
-```
-
-### Close stacking modals at once
-
-It's possible to close parent modal and child modal at once. Call `this.modalApi.state.parentModal.close()` to close parent modal.
-
-```vue
-<template>
-	<div>
-		<m-button
-			size="small"
-			@click="openModal"
-		>
-			Open modal
-		</m-button>
-		<m-modal-layer />
-	</div>
-</template>
-
-<script>
-import { MButton } from '@square/maker/components/Button';
-import { MModalLayer } from '@square/maker/components/Modal';
-import StackingDemoFirstModalCloseAll from 'doc/StackingDemoFirstModalCloseAll.vue';
-
-export default {
-	name: 'StackingDemoSetup',
-
-	components: {
-		MModalLayer,
-		MButton,
-	},
-
-	mixins: [
-		MModalLayer.apiMixin,
-	],
-
-	methods: {
-		openModal() {
-			this.modalApi.open(
-				() => <StackingDemoFirstModalCloseAll />,
-				{
-					closeOnClickOutside: true,
-				},
-			);
-		},
-	},
-};
-</script>
-```
-
-_StackingDemoFirstModalCloseAll.vue_
-
-```vue
-<template>
-	<m-modal>
-		<img
-			class="cover-photo"
-			src="https://picsum.photos/600/300"
-		>
-		<m-modal-content>
-			<m-text pattern="title">
-				First modal heading
-			</m-text>
-			<m-text>
-				First modal content
-			</m-text>
-			<m-inline-action-bar>
-				<m-action-bar-button
-					key="close"
-					color="#f6f6f6"
-					@click="modalApi.close()"
-					@window-esc="modalApi.close()"
-				>
-					<x-icon class="icon" />
-				</m-action-bar-button>
-				<m-action-bar-button
-					key="confirm"
-					full-width
-					@click="openSecondModal"
-				>
-					Open second modal
-				</m-action-bar-button>
-			</m-inline-action-bar>
-		</m-modal-content>
-	</m-modal>
-</template>
-
-<script>
-import { MText } from '@square/maker/components/Text';
-import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal';
-import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
-import StackingDemoSecondModalCloseAll from 'doc/StackingDemoSecondModalCloseAll.vue';
-import XIcon from '@square/maker-icons/X';
-
-export default {
-	name: 'StackingDemoFirstModal',
-
-	components: {
-		MModal,
-		MText,
-		MModalContent,
-		MInlineActionBar,
-		MActionBarButton,
-		XIcon,
-	},
-
-	inject: {
-		modalApi,
-	},
-
-	methods: {
-		openSecondModal() {
-			this.modalApi.open(
-				() => <StackingDemoSecondModalCloseAll />,
-				{
-					closeOnClickOutside: true,
-				},
-			);
-		},
-		closeFirst() {
-			this.modalApi.close();
-		},
-	},
-};
-</script>
-
-<style scoped>
-.cover-photo {
-	width: 100%;
-	height: 600px;
-	object-fit: cover;
-	object-position: center;
-}
-
-.icon {
-	width: 24px;
-	height: 24px;
-}
-</style>
-```
-
-_StackingDemoSecondModalCloseAll.vue_
-
-```vue
-<template>
-	<m-modal>
-		<img
-			class="cover-photo"
-			src="https://picsum.photos/400/300"
-		>
-		<m-modal-content>
-			<m-text pattern="title">
-				Second modal heading
-			</m-text>
-			<m-text>
-				Second modal content
-			</m-text>
-			<m-inline-action-bar>
-				<m-action-bar-button
-					key="close"
-					color="#f6f6f6"
-					@click="modalApi.close()"
-				>
-					<x-icon class="icon" />
-				</m-action-bar-button>
-				<m-action-bar-button
-					key="confirm"
-					full-width
-					@click="closeAll()"
+					@click="modalApi.closeAll()"
 				>
 					Close all modals
 				</m-action-bar-button>
@@ -805,8 +606,6 @@ import { MInlineActionBar, MActionBarButton } from '@square/maker/components/Act
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'StackingDemoSecondModal',
-
 	components: {
 		MModal,
 		MText,
@@ -819,24 +618,13 @@ export default {
 	inject: {
 		modalApi,
 	},
-
-	methods: {
-		closeAll() {
-			this.modalApi.close();
-
-			const { parentModal } = this.modalApi.state;
-			if (parentModal) {
-				parentModal.close();
-			}
-		},
-	},
 };
 </script>
 
 <style scoped>
 .cover-photo {
 	width: 100%;
-	height: 400px;
+	height: 300px;
 	object-fit: cover;
 	object-position: center;
 }

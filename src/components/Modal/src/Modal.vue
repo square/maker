@@ -89,7 +89,7 @@ export default {
 		beforeClose: {
 			immediate: true,
 			handler(hook) {
-				this.modalApi.state.options.beforeCloseHook = hook;
+				this.modalApi.registerBeforeCloseHook(hook);
 			},
 		},
 	},
