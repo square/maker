@@ -54,7 +54,6 @@ export default {
 	Defined in Choice component:
 	--selected-color
 	--selected-contrast-color
-	--selected-contrast-color-40
 */
 .ChoiceOption {
 	--button-padding: 12px 24px;
@@ -91,7 +90,7 @@ export default {
 	background-color: var(--selected-color, $maker-color-neutral-90);
 
 	&:disabled {
-		color: var(--selected-contrast-color-40, $maker-color-neutral-20);
+		color: var(--selected-contrast-color, $maker-color-neutral-20);
 	}
 }
 </style>

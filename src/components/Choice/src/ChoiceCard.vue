@@ -67,7 +67,6 @@ export default {
 	Defined in Choice component:
 	--selected-color
 	--selected-contrast-color
-	--selected-contrast-color-40
 */
 .ChoiceCard {
 	width: 100%;

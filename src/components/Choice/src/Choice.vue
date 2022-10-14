@@ -93,18 +93,11 @@ export default {
 		contrastColor() {
 			return getContrast(this.resolvedSelectedColor, '#fff');
 		},
-
-		disabledContrastColor() {
-			const alphaValue = 0.4;
-			return colord(this.contrastColor).alpha(alphaValue);
-		},
-
 		style() {
 			if (this.resolvedSelectedColor) {
 				return {
 					'--selected-color': this.resolvedSelectedColor,
 					'--selected-contrast-color': this.contrastColor,
-					'--selected-contrast-color-40': this.disabledContrastColor,
 				};
 			}
 			return {};
