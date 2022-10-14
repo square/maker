@@ -118,6 +118,7 @@ export default {
 			'size',
 			'fontFamily',
 			'fontWeight',
+			'fontSize',
 			'color',
 			'fontStyle',
 			'textTransform',
@@ -151,7 +152,7 @@ export default {
 		inlineStyles() {
 			const { fonts } = this.theme;
 			const styles = {
-				fontSize: this.fontSize,
+				fontSize: this.resolvedFontSize,
 				lineHeight: this.lineHeight,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
