@@ -11,8 +11,8 @@ Use Link for navigation links. Links have a `to` prop which can be passed anythi
 		</m-link>.
 		<br>
 		Go to Styleguide
-		<m-link :to="{ name: 'home' }">
-			home page
+		<m-link :to="{ name: 'index' }">
+			index page
 		</m-link>.
 	</p>
 </template>
