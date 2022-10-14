@@ -88,8 +88,6 @@ export default {
 </script>
 ```
 
-
-
 ## Setup
 
 Register the `MDialogLayer.apiMixin` mixin and mount the `MDialogLayer` component inside a component template. The location of the Layer component determines where the dialog will be mounted. Place `MDialogLayer` _after_ `MModalLayer` if you want Dialogs to appear above Modals. The mixin _provides_ the Dialog API to the current component and all nested child components. It can be accessed by the current component with `this.dialogApi` and can be accessed by nested child components by injecting the `dialogApi`.
@@ -127,8 +125,6 @@ export default {
 };
 </script>
 ```
-
-
 
 ## Usage
 
@@ -235,44 +231,48 @@ export default {
 </script>
 ```
 
-### Configurable options
+### dialogApi
 
-#### `dialogApi.open`
-
-The `dialogApi.open()` function has a second optional object parameter that offers configurable options. Current available options are:
-
+Full type info:
 
 ```ts
-{
+// Vue render function
+type VueRenderFn = () => VueVNodes;
+
+// options to dialogApi.open
+type OpenOptions = {
 	// Dialog will close when clicked outside of it - default false
-	closeOnClickOutside: boolean;
+	closeOnClickOutside?: boolean;
 
 	// Dialog will close when esc key is pressed - default false
-	closeOnEsc: boolean;
+	closeOnEsc?: boolean;
 
-	// Dialog will call this async function to determine if it should close
-	beforeCloseHook: (closeData?: any) => Promise<boolean>;
+	// function will be called right before closing, if it returns
+	// false then closing will be blocked
+	beforeCloseHook?: (closeData?: any) => boolean | Promise<boolean>;
 
-	// Dialog will call this function after the dialog has been dismissed
+	// function will be called right after closing
 	afterCloseHook?: (closeData?: any) => void;
-}
+};
+
+// closes a specific instance of an opened dialog
+// returns true if close was successful, false otherwise
+type CloseOpenedDialogFn = () => boolean | Promise<boolean>;
+
+type dialogApi = {
+	// open dialog in nearest parent dialog layer
+	open: (VueRenderFn, OpenOptions) => CloseOpenedDialogFn;
+
+	// attempts to close dialog, returns true if successful
+	// closeData, if present, is passed to any registered
+	// beforeClose or afterClose hooks on the dialog, if present
+	close: (closeData?: any) => boolean | Promise<boolean>;
+};
 ```
-
-To hook into the close function, you can either:
-1. add the `beforeCloseHook` property on the open options object. The function must be an async function that returns a boolean - true to close the dialog or false to block closing.
-2. add the `afterCloseHook` property on the open options object. This will be called once the dialog has been fully closed, and does not block the dialog from being closed.
-
-Either option will be passed the `closeData` that `dialogApi.close` is called with (see below).
-
-#### `dialogApi.close`
-
-The `dialogApi.close` function has an optional parameter to pass data to the `beforeCloseHook` and `afterCloseHook` callbacks defined in `dialogApi.open`.
-
 
 ## Examples
 
-
-### closeData and before/afterCloseHook
+### beforeBefore & afterClose hooks
 
 ```vue
 <template>
@@ -430,7 +430,6 @@ export default {
 </style>
 ```
 
-
 ### Dialog + ActionBar
 
 Dialogs are responsive and should be used with `InlineActionBar` which renders the `ActionBar` inline inside the dialog instead of the root `ActionBarLayer`.
@@ -540,8 +539,6 @@ export default {
 }
 </style>
 ```
-
-
 
 ### Opening Dialog from Modal
 
@@ -663,8 +660,6 @@ export default {
 }
 </style>
 ```
-
-
 
 <!-- api-tables:start -->
 ## Dialog Props
