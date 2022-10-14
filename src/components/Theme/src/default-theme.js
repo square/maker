@@ -172,6 +172,11 @@ export default function defaultTheme() {
 					fontFamily: '@fonts.label.fontFamily',
 					fontWeight: '@fonts.label.fontWeight',
 				},
+				buttonLabel: {
+					fontFamily: '@fonts.label.fontFamily',
+					fontWeight: '@fonts.label.fontWeight',
+					fontSize: 'inherit',
+				},
 			},
 		},
 		choice: {

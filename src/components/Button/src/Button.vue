@@ -3,7 +3,7 @@
 		:class="[
 			$s.Button,
 			$s[`variant_${resolvedVariant}`],
-			$s[`size_${resolvedSize}`],
+			$s[`size_${adjustedSize}`],
 			$s[`shape_${resolvedShape}`],
 			$s[`align_${resolvedAlign}`],
 			{
@@ -22,43 +22,55 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<span
+		<m-text
 			:class="[
 				$s.MainText,
 				{
 					[$s.TruncateText]: !isSingleChild(),
 				}
 			]"
+			:pattern="resolvedTextPattern"
+			element="span"
+			color="inherit"
 		>
 			<!-- @slot Button label -->
 			<slot />
-		</span>
+		</m-text>
 
-		<span
+		<m-text
 			v-if="$scopedSlots.information"
 			:class="[$s.InformationText, $s.TruncateText]"
+			:pattern="resolvedTextPattern"
+			element="span"
+			color="inherit"
 		>
 			<!-- @slot Information label -->
 			<slot
 				name="information"
 			/>
-		</span>
+		</m-text>
 	</button>
 </template>
 
 <script>
+import cssValidator from '@square/maker/utils/css-validator';
 import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
+import { BASE_TEN } from '@square/maker/utils/constants';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import { MText } from '@square/maker/components/Text';
 
 function setColorVariables(tokens, variant) {
-	const colorMainObject = colord(tokens.color);
-	const colorContrast = getContrast(tokens.color, tokens.textColor);
+	const colorMain = colord(tokens.color);
+	const colorMainHover = tokens.colorHover ? colord(tokens.colorHover) : colorMain;
+	const colorContrast = tokens.textColor || getContrast(tokens.color, tokens.textColor);
+	const colorContrastHover = tokens.textColorHover || getContrast(colorMainHover, tokens.textColor);
+
 	// Determine state adjustment type
 	let stateAdjustment;
 	if (variant === 'fill') {
-		stateAdjustment = colorMainObject.isDark() ? 'lighten' : 'darken';
+		stateAdjustment = colorMainHover.isDark() ? 'lighten' : 'darken';
 	} else {
 		stateAdjustment = 'alpha';
 	}
@@ -66,16 +78,26 @@ function setColorVariables(tokens, variant) {
 	const hoverStateAdjust = 0.08;
 	const activeStateAdjust = 0.16;
 	const focusAlphaAdjust = 0.3;
-	const colorHover = colorMainObject[stateAdjustment](hoverStateAdjust).toHex();
-	const colorActive = colorMainObject[stateAdjustment](activeStateAdjust).toHex();
-	const colorFocus = colorMainObject.alpha(focusAlphaAdjust).toHex();
+	const colorHover = colorMainHover[stateAdjustment](hoverStateAdjust).toHex();
+	const colorActive = colorMainHover[stateAdjustment](activeStateAdjust).toHex();
+	const colorFocus = colorMainHover.alpha(focusAlphaAdjust).toHex();
 
 	return {
 		'--color-main': tokens.color,
+		'--color-main-hover': tokens.colorHover || tokens.color,
 		'--color-contrast': colorContrast,
+		'--color-contrast-hover': colorContrastHover,
 		'--color-hover': colorHover,
 		'--color-active': colorActive,
 		'--color-focus': colorFocus,
+		'--border-radius': tokens.borderRadius,
+		'--border-radius-hover': tokens.borderRadiusHover || tokens.borderRadius,
+		'--border-width': tokens.borderWidth || '1px',
+		'--border-width-hover': tokens.borderWidthHover || tokens.borderWidth || '1px',
+		'--border-color': tokens.borderColor,
+		'--border-color-hover': tokens.borderColorHover || tokens.borderColor,
+		'--box-shadow': tokens.boxShadow,
+		'--box-shadow-hover': tokens.boxShadowHover || tokens.boxShadow,
 	};
 }
 
@@ -87,6 +109,7 @@ function setColorVariables(tokens, variant) {
 export default {
 	components: {
 		MLoading,
+		MText,
 	},
 
 	inject: {
@@ -130,7 +153,14 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * Background color of button
+		 * MText pattern in button label
+		 */
+		textPattern: {
+			type: String,
+			default: 'buttonLabel',
+		},
+		/**
+		 * Main color of button
 		 */
 		color: {
 			type: String,
@@ -138,9 +168,25 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Text color of button
+		 * Main hover color of button
+		 */
+		colorHover: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Text color of button (only applied on fill buttons)
 		 */
 		textColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Text hover color of button (only applied on fill buttons)
+		 */
+		textColorHover: {
 			type: String,
 			default: undefined,
 			validator: (color) => colord(color).isValid(),
@@ -155,12 +201,80 @@ export default {
 			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
 		},
 		/**
-		 * Shape of button
+		 * Shape of preset button (overridden by borderRadius prop)
+		 * @values squared, rounded, pill
 		 */
 		shape: {
 			type: String,
 			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
+		 * Shape of button
+		 * @values 'Npx', 'N%'
+		 */
+		borderRadius: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('border-radius'),
+		},
+		/**
+		 * Shape of button
+		 * @values 'Npx', 'N%'
+		 */
+		borderRadiusHover: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('border-radius'),
+		},
+		/**
+		 * Border width of button (e.g. '3px')
+		 */
+		borderWidth: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('border-width'),
+		},
+		/**
+		 * Border hover width of button (e.g. '3px')
+		 */
+		borderWidthHover: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('border-width'),
+		},
+
+		/**
+		 * Border color of button (only applied on fill buttons)
+		 */
+		borderColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Border hover color of button (only applied on fill buttons)
+		 */
+		borderColorHover: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Box-shadow of button
+		 */
+		boxShadow: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('box-shadow'),
+		},
+		/**
+		 * Box-shadow hover of button
+		 */
+		boxShadowHover: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('box-shadow'),
 		},
 		/**
 		 * Toggles button disabled state
@@ -189,23 +303,65 @@ export default {
 	computed: {
 		...resolveThemeableProps('button', [
 			'color',
+			'colorHover',
 			'size',
 			'textColor',
+			'textColorHover',
+			'textPattern',
 			'variant',
 			'shape',
+			'borderRadius',
+			'borderRadiusHover',
 			'align',
 			'fullWidth',
 			'pattern',
+			'borderWidth',
+			'borderWidthHover',
+			'borderColor',
+			'borderColorHover',
+			'boxShadow',
+			'boxShadowHover',
 		]),
 		style() {
 			const tokens = {
 				color: this.resolvedColor,
+				colorHover: this.resolvedColorHover,
 				textColor: this.resolvedTextColor,
+				textColorHover: this.resolvedTextColorHover,
+				borderRadius: this.resolvedBorderRadius,
+				borderRadiusHover: this.resolvedBorderRadiusHover,
+				borderWidth: this.resolvedBorderWidth,
+				borderWidthHover: this.resolvedBorderWidthHover,
+				borderColor: this.resolvedBorderColor,
+				borderColorHover: this.resolvedBorderColorHover,
+				boxShadow: this.resolvedBoxShadow,
+				boxShadowHover: this.resolvedBoxShadowHover,
 			};
-			return setColorVariables(tokens, this.resolvedVariant);
+			return {
+				...setColorVariables(tokens, this.resolvedVariant),
+			};
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
+		},
+		fontSize() {
+			return this.theme.text.patterns[this.resolvedTextPattern]?.fontSize || 'inherit';
+		},
+		adjustedSize() {
+			// Scale button size to fontSize if one is set
+			const fontSizeInt = Number.parseInt(this.fontSize, BASE_TEN);
+			if (fontSizeInt) {
+				const SMALL_MAX = 14;
+				const MEDIUM_MAX = 24;
+				if (fontSizeInt > MEDIUM_MAX) {
+					return 'large';
+				}
+				if (fontSizeInt > SMALL_MAX) {
+					return 'medium';
+				}
+				return 'small';
+			}
+			return this.resolvedSize;
 		},
 	},
 
@@ -241,17 +397,19 @@ export default {
 	vertical-align: middle;
 	background-color: var(--color-main, $maker-color-primary);
 	border: none;
-	border-radius: $maker-shape-button-border-radius;
+	border-radius: var(--border-radius, $maker-shape-button-border-radius);
 	outline: none;
 	box-shadow:
-		var(--outline-border, 0 0),
+		var(--border, 0 0),
+		var(--box-shadow, 0 0),
 		var(--focus-border, 0 0);
 	cursor: pointer;
 	transition:
 		color 0.2s ease-in,
 		background-color 0.2s ease-in,
 		filter 0.2s ease-in,
-		box-shadow 0.2s ease-in;
+		box-shadow 0.2s ease-in,
+		border-radius 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -355,7 +513,13 @@ export default {
 	}
 
 	&:hover:not(:disabled) {
+		color: var(--color-contrast-hover);
 		background-color: var(--color-hover);
+		border-radius: var(--border-radius-hover, $maker-shape-button-border-radius);
+		box-shadow:
+			var(--border-hover, 0 0),
+			var(--box-shadow-hover, 0 0),
+			var(--focus-border, 0 0);
 	}
 
 	&:active:not(:disabled) {
@@ -393,14 +557,22 @@ export default {
 	color: var(--color-contrast);
 }
 
+.Button.variant_fill {
+	--border: inset 0 0 0 var(--border-width) var(--border-color);
+	--border-hover: inset 0 0 0 var(--border-width-hover) var(--border-color-hover);
+}
+
 .Button.variant_outline {
-	--outline-border: inset 0 0 0 1px var(--color-main);
+	--border: inset 0 0 0 var(--border-width) var(--color-main);
+	--border-hover: inset 0 0 0 var(--border-width-hover) var(--color-main-hover);
 }
 
 .Button.variant_ghost {
 	--small-padding: 0 8px;
 	--medium-padding: 0 12px;
 	--large-padding: 0 20px;
+	--box-shadow: 0 !important;
+	--box-shadow-hover: 0 !important;
 }
 
 .Button.variant_outline,
@@ -410,6 +582,10 @@ export default {
 
 	& .Loading {
 		color: var(--color-main);
+	}
+
+	&:hover:not(:disabled) {
+		color: var(--color-main-hover);
 	}
 }
 
