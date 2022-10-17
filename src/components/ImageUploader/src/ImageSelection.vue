@@ -5,17 +5,7 @@
 			[$s.ImageSelectionContainerError]: isError
 		}"
 		role="img"
-		:style="{
-			'--progress-width': `${progress}%`,
-		}"
 	>
-		<!-- Icon Background -->
-		<div
-			:class="$s.ImageIconContainer"
-		>
-			<image-icon :class="$s.ImageIcon" />
-		</div>
-
 		<!-- Actual Image (hidden if not displayable) -->
 		<div
 			:class="$s.ImageDisplay"
@@ -30,6 +20,7 @@
 			}"
 		/>
 
+		<!-- Loading spinner -->
 		<div
 			v-if="isUploading"
 			:class="$s.ImageSelectionLoaderContainer"
@@ -37,6 +28,7 @@
 			<m-loading :class="$s.ImageSelectionLoader" />
 		</div>
 
+		<!-- Loading progress -->
 		<m-progress-bar
 			:class="{
 				[$s.ImageSelectionProgressContainer]: true,
@@ -52,9 +44,9 @@
 			:class="$s.ImageSelectionRemoveButton"
 			@click="$emit('removeImage')"
 		>
-			<x-icon
-				inline
+			<m-icon
 				:class="$s.ImageSelectionRemoveIcon"
+				name="close"
 			/>
 		</button>
 	</div>
@@ -63,17 +55,13 @@
 <script>
 import { MLoading } from '@square/maker/components/Loading';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
-import XIcon from '@square/maker-icons/X';
-import ImageIcon from '@square/maker-icons/Image';
+import { MIcon } from '@square/maker/components/Icon';
 
 export default {
-	name: 'MImageSelection',
-
 	components: {
 		MLoading,
 		MProgressBar,
-		XIcon,
-		ImageIcon,
+		MIcon,
 	},
 
 	props: {
@@ -125,7 +113,6 @@ export default {
 	--color-error: rgba(206, 50, 23, 1);
 }
 
-.ImageIconContainer,
 .ImageDisplay,
 .ImageFilter,
 .ImageSelectionLoaderContainer {
@@ -134,12 +121,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-}
-
-.ImageIconContainer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .ImageIcon {
@@ -171,7 +152,6 @@ export default {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -193,7 +173,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 3;
 	opacity: 0;
 	transition: opacity 150ms linear;
 
