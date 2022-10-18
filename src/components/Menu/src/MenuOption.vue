@@ -3,6 +3,7 @@
 		:class="$s.MenuOption"
 		role="menuitem"
 		tabindex="0"
+		:style="menuOptionStyles"
 		@click="selectSelf"
 		@keydown="handleKeyboardEvent"
 	>
@@ -153,10 +154,11 @@ export default {
 	box-sizing: border-box;
 	padding: 16px;
 	cursor: pointer;
+	fill: currentColor;
 
 	&:hover,
 	&:focus {
-		background-color: var(--neutral-10, #f1f1f1);
+		background-color: $maker-color-neutral-10;
 	}
 }
 

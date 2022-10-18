@@ -13,6 +13,7 @@
 			<template #action="popover">
 				<select-control
 					v-if="$slots['toggle-select']"
+					:class="$s.MenuSelectControl"
 					@click.stop="popover.toggle()"
 				>
 					<template
@@ -154,5 +155,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	min-width: 200px;
+}
+
+.MenuSelectControl {
+	fill: currentColor;
 }
 </style>
