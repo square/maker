@@ -90,12 +90,12 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 
 				// validate using pattern prop validator if exists
 				if (patternValidator) {
-					assert.error(patternValidator(resolvedPattern), `Invalid value "${resolvedPattern}" for prop "pattern" for component "${componentKeyInTheme}" in theme.`);
+					assert.error(patternValidator(resolvedPattern), `Invalid value "${resolvedPattern}" for prop "pattern" for component "${componentKeyInTheme}" in theme.`, 'Theme');
 
 				// otherwise try validating by checking patterns config for component
 				} else {
 					const themePattern = this.theme[componentKeyInTheme].patterns?.[resolvedPattern];
-					assert.error(themePattern, `Invalid pattern "${resolvedPattern}" for component "${componentKeyInTheme}" in theme.`);
+					assert.error(themePattern, `Invalid pattern "${resolvedPattern}" for component "${componentKeyInTheme}" in theme.`, 'Theme');
 				}
 				return resolvedPattern;
 			};
@@ -134,7 +134,7 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 				const propValidator = this.$vnode.componentOptions
 					.Ctor.extendOptions.props[propName].validator;
 				if (propValidator) {
-					assert.error(propValidator(resolvedValue), `Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
+					assert.error(propValidator(resolvedValue), `Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`, 'Theme');
 				}
 				return resolvedValue;
 			};

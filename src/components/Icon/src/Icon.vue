@@ -53,7 +53,7 @@ export default {
 	computed: {
 		iconComponent() {
 			const component = this.theme.icons[this.name];
-			assert.error(component, `'${this.name}' icon not defined in theme`);
+			assert.error(component, `'${this.name}' icon not defined in theme`, 'Icon');
 			return component;
 		},
 		inlineStyles() {

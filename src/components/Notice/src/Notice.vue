@@ -155,7 +155,7 @@ export default {
 	},
 
 	created() {
-		assert.warn(!(this.display === 'inline' && this.$slots.actions), 'inline Notices cannot have an actions slot');
+		assert.warn(!(this.display === 'inline' && this.$slots.actions), 'inline Notices cannot have an actions slot', 'Notice');
 	},
 };
 </script>
