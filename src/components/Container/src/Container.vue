@@ -131,9 +131,9 @@ export default {
 	},
 
 	mounted() {
-		assert.warn(!(this.$slots.label && this.label), 'Label slot cannot be used together with label prop, former overrides the latter.');
-		assert.warn(!(this.$slots.sublabel && this.sublabel), 'Sublabel slot cannot be used together with sublabel prop, former overrides the latter.');
-		assert.warn(!((this.$slots.requirementLabel || this.$slots['requirement-label']) && this.requirementLabel), 'Requirement Label slot cannot be used together with requirement label prop, former overrides the latter.');
+		assert.warn(!(this.$slots.label && this.label), 'Label slot cannot be used together with label prop, former overrides the latter.', 'Container');
+		assert.warn(!(this.$slots.sublabel && this.sublabel), 'Sublabel slot cannot be used together with sublabel prop, former overrides the latter.', 'Container');
+		assert.warn(!((this.$slots.requirementLabel || this.$slots['requirement-label']) && this.requirementLabel), 'Requirement Label slot cannot be used together with requirement label prop, former overrides the latter.', 'Container');
 	},
 };
 </script>
