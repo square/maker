@@ -63,14 +63,14 @@ export default {
 <style scoped>
 .nav .link {
 	display: block;
-	color: #5f666c;
+	color: var(--maker-color-neutral-90);
 	font-size: 16px;
 	line-height: 1.75;
 	text-decoration: none;
 }
 
 .nav .link:hover {
-	color: #006aff;
+	color: var(--maker-color-primary);
 }
 
 .nav .header-link {
