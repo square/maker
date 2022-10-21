@@ -17,7 +17,7 @@
     "styleguide": "just-ssr --webpack-config styleguide/webpack-styleguide-config --open",
     "styleguide-build": "npm run generate-api-tables && NODE_ENV=production webpack --config styleguide/webpack-styleguide-config",
     "styleguide-watch": "nodemon --watch styleguide --watch src --ext js,mjs,vue,json,md,html,css --exec \"webpack --config styleguide/webpack-styleguide-config\"",
-    "styleguide-run": "http-server -c-1 .dist/styleguide/$(git rev-parse --abbrev-ref HEAD)",
+    "styleguide-serve": "http-server -c-1 .dist/styleguide/$(git rev-parse --abbrev-ref HEAD)",
     "styleguide-deploy": "npm run pull-deploys && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
     "generate-deploy-index": "node ./build/generate-deploy-index",
     "deploy-all": "npm run pull-deploys && npm run lab-build && npm run styleguide-build && npm run sync-to-latest && npm run generate-deploy-index && npm run push-deploys",
