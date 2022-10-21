@@ -3,7 +3,6 @@
 		:class="$s.MenuOption"
 		role="menuitem"
 		tabindex="0"
-		:style="menuOptionStyles"
 		@click="selectSelf"
 		@keydown="handleKeyboardEvent"
 	>
