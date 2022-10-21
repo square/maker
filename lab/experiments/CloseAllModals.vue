@@ -6,16 +6,21 @@
 		<button @click="openAndCloseModal">
 			open & close modal in 5 secs
 		</button>
+		<m-modal :before-close="() => true">
+			this is a layerless modal with a beforeClose hook,
+			it should emit an error to the console
+		</m-modal>
 		<m-modal-layer />
 	</div>
 </template>
 
 <script>
-import { MModalLayer } from '@square/maker/components/Modal';
+import { MModalLayer, MModal } from '@square/maker/components/Modal';
 import MultiModal from '../components/MultiModal.vue';
 
 export default {
 	components: {
+		MModal,
 		MModalLayer,
 	},
 

@@ -13,6 +13,7 @@
 			<template #action="popover">
 				<select-control
 					v-if="$slots['toggle-select']"
+					:class="$s.MenuSelectControl"
 					@click.stop="popover.toggle()"
 				>
 					<template
@@ -130,7 +131,7 @@ export default {
 	methods: {
 		validateProps() {
 			if (this.isMultiSelect) {
-				assert.error(Array.isArray(this.selected), 'The v-model value for a multi-select must be of type Array.');
+				assert.error(Array.isArray(this.selected), 'The v-model value for a multi-select must be of type Array.', 'Menu');
 			}
 		},
 
@@ -154,5 +155,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	min-width: 200px;
+}
+
+.MenuSelectControl {
+	fill: currentColor;
 }
 </style>

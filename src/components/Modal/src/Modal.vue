@@ -42,7 +42,6 @@ export default {
 		 */
 		beforeClose: {
 			type: Function,
-			required: false,
 			default: undefined,
 		},
 		/**
