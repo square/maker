@@ -36,7 +36,7 @@ export default {
 		},
 	},
 	mounted() {
-		assert.error(this.$slots.label, 'Missing "label" slot in inline form control');
+		assert.error(this.$slots.label, 'Missing "label" slot in inline form control', 'InlineFormControlLayout');
 	},
 };
 </script>

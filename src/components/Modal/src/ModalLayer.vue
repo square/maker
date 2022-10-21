@@ -44,6 +44,7 @@
 <script>
 import Vue from 'vue';
 import PseudoWindow from 'vue-pseudo-window';
+import assert from '@square/maker/utils/assert';
 import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
 import {
@@ -238,6 +239,15 @@ const apiMixin = {
 			// only called from child
 			// allows child modal to register hook with parent
 			registerBeforeCloseHook(hook) {
+				// modal was rendered outside of a ModalLayer
+				if (!vm.parentModalApi) {
+					// no hook, no problem, fail silently
+					if (!hook) {
+						return;
+					}
+					// hook but no layer, big problem, fail loudly
+					assert.error(false, 'Cannot set the beforeClose prop on a Modal if it is mounted outside of an ModalLayer', 'Modal');
+				}
 				vm.parentModalApi.state.localBeforeCloseHook = hook;
 			},
 

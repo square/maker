@@ -131,7 +131,7 @@ export default {
 	methods: {
 		validateProps() {
 			if (this.isMultiSelect) {
-				assert.error(Array.isArray(this.selected), 'The v-model value for a multi-select must be of type Array.');
+				assert.error(Array.isArray(this.selected), 'The v-model value for a multi-select must be of type Array.', 'Menu');
 			}
 		},
 
