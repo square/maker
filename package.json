@@ -27,7 +27,7 @@
     "sync-to-latest": "node ./build/sync-to-latest",
     "pull-deploys": "node ./build/deploys/pull.js",
     "push-deploys": "node ./build/deploys/push.js",
-    "prepublishOnly": "npm run build"
+    "prepack": "npm run build && mv dist/* ."
   },
   "husky": {
     "hooks": {

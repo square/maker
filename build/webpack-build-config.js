@@ -64,7 +64,7 @@ const buildComponent = (componentPath) => merge({}, webpackBuildConfig, {
 	entry: componentPath,
 	output: {
 		filename: 'script.js',
-		path: path.resolve(getComponentDirectory(componentPath)),
+		path: path.resolve('dist', getComponentDirectory(componentPath)),
 	},
 	plugins: [
 		componentEntryPlugin,
@@ -80,7 +80,7 @@ const buildUtil = (utilPath) => merge({}, webpackBuildConfig, {
 	entry: utilPath,
 	output: {
 		filename: path.basename(utilPath),
-		path: path.dirname(path.resolve(getUtilDirectory(utilPath))),
+		path: path.dirname(path.resolve('dist', getUtilDirectory(utilPath))),
 	},
 });
 
