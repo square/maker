@@ -794,31 +794,31 @@ export default {
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Prop                | Type      | Default         | Possible values                    | Description                                                 |
-| ------------------- | --------- | --------------- | ---------------------------------- | ----------------------------------------------------------- |
-| pattern             | `string`  | —               | `pattern defined in theme`         | patterns are defined at the theme level                     |
-| tag                 | `string`  | `'a'`           | `button`, `a`                      | Tag of button                                               |
-| type                | `string`  | `'button'`      | —                                  | Type of the button                                          |
-| size                | `string`  | —               | `small`, `medium`, `large`         | Size of the button                                          |
-| full-width          | `boolean` | —               | —                                  | Whether to make the button full-width                       |
-| text-pattern        | `string`  | `'buttonLabel'` | —                                  | MText pattern in button label                               |
-| color               | `string`  | —               | —                                  | Main color of button                                        |
-| color-hover         | `string`  | —               | —                                  | Main hover color of button                                  |
-| text-color          | `string`  | —               | —                                  | Text color of button (only applied on fill buttons)         |
-| text-color-hover    | `string`  | —               | —                                  | Text hover color of button (only applied on fill buttons)   |
-| variant             | `string`  | —               | `fill`, `outline`, `ghost`         | Variant                                                     |
-| shape               | `string`  | —               | `squared`, `rounded`, `pill`       | Shape of preset button (overridden by borderRadius prop)    |
-| border-radius       | `string`  | —               | `'Npx'`, `'N%'`                    | Shape of button                                             |
-| border-radius-hover | `string`  | —               | `'Npx'`, `'N%'`                    | Shape of button                                             |
-| border-width        | `string`  | —               | —                                  | Border width of button (e.g. '3px')                         |
-| border-width-hover  | `string`  | —               | —                                  | Border hover width of button (e.g. '3px')                   |
-| border-color        | `string`  | —               | —                                  | Border color of button (only applied on fill buttons)       |
-| border-color-hover  | `string`  | —               | —                                  | Border hover color of button (only applied on fill buttons) |
-| box-shadow          | `string`  | —               | —                                  | Box-shadow of button                                        |
-| box-shadow-hover    | `string`  | —               | —                                  | Box-shadow hover of button                                  |
-| disabled            | `boolean` | `false`         | —                                  | Toggles button disabled state                               |
-| align               | `string`  | —               | `center`, `stack`, `space-between` | How to align button's contents                              |
-| loading             | `boolean` | `false`         | —                                  | Toggles button loading state                                |
+| Prop                | Type      | Default    | Possible values                    | Description                                                 |
+| ------------------- | --------- | ---------- | ---------------------------------- | ----------------------------------------------------------- |
+| pattern             | `string`  | —          | `pattern defined in theme`         | patterns are defined at the theme level                     |
+| tag                 | `string`  | `'button'` | `button`, `a`                      | Tag of button                                               |
+| type                | `string`  | `'button'` | —                                  | Type of the button                                          |
+| size                | `string`  | —          | `small`, `medium`, `large`         | Size of the button                                          |
+| full-width          | `boolean` | —          | —                                  | Whether to make the button full-width                       |
+| text-pattern        | `string`  | —          | —                                  | MText pattern in button label                               |
+| color               | `string`  | —          | —                                  | Main color of button                                        |
+| color-hover         | `string`  | —          | —                                  | Main hover color of button                                  |
+| text-color          | `string`  | —          | —                                  | Text color of button (only applied on fill buttons)         |
+| text-color-hover    | `string`  | —          | —                                  | Text hover color of button (only applied on fill buttons)   |
+| variant             | `string`  | —          | `fill`, `outline`, `ghost`         | Variant                                                     |
+| shape               | `string`  | —          | `squared`, `rounded`, `pill`       | Shape of preset button (overridden by borderRadius prop)    |
+| border-radius       | `string`  | —          | `'Npx'`, `'N%'`                    | Shape of button                                             |
+| border-radius-hover | `string`  | —          | `'Npx'`, `'N%'`                    | Shape of button                                             |
+| border-width        | `string`  | —          | —                                  | Border width of button (e.g. '3px')                         |
+| border-width-hover  | `string`  | —          | —                                  | Border hover width of button (e.g. '3px')                   |
+| border-color        | `string`  | —          | —                                  | Border color of button (only applied on fill buttons)       |
+| border-color-hover  | `string`  | —          | —                                  | Border hover color of button (only applied on fill buttons) |
+| box-shadow          | `string`  | —          | —                                  | Box-shadow of button                                        |
+| box-shadow-hover    | `string`  | —          | —                                  | Box-shadow hover of button                                  |
+| disabled            | `boolean` | `false`    | —                                  | Toggles button disabled state                               |
+| align               | `string`  | —          | `center`, `stack`, `space-between` | How to align button's contents                              |
+| loading             | `boolean` | `false`    | —                                  | Toggles button loading state                                |
 
 
 ## Slots
