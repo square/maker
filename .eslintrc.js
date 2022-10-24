@@ -1,6 +1,12 @@
 module.exports = {
 	root: true,
 
+	ignorePatterns: [
+		// Distribution files
+		'/components/',
+		'/utils/',
+	],
+
 	extends: [
 		'airbnb-base',
 		'plugin:unicorn/recommended',

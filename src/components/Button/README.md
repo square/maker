@@ -797,6 +797,7 @@ Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/W
 | Prop                | Type      | Default         | Possible values                    | Description                                                 |
 | ------------------- | --------- | --------------- | ---------------------------------- | ----------------------------------------------------------- |
 | pattern             | `string`  | —               | `pattern defined in theme`         | patterns are defined at the theme level                     |
+| tag                 | `string`  | `'a'`           | `button`, `a`                      | Tag of button                                               |
 | type                | `string`  | `'button'`      | —                                  | Type of the button                                          |
 | size                | `string`  | —               | `small`, `medium`, `large`         | Size of the button                                          |
 | full-width          | `boolean` | —               | —                                  | Whether to make the button full-width                       |

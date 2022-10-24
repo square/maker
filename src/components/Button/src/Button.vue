@@ -1,5 +1,6 @@
 <template>
-	<button
+	<component
+		:is="tag"
 		:class="[
 			$s.Button,
 			$s[`variant_${resolvedVariant}`],
@@ -49,7 +50,7 @@
 				name="information"
 			/>
 		</m-text>
-	</button>
+	</component>
 </template>
 
 <script>
@@ -65,7 +66,9 @@ function setColorVariables(tokens, variant) {
 	const colorMain = colord(tokens.color);
 	const colorMainHover = tokens.colorHover ? colord(tokens.colorHover) : colorMain;
 	const colorContrast = tokens.textColor || getContrast(tokens.color, tokens.textColor);
-	const colorContrastHover = tokens.textColorHover || getContrast(colorMainHover, tokens.textColor);
+	const colorContrastHover = !tokens.textColorHover && tokens.colorHover
+		? getContrast(tokens.colorHover, tokens.textColor)
+		: tokens.textColorHover;
 
 	// Determine state adjustment type
 	let stateAdjustment;
@@ -84,7 +87,7 @@ function setColorVariables(tokens, variant) {
 
 	return {
 		'--color-main': tokens.color,
-		'--color-main-hover': tokens.colorHover || tokens.color,
+		'--color-main-hover': tokens.colorHover,
 		'--color-contrast': colorContrast,
 		'--color-contrast-hover': colorContrastHover,
 		'--color-hover': colorHover,
@@ -92,8 +95,8 @@ function setColorVariables(tokens, variant) {
 		'--color-focus': colorFocus,
 		'--border-radius': tokens.borderRadius,
 		'--border-radius-hover': tokens.borderRadiusHover || tokens.borderRadius,
-		'--border-width': tokens.borderWidth || '1px',
-		'--border-width-hover': tokens.borderWidthHover || tokens.borderWidth || '1px',
+		'--border-width': tokens.borderWidth,
+		'--border-width-hover': tokens.borderWidthHover || tokens.borderWidth,
 		'--border-color': tokens.borderColor,
 		'--border-color-hover': tokens.borderColorHover || tokens.borderColor,
 		'--box-shadow': tokens.boxShadow,
@@ -129,6 +132,15 @@ export default {
 		pattern: {
 			type: String,
 			default: undefined,
+		},
+		/**
+		 * Tag of button
+		 * @values button, a
+		 */
+		tag: {
+			type: String,
+			default: 'button',
+			validator: (tag) => ['button', 'a'].includes(tag),
 		},
 		/**
 		 * Type of the button
@@ -390,6 +402,7 @@ export default {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
+	box-sizing: border-box;
 	min-width: 0;
 	color: var(--color-contrast, #fff);
 	font-weight: var(--maker-font-label-font-weight, 500);
@@ -513,7 +526,7 @@ export default {
 	}
 
 	&:hover:not(:disabled) {
-		color: var(--color-contrast-hover);
+		color: var(--color-contrast-hover, var(--color-contrast));
 		background-color: var(--color-hover);
 		border-radius: var(--border-radius-hover, $maker-shape-button-border-radius);
 		box-shadow:
@@ -558,13 +571,15 @@ export default {
 }
 
 .Button.variant_fill {
-	--border: inset 0 0 0 var(--border-width) var(--border-color);
-	--border-hover: inset 0 0 0 var(--border-width-hover) var(--border-color-hover);
+	--border: inset 0 0 0 var(--border-width, 1px) var(--border-color);
+	--border-hover: inset 0 0 0 var(--border-width-hover, 1px) var(--border-color-hover);
 }
 
 .Button.variant_outline {
-	--border: inset 0 0 0 var(--border-width) var(--color-main);
-	--border-hover: inset 0 0 0 var(--border-width-hover) var(--color-main-hover);
+	--border: inset 0 0 0 var(--border-width, 1px) var(--color-main);
+	--border-hover:
+		inset 0 0 0 var(--border-width-hover, 1px)
+		var(--color-main-hover, var(--color-main));
 }
 
 .Button.variant_ghost {
@@ -585,7 +600,7 @@ export default {
 	}
 
 	&:hover:not(:disabled) {
-		color: var(--color-main-hover);
+		color: var(--color-main-hover, var(--color-main));
 	}
 }
 
