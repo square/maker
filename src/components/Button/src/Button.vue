@@ -11,7 +11,7 @@
 				[$s.fullWidth]: resolvedFullWidth,
 				[$s.iconButton]: isSingleChild() && !resolvedFullWidth,
 				[$s.loading]: loading,
-			}
+			},
 		]"
 		:type="type"
 		:disabled="isDisabled"
