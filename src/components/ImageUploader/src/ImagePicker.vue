@@ -20,24 +20,26 @@
 			v-bind="$attrs"
 			@change="addImages"
 		>
-		<arrow-icon
+		<m-icon
 			v-if="dragged"
-			inline
-			:class="$s.ImagePickerDragIcon"
+			name="arrowUp"
+			size="large"
 		/>
-		<plus-icon
+		<m-icon
 			v-else
-			inline
-			:class="$s.ImagePickerInputIcon"
+			name="plus"
+			size="medium"
 		/>
 	</div>
 </template>
 
 <script>
-import PlusIcon from '@square/maker-icons/Plus';
-import ArrowIcon from '@square/maker-icons/ArrowUp';
+import { MIcon } from '@square/maker/components/Icon';
 import {
-	isEqual, uniqWith, escapeRegExp, partition,
+	isEqual,
+	uniqWith,
+	escapeRegExp,
+	partition,
 } from 'lodash';
 
 const getEntry = (item) => {
@@ -61,8 +63,7 @@ const readEntries =	(reader) => new Promise((resolve, reject) => {
 
 const getAllEntries = async (reader, aggregated = []) => {
 	const entries = await readEntries(reader);
-	// eslint-disable-next-line unicorn/explicit-length-check
-	if (!entries.length) {
+	if (entries.length === 0) {
 		return aggregated;
 	}
 
@@ -90,10 +91,8 @@ async function traverseEntry(entry) {
 }
 
 export default {
-	name: 'MImagePicker',
 	components: {
-		PlusIcon,
-		ArrowIcon,
+		MIcon,
 	},
 
 	data() {
@@ -187,26 +186,16 @@ export default {
 	box-sizing: border-box;
 	width: 96px;
 	height: 96px;
+	color: $maker-color-neutral-20;
 	background-color: $maker-color-background;
 	border: 1px solid $maker-color-neutral-20;
 	border-radius: $maker-shape-default-border-radius;
 	cursor: pointer;
 	transition: background-color 150ms linear;
-	fill: $maker-color-neutral-20;
 }
 
 .ImagePickerInputContainer.isDragged {
 	background-color: $maker-color-neutral-10;
-}
-
-.ImagePickerDragIcon {
-	width: 24px;
-	height: 24px;
-}
-
-.ImagePickerInputIcon {
-	width: 16px;
-	height: 16px;
 }
 
 .ImagePickerInput {
