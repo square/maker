@@ -169,7 +169,7 @@ export default {
 		 */
 		textPattern: {
 			type: String,
-			default: 'buttonLabel',
+			default: undefined,
 		},
 		/**
 		 * Main color of button
