@@ -52,6 +52,12 @@
 				/>
 			</button>
 		</aside>
+		<button
+			class="toggle-theme"
+			@click="toggleThemeControls"
+		>
+			Theme Colors
+		</button>
 		<aside class="side-nav">
 			<side-nav />
 		</aside>
@@ -191,6 +197,23 @@ button {
 	transform: translateX(0);
 }
 
+.toggle-theme {
+	position: fixed;
+	top: -1px;
+	right: var(--container-padding);
+	box-sizing: border-box;
+	padding: 9px 16px 8px 16px;
+	color: var(--maker-color-primary);
+	font-weight: 500;
+	font-size: 14px;
+	font-family: inherit;
+	background-color: var(--maker-color-background);
+	border: 1px solid var(--maker-color-neutral-10);
+	border-top: none;
+	cursor: pointer;
+	fill: currentColor;
+}
+
 .controls-header {
 	margin-top: 0;
 	margin-bottom: 1em;
@@ -209,8 +232,8 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 8px 4px 8px 6px;
-	color: inherit;
+	padding: 4px 0 4px 4px;
+	color: var(--maker-color-primary);
 	font-size: inherit;
 	font-family: inherit;
 	background: inherit;
@@ -218,7 +241,7 @@ button {
 	border-left: none;
 	transform: translate(100%, -50%);
 	transition: padding-left 0.5s;
-	fill: inherit;
+	fill: currentColor;
 }
 
 /* open */
@@ -227,8 +250,8 @@ button {
 }
 
 .toggle-icon {
-	width: 16px;
-	height: 16px;
+	width: 24px;
+	height: 24px;
 }
 
 .side-nav {
