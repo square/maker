@@ -101,6 +101,14 @@ export default {
 			validator: cssValidator('text-transform'),
 		},
 		/**
+		 * [Text decoration](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration)
+		 */
+		textDecoration: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('text-decoration'),
+		},
+		/**
 		 * [Text align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)
 		 * @values inherit, left, right, center, start, end
 		 */
@@ -122,6 +130,7 @@ export default {
 			'color',
 			'fontStyle',
 			'textTransform',
+			'textDecoration',
 			'textAlign',
 		]),
 		tag() {
@@ -171,6 +180,9 @@ export default {
 			}
 			if (this.resolvedTextTransform !== 'inherit') {
 				styles.textTransform = this.resolvedTextTransform;
+			}
+			if (this.resolvedTextDecoration !== 'inherit') {
+				styles.textDecoration = this.resolvedTextDecoration;
 			}
 			if (this.resolvedTextAlign !== 'inherit') {
 				styles.textAlign = this.resolvedTextAlign;

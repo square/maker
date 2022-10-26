@@ -61,19 +61,20 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop           | Type     | Default | Possible values                                                       | Description                                                                                                                    |
-| -------------- | -------- | ------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| pattern        | `string` | —       | `headline`, `title`, `paragraph`, `label`, `pattern defined in theme` | patterns are defined at the theme level                                                                                        |
-| element        | `string` | —       | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `div`, `li`          | [HTML Element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)                                                   |
-| size           | `number` | —       | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`                    | Size of text as step in fluid scale                                                                                            |
-| font-family    | `string` | —       | —                                                                     | [Font family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)                                                    |
-| font-weight    | `string` | —       | —                                                                     | [Font weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)                                                    |
-| font-size      | `string` | —       | —                                                                     | [Font size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size). Overrides the `size` prop, and disables type scaling. |
-| line-height    | `string` | —       | —                                                                     | [Line height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height). Overrides the internally calculated line height.  |
-| color          | `string` | —       | —                                                                     | [Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)                                                                |
-| font-style     | `string` | —       | `inherit`, `normal`, `italic`                                         | [Font style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)                                                      |
-| text-transform | `string` | —       | `inherit`, `none`, `uppercase`, `lowercase`, `capitalize`             | [Text transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)                                              |
-| text-align     | `string` | —       | `inherit`, `left`, `right`, `center`, `start`, `end`                  | [Text align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)                                                      |
+| Prop            | Type     | Default | Possible values                                                       | Description                                                                                                                    |
+| --------------- | -------- | ------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| pattern         | `string` | —       | `headline`, `title`, `paragraph`, `label`, `pattern defined in theme` | patterns are defined at the theme level                                                                                        |
+| element         | `string` | —       | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `div`, `li`          | [HTML Element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)                                                   |
+| size            | `number` | —       | `7`, `6`, `5`, `4`, `3`, `2`, `1`, `0`, `-1`, `-2`                    | Size of text as step in fluid scale                                                                                            |
+| font-family     | `string` | —       | —                                                                     | [Font family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)                                                    |
+| font-weight     | `string` | —       | —                                                                     | [Font weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)                                                    |
+| font-size       | `string` | —       | —                                                                     | [Font size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size). Overrides the `size` prop, and disables type scaling. |
+| line-height     | `string` | —       | —                                                                     | [Line height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height). Overrides the internally calculated line height.  |
+| color           | `string` | —       | —                                                                     | [Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)                                                                |
+| font-style      | `string` | —       | `inherit`, `normal`, `italic`                                         | [Font style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)                                                      |
+| text-transform  | `string` | —       | `inherit`, `none`, `uppercase`, `lowercase`, `capitalize`             | [Text transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)                                              |
+| text-decoration | `string` | —       | —                                                                     | [Text decoration](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration)                                            |
+| text-align      | `string` | —       | `inherit`, `left`, `right`, `center`, `start`, `end`                  | [Text align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)                                                      |
 
 
 ## Slots
