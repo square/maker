@@ -6,11 +6,16 @@ import defaultShapes from './default-shapes';
 
 export default function defaultTheme() {
 	return {
+		// utility functions which enable pointer values
+		resolve,
+		getPath,
+		// "global" theme settings
 		colors: defaultColors(),
 		fonts: defaultFonts(),
 		icons: defaultIcons(),
 		shapes: defaultShapes(),
 		profiles: {},
+		// "local" component theme settings
 		button: {
 			size: 'medium',
 			variant: 'fill',
@@ -373,7 +378,19 @@ export default function defaultTheme() {
 			color: undefined,
 			bgColor: undefined,
 		},
-		resolve,
-		getPath,
+		divider: {
+			color: '@colors["neutral-20"]',
+			size: '1px',
+			patterns: {
+				'gap-8': {
+					color: '@colors["neutral-10"]',
+					size: '8px',
+				},
+				'gap-16': {
+					color: '@colors["neutral-10"]',
+					size: '16px',
+				},
+			},
+		},
 	};
 }
