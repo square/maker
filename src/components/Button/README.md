@@ -518,21 +518,7 @@ export default {
 
 ```vue
 <template>
-	<m-theme :theme="theme">
-		<label>
-			primary color
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-		</label>&nbsp;
-		<label>
-			background
-			<input
-				v-model="bgColor"
-				type="color"
-			>
-		</label><br><br>
+	<div>
 		<table class="ButtonTable">
 			<thead>
 				<tr>
@@ -722,35 +708,15 @@ export default {
 				</tr>
 			</tbody>
 		</table>
-	</m-theme>
+	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MTheme } from '@square/maker/components/Theme';
-import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
 	components: {
-		MTheme,
 		MButton,
-	},
-	data() {
-		return {
-			primaryColor: '#9142ff',
-			bgColor: '#ffffff',
-		};
-	},
-	computed: {
-		theme() {
-			return {
-				colors: {
-					primary: this.primaryColor,
-					background: this.bgColor,
-					...makerColors(this.bgColor, this.primaryColor),
-				},
-			};
-		},
 	},
 };
 </script>

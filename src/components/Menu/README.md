@@ -2,146 +2,133 @@
 
 ```vue
 <template>
-	<m-theme
-		:theme="theme"
-	>
-		<div class="wrapper">
-			<label>
-				background color picker
-				<input
-					v-model="backgroundColor"
-					type="color"
+	<div class="wrapper">
+		<m-popover-layer />
+		<m-menu
+			v-model="single"
+		>
+			<template #toggle-select-prefix>
+				<settings class="icon" />
+			</template>
+			<template #toggle-select>
+				Single select menu
+			</template>
+			<template #menu>
+				<m-menu-option
+					value="one"
 				>
-			</label><br>
-			<m-popover-layer />
-			<m-menu
-				v-model="single"
-			>
-				<template #toggle-select-prefix>
-					<settings class="icon" />
-				</template>
-				<template #toggle-select>
-					Single select menu
-				</template>
-				<template #menu>
-					<m-menu-option
-						value="one"
-					>
-						Option one
-						<template #side>
-							Side
-						</template>
-						<template #suffix>
-							<settings class="icon" />
-						</template>
-					</m-menu-option>
-					<m-menu-option
-						value="two"
-					>
-						Option two
-						<template #secondary>
-							Secondary
-						</template>
-						<template #side>
-							Side
-						</template>
-						<template #side-secondary>
-							Side secondary
-						</template>
-					</m-menu-option>
-					<m-menu-option
-						value="three"
-					>
-						Option three
-						<template #suffix>
-							<settings class="icon" />
-						</template>
-					</m-menu-option>
-				</template>
-			</m-menu>
-			{{ single }}
-
-			<m-menu
-				v-model="multi"
-				type="multi-select"
-			>
-				<template #toggle-select>
-					Multi select menu
-				</template>
-				<template #menu>
-					<m-menu-option
-						value="one"
-					>
-						Option one
-						<template #side>
-							Side
-						</template>
-						<template #suffix>
-							<settings class="icon" />
-						</template>
-					</m-menu-option>
-					<m-menu-option
-						value="two"
-					>
-						Option two
-						<template #secondary>
-							Secondary
-						</template>
-						<template #side>
-							Side
-						</template>
-						<template #side-secondary>
-							Side secondary
-						</template>
-					</m-menu-option>
-					<m-menu-option
-						value="three"
-					>
-						Option three
-						<template #suffix>
-							<settings class="icon" />
-						</template>
-					</m-menu-option>
-				</template>
-			</m-menu>
-			{{ multi }}
-
-			<m-menu
-				type="action"
-			>
-				<template #toggle>
-					<m-button>
+					Option one
+					<template #side>
+						Side
+					</template>
+					<template #suffix>
 						<settings class="icon" />
-						Toggle
-					</m-button>
-				</template>
-				<template #menu>
-					<m-menu-option
-						v-for="index in 4"
-						:key="index"
-						:click-handler="clickHandler"
-					>
-						<template #prefix>
-							<settings class="icon" />
-						</template>
-						Action {{ index }}
-						<template #side>
-							Side
-						</template>
-					</m-menu-option>
-				</template>
-			</m-menu>
-		</div>
-	</m-theme>
+					</template>
+				</m-menu-option>
+				<m-menu-option
+					value="two"
+				>
+					Option two
+					<template #secondary>
+						Secondary
+					</template>
+					<template #side>
+						Side
+					</template>
+					<template #side-secondary>
+						Side secondary
+					</template>
+				</m-menu-option>
+				<m-menu-option
+					value="three"
+				>
+					Option three
+					<template #suffix>
+						<settings class="icon" />
+					</template>
+				</m-menu-option>
+			</template>
+		</m-menu>
+		{{ single }}
+
+		<m-menu
+			v-model="multi"
+			type="multi-select"
+		>
+			<template #toggle-select>
+				Multi select menu
+			</template>
+			<template #menu>
+				<m-menu-option
+					value="one"
+				>
+					Option one
+					<template #side>
+						Side
+					</template>
+					<template #suffix>
+						<settings class="icon" />
+					</template>
+				</m-menu-option>
+				<m-menu-option
+					value="two"
+				>
+					Option two
+					<template #secondary>
+						Secondary
+					</template>
+					<template #side>
+						Side
+					</template>
+					<template #side-secondary>
+						Side secondary
+					</template>
+				</m-menu-option>
+				<m-menu-option
+					value="three"
+				>
+					Option three
+					<template #suffix>
+						<settings class="icon" />
+					</template>
+				</m-menu-option>
+			</template>
+		</m-menu>
+		{{ multi }}
+
+		<m-menu
+			type="action"
+		>
+			<template #toggle>
+				<m-button>
+					<settings class="icon" />
+					Toggle
+				</m-button>
+			</template>
+			<template #menu>
+				<m-menu-option
+					v-for="index in 4"
+					:key="index"
+					:click-handler="clickHandler"
+				>
+					<template #prefix>
+						<settings class="icon" />
+					</template>
+					Action {{ index }}
+					<template #side>
+						Side
+					</template>
+				</m-menu-option>
+			</template>
+		</m-menu>
+	</div>
 </template>
 
 <script>
 import { MMenu, MMenuOption } from '@square/maker/components/Menu';
 import { MButton } from '@square/maker/components/Button';
-import { defaultTheme, MTheme } from '@square/maker/components/Theme';
 import Settings from '@square/maker-icons/Settings';
 import { MPopoverLayer } from '@square/maker/components/Popover';
-import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
 	components: {
@@ -150,7 +137,6 @@ export default {
 		MPopoverLayer,
 		Settings,
 		MButton,
-		MTheme,
 	},
 
 	mixins: [
@@ -161,19 +147,7 @@ export default {
 		return {
 			single: 'one',
 			multi: [],
-			backgroundColor: '#ffffff', // white
-			patterns: Object.keys(defaultTheme().badge.patterns),
 		};
-	},
-
-	computed: {
-		theme() {
-			return {
-				colors: {
-					...makerColors(this.backgroundColor),
-				},
-			};
-		},
 	},
 
 	methods: {
