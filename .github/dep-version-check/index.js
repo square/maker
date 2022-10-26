@@ -7,15 +7,16 @@ const packageJson = require('../../package.json');
 }) {
 	const errors = [];
 
-	for (const peerDepName in peerDependencies) {
-		if (!devDependencies.hasOwnProperty(peerDepName)) {
-			errors.push(`Missing "${peerDepName}" from devDependencies`);
+	for (const depName in peerDependencies) {
+		if (!devDependencies.hasOwnProperty(depName)) {
+			errors.push(`Missing "${depName}" in devDependencies`);
 			continue;
 		}
 
-		const peerDepSemver = peerDependencies[peerDepName];
-		if (semver.satisfies(devDependencies[peerDepName], peerDepSemver)) {
-			errors.push(`Expected dev-dependency "${peerDepName}" to be in range "${peerDependencies[peerDepName]}"`);
+		const peerDepSemver = peerDependencies[depName];
+		const devDepSemver = devDependencies[depName];
+		if (peerDepSemver !== devDepSemver) {
+			errors.push(`devDependency "${depName}@${devDepSemver}" doesn't match "${peerDepSemver}"`);
 			continue;
 		}
 	}

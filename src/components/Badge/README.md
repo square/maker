@@ -8,21 +8,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 
 ```vue
 <template>
-	<m-theme :theme="theme">
-		<label>
-			primary color picker
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-		</label><br>
-		<label>
-			background color picker
-			<input
-				v-model="backgroundColor"
-				type="color"
-			>
-		</label><br>
+	<div>
 		<table>
 			<thead>
 				<tr>
@@ -195,7 +181,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						in button  w/label
 					</th>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="primary"
@@ -205,7 +191,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="info"
@@ -215,7 +201,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="error"
@@ -225,7 +211,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="warning"
@@ -235,7 +221,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="success"
@@ -255,7 +241,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -266,7 +252,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -277,7 +263,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -288,7 +274,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -299,7 +285,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							size="small"
 							label="10+"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -310,7 +296,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						in button no label
 					</th>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="primary"
@@ -319,7 +305,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="info"
@@ -328,7 +314,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="error"
@@ -337,7 +323,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="warning"
@@ -346,7 +332,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 						</m-button>
 					</td>
 					<td>
-						<m-button pattern="outline">
+						<m-button pattern="primaryOutline">
 							button
 							<m-badge
 								pattern="success"
@@ -364,7 +350,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="primary"
 							size="small"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -374,7 +360,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="info"
 							size="small"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -384,7 +370,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="error"
 							size="small"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -394,7 +380,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="warning"
 							size="small"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -404,7 +390,7 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 							pattern="success"
 							size="small"
 						>
-							<m-button pattern="outline">
+							<m-button pattern="primaryOutline">
 								button
 							</m-button>
 						</m-badge>
@@ -412,37 +398,17 @@ Badges come with the following pre-defined patterns: primary, info, error, warni
 				</tr>
 			</tbody>
 		</table>
-	</m-theme>
+	</div>
 </template>
 
 <script>
 import { MButton } from '@square/maker/components/Button';
 import { MBadge } from '@square/maker/components/Badge';
-import { defaultTheme, MTheme } from '@square/maker/components/Theme';
-import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
 	components: {
 		MBadge,
 		MButton,
-		MTheme,
-	},
-	data() {
-		return {
-			primaryColor: '#0064ff', // blue
-			backgroundColor: '#ffffff', // white
-			patterns: Object.keys(defaultTheme().badge.patterns),
-		};
-	},
-	computed: {
-		theme() {
-			return {
-				colors: {
-					primary: this.primaryColor,
-					...makerColors(this.backgroundColor, this.primaryColor),
-				},
-			};
-		},
 	},
 };
 </script>
@@ -483,9 +449,13 @@ When positioning a Badge on top of another component, in order to position Badge
 		>
 			<div class="absolute box" />
 		</m-badge>
-		<button @click="toggleFixed">
+		<m-button
+			pattern="primaryOutline"
+			size="small"
+			@click="toggleFixed"
+		>
 			{{ fixedText }} fixed
-		</button>
+		</m-button>
 		<m-badge
 			v-if="showFixed"
 			label="badge"
@@ -499,10 +469,12 @@ When positioning a Badge on top of another component, in order to position Badge
 
 <script>
 import { MBadge } from '@square/maker/components/Badge';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MBadge,
+		MButton,
 	},
 	data() {
 		return {
@@ -526,20 +498,20 @@ export default {
 .container {
 	position: relative;
 	height: 200px;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 .box {
 	width: 80px;
 	height: 80px;
-	background-color: #555;
+	background-color: var(--maker-color-neutral-20, #555);
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	font-weight: 500;
 	font-size: 16px;
 	border-radius: 8px;
-	color: white;
+	color: var(--maker-color-body, #fff);
 	margin: 16px;
 }
 
@@ -570,7 +542,7 @@ export default {
 .fixed {
 	position: fixed;
 	bottom: 100px;
-	right: 100px;
+	right: 300px;
 }
 .fixed::before {
 	content: 'fixed';
@@ -625,7 +597,8 @@ export default {
 	width: 400px;
 	margin: 8px;
 	padding: 8px;
-	background-color: #aaccff;
+	color: var(--maker-color-body, #fff);
+	background-color: var(--maker-color-neutral-20, #555);
 	border-radius: 8px;
 }
 .loud {

@@ -1,26 +1,18 @@
 
 # Choice
 
+Use Choice to allow the user to choose one or multiple options from an inline list of options.
+
 ## Examples
 
 ### Default
 
+By default Choice allows user to select one option.
+
 ```vue
 <template>
 	<div>
-		<label>
-			Color picker
-			<input
-				v-model="color"
-				type="color"
-			>
-		</label>
-		<br>
-		<br>
-		<m-choice
-			v-model="selected"
-			:selected-color="color"
-		>
+		<m-choice v-model="selected">
 			<m-choice-option value="choice-1">
 				Choice
 			</m-choice-option>
@@ -53,7 +45,6 @@ export default {
 	data() {
 		return {
 			selected: 'choice-1',
-			color: '#006aff',
 		};
 	},
 };
@@ -61,6 +52,8 @@ export default {
 ```
 
 ### Multi select mode
+
+By setting the `mode` prop to `multi-select` Choice will allow users to select multiple options.
 
 ```vue
 <template>
@@ -108,6 +101,8 @@ export default {
 ```
 
 ### Fixed width
+
+Using CSS the width of individual ChoiceOptions can be fixed.
 
 ```vue
 <template>
@@ -161,6 +156,8 @@ export default {
 ```
 
 ### Disabled state
+
+The entire Choice component can be disabled or individual ChoiceOptions can be disabled.
 
 ```vue
 <template>
@@ -223,6 +220,8 @@ export default {
 ```
 
 ### Options as Cards
+
+Aside from ChoiceOptions you can also use ChoiceCards when options are more complex and may contain sub-options.
 
 ```vue
 <template>

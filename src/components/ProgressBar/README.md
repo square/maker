@@ -6,28 +6,8 @@ Use Progress Bar to display progress.
 
 ```vue
 <template>
-	<div :class="$s.Container">
-		<m-text
-			pattern="title"
-			:size="2"
-		>
-			default progressbar
-		</m-text>
-		<m-progress-bar
-			:progress="Number.parseInt(progress, 10)"
-		/>
-
-		<div :class="$s.Section">
-			<label>
-				Color picker
-				<input
-					v-model="color"
-					type="color"
-				>
-			</label>
-		</div>
-
-		<div :class="$s.Section">
+	<div class="demo">
+		<div>
 			<label>
 				Progress ({{ progress }}%)
 				<input
@@ -43,7 +23,7 @@ Use Progress Bar to display progress.
 		<div
 			v-for="shape in ['pill', 'rounded', 'squared']"
 			:key="shape"
-			:class="$s.Sizes"
+			class="sizes"
 		>
 			<m-text
 				pattern="title"
@@ -65,7 +45,6 @@ Use Progress Bar to display progress.
 				<m-progress-bar
 					:shape="shape"
 					:size="size"
-					:color="color"
 					:progress="Number.parseInt(progress, 10)"
 				/>
 			</div>
@@ -85,27 +64,25 @@ export default {
 
 	data() {
 		return {
-			color: '#000000',
 			progress: 50,
 		};
 	},
 };
 </script>
 
-<style module="$s">
-.Container {
+<style scoped>
+.demo {
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
 	max-width: 500px;
 }
 
-.Sizes {
+.sizes {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 }
-
 </style>
 ```
 

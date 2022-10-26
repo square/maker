@@ -162,22 +162,6 @@ While it's possible customize the `color`, `icon-name`, and `icon-color` props f
 ```vue
 <template>
 	<m-theme :theme="theme">
-		<label>
-			primary color
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-		</label>
-		<br>
-		<label>
-			background color
-			<input
-				v-model="backgroundColor"
-				type="color"
-			>
-		</label>
-		<br>
 		primary themed example:
 		<br>
 		<m-progress-circle
@@ -200,7 +184,6 @@ While it's possible customize the `color`, `icon-name`, and `icon-color` props f
 
 <script>
 import { MTheme } from '@square/maker/components/Theme';
-import makerColors from '@square/maker/utils/maker-colors';
 import { MProgressCircle } from '@square/maker/components/ProgressCircle';
 
 export default {
@@ -208,20 +191,9 @@ export default {
 		MProgressCircle,
 		MTheme,
 	},
-	data() {
-		return {
-			primaryColor: '#0064ff',
-			backgroundColor: '#ffffff',
-		};
-	},
 	computed: {
 		theme() {
 			return {
-				colors: {
-					primary: this.primaryColor,
-					background: this.backgroundColor,
-					...makerColors(this.backgroundColor, this.primaryColor),
-				},
 				progresscircle: {
 					patterns: {
 						primary: {

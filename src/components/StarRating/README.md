@@ -90,56 +90,6 @@ export default {
 </script>
 ```
 
-Although Star Rating has a `color` prop, it's better to leave it omitted and let Maker's theming system the best color for the rating given contrast requirements against the background.
-
-
-```vue
-<template>
-	<m-theme :theme="theme">
-		<label>
-			background color
-			<input
-				v-model="bgColor"
-				type="color"
-			>
-		</label>
-		<m-star-rating
-			v-for="rating in [1, 2, 3, 4, 5]"
-			:key="rating"
-			:rating="rating"
-		/>
-	</m-theme>
-</template>
-
-<script>
-import { MTheme } from '@square/maker/components/Theme';
-import makerColors from '@square/maker/utils/maker-colors';
-import { MStarRating } from '@square/maker/components/StarRating';
-
-export default {
-	components: {
-		MTheme,
-		MStarRating,
-	},
-	data() {
-		return {
-			bgColor: '#ffffff',
-		};
-	},
-	computed: {
-		theme() {
-			return {
-				colors: {
-					background: this.bgColor,
-					...makerColors(this.bgColor),
-				},
-			};
-		},
-	},
-};
-</script>
-```
-
 <!-- api-tables:start -->
 ## Star Props
 

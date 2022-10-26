@@ -8,24 +8,7 @@ Notice has the following built-in patterns: primary, error, warning, success, in
 
 ```vue
 <template>
-	<m-theme
-		:theme="theme"
-		class="spaceout"
-	>
-		<label>
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-			primary color picker
-		</label><br>
-		<label>
-			<input
-				v-model="bgColor"
-				type="color"
-			>
-			background color picker
-		</label><br><br>
+	<div class="spaceout">
 		<m-notice pattern="primary">
 			<template #icon>
 				<plus class="icon" />
@@ -118,14 +101,12 @@ Notice has the following built-in patterns: primary, error, warning, success, in
 				</m-text-button>
 			</template>
 		</m-notice>
-	</m-theme>
+	</div>
 </template>
 
 <script>
 import { MNotice } from '@square/maker/components/Notice';
 import { MTextButton } from '@square/maker/components/TextButton';
-import { MTheme } from '@square/maker/components/Theme';
-import makerColors from '@square/maker/utils/maker-colors';
 import Plus from '@square/maker-icons/Plus';
 
 export default {
@@ -133,23 +114,6 @@ export default {
 		MNotice,
 		MTextButton,
 		Plus,
-		MTheme,
-	},
-	data() {
-		return {
-			primaryColor: '#9142ff',
-			bgColor: '#ffffff',
-		};
-	},
-	computed: {
-		theme() {
-			return {
-				colors: {
-					primary: this.primaryColor,
-					...makerColors(this.bgColor, this.primaryColor),
-				},
-			};
-		},
 	},
 };
 </script>

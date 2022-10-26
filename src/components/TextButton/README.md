@@ -6,18 +6,11 @@ TextButton was made to be used inside the `#actions` slots of other components s
 
 **DO NOT** use this component if you need to navigate the user to another page, for that use [Link](#/Link).
 
-## Styles & Sizes
+## States & Sizes
 
 ```vue
 <template>
 	<div>
-		<label>
-			Color picker
-			<input
-				v-model="color"
-				type="color"
-			>
-		</label><br><br>
 		<table>
 			<thead>
 				<tr>
@@ -35,7 +28,6 @@ TextButton was made to be used inside the `#actions` slots of other components s
 					<td>
 						<m-text-button
 							size="large"
-							:color="color"
 						>
 							Button
 						</m-text-button>
@@ -43,7 +35,6 @@ TextButton was made to be used inside the `#actions` slots of other components s
 					<td>
 						<m-text-button
 							size="large"
-							:color="color"
 							disabled
 						>
 							Disabled
@@ -52,7 +43,6 @@ TextButton was made to be used inside the `#actions` slots of other components s
 					<td>
 						<m-text-button
 							size="large"
-							:color="color"
 							loading
 						>
 							Loading
@@ -67,7 +57,6 @@ TextButton was made to be used inside the `#actions` slots of other components s
 					<td>
 						<m-text-button
 							size="medium"
-							:color="color"
 						>
 							Button
 						</m-text-button>
@@ -75,7 +64,6 @@ TextButton was made to be used inside the `#actions` slots of other components s
 					<td>
 						<m-text-button
 							size="medium"
-							:color="color"
 							disabled
 						>
 							Disabled
@@ -84,7 +72,6 @@ TextButton was made to be used inside the `#actions` slots of other components s
 					<td>
 						<m-text-button
 							size="medium"
-							:color="color"
 							loading
 						>
 							Loading
@@ -103,11 +90,6 @@ export default {
 	components: {
 		MTextButton,
 	},
-	data() {
-		return {
-			color: '#000000',
-		};
-	},
 };
 </script>
 
@@ -120,21 +102,7 @@ th, td {
 ## Patterns
 ```vue
 <template>
-	<m-theme :theme="theme">
-		<label>
-			primary color
-			<input
-				v-model="primaryColor"
-				type="color"
-			>
-		</label>&nbsp;
-		<label>
-			background
-			<input
-				v-model="bgColor"
-				type="color"
-			>
-		</label><br><br>
+	<div>
 		<table>
 			<thead>
 				<tr>
@@ -147,7 +115,7 @@ th, td {
 						<m-text-button
 							pattern="primary"
 						>
-							primary
+							Primary
 						</m-text-button>
 					</td>
 				</tr>
@@ -156,7 +124,7 @@ th, td {
 						<m-text-button
 							pattern="error"
 						>
-							error
+							Error
 						</m-text-button>
 					</td>
 				</tr>
@@ -165,7 +133,7 @@ th, td {
 						<m-text-button
 							pattern="success"
 						>
-							success
+							Success
 						</m-text-button>
 					</td>
 				</tr>
@@ -174,7 +142,7 @@ th, td {
 						<m-text-button
 							pattern="warning"
 						>
-							warning
+							Warning
 						</m-text-button>
 					</td>
 				</tr>
@@ -183,41 +151,21 @@ th, td {
 						<m-text-button
 							pattern="info"
 						>
-							info
+							Info
 						</m-text-button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-	</m-theme>
+	</div>
 </template>
 
 <script>
 import { MTextButton } from '@square/maker/components/TextButton';
-import { MTheme } from '@square/maker/components/Theme';
-import makerColors from '@square/maker/utils/maker-colors';
 
 export default {
 	components: {
 		MTextButton,
-		MTheme,
-	},
-	data() {
-		return {
-			primaryColor: '#9142ff',
-			bgColor: '#ffffff',
-		};
-	},
-	computed: {
-		theme() {
-			return {
-				colors: {
-					primary: this.primaryColor,
-					background: this.bgColor,
-					...makerColors(this.bgColor, this.primaryColor),
-				},
-			};
-		},
 	},
 };
 </script>
