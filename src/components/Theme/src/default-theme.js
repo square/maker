@@ -15,6 +15,7 @@ export default function defaultTheme() {
 			size: 'medium',
 			variant: 'fill',
 			shape: undefined,
+			textPattern: 'buttonLabel',
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
