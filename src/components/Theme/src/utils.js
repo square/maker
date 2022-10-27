@@ -64,6 +64,8 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	for (const propName of propNames) {
 		if (propName === 'pattern') {
 			computedResolvedProps.resolvedPattern = function resolveThemeablePattern() {
+				console.log('resolving pattern prop');
+				// debugger;
 				// local pattern set directly on component
 				// overrides pattern set by theme
 				if (!isNil(this.pattern)) {
@@ -101,6 +103,8 @@ export function resolveThemeableProps(componentKeyInTheme, propNames) {
 			};
 		} else {
 			computedResolvedProps[`resolved${capitalizeFirstLetter(propName)}`] = function resolveThemeableProp() {
+				console.log(`resolving ${propName} prop`);
+				// debugger;
 				// local value set directly on component
 				// overrides value set by theme
 				if (!isNil(this[propName])) {
