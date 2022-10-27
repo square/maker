@@ -151,7 +151,7 @@
 							</div>
 						</div>
 						<br>
-						<m-divider />
+						<m-divider :class="$s.Divider" />
 						<m-text
 							pattern="title"
 							:size="0"
@@ -226,7 +226,7 @@
 							</select>
 						</template>
 						<br>
-						<m-divider />
+						<m-divider :class="$s.Divider" />
 						<m-text
 							pattern="title"
 							:size="0"
@@ -308,7 +308,7 @@
 							Switching to shipping will change the scheduled time you selected
 						</m-notice>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-input
 							placeholder="Delivery address"
@@ -381,7 +381,7 @@
 							Action has been successfully completed
 						</m-notice>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-button
 							full-width
@@ -395,7 +395,7 @@
 							Schedule for later
 						</m-button>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<m-container
 						label="label"
 						sublabel="sublabel"
@@ -403,7 +403,7 @@
 					>
 						container content
 					</m-container>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<m-pin-input :pin-length="3" />
 				</div>
 				<div
@@ -470,7 +470,7 @@
 							style="justify-content: flex-start;"
 						/>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-checkbox>
 							Include cutlery and utensils
@@ -509,7 +509,7 @@
 							disabled
 						/>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						Go to
 						<m-link
@@ -529,7 +529,7 @@
 							suffix text
 						</m-link>.
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-button
 							full-width
@@ -550,7 +550,7 @@
 							open blade
 						</m-button>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-progress-bar
 							:progress="50"
@@ -593,7 +593,7 @@
 							@image-uploader:change="setImages"
 						/>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-text
 							pattern="title"
@@ -612,7 +612,7 @@
 							:disabled-dates="disabledDates"
 						/>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div>
 						<m-text-button>
 							<info :class="$s.Icon" />  Learn more
@@ -622,7 +622,7 @@
 						/>
 						<m-toggle>label</m-toggle>
 					</div>
-					<m-divider />
+					<m-divider :class="$s.Divider" />
 					<div :class="$s.TypographyPreview">
 						<m-text
 							v-for="pattern in ['headline', 'title', 'paragraph', 'label']"
@@ -1002,6 +1002,7 @@ export default {
 
 hr.Divider {
 	margin: 8px 0;
+	padding: 0 !important;
 }
 
 .palette {

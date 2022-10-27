@@ -99,7 +99,9 @@ th, td {
 }
 </style>
 ```
+
 ## Patterns
+
 ```vue
 <template>
 	<div>
