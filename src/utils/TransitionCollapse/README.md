@@ -76,9 +76,9 @@ export default {
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-    background-color: #ccc;
+    background-color: var(--maker-color-neutral-10);
 	padding: 40px;
-	border: 2px solid black;
+	border: 2px solid var(--maker-color-neutral-20);
 	width: 500px;
 }
 </style>

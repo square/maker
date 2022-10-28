@@ -5,19 +5,25 @@ Use MToast to notify users of things.
 ```vue
 <template>
 	<div>
-		<button @click="openToast">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast"
+		>
 			open toast
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MToastLayer,
+		MButton,
 	},
 
 	mixins: [
@@ -84,38 +90,62 @@ Toasts will auto-dismiss after 5000 milliseconds (5 seconds) by default. You can
 ```vue
 <template>
 	<div>
-		<button @click="openToast(1000)">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast(1000)"
+		>
 			open short toast (1s)
-		</button>
-		<button @click="openToast(5000)">
+		</m-button>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast(5000)"
+		>
 			open default toast (5s)
-		</button>
-		<button @click="openToast(10000)">
+		</m-button>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast(10000)"
+		>
 			open long toast (10s)
-		</button>
-		<button @click="openToast(-1)">
+		</m-button>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast(-1)"
+		>
 			open persistent toast (indefinite)
-		</button>
+		</m-button>
 		<br>
-		<button @click="closeAllToasts">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="closeAllToasts"
+		>
 			programmatically close all toasts
-		</button>
-		<button
+		</m-button>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
 			:disabled="!persistentCloseFns.length"
 			@click="closePersistentToast"
 		>
 			programmatically close persistent toast
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MToastLayer,
+		MButton,
 	},
 
 	mixins: [
@@ -168,9 +198,13 @@ Toasts can have actions which can be passed via the `actions` prop. Every action
 ```vue
 <template>
 	<div>
-		<button @click="openToast">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast"
+		>
 			open toast
-		</button>
+		</m-button>
 		<br>
 		count: {{ count }}
 		<m-toast-layer />
@@ -178,10 +212,12 @@ Toasts can have actions which can be passed via the `actions` prop. Every action
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
 
 export default {
 	components: {
+		MButton,
 		MToastLayer,
 	},
 
@@ -223,9 +259,13 @@ Toasts can also optionally display progress. To render a progress bar pass a 0 -
 ```vue
 <template>
 	<div>
-		<button @click="openToast">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast"
+		>
 			open toast
-		</button>
+		</m-button>
 		<br>
 		<label>
 			progress {{ progress }}%
@@ -243,10 +283,12 @@ Toasts can also optionally display progress. To render a progress bar pass a 0 -
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
 
 export default {
 	components: {
+		MButton,
 		MToastLayer,
 	},
 
@@ -280,24 +322,28 @@ Toasts have the following built-in default patterns: `info` (default), `success`
 <template>
 	<div>
 		open toast:
-		<button
+		<m-button
 			v-for="pattern in defaultToastPatterns"
 			:key="pattern"
+			size="small"
+			pattern="primaryOutline"
 			class="toastbutton"
 			@click="openToast(pattern)"
 		>
 			{{ pattern }}
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { defaultTheme } from '@square/maker/components/Theme';
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
 
 export default {
 	components: {
+		MButton,
 		MToastLayer,
 	},
 
@@ -336,9 +382,13 @@ An example combining all of the features above that you can copy & paste into yo
 ```vue
 <template>
 	<div>
-		<button @click="openToast">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast"
+		>
 			open toast
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</div>
 </template>
@@ -346,10 +396,12 @@ An example combining all of the features above that you can copy & paste into yo
 <script>
 /* eslint-disable no-return-assign */
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
+import { MButton } from '@square/maker/components/Button';
 
 export default {
 	components: {
 		MToastLayer,
+		MButton,
 	},
 
 	mixins: [
@@ -397,25 +449,29 @@ By default, icons are hidden for `info` and `primary` patterns and shown for the
 <template>
 	<div>
 		open toast:
-		<button
+		<m-button
 			v-for="config in invertedShowIcons"
 			:key="config.pattern"
+			size="small"
+			pattern="primaryOutline"
 			class="toastbutton"
 			@click="openToast(config.pattern, config.showIcon)"
 		>
 			{{ config.pattern }} {{ config.showIcon ? 'with' : 'without' }} an icon
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { defaultTheme } from '@square/maker/components/Theme';
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
 
 export default {
 	components: {
 		MToastLayer,
+		MButton,
 	},
 
 	mixins: [
@@ -473,10 +529,14 @@ Use `actionbarOffset: true` when opening the toast.
 			style="padding-bottom: 0"
 		>
 			<div class="showOnMobile">
-				<button @click="showActionbar = !showActionbar">
+				<m-button
+					size="small"
+					pattern="primaryOutline"
+					@click="showActionbar = !showActionbar"
+				>
 					{{ showActionbar ? 'hide' : 'show' }}
 					global actionbar
-				</button>
+				</m-button>
 				<div
 					v-if="showActionbar"
 				>
@@ -496,12 +556,20 @@ Use `actionbarOffset: true` when opening the toast.
 							Confirm action
 						</m-action-bar-button>
 					</m-action-bar>
-					<button @click="openToastWithOffset">
+					<m-button
+						size="small"
+						pattern="primaryOutline"
+						@click="openToastWithOffset"
+					>
 						✅ show toast (with actionbar offset on mobile)
-					</button>
-					<button @click="openToast">
+					</m-button>
+					<m-button
+						size="small"
+						pattern="primaryOutline"
+						@click="openToast"
+					>
 						❌ show default toast (covering actionbar)
-					</button>
+					</m-button>
 				</div>
 			</div>
 			<div class="showOnTablet">
@@ -514,6 +582,7 @@ Use `actionbarOffset: true` when opening the toast.
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
 import { MActionBar, MActionBarButton, MActionBarLayer } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
@@ -525,6 +594,7 @@ export default {
 		MActionBar,
 		MActionBarButton,
 		XIcon,
+		MButton,
 	},
 	mixins: [
 		MToastLayer.apiMixin,
@@ -581,17 +651,20 @@ Same as for dodging global actionbars. Use `actionbarOffset: true` when opening 
 ```vue
 <template>
 	<div>
-		<button
+		<m-button
+			size="small"
+			pattern="primaryOutline"
 			@click="openModal"
 		>
 			Open modal
-		</button>
+		</m-button>
 		<m-modal-layer />
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MModalLayer } from '@square/maker/components/Modal';
 import { MToastLayer } from '@square/maker/components/Toast';
 import ActionbarModal from 'doc/ActionbarModal.vue';
@@ -600,6 +673,7 @@ export default {
 	components: {
 		MModalLayer,
 		MToastLayer,
+		MButton,
 	},
 
 	mixins: [
@@ -631,12 +705,20 @@ _ActionbarModal.vue_
 			</m-text>
 			resize your screen above/below 840px (breakpoint separately
 			mobile &amp; desktop styles)
-			<button @click="openToastWithOffset">
+			<m-button
+				size="small"
+				pattern="primaryOutline"
+				@click="openToastWithOffset"
+			>
 				✅ show toast (with actionbar offset on mobile)
-			</button>
-			<button @click="openToast">
+			</m-button>
+			<m-button
+				size="small"
+				pattern="primaryOutline"
+				@click="openToast"
+			>
 				❌ show default toast (covering actionbar)
-			</button>
+			</m-button>
 			<m-inline-action-bar>
 				<m-action-bar-button
 					key="close"
@@ -659,6 +741,7 @@ _ActionbarModal.vue_
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MText } from '@square/maker/components/Text';
 import { MModal, modalApi, MModalContent } from '@square/maker/components/Modal';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
@@ -667,6 +750,7 @@ import { toastApi, MToast } from '@square/maker/components/Toast';
 
 export default {
 	components: {
+		MButton,
 		MText,
 		MModal,
 		MActionBarButton,
@@ -721,14 +805,19 @@ The close icon can be customized by changing the `close` icon in the `icons` sec
 ```vue
 <template>
 	<m-theme :theme="theme">
-		<button @click="openZapToast">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openZapToast"
+		>
 			open zap toast
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</m-theme>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MTheme } from '@square/maker/components/Theme';
 import { MToastLayer, MToast } from '@square/maker/components/Toast';
 import Zap from '@square/maker-icons/Zap';
@@ -737,6 +826,7 @@ import ChevronRight from '@square/maker-icons/ChevronRight';
 export default {
 	components: {
 		MTheme,
+		MButton,
 		MToastLayer,
 	},
 
@@ -776,18 +866,24 @@ If MToast doesn't satify your needs and you need custom toast for a specific sit
 ```vue
 <template>
 	<div>
-		<button @click="openToast">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openToast"
+		>
 			open custom toast
-		</button>
+		</m-button>
 		<m-toast-layer />
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MToastLayer, MBread } from '@square/maker/components/Toast';
 
 export default {
 	components: {
+		MButton,
 		MToastLayer,
 	},
 

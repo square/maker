@@ -7,6 +7,7 @@ Use the Dialog component to prompt the user with some immediate information that
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openDialog"
 		>
 			Open dialog
@@ -58,6 +59,7 @@ _DemoDialog.vue_
 			</m-text>
 			<m-button
 				size="small"
+				pattern="primaryOutline"
 				@click="dialogApi.close()"
 			>
 				Close
@@ -272,12 +274,16 @@ type dialogApi = {
 
 ## Examples
 
-### beforeBefore & afterClose hooks
+### beforeClose & afterClose hooks
 
 ```vue
 <template>
 	<div>
-		<m-button @click="openDialog">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openDialog"
+		>
 			Open Dialog
 		</m-button>
 
@@ -439,6 +445,7 @@ Dialogs are responsive and should be used with `InlineActionBar` which renders t
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openDialog"
 		>
 			Open dialog
@@ -549,6 +556,7 @@ As noted above, to open a Dialog on top of a Modal you must place `MDialogLayer`
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openModal"
 		>
 			Open modal
@@ -607,12 +615,14 @@ _DemoModal.vue_
 			</m-text>
 			<m-button
 				size="small"
+				pattern="primaryOutline"
 				@click="modalApi.close()"
 			>
 				Close
 			</m-button>
 			<m-button
 				size="small"
+				pattern="primaryOutline"
 				@click="openDialog"
 			>
 				Open Dialog

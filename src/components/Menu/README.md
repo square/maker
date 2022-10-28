@@ -100,7 +100,10 @@
 			type="action"
 		>
 			<template #toggle>
-				<m-button>
+				<m-button
+					size="small"
+					pattern="primaryOutline"
+				>
 					<settings class="icon" />
 					Toggle
 				</m-button>

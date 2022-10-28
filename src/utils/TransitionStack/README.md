@@ -12,32 +12,42 @@ How items are animated into the stack can be controlled via the `transition-from
 <template>
 	<div class="demo">
 		<div class="buttons">
-			<button
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="insertItem"
 			>
 				insert randomly
-			</button>
-			<button
+			</m-button>
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="removeItem"
 			>
 				remove randomly
-			</button>
-			<button
+			</m-button>
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="cycleTransitionFrom"
 			>
 				transition from {{ transitionFrom }}
-			</button>
+			</m-button>
 			<br>
-			<button
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="cycleTransitionDuration"
 			>
 				transition duration {{ transitionDuration }}s
-			</button>
-			<button
+			</m-button>
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="cycleAlign"
 			>
 				align {{ align }}
-			</button>
+			</m-button>
 		</div>
 		<m-transition-stack
 			class="stack"
@@ -62,6 +72,7 @@ How items are animated into the stack can be controlled via the `transition-from
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MTransitionStack } from '@square/maker/utils/TransitionStack';
 
 function randomInt(exclusiveMax) {
@@ -156,6 +167,7 @@ function cycle(current, available) {
 export default {
 	components: {
 		MTransitionStack,
+		MButton,
 	},
 
 	data() {
@@ -261,21 +273,27 @@ It's possible to turn MTransitionStack into a full-screen overlay with `position
 <template>
 	<div class="demo">
 		<div class="buttons">
-			<button
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="insertItem"
 			>
 				add item
-			</button>
-			<button
+			</m-button>
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="removeItem"
 			>
 				remove item
-			</button>
-			<button
+			</m-button>
+			<m-button
+				size="small"
+				pattern="primaryOutline"
 				@click="cyclePosition"
 			>
 				position {{ position }}
-			</button>
+			</m-button>
 		</div>
 		<m-transition-stack
 			class="stack"
@@ -295,6 +313,7 @@ It's possible to turn MTransitionStack into a full-screen overlay with `position
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MTransitionStack } from '@square/maker/utils/TransitionStack';
 
 function randomInt(exclusiveMax) {
@@ -370,6 +389,7 @@ function cycle(current, available) {
 export default {
 	components: {
 		MTransitionStack,
+		MButton,
 	},
 
 	data() {

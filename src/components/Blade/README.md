@@ -7,6 +7,7 @@ Use the Blade component to open a blade.
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openBlade"
 		>
 			Open blade
@@ -21,8 +22,6 @@ import DemoBlade from 'doc/DemoBlade.vue';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
-	name: 'DemoSetup',
-
 	components: {
 		MButton,
 		MBladeLayer,
@@ -59,6 +58,7 @@ _DemoBlade.vue_
 			</m-text>
 			<m-button
 				size="small"
+				pattern="primaryOutline"
 				@click="bladeApi.close()"
 			>
 				Close
@@ -73,8 +73,6 @@ import { MButton } from '@square/maker/components/Button';
 import { MText } from '@square/maker/components/Text';
 
 export default {
-	name: 'DemoBlade',
-
 	components: {
 		MBlade,
 		MBladeContent,
@@ -107,6 +105,7 @@ export default {
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openBlade"
 		>
 			Open blade
@@ -121,8 +120,6 @@ import ActionBarDemoBlade from 'doc/ActionBarDemoBlade.vue';
 import { MButton } from '@square/maker/components/Button';
 
 export default {
-	name: 'ActionBarDemoSetup',
-
 	components: {
 		MButton,
 		MBladeLayer,
@@ -184,8 +181,6 @@ import { MInlineActionBar, MActionBarButton } from '@square/maker/components/Act
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'ActionBarDemoBlade',
-
 	components: {
 		MBlade,
 		MBladeContent,

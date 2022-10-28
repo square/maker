@@ -45,7 +45,7 @@ export default {
 .gray-box {
     width: 300px;
     height: 500px;
-    background-color: #ccc;
+    background-color: var(--maker-color-neutral-10);
 }
 </style>
 ```
