@@ -195,6 +195,7 @@ export default {
 	min-width: 80px;
 	font-size: 16px;
 	border-radius: $maker-shape-default-border-radius;
+	fill: currentColor;
 }
 
 .Prefix {
@@ -226,7 +227,7 @@ export default {
 	height: 48px;
 	padding: 0 32px 0 16px;
 	overflow: hidden;
-	color: var(--color-foreground);
+	color: var(--color-placeholder);
 	font-weight: inherit;
 	font-size: inherit;
 	font-family: inherit;

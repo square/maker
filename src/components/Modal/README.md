@@ -7,6 +7,7 @@ Use the modal component to enter the user into a new _mode_.
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openModal"
 		>
 			Open modal
@@ -59,6 +60,7 @@ _DemoModal.vue_
 			</m-text>
 			<m-button
 				size="small"
+				pattern="primaryOutline"
 				@click="modalApi.close()"
 			>
 				Close
@@ -263,6 +265,7 @@ type modalApi = {
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openModal"
 		>
 			Open modal
@@ -337,6 +340,7 @@ Modals are responsive and should be used with `InlineActionBar` which renders th
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openModal"
 		>
 			Open modal
@@ -451,6 +455,7 @@ It's possible to stack modals, i.e. open another modal from inside a modal. Simp
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openModal"
 		>
 			Open modal
