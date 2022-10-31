@@ -2,7 +2,6 @@
 
 Use the popover to provide the user with more context or options. The Popover Layer should be placed at the root of your application.
 
-## Basic Popover
 ```vue
 <template>
 	<div>
@@ -11,9 +10,11 @@ Use the popover to provide the user with more context or options. The Popover La
 		<m-popover>
 			<template #action="popover">
 				<m-button
+					size="small"
+					pattern="primaryOutline"
 					@click="popover.toggle()"
 				>
-					Popover Toggle
+					Toggle popover
 				</m-button>
 			</template>
 
@@ -31,8 +32,6 @@ import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/componen
 import { MButton } from '@square/maker/components/Button';
 
 export default {
-	name: 'BasicDemo',
-
 	components: {
 		MPopoverLayer,
 		MPopover,
@@ -47,8 +46,10 @@ export default {
 </script>
 ```
 
+## Examples
 
-## Other Configurations
+### Theming
+
 ```vue
 <template>
 	<div>
@@ -71,14 +72,14 @@ export default {
 					/>
 				</label>
 				<label>
-					Text Color
+					Text color
 					<input
 						v-model="color"
 						type="color"
 					>
 				</label>
 				<label>
-					Background Color
+					Background color
 					<input
 						v-model="bgColor"
 						type="color"
@@ -106,7 +107,7 @@ export default {
 						<m-button
 							@click="popover.toggle()"
 						>
-							Popover Toggle
+							Toggle popover
 						</m-button>
 					</template>
 
@@ -132,8 +133,6 @@ import { MText } from '@square/maker/components/Text';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'SimpleDemo',
-
 	components: {
 		MPopoverLayer,
 		MPopover,
@@ -258,7 +257,7 @@ export default {
 </style>
 ```
 
-## External Trigger
+### External triggers
 
 If you need to trigger a popover to be opened from outside the `Popover` component, you can access the `open`, `close`, and `trigger` methods via a `ref`.
 
@@ -269,9 +268,11 @@ If you need to trigger a popover to be opened from outside the `Popover` compone
 
 		<m-button
 			ref="externalTrigger"
+			size="small"
+			pattern="primaryOutline"
 			@click="$refs.popover.toggle($refs.externalTrigger.$el)"
 		>
-			Popover Toggle
+			Toggle popover
 		</m-button>
 		<m-popover ref="popover">
 			<template #action>
@@ -297,8 +298,6 @@ import { MButton } from '@square/maker/components/Button';
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'ExternalTriggerDemo',
-
 	components: {
 		MPopoverLayer,
 		MPopover,
@@ -314,26 +313,38 @@ export default {
 </script>
 ```
 
-## Modal/Dialog Usage
+## Usage within layer components
 
-The Dialog and Modal layers share the root-level Popover layer. In order for popovers to appear on top of the Dialogs and Modals, make sure to include the `MPopoverLayer` component _after_ the `MDialogLayer`/`MModalLayer` components in your template. Otherwise, Popovers will work inside Dialogs and Modals without extra configuration.
+Layer components, such as Modal, Dialog, and Blade, share the root-level Popover layer. In order for Popovers to appear over Modals, Dialogs, and Blades, the `MPopoverLayer` component must be placed _after_ `MModalLayer`, `MDialogLayer`, and `MBladeLayer` components in your root app template.
 
 ```vue
 <template>
 	<div>
+		<m-blade-layer />
 		<m-modal-layer />
 		<m-dialog-layer />
 		<m-popover-layer />
 
 		<m-button
-			@click="openModal()"
+			size="small"
+			pattern="primaryOutline"
+			@click="openModal"
 		>
-			Open Modal
+			Open modal
 		</m-button>
 		<m-button
-			@click="openDialog()"
+			size="small"
+			pattern="primaryOutline"
+			@click="openDialog"
 		>
-			Open Dialog
+			Open dialog
+		</m-button>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openBlade"
+		>
+			Open blade
 		</m-button>
 	</div>
 </template>
@@ -345,21 +356,23 @@ import { MModalLayer } from '@square/maker/components/Modal';
 import DemoModal from 'doc/DemoModal.vue';
 import { MDialogLayer } from '@square/maker/components/Dialog';
 import DemoDialog from 'doc/DemoDialog.vue';
+import { MBladeLayer } from '@square/maker/components/Blade';
+import DemoBlade from 'doc/DemoBlade.vue';
 
 export default {
-	name: 'ModalDemo',
-
 	components: {
 		MPopoverLayer,
 		MButton,
 		MModalLayer,
 		MDialogLayer,
+		MBladeLayer,
 	},
 
 	mixins: [
 		MPopoverLayer.popoverMixin,
 		MModalLayer.apiMixin,
 		MDialogLayer.apiMixin,
+		MBladeLayer.apiMixin,
 	],
 
 	methods: {
@@ -373,6 +386,9 @@ export default {
 		},
 		openDialog() {
 			this.dialogApi.open(() => <DemoDialog />);
+		},
+		openBlade() {
+			this.bladeApi.open(() => <DemoBlade />);
 		},
 	},
 };
@@ -397,17 +413,22 @@ _DemoModal.vue_
 				<template #action="popover">
 					<m-button
 						size="small"
+						pattern="primaryOutline"
 						@click="popover.toggle()"
 					>
-						Toggle Popover
+						Toggle popover
 					</m-button>
 				</template>
 
 				<template #content>
 					<m-popover-content>
 						<demo-popover>
-							<m-button @click="closeModal()">
-								Close Modal
+							<m-button
+								size="small"
+								pattern="primaryOutline"
+								@click="closeModal"
+							>
+								Close modal
 							</m-button>
 						</demo-popover>
 					</m-popover-content>
@@ -425,8 +446,6 @@ import { MModal, MModalContent, modalApi } from '@square/maker/components/Modal'
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'DemoModal',
-
 	components: {
 		MPopover,
 		MPopoverContent,
@@ -473,17 +492,22 @@ _DemoDialog.vue_
 				<template #action="popover">
 					<m-button
 						size="small"
+						pattern="primaryOutline"
 						@click="popover.toggle()"
 					>
-						Toggle Popover
+						Toggle popover
 					</m-button>
 				</template>
 
 				<template #content>
 					<m-popover-content>
 						<demo-popover>
-							<m-button @click="closeDialog()">
-								Close Dialog
+							<m-button
+								size="small"
+								pattern="primaryOutline"
+								@click="closeDialog"
+							>
+								Close dialog
 							</m-button>
 						</demo-popover>
 					</m-popover-content>
@@ -501,8 +525,6 @@ import { MDialog, MDialogContent, dialogApi } from '@square/maker/components/Dia
 import DemoPopover from 'doc/DemoPopoverContent.vue';
 
 export default {
-	name: 'DemoDialog',
-
 	components: {
 		MPopover,
 		MPopoverContent,
@@ -525,6 +547,89 @@ export default {
 };
 </script>
 ```
+
+_DemoBlade.vue_
+
+```vue
+<template>
+	<m-blade>
+		<img
+			class="cover-photo"
+			src="https://picsum.photos/400/300"
+		>
+		<m-blade-content>
+			<m-text pattern="title">
+				Popover in a blade
+			</m-text>
+			<m-popover>
+				<template #action="popover">
+					<m-button
+						size="small"
+						pattern="primaryOutline"
+						@click="popover.toggle()"
+					>
+						Toggle popover
+					</m-button>
+				</template>
+
+				<template #content>
+					<m-popover-content>
+						<demo-popover>
+							<m-button
+								size="small"
+								pattern="primaryOutline"
+								@click="closeBlade"
+							>
+								Close blade
+							</m-button>
+						</demo-popover>
+					</m-popover-content>
+				</template>
+			</m-popover>
+		</m-blade-content>
+	</m-blade>
+</template>
+
+<script>
+import { MBlade, MBladeContent, bladeApi } from '@square/maker/components/Blade';
+import { MButton } from '@square/maker/components/Button';
+import { MText } from '@square/maker/components/Text';
+import { MPopover, MPopoverContent } from '@square/maker/components/Popover';
+import DemoPopover from 'doc/DemoPopoverContent.vue';
+
+export default {
+	components: {
+		MBlade,
+		MBladeContent,
+		MButton,
+		MText,
+		MPopover,
+		MPopoverContent,
+		DemoPopover,
+	},
+
+	inject: {
+		bladeApi,
+	},
+
+	methods: {
+		closeBlade() {
+			this.bladeApi.close();
+		},
+	},
+};
+</script>
+
+<style scoped>
+.cover-photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+}
+</style>
+```
+
 
 _DemoPopoverContent.vue_
 
@@ -556,8 +661,6 @@ _DemoPopoverContent.vue_
 import { MText } from '@square/maker/components/Text';
 
 export default {
-	name: 'DemoPopoverContent',
-
 	components: {
 		MText,
 	},

@@ -1,5 +1,7 @@
 # Row
 
+Use Row when you need layout a title and an optional subtitle, secondary title, secondary subtitle, prefix icon or control, and suffix icon or control. This component is used internally in [Accordion](#/Accordion) and [Menu](#/Menu).
+
 ```vue
 <template>
 	<div class="wrapper">

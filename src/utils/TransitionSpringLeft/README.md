@@ -51,7 +51,7 @@ export default {
     width: 100%;
     height: 100%;
     border-radius: 16px 0 0 16px;
-    background-color: #ccc;
+    background-color: var(--maker-color-neutral-10);
 }
 </style>
 ```

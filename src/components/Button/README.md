@@ -483,6 +483,7 @@ export default {
 <style scoped>
 .ButtonTable {
 	min-width: 50%;
+	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0 16px;
 	text-align: left;
@@ -724,6 +725,7 @@ export default {
 <style scoped>
 .ButtonTable {
 	min-width: 50%;
+	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0 16px;
 	text-align: left;

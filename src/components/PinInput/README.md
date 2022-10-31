@@ -272,6 +272,7 @@ export default {
 	<div>
 		<m-button
 			size="small"
+			pattern="primaryOutline"
 			@click="openDialog"
 		>
 			Open dialog
@@ -336,6 +337,7 @@ _DemoDialog.vue_
 			</m-pin-input>
 			<m-button
 				size="small"
+				pattern="primaryOutline"
 				@click="dialogApi.close()"
 			>
 				Close

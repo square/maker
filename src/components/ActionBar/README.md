@@ -12,51 +12,54 @@ There are 2 versions of ActionBar:
 ```vue
 <template>
 	<div>
-		<button @click="showClose = !showClose">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="showClose = !showClose"
+		>
 			toggle close button
-		</button>
-		<div class="container">
-			<div class="card">
-				<div class="content">
-					<ol>
-						<li
-							v-for="i in 20"
-							:key="i"
-						>
-							content content content
-						</li>
-					</ol>
-					<m-inline-action-bar>
-						<m-action-bar-button
-							v-if="showClose"
-							key="close"
-							color="#f6f6f6"
-						>
-							<x-icon class="icon" />
-						</m-action-bar-button>
-						<m-action-bar-button
-							key="confirm"
-							full-width
-						>
-							Confirm action
-						</m-action-bar-button>
-					</m-inline-action-bar>
-				</div>
+		</m-button>
+		<div class="card">
+			<div class="content">
+				<ol>
+					<li
+						v-for="i in 20"
+						:key="i"
+					>
+						content content content
+					</li>
+				</ol>
+				<m-inline-action-bar>
+					<m-action-bar-button
+						v-if="showClose"
+						key="close"
+						color="#f6f6f6"
+					>
+						<x-icon class="icon" />
+					</m-action-bar-button>
+					<m-action-bar-button
+						key="confirm"
+						full-width
+					>
+						Confirm action
+					</m-action-bar-button>
+				</m-inline-action-bar>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MInlineActionBar, MActionBarButton } from '@square/maker/components/ActionBar';
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'InlineDemo',
 	components: {
 		MInlineActionBar,
 		MActionBarButton,
 		XIcon,
+		MButton,
 	},
 	data() {
 		return {
@@ -80,9 +83,10 @@ export default {
 	border-radius: 16px;
 	box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
 	padding: 16px;
+	margin: 16px 0;
 }
 .content {
-	overflow: scroll;
+	overflow-y: scroll;
 	height: 100%;
 }
 .icon {
@@ -115,7 +119,6 @@ import { MActionBarLayer } from '@square/maker/components/ActionBar';
 import DemoActionBar from 'doc/DemoActionBar.vue';
 
 export default {
-	name: 'Demo',
 	components: {
 		MActionBarLayer,
 		DemoActionBar,
@@ -175,7 +178,6 @@ import { MActionBar, MActionBarButton } from '@square/maker/components/ActionBar
 import XIcon from '@square/maker-icons/X';
 
 export default {
-	name: 'DemoResponsiveActionBar',
 	components: {
 		MActionBar,
 		MActionBarButton,
@@ -197,7 +199,7 @@ export default {
 </style>
 ```
 
-### ActionBar Buttons
+### ActionBarButtons
 
 ```vue
 <template>
@@ -353,7 +355,6 @@ import XIcon from '@square/maker-icons/X';
 import SearchIcon from '@square/maker-icons/Search';
 
 export default {
-	name: 'InlineDemo',
 	components: {
 		MInlineActionBar,
 		MActionBarButton,
@@ -379,7 +380,7 @@ export default {
 .grid > div {
 	position: relative;
 	height: 96px;
-	background: #e4e7eb;
+	background: var(--maker-color-neutral-10);
 }
 
 .icon {
