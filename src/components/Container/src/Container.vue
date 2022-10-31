@@ -8,7 +8,10 @@
 		:style="style"
 		v-on="$listeners"
 	>
-		<header :class="$s.Header">
+		<header
+			v-if="hasHeaderContent"
+			:class="$s.Header"
+		>
 			<div
 				v-if="hasLabel"
 				:class="$s.Label"
@@ -127,6 +130,9 @@ export default {
 		},
 		hasRequirementLabel() {
 			return this.$slots.requirementLabel || this.$slots['requirement-label'] || this.requirementLabel;
+		},
+		hasHeaderContent() {
+			return this.hasLabel || this.hasSublabel || this.hasRequirementLabel;
 		},
 	},
 
