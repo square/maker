@@ -250,6 +250,8 @@ export default {
 		/>
 		<br>
 		<m-button
+			size="small"
+			pattern="primaryOutline"
 			@click="handleClick"
 		>
 			Click to {{ focused ? 'blur' : 'focus' }}

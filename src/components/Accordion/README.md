@@ -42,7 +42,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	background-color: var(--maker-color-neutral-10);
 }
 </style>
 ```
@@ -84,7 +84,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	background-color: var(--maker-color-neutral-10);
 }
 </style>
 ```
@@ -96,9 +96,13 @@ If necessary, Accordions can be controlled programmatically by passing a boolean
 ```vue
 <template>
 	<div class="container">
-		<button @click="expanded = !expanded">
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="expanded = !expanded"
+		>
 			external button (expanded: {{ expanded }})
-		</button>
+		</m-button>
 		<br><br>
 		<m-accordion
 			v-model="expanded"
@@ -113,11 +117,13 @@ If necessary, Accordions can be controlled programmatically by passing a boolean
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MAccordion } from '@square/maker/components/Accordion';
 
 export default {
 	components: {
 		MAccordion,
+		MButton,
 	},
 	data() {
 		return {
@@ -136,7 +142,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	background-color: var(--maker-color-neutral-10);
 }
 </style>
 ```
@@ -213,7 +219,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	background-color: var(--maker-color-neutral-10);
 }
 .icon {
 	width: 24px;
@@ -312,7 +318,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	background-color: var(--maker-color-neutral-10);
 }
 .divider {
 	margin: 16px 0;
