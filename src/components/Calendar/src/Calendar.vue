@@ -340,7 +340,7 @@ export default {
 }
 
 .CalendarHeaderTitle {
-	color: $maker-color-primary;
+	color: $maker-color-heading;
 	font-weight: var(--maker-font-label-font-weight, 500);
 	font-family: var(--maker-font-label-font-family, inherit);
 }
