@@ -301,31 +301,9 @@
 								<check-circle :class="$s.Icon" /> Estimated prep time: 15 minutes
 							</m-text>
 						</m-card>
-						<m-notice
-							type="info"
-							display="block"
-						>
-							Switching to shipping will change the scheduled time you selected
-						</m-notice>
 					</div>
 					<m-divider :class="$s.Divider" />
 					<div>
-						<m-input
-							placeholder="Delivery address"
-						/>
-						<m-input
-							placeholder="Disabled text input"
-							disabled
-						/>
-						<m-input
-							variant="outline"
-							placeholder="Delivery address"
-						/>
-						<m-input
-							placeholder="Disabled text input"
-							variant="outline"
-							disabled
-						/>
 						<div :class="$s.pills">
 							<m-pill
 								v-for="pattern in pillPatterns"
@@ -380,6 +358,20 @@
 						>
 							Action has been successfully completed
 						</m-notice>
+						<div :class="$s.buttons">
+							<template
+								v-for="pattern in buttonPatterns"
+							>
+								<m-button
+									v-if="!pattern.includes('Ghost')"
+									:key="pattern"
+									:pattern="pattern"
+									size="small"
+								>
+									{{ pattern }}
+								</m-button>
+							</template>
+						</div>
 					</div>
 					<m-divider :class="$s.Divider" />
 					<div>
@@ -494,6 +486,22 @@
 								obligatory sublabel
 							</template>
 						</m-checkbox>
+						<m-input
+							placeholder="Delivery address"
+						/>
+						<m-input
+							placeholder="Disabled text input"
+							disabled
+						/>
+						<m-input
+							variant="outline"
+							placeholder="Delivery address"
+						/>
+						<m-input
+							placeholder="Disabled text input"
+							variant="outline"
+							disabled
+						/>
 						<m-textarea placeholder="Additional requests" />
 						<m-textarea
 							placeholder="Disabled textbox"
@@ -877,6 +885,7 @@ export default {
 				'32px',
 			],
 			pillPatterns: Object.keys(defaultTheme().pill.patterns),
+			buttonPatterns: Object.keys(defaultTheme().button.patterns),
 			iconStyle: 'filled',
 		};
 	},
@@ -965,7 +974,8 @@ export default {
 </script>
 
 <style module="$s">
-.pills > * {
+.pills > *,
+.buttons > * {
 	margin: 4px;
 }
 
@@ -1000,7 +1010,7 @@ export default {
 	}
 }
 
-hr.Divider {
+.Divider {
 	margin: 8px 0;
 	padding: 0 !important;
 }
@@ -1032,7 +1042,7 @@ hr.Divider {
 	}
 
 	& > div > * {
-		margin-bottom: 16px;
+		margin-bottom: 8px;
 	}
 
 	& > div > *:last-child {
