@@ -73,8 +73,8 @@ function isDark(hex) {
 }
 
 function enoughContrastForFill(hex1, hex2) {
-	const CONTRAST_FILL = 0.25;
-	return colord(hex1).delta(hex2) >= CONTRAST_FILL;
+	const MAKER_DELTA_FILL = 0.25;
+	return colord(hex1).delta(hex2) >= MAKER_DELTA_FILL;
 }
 
 function enoughContrastForText(hex1, hex2) {
