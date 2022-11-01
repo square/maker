@@ -626,10 +626,10 @@ export default {
 	width: fit-content;
 
 	/* cancels out padding-bottom below */
-	margin-bottom: -0.5em;
+	margin-bottom: -0.5em !important;
 
 	/* https://stackoverflow.com/a/64039674/2766908 */
-	padding-bottom: 0.5em;
+	padding-bottom: 0.5em !important;
 	overflow: hidden;
 	line-height: 1.1 !important;
 	text-overflow: ellipsis;
