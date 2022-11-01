@@ -22,7 +22,7 @@ call `shakeAndClearInputs()` on the referenced component.
 			v-if="invalidEntry"
 			#error
 		>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				Error slot
 			</m-notice>
 		</template>
@@ -72,7 +72,7 @@ export default {
 			v-if="invalidEntry"
 			#error
 		>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				Error slot
 			</m-notice>
 		</template>
@@ -121,7 +121,7 @@ export default {
 			v-if="invalidEntry"
 			#error
 		>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				Error slot
 			</m-notice>
 		</template>
@@ -170,7 +170,7 @@ export default {
 			v-if="invalidEntry"
 			#error
 		>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				Error slot
 			</m-notice>
 		</template>
@@ -221,7 +221,7 @@ export default {
 			v-if="invalidEntry"
 			#error
 		>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				Error slot
 			</m-notice>
 		</template>
@@ -330,7 +330,7 @@ _DemoDialog.vue_
 					v-if="invalidEntry"
 					#error
 				>
-					<m-notice type="error">
+					<m-notice pattern="error">
 						Error slot
 					</m-notice>
 				</template>
