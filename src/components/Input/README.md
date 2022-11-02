@@ -304,12 +304,11 @@ Supports attributes from [`<input type="text">`](https://developer.mozilla.org/e
 
 ## Slots
 
-| Slot    | Description      |
-| ------- | ---------------- |
-| prefix  | Input prefix     |
-| suffix  | Input suffix     |
-| default | —                |
-| error   | Input error slot |
+| Slot   | Description      |
+| ------ | ---------------- |
+| prefix | Input prefix     |
+| suffix | Input suffix     |
+| error  | Input error slot |
 
 
 ## Events

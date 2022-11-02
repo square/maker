@@ -116,7 +116,22 @@ async function parseComponent(componentPath) {
 			if (inherited.tags.inheritSlots) {
 				componentInfo.tags.inheritSlots.push(...inherited.tags.inheritSlots);
 			}
+			if (componentInfo.slots) {
+				// filter out parsed proxy slots
+				componentInfo.slots = componentInfo.slots.filter((slot) => {
+					const isDefault = slot.name === 'default';
+					const isScoped = slot.scoped;
+					const hasProxyBinding = slot.bindings?.length && slot.bindings[0].name === 'name';
+					const isProxySlot = isDefault && isScoped && hasProxyBinding;
+					return !isProxySlot;
+				});
+			}
 		}
+	}
+
+	if (componentInfo.slots) {
+		// filter out private slots
+		componentInfo.slots = componentInfo.slots.filter((slot) => slot.tags?.access[0]?.description !== 'private');
 	}
 
 	return componentInfo;

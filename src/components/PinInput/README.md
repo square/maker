@@ -408,10 +408,9 @@ export default {
 
 ## Slots
 
-| Slot    | Description             |
-| ------- | ----------------------- |
-| default | —                       |
-| error   | slot for error messages |
+| Slot  | Description             |
+| ----- | ----------------------- |
+| error | slot for error messages |
 
 
 ## Events

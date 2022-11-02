@@ -416,10 +416,10 @@ Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/W
 
 ## Slots
 
-| Slot    | Description             |
-| ------- | ----------------------- |
-| default | —                       |
-| error   | slot for error messages |
+| Slot   | Description             |
+| ------ | ----------------------- |
+| prefix | Select prefix           |
+| error  | slot for error messages |
 
 
 ## Events

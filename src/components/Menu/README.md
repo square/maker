@@ -101,7 +101,6 @@
 		>
 			<template #toggle>
 				<m-button
-					size="small"
 					pattern="primaryOutline"
 				>
 					<settings class="icon" />
