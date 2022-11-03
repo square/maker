@@ -1,9 +1,9 @@
 import { colord, extend } from 'colord';
 import a11yPlugin from 'colord/plugins/a11y';
 import mixPlugin from 'colord/plugins/mix';
+import labPlugin from 'colord/plugins/lab';
 import { cloneDeep } from 'lodash';
 import {
-	WCAG_CONTRAST_TEXT,
 	WCAG_CONTRAST_TITLE,
 	DARK_COLOR_LUMINANCE_THRESHOLD,
 	getContrast,
@@ -12,7 +12,7 @@ import defaultColors from '../components/Theme/src/default-colors.cjs';
 
 const DEFAULT_COLORS = defaultColors();
 
-extend([a11yPlugin, mixPlugin]);
+extend([a11yPlugin, mixPlugin, labPlugin]);
 
 const NEUTRAL_RATIOS = {
 	light: {
@@ -25,7 +25,7 @@ const NEUTRAL_RATIOS = {
 	},
 	dark: {
 		'neutral-0': 0,
-		'neutral-10': 0.255,
+		'neutral-10': 0.225,
 		'neutral-20': 0.37,
 		'neutral-80': 0.55,
 		'neutral-90': 0.95,
@@ -73,6 +73,11 @@ function isDark(hex) {
 }
 
 function enoughContrastForFill(hex1, hex2) {
+	const MAKER_DELTA_FILL = 0.25;
+	return colord(hex1).delta(hex2) >= MAKER_DELTA_FILL;
+}
+
+function enoughContrastForText(hex1, hex2) {
 	return colord(hex1).contrast(hex2) >= WCAG_CONTRAST_TITLE;
 }
 
@@ -81,32 +86,31 @@ function generateContextualPrimaryColors(
 	primary = DEFAULT_COLORS.primary,
 	neutralColors,
 ) {
-	const isDarkBg = isDark(background);
 	const backgroundContrast = getContrast(background);
+	const primaryHsl = colord(primary).toHsl();
 	const primaryColors = {};
 	if (enoughContrastForFill(primary, background)) {
 		primaryColors.fill = primary;
-		const DARKEN_PRIMARY_FOR_TEXT = 0.2;
-		primaryColors.text = colord(primary)
-			.mix(backgroundContrast, DARKEN_PRIMARY_FOR_TEXT)
-			.toHex();
+		const ADJUST_PRIMARY_FOR_TEXT = 0.2;
+		primaryColors.text = enoughContrastForText(primary, background)
+			? colord(primary).mix(backgroundContrast, ADJUST_PRIMARY_FOR_TEXT).toHex()
+			: backgroundContrast;
 		primaryColors.onFill = getContrast(primaryColors.fill);
 	} else {
 		primaryColors.fill = backgroundContrast;
 		primaryColors.text = backgroundContrast;
 		primaryColors.onFill = primary;
 	}
-	if (isDarkBg) {
-		primaryColors.subtle = neutralColors['neutral-10'];
-	} else {
+	if (colord(background).toHex() === '#ffffff') {
 		const SUBTLE_SATURATION = 25;
 		const SUBTLE_LIGHTNESS = 95;
-		const primaryHsl = colord(primary).toHsl();
 		primaryColors.subtle = colord({
 			h: primaryHsl.h,
 			s: SUBTLE_SATURATION,
 			l: SUBTLE_LIGHTNESS,
 		}).toHex();
+	} else {
+		primaryColors.subtle = neutralColors['neutral-10'];
 	}
 	return primaryColors;
 }
@@ -142,16 +146,16 @@ export default function makerColors(
 
 	// derive contextual critical, warning, success colors
 	['critical', 'warning', 'success'].forEach((name) => {
-		if (colord(contextualColors[name].text).contrast(background) < WCAG_CONTRAST_TEXT) {
+		if (!enoughContrastForFill(contextualColors[name].fill, background)) {
 			contextualColors[name].onFill = contextualColors[name].fill;
-			contextualColors[name].text = backgroundContrast;
 			contextualColors[name].fill = backgroundContrast;
 		}
-
-		if (!contextualColors[name].subtle) {
+		if (!enoughContrastForText(contextualColors[name].text, background)) {
+			contextualColors[name].text = backgroundContrast;
+		}
+		if (colord(background).toHex() !== '#ffffff') {
 			contextualColors[name].subtle = neutralColors['neutral-10'];
 		}
-
 		if (!contextualColors[name].onFill) {
 			contextualColors[name].onFill = getContrast(contextualColors[name].fill);
 		}
