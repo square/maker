@@ -15,9 +15,9 @@ npx i-peers -a
 
 - Using latest version of Maker? [Read latest-stable docs.](https://square.github.io/maker/styleguide/latest-stable/#/)
 - Using older version of Maker? [Find older version docs here.](https://square.github.io/maker/)
-- Upgrading to a new major version of Maker? [Read the migration docs.](.github/MIGRATION.md)
+- Upgrading to a new major version of Maker? [Read the migration docs.](https://github.com/square/maker/blob/master/.github/MIGRATION.md)
 - Need to report a bug? [Create an issue.](https://github.com/square/maker/issues/new/choose)
 - Need to request a new feature? [Create an issue.](https://github.com/square/maker/issues/new/choose)
 - Need to ask a question? [Ask here.](https://github.com/square/maker/discussions)
-- Contributing to Maker? [Read the contributing docs.](.github/CONTRIBUTING.md)
+- Contributing to Maker? [Read the contributing docs.](https://github.com/square/maker/blob/master/.github/CONTRIBUTING.md)
 
