@@ -158,19 +158,62 @@ export default {
 </script>
 ```
 
+## Other customizations
+
+Containers can be customized further with: bg-color, color, padding.
+
+```vue
+<template>
+	<div>
+		<m-container
+			label="background color customized label"
+			size="small"
+			bg-color="#ffe800"
+		>
+			background color customized
+		</m-container>
+		<m-container
+			label="text color customized label"
+			size="small"
+			color="#ffe800"
+		>
+			text color customized
+		</m-container>
+		<m-container
+			label="padding customized label"
+			size="small"
+			padding="50px"
+		>
+			padding customized
+		</m-container>
+	</div>
+</template>
+
+<script>
+import { MContainer } from '@square/maker/components/Container';
+
+export default {
+	components: {
+		MContainer,
+	},
+};
+</script>
+```
+
 <!-- api-tables:start -->
 ## Props
 
 Supports attributes from [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section).
 
-| Prop              | Type     | Default    | Possible values            | Description                   |
-| ----------------- | -------- | ---------- | -------------------------- | ----------------------------- |
-| label             | `string` | —          | —                          | Container label               |
-| sublabel          | `string` | —          | —                          | Container sublabel            |
-| requirement-label | `string` | —          | —                          | Container requirement label   |
-| size              | `string` | `'medium'` | `small`, `medium`, `large` | Container size                |
-| bg-color          | `string` | —          | —                          | Background color of container |
-| color             | `string` | —          | —                          | Text color of container       |
+| Prop              | Type     | Default       | Possible values            | Description                   |
+| ----------------- | -------- | ------------- | -------------------------- | ----------------------------- |
+| label             | `string` | —             | —                          | Container label               |
+| sublabel          | `string` | —             | —                          | Container sublabel            |
+| requirement-label | `string` | —             | —                          | Container requirement label   |
+| size              | `string` | `'medium'`    | `small`, `medium`, `large` | Container size                |
+| bg-color          | `string` | —             | —                          | Background color of container |
+| color             | `string` | —             | —                          | Text color of container       |
+| padding           | `string` | `'16px 24px'` | —                          | Padding of the container      |
 
 
 ## Slots
