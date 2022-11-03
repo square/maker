@@ -1,6 +1,6 @@
 # What is Maker?
 
-Most people contributing to and using Maker will be familiar with [Orbit](https://github.com/square/orbit), but they might have some wrong ideas about Maker's goals, by assuming they're the same as Orbit's. This is incorrect. Maker is not Orbit. Their key high-level differences in a table:
+Most people contributing to and using Maker will be familiar with [Orbit](https://github.com/squareup/orbit-ui), but they might have some wrong ideas about Maker's goals by assuming they're the same as Orbit's. This is incorrect. Maker is not Orbit. Their key high-level differences in a table:
 
 | | Orbit | Maker |
 |-|-------|-------|
@@ -37,7 +37,7 @@ No. Start from first principles. Review the table above. It's okay to look at an
 
 ### When should I update an MCL component vs implementing a one-off in my project?
 
-There is a [Maker Design System Figma file](https://www.figma.com/file/2cgnI0Cb5L7DqdCNiIRrot/%F0%9F%8D%81-Maker-Design-System?node-id=2379%3A19587). To make an engineering-friendly analogy, this Figma file is like the `master` branch of MDS. The `master` branch of MCL should always faithfully represent the designs in the `master` branch of MDS, i.e. [its Figma file](https://www.figma.com/file/2cgnI0Cb5L7DqdCNiIRrot/%F0%9F%8D%81-Maker-Design-System?node-id=2379%3A19587). MDS is the source of truth for MCL.
+There is a [Maker Design System Figma file](https://www.figma.com/file/SHY7Z7PbcVssjIJVuJ3IwU/%F0%9F%8D%81-Maker?node-id=2379%3A19587). To make an engineering-friendly analogy, this Figma file is like the `master` branch of MDS. The `master` branch of MCL should always faithfully represent the designs in the `master` branch of MDS, i.e. [its Figma file](https://www.figma.com/file/SHY7Z7PbcVssjIJVuJ3IwU/%F0%9F%8D%81-Maker?node-id=2379%3A19587). MDS is the source of truth for MCL.
 
 Ideally, when a product designer uses MDS to design a mockup, they design the entire mockup using only MDS. If you're working with such a designer then you'll be able to use MCL as-is to implement the mockup without having to do any hacks, overrides, or opening any PRs to change MCL.
 

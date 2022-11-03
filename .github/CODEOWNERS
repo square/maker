@@ -1,6 +1,6 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# Maker Team heirarchy
+# Maker Team hierarchy
 #
 # Maker Contributors (@square/maker-contributors)
 # - have write access to repo, can push commits & open PRs

@@ -102,7 +102,7 @@ export default {
 	--color-border: $maker-color-neutral-20;
 	--color-border-focus: $maker-color-body;
 	--color-active: $maker-color-body;
-	--color-error: rgba(206, 50, 23, 1);
+	--color-error: $maker-color-critical-fill;
 }
 
 .Checkbox {
