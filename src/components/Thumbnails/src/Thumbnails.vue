@@ -31,7 +31,6 @@ import { MImage } from '@square/maker/components/Image';
 import { MText } from '@square/maker/components/Text';
 
 const DEFAULT_THUMBNAIL_COUNT = 5;
-const DEFAULT_OVERFLOW_TEXT_SIZE = -1;
 const MIN_SIZE = -2;
 const MAX_SIZE = 7;
 
@@ -71,7 +70,7 @@ export default {
 		 */
 		overflowTextSize: {
 			type: Number,
-			default: DEFAULT_OVERFLOW_TEXT_SIZE,
+			default: undefined,
 			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
 		},
 	},
@@ -100,6 +99,7 @@ export default {
 <style module="$s">
 .Thumbnails {
 	display: flex;
+	gap: 8px;
 	align-items: center;
 }
 
@@ -108,6 +108,5 @@ export default {
 	min-width: var(--size);
 	max-width: var(--size);
 	height: var(--size);
-	margin-right: 8px;
 }
 </style>
