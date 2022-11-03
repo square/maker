@@ -15,7 +15,7 @@ A Maker Core Team member will review your issue and give you suggestions and fee
 
 You _can_ skip creating an issue first, but you might sink a lot of time producing a PR that will generate a lot of feedback and take a lot longer to get through the PR review stage. Discussing your general approach in an issue first will generally save you time for most Maker tasks.
 
-## Maker Team heirarchy
+## Maker Team hierarchy
 
 ### Maker Contributors ([@square/maker-contributors](https://github.com/orgs/square/teams/maker-contributors/members))
  - have write access to repo, can push commits & open PRs
