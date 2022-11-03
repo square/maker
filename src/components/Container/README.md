@@ -144,15 +144,6 @@ Containers can be small, medium, or large, which affects the default typography 
 		>
 			large container content
 		</m-container>
-		<m-container
-			label="container with custom padding label"
-			sublabel="container with custom padding sublabel"
-			requirement-label="container with custom padding requirement label"
-			size="small"
-			padding="50px"
-		>
-			container with custom padding
-		</m-container>
 	</div>
 </template>
 
