@@ -13,6 +13,8 @@ Use OrderCard to display order information
 			:thumbnails="thumbnails"
 			:primary-action-text="'Primary'"
 			:secondary-action-text="'Secondary'"
+			@action:click-primary="clickPrimary"
+			@action:click-secondary="clickSecondary"
 		/>
 		<m-divider />
 		<m-order-card
@@ -20,6 +22,8 @@ Use OrderCard to display order information
 			:thumbnails="thumbnails"
 			:primary-action-text="'Primary'"
 			:secondary-action-text="'Secondary'"
+			@action:click-primary="clickPrimary"
+			@action:click-secondary="clickSecondary"
 		/>
 		<m-divider />
 		<m-order-card
@@ -27,6 +31,7 @@ Use OrderCard to display order information
 			:title="'Order with fewer thumbnails'"
 			:thumbnails="fewerThumbnails"
 			:primary-action-text="'Primary'"
+			@action:click-primary="clickPrimary"
 		/>
 		<m-divider />
 		<m-order-card
@@ -34,6 +39,8 @@ Use OrderCard to display order information
 			:title="'Order with no thumbnails'"
 			:primary-action-text="'Primary'"
 			:secondary-action-text="'Secondary'"
+			@action:click-primary="clickPrimary"
+			@action:click-secondary="clickSecondary"
 		/>
 		<m-divider />
 		<m-order-card
@@ -41,19 +48,27 @@ Use OrderCard to display order information
 			:title="'Order with no secondary action'"
 			:thumbnails="thumbnails"
 			:primary-action-text="'Primary'"
+			@action:click-primary="clickPrimary"
 		/>
+		<m-toast-layer />
 	</div>
 </template>
 
 <script>
+import { MToastLayer, MToast } from '@square/maker/components/Toast';
 import { MOrderCard } from '@square/maker/components/OrderCard';
 import { MDivider } from '@square/maker/components/Divider';
 
 export default {
 	components: {
+		MToastLayer,
 		MOrderCard,
 		MDivider,
 	},
+
+	mixins: [
+		MToastLayer.apiMixin,
+	],
 
 	data() {
 		return {
@@ -70,6 +85,20 @@ export default {
 				'https://source.unsplash.com/random/400x600',
 			],
 		};
+	},
+
+	methods: {
+		clickPrimary() {
+			this.toastApi.open(() => <MToast
+					text={'Hello. Primary clicked.'}
+			/>);
+		},
+
+		clickSecondary() {
+			this.toastApi.open(() => <MToast
+					text={'Hello. Secondary clicked.'}
+			/>);
+		},
 	},
 };
 </script>
