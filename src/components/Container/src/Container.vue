@@ -112,6 +112,20 @@ export default {
 			default: undefined,
 			validator: (color) => colord(color).isValid(),
 		},
+		/**
+		 * Padding of the container
+		 */
+		padding: {
+			type: String,
+			default: '16px 24px',
+			validator: (padding) => {
+				// CSS not defined when rendering server-side
+				if (global.CSS) {
+					return global.CSS.supports('padding', padding);
+				}
+				return true;
+			},
+		},
 	},
 
 	computed: {
@@ -120,6 +134,7 @@ export default {
 			return {
 				'--bg-color': this.resolvedBgColor,
 				'--color': this.resolvedColor,
+				'--padding': this.padding,
 			};
 		},
 		hasLabel() {
@@ -146,7 +161,7 @@ export default {
 
 <style module="$s">
 .Container {
-	padding: 16px 24px;
+	padding: var(--padding);
 	background-color: var(--bg-color, inherit);
 }
 
