@@ -51,6 +51,7 @@
 import { colord } from 'colord';
 import assert from '@square/maker/utils/assert';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import cssValidator from '@square/maker/utils/css-validator';
 
 /**
  * @inheritAttrs section
@@ -118,13 +119,7 @@ export default {
 		padding: {
 			type: String,
 			default: '16px 24px',
-			validator: (padding) => {
-				// CSS not defined when rendering server-side
-				if (global.CSS) {
-					return global.CSS.supports('padding', padding);
-				}
-				return true;
-			},
+			validator: cssValidator('padding'),
 		},
 	},
 
