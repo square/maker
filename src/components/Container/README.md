@@ -158,6 +158,48 @@ export default {
 </script>
 ```
 
+## Other customizations
+
+Containers can be customized further with: bg-color, color, padding.
+
+```vue
+<template>
+	<div>
+		<m-container
+			label="background color customized label"
+			size="small"
+			bg-color="#ffe800"
+		>
+			background color customized
+		</m-container>
+		<m-container
+			label="text color customized label"
+			size="small"
+			color="#ffe800"
+		>
+			text color customized
+		</m-container>
+		<m-container
+			label="padding customized label"
+			size="small"
+			padding="50px"
+		>
+			padding customized
+		</m-container>
+	</div>
+</template>
+
+<script>
+import { MContainer } from '@square/maker/components/Container';
+
+export default {
+	components: {
+		MContainer,
+	},
+};
+</script>
+```
+
 <!-- api-tables:start -->
 ## Props
 
