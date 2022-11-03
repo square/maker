@@ -1,6 +1,36 @@
-# 🛠 Contributing
+# Contributing
 
 This document contains all of the dry technical details of how to contribute to Maker. This document assumes your proposed contribution is sensible and within Maker's scope and guiding philosophies. If you are unsure if the last sentence applies to you please read [What is Maker?](./WHAT_IS_MAKER.md)
+
+## Create an issue first
+
+Before you begin coding, please consider making an [issue](https://github.com/square/maker/issues/new/choose) first. In your issue describe your request, add screenshots if possible, and if you're interested in contributing to Maker describe your implementation approach for solving the issue, e.g.
+
+1. _"I would like to fix this bug by doing X"_
+2. _"I would like to add a new Component Y to Maker"_
+3. _"I would like to add new props, events, or slots to existing Component Z"_
+4. _"I would like to make breaking change Q"_
+
+A Maker Core Team member will review your issue and give you suggestions and feedback on your implementation approach. Once you've gotten tacit or explicit approval feel free to go ahead and create a PR.
+
+You _can_ skip creating an issue first, but you might sink a lot of time producing a PR that will generate a lot of feedback and take a lot longer to get through the PR review stage. Discussing your general approach in an issue first will generally save you time for most Maker tasks.
+
+## Maker Team heirarchy
+
+### Maker Contributors ([@square/maker-contributors](https://github.com/orgs/square/teams/maker-contributors/members))
+ - have write access to repo, can push commits & open PRs
+
+### Maker Reviewers ([@square/maker-reviewers](https://github.com/orgs/square/teams/maker-reviewers/members))
+- are also contributors
+ - have write access to repo, can push commits & open PRs
+ - can approve PRs that change components, docs, or lab experiments
+
+### Maker Core Team ([@square/maker-core-team](https://github.com/orgs/square/teams/maker-core-team/members))
+- are also reviewers
+- have admin access to repo, can do anything
+- can approve any PRs
+
+If you'd like to contribute to Maker ping @kirill on Slack (@pretzelhammer on Github) and he can add you to the Maker Contributors team. Your Github account has to already be a member of the [Square](https://github.com/orgs/square/people) org. If it isn't, you can ask for your Github account to be added to the org in the #opensource channel on Slack.
 
 ## Supported environments
 
