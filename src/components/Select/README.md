@@ -152,7 +152,7 @@ export default {
 		:options="options"
 	>
 		<template #error>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				error message here
 			</m-notice>
 		</template>

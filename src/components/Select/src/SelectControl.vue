@@ -188,7 +188,7 @@ export default {
 	--color-placeholder: $maker-color-neutral-80;
 	--color-foreground: $maker-color-neutral-90;
 	--color-border-active: $maker-color-neutral-80;
-	--color-error: rgba(206, 50, 23, 1);
+	--color-error: $maker-color-critical-fill;
 
 	position: relative;
 	box-sizing: border-box;

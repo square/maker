@@ -69,7 +69,7 @@ export default {
 <template>
 	<m-input placeholder="Placeholder">
 		<template #error>
-			<m-notice type="error">
+			<m-notice pattern="error">
 				error message here
 			</m-notice>
 		</template>

@@ -29,6 +29,9 @@ module.exports = function publicizeVars(theme) {
 		'--maker-color-elevation': colors.elevation,
 		'--maker-color-overlay': colors.overlay,
 
+		// contextual colors
+		'--maker-color-critical-fill': colors.critical.fill,
+
 		// typography
 		'--maker-font-heading-font-family': fonts.heading.fontFamily,
 		'--maker-font-heading-font-weight': fonts.heading.fontWeight,

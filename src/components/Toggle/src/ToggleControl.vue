@@ -77,7 +77,7 @@ export default {
 /* default unchecked state */
 .Checkbox {
 	/* general vars */
-	--color-error: rgba(206, 50, 23, 1);
+	--color-error: $maker-color-critical-fill;
 	--transition: 0.2s ease;
 
 	/* toggle vars */
