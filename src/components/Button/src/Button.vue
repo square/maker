@@ -427,15 +427,18 @@ export default {
 	touch-action: manipulation;
 	fill: currentColor;
 
-	&.shape_squared {
+	&.shape_squared,
+	&.shape_squared:hover:not(:disabled) {
 		border-radius: 0;
 	}
 
-	&.shape_rounded {
+	&.shape_rounded,
+	&.shape_rounded:hover:not(:disabled) {
 		border-radius: var(--radius-rounded-button);
 	}
 
-	&.shape_pill {
+	&.shape_pill,
+	&.shape_pill:hover:not(:disabled) {
 		border-radius: var(--radius-pill-button);
 	}
 
