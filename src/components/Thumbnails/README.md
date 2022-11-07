@@ -93,12 +93,12 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop               | Type     | Default                   | Possible values                                                        | Description                                              |
-| ------------------ | -------- | ------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------- |
-| thumbnails         | `array`  | —                         | -                                                                      | Image urls to display for thumbnails                     |
-| size               | `number` | `32`                      | -                                                                      | Size to display thumbnail images (in px)                 |
-| max-thumbnails     | `number` | `DEFAULT_THUMBNAIL_COUNT` | -                                                                      | Maximum number of thumbnails to display                  |
-| overflow-text-size | `number` | —                         | `'7'`, `'6'`, `'5'`, `'4'`, `'3'`, `'2'`, `'1'`, `'0'`, `'-1'`, `'-2'` | Overflow text size. Size of text as step in fluid scale. |
+| Prop               | Type     | Default                   | Possible values | Description                                                        |
+| ------------------ | -------- | ------------------------- | --------------- | ------------------------------------------------------------------ |
+| thumbnails         | `array`  | —                         | -               | Image urls to display for thumbnails                               |
+| size               | `number` | `32`                      | -               | Size to display thumbnail images (in px)                           |
+| max-thumbnails     | `number` | `DEFAULT_THUMBNAIL_COUNT` | -               | Maximum number of thumbnails to display                            |
+| overflow-text-size | `number` | —                         | -               | Overflow text size. Size of text as step in fluid scale (-2 to 7). |
 
 
 ## Events
