@@ -1,7 +1,3 @@
-// import {
-// 	isString, isNil, get,
-// } from 'lodash';
-// import assert from '@square/maker/utils/assert';
 const { isString, isNil, get } = require('lodash');
 
 /**
@@ -91,7 +87,6 @@ function resolveThemeableProps(componentKeyInTheme, propNames) {
 
 				// validate using pattern prop validator if exists
 				if (patternValidator) {
-					// assert.error(patternValidator(resolvedPattern), `Invalid value "${resolvedPattern}" for prop "pattern" for component "${componentKeyInTheme}" in theme.`, 'Theme');
 					if (!patternValidator(resolvedPattern)) {
 						throw new Error(`Invalid value "${resolvedPattern}" for prop "pattern" for component "${componentKeyInTheme}" in theme.`);
 					}
@@ -99,7 +94,6 @@ function resolveThemeableProps(componentKeyInTheme, propNames) {
 				// otherwise try validating by checking patterns config for component
 				} else {
 					const themePattern = this.theme[componentKeyInTheme].patterns?.[resolvedPattern];
-					// assert.error(themePattern, `Invalid pattern "${resolvedPattern}" for component "${componentKeyInTheme}" in theme.`, 'Theme');
 					if (!themePattern) {
 						throw new Error(`Invalid pattern "${resolvedPattern}" for component "${componentKeyInTheme}" in theme.`);
 					}
@@ -141,7 +135,6 @@ function resolveThemeableProps(componentKeyInTheme, propNames) {
 				const propValidator = this.$vnode.componentOptions
 					.Ctor.extendOptions.props[propName].validator;
 				if (propValidator) {
-					// assert.error(propValidator(resolvedValue), `Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`, 'Theme');
 					if (!propValidator(resolvedValue)) {
 						throw new Error(`Invalid value "${resolvedValue}" for prop "${propName}" for component "${componentKeyInTheme}" in theme.`);
 					}

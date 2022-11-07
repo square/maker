@@ -183,12 +183,12 @@ export default {
 
 Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
 
-| Prop      | Type      | Default  | Possible values   | Description                           |
-| --------- | --------- | -------- | ----------------- | ------------------------------------- |
-| variant   | `string`  | `'fill'` | `fill`, `outline` | textarea variant                      |
-| v-model   | `string`  | `''`     | -                 | textarea's current value              |
-| invalid   | `boolean` | `false`  | -                 | Toggle textarea's invalid state       |
-| resizable | `boolean` | `false`  | -                 | Toggles whether textarea is resizable |
+| Prop      | Type      | Default  | Possible values       | Description                           |
+| --------- | --------- | -------- | --------------------- | ------------------------------------- |
+| variant   | `string`  | `'fill'` | `'fill'`, `'outline'` | textarea variant                      |
+| v-model   | `string`  | `''`     | -                     | textarea's current value              |
+| invalid   | `boolean` | `false`  | -                     | Toggle textarea's invalid state       |
+| resizable | `boolean` | `false`  | -                     | Toggles whether textarea is resizable |
 
 
 ## Slots

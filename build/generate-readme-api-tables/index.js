@@ -4,7 +4,7 @@ const tinyGlob = require('tiny-glob');
 const path = require('path');
 const { promises: fs } = require('fs');
 const {
- groupBy, last, keyBy, isNil,
+ groupBy, last, keyBy, isNil, isString,
 } = require('lodash');
 const commentMark = require('comment-mark');
 const generateApiTables = require('./generate-api-tables');
@@ -51,6 +51,10 @@ function stringify(value) {
 	if (isNil(value)) {
 		return '-';
 	}
+	// value already stringified & single-quoted
+	if (isString(value) && value.startsWith("'") && value.endsWith("'")) {
+		return value;
+	}
 	let stringValue = JSON.stringify(value);
 	// replace double quotes with single quotes
 	if (stringValue.startsWith('"') && stringValue.endsWith('"')) {
@@ -93,9 +97,6 @@ function enrichInfoWithDefaultThemeData(componentInfo) {
 					propInfo.values = COMPONENT_THEME_DEFAULT_PATTERN_NAMES;
 				}
 			}
-		}
-		if (propInfo.values) {
-			propInfo.values = propInfo.values.map((value) => stringify(value));
 		}
 	}
 }
@@ -205,6 +206,14 @@ async function parseComponent(componentPath) {
 
 	// componentInfo is modified in place
 	enrichInfoWithDefaultThemeData(componentInfo);
+
+	if (componentInfo.props) {
+		for (const propInfo of Object.values(componentInfo.props)) {
+			if (propInfo.values) {
+				propInfo.values = propInfo.values.map((value) => stringify(value));
+			}
+		}
+	}
 
 	return componentInfo;
 }

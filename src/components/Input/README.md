@@ -294,12 +294,12 @@ export default {
 
 Supports attributes from [`<input type="text">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text).
 
-| Prop     | Type      | Default  | Possible values   | Description                  |
-| -------- | --------- | -------- | ----------------- | ---------------------------- |
-| variant  | `string`  | `'fill'` | `fill`, `outline` | Input variant                |
-| disabled | `boolean` | `false`  | -                 | Toggles input disabled state |
-| invalid  | `boolean` | `false`  | -                 | Toggles input invalid state  |
-| align    | `string`  | `'left'` | `left`, `right`   | Aligns text within input     |
+| Prop     | Type      | Default  | Possible values       | Description                  |
+| -------- | --------- | -------- | --------------------- | ---------------------------- |
+| variant  | `string`  | `'fill'` | `'fill'`, `'outline'` | Input variant                |
+| disabled | `boolean` | `false`  | -                     | Toggles input disabled state |
+| invalid  | `boolean` | `false`  | -                     | Toggles input invalid state  |
+| align    | `string`  | `'left'` | `'left'`, `'right'`   | Aligns text within input     |
 
 
 ## Slots

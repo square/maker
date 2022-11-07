@@ -435,17 +435,17 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 ## ActionBarLayer Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description                           |
+| ------- | ------------------------------------- |
+| default | content actionbar will be opened over |
 
 
 ## InlineActionBar Props
 
-| Prop     | Type     | Default      | Possible values                           | Description |
-| -------- | -------- | ------------ | ----------------------------------------- | ----------- |
-| position | `string` | `'absolute'` | `static`, `relative`, `absolute`, `fixed` | -           |
-| hide-on  | `string` | `'none'`     | `none`, `mobile`, `tablet`, `desktop`     | -           |
+| Prop     | Type     | Default      | Possible values                                   | Description |
+| -------- | -------- | ------------ | ------------------------------------------------- | ----------- |
+| position | `string` | `'absolute'` | `'static'`, `'relative'`, `'absolute'`, `'fixed'` | -           |
+| hide-on  | `string` | `'none'`     | `'none'`, `'mobile'`, `'tablet'`, `'desktop'`     | -           |
 
 
 ## InlineActionBar Slots

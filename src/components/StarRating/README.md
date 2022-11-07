@@ -95,10 +95,10 @@ export default {
 
 Supports attributes from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg).
 
-| Prop  | Type     | Default     | Possible values         | Description                           |
-| ----- | -------- | ----------- | ----------------------- | ------------------------------------- |
-| fill  | `string` | `'full'`    | `full`, `half`, `empty` | Determines the fill style of the star |
-| color | `string` | `'#ffbf00'` | -                       | Color of the star                     |
+| Prop  | Type     | Default     | Possible values               | Description                           |
+| ----- | -------- | ----------- | ----------------------------- | ------------------------------------- |
+| fill  | `string` | `'full'`    | `'full'`, `'half'`, `'empty'` | Determines the fill style of the star |
+| color | `string` | `'#ffbf00'` | -                             | Color of the star                     |
 
 
 ## Star Events

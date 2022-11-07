@@ -1,15 +1,3 @@
-// import AlertTriangleFilled from '@square/maker-icons/AlertTriangleFilled';
-// import AlertCircleFilled from '@square/maker-icons/AlertCircleFilled';
-// import CheckCircleFilled from '@square/maker-icons/CheckCircleFilled';
-// import InfoFilled from '@square/maker-icons/InfoFilled';
-// import ChevronUp from '@square/maker-icons/ChevronUp';
-// import ChevronDown from '@square/maker-icons/ChevronDown';
-// import ChevronLeft from '@square/maker-icons/ChevronLeft';
-// import ChevronRight from '@square/maker-icons/ChevronRight';
-// import X from '@square/maker-icons/X';
-// import Plus from '@square/maker-icons/Plus';
-// import ArrowUp from '@square/maker-icons/ArrowUp';
-
 const AlertTriangleFilled = require('@square/maker-icons/AlertTriangleFilled').default;
 const AlertCircleFilled = require('@square/maker-icons/AlertCircleFilled').default;
 const CheckCircleFilled = require('@square/maker-icons/CheckCircleFilled').default;

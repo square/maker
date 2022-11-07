@@ -405,13 +405,13 @@ export default {
 
 Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select).
 
-| Prop        | Type      | Default  | Possible values   | Description                  |
-| ----------- | --------- | -------- | ----------------- | ---------------------------- |
-| variant     | `string`  | `'fill'` | `fill`, `outline` | Select variant               |
-| v-model     | `string`  | —        | -                 | current selected value       |
-| placeholder | `string`  | `''`     | -                 | Select placeholder           |
-| options     | `array`   | `[]`     | -                 | Select options               |
-| invalid     | `boolean` | `false`  | -                 | Toggles select invalid state |
+| Prop        | Type      | Default  | Possible values       | Description                  |
+| ----------- | --------- | -------- | --------------------- | ---------------------------- |
+| variant     | `string`  | `'fill'` | `'fill'`, `'outline'` | Select variant               |
+| v-model     | `string`  | —        | -                     | current selected value       |
+| placeholder | `string`  | `''`     | -                     | Select placeholder           |
+| options     | `array`   | `[]`     | -                     | Select options               |
+| invalid     | `boolean` | `false`  | -                     | Toggles select invalid state |
 
 
 ## Slots
