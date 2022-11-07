@@ -127,7 +127,6 @@ export default {
 	props: {
 		/**
 		 * patterns are defined at the theme level
-		 * @values pattern defined in theme
 		 */
 		pattern: {
 			type: String,
@@ -135,7 +134,6 @@ export default {
 		},
 		/**
 		 * Tag of button
-		 * @values button, a
 		 */
 		tag: {
 			type: String,
@@ -205,7 +203,6 @@ export default {
 		},
 		/**
 		 * Variant
-		 * @values fill, outline, ghost
 		 */
 		variant: {
 			type: String,
@@ -214,7 +211,6 @@ export default {
 		},
 		/**
 		 * Shape of preset button (overridden by borderRadius prop)
-		 * @values squared, rounded, pill
 		 */
 		shape: {
 			type: String,
@@ -222,8 +218,7 @@ export default {
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
 		/**
-		 * Shape of button
-		 * @values 'Npx', 'N%'
+		 * button's border radius
 		 */
 		borderRadius: {
 			type: String,
@@ -231,8 +226,7 @@ export default {
 			validator: cssValidator('border-radius'),
 		},
 		/**
-		 * Shape of button
-		 * @values 'Npx', 'N%'
+		 * button's border radius when hovered
 		 */
 		borderRadiusHover: {
 			type: String,

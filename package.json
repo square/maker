@@ -1,7 +1,7 @@
 {
   "name": "@square/maker",
   "version": "0.0.0-semantic-release",
-  "description": "📚 Maker Design System by Square",
+  "description": "Maker Design System by Square",
   "license": "Apache-2.0",
   "files": [
     "components",
@@ -114,7 +114,7 @@
     "stylelint-order": "^4.1.0",
     "stylelint-webpack-plugin": "^3.0.1",
     "terser-webpack-plugin": "^5.1.4",
-    "tiny-glob": "^0.2.8",
+    "tiny-glob": "^0.2.9",
     "tippy.js": "^6.2.6",
     "vue": "2.6.14",
     "vue-demo-collapse": "0.0.2",

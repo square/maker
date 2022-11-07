@@ -106,7 +106,7 @@ export default {
 
 | Prop    | Type     | Default | Possible values | Description                                |
 | ------- | -------- | ------- | --------------- | ------------------------------------------ |
-| element | `string` | `'div'` | —               | topmost wrapper element around row content |
+| element | `string` | `'div'` | -               | topmost wrapper element around row content |
 
 
 ## Slots

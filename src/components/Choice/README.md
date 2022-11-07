@@ -304,13 +304,15 @@ export default {
 <!-- api-tables:start -->
 ## Choice Props
 
-| Prop           | Type        | Default           | Possible values                 | Description                                             |
-| -------------- | ----------- | ----------------- | ------------------------------- | ------------------------------------------------------- |
-| v-model        | `undefined` | —                 | —                               | Selected choice option                                  |
-| disabled       | `boolean`   | `false`           | —                               | Disables choice option                                  |
-| mode           | `string`    | `'single-select'` | `single-select`, `multi-select` | Selects single choice option or multiple choice options |
-| selected-color | `string`    | —                 | —                               | Background color of a selected option                   |
-| wrap-choices   | `boolean`   | `false`           | —                               | Wraps the choice options                                |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `choice`.
+
+| Prop            | Type        | Default           | Possible values                     | Description                                             |
+| --------------- | ----------- | ----------------- | ----------------------------------- | ------------------------------------------------------- |
+| v-model         | `undefined` | —                 | -                                   | Selected choice option                                  |
+| disabled        | `boolean`   | `false`           | -                                   | Disables choice option                                  |
+| mode            | `string`    | `'single-select'` | `'single-select'`, `'multi-select'` | Selects single choice option or multiple choice options |
+| selected-color* | `string`    | `'#006aff'`       | -                                   | Background color of a selected option                   |
+| wrap-choices    | `boolean`   | `false`           | -                                   | Wraps the choice options                                |
 
 
 ## Choice Slots
@@ -331,8 +333,8 @@ export default {
 
 | Prop     | Type        | Default | Possible values | Description |
 | -------- | ----------- | ------- | --------------- | ----------- |
-| value*   | `undefined` | —       | —               | —           |
-| disabled | `boolean`   | `false` | —               | —           |
+| value    | `undefined` | —       | -               | -           |
+| disabled | `boolean`   | `false` | -               | -           |
 
 
 ## ChoiceCard Slots
@@ -346,8 +348,8 @@ export default {
 
 | Prop     | Type        | Default | Possible values | Description |
 | -------- | ----------- | ------- | --------------- | ----------- |
-| value*   | `undefined` | —       | —               | —           |
-| disabled | `boolean`   | `false` | —               | —           |
+| value    | `undefined` | —       | -               | -           |
+| disabled | `boolean`   | `false` | -               | -           |
 
 
 ## ChoiceOption Slots

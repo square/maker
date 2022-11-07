@@ -644,11 +644,13 @@ export default {
 <!-- api-tables:start -->
 ## Modal Props
 
-| Prop         | Type     | Default | Possible values | Description                          |
-| ------------ | -------- | ------- | --------------- | ------------------------------------ |
-| before-close | `func`   | —       | —               | Before close hook, can block closing |
-| bg-color     | `string` | —       | —               | Background color of modal            |
-| color        | `string` | —       | —               | Text color of modal                  |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `modal`.
+
+| Prop         | Type     | Default     | Possible values | Description                          |
+| ------------ | -------- | ----------- | --------------- | ------------------------------------ |
+| before-close | `func`   | —           | -               | Before close hook, can block closing |
+| bg-color*    | `string` | `'#ffffff'` | -               | Background color of modal            |
+| color*       | `string` | `'#000000'` | -               | Text color of modal                  |
 
 
 ## Modal Slots

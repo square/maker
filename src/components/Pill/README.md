@@ -48,11 +48,13 @@ export default {
 
 Supports attributes from [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span).
 
-| Prop       | Type     | Default | Possible values | Description                                  |
-| ---------- | -------- | ------- | --------------- | -------------------------------------------- |
-| pattern    | `string` | —       | —               | pattern defined at theme level               |
-| text-color | `string` | —       | —               | text color, also border color if no bg color |
-| bg-color   | `string` | —       | —               | bg & border color                            |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `pill`.
+
+| Prop        | Type     | Default     | Possible values                                                                                                                                                                                                                                                                                  | Description                                  |
+| ----------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| pattern*    | `string` | —           | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, `'primaryOutline'`, `'errorOutline'`, `'successOutline'`, `'warningOutline'`, `'infoOutline'`, `'primarySubtle'`, `'errorSubtle'`, `'successSubtle'`, `'warningSubtle'`, `'infoSubtle'`, any custom pattern defined within the theme | pattern defined at theme level               |
+| text-color* | `string` | `'#ffffff'` | -                                                                                                                                                                                                                                                                                                | text color, also border color if no bg color |
+| bg-color*   | `string` | `'#1b1b1b'` | -                                                                                                                                                                                                                                                                                                | bg & border color                            |
 
 
 ## Slots

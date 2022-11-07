@@ -684,7 +684,7 @@ export default {
 | Prop      | Type     | Default                   | Possible values                                                                                                                                                                | Description                                                                |
 | --------- | -------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
 | placement | `string` | `'bottom-start'`          | `auto`, `auto-start`, `auto-end`, `top`, `top-start`, `top-end`, `right`, `right-start`, `right-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end` | Starting position of the popover. Not guaranteed if too close to overflow. |
-| modifiers | `array`  | `() => DEFAULT_MODIFIERS` | —                                                                                                                                                                              | Popper.js modifier list. Overrides default configuration if present.       |
+| modifiers | `array`  | `() => DEFAULT_MODIFIERS` | -                                                                                                                                                                              | Popper.js modifier list. Overrides default configuration if present.       |
 
 
 ## Popover Slots
@@ -716,9 +716,9 @@ export default {
 
 | Prop     | Type     | Default  | Possible values | Description                     |
 | -------- | -------- | -------- | --------------- | ------------------------------- |
-| color    | `string` | —        | —               | Text color within the popover   |
-| bg-color | `string` | —        | —               | Background color of the popover |
-| padding  | `string` | `'24px'` | —               | Popover padding                 |
+| color    | `string` | —        | -               | Text color within the popover   |
+| bg-color | `string` | —        | -               | Background color of the popover |
+| padding  | `string` | `'24px'` | -               | Popover padding                 |
 
 
 ## PopoverContent Slots

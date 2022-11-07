@@ -225,13 +225,15 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop       | Type     | Default | Possible values | Description                     |
-| ---------- | -------- | ------- | --------------- | ------------------------------- |
-| pattern    | `string` | —       | —               | pattern defined at theme level  |
-| color      | `string` | —       | —               | color of the progress circle    |
-| progress   | `number` | `0`     | —               | progress of circle (0 - 100)    |
-| icon-name  | `string` | —       | —               | name of icon (defined in theme) |
-| icon-color | `string` | —       | —               | color of icon                   |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `progresscircle`.
+
+| Prop        | Type     | Default     | Possible values                             | Description                     |
+| ----------- | -------- | ----------- | ------------------------------------------- | ------------------------------- |
+| pattern*    | `string` | —           | any custom pattern defined within the theme | pattern defined at theme level  |
+| color*      | `string` | `'#000000'` | -                                           | color of the progress circle    |
+| progress    | `number` | `0`         | -                                           | progress of circle (0 - 100)    |
+| icon-name   | `string` | —           | -                                           | name of icon (defined in theme) |
+| icon-color* | `string` | `'#000000'` | -                                           | color of icon                   |
 
 
 ## Events

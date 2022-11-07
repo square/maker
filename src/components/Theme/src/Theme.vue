@@ -11,8 +11,8 @@
 import { merge, mergeWith } from 'lodash';
 import { showWarning } from '@square/maker/utils/debug';
 import key from './key';
-import defaultTheme from './default-theme';
-import { resolve, getPath } from './utils';
+import defaultTheme from './default-theme.cjs';
+import { resolve, getPath } from './utils.cjs';
 import publicizeVars from './publicize-vars.cjs';
 
 // naive check, just checks for presence of a render field,

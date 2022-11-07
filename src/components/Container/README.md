@@ -163,14 +163,14 @@ export default {
 
 Supports attributes from [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section).
 
-| Prop              | Type     | Default    | Possible values            | Description                   |
-| ----------------- | -------- | ---------- | -------------------------- | ----------------------------- |
-| label             | `string` | —          | —                          | Container label               |
-| sublabel          | `string` | —          | —                          | Container sublabel            |
-| requirement-label | `string` | —          | —                          | Container requirement label   |
-| size              | `string` | `'medium'` | `small`, `medium`, `large` | Container size                |
-| bg-color          | `string` | —          | —                          | Background color of container |
-| color             | `string` | —          | —                          | Text color of container       |
+| Prop              | Type     | Default    | Possible values                  | Description                   |
+| ----------------- | -------- | ---------- | -------------------------------- | ----------------------------- |
+| label             | `string` | —          | -                                | Container label               |
+| sublabel          | `string` | —          | -                                | Container sublabel            |
+| requirement-label | `string` | —          | -                                | Container requirement label   |
+| size              | `string` | `'medium'` | `'small'`, `'medium'`, `'large'` | Container size                |
+| bg-color          | `string` | —          | -                                | Background color of container |
+| color             | `string` | —          | -                                | Text color of container       |
 
 
 ## Slots

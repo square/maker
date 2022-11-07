@@ -250,10 +250,10 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop   | Type   | Default | Possible values | Description |
-| ------ | ------ | ------- | --------------- | ----------- |
-| enter* | `func` | —       | —               | —           |
-| leave* | `func` | —       | —               | —           |
+| Prop  | Type   | Default | Possible values | Description |
+| ----- | ------ | ------- | --------------- | ----------- |
+| enter | `func` | —       | -               | -           |
+| leave | `func` | —       | -               | -           |
 
 
 ## Slots

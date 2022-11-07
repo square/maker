@@ -614,15 +614,17 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop          | Type      | Default    | Possible values   | Description                                       |
-| ------------- | --------- | ---------- | ----------------- | ------------------------------------------------- |
-| pattern       | `string`  | —          | —                 | pattern defined at theme level                    |
-| label         | `string`  | —          | —                 | badge's label text                                |
-| size          | `string`  | `'medium'` | `small`, `medium` | badge's size                                      |
-| no-relative   | `boolean` | `false`    | —                 | skip setting `position: relative` on default slot |
-| pseudo-target | `string`  | `'after'`  | `before`, `after` | default slot's pseudo-element target              |
-| bg-color      | `string`  | —          | —                 | bg color, as a valid hex string                   |
-| text-color    | `string`  | —          | —                 | text color, as a valid hex string                 |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `badge`.
+
+| Prop          | Type      | Default     | Possible values                                                                                         | Description                                       |
+| ------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| pattern*      | `string`  | —           | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level                    |
+| label         | `string`  | —           | -                                                                                                       | badge's label text                                |
+| size          | `string`  | `'medium'`  | `'small'`, `'medium'`                                                                                   | badge's size                                      |
+| no-relative   | `boolean` | `false`     | -                                                                                                       | skip setting `position: relative` on default slot |
+| pseudo-target | `string`  | `'after'`   | `'before'`, `'after'`                                                                                   | default slot's pseudo-element target              |
+| bg-color*     | `string`  | `'#1b1b1b'` | -                                                                                                       | bg color, as a valid hex string                   |
+| text-color*   | `string`  | `'#ffffff'` | -                                                                                                       | text color, as a valid hex string                 |
 
 
 ## Slots

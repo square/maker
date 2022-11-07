@@ -29,7 +29,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop | Type     | Default    | Possible values   | Description |
 | ---- | -------- | ---------- | ----------------- | ----------- |
-| size | `string` | `'normal'` | `normal`, `large` | —           |
+| size | `string` | `'normal'` | `normal`, `large` | -           |
 
 
 ## Events

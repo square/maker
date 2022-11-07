@@ -5,7 +5,7 @@
 
 | Prop     | Type      | Default | Possible values | Description                    |
 | -------- | --------- | ------- | --------------- | ------------------------------ |
-| disabled | `boolean` | `false` | —               | Toggles inline disabled styles |
+| disabled | `boolean` | `false` | -               | Toggles inline disabled styles |
 
 
 ## Slots

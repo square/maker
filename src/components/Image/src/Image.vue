@@ -95,7 +95,6 @@ export default {
 		},
 		/**
 		 * Original applies theme's border radius, square applies border radius of 0
-		 * @values original, square, circle, arch
 		 */
 		shape: {
 			type: String,
