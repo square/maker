@@ -185,10 +185,6 @@ const apiMixin = {
 				options: {},
 				// true if this modal has a modal beneath it
 				isStacked: !!vm.parentModalApi,
-				// although parentModal is not used within Maker it's used
-				// by some of our users so removing it would be a breaking
-				// change and require a major release
-				parentModal: vm.parentModalApi,
 			}),
 
 			// only called from parent
