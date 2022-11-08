@@ -533,7 +533,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop               | Type     | Default | Possible values | Description                                      |
 | ------------------ | -------- | ------- | --------------- | ------------------------------------------------ |
-| before-enter-class | `string` | —       | —               | how to animate the stack items before they enter |
+| before-enter-class | `string` | —       | -               | how to animate the stack items before they enter |
 
 
 ## Slots

@@ -56,7 +56,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop   | Type      | Default | Possible values | Description          |
 | ------ | --------- | ------- | --------------- | -------------------- |
-| loaded | `boolean` | `false` | —               | Toggled loaded state |
+| loaded | `boolean` | `false` | -               | Toggled loaded state |
 
 
 ## SkeletonBlock Slots
@@ -77,8 +77,8 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop   | Type            | Default | Possible values | Description                      |
 | ------ | --------------- | ------- | --------------- | -------------------------------- |
-| lines  | `string|number` | `1`     | —               | number of lines of skeleton text |
-| loaded | `boolean`       | `false` | —               | Toggled loaded state             |
+| lines  | `string|number` | `1`     | -               | number of lines of skeleton text |
+| loaded | `boolean`       | `false` | -               | Toggled loaded state             |
 
 
 ## SkeletonText Slots

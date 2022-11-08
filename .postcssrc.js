@@ -1,4 +1,4 @@
-const variables = require('./src/styles/default-variables.js');
+const variables = require('./src/styles/default-variables.cjs');
 
 module.exports = {
 	plugins: [

@@ -8,7 +8,7 @@ import {
 	DARK_COLOR_LUMINANCE_THRESHOLD,
 	getContrast,
 } from './get-contrast';
-import defaultColors from '../components/Theme/src/default-colors';
+import defaultColors from '../components/Theme/src/default-colors.cjs';
 
 const DEFAULT_COLORS = defaultColors();
 

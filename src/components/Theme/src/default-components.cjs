@@ -1,20 +1,8 @@
-import defaultIcons from './default-icons';
-import { resolve, getPath } from './utils';
-import defaultColors from './default-colors';
-import defaultFonts from './default-fonts';
-import defaultShapes from './default-shapes';
-
-export default function defaultTheme() {
+// note: this is intentionally written as a cjs module
+// so it can be used by build files, please do not
+// refactor this into an es6 module
+module.exports = function defaultComponents() {
 	return {
-		// utility functions which enable pointer values
-		resolve,
-		getPath,
-		// "global" theme settings
-		colors: defaultColors(),
-		fonts: defaultFonts(),
-		icons: defaultIcons(),
-		shapes: defaultShapes(),
-		profiles: {},
 		// "local" component theme settings
 		button: {
 			size: 'medium',
@@ -25,6 +13,17 @@ export default function defaultTheme() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+			colorHover: undefined,
+			textColorHover: undefined,
+			borderRadius: undefined,
+			borderRadiusHover: undefined,
+			borderWidth: undefined,
+			borderWidthHover: undefined,
+			borderColor: undefined,
+			borderColorHover: undefined,
+			boxShadow: undefined,
+			boxShadowHover: undefined,
+			pattern: undefined,
 			patterns: {
 				// fill contextual color patterns
 				primaryFill: {
@@ -118,6 +117,7 @@ export default function defaultTheme() {
 		textbutton: {
 			color: '@colors.primary',
 			size: 'medium',
+			pattern: undefined,
 			patterns: {
 				primary: {
 					color: '@colors.contextualPrimary.text',
@@ -158,6 +158,9 @@ export default function defaultTheme() {
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
+			pattern: 'paragraph',
+			fontSize: undefined,
+			textDecoration: undefined,
 			patterns: {
 				headline: {
 					size: 7,
@@ -191,9 +194,15 @@ export default function defaultTheme() {
 		stepper: {
 			color: '@colors["neutral-10"]',
 			textColor: '@colors["neutral-90"]',
+			shape: undefined,
 		},
 		notice: {
 			type: 'info',
+			iconName: 'info',
+			iconColor: '@colors["neutral-80"]',
+			color: '@colors["neutral-90"]',
+			bgColor: '@colors["neutral-10"]',
+			pattern: 'info',
 			patterns: {
 				primary: {
 					iconColor: '@colors.contextualPrimary.fill',
@@ -221,18 +230,13 @@ export default function defaultTheme() {
 					color: '@colors.warning.text',
 					bgColor: '@colors.warning.subtle',
 				},
-				info: {
-					type: 'info',
-					iconName: 'info',
-					iconColor: '@colors["neutral-80"]',
-					color: '@colors["neutral-90"]',
-					bgColor: '@colors["neutral-10"]',
-				},
+				info: {}, // component default
 			},
 		},
 		pill: {
 			textColor: '@colors["neutral-0"]',
 			bgColor: '@colors["neutral-90"]',
+			pattern: 'info',
 			patterns: {
 				// filled patterns
 				primary: {
@@ -299,6 +303,7 @@ export default function defaultTheme() {
 		badge: {
 			textColor: '@colors["neutral-0"]',
 			bgColor: '@colors["neutral-90"]',
+			pattern: 'info',
 			patterns: {
 				primary: {
 					textColor: '@colors.contextualPrimary.onFill',
@@ -327,6 +332,7 @@ export default function defaultTheme() {
 			bgColor: '@colors.background',
 			color: '@colors.body',
 			accentColor: '@colors.body',
+			pattern: 'info',
 			patterns: {
 				info: {}, // component default
 				success: {
@@ -356,11 +362,13 @@ export default function defaultTheme() {
 			color: '@colors["neutral-100"]',
 			iconColor: '@colors["neutral-100"]',
 			iconName: undefined,
+			pattern: undefined,
 		},
 		progressbar: {
 			color: '@colors["neutral-100"]',
 			size: 'medium',
 			shape: undefined,
+			pattern: undefined,
 		},
 		modal: {
 			color: '@colors.body',
@@ -381,6 +389,7 @@ export default function defaultTheme() {
 		divider: {
 			color: '@colors["neutral-20"]',
 			size: '1px',
+			pattern: undefined,
 			patterns: {
 				'gap-8': {
 					color: '@colors["neutral-10"]',
@@ -393,4 +402,4 @@ export default function defaultTheme() {
 			},
 		},
 	};
-}
+};

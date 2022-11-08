@@ -34,10 +34,12 @@ export default {
 
 Supports attributes from [`<a>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a).
 
-| Prop  | Type            | Default | Possible values | Description   |
-| ----- | --------------- | ------- | --------------- | ------------- |
-| to*   | `string|object` | —       | —               | —             |
-| color | `string`        | —       | —               | Color of link |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `link`.
+
+| Prop   | Type            | Default     | Possible values | Description   |
+| ------ | --------------- | ----------- | --------------- | ------------- |
+| to     | `string|object` | —           | -               | -             |
+| color* | `string`        | `'#006aff'` | -               | Color of link |
 
 
 ## Events

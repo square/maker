@@ -311,10 +311,10 @@ export default {
 
 | Prop           | Type     | Default     | Possible values | Description                                                                                                                              |
 | -------------- | -------- | ----------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| upload-handler | `func`   | —           | —               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
-| max-images     | `number` | —           | —               | The maximum number of images allowed to be selected.                                                                                     |
-| max-size       | `number` | —           | —               | The maximum file size allowed (in bytes)                                                                                                 |
-| accept         | `string` | `'image/*'` | —               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
+| upload-handler | `func`   | —           | -               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
+| max-images     | `number` | —           | -               | The maximum number of images allowed to be selected.                                                                                     |
+| max-size       | `number` | —           | -               | The maximum file size allowed (in bytes)                                                                                                 |
+| accept         | `string` | `'image/*'` | -               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
 
 
 ## Events

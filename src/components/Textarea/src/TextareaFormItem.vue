@@ -19,7 +19,6 @@ import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLay
 import TextareaControl from './TextareaControl.vue';
 
 /**
- * Textarea component
  * @inheritAttrs ./TextareaControl.vue
  * @inheritListeners ./TextareaControl.vue
  */

@@ -95,10 +95,10 @@ export default {
 
 Supports attributes from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg).
 
-| Prop  | Type     | Default     | Possible values         | Description                           |
-| ----- | -------- | ----------- | ----------------------- | ------------------------------------- |
-| fill  | `string` | `'full'`    | `full`, `half`, `empty` | Determines the fill style of the star |
-| color | `string` | `'#ffbf00'` | —                       | Color of the star                     |
+| Prop  | Type     | Default     | Possible values               | Description                           |
+| ----- | -------- | ----------- | ----------------------------- | ------------------------------------- |
+| fill  | `string` | `'full'`    | `'full'`, `'half'`, `'empty'` | Determines the fill style of the star |
+| color | `string` | `'#ffbf00'` | -                             | Color of the star                     |
 
 
 ## Star Events
@@ -110,12 +110,14 @@ Supports events from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop        | Type      | Default    | Possible values            | Description                                                                |
-| ----------- | --------- | ---------- | -------------------------- | -------------------------------------------------------------------------- |
-| rating      | `number`  | `0`        | —                          | Rating value from 0-5, determines fill state of stars                      |
-| size        | `string`  | `'medium'` | `small`, `medium`, `large` | Size of rating component                                                   |
-| color       | `string`  | —          | —                          | Color of the star                                                          |
-| is-editable | `boolean` | `false`    | —                          | Determines whether to bubble up click/hover events and show pointer cursor |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `starrating`.
+
+| Prop        | Type      | Default     | Possible values                  | Description                                                                |
+| ----------- | --------- | ----------- | -------------------------------- | -------------------------------------------------------------------------- |
+| rating      | `number`  | `0`         | -                                | Rating value from 0-5, determines fill state of stars                      |
+| size        | `string`  | `'medium'`  | `'small'`, `'medium'`, `'large'` | Size of rating component                                                   |
+| color*      | `string`  | `'#ffbf00'` | -                                | Color of the star                                                          |
+| is-editable | `boolean` | `false`     | -                                | Determines whether to bubble up click/hover events and show pointer cursor |
 
 
 ## StarRating Events

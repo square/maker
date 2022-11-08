@@ -402,16 +402,18 @@ export default {
 
 Supports attributes from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-| Prop       | Type      | Default    | Possible values                    | Description                           |
-| ---------- | --------- | ---------- | ---------------------------------- | ------------------------------------- |
-| type       | `string`  | `'button'` | —                                  | Type of the button                    |
-| full-width | `boolean` | —          | —                                  | Whether to make the button full-width |
-| color      | `string`  | —          | —                                  | Background color of button            |
-| text-color | `string`  | —          | —                                  | Text color of button                  |
-| shape      | `string`  | —          | `squared`, `rounded`, `pill`       | Shape of button                       |
-| disabled   | `boolean` | `false`    | —                                  | Toggles button disabled state         |
-| align      | `string`  | —          | `center`, `stack`, `space-between` | How to align button's contents        |
-| loading    | `boolean` | `false`    | —                                  | Toggles button loading state          |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `actionbarbutton`.
+
+| Prop        | Type      | Default     | Possible values                          | Description                           |
+| ----------- | --------- | ----------- | ---------------------------------------- | ------------------------------------- |
+| type        | `string`  | `'button'`  | -                                        | Type of the button                    |
+| full-width* | `boolean` | —           | -                                        | Whether to make the button full-width |
+| color*      | `string`  | `'#006aff'` | -                                        | Background color of button            |
+| text-color* | `string`  | —           | -                                        | Text color of button                  |
+| shape*      | `string`  | —           | `'squared'`, `'rounded'`, `'pill'`       | Shape of button                       |
+| disabled    | `boolean` | `false`     | -                                        | Toggles button disabled state         |
+| align*      | `string`  | `'center'`  | `'center'`, `'stack'`, `'space-between'` | How to align button's contents        |
+| loading     | `boolean` | `false`     | -                                        | Toggles button loading state          |
 
 
 ## ActionBarButton Slots
@@ -433,17 +435,17 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 ## ActionBarLayer Slots
 
-| Slot    | Description |
-| ------- | ----------- |
-| default | —           |
+| Slot    | Description                           |
+| ------- | ------------------------------------- |
+| default | content actionbar will be opened over |
 
 
 ## InlineActionBar Props
 
-| Prop     | Type     | Default      | Possible values                           | Description |
-| -------- | -------- | ------------ | ----------------------------------------- | ----------- |
-| position | `string` | `'absolute'` | `static`, `relative`, `absolute`, `fixed` | —           |
-| hide-on  | `string` | `'none'`     | `none`, `mobile`, `tablet`, `desktop`     | —           |
+| Prop     | Type     | Default      | Possible values                                   | Description |
+| -------- | -------- | ------------ | ------------------------------------------------- | ----------- |
+| position | `string` | `'absolute'` | `'static'`, `'relative'`, `'absolute'`, `'fixed'` | -           |
+| hide-on  | `string` | `'none'`     | `'none'`, `'mobile'`, `'tablet'`, `'desktop'`     | -           |
 
 
 ## InlineActionBar Slots

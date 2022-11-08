@@ -398,20 +398,19 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop       | Type      | Default              | Possible values   | Description                 |
-| ---------- | --------- | -------------------- | ----------------- | --------------------------- |
-| pin-length | `number`  | `DEFAULT_INPUT_SIZE` | —                 | Length of pin               |
-| variant    | `string`  | `'fill'`             | `fill`, `outline` | Input variant               |
-| invalid    | `boolean` | `false`              | —                 | Toggles input invalid state |
-| disabled   | `boolean` | `false`              | —                 | Disable the inputs          |
+| Prop       | Type      | Default              | Possible values       | Description                 |
+| ---------- | --------- | -------------------- | --------------------- | --------------------------- |
+| pin-length | `number`  | `DEFAULT_INPUT_SIZE` | -                     | Length of pin               |
+| variant    | `string`  | `'fill'`             | `'fill'`, `'outline'` | Input variant               |
+| invalid    | `boolean` | `false`              | -                     | Toggles input invalid state |
+| disabled   | `boolean` | `false`              | -                     | Disable the inputs          |
 
 
 ## Slots
 
-| Slot    | Description             |
-| ------- | ----------------------- |
-| default | —                       |
-| error   | slot for error messages |
+| Slot  | Description             |
+| ----- | ----------------------- |
+| error | slot for error messages |
 
 
 ## Events

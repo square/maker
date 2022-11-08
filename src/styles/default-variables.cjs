@@ -1,7 +1,7 @@
-const defaultColors = require('../components/Theme/src/default-colors');
-const defaultFonts = require('../components/Theme/src/default-fonts');
-const defaultShapes = require('../components/Theme/src/default-shapes');
-const publicizeVars = require('../components/Theme/src/publicize-vars');
+const defaultColors = require('../components/Theme/src/default-colors.cjs');
+const defaultFonts = require('../components/Theme/src/default-fonts.cjs');
+const defaultShapes = require('../components/Theme/src/default-shapes.cjs');
+const publicizeVars = require('../components/Theme/src/publicize-vars.cjs');
 
 const defaultTheme = {
 	colors: defaultColors(),

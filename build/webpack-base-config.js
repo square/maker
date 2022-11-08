@@ -40,7 +40,8 @@ const webpackBaseConfig = {
 				loader: 'vue-loader',
 			},
 			{
-				test: /\.js$/,
+				// passes .cjs, .mjs, .js
+				test: /\.(c|m)?js$/,
 				loader: 'babel-loader',
 			},
 			{

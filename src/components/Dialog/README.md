@@ -674,10 +674,12 @@ export default {
 <!-- api-tables:start -->
 ## Dialog Props
 
-| Prop     | Type     | Default | Possible values | Description                |
-| -------- | -------- | ------- | --------------- | -------------------------- |
-| bg-color | `string` | —       | —               | Background color of dialog |
-| color    | `string` | —       | —               | Text color of dialog       |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `dialog`.
+
+| Prop      | Type     | Default     | Possible values | Description                |
+| --------- | -------- | ----------- | --------------- | -------------------------- |
+| bg-color* | `string` | `'#ffffff'` | -               | Background color of dialog |
+| color*    | `string` | `'#000000'` | -               | Text color of dialog       |
 
 
 ## Dialog Slots

@@ -1,4 +1,4 @@
-# 📚 Styleguide
+# Styleguide
 
 The Styleguide showcases all components and provides information on how to use them.
 

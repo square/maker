@@ -30,6 +30,7 @@ import SelectControl from './SelectControl.vue';
 /**
  * @inheritAttrs ./SelectControl.vue
  * @inheritListeners ./SelectControl.vue
+ * @inheritSlots ./SelectControl.vue
  */
 export default {
 	components: {

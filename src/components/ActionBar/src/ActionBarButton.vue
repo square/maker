@@ -161,7 +161,13 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('actionbarbutton', ['color', 'shape', 'textColor', 'align', 'fullWidth']),
+		...resolveThemeableProps('actionbarbutton', [
+			'color',
+			'shape',
+			'textColor',
+			'align',
+			'fullWidth',
+		]),
 		style() {
 			let tokens = {
 				color: this.resolvedColor,

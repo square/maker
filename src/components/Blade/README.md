@@ -213,10 +213,12 @@ export default {
 <!-- api-tables:start -->
 ## Blade Props
 
-| Prop     | Type     | Default | Possible values | Description               |
-| -------- | -------- | ------- | --------------- | ------------------------- |
-| bg-color | `string` | —       | —               | Background color of blade |
-| color    | `string` | —       | —               | Text color of blade       |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `blade`.
+
+| Prop      | Type     | Default     | Possible values | Description               |
+| --------- | -------- | ----------- | --------------- | ------------------------- |
+| bg-color* | `string` | `'#ffffff'` | -               | Background color of blade |
+| color*    | `string` | `'#000000'` | -               | Text color of blade       |
 
 
 ## Blade Slots
