@@ -97,7 +97,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | -------- | -------- | ----------- | -------------------------------------------- | ------------------------------------- |
 | pattern* | `string` | —           | any custom pattern defined within the theme  | pattern defined at theme level        |
 | size*    | `string` | `'medium'`  | `'xsmall'`, `'small'`, `'medium'`, `'large'` | Size (height) of the progress bar     |
-| shape    | `string` | —           | `'squared'`, `'rounded'`, `'pill'`           | Shape of the progress bar             |
+| shape*   | `string` | —           | `'squared'`, `'rounded'`, `'pill'`           | Shape of the progress bar             |
 | color*   | `string` | `'#000000'` | -                                            | Color of the progress bar             |
 | progress | `number` | `0`         | -                                            | Progress (width) of the bar (0 - 100) |
 

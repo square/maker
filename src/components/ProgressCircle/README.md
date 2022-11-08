@@ -232,7 +232,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | pattern*    | `string` | —           | any custom pattern defined within the theme | pattern defined at theme level  |
 | color*      | `string` | `'#000000'` | -                                           | color of the progress circle    |
 | progress    | `number` | `0`         | -                                           | progress of circle (0 - 100)    |
-| icon-name   | `string` | —           | -                                           | name of icon (defined in theme) |
+| icon-name*  | `string` | —           | -                                           | name of icon (defined in theme) |
 | icon-color* | `string` | `'#000000'` | -                                           | color of icon                   |
 
 

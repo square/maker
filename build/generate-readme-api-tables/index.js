@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len,no-prototype-builtins */
 const vueDocs = require('vue-docgen-api');
 const tinyGlob = require('tiny-glob');
 const path = require('path');
@@ -48,7 +48,7 @@ function displayNameToThemeKey(displayName) {
 }
 
 function stringify(value) {
-	if (isNil(value)) {
+	if (isNil(value) || value === '-') {
 		return '-';
 	}
 	// value already stringified & single-quoted
@@ -75,13 +75,15 @@ function enrichInfoWithDefaultThemeData(componentInfo) {
 		return;
 	}
 	for (const [propName, propInfo] of Object.entries(componentInfo.props)) {
-		const PROP_DEFAULT_THEME_VALUE = COMPONENT_THEME_DEFAULTS[propName];
-		if (PROP_DEFAULT_THEME_VALUE) {
+		const hasPropInThemeDefaults = COMPONENT_THEME_DEFAULTS.hasOwnProperty(propName);
+		if (hasPropInThemeDefaults) {
+			// PROP_DEFAULT_THEME_VALUE can be undefined or null
+			const PROP_DEFAULT_THEME_VALUE = COMPONENT_THEME_DEFAULTS[propName];
 			if (propInfo.defaultValue?.value === 'undefined') {
 				const RESOLVED_THEME_VALUE = DEFAULT_THEME.resolve(PROP_DEFAULT_THEME_VALUE);
 				propInfo.defaultValue = {
 					func: false,
-					value: stringify(RESOLVED_THEME_VALUE),
+					value: RESOLVED_THEME_VALUE ? stringify(RESOLVED_THEME_VALUE) : 'undefined',
 				};
 				propInfo.themable = true;
 			} else {
