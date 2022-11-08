@@ -6,7 +6,7 @@
 		]"
 	>
 		<button
-			v-if="$slots.default"
+			v-if="$slots['private-menu']"
 			:class="[
 				$s.SelectButton,
 				{
@@ -17,7 +17,11 @@
 			v-on="$listeners"
 		>
 			<span>
-				<slot />
+				<!--
+					@slot private slot used internally in Menu component
+					@private
+				-->
+				<slot name="private-menu" />
 			</span>
 		</button>
 		<select

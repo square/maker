@@ -83,9 +83,9 @@ export default {
 <!-- api-tables:start -->
 ## Props
 
-| Prop         | Type    | Default | Possible values | Description |
-| ------------ | ------- | ------- | --------------- | ----------- |
-| transitions* | `array` | —       | —               | —           |
+| Prop        | Type    | Default | Possible values | Description |
+| ----------- | ------- | ------- | --------------- | ----------- |
+| transitions | `array` | —       | -               | -           |
 
 
 ## Slots

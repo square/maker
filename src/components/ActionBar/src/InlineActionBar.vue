@@ -21,7 +21,6 @@ import { springUpBounceFn, springDownBounceFn } from '@square/maker/utils/transi
 import AtomicActionBar from './AtomicActionBar.vue';
 
 /**
- * InlineActionBar component
  * @inheritAttrs ./AtomicActionBar.vue
  * @inheritListeners ./AtomicActionBar.vue
  */

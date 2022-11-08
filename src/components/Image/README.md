@@ -98,13 +98,15 @@ Supports all `<img>` attributes
 
 Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
 
-| Prop     | Type      | Default | Possible values                        | Description                                                               |
-| -------- | --------- | ------- | -------------------------------------- | ------------------------------------------------------------------------- |
-| src      | `string`  | —       | —                                      | —                                                                         |
-| srcset   | `string`  | —       | —                                      | —                                                                         |
-| sizes    | `string`  | —       | —                                      | —                                                                         |
-| shape    | `string`  | —       | `original`, `square`, `circle`, `arch` | Original applies theme's border radius, square applies border radius of 0 |
-| lazyload | `boolean` | `false` | —                                      | —                                                                         |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `image`.
+
+| Prop     | Type      | Default | Possible values                                | Description                                                               |
+| -------- | --------- | ------- | ---------------------------------------------- | ------------------------------------------------------------------------- |
+| src      | `string`  | —       | -                                              | -                                                                         |
+| srcset   | `string`  | —       | -                                              | -                                                                         |
+| sizes    | `string`  | —       | -                                              | -                                                                         |
+| shape*   | `string`  | —       | `'original'`, `'square'`, `'circle'`, `'arch'` | Original applies theme's border radius, square applies border radius of 0 |
+| lazyload | `boolean` | `false` | -                                              | -                                                                         |
 
 
 ## Events

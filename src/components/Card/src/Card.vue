@@ -41,7 +41,9 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('card', ['shape']),
+		...resolveThemeableProps('card', [
+			'shape',
+		]),
 	},
 };
 </script>

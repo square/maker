@@ -6,9 +6,9 @@
 
 | Prop               | Type      | Default | Possible values | Description |
 | ------------------ | --------- | ------- | --------------- | ----------- |
-| prevent-default    | `boolean` | `false` | —               | —           |
-| min-swipe-distance | `number`  | `30`    | —               | —           |
-| max-swipe-duration | `number`  | `300`   | —               | —           |
+| prevent-default    | `boolean` | `false` | -               | -           |
+| min-swipe-distance | `number`  | `30`    | -               | -           |
+| max-swipe-duration | `number`  | `300`   | -               | -           |
 
 
 ## Slots

@@ -28,7 +28,8 @@ const webpackBuildConfig = (() => {
 		module: {
 			rules: [
 				{
-					test: /\.js$/,
+					// passes .cjs, .mjs, .js
+					test: /\.(c|m)?js$/,
 					loader: 'babel-loader',
 				},
 			],
@@ -86,9 +87,9 @@ const buildUtil = (utilPath) => merge({}, webpackBuildConfig, {
 
 module.exports = async () => [
 	...(await tinyGlob('./src/{components,utils}/**/index.js')).map(
-		(componentPath) => buildComponent(`./${ componentPath}`),
+		(componentPath) => buildComponent(`./${componentPath}`),
 	),
 	...(await tinyGlob('./src/utils/*.js')).map(
-		(utilPath) => buildUtil(`./${ utilPath}`),
+		(utilPath) => buildUtil(`./${utilPath}`),
 	),
 ];

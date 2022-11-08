@@ -24,7 +24,6 @@ import { MInlineFormControlLayout } from '@square/maker/utils/InlineFormControlL
 import ToggleControl from './ToggleControl.vue';
 
 /**
- * Toggle component
  * @inheritAttrs ./ToggleControl.vue
  * @inheritListeners ./ToggleControl.vue
  */

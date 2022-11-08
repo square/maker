@@ -1,13 +1,17 @@
+/* eslint-disable max-len,no-prototype-builtins */
 const vueDocs = require('vue-docgen-api');
 const tinyGlob = require('tiny-glob');
 const path = require('path');
 const { promises: fs } = require('fs');
 const {
- groupBy, last, keyBy,
+ groupBy, last, keyBy, isNil, isString,
 } = require('lodash');
 const commentMark = require('comment-mark');
 const generateApiTables = require('./generate-api-tables');
 const developmentConfig = require('../webpack-development-config');
+const defaultTheme = require('../../src/components/Theme/src/default-theme.cjs');
+
+const DEFAULT_THEME = Object.freeze(defaultTheme());
 
 const pathExists = (fsPath) => fs.access(fsPath).then(() => true, () => false);
 
@@ -29,6 +33,74 @@ async function ensureReadme(componentPath) {
 	}
 
 	return readmePath;
+}
+
+function displayNameToThemeKey(displayName) {
+	const lowercaseDisplayName = displayName.toLowerCase();
+	if (DEFAULT_THEME[lowercaseDisplayName]) {
+		return lowercaseDisplayName;
+	}
+	const truncateFormItem = lowercaseDisplayName.replace('formitem', '');
+	if (DEFAULT_THEME[truncateFormItem]) {
+		return truncateFormItem;
+	}
+	return undefined;
+}
+
+function stringify(value) {
+	if (isNil(value) || value === '-') {
+		return '-';
+	}
+	// value already stringified & single-quoted
+	if (isString(value) && value.startsWith("'") && value.endsWith("'")) {
+		return value;
+	}
+	let stringValue = JSON.stringify(value);
+	// replace double quotes with single quotes
+	if (stringValue.startsWith('"') && stringValue.endsWith('"')) {
+		const ONE = 1;
+		stringValue = `'${stringValue.slice(ONE, stringValue.length - ONE)}'`;
+	}
+	return stringValue;
+}
+
+function getComponentThemeDefaults(componentInfo) {
+	return DEFAULT_THEME[displayNameToThemeKey(componentInfo.displayName)];
+}
+
+function enrichInfoWithDefaultThemeData(componentInfo) {
+	const COMPONENT_THEME_DEFAULTS = getComponentThemeDefaults(componentInfo);
+	if (!COMPONENT_THEME_DEFAULTS) {
+		// component isn't themable, nothing to do
+		return;
+	}
+	for (const [propName, propInfo] of Object.entries(componentInfo.props)) {
+		const hasPropInThemeDefaults = COMPONENT_THEME_DEFAULTS.hasOwnProperty(propName);
+		if (hasPropInThemeDefaults) {
+			// PROP_DEFAULT_THEME_VALUE can be undefined or null
+			const PROP_DEFAULT_THEME_VALUE = COMPONENT_THEME_DEFAULTS[propName];
+			if (propInfo.defaultValue?.value === 'undefined') {
+				const RESOLVED_THEME_VALUE = DEFAULT_THEME.resolve(PROP_DEFAULT_THEME_VALUE);
+				propInfo.defaultValue = {
+					func: false,
+					value: RESOLVED_THEME_VALUE ? stringify(RESOLVED_THEME_VALUE) : 'undefined',
+				};
+				propInfo.themable = true;
+			} else {
+				throw new Error(`component ${componentInfo.displayName} has a default theme value ${PROP_DEFAULT_THEME_VALUE} for prop ${propName} but it will never get this value because it has a local default value of ${JSON.stringify(propInfo.defaultValue?.value)}`);
+			}
+		}
+		if (propName === 'pattern') {
+			propInfo.themable = true;
+			const COMPONENT_THEME_DEFAULT_PATTERNS = COMPONENT_THEME_DEFAULTS.patterns;
+			if (COMPONENT_THEME_DEFAULT_PATTERNS) {
+				const COMPONENT_THEME_DEFAULT_PATTERN_NAMES = Object.keys(COMPONENT_THEME_DEFAULTS.patterns);
+				if (COMPONENT_THEME_DEFAULT_PATTERN_NAMES.length > 0) {
+					propInfo.values = COMPONENT_THEME_DEFAULT_PATTERN_NAMES;
+				}
+			}
+		}
+	}
 }
 
 async function filterPublicSubcomponents(componentPath, vueFiles) {
@@ -115,6 +187,32 @@ async function parseComponent(componentPath) {
 			}
 			if (inherited.tags.inheritSlots) {
 				componentInfo.tags.inheritSlots.push(...inherited.tags.inheritSlots);
+			}
+			if (componentInfo.slots) {
+				// filter out parsed proxy slots
+				componentInfo.slots = componentInfo.slots.filter((slot) => {
+					const isDefault = slot.name === 'default';
+					const isScoped = slot.scoped;
+					const hasProxyBinding = slot.bindings?.length && slot.bindings[0].name === 'name';
+					const isProxySlot = isDefault && isScoped && hasProxyBinding;
+					return !isProxySlot;
+				});
+			}
+		}
+	}
+
+	if (componentInfo.slots) {
+		// filter out private slots
+		componentInfo.slots = componentInfo.slots.filter((slot) => slot.tags?.access[0]?.description !== 'private');
+	}
+
+	// componentInfo is modified in place
+	enrichInfoWithDefaultThemeData(componentInfo);
+
+	if (componentInfo.props) {
+		for (const propInfo of Object.values(componentInfo.props)) {
+			if (propInfo.values) {
+				propInfo.values = propInfo.values.map((value) => stringify(value));
 			}
 		}
 	}
