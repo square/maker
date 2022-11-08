@@ -72,6 +72,10 @@ function getPropDescription(propInfo) {
 	return propInfo.description || '-';
 }
 
+function isAdvancedProp(propInfo) {
+	return propInfo?.tags?.advanced;
+}
+
 function getPropsTable({ displayName, props, tags }, tablePrefix) {
 	let inheritsFrom = (tags.inheritAttrs || []).find(({ description }) => !description.startsWith('.'));
 
@@ -84,8 +88,11 @@ function getPropsTable({ displayName, props, tags }, tablePrefix) {
 	const hasThemableProps = props && Object.values(props).find((propInfo) => propInfo.themable);
 	const themeKey = displayNameToThemeKey(displayName);
 	const description = hasThemableProps ? `Themable props* can be configured via the [Theme](#/Theme) component using the key ${code(themeKey)}.` : undefined;
-	const standardProps = props ? Object.fromEntries(Object.entries(props).filter((prop) => !getPropDescription(prop[1]).includes('Advanced: '))) : undefined;
-	const advancedPropsArray = props ? Object.entries(props).filter((prop) => getPropDescription(prop[1]).includes('Advanced: ')) : undefined;
+	const standardProps = props
+		? Object.fromEntries(Object.entries(props).filter((prop) => !isAdvancedProp(prop[1])))
+		: undefined;
+	const advancedPropsArray = props
+		? Object.entries(props).filter((prop) => isAdvancedProp(prop[1])) : undefined;
 	const advancedProps = advancedPropsArray && advancedPropsArray.length > 0
 		? Object.fromEntries(advancedPropsArray) : undefined;
 	return section(
@@ -103,7 +110,7 @@ function getPropsTable({ displayName, props, tags }, tablePrefix) {
 					getPropDescription(propInfo),
 				]),
 			]) : '',
-			advancedProps ? '### Advanced customization props' : '',
+			advancedProps ? `### ${tablePrefix ? `${tablePrefix} ` : ''}Props (Advanced)` : '',
 			advancedProps ? markdownTable([
 				['Prop', 'Type', 'Default', 'Possible values', 'Description'],
 				...mapIn(advancedProps, (propInfo) => [
@@ -111,7 +118,7 @@ function getPropsTable({ displayName, props, tags }, tablePrefix) {
 					getPropType(propInfo),
 					getPropDefaultValue(propInfo),
 					getPropPossibleValues(propInfo),
-					getPropDescription(propInfo).split('Advanced: ')[1],
+					getPropDescription(propInfo),
 				]),
 			]) : '',
 

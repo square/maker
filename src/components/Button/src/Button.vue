@@ -133,21 +133,6 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * Size of the button
-		 */
-		size: {
-			type: String,
-			default: undefined,
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
-		},
-		/**
-		 * Whether to make the button full-width
-		 */
-		fullWidth: {
-			type: Boolean,
-			default: undefined,
-		},
-		/**
 		 * Variant
 		 */
 		variant: {
@@ -156,12 +141,12 @@ export default {
 			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
 		},
 		/**
-		 * Shape of preset button (overridden by borderRadius prop)
+		 * Size of the button
 		 */
-		shape: {
+		size: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+			validator: (size) => ['small', 'medium', 'large'].includes(size),
 		},
 		/**
 		 * Main color of button
@@ -178,6 +163,21 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Shape of preset button (overridden by borderRadius prop)
+		 */
+		shape: {
+			type: String,
+			default: undefined,
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
+		 * Whether to make the button full-width
+		 */
+		fullWidth: {
+			type: Boolean,
+			default: undefined,
 		},
 		/**
 		 * How to align button's contents
@@ -217,14 +217,16 @@ export default {
 			default: false,
 		},
 		/**
-		 * Advanced: MText pattern in button label
+		 * MText pattern in button label
+		 * @advanced
 		 */
 		textPattern: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Advanced: Main hover color of button
+		 * Main hover color of button
+		 * @advanced
 		 */
 		colorHover: {
 			type: String,
@@ -232,7 +234,8 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Advanced: Text hover color of button (only applied on fill buttons)
+		 * Text hover color of button (only applied on fill buttons)
+		 * @advanced
 		 */
 		textColorHover: {
 			type: String,
@@ -240,7 +243,8 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Advanced: button's border radius
+		 * button's border radius
+		 * @advanced
 		 */
 		borderRadius: {
 			type: String,
@@ -248,7 +252,8 @@ export default {
 			validator: cssValidator('border-radius'),
 		},
 		/**
-		 * Advanced: button's border radius when hovered
+		 * button's border radius when hovered
+		 * @advanced
 		 */
 		borderRadiusHover: {
 			type: String,
@@ -256,7 +261,8 @@ export default {
 			validator: cssValidator('border-radius'),
 		},
 		/**
-		 * Advanced: Border width of button (e.g. '3px')
+		 * Border width of button (e.g. '3px')
+		 * @advanced
 		 */
 		borderWidth: {
 			type: String,
@@ -264,16 +270,17 @@ export default {
 			validator: cssValidator('border-width'),
 		},
 		/**
-		 * Advanced: Border hover width of button (e.g. '3px')
+		 * Border hover width of button (e.g. '3px')
+		 * @advanced
 		 */
 		borderWidthHover: {
 			type: String,
 			default: undefined,
 			validator: cssValidator('border-width'),
 		},
-
 		/**
-		 * Advanced: Border color of button (only applied on fill buttons)
+		 * Border color of button (only applied on fill buttons)
+		 * @advanced
 		 */
 		borderColor: {
 			type: String,
@@ -281,7 +288,8 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Advanced: Border hover color of button (only applied on fill buttons)
+		 * Border hover color of button (only applied on fill buttons)
+		 * @advanced
 		 */
 		borderColorHover: {
 			type: String,
@@ -289,7 +297,8 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Advanced: Box-shadow of button
+		 * Box-shadow of button
+		 * @advanced
 		 */
 		boxShadow: {
 			type: String,
@@ -297,7 +306,8 @@ export default {
 			validator: cssValidator('box-shadow'),
 		},
 		/**
-		 * Advanced: Box-shadow hover of button
+		 * Box-shadow hover of button
+		 * @advanced
 		 */
 		boxShadowHover: {
 			type: String,
