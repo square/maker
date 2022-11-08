@@ -1,6 +1,16 @@
 # Migration guides for Maker major releases
 
-## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](https://github.com/square/maker/pull/441))
+## [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) -> [16.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](not yet made))
+
+### `parentModal` removed from `modalApi`, use `closeAll` instead
+
+Before, if a user wanted to close a stack of modals simultaneously, they would write `this.modalApi.parentModal.close()`, which worked at some point in time, but has been broken for a while, and even while it "worked" it would force close both modals without running their `beforeClose` hooks. For these reasons `parentModal` has been removed and replaced with a `closeAll` method which solves all of these problems.
+
+15.x (before) | 16.x (after)
+-|-
+`this.modalApi.parentModal.close()` | `this.modalApi.closeAll()`
+
+## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))
 
 ### MButton pattern & variant renames
 
