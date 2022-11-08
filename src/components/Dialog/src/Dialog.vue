@@ -66,7 +66,10 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('dialog', ['bgColor', 'color']),
+		...resolveThemeableProps('dialog', [
+			'bgColor',
+			'color',
+		]),
 
 		style() {
 			return {

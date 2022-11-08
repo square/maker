@@ -618,7 +618,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop          | Type      | Default     | Possible values                                                                                         | Description                                       |
 | ------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| pattern*      | `string`  | —           | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level                    |
+| pattern*      | `string`  | `'info'`    | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level                    |
 | label         | `string`  | —           | -                                                                                                       | badge's label text                                |
 | size          | `string`  | `'medium'`  | `'small'`, `'medium'`                                                                                   | badge's size                                      |
 | no-relative   | `boolean` | `false`     | -                                                                                                       | skip setting `position: relative` on default slot |

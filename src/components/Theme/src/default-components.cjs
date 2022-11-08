@@ -13,6 +13,17 @@ module.exports = function defaultComponents() {
 			textColor: undefined,
 			fullWidth: false,
 			align: 'center',
+			colorHover: undefined,
+			textColorHover: undefined,
+			borderRadius: undefined,
+			borderRadiusHover: undefined,
+			borderWidth: undefined,
+			borderWidthHover: undefined,
+			borderColor: undefined,
+			borderColorHover: undefined,
+			boxShadow: undefined,
+			boxShadowHover: undefined,
+			pattern: undefined,
 			patterns: {
 				// fill contextual color patterns
 				primaryFill: {
@@ -106,6 +117,7 @@ module.exports = function defaultComponents() {
 		textbutton: {
 			color: '@colors.primary',
 			size: 'medium',
+			pattern: undefined,
 			patterns: {
 				primary: {
 					color: '@colors.contextualPrimary.text',
@@ -146,6 +158,9 @@ module.exports = function defaultComponents() {
 			fontStyle: 'inherit',
 			textTransform: 'inherit',
 			textAlign: 'inherit',
+			pattern: 'paragraph',
+			fontSize: undefined,
+			textDecoration: undefined,
 			patterns: {
 				headline: {
 					size: 7,
@@ -179,9 +194,15 @@ module.exports = function defaultComponents() {
 		stepper: {
 			color: '@colors["neutral-10"]',
 			textColor: '@colors["neutral-90"]',
+			shape: undefined,
 		},
 		notice: {
 			type: 'info',
+			iconName: 'info',
+			iconColor: '@colors["neutral-80"]',
+			color: '@colors["neutral-90"]',
+			bgColor: '@colors["neutral-10"]',
+			pattern: 'info',
 			patterns: {
 				primary: {
 					iconColor: '@colors.contextualPrimary.fill',
@@ -209,18 +230,13 @@ module.exports = function defaultComponents() {
 					color: '@colors.warning.text',
 					bgColor: '@colors.warning.subtle',
 				},
-				info: {
-					type: 'info',
-					iconName: 'info',
-					iconColor: '@colors["neutral-80"]',
-					color: '@colors["neutral-90"]',
-					bgColor: '@colors["neutral-10"]',
-				},
+				info: {}, // component default
 			},
 		},
 		pill: {
 			textColor: '@colors["neutral-0"]',
 			bgColor: '@colors["neutral-90"]',
+			pattern: 'info',
 			patterns: {
 				// filled patterns
 				primary: {
@@ -287,6 +303,7 @@ module.exports = function defaultComponents() {
 		badge: {
 			textColor: '@colors["neutral-0"]',
 			bgColor: '@colors["neutral-90"]',
+			pattern: 'info',
 			patterns: {
 				primary: {
 					textColor: '@colors.contextualPrimary.onFill',
@@ -315,6 +332,7 @@ module.exports = function defaultComponents() {
 			bgColor: '@colors.background',
 			color: '@colors.body',
 			accentColor: '@colors.body',
+			pattern: 'info',
 			patterns: {
 				info: {}, // component default
 				success: {
@@ -344,11 +362,13 @@ module.exports = function defaultComponents() {
 			color: '@colors["neutral-100"]',
 			iconColor: '@colors["neutral-100"]',
 			iconName: undefined,
+			pattern: undefined,
 		},
 		progressbar: {
 			color: '@colors["neutral-100"]',
 			size: 'medium',
 			shape: undefined,
+			pattern: undefined,
 		},
 		modal: {
 			color: '@colors.body',
@@ -369,6 +389,7 @@ module.exports = function defaultComponents() {
 		divider: {
 			color: '@colors["neutral-20"]',
 			size: '1px',
+			pattern: undefined,
 			patterns: {
 				'gap-8': {
 					color: '@colors["neutral-10"]',

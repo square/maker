@@ -931,7 +931,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop           | Type      | Default     | Possible values                                                                                         | Description                                               |
 | -------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| pattern*       | `string`  | —           | `'info'`, `'success'`, `'warning'`, `'error'`, `'primary'`, any custom pattern defined within the theme | pattern defined at theme level                            |
+| pattern*       | `string`  | `'info'`    | `'info'`, `'success'`, `'warning'`, `'error'`, `'primary'`, any custom pattern defined within the theme | pattern defined at theme level                            |
 | persistent*    | `boolean` | —           | -                                                                                                       | make toast persistent (no auto-dismiss)                   |
 | dismiss-after* | `number`  | `5000`      | -                                                                                                       | auto-dismiss after x milliseconds (ignored if persistent) |
 | icon-name*     | `string`  | `'info'`    | -                                                                                                       | name of icon to show                                      |

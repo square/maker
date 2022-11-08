@@ -143,15 +143,15 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 Themable props* can be configured via the [Theme](#/Theme) component using the key `notice`.
 
-| Prop       | Type     | Default    | Possible values                                                                                         | Description                        |
-| ---------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| pattern*   | `string` | —          | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level     |
-| type*      | `string` | `'info'`   | `'error'`, `'success'`, `'warning'`, `'info'`                                                           | type of notice                     |
-| display    | `string` | `'inline'` | `'inline'`, `'block'`                                                                                   | notice display                     |
-| icon-name  | `string` | —          | -                                                                                                       | name of icon, defined in theme     |
-| icon-color | `string` | —          | -                                                                                                       | icon color                         |
-| color      | `string` | —          | -                                                                                                       | text color for inline notices      |
-| bg-color   | `string` | —          | -                                                                                                       | background color for block notices |
+| Prop        | Type     | Default     | Possible values                                                                                         | Description                        |
+| ----------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| pattern*    | `string` | `'info'`    | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level     |
+| type*       | `string` | `'info'`    | `'error'`, `'success'`, `'warning'`, `'info'`                                                           | type of notice                     |
+| display     | `string` | `'inline'`  | `'inline'`, `'block'`                                                                                   | notice display                     |
+| icon-name*  | `string` | `'info'`    | -                                                                                                       | name of icon, defined in theme     |
+| icon-color* | `string` | `'#707070'` | -                                                                                                       | icon color                         |
+| color*      | `string` | `'#1b1b1b'` | -                                                                                                       | text color for inline notices      |
+| bg-color*   | `string` | `'#f1f1f1'` | -                                                                                                       | background color for block notices |
 
 
 ## Slots

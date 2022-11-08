@@ -124,7 +124,10 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('container', ['bgColor', 'color']),
+		...resolveThemeableProps('container', [
+			'bgColor',
+			'color',
+		]),
 		style() {
 			return {
 				'--bg-color': this.resolvedBgColor,

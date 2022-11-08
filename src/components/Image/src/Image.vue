@@ -119,7 +119,9 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('image', ['shape']),
+		...resolveThemeableProps('image', [
+			'shape',
+		]),
 
 		style() {
 			return {
