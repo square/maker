@@ -18,7 +18,6 @@ export default {
 	props: {
 		/**
 		 * patterns are defined at the theme level
-		 * @values headline, title, paragraph, label, pattern defined in theme
 		 */
 		pattern: {
 			type: String,
@@ -26,7 +25,6 @@ export default {
 		},
 		/**
 		 * [HTML Element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
-		 * @values h1, h2, h3, h4, h5, h6, p, span, div, li
 		 */
 		element: {
 			type: String,
@@ -34,8 +32,7 @@ export default {
 			validator: (element) => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div', 'li'].includes(element),
 		},
 		/**
-		 * Size of text as step in fluid scale
-		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
+		 * Size of text as step in fluid scale (-2 to 7)
 		 */
 		size: {
 			type: Number,
@@ -84,7 +81,6 @@ export default {
 		},
 		/**
 		 * [Font style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)
-		 * @values inherit, normal, italic
 		 */
 		fontStyle: {
 			type: String,
@@ -93,7 +89,6 @@ export default {
 		},
 		/**
 		 * [Text transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)
-		 * @values inherit, none, uppercase, lowercase, capitalize
 		 */
 		textTransform: {
 			type: String,
@@ -110,7 +105,6 @@ export default {
 		},
 		/**
 		 * [Text align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)
-		 * @values inherit, left, right, center, start, end
 		 */
 		textAlign: {
 			type: String,

@@ -65,8 +65,7 @@ export default {
 			default: DEFAULT_THUMBNAIL_COUNT,
 		},
 		/**
-		 * Overflow text size. Size of text as step in fluid scale.
-		 * @values 7, 6, 5, 4, 3, 2, 1, 0, -1, -2
+		 * Overflow text size. Size of text as step in fluid scale (-2 to 7).
 		 */
 		overflowTextSize: {
 			type: Number,

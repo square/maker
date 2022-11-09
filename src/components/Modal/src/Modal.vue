@@ -73,7 +73,10 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('modal', ['bgColor', 'color']),
+		...resolveThemeableProps('modal', [
+			'bgColor',
+			'color',
+		]),
 
 		style() {
 			return {

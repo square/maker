@@ -127,15 +127,68 @@ export default {
 	props: {
 		/**
 		 * patterns are defined at the theme level
-		 * @values pattern defined in theme
 		 */
 		pattern: {
 			type: String,
 			default: undefined,
 		},
 		/**
+		 * Variant
+		 */
+		variant: {
+			type: String,
+			default: undefined,
+			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
+		},
+		/**
+		 * Size of the button
+		 */
+		size: {
+			type: String,
+			default: undefined,
+			validator: (size) => ['small', 'medium', 'large'].includes(size),
+		},
+		/**
+		 * Main color of button
+		 */
+		color: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Text color of button (only applied on fill buttons)
+		 */
+		textColor: {
+			type: String,
+			default: undefined,
+			validator: (color) => colord(color).isValid(),
+		},
+		/**
+		 * Shape of preset button (overridden by borderRadius prop)
+		 */
+		shape: {
+			type: String,
+			default: undefined,
+			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
+		 * Whether to make the button full-width
+		 */
+		fullWidth: {
+			type: Boolean,
+			default: undefined,
+		},
+		/**
+		 * How to align button's contents
+		 */
+		align: {
+			type: String,
+			default: undefined,
+			validator: (align) => ['center', 'stack', 'space-between'].includes(align),
+		},
+		/**
 		 * Tag of button
-		 * @values button, a
 		 */
 		tag: {
 			type: String,
@@ -150,37 +203,30 @@ export default {
 			default: 'button',
 		},
 		/**
-		 * Size of the button
+		 * Toggles button disabled state
 		 */
-		size: {
-			type: String,
-			default: undefined,
-			validator: (size) => ['small', 'medium', 'large'].includes(size),
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 		/**
-		 * Whether to make the button full-width
+		 * Toggles button loading state
 		 */
-		fullWidth: {
+		loading: {
 			type: Boolean,
-			default: undefined,
+			default: false,
 		},
 		/**
 		 * MText pattern in button label
+		 * @advanced
 		 */
 		textPattern: {
 			type: String,
 			default: undefined,
 		},
 		/**
-		 * Main color of button
-		 */
-		color: {
-			type: String,
-			default: undefined,
-			validator: (color) => colord(color).isValid(),
-		},
-		/**
 		 * Main hover color of button
+		 * @advanced
 		 */
 		colorHover: {
 			type: String,
@@ -188,15 +234,8 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Text color of button (only applied on fill buttons)
-		 */
-		textColor: {
-			type: String,
-			default: undefined,
-			validator: (color) => colord(color).isValid(),
-		},
-		/**
 		 * Text hover color of button (only applied on fill buttons)
+		 * @advanced
 		 */
 		textColorHover: {
 			type: String,
@@ -204,26 +243,8 @@ export default {
 			validator: (color) => colord(color).isValid(),
 		},
 		/**
-		 * Variant
-		 * @values fill, outline, ghost
-		 */
-		variant: {
-			type: String,
-			default: undefined,
-			validator: (variant) => ['fill', 'outline', 'ghost'].includes(variant),
-		},
-		/**
-		 * Shape of preset button (overridden by borderRadius prop)
-		 * @values squared, rounded, pill
-		 */
-		shape: {
-			type: String,
-			default: undefined,
-			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
-		},
-		/**
-		 * Shape of button
-		 * @values 'Npx', 'N%'
+		 * button's border radius
+		 * @advanced
 		 */
 		borderRadius: {
 			type: String,
@@ -231,8 +252,8 @@ export default {
 			validator: cssValidator('border-radius'),
 		},
 		/**
-		 * Shape of button
-		 * @values 'Npx', 'N%'
+		 * button's border radius when hovered
+		 * @advanced
 		 */
 		borderRadiusHover: {
 			type: String,
@@ -241,6 +262,7 @@ export default {
 		},
 		/**
 		 * Border width of button (e.g. '3px')
+		 * @advanced
 		 */
 		borderWidth: {
 			type: String,
@@ -249,15 +271,16 @@ export default {
 		},
 		/**
 		 * Border hover width of button (e.g. '3px')
+		 * @advanced
 		 */
 		borderWidthHover: {
 			type: String,
 			default: undefined,
 			validator: cssValidator('border-width'),
 		},
-
 		/**
 		 * Border color of button (only applied on fill buttons)
+		 * @advanced
 		 */
 		borderColor: {
 			type: String,
@@ -266,6 +289,7 @@ export default {
 		},
 		/**
 		 * Border hover color of button (only applied on fill buttons)
+		 * @advanced
 		 */
 		borderColorHover: {
 			type: String,
@@ -274,6 +298,7 @@ export default {
 		},
 		/**
 		 * Box-shadow of button
+		 * @advanced
 		 */
 		boxShadow: {
 			type: String,
@@ -282,33 +307,12 @@ export default {
 		},
 		/**
 		 * Box-shadow hover of button
+		 * @advanced
 		 */
 		boxShadowHover: {
 			type: String,
 			default: undefined,
 			validator: cssValidator('box-shadow'),
-		},
-		/**
-		 * Toggles button disabled state
-		 */
-		disabled: {
-			type: Boolean,
-			default: false,
-		},
-		/**
-		 * How to align button's contents
-		 */
-		align: {
-			type: String,
-			default: undefined,
-			validator: (align) => ['center', 'stack', 'space-between'].includes(align),
-		},
-		/**
-		 * Toggles button loading state
-		 */
-		loading: {
-			type: Boolean,
-			default: false,
 		},
 	},
 

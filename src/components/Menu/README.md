@@ -101,7 +101,6 @@
 		>
 			<template #toggle>
 				<m-button
-					size="small"
 					pattern="primaryOutline"
 				>
 					<settings class="icon" />
@@ -180,10 +179,10 @@ export default {
 <!-- api-tables:start -->
 ## Menu Props
 
-| Prop    | Type        | Default           | Possible values                           | Description          |
-| ------- | ----------- | ----------------- | ----------------------------------------- | -------------------- |
-| v-model | `undefined` | —                 | —                                         | Selected menu option |
-| type    | `string`    | `'single-select'` | `multi-select`, `single-select`, `action` | —                    |
+| Prop    | Type        | Default           | Possible values                                 | Description          |
+| ------- | ----------- | ----------------- | ----------------------------------------------- | -------------------- |
+| v-model | `undefined` | —                 | -                                               | Selected menu option |
+| type    | `string`    | `'single-select'` | `'multi-select'`, `'single-select'`, `'action'` | -                    |
 
 
 ## Menu Slots
@@ -216,8 +215,8 @@ export default {
 
 | Prop          | Type        | Default | Possible values | Description |
 | ------------- | ----------- | ------- | --------------- | ----------- |
-| value         | `undefined` | —       | —               | —           |
-| click-handler | `func`      | —       | —               | —           |
+| value         | `undefined` | —       | -               | -           |
+| click-handler | `func`      | —       | -               | -           |
 
 
 ## MenuOption Slots

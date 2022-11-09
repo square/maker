@@ -31,6 +31,7 @@ import PinInputControl from './PinInputControl.vue';
 /**
  * @inheritAttrs ./PinInputControl.vue
  * @inheritListeners ./PinInputControl.vue
+ * @inheritSlots ./PinInputControl.vue
  */
 export default {
 	components: {

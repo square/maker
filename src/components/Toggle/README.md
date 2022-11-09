@@ -80,8 +80,8 @@ Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.o
 
 | Prop    | Type      | Default | Possible values | Description                  |
 | ------- | --------- | ------- | --------------- | ---------------------------- |
-| v-model | `boolean` | `false` | —               | Current toggled state        |
-| invalid | `boolean` | `false` | —               | Toggles Toggle invalid state |
+| v-model | `boolean` | `false` | -               | Current toggled state        |
+| invalid | `boolean` | `false` | -               | Toggles Toggle invalid state |
 
 
 ## Slots

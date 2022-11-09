@@ -907,8 +907,8 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop          | Type      | Default | Possible values | Description                                               |
 | ------------- | --------- | ------- | --------------- | --------------------------------------------------------- |
-| persistent    | `boolean` | `false` | —               | make bread persistent (no auto-dismiss)                   |
-| dismiss-after | `number`  | `5000`  | —               | auto-dismiss after x milliseconds (ignored if persistent) |
+| persistent    | `boolean` | `false` | -               | make bread persistent (no auto-dismiss)                   |
+| dismiss-after | `number`  | `5000`  | -               | auto-dismiss after x milliseconds (ignored if persistent) |
 
 
 ## Bread Slots
@@ -927,19 +927,21 @@ Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop          | Type      | Default | Possible values | Description                                               |
-| ------------- | --------- | ------- | --------------- | --------------------------------------------------------- |
-| pattern       | `string`  | —       | —               | pattern defined at theme level                            |
-| persistent    | `boolean` | —       | —               | make toast persistent (no auto-dismiss)                   |
-| dismiss-after | `number`  | —       | —               | auto-dismiss after x milliseconds (ignored if persistent) |
-| icon-name     | `string`  | —       | —               | name of icon to show                                      |
-| show-icon     | `boolean` | —       | —               | shows icon                                                |
-| text          | `string`  | `''`    | —               | toast text content                                        |
-| progress      | `number`  | —       | —               | optional toast progress (0 - 100)                         |
-| color         | `string`  | —       | —               | toast text & button color                                 |
-| accent-color  | `string`  | —       | —               | toast icon & progress color                               |
-| bg-color      | `string`  | —       | —               | toast background color                                    |
-| actions       | `array`   | `[]`    | —               | toast actions                                             |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `toast`.
+
+| Prop           | Type      | Default     | Possible values                                                                                         | Description                                               |
+| -------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| pattern*       | `string`  | `'info'`    | `'info'`, `'success'`, `'warning'`, `'error'`, `'primary'`, any custom pattern defined within the theme | pattern defined at theme level                            |
+| persistent*    | `boolean` | —           | -                                                                                                       | make toast persistent (no auto-dismiss)                   |
+| dismiss-after* | `number`  | `5000`      | -                                                                                                       | auto-dismiss after x milliseconds (ignored if persistent) |
+| icon-name*     | `string`  | `'info'`    | -                                                                                                       | name of icon to show                                      |
+| show-icon*     | `boolean` | —           | -                                                                                                       | shows icon                                                |
+| text           | `string`  | `''`        | -                                                                                                       | toast text content                                        |
+| progress       | `number`  | —           | -                                                                                                       | optional toast progress (0 - 100)                         |
+| color*         | `string`  | `'#000000'` | -                                                                                                       | toast text & button color                                 |
+| accent-color*  | `string`  | `'#000000'` | -                                                                                                       | toast icon & progress color                               |
+| bg-color*      | `string`  | `'#ffffff'` | -                                                                                                       | toast background color                                    |
+| actions        | `array`   | `[]`        | -                                                                                                       | toast actions                                             |
 
 
 ## Toast Slots

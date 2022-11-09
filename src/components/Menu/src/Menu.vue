@@ -22,8 +22,12 @@
 						<!-- @slot Select toggle prefix -->
 						<slot name="toggle-select-prefix" />
 					</template>
-					<!-- @slot Select toggle text -->
-					<slot name="toggle-select" />
+					<template
+						#private-menu
+					>
+						<!-- @slot Select toggle text -->
+						<slot name="toggle-select" />
+					</template>
 				</select-control>
 				<div
 					v-else

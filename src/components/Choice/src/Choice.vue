@@ -89,7 +89,9 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('choice', ['selectedColor']),
+		...resolveThemeableProps('choice', [
+			'selectedColor',
+		]),
 		contrastColor() {
 			return getContrast(this.resolvedSelectedColor, '#fff');
 		},

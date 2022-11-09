@@ -27,9 +27,9 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop | Type     | Default    | Possible values   | Description |
-| ---- | -------- | ---------- | ----------------- | ----------- |
-| size | `string` | `'normal'` | `normal`, `large` | —           |
+| Prop | Type     | Default    | Possible values       | Description |
+| ---- | -------- | ---------- | --------------------- | ----------- |
+| size | `string` | `'normal'` | `'normal'`, `'large'` | -           |
 
 
 ## Events

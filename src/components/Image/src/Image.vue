@@ -95,7 +95,6 @@ export default {
 		},
 		/**
 		 * Original applies theme's border radius, square applies border radius of 0
-		 * @values original, square, circle, arch
 		 */
 		shape: {
 			type: String,
@@ -120,7 +119,9 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('image', ['shape']),
+		...resolveThemeableProps('image', [
+			'shape',
+		]),
 
 		style() {
 			return {

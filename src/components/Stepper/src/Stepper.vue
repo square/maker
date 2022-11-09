@@ -138,7 +138,11 @@ export default {
 	},
 
 	computed: {
-		...resolveThemeableProps('stepper', ['color', 'textColor', 'shape']),
+		...resolveThemeableProps('stepper', [
+			'color',
+			'textColor',
+			'shape',
+		]),
 
 		maxVal() {
 			return Number.parseInt(this.max, BASE_TEN);
