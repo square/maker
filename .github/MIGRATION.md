@@ -18,6 +18,14 @@ The naming scheme for Maker component semantic sizes is: `xsmall`, `small`, `med
 -|-
 `<m-loading size="normal" />` | `<m-loading size="medium" />`
 
+## MenuOption `click-handler` prop removed, use `@click` instead
+
+Should've been `@click` from the beginning, but was overlooked during code review.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-menu-option :click-handler="someMethod">` | `<m-menu-option @click="someMethod">`
+
 ## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))
 
 ### MButton pattern & variant renames
