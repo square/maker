@@ -1,5 +1,15 @@
 # Menu
 
+Use Menu when you'd like the user to select one (single-select mode) or many (multi-select mode) options from a dropdown list of options. If you want the user to select only one option, and Menu is more fancy than you need, then you should use [Select](#/Select). If you'd like all of the options to be inlined use [Radio](#/Radio), [SegmentedControl](#/SegmentedControl), or [Choice](#/Choice) (in single-select mode) for single-select use-cases and [Checkbox](#/Checkbox), or [Choice](#/Choice) (in multi-select mode) for multi-select use-cases.
+
+## Examples
+
+To use Menu you need to have a [PopoverLayer](#/Popover) somewhere in your app.
+
+### Single select
+
+This is the default mode. Allows user to only select a single option.
+
 ```vue
 <template>
 	<div class="wrapper">
@@ -49,8 +59,55 @@
 				</m-menu-option>
 			</template>
 		</m-menu>
-		{{ single }}
+		Selection: {{ single }}
+	</div>
+</template>
 
+<script>
+import { MMenu, MMenuOption } from '@square/maker/components/Menu';
+import Settings from '@square/maker-icons/Settings';
+import { MPopoverLayer } from '@square/maker/components/Popover';
+
+export default {
+	components: {
+		MMenu,
+		MMenuOption,
+		MPopoverLayer,
+		Settings,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+
+	data() {
+		return {
+			single: 'one',
+		};
+	},
+};
+</script>
+
+<style scoped>
+.wrapper {
+	width: 400px;
+}
+
+.icon {
+	width: 16px;
+	height: 16px;
+}
+</style>
+```
+
+### Multi select
+
+Set `type` to `multi-select`. Allows user to select multiple options.
+
+```vue
+<template>
+	<div class="wrapper">
+		<m-popover-layer />
 		<m-menu
 			v-model="multi"
 			type="multi-select"
@@ -94,8 +151,55 @@
 				</m-menu-option>
 			</template>
 		</m-menu>
-		{{ multi }}
+		Selection: {{ multi }}
+	</div>
+</template>
 
+<script>
+import { MMenu, MMenuOption } from '@square/maker/components/Menu';
+import Settings from '@square/maker-icons/Settings';
+import { MPopoverLayer } from '@square/maker/components/Popover';
+
+export default {
+	components: {
+		MMenu,
+		MMenuOption,
+		MPopoverLayer,
+		Settings,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+
+	data() {
+		return {
+			multi: [],
+		};
+	},
+};
+</script>
+
+<style scoped>
+.wrapper {
+	width: 400px;
+}
+
+.icon {
+	width: 16px;
+	height: 16px;
+}
+</style>
+```
+
+### Action menu
+
+Set `type` to `action` and bind a `@click` listener on each individual `<m-menu-option>`. This allows the user to select a single option and for an action to be invoked immediately.
+
+```vue
+<template>
+	<div class="wrapper">
+		<m-popover-layer />
 		<m-menu
 			type="action"
 		>
@@ -111,7 +215,7 @@
 				<m-menu-option
 					v-for="index in 4"
 					:key="index"
-					:click-handler="clickHandler"
+					@click="onOptionClick(index)"
 				>
 					<template #prefix>
 						<settings class="icon" />
@@ -153,9 +257,9 @@ export default {
 	},
 
 	methods: {
-		clickHandler() {
+		onOptionClick(index) {
 			// eslint-disable-next-line no-alert
-			alert('Action clicked');
+			alert(`Action ${index} clicked!`);
 		},
 	},
 };
@@ -163,9 +267,6 @@ export default {
 
 <style scoped>
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
 	width: 400px;
 }
 
@@ -213,18 +314,18 @@ export default {
 
 ## MenuOption Props
 
-| Prop          | Type        | Default | Possible values | Description |
-| ------------- | ----------- | ------- | --------------- | ----------- |
-| value         | `undefined` | —       | -               | -           |
-| click-handler | `func`      | —       | -               | -           |
+| Prop    | Type        | Default | Possible values | Description                                |
+| ------- | ----------- | ------- | --------------- | ------------------------------------------ |
+| element | `string`    | `'div'` | -               | topmost wrapper element around row content |
+| value   | `undefined` | —       | -               | -                                          |
 
 
 ## MenuOption Slots
 
 | Slot           | Description |
 | -------------- | ----------- |
-| default        | —           |
 | prefix         | —           |
+| default        | —           |
 | secondary      | —           |
 | side           | —           |
 | side-secondary | —           |

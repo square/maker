@@ -1,7 +1,7 @@
 
 # Choice
 
-Use Choice to allow the user to choose one or multiple options from an inline list of options.
+Use Choice when you'd like the user to select one (in single-select mode) or many (in multi-select mode) options from an inline list of options. Other components you can use if you need the user to select a single option are [Radio](#/Radio), [SegmentedControl](#/SegmentedControl), [Select](#/Select), or [Menu](#/Menu) (in single-select mode). Other components you can use if you need the user to select many options are [Checkbox](#/Checkbox), or [Menu](#/Menu) (in multi-select mode).
 
 ## Examples
 
