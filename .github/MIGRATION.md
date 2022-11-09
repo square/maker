@@ -10,6 +10,14 @@ Before, if a user wanted to close a stack of modals simultaneously, they would w
 -|-
 `this.modalApi.parentModal.close()` | `this.modalApi.closeAll()`
 
+### Loading `normal` size renamed to `medium`
+
+The naming scheme for Maker component semantic sizes is: `xsmall`, `small`, `medium`, `large`, `xlarge` but the Loading component was implemented forever ago and its size values were `normal` and `large` which is weird so we're renaming `normal` to `medium` so it's more consistent with the rest of the library.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-loading size="normal" />` | `<m-loading size="medium" />`
+
 ## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))
 
 ### MButton pattern & variant renames
