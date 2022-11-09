@@ -187,13 +187,13 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop          | Type      | Default     | Possible values                                                                                         | Description                             |
 | ------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| pattern*      | `string`  | —           | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level          |
-| type          | `string`  | `'button'`  | -                                                                                                       | Type of the button                      |
-| size*         | `string`  | `'medium'`  | `'medium'`, `'large'`                                                                                   | Size of the button label text           |
 | color*        | `string`  | `'#006aff'` | -                                                                                                       | Text color of button                    |
 | disabled      | `boolean` | `false`     | -                                                                                                       | Toggles button disabled state           |
 | loading       | `boolean` | `false`     | -                                                                                                       | Toggles button loading state            |
+| pattern*      | `string`  | —           | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level          |
+| size*         | `string`  | `'medium'`  | `'medium'`, `'large'`                                                                                   | Size of the button label text           |
 | truncate-text | `boolean` | `false`     | -                                                                                                       | Truncate text if it overflows container |
+| type          | `string`  | `'button'`  | -                                                                                                       | Type of the button                      |
 
 
 ## Slots

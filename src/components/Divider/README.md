@@ -126,9 +126,9 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop     | Type     | Default     | Possible values                                                    | Description                    |
 | -------- | -------- | ----------- | ------------------------------------------------------------------ | ------------------------------ |
+| color*   | `string` | `'#d3d3d3'` | -                                                                  | Color of the divider           |
 | pattern* | `string` | —           | `'gap-8'`, `'gap-16'`, any custom pattern defined within the theme | pattern defined at theme level |
 | size*    | `string` | `'1px'`     | -                                                                  | Size (height) of the divider   |
-| color*   | `string` | `'#d3d3d3'` | -                                                                  | Color of the divider           |
 
 
 ## Events

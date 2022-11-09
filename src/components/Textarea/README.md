@@ -185,10 +185,10 @@ Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs
 
 | Prop      | Type      | Default  | Possible values       | Description                           |
 | --------- | --------- | -------- | --------------------- | ------------------------------------- |
-| variant   | `string`  | `'fill'` | `'fill'`, `'outline'` | textarea variant                      |
-| v-model   | `string`  | `''`     | -                     | textarea's current value              |
 | invalid   | `boolean` | `false`  | -                     | Toggle textarea's invalid state       |
 | resizable | `boolean` | `false`  | -                     | Toggles whether textarea is resizable |
+| v-model   | `string`  | `''`     | -                     | textarea's current value              |
+| variant   | `string`  | `'fill'` | `'fill'`, `'outline'` | textarea variant                      |
 
 
 ## Slots

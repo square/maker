@@ -770,8 +770,8 @@ Variable | Purpose
 
 | Prop    | Type     | Default | Possible values | Description |
 | ------- | -------- | ------- | --------------- | ----------- |
-| theme   | `object` | `{}`    | -               | -           |
 | profile | `string` | —       | -               | -           |
+| theme   | `object` | `{}`    | -               | -           |
 
 
 ## Slots

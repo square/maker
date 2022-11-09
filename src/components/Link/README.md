@@ -38,8 +38,8 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop   | Type            | Default     | Possible values | Description   |
 | ------ | --------------- | ----------- | --------------- | ------------- |
-| to     | `string|object` | —           | -               | -             |
 | color* | `string`        | `'#006aff'` | -               | Color of link |
+| to     | `string|object` | —           | -               | -             |
 
 
 ## Events

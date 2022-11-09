@@ -95,16 +95,16 @@ export default {
 
 | Prop               | Type     | Default                   | Possible values | Description                                                        |
 | ------------------ | -------- | ------------------------- | --------------- | ------------------------------------------------------------------ |
-| thumbnails         | `array`  | —                         | -               | Image urls to display for thumbnails                               |
-| size               | `number` | `32`                      | -               | Size to display thumbnail images (in px)                           |
 | max-thumbnails     | `number` | `DEFAULT_THUMBNAIL_COUNT` | -               | Maximum number of thumbnails to display                            |
 | overflow-text-size | `number` | —                         | -               | Overflow text size. Size of text as step in fluid scale (-2 to 7). |
+| size               | `number` | `32`                      | -               | Size to display thumbnail images (in px)                           |
+| thumbnails         | `array`  | —                         | -               | Image urls to display for thumbnails                               |
 
 
 ## Events
 
 | Event           | Type | Description |
 | --------------- | ---- | ----------- |
-| thumbnail:click | -    | —           |
 | overflow:click  | -    | —           |
+| thumbnail:click | -    | —           |
 <!-- api-tables:end -->

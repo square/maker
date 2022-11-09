@@ -209,13 +209,13 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop              | Type     | Default       | Possible values                  | Description                   |
 | ----------------- | -------- | ------------- | -------------------------------- | ----------------------------- |
-| label             | `string` | —             | -                                | Container label               |
-| sublabel          | `string` | —             | -                                | Container sublabel            |
-| requirement-label | `string` | —             | -                                | Container requirement label   |
-| size              | `string` | `'medium'`    | `'small'`, `'medium'`, `'large'` | Container size                |
 | bg-color*         | `string` | —             | -                                | Background color of container |
 | color*            | `string` | —             | -                                | Text color of container       |
+| label             | `string` | —             | -                                | Container label               |
 | padding           | `string` | `'16px 24px'` | -                                | Padding of the container      |
+| requirement-label | `string` | —             | -                                | Container requirement label   |
+| size              | `string` | `'medium'`    | `'small'`, `'medium'`, `'large'` | Container size                |
+| sublabel          | `string` | —             | -                                | Container sublabel            |
 
 
 ## Slots

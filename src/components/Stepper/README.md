@@ -38,12 +38,12 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop        | Type            | Default     | Possible values                    | Description                     |
 | ----------- | --------------- | ----------- | ---------------------------------- | ------------------------------- |
-| v-model     | `number`        | —           | -                                  | stepper's current value         |
-| min         | `number|string` | —           | -                                  | stepper min value               |
-| max         | `number|string` | —           | -                                  | stepper max value               |
 | color*      | `string`        | `'#f1f1f1'` | -                                  | stepper button background color |
-| text-color* | `string`        | `'#1b1b1b'` | -                                  | stepper button text color       |
+| max         | `number|string` | —           | -                                  | stepper max value               |
+| min         | `number|string` | —           | -                                  | stepper min value               |
 | shape*      | `string`        | —           | `'squared'`, `'rounded'`, `'pill'` | stepper button shape            |
+| text-color* | `string`        | `'#1b1b1b'` | -                                  | stepper button text color       |
+| v-model     | `number`        | —           | -                                  | stepper's current value         |
 
 
 ## Events

@@ -407,11 +407,11 @@ Supports attributes from [`<select>`](https://developer.mozilla.org/en-US/docs/W
 
 | Prop        | Type      | Default  | Possible values       | Description                  |
 | ----------- | --------- | -------- | --------------------- | ---------------------------- |
-| variant     | `string`  | `'fill'` | `'fill'`, `'outline'` | Select variant               |
-| v-model     | `string`  | —        | -                     | current selected value       |
-| placeholder | `string`  | `''`     | -                     | Select placeholder           |
-| options     | `array`   | `[]`     | -                     | Select options               |
 | invalid     | `boolean` | `false`  | -                     | Toggles select invalid state |
+| options     | `array`   | `[]`     | -                     | Select options               |
+| placeholder | `string`  | `''`     | -                     | Select placeholder           |
+| v-model     | `string`  | —        | -                     | current selected value       |
+| variant     | `string`  | `'fill'` | `'fill'`, `'outline'` | Select variant               |
 
 
 ## Slots

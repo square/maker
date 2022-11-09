@@ -87,10 +87,10 @@ Supports attributes from [`<input type="checkbox">`](https://developer.mozilla.o
 
 | Prop     | Type            | Default | Possible values | Description                    |
 | -------- | --------------- | ------- | --------------- | ------------------------------ |
+| disabled | `boolean`       | `false` | -               | Toggles radio disabled state   |
+| invalid  | `boolean`       | `false` | -               | Toggles checkbox invalid state |
 | v-model  | `boolean|array` | —       | -               | Toggles checkbox checked state |
 | value    | `undefined`     | —       | -               | Value to return from v-model   |
-| invalid  | `boolean`       | `false` | -               | Toggles checkbox invalid state |
-| disabled | `boolean`       | `false` | -               | Toggles radio disabled state   |
 
 
 ## Slots

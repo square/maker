@@ -181,8 +181,8 @@ export default {
 
 | Prop    | Type        | Default           | Possible values                                 | Description          |
 | ------- | ----------- | ----------------- | ----------------------------------------------- | -------------------- |
-| v-model | `undefined` | —                 | -                                               | Selected menu option |
 | type    | `string`    | `'single-select'` | `'multi-select'`, `'single-select'`, `'action'` | -                    |
+| v-model | `undefined` | —                 | -                                               | Selected menu option |
 
 
 ## Menu Slots
@@ -199,8 +199,8 @@ export default {
 
 | Event       | Type | Description |
 | ----------- | ---- | ----------- |
-| menu:open   | -    | —           |
 | menu:close  | -    | —           |
+| menu:open   | -    | —           |
 | menu:update | -    | —           |
 
 
@@ -215,8 +215,8 @@ export default {
 
 | Prop          | Type        | Default | Possible values | Description |
 | ------------- | ----------- | ------- | --------------- | ----------- |
-| value         | `undefined` | —       | -               | -           |
 | click-handler | `func`      | —       | -               | -           |
+| value         | `undefined` | —       | -               | -           |
 
 
 ## MenuOption Slots

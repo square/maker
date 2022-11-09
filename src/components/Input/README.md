@@ -296,10 +296,10 @@ Supports attributes from [`<input type="text">`](https://developer.mozilla.org/e
 
 | Prop     | Type      | Default  | Possible values       | Description                  |
 | -------- | --------- | -------- | --------------------- | ---------------------------- |
-| variant  | `string`  | `'fill'` | `'fill'`, `'outline'` | Input variant                |
+| align    | `string`  | `'left'` | `'left'`, `'right'`   | Aligns text within input     |
 | disabled | `boolean` | `false`  | -                     | Toggles input disabled state |
 | invalid  | `boolean` | `false`  | -                     | Toggles input invalid state  |
-| align    | `string`  | `'left'` | `'left'`, `'right'`   | Aligns text within input     |
+| variant  | `string`  | `'fill'` | `'fill'`, `'outline'` | Input variant                |
 
 
 ## Slots

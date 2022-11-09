@@ -406,14 +406,14 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop        | Type      | Default     | Possible values                          | Description                           |
 | ----------- | --------- | ----------- | ---------------------------------------- | ------------------------------------- |
-| type        | `string`  | `'button'`  | -                                        | Type of the button                    |
-| full-width* | `boolean` | —           | -                                        | Whether to make the button full-width |
-| color*      | `string`  | `'#006aff'` | -                                        | Background color of button            |
-| text-color* | `string`  | —           | -                                        | Text color of button                  |
-| shape*      | `string`  | —           | `'squared'`, `'rounded'`, `'pill'`       | Shape of button                       |
-| disabled    | `boolean` | `false`     | -                                        | Toggles button disabled state         |
 | align*      | `string`  | `'center'`  | `'center'`, `'stack'`, `'space-between'` | How to align button's contents        |
+| color*      | `string`  | `'#006aff'` | -                                        | Background color of button            |
+| disabled    | `boolean` | `false`     | -                                        | Toggles button disabled state         |
+| full-width* | `boolean` | —           | -                                        | Whether to make the button full-width |
 | loading     | `boolean` | `false`     | -                                        | Toggles button loading state          |
+| shape*      | `string`  | —           | `'squared'`, `'rounded'`, `'pill'`       | Shape of button                       |
+| text-color* | `string`  | —           | -                                        | Text color of button                  |
+| type        | `string`  | `'button'`  | -                                        | Type of the button                    |
 
 
 ## ActionBarButton Slots
@@ -444,8 +444,8 @@ Supports events from [`<button>`](https://developer.mozilla.org/en-US/docs/Web/H
 
 | Prop     | Type     | Default      | Possible values                                   | Description |
 | -------- | -------- | ------------ | ------------------------------------------------- | ----------- |
-| position | `string` | `'absolute'` | `'static'`, `'relative'`, `'absolute'`, `'fixed'` | -           |
 | hide-on  | `string` | `'none'`     | `'none'`, `'mobile'`, `'tablet'`, `'desktop'`     | -           |
+| position | `string` | `'absolute'` | `'static'`, `'relative'`, `'absolute'`, `'fixed'` | -           |
 
 
 ## InlineActionBar Slots

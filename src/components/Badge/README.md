@@ -618,12 +618,12 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop          | Type      | Default     | Possible values                                                                                         | Description                                       |
 | ------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| pattern*      | `string`  | `'info'`    | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level                    |
-| label         | `string`  | —           | -                                                                                                       | badge's label text                                |
-| size          | `string`  | `'medium'`  | `'small'`, `'medium'`                                                                                   | badge's size                                      |
-| no-relative   | `boolean` | `false`     | -                                                                                                       | skip setting `position: relative` on default slot |
-| pseudo-target | `string`  | `'after'`   | `'before'`, `'after'`                                                                                   | default slot's pseudo-element target              |
 | bg-color*     | `string`  | `'#1b1b1b'` | -                                                                                                       | bg color, as a valid hex string                   |
+| label         | `string`  | —           | -                                                                                                       | badge's label text                                |
+| no-relative   | `boolean` | `false`     | -                                                                                                       | skip setting `position: relative` on default slot |
+| pattern*      | `string`  | `'info'`    | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, any custom pattern defined within the theme | pattern defined at theme level                    |
+| pseudo-target | `string`  | `'after'`   | `'before'`, `'after'`                                                                                   | default slot's pseudo-element target              |
+| size          | `string`  | `'medium'`  | `'small'`, `'medium'`                                                                                   | badge's size                                      |
 | text-color*   | `string`  | `'#ffffff'` | -                                                                                                       | text color, as a valid hex string                 |
 
 

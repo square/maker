@@ -8,12 +8,13 @@ const DEFAULT_THEME = Object.freeze(defaultTheme());
 const code = (string) => `\`${string}\``;
 const section = (title, content) => `## ${title}\n\n${content.filter(Boolean).join('\n\n')}`;
 
-const mapIn = (object, iteratee) => {
-	const array = [];
-	for (const prop in object) { // eslint-disable-line no-restricted-syntax, guard-for-in
-		array.push(iteratee(object[prop]));
+const mapIn = (keyedObject, iteratee) => {
+	const result = [];
+	const alphaOrdering = Object.keys(keyedObject).sort();
+	for (const key of alphaOrdering) {
+		result.push(iteratee(keyedObject[key]));
 	}
-	return array;
+	return result;
 };
 
 function tagToMdnLink(tag) {

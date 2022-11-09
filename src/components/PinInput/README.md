@@ -400,10 +400,10 @@ export default {
 
 | Prop       | Type      | Default              | Possible values       | Description                 |
 | ---------- | --------- | -------------------- | --------------------- | --------------------------- |
+| disabled   | `boolean` | `false`              | -                     | Disable the inputs          |
+| invalid    | `boolean` | `false`              | -                     | Toggles input invalid state |
 | pin-length | `number`  | `DEFAULT_INPUT_SIZE` | -                     | Length of pin               |
 | variant    | `string`  | `'fill'`             | `'fill'`, `'outline'` | Input variant               |
-| invalid    | `boolean` | `false`              | -                     | Toggles input invalid state |
-| disabled   | `boolean` | `false`              | -                     | Disable the inputs          |
 
 
 ## Slots

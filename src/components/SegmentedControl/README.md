@@ -183,9 +183,9 @@ export default {
 
 | Prop    | Type        | Default    | Possible values                    | Description                     |
 | ------- | ----------- | ---------- | ---------------------------------- | ------------------------------- |
-| v-model | `undefined` | —          | -                                  | Selected Segment inside Control |
 | shape   | `string`    | —          | `'squared'`, `'rounded'`, `'pill'` | Shape of Control & Segments     |
 | size    | `string`    | `'medium'` | `'small'`, `'medium'`              | Size of Control & Segments      |
+| v-model | `undefined` | —          | -                                  | Selected Segment inside Control |
 
 
 ## SegmentedControl Slots

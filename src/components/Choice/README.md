@@ -308,10 +308,10 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop            | Type        | Default           | Possible values                     | Description                                             |
 | --------------- | ----------- | ----------------- | ----------------------------------- | ------------------------------------------------------- |
-| v-model         | `undefined` | —                 | -                                   | Selected choice option                                  |
 | disabled        | `boolean`   | `false`           | -                                   | Disables choice option                                  |
 | mode            | `string`    | `'single-select'` | `'single-select'`, `'multi-select'` | Selects single choice option or multiple choice options |
 | selected-color* | `string`    | `'#006aff'`       | -                                   | Background color of a selected option                   |
+| v-model         | `undefined` | —                 | -                                   | Selected choice option                                  |
 | wrap-choices    | `boolean`   | `false`           | -                                   | Wraps the choice options                                |
 
 
@@ -333,8 +333,8 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop     | Type        | Default | Possible values | Description |
 | -------- | ----------- | ------- | --------------- | ----------- |
-| value    | `undefined` | —       | -               | -           |
 | disabled | `boolean`   | `false` | -               | -           |
+| value    | `undefined` | —       | -               | -           |
 
 
 ## ChoiceCard Slots
@@ -348,8 +348,8 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop     | Type        | Default | Possible values | Description |
 | -------- | ----------- | ------- | --------------- | ----------- |
-| value    | `undefined` | —       | -               | -           |
 | disabled | `boolean`   | `false` | -               | -           |
+| value    | `undefined` | —       | -               | -           |
 
 
 ## ChoiceOption Slots

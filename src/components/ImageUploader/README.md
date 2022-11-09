@@ -311,10 +311,10 @@ export default {
 
 | Prop           | Type     | Default     | Possible values | Description                                                                                                                              |
 | -------------- | -------- | ----------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| upload-handler | `func`   | —           | -               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
+| accept         | `string` | `'image/*'` | -               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
 | max-images     | `number` | —           | -               | The maximum number of images allowed to be selected.                                                                                     |
 | max-size       | `number` | —           | -               | The maximum file size allowed (in bytes)                                                                                                 |
-| accept         | `string` | `'image/*'` | -               | Allowed file types, must be an image type (eg image/jpeg)                                                                                |
+| upload-handler | `func`   | —           | -               | Function called to trigger an upload. Called immediately on image selection, provided max size and max number image constraints are met. |
 
 
 ## Events
@@ -322,7 +322,7 @@ export default {
 | Event                    | Type    | Description                                              |
 | ------------------------ | ------- | -------------------------------------------------------- |
 | image-uploader:change    | `Array` | Update to list of images                                 |
-| image-uploader:uploading | `Array` | Update to list of images that are currently uploading    |
-| image-uploader:error     | `Array` | Update to list of images with an error                   |
 | image-uploader:complete  | `Array` | Update to list of images that have successfully uploaded |
+| image-uploader:error     | `Array` | Update to list of images with an error                   |
+| image-uploader:uploading | `Array` | Update to list of images that are currently uploading    |
 <!-- api-tables:end -->

@@ -102,11 +102,11 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop     | Type      | Default | Possible values                                | Description                                                               |
 | -------- | --------- | ------- | ---------------------------------------------- | ------------------------------------------------------------------------- |
+| lazyload | `boolean` | `false` | -                                              | -                                                                         |
+| shape*   | `string`  | —       | `'original'`, `'square'`, `'circle'`, `'arch'` | Original applies theme's border radius, square applies border radius of 0 |
+| sizes    | `string`  | —       | -                                              | -                                                                         |
 | src      | `string`  | —       | -                                              | -                                                                         |
 | srcset   | `string`  | —       | -                                              | -                                                                         |
-| sizes    | `string`  | —       | -                                              | -                                                                         |
-| shape*   | `string`  | —       | `'original'`, `'square'`, `'circle'`, `'arch'` | Original applies theme's border radius, square applies border radius of 0 |
-| lazyload | `boolean` | `false` | -                                              | -                                                                         |
 
 
 ## Events

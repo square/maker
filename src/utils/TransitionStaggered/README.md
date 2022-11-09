@@ -88,9 +88,9 @@ export default {
 
 | Prop                 | Type     | Default | Possible values | Description |
 | -------------------- | -------- | ------- | --------------- | ----------- |
+| item-index           | `number` | `1`     | -               | -           |
 | items-per-row-mobile | `number` | `1`     | -               | -           |
 | items-per-row-tablet | `number` | `1`     | -               | -           |
-| item-index           | `number` | `1`     | -               | -           |
 
 
 ## Slots

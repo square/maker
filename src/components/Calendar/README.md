@@ -122,11 +122,11 @@ export default {
 
 | Prop           | Type     | Default | Possible values | Description                                          |
 | -------------- | -------- | ------- | --------------- | ---------------------------------------------------- |
-| v-model        | `string` | —       | -               | Selected date value in ISO format.                   |
-| min-date       | `string` | —       | -               | Disable the dates before the min-date in ISO format. |
-| max-date       | `string` | —       | -               | Disable the dates after the max-date in ISO format.  |
 | disabled-dates | `array`  | `[]`    | -               | List of disabled dates in ISO format.                |
 | locale         | `string` | —       | -               | Calendar locale. Defaults to browser locale.         |
+| max-date       | `string` | —       | -               | Disable the dates after the max-date in ISO format.  |
+| min-date       | `string` | —       | -               | Disable the dates before the min-date in ISO format. |
+| v-model        | `string` | —       | -               | Selected date value in ISO format.                   |
 
 
 ## Events
