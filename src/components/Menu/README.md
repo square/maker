@@ -314,10 +314,9 @@ export default {
 
 ## MenuOption Props
 
-| Prop    | Type        | Default | Possible values | Description                                |
-| ------- | ----------- | ------- | --------------- | ------------------------------------------ |
-| element | `string`    | `'div'` | -               | topmost wrapper element around row content |
-| value   | `undefined` | —       | -               | -                                          |
+| Prop  | Type        | Default | Possible values | Description |
+| ----- | ----------- | ------- | --------------- | ----------- |
+| value | `undefined` | —       | -               | -           |
 
 
 ## MenuOption Slots
