@@ -1,14 +1,28 @@
 # Loading
 
+Use the Loading component to communicate to users that something is happening.
+
 ```vue
 <template>
-	<div>
-		<h4>normal size</h4>
-		<m-loading />
+	<m-loading />
+</template>
 
-		<h4>large size</h4>
-		<m-loading size="large" />
-	</div>
+<script>
+import { MLoading } from '@square/maker/components/Loading';
+
+export default {
+	components: {
+		MLoading,
+	},
+};
+</script>
+```
+
+It also comes in a `large` size.
+
+```vue
+<template>
+	<m-loading size="large" />
 </template>
 
 <script>
@@ -29,7 +43,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 | Prop | Type     | Default    | Possible values       | Description |
 | ---- | -------- | ---------- | --------------------- | ----------- |
-| size | `string` | `'normal'` | `'normal'`, `'large'` | -           |
+| size | `string` | `'medium'` | `'medium'`, `'large'` | -           |
 
 
 ## Events
