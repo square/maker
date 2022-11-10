@@ -783,7 +783,8 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 | Prop                 | Type     | Default         | Possible values | Description                                                 |
 | -------------------- | -------- | --------------- | --------------- | ----------------------------------------------------------- |
-| text-pattern*        | `string` | `'buttonLabel'` | -               | MText pattern in button label                               |
+| text-pattern*        | `string` | `'buttonLabel'` | -               | Text pattern in button label                                |
+| text-pattern-hover*  | `string` | —               | -               | Text hover pattern in button label                          |
 | color-hover*         | `string` | —               | -               | Main hover color of button                                  |
 | text-color-hover*    | `string` | —               | -               | Text hover color of button (only applied on fill buttons)   |
 | border-radius*       | `string` | —               | -               | button's border radius                                      |

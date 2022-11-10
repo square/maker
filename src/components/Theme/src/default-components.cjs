@@ -9,6 +9,7 @@ module.exports = function defaultComponents() {
 			variant: 'fill',
 			shape: undefined,
 			textPattern: 'buttonLabel',
+			textPatternHover: undefined,
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
