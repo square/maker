@@ -29,7 +29,6 @@ import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLay
 import InputControl from './InputControl.vue';
 
 /**
- * Input component
  * @inheritAttrs ./InputControl.vue
  * @inheritListeners ./InputControl.vue
  * @inheritSlots ./InputControl.vue
