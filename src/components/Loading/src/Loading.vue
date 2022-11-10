@@ -32,8 +32,8 @@ export default {
 	props: {
 		size: {
 			type: String,
-			default: 'normal',
-			validator: (size) => ['normal', 'large'].includes(size),
+			default: 'medium',
+			validator: (size) => ['medium', 'large'].includes(size),
 		},
 	},
 };
@@ -55,7 +55,7 @@ export default {
 .Spinner {
 	animation: rotate var(--duration) linear infinite;
 
-	&.size_normal {
+	&.size_medium {
 		width: var(--spinner-diameter);
 		height: var(--spinner-diameter);
 	}
@@ -72,7 +72,7 @@ export default {
 	stroke: currentColor;
 	stroke-dasharray: var(--offset);
 
-	&.size_normal {
+	&.size_medium {
 		stroke-width: 2px;
 	}
 
