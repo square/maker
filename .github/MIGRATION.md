@@ -1,6 +1,6 @@
 # Migration guides for Maker major releases
 
-## [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) -> [16.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](not yet made))
+## [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) -> [16.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](https://github.com/square/maker/pull/500))
 
 ### `parentModal` removed from `modalApi`, use `closeAll` instead
 
