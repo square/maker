@@ -24,7 +24,7 @@ If you want this just use the `TransitionFadeIn` component.
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
+import { MTransition } from '@square/maker/components/Transition';
 import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
 
 export default {
@@ -86,7 +86,7 @@ If you want this just use the `TransitionSpringUp` component.
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
+import { MTransition } from '@square/maker/components/Transition';
 import { springUpFn, springDownFn } from '@square/maker/utils/transitions';
 
 export default {
@@ -146,7 +146,7 @@ Example of mixing different transition styles on enter and leave.
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
+import { MTransition } from '@square/maker/components/Transition';
 import { fadeInFn, springDownFn } from '@square/maker/utils/transitions';
 
 export default {
@@ -206,7 +206,7 @@ Another example of mixing different transition styles on enter and leave.
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
+import { MTransition } from '@square/maker/components/Transition';
 import { springUpFn, fadeOutFn } from '@square/maker/utils/transitions';
 
 export default {

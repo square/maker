@@ -1,4 +1,4 @@
-/* global COMPONENTS_ROUTES, UTILS_ROUTES */
+/* global COMPONENTS_ROUTES */
 import Vue from 'vue';
 import Router from 'vue-router';
 import Meta from 'vue-meta';
@@ -13,8 +13,6 @@ Vue.use(VuePortal);
 
 // eslint-disable-next-line no-unused-vars
 const importComponentsDocument = (componentName) => () => import(`@square/maker/components/${componentName}/README.md`);
-// eslint-disable-next-line no-unused-vars
-const importUtilsDocument = (componentName) => () => import(`@square/maker/utils/${componentName}/README.md`);
 
 function createRouter() {
 	return new Router({
@@ -35,11 +33,10 @@ function createRouter() {
 				path: '/utils',
 				component: UtilsPage,
 			},
-			// these "constants" are generated
+			// this "constant" is generated
 			// at build time and replaced with
 			// the actual routes as part of the build
 			...COMPONENTS_ROUTES,
-			...UTILS_ROUTES,
 		],
 	});
 }

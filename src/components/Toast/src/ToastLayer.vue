@@ -18,7 +18,7 @@
 
 <script>
 import Vue from 'vue';
-import { MTransitionStack } from '@square/maker/utils/TransitionStack';
+import { MTransitionStack } from '@square/maker/components/TransitionStack';
 import ToastRenderFn from './ToastRenderFn';
 import toastApi from './toast-api';
 

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
+import { MTransitionResponsive } from '@square/maker/components/TransitionResponsive';
 import { mobileMinWidth } from '@square/maker/utils/transitions';
 
 export default {

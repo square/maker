@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLayout';
+import { MBlockFormControlLayout } from '@square/maker/components/BlockFormControlLayout';
 import PinInputControl from './PinInputControl.vue';
 
 /**

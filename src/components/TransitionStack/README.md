@@ -73,7 +73,7 @@ How items are animated into the stack can be controlled via the `transition-from
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MTransitionStack } from '@square/maker/utils/TransitionStack';
+import { MTransitionStack } from '@square/maker/components/TransitionStack';
 
 function randomInt(exclusiveMax) {
 	return Math.floor(Math.random() * exclusiveMax);
@@ -314,7 +314,7 @@ It's possible to turn MTransitionStack into a full-screen overlay with `position
 
 <script>
 import { MButton } from '@square/maker/components/Button';
-import { MTransitionStack } from '@square/maker/utils/TransitionStack';
+import { MTransitionStack } from '@square/maker/components/TransitionStack';
 
 function randomInt(exclusiveMax) {
 	return Math.floor(Math.random() * exclusiveMax);

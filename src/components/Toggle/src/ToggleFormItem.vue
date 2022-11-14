@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { MInlineFormControlLayout } from '@square/maker/utils/InlineFormControlLayout';
+import { MInlineFormControlLayout } from '@square/maker/components/InlineFormControlLayout';
 import ToggleControl from './ToggleControl.vue';
 
 /**
