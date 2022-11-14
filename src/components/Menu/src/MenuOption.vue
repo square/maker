@@ -37,7 +37,7 @@ import CheckIcon from '@square/maker-icons/Check';
 import key from './key';
 
 /**
- * @inheritSlots ../../../utils/Row/src/Row.vue
+ * @inheritSlots ../../../components/Row/src/Row.vue
  */
 export default {
 	components: {
