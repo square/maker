@@ -127,7 +127,7 @@ The colors of the progress circle and icon can be customized separately using th
 		<br>
 		<m-progress-circle
 			color="#cd2026"
-			icon-name="critical"
+			icon-name="error"
 			icon-color="#cd2026"
 			:progress="50"
 		/>
@@ -169,10 +169,10 @@ While it's possible customize the `color`, `icon-name`, and `icon-color` props f
 			:progress="50"
 		/>
 		<br>
-		examples of "critical" and "success" patterns:
+		examples of "error" and "success" patterns:
 		<br>
 		<m-progress-circle
-			pattern="critical"
+			pattern="error"
 			:progress="50"
 		/>
 		<m-progress-circle
@@ -201,10 +201,10 @@ export default {
 							iconName: 'info',
 							iconColor: '@colors.contextualPrimary.fill',
 						},
-						critical: {
-							color: '@colors.critical.fill',
-							iconName: 'critical',
-							iconColor: '@colors.critical.fill',
+						error: {
+							color: '@colors.error.fill',
+							iconName: 'error',
+							iconColor: '@colors.error.fill',
 						},
 						success: {
 							color: '@colors.success.fill',

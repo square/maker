@@ -31,8 +31,8 @@ module.exports = function defaultComponents() {
 					textColor: '@colors.contextualPrimary.onFill',
 				},
 				errorFill: {
-					color: '@colors.critical.fill',
-					textColor: '@colors.critical.onFill',
+					color: '@colors.error.fill',
+					textColor: '@colors.error.onFill',
 				},
 				successFill: {
 					color: '@colors.success.fill',
@@ -53,7 +53,7 @@ module.exports = function defaultComponents() {
 				},
 				errorOutline: {
 					variant: 'outline',
-					color: '@colors.critical.text',
+					color: '@colors.error.text',
 				},
 				successOutline: {
 					variant: 'outline',
@@ -73,8 +73,8 @@ module.exports = function defaultComponents() {
 					color: '@colors.contextualPrimary.subtle',
 				},
 				errorSubtle: {
-					textColor: '@colors.critical.text',
-					color: '@colors.critical.subtle',
+					textColor: '@colors.error.text',
+					color: '@colors.error.subtle',
 				},
 				successSubtle: {
 					textColor: '@colors.success.text',
@@ -95,7 +95,7 @@ module.exports = function defaultComponents() {
 				},
 				errorGhost: {
 					variant: 'ghost',
-					color: '@colors.critical.text',
+					color: '@colors.error.text',
 				},
 				successGhost: {
 					variant: 'ghost',
@@ -123,7 +123,7 @@ module.exports = function defaultComponents() {
 					color: '@colors.contextualPrimary.text',
 				},
 				error: {
-					color: '@colors.critical.text',
+					color: '@colors.error.text',
 				},
 				success: {
 					color: '@colors.success.text',
@@ -211,10 +211,10 @@ module.exports = function defaultComponents() {
 				},
 				error: {
 					type: 'error',
-					iconName: 'critical',
-					iconColor: '@colors.critical.fill',
-					color: '@colors.critical.text',
-					bgColor: '@colors.critical.subtle',
+					iconName: 'error',
+					iconColor: '@colors.error.fill',
+					color: '@colors.error.text',
+					bgColor: '@colors.error.subtle',
 				},
 				success: {
 					type: 'success',
@@ -244,8 +244,8 @@ module.exports = function defaultComponents() {
 					bgColor: '@colors.contextualPrimary.fill',
 				},
 				error: {
-					textColor: '@colors.critical.onFill',
-					bgColor: '@colors.critical.fill',
+					textColor: '@colors.error.onFill',
+					bgColor: '@colors.error.fill',
 				},
 				success: {
 					textColor: '@colors.success.onFill',
@@ -262,7 +262,7 @@ module.exports = function defaultComponents() {
 					bgColor: 'transparent',
 				},
 				errorOutline: {
-					textColor: '@colors.critical.text',
+					textColor: '@colors.error.text',
 					bgColor: 'transparent',
 				},
 				successOutline: {
@@ -283,8 +283,8 @@ module.exports = function defaultComponents() {
 					bgColor: '@colors.contextualPrimary.subtle',
 				},
 				errorSubtle: {
-					textColor: '@colors.critical.text',
-					bgColor: '@colors.critical.subtle',
+					textColor: '@colors.error.text',
+					bgColor: '@colors.error.subtle',
 				},
 				successSubtle: {
 					textColor: '@colors.success.text',
@@ -310,8 +310,8 @@ module.exports = function defaultComponents() {
 					bgColor: '@colors.contextualPrimary.fill',
 				},
 				error: {
-					textColor: '@colors.critical.onFill',
-					bgColor: '@colors.critical.fill',
+					textColor: '@colors.error.onFill',
+					bgColor: '@colors.error.fill',
 				},
 				success: {
 					textColor: '@colors.success.onFill',
@@ -346,9 +346,9 @@ module.exports = function defaultComponents() {
 					accentColor: '@colors.warning.fill',
 				},
 				error: {
-					iconName: 'critical',
+					iconName: 'error',
 					showIcon: true,
-					accentColor: '@colors.critical.fill',
+					accentColor: '@colors.error.fill',
 				},
 				primary: {
 					accentColor: '@colors.contextualPrimary.fill',

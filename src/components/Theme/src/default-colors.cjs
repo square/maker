@@ -21,7 +21,7 @@ module.exports = function defaultColors() {
 			subtle: '#eff2f5',
 			text: '#1c54c7',
 		},
-		critical: {
+		error: {
 			fill: '#cd2026',
 			onFill: '#ffffff',
 			text: '#a82826',

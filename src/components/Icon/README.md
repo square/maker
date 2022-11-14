@@ -1,6 +1,6 @@
 # Icon
 
-Use Icon to render icons defined in the Theme. Maker provides these built-in icons: critical, warning, success, info, chevronLeft, chevronRight, chevronUp, and chevronUp. The first 4 are used within [Notice](#/Notice). chevronLeft and chevronRight are used within [Calendar](#/Calendar). chevronDown is used within [Select](#/Select).
+Use Icon to render icons defined in the Theme. Maker provides these built-in icons: error, warning, success, info, chevronLeft, chevronRight, chevronUp, and chevronUp. The first 4 are used within [Notice](#/Notice). chevronLeft and chevronRight are used within [Calendar](#/Calendar). chevronDown is used within [Select](#/Select).
 
 ```vue
 <template>

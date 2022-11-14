@@ -304,7 +304,7 @@ export default {
 	}
 
 	&.error {
-		border-color: $maker-color-critical-fill;
+		border-color: $maker-color-error-fill;
 	}
 }
 

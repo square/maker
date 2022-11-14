@@ -711,13 +711,13 @@ import ActionBarModal from '../components/ActionBarModal.vue';
 import ActionBarDialog from '../components/ActionBarDialog.vue';
 
 const filledIcons = {
-	critical: AlertCircleFilled,
+	error: AlertCircleFilled,
 	warning: AlertTriangleFilled,
 	success: CheckCircleFilled,
 	info: InfoFilled,
 };
 const outlineIcons = {
-	critical: AlertCircle,
+	error: AlertCircle,
 	warning: AlertTriangle,
 	success: CheckCircle,
 	info: Info,
