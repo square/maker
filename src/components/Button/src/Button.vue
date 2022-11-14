@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { kebabCase } from 'lodash';
 import cssValidator from '@square/maker/utils/css-validator';
 import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
@@ -106,19 +107,19 @@ const TEXT_STYLES = new Set([
 	'textDecoration',
 ]);
 
-function kebabCase(string) {
-	return string.replace(/([\da-z])([A-Z])/g, '$1-$2').toLowerCase();
+function isValidCss(style, value) {
+	if (global.CSS) {
+		return global.CSS.supports(style, value);
+	}
+	return true;
 }
 
 function formatCssStyles(theme, styles, suffix) {
 	const formattedStyles = {};
 	for (const [style, value] of Object.entries(styles)) {
-		if (TEXT_STYLES.has(style) && cssValidator(style, value)) {
-			if (value.startsWith('@')) {
-				formattedStyles[`--${kebabCase(style)}${suffix}`] = theme.resolve(value);
-			} else {
-				formattedStyles[`--${kebabCase(style)}${suffix}`] = value;
-			}
+		const cssStyle = kebabCase(style);
+		if (TEXT_STYLES.has(style) && isValidCss(cssStyle, value)) {
+			formattedStyles[`--${cssStyle}${suffix}`] = theme.resolve(value);
 		}
 	}
 	return formattedStyles;
@@ -383,10 +384,8 @@ export default {
 			};
 
 			const { resolvedTextPattern, resolvedTextPatternHover, theme } = this;
-			const textPattern = resolvedTextPattern
-				? theme?.text?.patterns?.[resolvedTextPattern] || {} : {};
-			const textPatternHover = resolvedTextPatternHover
-				? theme.text.patterns?.[resolvedTextPatternHover] || {} : {};
+			const textPattern = theme?.text?.patterns?.[resolvedTextPattern] || {};
+			const textPatternHover = theme.text.patterns?.[resolvedTextPatternHover] || {};
 			const textPatternStyles = formatCssStyles(theme, textPattern, '');
 			const textPatternHoverStyles = formatCssStyles(theme, textPatternHover, '-hover');
 
@@ -400,7 +399,7 @@ export default {
 			return this.disabled || this.loading;
 		},
 		fontSize() {
-			return this.theme.text.patterns[this.resolvedTextPattern]?.fontSize || 'inherit';
+			return this.theme.text.patterns[this.resolvedTextPattern]?.fontSize;
 		},
 		adjustedSize() {
 			// Scale button size to fontSize if one is set
@@ -449,8 +448,9 @@ export default {
 	min-width: 0;
 	color: var(--color-contrast, #fff);
 	font-weight: var(--font-weight, var(--maker-font-label-font-weight, 500));
+	font-size: var(--font-size);
 	font-family: var(--font-family, var(--maker-font-label-font-family, inherit));
-	font-style: var(--font-size);
+	font-style: var(--font-style);
 	text-transform: var(--text-transform);
 	text-decoration: var(--text-decoration);
 	vertical-align: middle;
@@ -468,7 +468,8 @@ export default {
 		background-color 0.2s ease-in,
 		filter 0.2s ease-in,
 		box-shadow 0.2s ease-in,
-		border-radius 0.2s ease-in;
+		border-radius 0.2s ease-in,
+		font-size 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -493,9 +494,10 @@ export default {
 	}
 
 	&.size_small {
+		--font-size: 12px;
+
 		height: 32px;
 		padding: var(--small-padding);
-		font-size: 12px;
 
 		& > * {
 			line-height: 1.4;
@@ -508,9 +510,10 @@ export default {
 	}
 
 	&.size_medium {
+		--font-size: 14px;
+
 		height: 48px;
 		padding: var(--medium-padding);
-		font-size: 14px;
 
 		& > * {
 			line-height: 1.77;
@@ -523,9 +526,10 @@ export default {
 	}
 
 	&.size_large {
+		--font-size: 16px;
+
 		height: 64px;
 		padding: var(--large-padding);
-		font-size: 16px;
 
 		& > * {
 			line-height: 1.5;
@@ -577,8 +581,9 @@ export default {
 	&:hover:not(:disabled) {
 		color: var(--color-contrast-hover, var(--color-contrast));
 		font-weight: var(--font-weight-hover, var(--font-weight));
+		font-size: var(--font-size-hover, var(--font-size));
 		font-family: var(--font-family-hover, var(--font-family));
-		font-style: var(--font-size-hover, var(--font-size));
+		font-style: var(--font-style-hover, var(--font-style));
 		text-transform: var(--text-transform-hover, var(--text-transform));
 		text-decoration: var(--text-decoration-hover, var(--text-decoration));
 		background-color: var(--color-hover);

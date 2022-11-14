@@ -185,7 +185,6 @@ module.exports = function defaultComponents() {
 				buttonLabel: {
 					fontFamily: '@fonts.label.fontFamily',
 					fontWeight: '@fonts.label.fontWeight',
-					fontSize: 'inherit',
 				},
 			},
 		},
