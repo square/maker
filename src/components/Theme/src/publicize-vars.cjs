@@ -30,7 +30,7 @@ module.exports = function publicizeVars(theme) {
 		'--maker-color-overlay': colors.overlay,
 
 		// contextual colors
-		'--maker-color-critical-fill': colors.critical.fill,
+		'--maker-color-error-fill': colors.error.fill,
 
 		// typography
 		'--maker-font-heading-font-family': fonts.heading.fontFamily,

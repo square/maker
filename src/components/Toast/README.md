@@ -800,7 +800,7 @@ export default {
 
 ### Customizing icons
 
-The close icon can be customized by changing the `close` icon in the `icons` section of the site's theme. The prefix icons for each pattern can be by customizing the `info`, `success`, `warning`, and `critical` icons in the `icons` section of the site's theme. One-off icons can also be added as custom icons to the `icons` section of the site's theme and then referenced by their name via the `iconName` prop on Toasts. One-off icons can also be set on Toasts using the `icon` slot.
+The close icon can be customized by changing the `close` icon in the `icons` section of the site's theme. The prefix icons for each pattern can be by customizing the `info`, `success`, `warning`, and `error` icons in the `icons` section of the site's theme. One-off icons can also be added as custom icons to the `icons` section of the site's theme and then referenced by their name via the `iconName` prop on Toasts. One-off icons can also be set on Toasts using the `icon` slot.
 
 ```vue
 <template>

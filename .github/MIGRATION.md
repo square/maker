@@ -26,6 +26,27 @@ Should've been `@click` from the beginning, but was overlooked during code revie
 -|-
 `<m-menu-option :click-handler="someMethod">` | `<m-menu-option @click="someMethod">`
 
+### `critical` theme value renamed to `error`
+
+We've been using `critical` and `error` interchangeably internally within the library but also in the public API, so it sometimes got confusing when to use one or the other, so we're simplifying the situation by standardizing on `error` in all use-cases.
+
+15.x (before) | 16.x (after)
+-|-
+`{ colors: { critical: { /* colors here */ }}}` | `{ colors: { error: { /* colors here */ }}}`
+`@colors.critical.onFill` | `@colors.error.onFill`
+`@colors.critical.fill` | `@colors.error.fill`
+`@colors.critical.text` | `@colors.error.text`
+`@colors.critical.subtle` | `@colors.error.subtle`
+`var(--maker-color-critical-fill)` | `var(--maker-color-error-fill)`
+`{ icons: { critical: AlertTriangle }}` | `{ icons: { error: AlertTriangle }}`
+`@icons.critical` | `@icons.error`
+`<m-icon name="critical" />` | `<m-icon name="error" />`
+`<m-notice icon-name="critical">` | `<m-notice icon-name="error">`
+`<m-progress-circle icon-name="critical">` | `<m-progress-circle icon-name="error">`
+`<m-toast icon-name="critical">` | `<m-toast icon-name="error">`
+
+
+
 ## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))
 
 ### MButton pattern & variant renames

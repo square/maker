@@ -12,7 +12,7 @@ const ArrowUp = require('@square/maker-icons/ArrowUp').default;
 
 module.exports = function defaultIcons() {
 	return {
-		critical: AlertCircleFilled,
+		error: AlertCircleFilled,
 		warning: AlertTriangleFilled,
 		success: CheckCircleFilled,
 		info: InfoFilled,
