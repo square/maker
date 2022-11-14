@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLayout';
+import { MBlockFormControlLayout } from '@square/maker/components/BlockFormControlLayout';
 import TextareaControl from './TextareaControl.vue';
 
 /**

@@ -18,7 +18,7 @@
 import cssValidator from '@square/maker/utils/css-validator';
 import { throttle } from 'lodash';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { MTouchCapture } from '@square/maker/utils/TouchCapture';
+import { MTouchCapture } from '@square/maker/components/TouchCapture';
 import dialogApi from './dialog-api';
 
 export default {

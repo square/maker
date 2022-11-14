@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { MRow } from '@square/maker/utils/Row';
+import { MRow } from '@square/maker/components/Row';
 import CheckIcon from '@square/maker-icons/Check';
 import key from './key';
 

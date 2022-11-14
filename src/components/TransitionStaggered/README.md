@@ -25,7 +25,7 @@ MTransitionStaggered creates a staggered load animation on a group of items (in 
 </template>
 
 <script>
-import { MTransitionStaggered } from '@square/maker/utils/TransitionStaggered';
+import { MTransitionStaggered } from '@square/maker/components/TransitionStaggered';
 
 export default {
 	components: {

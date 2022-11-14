@@ -28,7 +28,7 @@ The example below illustrates that it's safe to use the transition even with dyn
 </template>
 
 <script>
-import { MTransitionCollapse } from '@square/maker/utils/TransitionCollapse';
+import { MTransitionCollapse } from '@square/maker/components/TransitionCollapse';
 
 const INCREMENT = 1;
 const DECREMENT = -1;

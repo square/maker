@@ -68,7 +68,7 @@ Use Row when you need layout a title and an optional subtitle, secondary title, 
 </template>
 
 <script>
-import { MRow } from '@square/maker/utils/Row';
+import { MRow } from '@square/maker/components/Row';
 import { MCard } from '@square/maker/components/Card';
 import { MCheckbox } from '@square/maker/components/Checkbox';
 import Settings from '@square/maker-icons/Settings';

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
+import { MTransition } from '@square/maker/components/Transition';
 import { springLeftFn, springRightFn } from '@square/maker/utils/transitions';
 
 export default {

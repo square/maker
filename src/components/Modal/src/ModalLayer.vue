@@ -45,8 +45,8 @@
 import Vue from 'vue';
 import PseudoWindow from 'vue-pseudo-window';
 import assert from '@square/maker/utils/assert';
-import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
-import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionResponsive } from '@square/maker/components/TransitionResponsive';
 import {
 	fadeOutFn,
 	springUpFn,

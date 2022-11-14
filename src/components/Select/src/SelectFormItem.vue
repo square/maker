@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLayout';
+import { MBlockFormControlLayout } from '@square/maker/components/BlockFormControlLayout';
 import SelectControl from './SelectControl.vue';
 
 /**
