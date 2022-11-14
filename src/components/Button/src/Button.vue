@@ -23,44 +23,38 @@
 			v-if="loading"
 			:class="$s.Loading"
 		/>
-		<m-text
+		<span
 			:class="[
 				$s.MainText,
 				{
 					[$s.TruncateText]: !isSingleChild(),
 				}
 			]"
-			:pattern="resolvedTextPattern"
-			element="span"
-			color="inherit"
 		>
 			<!-- @slot Button label -->
 			<slot />
-		</m-text>
+		</span>
 
-		<m-text
+		<span
 			v-if="$scopedSlots.information"
 			:class="[$s.InformationText, $s.TruncateText]"
-			:pattern="resolvedTextPattern"
-			element="span"
-			color="inherit"
 		>
 			<!-- @slot Information label -->
 			<slot
 				name="information"
 			/>
-		</m-text>
+		</span>
 	</component>
 </template>
 
 <script>
+import { kebabCase } from 'lodash';
 import cssValidator from '@square/maker/utils/css-validator';
 import { colord } from 'colord';
 import { getContrast } from '@square/maker/utils/get-contrast';
 import { BASE_TEN } from '@square/maker/utils/constants';
 import { MLoading } from '@square/maker/components/Loading';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
-import { MText } from '@square/maker/components/Text';
 
 function setColorVariables(tokens, variant) {
 	const colorMain = colord(tokens.color);
@@ -104,6 +98,33 @@ function setColorVariables(tokens, variant) {
 	};
 }
 
+const TEXT_STYLES = new Set([
+	'fontFamily',
+	'fontWeight',
+	'fontSize',
+	'fontStyle',
+	'textTransform',
+	'textDecoration',
+]);
+
+function isValidCss(style, value) {
+	if (global.CSS) {
+		return global.CSS.supports(style, value);
+	}
+	return true;
+}
+
+function formatCssStyles(theme, styles, suffix) {
+	const formattedStyles = {};
+	for (const [style, value] of Object.entries(styles)) {
+		const cssStyle = kebabCase(style);
+		if (TEXT_STYLES.has(style) && isValidCss(cssStyle, value)) {
+			formattedStyles[`--${cssStyle}${suffix}`] = theme.resolve(value);
+		}
+	}
+	return formattedStyles;
+}
+
 /**
  * Button component
  * @inheritAttrs button
@@ -112,7 +133,6 @@ function setColorVariables(tokens, variant) {
 export default {
 	components: {
 		MLoading,
-		MText,
 	},
 
 	inject: {
@@ -217,10 +237,18 @@ export default {
 			default: false,
 		},
 		/**
-		 * MText pattern in button label
+		 * Text pattern in button label
 		 * @advanced
 		 */
 		textPattern: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Text hover pattern in button label
+		 * @advanced
+		 */
+		textPatternHover: {
 			type: String,
 			default: undefined,
 		},
@@ -324,6 +352,7 @@ export default {
 			'textColor',
 			'textColorHover',
 			'textPattern',
+			'textPatternHover',
 			'variant',
 			'shape',
 			'borderRadius',
@@ -353,15 +382,24 @@ export default {
 				boxShadow: this.resolvedBoxShadow,
 				boxShadowHover: this.resolvedBoxShadowHover,
 			};
+
+			const { resolvedTextPattern, resolvedTextPatternHover, theme } = this;
+			const textPattern = theme?.text?.patterns?.[resolvedTextPattern] || {};
+			const textPatternHover = theme.text.patterns?.[resolvedTextPatternHover] || {};
+			const textPatternStyles = formatCssStyles(theme, textPattern, '');
+			const textPatternHoverStyles = formatCssStyles(theme, textPatternHover, '-hover');
+
 			return {
 				...setColorVariables(tokens, this.resolvedVariant),
+				...textPatternStyles,
+				...textPatternHoverStyles,
 			};
 		},
 		isDisabled() {
 			return this.disabled || this.loading;
 		},
 		fontSize() {
-			return this.theme.text.patterns[this.resolvedTextPattern]?.fontSize || 'inherit';
+			return this.theme.text.patterns[this.resolvedTextPattern]?.fontSize;
 		},
 		adjustedSize() {
 			// Scale button size to fontSize if one is set
@@ -409,8 +447,12 @@ export default {
 	box-sizing: border-box;
 	min-width: 0;
 	color: var(--color-contrast, #fff);
-	font-weight: var(--maker-font-label-font-weight, 500);
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-weight: var(--font-weight, var(--maker-font-label-font-weight, 500));
+	font-size: var(--font-size);
+	font-family: var(--font-family, var(--maker-font-label-font-family, inherit));
+	font-style: var(--font-style);
+	text-transform: var(--text-transform);
+	text-decoration: var(--text-decoration);
 	vertical-align: middle;
 	background-color: var(--color-main, $maker-color-primary);
 	border: none;
@@ -426,7 +468,8 @@ export default {
 		background-color 0.2s ease-in,
 		filter 0.2s ease-in,
 		box-shadow 0.2s ease-in,
-		border-radius 0.2s ease-in;
+		border-radius 0.2s ease-in,
+		font-size 0.2s ease-in;
 	user-select: none;
 	touch-action: manipulation;
 	fill: currentColor;
@@ -451,9 +494,10 @@ export default {
 	}
 
 	&.size_small {
+		--font-size: 12px;
+
 		height: 32px;
 		padding: var(--small-padding);
-		font-size: 12px;
 
 		& > * {
 			line-height: 1.4;
@@ -466,9 +510,10 @@ export default {
 	}
 
 	&.size_medium {
+		--font-size: 14px;
+
 		height: 48px;
 		padding: var(--medium-padding);
-		font-size: 14px;
 
 		& > * {
 			line-height: 1.77;
@@ -481,9 +526,10 @@ export default {
 	}
 
 	&.size_large {
+		--font-size: 16px;
+
 		height: 64px;
 		padding: var(--large-padding);
-		font-size: 16px;
 
 		& > * {
 			line-height: 1.5;
@@ -534,6 +580,12 @@ export default {
 
 	&:hover:not(:disabled) {
 		color: var(--color-contrast-hover, var(--color-contrast));
+		font-weight: var(--font-weight-hover, var(--font-weight));
+		font-size: var(--font-size-hover, var(--font-size));
+		font-family: var(--font-family-hover, var(--font-family));
+		font-style: var(--font-style-hover, var(--font-style));
+		text-transform: var(--text-transform-hover, var(--text-transform));
+		text-decoration: var(--text-decoration-hover, var(--text-decoration));
 		background-color: var(--color-hover);
 		border-radius: var(--border-radius-hover, $maker-shape-button-border-radius);
 		box-shadow:
