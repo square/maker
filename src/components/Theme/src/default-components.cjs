@@ -9,6 +9,7 @@ module.exports = function defaultComponents() {
 			variant: 'fill',
 			shape: undefined,
 			textPattern: 'buttonLabel',
+			textPatternHover: undefined,
 			color: '@colors.primary',
 			textColor: undefined,
 			fullWidth: false,
@@ -184,7 +185,6 @@ module.exports = function defaultComponents() {
 				buttonLabel: {
 					fontFamily: '@fonts.label.fontFamily',
 					fontWeight: '@fonts.label.fontWeight',
-					fontSize: 'inherit',
 				},
 			},
 		},

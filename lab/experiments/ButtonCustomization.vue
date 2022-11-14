@@ -53,6 +53,45 @@
 				Font size: {{ fontSize }}
 			</label>
 			<label>
+				<select
+					v-model="fontFamilyHover"
+				>
+					<option>
+						Georgia
+					</option>
+					<option>
+						Verdana
+					</option>
+					<option>
+						Monospace
+					</option>
+				</select>
+				Font family hover
+			</label>
+			<label>
+				<select
+					v-model="fontWeightHover"
+				>
+					<option>
+						normal
+					</option>
+					<option>
+						bold
+					</option>
+				</select>
+				Font weight hover
+			</label>
+			<label>
+				<input
+					v-model="fontSizeHover"
+					type="range"
+					min="12"
+					max="32"
+					step="2"
+				>
+				Font size hover: {{ fontSizeHover }}
+			</label>
+			<label>
 				<input
 					v-model="color"
 					type="color"
@@ -534,9 +573,12 @@ import makerColors from '@square/maker/utils/maker-colors';
 const defaultButtonProps = {
 	color: '#9142ff',
 	colorHover: undefined,
-	fontFamily: undefined,
-	fontWeight: undefined,
+	fontFamily: 'Verdana',
+	fontWeight: 'normal',
 	fontSize: undefined,
+	fontFamilyHover: 'Monospace',
+	fontWeightHover: 'bold',
+	fontSizeHover: undefined,
 	textColor: '#ffffff',
 	textColorHover: undefined,
 	borderRadius: undefined,
@@ -578,11 +620,23 @@ export default {
 	},
 	computed: {
 		theme() {
-			const { fontSize, fontFamily, fontWeight } = this;
+			const {
+				fontSize,
+				fontFamily,
+				fontWeight,
+				fontSizeHover,
+				fontFamilyHover,
+				fontWeightHover,
+			} = this;
 			const buttonTextPattern = {
 				...(fontFamily && { fontFamily }),
 				...(fontWeight && { fontWeight }),
 				...(fontSize && { fontSize: `${fontSize}px` }),
+			};
+			const buttonTextPatternHover = {
+				...(fontFamilyHover && { fontFamily: fontFamilyHover }),
+				...(fontWeightHover && { fontWeight: fontWeightHover }),
+				...(fontSizeHover && { fontSize: `${fontSizeHover}px` }),
 			};
 			return {
 				colors: {
@@ -592,7 +646,11 @@ export default {
 				text: {
 					patterns: {
 						buttonLabel: buttonTextPattern,
+						buttonLabelHover: buttonTextPatternHover,
 					},
+				},
+				button: {
+					textPatternHover: 'buttonLabelHover',
 				},
 			};
 		},
