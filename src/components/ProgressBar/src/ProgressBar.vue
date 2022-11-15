@@ -107,7 +107,7 @@ export default {
 	width: 100%;
 	overflow: hidden;
 	background-color: $maker-color-neutral-10;
-	border-radius: var(--maker-default-border-radius, 16px);
+	border-radius: $maker-shape-default-border-radius;
 
 	&.shape_squared {
 		border-radius: 0;
@@ -124,7 +124,7 @@ export default {
 	height: 100%;
 	color: var(--bar-color);
 	background-color: currentColor;
-	border-radius: var(--maker-default-border-radius, 16px);
+	border-radius: $maker-shape-default-border-radius;
 	transition: width 100ms linear;
 
 	&.shape_squared {

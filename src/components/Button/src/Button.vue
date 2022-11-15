@@ -447,9 +447,9 @@ export default {
 	box-sizing: border-box;
 	min-width: 0;
 	color: var(--color-contrast, #fff);
-	font-weight: var(--font-weight, var(--maker-font-label-font-weight, 500));
+	font-weight: var(--font-weight, $maker-font-label-font-weight);
 	font-size: var(--font-size);
-	font-family: var(--font-family, var(--maker-font-label-font-family, inherit));
+	font-family: var(--font-family, $maker-font-label-font-family);
 	font-style: var(--font-style);
 	text-transform: var(--text-transform);
 	text-decoration: var(--text-decoration);

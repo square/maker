@@ -72,9 +72,9 @@ export default {
 	box-sizing: border-box;
 	height: 48px;
 	padding: 4px;
-	font-weight: var(--maker-font-label-font-weight, 500);
+	font-weight: $maker-font-label-font-weight;
 	font-size: 14px;
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-family: $maker-font-label-font-family;
 	line-height: 24px;
 	background-color: $maker-color-neutral-10;
 	border-radius: $maker-shape-button-border-radius;
