@@ -45,6 +45,13 @@ We've been using `critical` and `error` interchangeably internally within the li
 `<m-progress-circle icon-name="critical">` | `<m-progress-circle icon-name="error">`
 `<m-toast icon-name="critical">` | `<m-toast icon-name="error">`
 
+### MThumbnails `size` prop now takes Strings instead of Numbers
+
+Before the MThumbnails `size` prop only took a Number, and converted it to pixels, to set the thumbnail size. Now it takes a String, which can be any valid CSS width/height value. This is now more similar to how most props on most components work.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-thumbnails :size="100">` | `<m-thumbnails size="100px">`
 
 
 ## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))

@@ -3,18 +3,16 @@
 		:class="$s.Thumbnails"
 		:style="thumbnailStyles"
 	>
-		<template
-			v-for="(thumbnail, index) in thumbnails.slice(0, maxThumbnails)"
-		>
-			<m-image
-				:key="`image-${index}`"
-				:class="$s.ThumbnailImage"
-				:src="thumbnail"
-				@click="$emit('thumbnail:click', thumbnail)"
-			/>
-		</template>
+		<m-image
+			v-for="thumbnailSrc in visibleThumbnails"
+			:key="thumbnailSrc"
+			:class="$s.ThumbnailImage"
+			:src="thumbnailSrc"
+			@click="$emit('thumbnail:click', thumbnailSrc)"
+		/>
 		<div
-			v-if="hasThumbnailOverflow"
+			v-if="overflowImageCount > 0"
+			:class="$s.ThumbnailOverflow"
 			@click="$emit('overflow:click')"
 		>
 			<m-text
@@ -27,16 +25,14 @@
 </template>
 
 <script>
+import cssValidator from '@square/maker/utils/css-validator';
 import { MImage } from '@square/maker/components/Image';
 import { MText } from '@square/maker/components/Text';
 
-const DEFAULT_THUMBNAIL_COUNT = 5;
-const MIN_SIZE = -2;
-const MAX_SIZE = 7;
+const MIN_TEXT_SIZE = -2;
+const MAX_TEXT_SIZE = 7;
 
 export default {
-	name: 'Thumbnails',
-
 	components: {
 		MImage,
 		MText,
@@ -51,45 +47,51 @@ export default {
 			required: true,
 		},
 		/**
-		 * Size to display thumbnail images (in px)
+		 * Size to display thumbnail images
 		 */
 		size: {
-			type: Number,
-			default: 32,
+			type: String,
+			default: '32px',
+			validator: cssValidator('width'),
 		},
 		/**
 		 * Maximum number of thumbnails to display
 		 */
 		maxThumbnails: {
 			type: Number,
-			default: DEFAULT_THUMBNAIL_COUNT,
+			default: 5,
+			validator: (count) => count >= 0,
 		},
 		/**
 		 * Overflow text size. Size of text as step in fluid scale (-2 to 7).
 		 */
 		overflowTextSize: {
 			type: Number,
-			default: undefined,
-			validator: (size) => size >= MIN_SIZE && size <= MAX_SIZE,
+			default: 0,
+			validator: (size) => size >= MIN_TEXT_SIZE && size <= MAX_TEXT_SIZE,
 		},
 	},
 
 	computed: {
-		hasThumbnailOverflow() {
-			return this.thumbnails.length > this.maxThumbnails;
+		visibleThumbnails() {
+			return this.thumbnails.slice(0, this.maxThumbnails);
 		},
 
 		overflowImageCount() {
-			if (this.hasThumbnailOverflow) {
-				return this.thumbnails.length - this.maxThumbnails;
-			}
-			return 0;
+			return this.thumbnails.length - this.maxThumbnails;
 		},
 
 		thumbnailStyles() {
-			return {
-				'--size': `${this.size}px`,
+			const styles = {
+				'--size': this.size,
 			};
+			if (this.$listeners['thumbnail:click']) {
+				styles['--thumbnail-cursor'] = 'pointer';
+			}
+			if (this.$listeners['overflow:click']) {
+				styles['--overflow-cursor'] = 'pointer';
+			}
+			return styles;
 		},
 	},
 };
@@ -103,9 +105,21 @@ export default {
 }
 
 .ThumbnailImage {
+	cursor: var(--thumbnail-cursor, auto);
+}
+
+.ThumbnailImage,
+.ThumbnailOverflow {
 	width: var(--size);
 	min-width: var(--size);
 	max-width: var(--size);
 	height: var(--size);
+}
+
+.ThumbnailOverflow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: var(--overflow-cursor, default);
 }
 </style>
