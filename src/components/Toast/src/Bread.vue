@@ -112,8 +112,8 @@ export default {
 .Bread {
 	margin: 8px 0;
 	overflow: hidden;
-	background-color: var(--maker-color-background, #fff);
-	border-radius: var(--maker-shape-default-border-radius, 4px);
+	background-color: $maker-color-background;
+	border-radius: $maker-shape-default-border-radius;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 32px rgba(0, 0, 0, 0.1);
 	transition:
 		transform 0.5s,

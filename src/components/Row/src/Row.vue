@@ -72,7 +72,7 @@ export default {
 	gap: 8px;
 	align-items: center;
 	width: 100%;
-	color: var(--maker-color-body);
+	color: $maker-color-body;
 	fill: currentColor;
 }
 
