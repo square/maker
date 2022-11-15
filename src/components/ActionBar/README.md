@@ -407,7 +407,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | Prop        | Type      | Default     | Possible values                          | Description                           |
 | ----------- | --------- | ----------- | ---------------------------------------- | ------------------------------------- |
 | type        | `string`  | `'button'`  | -                                        | Type of the button                    |
-| full-width* | `boolean` | —           | -                                        | Whether to make the button full-width |
+| full-width* | `boolean` | `false`     | -                                        | Whether to make the button full-width |
 | color*      | `string`  | `'#006aff'` | -                                        | Background color of button            |
 | text-color* | `string`  | —           | -                                        | Text color of button                  |
 | shape*      | `string`  | —           | `'squared'`, `'rounded'`, `'pill'`       | Shape of button                       |
