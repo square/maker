@@ -244,9 +244,9 @@ export default {
 	height: var(--medium-height);
 	padding: 0 var(--medium-padding);
 	color: var(--text-color);
-	font-weight: var(--maker-font-label-font-weight, 500);
+	font-weight: $maker-font-label-font-weight;
 	font-size: var(--medium-font-size);
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-family: $maker-font-label-font-family;
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
