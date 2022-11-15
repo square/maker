@@ -361,7 +361,8 @@ module.exports = function defaultComponents() {
 		progresscircle: {
 			color: '@colors["neutral-100"]',
 			iconColor: '@colors["neutral-100"]',
-			iconName: undefined,
+			iconName: 'info',
+			showIcon: false,
 			pattern: undefined,
 		},
 		progressbar: {

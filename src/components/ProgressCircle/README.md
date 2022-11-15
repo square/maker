@@ -49,15 +49,15 @@ export default {
 ```
 
 
-An icon can be rendered inside the progress circle if you pass its name via the `icon-name` prop. Icons can be defined & named in the [Theme](#/Theme) component. The icons bundled with Maker by default are listed in the [Icon](#/Icon) component docs.
+An icon can be rendered inside the progress circle if you pass its name via the `icon-name` prop and set `show-icon` to true. Icons can be defined & named in the [Theme](#/Theme) component. The icons bundled with Maker by default are listed in the [Icon](#/Icon) component docs.
 
 ```vue
 <template>
 	<m-theme :theme="theme">
-		example built-in icon:
+		example default built-in icon:
 		<br>
 		<m-progress-circle
-			icon-name="info"
+			show-icon
 			:progress="50"
 		/>
 		<br>
@@ -65,6 +65,7 @@ An icon can be rendered inside the progress circle if you pass its name via the 
 		<br>
 		<m-progress-circle
 			icon-name="zap"
+			show-icon
 			:progress="50"
 		/>
 	</m-theme>
@@ -118,7 +119,7 @@ The colors of the progress circle and icon can be customized separately using th
 		<br>
 		<m-progress-circle
 			:color="progressColor"
-			icon-name="info"
+			show-icon
 			:icon-color="iconColor"
 			:progress="50"
 		/>
@@ -128,12 +129,14 @@ The colors of the progress circle and icon can be customized separately using th
 		<m-progress-circle
 			color="#cd2026"
 			icon-name="error"
+			show-icon
 			icon-color="#cd2026"
 			:progress="50"
 		/>
 		<m-progress-circle
 			color="#008000"
 			icon-name="success"
+			show-icon
 			icon-color="#008000"
 			:progress="50"
 		/>
@@ -199,16 +202,19 @@ export default {
 						primary: {
 							color: '@colors.contextualPrimary.fill',
 							iconName: 'info',
+							showIcon: true,
 							iconColor: '@colors.contextualPrimary.fill',
 						},
 						error: {
 							color: '@colors.error.fill',
 							iconName: 'error',
+							showIcon: true,
 							iconColor: '@colors.error.fill',
 						},
 						success: {
 							color: '@colors.success.fill',
 							iconName: 'success',
+							showIcon: true,
 							iconColor: '@colors.success.fill',
 						},
 					},
@@ -227,13 +233,14 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 Themable props* can be configured via the [Theme](#/Theme) component using the key `progresscircle`.
 
-| Prop        | Type     | Default     | Possible values                             | Description                     |
-| ----------- | -------- | ----------- | ------------------------------------------- | ------------------------------- |
-| pattern*    | `string` | —           | any custom pattern defined within the theme | pattern defined at theme level  |
-| color*      | `string` | `'#000000'` | -                                           | color of the progress circle    |
-| progress    | `number` | `0`         | -                                           | progress of circle (0 - 100)    |
-| icon-name*  | `string` | —           | -                                           | name of icon (defined in theme) |
-| icon-color* | `string` | `'#000000'` | -                                           | color of icon                   |
+| Prop        | Type      | Default     | Possible values                             | Description                     |
+| ----------- | --------- | ----------- | ------------------------------------------- | ------------------------------- |
+| pattern*    | `string`  | —           | any custom pattern defined within the theme | pattern defined at theme level  |
+| color*      | `string`  | `'#000000'` | -                                           | color of the progress circle    |
+| progress    | `number`  | `0`         | -                                           | progress of circle (0 - 100)    |
+| icon-name*  | `string`  | `'info'`    | -                                           | name of icon (defined in theme) |
+| show-icon*  | `boolean` | `false`     | -                                           | shows icon                      |
+| icon-color* | `string`  | `'#000000'` | -                                           | color of icon                   |
 
 
 ## Events
