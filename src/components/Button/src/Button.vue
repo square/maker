@@ -440,6 +440,10 @@ export default {
 .Button {
 	--radius-rounded-button: 8px;
 	--radius-pill-button: 32px;
+	--border-radius: $maker-shape-button-border-radius;
+	--color-main: $maker-color-primary;
+	--font-family: $maker-font-label-font-family;
+	--font-weight: $maker-font-label-font-weight;
 
 	position: relative;
 	display: inline-flex;
@@ -447,16 +451,16 @@ export default {
 	box-sizing: border-box;
 	min-width: 0;
 	color: var(--color-contrast, #fff);
-	font-weight: var(--font-weight, $maker-font-label-font-weight);
+	font-weight: var(--font-weight);
 	font-size: var(--font-size);
-	font-family: var(--font-family, $maker-font-label-font-family);
+	font-family: var(--font-family);
 	font-style: var(--font-style);
 	text-transform: var(--text-transform);
 	text-decoration: var(--text-decoration);
 	vertical-align: middle;
-	background-color: var(--color-main, $maker-color-primary);
+	background-color: var(--color-main);
 	border: none;
-	border-radius: var(--border-radius, $maker-shape-button-border-radius);
+	border-radius: var(--border-radius);
 	outline: none;
 	box-shadow:
 		var(--border, 0 0),
@@ -587,7 +591,7 @@ export default {
 		text-transform: var(--text-transform-hover, var(--text-transform));
 		text-decoration: var(--text-decoration-hover, var(--text-decoration));
 		background-color: var(--color-hover);
-		border-radius: var(--border-radius-hover, $maker-shape-button-border-radius);
+		border-radius: var(--border-radius-hover, var(--border-radius));
 		box-shadow:
 			var(--border-hover, 0 0),
 			var(--box-shadow-hover, 0 0),
