@@ -33,7 +33,7 @@
 			/>
 		</svg>
 		<div
-			v-if="resolvedIconName"
+			v-if="resolvedShowIcon"
 			:class="$s.IconContainer"
 		>
 			<m-icon :name="resolvedIconName" />
@@ -101,6 +101,13 @@ export default {
 			default: undefined,
 		},
 		/**
+		 * shows icon
+		 */
+		showIcon: {
+			type: Boolean,
+			default: undefined,
+		},
+		/**
 		 * color of icon
 		 */
 		iconColor: {
@@ -114,6 +121,7 @@ export default {
 			'pattern',
 			'color',
 			'iconName',
+			'showIcon',
 			'iconColor',
 		]),
 		styles() {
