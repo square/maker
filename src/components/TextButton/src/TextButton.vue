@@ -229,6 +229,7 @@ export default {
 	white-space: initial;
 	text-align: inherit;
 	text-overflow: ellipsis;
+	overflow-wrap: anywhere;
 }
 
 </style>
