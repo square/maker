@@ -45,8 +45,8 @@
 import Vue from 'vue';
 import PseudoWindow from 'vue-pseudo-window';
 import assert from '@square/maker/utils/assert';
-import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
-import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
+import { MTransitionResponsive } from '@square/maker/components/TransitionResponsive';
 import {
 	fadeOutFn,
 	springUpFn,
@@ -185,10 +185,6 @@ const apiMixin = {
 				options: {},
 				// true if this modal has a modal beneath it
 				isStacked: !!vm.parentModalApi,
-				// although parentModal is not used within Maker it's used
-				// by some of our users so removing it would be a breaking
-				// change and require a major release
-				parentModal: vm.parentModalApi,
 			}),
 
 			// only called from parent

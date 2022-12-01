@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { MTransition } from '@square/maker/utils/Transition';
+import { MTransition } from '@square/maker/components/Transition';
 import { springUpBounceFn, springDownBounceFn } from '@square/maker/utils/transitions';
 import AtomicActionBar from './AtomicActionBar.vue';
 

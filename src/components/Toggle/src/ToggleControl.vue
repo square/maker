@@ -77,7 +77,7 @@ export default {
 /* default unchecked state */
 .Checkbox {
 	/* general vars */
-	--color-error: $maker-color-critical-fill;
+	--color-error: $maker-color-error-fill;
 	--transition: 0.2s ease;
 
 	/* toggle vars */

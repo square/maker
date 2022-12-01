@@ -29,7 +29,7 @@
 
 <script>
 import { throwError } from '@square/maker/utils/debug';
-import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { Portal } from '@linusborg/vue-simple-portal';
 import { PopoverConfigKey, PopoverAPIKey } from './keys';
 import PopoverInstance from './PopoverInstance.vue';

@@ -428,7 +428,7 @@ import ActionBarDialog from '../../components/ActionBarDialog.vue';
 import ActionBarModal from '../../components/ActionBarModal.vue';
 
 const filledIcons = {
-	critical: AlertCircleFilled,
+	error: AlertCircleFilled,
 	warning: AlertTriangleFilled,
 	success: CheckCircleFilled,
 	info: InfoFilled,
@@ -436,7 +436,7 @@ const filledIcons = {
 };
 
 const outlineIcons = {
-	critical: AlertCircle,
+	error: AlertCircle,
 	warning: AlertTriangle,
 	success: CheckCircle,
 	info: Info,
@@ -519,11 +519,11 @@ export default {
 						bgColor: '@colors.warning.fill',
 					},
 					errorSaturated: {
-						iconName: 'critical',
+						iconName: 'error',
 						hideIcon: false,
-						accentColor: '@colors.critical.onFill',
-						color: '@colors.critical.onFill',
-						bgColor: '@colors.critical.fill',
+						accentColor: '@colors.error.onFill',
+						color: '@colors.error.onFill',
+						bgColor: '@colors.error.fill',
 					},
 				},
 			};

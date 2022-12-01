@@ -163,9 +163,9 @@ export default {
 	display: flex;
 	gap: 8px;
 	box-sizing: border-box;
-	font-weight: var(--maker-font-label-font-weight, 500);
+	font-weight: $maker-font-label-font-weight;
 	font-size: var(--font-size);
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-family: $maker-font-label-font-family;
 	line-height: var(--line-height);
 
 	&.wrapChoices {

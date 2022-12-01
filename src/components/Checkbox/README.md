@@ -1,5 +1,7 @@
 # Checkbox
 
+Use Checkbox when you'd like the user to select potentially many options from a inline list of options. Another component you can use for this use-case is [Choice](#/Choice) (in multi-select mode). If you'd like to limit the user to a single selection then use [Radio](#/Radio), [SegmentedControl](#/SegmentedControl), or [Choice](#/Choice) (in single-select mode). If you'd like the list of options to be hidden behind a toggled dropdown list then use [Select](#/Select) or [Menu](#/Menu) (in single-select mode) for single-select use-cases and [Menu](#/Menu) (in multi-select mode) for multi-select use-cases.
+
 ```vue
 <template>
 	<div>

@@ -8,7 +8,7 @@
 				components
 			</router-link>
 			<router-link
-				v-for="componentLink in componentsLinks"
+				v-for="componentLink in navLinks"
 				:key="componentLink.path.name"
 				:to="componentLink.path"
 				class="link"
@@ -20,14 +20,6 @@
 				class="header-link link"
 			>
 				utils
-			</router-link>
-			<router-link
-				v-for="utilLink in utilsLinks"
-				:key="utilLink.path.name"
-				:to="utilLink.path"
-				class="link"
-			>
-				{{ utilLink.label }}
 			</router-link>
 		</nav>
 	</div>
@@ -47,14 +39,6 @@ export default {
 					},
 					category: route.category,
 				}));
-		},
-		componentsLinks() {
-			return this.navLinks
-				.filter((link) => link.category === 'components');
-		},
-		utilsLinks() {
-			return this.navLinks
-				.filter((link) => link.category === 'utils');
 		},
 	},
 };

@@ -800,7 +800,7 @@ export default {
 
 ### Customizing icons
 
-The close icon can be customized by changing the `close` icon in the `icons` section of the site's theme. The prefix icons for each pattern can be by customizing the `info`, `success`, `warning`, and `critical` icons in the `icons` section of the site's theme. One-off icons can also be added as custom icons to the `icons` section of the site's theme and then referenced by their name via the `iconName` prop on Toasts. One-off icons can also be set on Toasts using the `icon` slot.
+The close icon can be customized by changing the `close` icon in the `icons` section of the site's theme. The prefix icons for each pattern can be by customizing the `info`, `success`, `warning`, and `error` icons in the `icons` section of the site's theme. One-off icons can also be added as custom icons to the `icons` section of the site's theme and then referenced by their name via the `iconName` prop on Toasts. One-off icons can also be set on Toasts using the `icon` slot.
 
 ```vue
 <template>
@@ -932,10 +932,10 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | Prop           | Type      | Default     | Possible values                                                                                         | Description                                               |
 | -------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | pattern*       | `string`  | `'info'`    | `'info'`, `'success'`, `'warning'`, `'error'`, `'primary'`, any custom pattern defined within the theme | pattern defined at theme level                            |
-| persistent*    | `boolean` | —           | -                                                                                                       | make toast persistent (no auto-dismiss)                   |
+| persistent*    | `boolean` | `false`     | -                                                                                                       | make toast persistent (no auto-dismiss)                   |
 | dismiss-after* | `number`  | `5000`      | -                                                                                                       | auto-dismiss after x milliseconds (ignored if persistent) |
 | icon-name*     | `string`  | `'info'`    | -                                                                                                       | name of icon to show                                      |
-| show-icon*     | `boolean` | —           | -                                                                                                       | shows icon                                                |
+| show-icon*     | `boolean` | `false`     | -                                                                                                       | shows icon                                                |
 | text           | `string`  | `''`        | -                                                                                                       | toast text content                                        |
 | progress       | `number`  | —           | -                                                                                                       | optional toast progress (0 - 100)                         |
 | color*         | `string`  | `'#000000'` | -                                                                                                       | toast text & button color                                 |

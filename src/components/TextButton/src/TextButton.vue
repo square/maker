@@ -141,8 +141,8 @@ export default {
 	min-width: 0;
 	padding: 0;
 	color: var(--color, $maker-color-neutral-90);
-	font-weight: var(--maker-font-label-font-weight, 500);
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-weight: $maker-font-label-font-weight;
+	font-family: $maker-font-label-font-family;
 	text-align: inherit;
 	vertical-align: middle;
 	background-color: transparent;

@@ -241,9 +241,9 @@ export default {
 .QuantityReadonly,
 .QuantityManualInput {
 	color: $maker-color-neutral-90;
-	font-weight: var(--maker-font-label-font-weight, 500);
+	font-weight: $maker-font-label-font-weight;
 	font-size: inherit;
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-family: $maker-font-label-font-family;
 	font-feature-settings: "tnum";
 	font-variant-numeric: tabular-nums;
 }

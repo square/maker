@@ -139,8 +139,8 @@ export default {
 
 <style module="$s">
 .Link {
-	font-weight: var(--maker-font-label-font-weight, 500);
-	font-family: var(--maker-font-label-font-family, inherit);
+	font-weight: $maker-font-label-font-weight;
+	font-family: $maker-font-label-font-family;
 	text-decoration: underline;
 	cursor: pointer;
 }

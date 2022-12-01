@@ -35,7 +35,7 @@ const NEUTRAL_RATIOS = {
 
 const CONTEXTUAL_COLORS = {
 	light: {
-		critical: {
+		error: {
 			fill: '#cd2026',
 			text: '#a82826',
 			subtle: '#f6eceb',
@@ -53,7 +53,7 @@ const CONTEXTUAL_COLORS = {
 
 	},
 	dark: {
-		critical: {
+		error: {
 			fill: '#cd2026',
 			text: '#ff7566',
 		},
@@ -144,8 +144,8 @@ export default function makerColors(
 		neutralColors,
 	);
 
-	// derive contextual critical, warning, success colors
-	['critical', 'warning', 'success'].forEach((name) => {
+	// derive contextual error, warning, success colors
+	['error', 'warning', 'success'].forEach((name) => {
 		if (!enoughContrastForFill(contextualColors[name].fill, background)) {
 			contextualColors[name].onFill = contextualColors[name].fill;
 			contextualColors[name].fill = backgroundContrast;

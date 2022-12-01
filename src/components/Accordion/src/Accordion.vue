@@ -81,10 +81,10 @@
 
 <script>
 import { isUndefined } from 'lodash';
-import { MRow } from '@square/maker/utils/Row';
+import { MRow } from '@square/maker/components/Row';
 import { MText } from '@square/maker/components/Text';
 import { MIcon } from '@square/maker/components/Icon';
-import { MTransitionCollapse } from '@square/maker/utils/TransitionCollapse';
+import { MTransitionCollapse } from '@square/maker/components/TransitionCollapse';
 
 /**
  * @inheritAttrs div

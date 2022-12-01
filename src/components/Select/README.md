@@ -1,5 +1,7 @@
 # Select
 
+Use Select when you'd like the user to select a single option from a dropdown list of options. If the options are information dense and you need something fancier, use [Menu](#/Menu) (in single-select mode). If you'd like all of the options to inlined use [Radio](#/Radio), [SegmentedControl](#/SegmentedControl), or [Choice](#/Choice) (in single-select mode). If you'd like the user to select potentially many options from a dropdown list of options use [Menu](#/Menu) (in multi-select mode). If you'd like all the options to be inlined use [Checkbox](#/Checkbox) or [Choice](#/Choice) (in multi-select mode).
+
 ## Examples
 
 ### Default State

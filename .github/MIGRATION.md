@@ -1,6 +1,88 @@
 # Migration guides for Maker major releases
 
-## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](https://github.com/square/maker/pull/441))
+## [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) -> [16.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](https://github.com/square/maker/pull/500))
+
+### `parentModal` removed from `modalApi`, use `closeAll` instead
+
+Before, if a user wanted to close a stack of modals simultaneously, they would write `this.modalApi.parentModal.close()`, which worked at some point in time, but has been broken for a while, and even while it "worked" it would force close both modals without running their `beforeClose` hooks. For these reasons `parentModal` has been removed and replaced with a `closeAll` method which solves all of these problems.
+
+15.x (before) | 16.x (after)
+-|-
+`this.modalApi.parentModal.close()` | `this.modalApi.closeAll()`
+
+### Loading `normal` size renamed to `medium`
+
+The naming scheme for Maker component semantic sizes is: `xsmall`, `small`, `medium`, `large`, `xlarge` but MLoading was implemented forever ago and its size values were `normal` and `large` which is weird so we're renaming `normal` to `medium` so it's more consistent with the rest of the library.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-loading size="normal" />` | `<m-loading size="medium" />`
+
+## MenuOption `click-handler` prop removed, use `@click` instead
+
+Should've been `@click` from the beginning, but was overlooked during code review.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-menu-option :click-handler="someMethod">` | `<m-menu-option @click="someMethod">`
+
+### `critical` theme value renamed to `error`
+
+We've been using `critical` and `error` interchangeably internally within the library but also in the public API, so it sometimes got confusing when to use one or the other, so we're simplifying the situation by standardizing on `error` in all use-cases.
+
+15.x (before) | 16.x (after)
+-|-
+`{ colors: { critical: { /* colors here */ }}}` | `{ colors: { error: { /* colors here */ }}}`
+`@colors.critical.onFill` | `@colors.error.onFill`
+`@colors.critical.fill` | `@colors.error.fill`
+`@colors.critical.text` | `@colors.error.text`
+`@colors.critical.subtle` | `@colors.error.subtle`
+`var(--maker-color-critical-fill)` | `var(--maker-color-error-fill)`
+`{ icons: { critical: AlertTriangle }}` | `{ icons: { error: AlertTriangle }}`
+`@icons.critical` | `@icons.error`
+`<m-icon name="critical" />` | `<m-icon name="error" />`
+`<m-notice icon-name="critical">` | `<m-notice icon-name="error">`
+`<m-progress-circle icon-name="critical">` | `<m-progress-circle icon-name="error">`
+`<m-toast icon-name="critical">` | `<m-toast icon-name="error">`
+
+### MThumbnails `size` prop now takes strings instead of numbers
+
+Before the MThumbnails `size` prop only took a number, and converted it to pixels, to set the thumbnail size. Now it takes a string, which can be any valid CSS width or height value. This is now more similar to how most props on most components work.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-thumbnails :size="100">` | `<m-thumbnails size="100px">`
+
+
+### Added `show-icon` prop to MProgressCircle
+
+MProgressCircle's icon props were not pattern-friendly. We had the same problem during the development of MToast and we solved it by adding a `show-icon` prop which we've now also added to MProgressCircle. You know have to set this prop to `true` along with passing an icon name to display an icon.
+
+15.x (before) | 16.x (after)
+-|-
+`<m-progress-circle icon-name="info">` | `<m-progress-circle icon-name="info" show-icon>`
+
+### All components moved from `/utils` to `/components`
+
+Before we put visual components into `/components` and functional components into `/utils`. This seemed like a meaningful distinction at the time but we no longer feel it warrants separating the components into these arbitrary categories, especially considering that we currently have several components like MRow, MBlockFormControlLayout, MInlineFormControlLayout, MDialogLayer, MToastLayer, and MBladeLayer that blur this boundary, and we have several potential components coming down the pipeline like MLayout, MGrid, MCarousel, and MSlideshow that further blur the boundary. Keeping track of this arbitrary categorization is also a burden we passed on to our users who had to remember whether a component is a "regular" component or a "utility" component in order to import it correctly. We decided to get rid of the arbitrary categorization and now all components are in the `/components` directory.
+
+15.x (before) | 16.x (after)
+-|-
+`import { MBlockFormControlLayout } from '@square/maker/utils/BlockFormControlLayout'` | `import { MBlockFormControlLayout } from '@square/maker/components/BlockFormControlLayout'`
+`import { MInlineFormControlLayout } from '@square/maker/utils/InlineFormControlLayout'` | `import { MInlineFormControlLayout } from '@square/maker/components/InlineFormControlLayout'`
+`import { MRow } from '@square/maker/utils/Row'` | `import { MRow } from '@square/maker/components/Row'`
+`import { MTouchCapture } from '@square/maker/utils/TouchCapture'` | `import { MTouchCapture } from '@square/maker/components/TouchCapture'`
+`import { MTransition } from '@square/maker/utils/Transition'` | `import { MTransition } from '@square/maker/components/Transition'`
+`import { MTransitionCollapse } from '@square/maker/utils/TransitionCollapse'` | `import { MTransitionCollapse } from '@square/maker/components/TransitionCollapse'`
+`import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn'` | `import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn'`
+`import { MTransitionResize } from '@square/maker/utils/TransitionResize'` | `import { MTransitionResize } from '@square/maker/components/TransitionResize'`
+`import { MTransitionResponsive } from '@square/maker/utils/TransitionResponsive'` | `import { MTransitionResponsive } from '@square/maker/components/TransitionResponsive'`
+`import { MTransitionSpringLeft } from '@square/maker/utils/TransitionSpringLeft'` | `import { MTransitionSpringLeft } from '@square/maker/components/TransitionSpringLeft'`
+`import { MTransitionSpringUp } from '@square/maker/utils/TransitionSpringUp'` | `import { MTransitionSpringUp } from '@square/maker/components/TransitionSpringUp'`
+`import { MTransitionStack } from '@square/maker/utils/TransitionStack'` | `import { MTransitionStack } from '@square/maker/components/TransitionStack'`
+`import { MTransitionStaggered } from '@square/maker/utils/TransitionStaggered'` | `import { MTransitionStaggered } from '@square/maker/components/TransitionStaggered'`
+
+## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))
 
 ### MButton pattern & variant renames
 

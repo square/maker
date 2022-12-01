@@ -1,3 +1,5 @@
-# Maker Utils
+# Utils
 
-Browse util documentation by clicking on the links in the side navigation. The utils are used internally within Maker to help implement components, but they're also exported publically if you'd like to use them to implement your own custom components.
+Maker utils are JS functions which can help you use Maker in your app. A popular example is `makerColors` exported from `@square/maker/utils/maker-colors` which if you simply pass it a background color & a primary color it will generate an entire `colors` theme config object for you.
+
+TODO: add `makerColors` example here eventually

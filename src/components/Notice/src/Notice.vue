@@ -129,7 +129,7 @@ export default {
 				return this.resolvedIconName;
 			}
 			if (this.resolvedType === 'error') {
-				return 'critical';
+				return 'error';
 			}
 			if (this.resolvedType === 'success') {
 				return 'success';

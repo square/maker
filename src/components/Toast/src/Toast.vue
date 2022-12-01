@@ -269,7 +269,7 @@ export default {
 }
 
 .EnhanceContrast {
-	border: 1px solid var(--maker-color-neutral-10, #f1f1f1);
+	border: 1px solid $maker-color-neutral-10;
 }
 
 .ToastContent {

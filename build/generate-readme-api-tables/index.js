@@ -83,7 +83,7 @@ function enrichInfoWithDefaultThemeData(componentInfo) {
 				const RESOLVED_THEME_VALUE = DEFAULT_THEME.resolve(PROP_DEFAULT_THEME_VALUE);
 				propInfo.defaultValue = {
 					func: false,
-					value: RESOLVED_THEME_VALUE ? stringify(RESOLVED_THEME_VALUE) : 'undefined',
+					value: !isNil(RESOLVED_THEME_VALUE) ? stringify(RESOLVED_THEME_VALUE) : 'undefined',
 				};
 				propInfo.themable = true;
 			} else {

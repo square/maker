@@ -3,16 +3,23 @@
 		:class="$s.MenuOption"
 		role="menuitem"
 		tabindex="0"
+		v-bind="$attrs"
 		@click="selectSelf"
 		@keydown="handleKeyboardEvent"
 	>
-		<slot />
 		<template
-			v-if="isSelectOption || $slots.prefix"
+			v-for="(_, slot) of $slots"
+			#[slot]
+		>
+			<slot
+				:name="slot"
+			/>
+		</template>
+		<template
+			v-if="isSelectOption"
 			#prefix
 		>
 			<span
-				v-if="isSelectOption"
 				:class="$s.Check"
 			>
 				<check-icon
@@ -20,43 +27,18 @@
 					:class="$s.Icon"
 				/>
 			</span>
-			<slot
-				v-else
-				name="prefix"
-			/>
-		</template>
-		<template
-			v-if="$slots.secondary"
-			#secondary
-		>
-			<slot name="secondary" />
-		</template>
-		<template
-			v-if="$slots.side"
-			#side
-		>
-			<slot name="side" />
-		</template>
-		<template
-			v-if="$slots['side-secondary']"
-			#side-secondary
-		>
-			<slot name="side-secondary" />
-		</template>
-		<template
-			v-if="$slots.suffix"
-			#suffix
-		>
-			<slot name="suffix" />
 		</template>
 	</m-row>
 </template>
 
 <script>
-import { MRow } from '@square/maker/utils/Row';
+import { MRow } from '@square/maker/components/Row';
 import CheckIcon from '@square/maker-icons/Check';
 import key from './key';
 
+/**
+ * @inheritSlots ../../../components/Row/src/Row.vue
+ */
 export default {
 	components: {
 		MRow,
@@ -67,14 +49,11 @@ export default {
 		controlState: key,
 	},
 
+	inheritAttrs: false,
+
 	props: {
 		value: {
 			type: undefined,
-			default: undefined,
-		},
-
-		clickHandler: {
-			type: Function,
 			default: undefined,
 		},
 	},
@@ -102,11 +81,11 @@ export default {
 	},
 
 	methods: {
-		selectSelf() {
+		selectSelf(clickEvent) {
 			const { isMultiSelect, isActionSelect } = this.controlState;
 
-			if (isActionSelect) {
-				this.clickHandler();
+			if (isActionSelect && this.$listeners.click) {
+				this.$listeners.click(clickEvent);
 			}
 
 			let currentValue = this.value;

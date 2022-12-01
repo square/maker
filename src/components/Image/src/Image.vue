@@ -34,7 +34,7 @@
 <script>
 import PseudoWindow from 'vue-pseudo-window';
 import { throttle } from 'lodash';
-import { MTransitionFadeIn } from '@square/maker/utils/TransitionFadeIn';
+import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 

@@ -14,7 +14,6 @@ const entry = path.resolve('./styleguide/App.vue');
 require.resolve(entry);
 
 const componentsDirectory = path.resolve('./src/components/');
-const utilsDirectory = path.resolve('./src/utils/');
 
 function generateRoutes(directory, importFnName, category) {
 	const files = fs.readdirSync(directory, {
@@ -40,12 +39,6 @@ const COMPONENTS_ROUTES = stringifyRoutes(generateRoutes(
 	componentsDirectory,
 	'importComponentsDocument',
 	'components',
-));
-
-const UTILS_ROUTES = stringifyRoutes(generateRoutes(
-	utilsDirectory,
-	'importUtilsDocument',
-	'utils',
 ));
 
 const config = merge({}, webpackBaseConfig, {
@@ -111,7 +104,6 @@ const config = merge({}, webpackBaseConfig, {
 	plugins: [
 		new webpack.DefinePlugin({
 			COMPONENTS_ROUTES,
-			UTILS_ROUTES,
 		}),
 		new JustSsrPlugin({
 			createAppPath: './styleguide/create-app.js',
