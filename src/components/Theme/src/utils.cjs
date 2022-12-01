@@ -1,4 +1,7 @@
-const { isString, isNil, get } = require('lodash');
+const isString = require('lodash/isString');
+const isNil = require('lodash/isNil');
+const get = require('lodash/get');
+// Can't import via require('lodash') as it will bring in the entire lodash lib
 
 /**
  * Check if passed in value is a pointer, if so resolve the pointer to its value,
