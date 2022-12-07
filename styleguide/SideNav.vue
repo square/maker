@@ -4,6 +4,7 @@
 			<router-link
 				to="/components"
 				class="header-link link"
+				@click.native="$emit('route:click')"
 			>
 				components
 			</router-link>
@@ -12,12 +13,14 @@
 				:key="componentLink.path.name"
 				:to="componentLink.path"
 				class="link"
+				@click.native="$emit('route:click')"
 			>
 				{{ componentLink.label }}
 			</router-link>
 			<router-link
 				to="/utils"
 				class="header-link link"
+				@click.native="$emit('route:click')"
 			>
 				utils
 			</router-link>
