@@ -1,4 +1,4 @@
-# Vertical Divider
+# VerticalDivider
 
 Use VerticalDivider to vertically separate similar content.
 

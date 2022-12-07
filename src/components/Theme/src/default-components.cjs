@@ -359,17 +359,64 @@ module.exports = function defaultComponents() {
 			color: '@colors.warning.fill',
 		},
 		progresscircle: {
-			color: '@colors["neutral-100"]',
-			iconColor: '@colors["neutral-100"]',
+			color: '@colors["neutral-90"]',
+			iconColor: '@colors["neutral-90"]',
 			iconName: 'info',
 			showIcon: false,
 			pattern: undefined,
+			patterns: {
+				info: {
+					iconName: 'info',
+					showIcon: true,
+					color: '@colors["neutral-90"]',
+					iconColor: '@colors["neutral-90"]',
+				},
+				warning: {
+					iconName: 'warning',
+					showIcon: true,
+					color: '@colors.warning.fill',
+					iconColor: '@colors.warning.fill',
+				},
+				error: {
+					iconName: 'error',
+					showIcon: true,
+					color: '@colors.error.fill',
+					iconColor: '@colors.error.fill',
+				},
+				success: {
+					iconName: 'success',
+					showIcon: true,
+					color: '@colors.success.fill',
+					iconColor: '@colors.success.fill',
+				},
+				primary: {
+					iconName: 'info',
+					showIcon: true,
+					color: '@colors.contextualPrimary.fill',
+					iconColor: '@colors.contextualPrimary.fill',
+				},
+			},
 		},
 		progressbar: {
-			color: '@colors["neutral-100"]',
+			color: '@colors["neutral-90"]',
 			size: 'medium',
 			shape: undefined,
-			pattern: undefined,
+			pattern: 'info',
+			patterns: {
+				info: {}, // component default
+				warning: {
+					color: '@colors.warning.fill',
+				},
+				error: {
+					color: '@colors.error.fill',
+				},
+				success: {
+					color: '@colors.success.fill',
+				},
+				primary: {
+					color: '@colors.contextualPrimary.fill',
+				},
+			},
 		},
 		modal: {
 			color: '@colors.body',
@@ -399,6 +446,33 @@ module.exports = function defaultComponents() {
 				'gap-16': {
 					color: '@colors["neutral-10"]',
 					size: '16px',
+				},
+			},
+		},
+		icon: {
+			color: 'inherit',
+			name: 'info',
+			pattern: undefined,
+			patterns: {
+				info: {
+					color: '@colors["neutral-90"]',
+					name: 'info',
+				},
+				warning: {
+					color: '@colors.warning.fill',
+					name: 'warning',
+				},
+				error: {
+					color: '@colors.error.fill',
+					name: 'error',
+				},
+				success: {
+					color: '@colors.success.fill',
+					name: 'success',
+				},
+				primary: {
+					color: '@colors.contextualPrimary.fill',
+					name: 'info',
 				},
 			},
 		},
