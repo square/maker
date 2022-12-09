@@ -1,4 +1,6 @@
-# Segmented Control
+# SegmentedControl
+
+Use SegmentedControl when you'd like the user to select a single option from an inline list of options. Other components you can use for this use-case are [Radio](#/Radio) and [Choice](#/Choice) (in single-select mode). If you'd like the user to select potentially many options then use [Checkbox](#/Checkbox) or [Choice](#/Choice) (in multi-select mode). If you'd like the list of options to be hidden behind a toggled dropdown list then use [Select](#/Select) or [Menu](#/Menu) (in single-select mode) for single-select use-cases and [Menu](#/Menu) (in multi-select mode) for multi-select use-cases.
 
 Use SegmentedControl when you'd like the user to select a single option from an inline list of options. Other components you can use for this use-case are [Radio](#/Radio) and [Choice](#/Choice) (in single-select mode). If you'd like the user to select potentially many options then use [Checkbox](#/Checkbox) or [Choice](#/Choice) (in multi-select mode). If you'd like the list of options to be hidden behind a toggled dropdown list then use [Select](#/Select) or [Menu](#/Menu) (in single-select mode) for single-select use-cases and [Menu](#/Menu) (in multi-select mode) for multi-select use-cases.
 

@@ -1,6 +1,12 @@
 # Icon
 
-Use Icon to render icons defined in the Theme. Maker provides these built-in icons: error, warning, success, info, chevronLeft, chevronRight, chevronUp, and chevronUp. The first 4 are used within [Notice](#/Notice). chevronLeft and chevronRight are used within [Calendar](#/Calendar). chevronDown is used within [Select](#/Select).
+Use Icon to render icons defined in the Theme.
+
+## Examples
+
+### Built-in default icons
+
+Maker provides several built-in icons (listed below). The icons `error`, `warning`, `success` and `info` are used within [Notice](#/Notice). `chevronLeft` and `chevronRight` are used within [Calendar](#/Calendar). `chevronDown` is used within [Select](#/Select). `plus` and `arrowUp` are used within [ImageUploader](#/ImageUploader). `close` is used within [Toast](#/Toast) and [ImageUploader](#/ImageUploader). Any of these can be customized via the [Theme](#/Theme) component.
 
 ```vue
 <template>
@@ -45,15 +51,67 @@ export default {
 </style>
 ```
 
+### Built-in default patterns
+
+Patterns bundle an icon name along with a contextual color. Existing patterns can be customized, or new patterns can be added, via the [Theme](#/Theme) component.
+
+```vue
+<template>
+	<ul class="icon-list">
+		<li
+			v-for="iconPattern in iconPatterns"
+			:key="iconPattern"
+		>
+			<m-icon :pattern="iconPattern" /> {{ iconPattern }}
+		</li>
+	</ul>
+</template>
+
+<script>
+import { MIcon } from '@square/maker/components/Icon';
+import { defaultTheme } from '@square/maker/components/Theme';
+
+export default {
+	components: {
+		MIcon,
+	},
+	data() {
+		return {
+			iconPatterns: Object.keys(defaultTheme().icon.patterns),
+		};
+	},
+};
+</script>
+
+<style scoped>
+.icon-list {
+	margin: 0 !important;
+	padding: 0 !important;
+	list-style: none;
+}
+
+.icon-list li {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+</style>
+```
+
+
 <!-- api-tables:start -->
 ## Props
 
 Supports attributes from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg).
 
-| Prop | Type     | Default    | Possible values       | Description                               |
-| ---- | -------- | ---------- | --------------------- | ----------------------------------------- |
-| name | `string` | —          | -                     | name of icon, defined in theme            |
-| size | `string` | `'medium'` | `'medium'`, `'large'` | size of icon, medium = 16px, large = 24px |
+Themable props* can be configured via the [Theme](#/Theme) component using the key `icon`.
+
+| Prop     | Type     | Default     | Possible values                                                                                         | Description                               |
+| -------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| pattern* | `string` | —           | `'info'`, `'warning'`, `'error'`, `'success'`, `'primary'`, any custom pattern defined within the theme | pattern defined in theme                  |
+| name*    | `string` | `'info'`    | -                                                                                                       | name of icon, defined in theme            |
+| size     | `string` | `'medium'`  | `'medium'`, `'large'`                                                                                   | size of icon, medium = 16px, large = 24px |
+| color*   | `string` | `'inherit'` | -                                                                                                       | color of icon                             |
 
 
 ## Events
