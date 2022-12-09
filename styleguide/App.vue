@@ -1,8 +1,40 @@
 <template>
 	<m-theme
-		class="container"
+		class="styleguide"
 		:theme="theme"
 	>
+		<aside
+			ref="nav"
+			:class="[
+				'side-nav',
+				{
+					'open': sideNavOpen,
+				},
+			]"
+			@transitionend="onNavTransitionEnd"
+		>
+			<side-nav
+				@route:click="toggleSideNav"
+			/>
+		</aside>
+		<button
+			:class="[
+				'side-nav-toggle',
+				{
+					'open': sideNavOpen,
+				},
+			]"
+			@click="toggleSideNav"
+		>
+			<chevron-left
+				v-if="sideNavOpen"
+				class="toggle-icon"
+			/>
+			<chevron-right
+				v-else
+				class="toggle-icon"
+			/>
+		</button>
 		<aside
 			:class="[
 				'theme-controls',
@@ -52,15 +84,20 @@
 				/>
 			</button>
 		</aside>
-		<button
-			class="toggle-theme"
-			@click="toggleThemeControls"
-		>
-			Theme Colors
-		</button>
-		<aside class="side-nav">
-			<side-nav />
-		</aside>
+		<div class="toggle-tabs">
+			<button
+				class="toggle-tab-btn toggle-nav hide-when-wide"
+				@click="toggleSideNav"
+			>
+				Navigation
+			</button>
+			<button
+				class="toggle-tab-btn toggle-theme"
+				@click="toggleThemeControls"
+			>
+				Theme Colors
+			</button>
+		</div>
 		<main class="page">
 			<router-view />
 		</main>
@@ -91,6 +128,7 @@ export default {
 	data() {
 		return {
 			themeControlsOpen: false,
+			sideNavOpen: false,
 			bgColor: '#ffffff',
 			primaryColor: '#006aff',
 		};
@@ -106,8 +144,18 @@ export default {
 		toggleThemeControls() {
 			this.themeControlsOpen = !this.themeControlsOpen;
 		},
+		toggleSideNav() {
+			this.sideNavOpen = !this.sideNavOpen;
+		},
 		resetColors() {
 			Object.assign(this.$data, COLOR_DEFAULTS);
+		},
+		onNavTransitionEnd() {
+			// reset nav scroll to top after
+			// it finishes closing
+			if (!this.sideNavOpen) {
+				this.$refs.nav.scrollTop = 0;
+			}
 		},
 	},
 };
@@ -172,16 +220,25 @@ button {
 
 <!-- scoped styleguide styles -->
 <style scoped>
-.container {
+.styleguide {
+	--transition-speed: 0.5s;
+
 	display: grid;
 	grid-template-columns: var(--nav-width) calc(100% - var(--nav-width));
 	min-height: 100vh;
+}
+
+@media screen and (max-width: 1000px) {
+	.styleguide {
+		grid-template-columns: 100%;
+	}
 }
 
 .theme-controls {
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 1;
 	box-sizing: border-box;
 	width: var(--nav-width);
 	height: 100vh;
@@ -189,7 +246,7 @@ button {
 	background-color: var(--maker-color-background);
 	border-right: 1px solid var(--maker-color-neutral-10);
 	transform: translateX(-100%);
-	transition: transform 0.5s;
+	transition: transform var(--transition-speed);
 	fill: currentColor;
 }
 
@@ -197,13 +254,18 @@ button {
 	transform: translateX(0);
 }
 
-.toggle-theme {
+.toggle-tabs {
 	position: fixed;
 	top: -1px;
 	right: var(--container-padding);
+	display: flex;
+	gap: 8px;
+	box-sizing: border-box;
+}
+
+.toggle-tab-btn {
 	box-sizing: border-box;
 	padding: 9px 16px 8px 16px;
-	color: var(--maker-color-primary);
 	font-weight: 500;
 	font-size: 14px;
 	font-family: inherit;
@@ -212,6 +274,21 @@ button {
 	border-top: none;
 	cursor: pointer;
 	fill: currentColor;
+}
+
+.toggle-theme {
+	color: var(--maker-color-primary);
+}
+
+.toggle-nav {
+	display: none;
+	color: var(--maker-color-body);
+}
+
+@media screen and (max-width: 1000px) {
+	.toggle-nav {
+		display: block;
+	}
 }
 
 .controls-header {
@@ -257,7 +334,59 @@ button {
 .side-nav {
 	box-sizing: border-box;
 	padding: var(--container-padding);
+	background-color: var(--maker-color-background);
 	border-right: 1px solid var(--maker-color-neutral-10);
+	fill: currentColor;
+	scrollbar-width: none;
+}
+
+.side-nav::-webkit-scrollbar {
+	display: none;
+}
+
+.side-nav-toggle {
+	display: none;
+}
+
+@media screen and (max-width: 1000px) {
+	.side-nav {
+		position: fixed;
+		z-index: 1;
+		height: 100vh;
+		overflow-y: auto;
+		transform: translateX(-100%);
+		transition: transform var(--transition-speed);
+	}
+
+	.side-nav.open {
+		transform: translateX(0);
+	}
+
+	/* closed */
+	.side-nav-toggle {
+		position: fixed;
+		top: 40px;
+		left: 1px;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 4px 0 4px 6px;
+		color: var(--maker-color-body);
+		font-size: inherit;
+		font-family: inherit;
+		background: inherit;
+		border: 1px solid var(--maker-color-neutral-10);
+		border-left: none;
+		transform: translateX(-6px);
+		transition: padding-left var(--transition-speed), left var(--transition-speed);
+		fill: currentColor;
+	}
+
+	.side-nav-toggle.open {
+		left: calc(var(--nav-width) + 1px);
+		padding-left: 2px;
+	}
 }
 
 .page {
