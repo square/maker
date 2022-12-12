@@ -22,9 +22,10 @@
 			<span
 				:class="$s.Check"
 			>
-				<check-icon
+				<m-icon
 					v-if="isSelected"
 					:class="$s.Icon"
+					name="check"
 				/>
 			</span>
 		</template>
@@ -33,7 +34,7 @@
 
 <script>
 import { MRow } from '@square/maker/components/Row';
-import CheckIcon from '@square/maker-icons/Check';
+import { MIcon } from '@square/maker/components/Icon';
 import key from './key';
 
 /**
@@ -42,7 +43,7 @@ import key from './key';
 export default {
 	components: {
 		MRow,
-		CheckIcon,
+		MIcon,
 	},
 
 	inject: {
