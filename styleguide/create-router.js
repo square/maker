@@ -4,7 +4,6 @@ import Router from 'vue-router';
 import Meta from 'vue-meta';
 import VuePortal from '@linusborg/vue-simple-portal';
 import IndexPage from './INDEX.md';
-import ComponentsPage from './COMPONENTS.md';
 import UtilsPage from './UTILS.md';
 
 Vue.use(Router);
@@ -22,11 +21,6 @@ function createRouter() {
 				name: 'index',
 				path: '/',
 				component: IndexPage,
-			},
-			{
-				name: 'components',
-				path: '/components',
-				component: ComponentsPage,
 			},
 			{
 				name: 'utils',

@@ -1,22 +1,25 @@
 <template>
 	<div>
 		<nav class="nav">
-			<router-link
-				to="/components"
-				class="header-link link"
-				@click.native="$emit('route:click')"
+			<template
+				v-for="group in groups"
 			>
-				components
-			</router-link>
-			<router-link
-				v-for="componentLink in navLinks"
-				:key="componentLink.path.name"
-				:to="componentLink.path"
-				class="link"
-				@click.native="$emit('route:click')"
-			>
-				{{ componentLink.label }}
-			</router-link>
+				<a
+					:key="group.name"
+					class="link header-link"
+				>
+					{{ group.name }}
+				</a>
+				<router-link
+					v-for="link in group.links"
+					:key="link.path.name"
+					:to="link.path"
+					class="link"
+					@click.native="$emit('route:click')"
+				>
+					{{ link.label }}
+				</router-link>
+			</template>
 			<router-link
 				to="/utils"
 				class="header-link link"
@@ -29,7 +32,6 @@
 </template>
 
 <script>
-
 export default {
 	computed: {
 		navLinks() {
@@ -42,6 +44,109 @@ export default {
 					},
 					category: route.category,
 				}));
+		},
+		groups() {
+			const defaultGroup = {
+				name: 'general',
+				links: [],
+			};
+			const groups = [
+				{
+					name: 'container',
+					set: new Set([
+						'accordion',
+						'card',
+						'container',
+					]),
+					links: [],
+				},
+				{
+					name: 'form',
+					set: new Set([
+						'calendar',
+						'checkbox',
+						'choice',
+						'imageuploader',
+						'input',
+						'pininput',
+						'radio',
+						'segmentedcontrol',
+						'select',
+						'starrating',
+						'stepper',
+						'textarea',
+						'toggle',
+					]),
+					links: [],
+				},
+				{
+					name: 'popout',
+					set: new Set([
+						'actionbar',
+						'blade',
+						'dialog',
+						'modal',
+						'popover',
+						'menu',
+						'toast',
+					]),
+					links: [],
+				},
+				{
+					name: 'loading',
+					set: new Set([
+						'loading',
+						'skeleton',
+					]),
+					links: [],
+				},
+				{
+					name: 'layout',
+					set: new Set([
+						'blockformcontrollayout',
+						'inlineformcontrollayout',
+						'row',
+					]),
+					links: [],
+				},
+				{
+					name: 'transition',
+					set: new Set([
+						'transition',
+						'transitioncollapse',
+						'transitionfadein',
+						'transitionresize',
+						'transitionresponsive',
+						'transitionspringleft',
+						'transitionspringup',
+						'transitionstack',
+						'transitionstaggered',
+					]),
+					links: [],
+				},
+				{
+					name: 'functional',
+					set: new Set([
+						'touchcapture',
+					]),
+					links: [],
+				},
+			];
+			for (const navLink of this.navLinks) {
+				let hasGroup = false;
+				for (const group of groups) {
+					if (group.set.has(navLink.label.toLowerCase())) {
+						group.links.push(navLink);
+						hasGroup = true;
+						break;
+					}
+				}
+				if (!hasGroup) {
+					defaultGroup.links.push(navLink);
+				}
+			}
+			groups.unshift(defaultGroup);
+			return groups;
 		},
 	},
 };
@@ -63,8 +168,8 @@ export default {
 .nav .header-link {
 	font-weight: 600;
 	font-size: 14px;
-	line-height: 2.5;
-	letter-spacing: 1px;
+	line-height: 3;
+	letter-spacing: 2px;
 	text-transform: uppercase;
 }
 </style>
