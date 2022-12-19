@@ -110,7 +110,7 @@ export default {
 	border-radius: $maker-shape-default-border-radius;
 	transition: background-image linear 150ms;
 
-	--color-error: rgba(206, 50, 23, 1);
+	--color-error: $maker-color-error-fill;
 }
 
 .ImageDisplay,
