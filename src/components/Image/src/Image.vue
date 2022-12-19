@@ -18,10 +18,11 @@
 					[$s.thumbnail]: isThumbnail,
 				}"
 				:style="style"
-				:srcset="srcset"
+				:srcset="calculatedSrcSet"
 				:sizes="sizes"
-				:src="src"
+				:src="calculatedSrc"
 				v-bind="$attrs"
+				@load="onLoaded"
 				v-on="$listeners"
 			>
 		</m-transition-fade-in>
@@ -38,10 +39,11 @@ import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 
+/** @constructor */
 function SharedIntersectionObserver() {
 	const callbacks = new WeakMap();
 	const o = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => callbacks.get(entry.target)(entry));
+		entries.forEach((entry) => callbacks.get(entry.target)?.(entry));
 	});
 
 	return {
@@ -56,8 +58,10 @@ function SharedIntersectionObserver() {
 	};
 }
 
-const imgCache = new Set();
 const THUMBNAIL_MAX_WIDTH = '150';
+const THROTTLE_DELAY = 200;
+
+/** @type {SharedIntersectionObserver?} */
 let observer;
 
 /**
@@ -108,11 +112,10 @@ export default {
 	},
 
 	data() {
-		const throttleDelay = 200;
-
 		return {
-			loaded: imgCache.has(this.src + this.srcset),
-			throttledResizeHandler: throttle(this.getImageDimensions, throttleDelay),
+			shouldLoad: false,
+			loaded: false,
+			throttledResizeHandler: throttle(this.getImageDimensions, THROTTLE_DELAY),
 			height: 0,
 			width: 0,
 		};
@@ -122,6 +125,18 @@ export default {
 		...resolveThemeableProps('image', [
 			'shape',
 		]),
+
+		calculatedSrc() {
+			return this.shouldLoad
+				? this.src
+				: '';
+		},
+
+		calculatedSrcSet() {
+			return this.shouldLoad
+				? this.srcset
+				: '';
+		},
 
 		style() {
 			return {
@@ -145,54 +160,29 @@ export default {
 		if (this.loaded) {
 			this.$emit('image:visible');
 		}
-		if (!this.lazyload) {
-			this.load();
-		} else {
-			if (!observer) {
-				observer = new SharedIntersectionObserver();
-			}
+
+		if (this.lazyload) {
+			observer ??= new SharedIntersectionObserver();
+
 			observer.watch(this.$el, ({ isIntersecting }) => {
 				if (isIntersecting) {
 					this.load();
 				}
 			});
+		} else {
+			this.load();
 		}
+
 		this.getImageDimensions();
 	},
 
 	beforeDestroy() {
-		if (observer) {
-			observer.unwatch(this.$el);
-		}
+		observer?.unwatch(this.$el);
 	},
 
 	methods: {
 		load() {
-			if (this.loaded || (!this.src && !this.srcset)) {
-				return;
-			}
-
-			const img = new Image();
-
-			if (this.src) {
-				img.src = this.src;
-			}
-
-			if (this.srcset) {
-				img.srcset = this.srcset;
-			}
-
-			// Needed to not load the full size image
-			// and match the size loaded in the UI
-			if (this.sizes) {
-				img.sizes = this.sizes;
-			}
-
-			img.addEventListener('load', () => {
-				imgCache.add(this.src + this.srcset);
-				this.loaded = true;
-				this.getImageDimensions();
-			});
+			this.shouldLoad = true;
 		},
 
 		getImageDimensions() {
@@ -202,6 +192,11 @@ export default {
 
 		afterEnter() {
 			this.$emit('image:visible');
+		},
+
+		onLoaded() {
+			this.loaded = true;
+			this.getImageDimensions();
 		},
 	},
 };

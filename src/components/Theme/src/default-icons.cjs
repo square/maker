@@ -8,7 +8,9 @@ const ChevronLeft = require('@square/maker-icons/ChevronLeft').default;
 const ChevronRight = require('@square/maker-icons/ChevronRight').default;
 const X = require('@square/maker-icons/X').default;
 const Plus = require('@square/maker-icons/Plus').default;
+const Minus = require('@square/maker-icons/Minus').default;
 const ArrowUp = require('@square/maker-icons/ArrowUp').default;
+const Check = require('@square/maker-icons/Check').default;
 
 module.exports = function defaultIcons() {
 	return {
@@ -22,6 +24,8 @@ module.exports = function defaultIcons() {
 		chevronRight: ChevronRight,
 		close: X,
 		plus: Plus,
+		minus: Minus,
 		arrowUp: ArrowUp,
+		check: Check,
 	};
 };
