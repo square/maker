@@ -2,6 +2,7 @@
 	<div
 		:class="$s.Theme"
 		:style="styles"
+		v-on="$listeners"
 	>
 		<slot />
 	</div>

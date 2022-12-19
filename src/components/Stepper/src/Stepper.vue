@@ -11,7 +11,10 @@
 			:disabled="value === minVal"
 			@click="decrement"
 		>
-			<minus :class="$s.Icon" />
+			<m-icon
+				:class="$s.Icon"
+				name="minus"
+			/>
 		</m-button>
 		<div
 			:class="$s.Quantity"
@@ -48,7 +51,10 @@
 			:disabled="value === maxVal"
 			@click="increment"
 		>
-			<plus :class="$s.Icon" />
+			<m-icon
+				:class="$s.Icon"
+				name="plus"
+			/>
 		</m-button>
 	</div>
 </template>
@@ -57,15 +63,13 @@
 import { colord } from 'colord';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import { MButton } from '@square/maker/components/Button';
-import Plus from '@square/maker-icons/Plus';
-import Minus from '@square/maker-icons/Minus';
+import { MIcon } from '@square/maker/components/Icon';
 import { BASE_TEN } from '@square/maker/utils/constants';
 
 export default {
 	components: {
 		MButton,
-		Plus,
-		Minus,
+		MIcon,
 	},
 
 	inject: {
