@@ -2,7 +2,7 @@
 	<div>
 		<nav class="nav">
 			<template
-				v-for="group in groups"
+				v-for="group in groupsWithLinks"
 			>
 				<a
 					:key="group.name"
@@ -48,6 +48,9 @@ export default {
 		groups() {
 			const defaultGroup = {
 				name: 'general',
+				set: new Set([
+					'starrating',
+				]),
 				links: [],
 			};
 			const groups = [
@@ -57,6 +60,12 @@ export default {
 						'accordion',
 						'card',
 						'container',
+						'theme',
+						'blade',
+						'dialog',
+						'modal',
+						'popover',
+						'toast',
 					]),
 					links: [],
 				},
@@ -76,6 +85,19 @@ export default {
 						'stepper',
 						'textarea',
 						'toggle',
+						'menu',
+					]),
+					links: [],
+				},
+				{
+					name: 'notify',
+					set: new Set([
+						'notice',
+						'pill',
+						'badge',
+						'toast',
+						'progressbar',
+						'progresscircle',
 					]),
 					links: [],
 				},
@@ -89,6 +111,7 @@ export default {
 						'popover',
 						'menu',
 						'toast',
+						'select',
 					]),
 					links: [],
 				},
@@ -103,6 +126,7 @@ export default {
 				{
 					name: 'layout',
 					set: new Set([
+						'container',
 						'blockformcontrollayout',
 						'inlineformcontrollayout',
 						'row',
@@ -133,20 +157,23 @@ export default {
 				},
 			];
 			for (const navLink of this.navLinks) {
+				const navLinkLabel = navLink.label.toLowerCase();
 				let hasGroup = false;
 				for (const group of groups) {
-					if (group.set.has(navLink.label.toLowerCase())) {
+					if (group.set.has(navLinkLabel)) {
 						group.links.push(navLink);
 						hasGroup = true;
-						break;
 					}
 				}
-				if (!hasGroup) {
+				if (!hasGroup || defaultGroup.set.has(navLinkLabel)) {
 					defaultGroup.links.push(navLink);
 				}
 			}
 			groups.unshift(defaultGroup);
 			return groups;
+		},
+		groupsWithLinks() {
+			return this.groups.filter((group) => group.links.length > 0);
 		},
 	},
 };
