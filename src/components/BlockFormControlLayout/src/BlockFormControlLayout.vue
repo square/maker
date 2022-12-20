@@ -19,7 +19,7 @@
 
 .Error {
 	/* provided by theme eventually */
-	--color-error: rgba(206, 50, 23, 1);
+	--color-error: $maker-color-error-fill;
 
 	display: inline-block;
 	margin-top: 8px;
