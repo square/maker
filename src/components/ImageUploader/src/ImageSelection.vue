@@ -38,27 +38,30 @@
 			size="xsmall"
 		/>
 
-		<button
+		<m-button
 			v-if="!isUploading"
-			type="button"
-			:class="$s.ImageSelectionRemoveButton"
+			size="small"
+			color="#ffffff"
+			:class="$s.TopRight"
 			@click="$emit('removeImage')"
 		>
 			<m-icon
 				:class="$s.ImageSelectionRemoveIcon"
 				name="close"
 			/>
-		</button>
+		</m-button>
 	</div>
 </template>
 
 <script>
+import { MButton } from '@square/maker/components/Button';
 import { MLoading } from '@square/maker/components/Loading';
 import { MProgressBar } from '@square/maker/components/ProgressBar';
 import { MIcon } from '@square/maker/components/Icon';
 
 export default {
 	components: {
+		MButton,
 		MLoading,
 		MProgressBar,
 		MIcon,
@@ -148,19 +151,10 @@ export default {
 	border: 1px solid var(--color-error);
 }
 
-.ImageSelectionRemoveButton {
+.TopRight {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 32px;
-	height: 32px;
-	background-color: #fff;
-	border: 0;
-	border-radius: 50%;
-	cursor: pointer;
 }
 
 .ImageSelectionRemoveIcon {
