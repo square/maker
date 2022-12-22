@@ -63,23 +63,24 @@ export default {
 </script>
 
 <style module="$s">
-/*
-	Defined in Choice component:
-	--selected-color
-	--selected-contrast-color
-*/
 .ChoiceCard {
+	--color-border-active: $maker-color-neutral-80;
+
 	width: 100%;
 	cursor: pointer;
+	transition: border-color 0.2s ease;
 
 	&.selected {
-		border-color: var(--selected-color, $maker-color-neutral-90);
-		box-shadow: 0 0 0 1px var(--selected-color, $maker-color-neutral-90) inset;
+		border-color: var(--color-border-active);
 	}
 
 	&.disabled {
 		cursor: not-allowed;
 		opacity: 0.5;
+	}
+
+	&:not(.disabled, .selected):hover {
+		border-color: var(--color-border-active);
 	}
 }
 </style>
