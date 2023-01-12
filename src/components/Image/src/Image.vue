@@ -146,7 +146,7 @@ export default {
 		style() {
 			return {
 				'--image-height': `${this.height}px`,
-				'object-fit': this.objectFit,
+				'--image-object-fit': this.objectFit,
 			};
 		},
 
@@ -218,7 +218,7 @@ export default {
 .Image {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: var(--image-object-fit);
 	object-position: center;
 	border-radius: $maker-shape-image-border-radius;
 
