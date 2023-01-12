@@ -109,6 +109,11 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		objectFit: {
+			type: String,
+			validator: (fit) => ['cover', 'contain'].includes(fit),
+			default: 'cover',
+		},
 	},
 
 	data() {
@@ -141,6 +146,7 @@ export default {
 		style() {
 			return {
 				'--image-height': `${this.height}px`,
+				'object-fit': this.objectFit,
 			};
 		},
 
