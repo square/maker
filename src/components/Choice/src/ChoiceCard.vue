@@ -65,13 +65,15 @@ export default {
 <style module="$s">
 .ChoiceCard {
 	--color-border-active: $maker-color-neutral-80;
+	--color-border-selected: $maker-color-neutral-90;
 
 	width: 100%;
 	cursor: pointer;
 	transition: border-color 0.2s ease;
 
 	&.selected {
-		border-color: var(--color-border-active);
+		border-color: var(--color-border-selected);
+		box-shadow: 0 0 0 1px var(--color-border-selected) inset;
 	}
 
 	&.disabled {
