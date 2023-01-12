@@ -7,6 +7,8 @@
 			$s[`variant_${variant}`],
 			{
 				[$s.resizable]: resizable,
+				[$s.disabled]: disabled,
+				[$s.invalid]: invalid,
 			},
 		]"
 		v-bind="$attrs"
@@ -41,6 +43,13 @@ export default {
 		value: {
 			type: String,
 			default: '',
+		},
+		/**
+		 * Toggles textarea's disabled state
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 		/**
 		 * Toggle textarea's invalid state
@@ -138,12 +147,12 @@ export default {
 		color: var(--color-placeholder);
 	}
 
-	&:disabled {
+	&.disabled {
 		cursor: not-allowed;
 		opacity: 0.5;
 	}
 
-	&:invalid {
+	&.invalid {
 		border-color: var(--color-error);
 	}
 
@@ -155,12 +164,12 @@ export default {
 		-webkit-text-fill-color: var(--color-background);
 	}
 
-	&:hover:not(:disabled, :invalid) {
+	&:hover:not(.disabled, .invalid) {
 		border-color: var(--color-border-active);
 	}
 
-	&:active:not(:disabled, :invalid),
-	&:focus:not(:disabled, :invalid) {
+	&:active:not(.disabled, .invalid),
+	&:focus:not(.disabled, .invalid) {
 		border-color: var(--color-border-active);
 	}
 
