@@ -143,16 +143,11 @@ export default {
 
 	data() {
 		return {
-			shape: 'square',
-			shapeOptions: [
-				'square',
-				'circle',
-				'arch',
-			],
 			objectFit: 'cover',
 			objectFitOptions: [
 				'cover',
 				'contain',
+				'scale-down',
 			],
 		};
 	},
@@ -198,7 +193,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | sizes      | `string`  | —         | -                                              | -                                                                         |
 | shape*     | `string`  | —         | `'original'`, `'square'`, `'circle'`, `'arch'` | Original applies theme's border radius, square applies border radius of 0 |
 | lazyload   | `boolean` | `false`   | -                                              | -                                                                         |
-| object-fit | `string`  | `'cover'` | `'cover'`, `'contain'`                         | `cover` - image will be clipped to fit, `contain` - image will be scaled to fit dimensions                                                                         |
+| object-fit | `string`  | `'cover'` | `'cover'`, `'contain'`, `'scale-down'`                         | `cover` - image will be clipped to fit, `contain` - image will be scaled to fit dimensions                                                                         |
 
 
 ## Events

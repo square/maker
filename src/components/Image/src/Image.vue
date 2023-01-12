@@ -111,7 +111,7 @@ export default {
 		},
 		objectFit: {
 			type: String,
-			validator: (fit) => ['cover', 'contain'].includes(fit),
+			validator: (fit) => ['cover', 'contain', 'scale-down'].includes(fit),
 			default: 'cover',
 		},
 	},
