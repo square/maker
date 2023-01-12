@@ -187,6 +187,7 @@ Supports attributes from [`<textarea>`](https://developer.mozilla.org/en-US/docs
 | --------- | --------- | -------- | --------------------- | ------------------------------------- |
 | variant   | `string`  | `'fill'` | `'fill'`, `'outline'` | textarea variant                      |
 | v-model   | `string`  | `''`     | -                     | textarea's current value              |
+| disabled  | `boolean` | `false`  | -                     | Toggles textarea's disabled state     |
 | invalid   | `boolean` | `false`  | -                     | Toggle textarea's invalid state       |
 | resizable | `boolean` | `false`  | -                     | Toggles whether textarea is resizable |
 
