@@ -38,6 +38,7 @@ import { throttle } from 'lodash';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import cssValidator from '@square/maker/utils/css-validator';
 
 /** @constructor */
 function SharedIntersectionObserver() {
@@ -109,9 +110,12 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * [Object fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)
+		 */
 		objectFit: {
 			type: String,
-			validator: (fit) => ['cover', 'contain', 'scale-down'].includes(fit),
+			validator: cssValidator('object-fit'),
 			default: 'cover',
 		},
 	},
