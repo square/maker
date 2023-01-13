@@ -44,7 +44,7 @@
 </template>
 
 <script>
-const INPUT_FILTER_REGEX = /\D/gi;
+const INPUT_FILTER_REGEX = /\D/gimu;
 const INPUT_KEY_REGEX = /\d/;
 
 const DEFAULT_INPUT_SIZE = 6;
@@ -185,7 +185,7 @@ export default {
 
 		sanitizePinValue(input = '') {
 			return input
-				.replaceAll(INPUT_FILTER_REGEX, '')
+				.replace(INPUT_FILTER_REGEX, '')
 				.slice(0, this.pinLength);
 		},
 
