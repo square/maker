@@ -72,11 +72,16 @@ export default {
 	outline: none;
 	box-shadow: var(--focus-border, 0 0);
 	cursor: pointer;
+	transition: background-color 0.2s ease;
 
 	&:focus {
 		--focus-border:
 			0 0 0 1px $maker-color-neutral-10,
 			0 0 0 3px $maker-color-neutral-20;
+	}
+
+	&:not(:disabled, .selected):hover {
+		background-color: $maker-color-neutral-20;
 	}
 
 	&:disabled {
