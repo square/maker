@@ -38,6 +38,7 @@ import { throttle } from 'lodash';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import cssValidator from '@square/maker/utils/css-validator';
 
 /** @constructor */
 function SharedIntersectionObserver() {
@@ -109,6 +110,14 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * [Object fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)
+		 */
+		objectFit: {
+			type: String,
+			validator: cssValidator('object-fit'),
+			default: 'cover',
+		},
 	},
 
 	data() {
@@ -141,6 +150,7 @@ export default {
 		style() {
 			return {
 				'--image-height': `${this.height}px`,
+				'--image-object-fit': this.objectFit,
 			};
 		},
 
@@ -212,7 +222,7 @@ export default {
 .Image {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: var(--image-object-fit);
 	object-position: center;
 	border-radius: $maker-shape-image-border-radius;
 
