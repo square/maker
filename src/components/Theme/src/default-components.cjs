@@ -149,6 +149,7 @@ module.exports = function defaultComponents() {
 		},
 		card: {
 			shape: undefined,
+			variant: 'outline',
 		},
 		text: {
 			size: 0,

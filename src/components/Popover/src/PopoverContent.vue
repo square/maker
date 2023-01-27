@@ -72,6 +72,7 @@ export default {
 				colors = makerColors(this.bgColor);
 			}
 			if (this.color) {
+				colors.heading = getContrast(colors.background, this.color);
 				colors.body = getContrast(colors.background, this.color, WCAG_CONTRAST_TEXT);
 			}
 

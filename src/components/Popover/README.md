@@ -256,6 +256,89 @@ export default {
 }
 </style>
 ```
+### Custom popover component
+
+Using Popover to toggle a component besides PopoverContent (e.g. Card)
+
+```vue
+<template>
+	<m-theme
+		class="wrapper"
+		:theme="theme"
+	>
+		<m-popover-layer />
+		<m-image
+			class="image"
+			src="https://source.unsplash.com/600x400/?night+sky"
+		/>
+		<m-popover>
+			<template #action="popover">
+				<m-button
+					size="small"
+					@click="popover.toggle()"
+				>
+					Toggle popover
+				</m-button>
+			</template>
+
+			<template #content>
+				<m-card
+					variant="glass"
+				>
+					Content for a basic popover
+				</m-card>
+			</template>
+		</m-popover>
+	</m-theme>
+</template>
+
+<script>
+import { MPopoverLayer, MPopover } from '@square/maker/components/Popover';
+import { MButton } from '@square/maker/components/Button';
+import { MCard } from '@square/maker/components/Card';
+import { MImage } from '@square/maker/components/Image';
+import { MTheme } from '@square/maker/components/Theme';
+import makerColors from '@square/maker/utils/maker-colors';
+
+export default {
+	components: {
+		MPopoverLayer,
+		MPopover,
+		MButton,
+		MCard,
+		MImage,
+		MTheme,
+	},
+
+	mixins: [
+		MPopoverLayer.popoverMixin,
+	],
+
+	computed: {
+		theme() {
+			return {
+				colors: makerColors('#000000', '#ffffff'),
+			};
+		},
+	},
+};
+</script>
+
+<style scoped>
+.wrapper {
+	position: relative;
+	width: 600px;
+	height: 400px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.image {
+	position: absolute;
+}
+</style>
+```
 
 ### External triggers
 
