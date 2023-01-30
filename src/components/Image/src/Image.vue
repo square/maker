@@ -118,6 +118,14 @@ export default {
 			validator: cssValidator('object-fit'),
 			default: 'cover',
 		},
+		/**
+		 * [Object position](https://developer.mozilla.org/en-US/docs/Web/CSS/object-position)
+		 */
+		objectPosition: {
+			type: String,
+			validator: cssValidator('object-position'),
+			default: 'center',
+		},
 	},
 
 	data() {
@@ -151,6 +159,7 @@ export default {
 			return {
 				'--image-height': `${this.height}px`,
 				'--image-object-fit': this.objectFit,
+				'--image-object-position': this.objectPosition,
 			};
 		},
 
@@ -224,7 +233,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	object-fit: var(--image-object-fit);
-	object-position: center;
+	object-position: var(--image-object-position);
 	border-radius: $maker-shape-image-border-radius;
 
 	&.thumbnail {
