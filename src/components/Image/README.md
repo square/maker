@@ -176,6 +176,66 @@ export default {
 </style>
 ```
 
+### Object Position
+
+```vue
+<template>
+	<div>
+		<m-image
+			class="image"
+			src="https://source.unsplash.com/random/400x400"
+			:object-fit="objectFit"
+			:object-position="objectPosition"
+		/>
+		<br>
+		<label>
+			Object Position
+			<select
+				v-model="objectPosition"
+			>
+				<option
+					v-for="(value, index) in objectPositionOptions"
+					:key="index"
+					:value="value"
+				>
+					{{ value }}
+				</option>
+			</select>
+		</label>
+	</div>
+</template>
+
+<script>
+import { MImage } from '@square/maker/components/Image';
+
+export default {
+	components: {
+		MImage,
+	},
+
+	data() {
+		return {
+			objectFit: 'contain',
+			objectPosition: 'center',
+			objectPositionOptions: [
+				'center',
+				'top',
+				'bottom',
+			],
+		};
+	},
+};
+</script>
+
+<style scoped>
+.image {
+	display: inline-block;
+	width: 400px;
+	height: 600px;
+}
+</style>
+```
+
 ## Props
 Supports all `<img>` attributes
 
