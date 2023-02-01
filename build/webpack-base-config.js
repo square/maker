@@ -45,7 +45,7 @@ const webpackBaseConfig = {
 				loader: 'babel-loader',
 			},
 			{
-				test: /\.css$/,
+				test: /\.(post)?css$/,
 				oneOf: [
 					// Matches `<style module>`
 					{
