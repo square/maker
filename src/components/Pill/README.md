@@ -53,7 +53,7 @@ Pill can also take on a variety of shapes, optionally with a different shape on 
 			:shape="shape.shape"
 			:pattern="shape.pattern || 'info'"
 		>
-			shape: {{ shape.key }}
+			shape: {{ shape.shape }}
 		</m-pill>
 	</div>
 </template>
@@ -70,16 +70,16 @@ Pill can also take on a variety of shapes, optionally with a different shape on 
 			return {
 				shapes: [
 					{ key: 'pill', shape: 'pill' },
-					{ key: 'pill', shape: 'pill', pattern: 'infoOutline' },
+					{ key: 'pill-outline', shape: 'pill', pattern: 'infoOutline' },
 					{ key: 'rounded', shape: 'rounded' },
-					{ key: 'rounded', shape: 'rounded', pattern: 'infoOutline' },
-					{ key: 'sharp', shape: 'sharp' },
-					{ key: 'sharp', shape: 'sharp', pattern: 'infoOutline' },
+					{ key: 'rounded-outline', shape: 'rounded', pattern: 'infoOutline' },
+					{ key: 'squared', shape: 'squared' },
+					{ key: 'squared-outline', shape: 'squared', pattern: 'infoOutline' },
 					{ key: 'point', shape: 'point' },
-					{ key: 'point', shape: 'point', pattern: 'infoOutline' },
+					{ key: 'point-outline', shape: 'point', pattern: 'infoOutline' },
 					{ key: 'ribbon', shape: 'ribbon' },
-					{ key: 'ribbon', shape: 'ribbon', pattern: 'infoOutline' },
-					{ key: 'sharp, point', shape: ['sharp', 'point'] },
+					{ key: 'ribbon-outline', shape: 'ribbon', pattern: 'infoOutline' },
+					{ key: 'squared, point', shape: ['squared', 'point'] },
 					{ key: 'rounded, ribbon', shape: ['rounded', 'ribbon'], pattern: 'infoOutline' },
 				],
 			};
@@ -109,7 +109,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | pattern*    | `string`       | `'info'`    | `'primary'`, `'error'`, `'success'`, `'warning'`, `'info'`, `'primaryOutline'`, `'errorOutline'`, `'successOutline'`, `'warningOutline'`, `'infoOutline'`, `'primarySubtle'`, `'errorSubtle'`, `'successSubtle'`, `'warningSubtle'`, `'infoSubtle'`, any custom pattern defined within the theme | pattern defined at theme level                                        |
 | text-color* | `string`       | `'#ffffff'` | -                                                                                                                                                                                                                                                                                                | text color, also border color if no bg color                          |
 | bg-color*   | `string`       | `'#1b1b1b'` | -                                                                                                                                                                                                                                                                                                | bg & border color                                                     |
-| shape       | `string|array` | `'pill'`    | `'pill'`, `'sharp'`, `'rounded'`, `'point'`, `'ribbon'`                                                                                                                                                                                                                                          | The shape the pill should take, or a tuple of shapes for each endcap. |
+| shape       | `string|array` | `'pill'`    | `'pill'`, `'squared'`, `'rounded'`, `'point'`, `'ribbon'`                                                                                                                                                                                                                                        | The shape the pill should take, or a tuple of shapes for each endcap. |
 
 
 ## Slots

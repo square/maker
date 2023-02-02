@@ -16,7 +16,7 @@ import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/co
 
 const MAXIMUM_ALLOWED_SHAPES = 2;
 const ALLOWED_SHAPES = new Set([
-	'sharp',
+	'squared',
 	'rounded',
 	'pill',
 	'point',
@@ -66,7 +66,7 @@ export default {
 
 		/**
 		 * The shape the pill should take, or a tuple of shapes for each endcap.
-		 * @values pill, sharp, rounded, point, ribbon
+		 * @values pill, squared, rounded, point, ribbon
 		 */
 		shape: {
 			type: [String, Array],
@@ -141,7 +141,7 @@ export default {
 		border-bottom-left-radius: 4px;
 	}
 
-	&.start--sharp,
+	&.start--squared,
 	&.start--point,
 	&.start--ribbon {
 		border-top-left-radius: unset;
@@ -160,7 +160,7 @@ export default {
 			bottom: -1px; /* align to border */
 			left: -15px;
 			width: 15px;
-			background-color: inherit;
+			background-color: var(--bg-color);
 			content: '';
 		}
 
@@ -235,7 +235,7 @@ export default {
 		border-bottom-right-radius: 4px;
 	}
 
-	&.end--sharp,
+	&.end--squared,
 	&.end--point,
 	&.end--ribbon {
 		border-top-right-radius: unset;
@@ -289,8 +289,19 @@ export default {
 	}
 
 	&.end--ribbon {
+		&::after {
+			clip-path:
+				polygon(
+					0% 0%,
+					100% 0%,
+					20% 50%,
+					100% 100%,
+					0% 100%,
+					0% 0%
+				);
+		}
+
 		&.outlined::after {
-			background-color: var(--border-color);
 			clip-path:
 				polygon(
 					0% 0%,
@@ -303,18 +314,6 @@ export default {
 					calc(20% - 1px) 50%,
 					calc(100% - 2px) calc(0% + 1px),
 					0% calc(0% + 1px),
-					0% 0%
-				);
-		}
-
-		&::after {
-			clip-path:
-				polygon(
-					0% 0%,
-					100% 0%,
-					20% 50%,
-					100% 100%,
-					0% 100%,
 					0% 0%
 				);
 		}
