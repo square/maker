@@ -118,7 +118,7 @@ export default {
 };
 </script>
 
-<style module="$s" lang="postcss">
+<style module="$s">
 .Pill {
 	position: relative;
 	display: inline-block;
