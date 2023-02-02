@@ -71,7 +71,7 @@ export default {
 		shape: {
 			type: [String, Array],
 			default: 'pill',
-			validator: function validatePillShape(input) {
+			validator(input) {
 				if (Array.isArray(input)) {
 					return input.length === MAXIMUM_ALLOWED_SHAPES
 						&& input.every((value) => ALLOWED_SHAPES.has(value));
