@@ -14,18 +14,18 @@ const Check = require('@square/maker-icons/Check').default;
 
 module.exports = function defaultIcons() {
 	return {
-		error: AlertCircleFilled,
-		warning: AlertTriangleFilled,
-		success: CheckCircleFilled,
-		info: InfoFilled,
-		chevronUp: ChevronUp,
-		chevronDown: ChevronDown,
-		chevronLeft: ChevronLeft,
-		chevronRight: ChevronRight,
-		close: X,
-		plus: Plus,
-		minus: Minus,
-		arrowUp: ArrowUp,
-		check: Check,
+		error: (h) => h(AlertCircleFilled),
+		warning: (h) => h(AlertTriangleFilled),
+		success: (h) => h(CheckCircleFilled),
+		info: (h) => h(InfoFilled),
+		chevronUp: (h) => h(ChevronUp),
+		chevronDown: (h) => h(ChevronDown),
+		chevronLeft: (h) => h(ChevronLeft),
+		chevronRight: (h) => h(ChevronRight),
+		close: (h) => h(X),
+		plus: (h) => h(Plus),
+		minus: (h) => h(Minus),
+		arrowUp: (h) => h(ArrowUp),
+		check: (h) => h(Check),
 	};
 };

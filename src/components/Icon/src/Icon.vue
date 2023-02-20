@@ -1,6 +1,6 @@
 <template>
-	<component
-		:is="iconComponent"
+	<render-fn
+		:render-fn="iconRenderFn"
 		:class="$s.Icon"
 		:style="inlineStyles"
 		v-bind="$attrs"
@@ -12,6 +12,7 @@
 import cssValidator from '@square/maker/utils/css-validator';
 import assert from '@square/maker/utils/assert';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
+import RenderFn from '@square/maker/utils/RenderFn';
 
 const ICON_SIZES = {
 	medium: '16px',
@@ -23,6 +24,10 @@ const ICON_SIZES = {
  * @inheritListeners svg
  */
 export default {
+	components: {
+		RenderFn,
+	},
+
 	inject: {
 		theme: {
 			default: defaultTheme(),
@@ -71,10 +76,10 @@ export default {
 			'name',
 			'color',
 		]),
-		iconComponent() {
-			const component = this.theme.icons[this.resolvedName];
-			assert.error(component, `'${this.resolvedName}' icon not defined in theme`, 'Icon');
-			return component;
+		iconRenderFn() {
+			const renderFn = this.theme.icons[this.resolvedName];
+			assert.error(renderFn, `'${this.resolvedName}' icon not defined in theme`, 'Icon');
+			return renderFn;
 		},
 		inlineStyles() {
 			return {
