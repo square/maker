@@ -68,6 +68,14 @@ export default {
 			default: undefined,
 			validator: cssValidator('color'),
 		},
+		/**
+		 * fill of icon
+		 */
+		fill: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('fill'),
+		},
 	},
 
 	computed: {
@@ -75,6 +83,7 @@ export default {
 			'pattern',
 			'name',
 			'color',
+			'fill',
 		]),
 		iconRenderFn() {
 			const renderFn = this.theme.icons[this.resolvedName];
@@ -85,6 +94,7 @@ export default {
 			return {
 				'--color': this.resolvedColor,
 				'--icon-size': ICON_SIZES[this.size],
+				'--fill': this.resolvedFill,
 			};
 		},
 	},
@@ -95,10 +105,11 @@ export default {
 .Icon {
 	--icon-size: 16px;
 	--color: inherit;
+	--fill: currentColor;
 
 	width: var(--icon-size);
 	height: var(--icon-size);
 	color: var(--color);
-	fill: currentColor;
+	fill: var(--fill);
 }
 </style>

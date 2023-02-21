@@ -1,4 +1,5 @@
 <template>
+	<!-- eslint-disable max-len -->
 	<m-theme
 		class="custom-icons-lab"
 		:theme="iconTheme"
@@ -65,6 +66,69 @@
 			:name="icon"
 			:pattern="chosenIconPattern"
 		/>
+		<template
+			v-if="chosenIconPattern === 'gradient'"
+		>
+			<label>
+				customize gradient
+			</label>
+			<label>
+				start color
+				<input
+					v-model="startColor"
+					type="color"
+				>
+				{{ startColor }}
+			</label>
+			<label>
+				end color
+				<input
+					v-model="endColor"
+					type="color"
+				>
+				{{ endColor }}
+			</label>
+			<label>
+				angle
+				<input
+					v-model="angle"
+					type="range"
+					min="0"
+					max="360"
+				>
+				{{ angle }} deg
+			</label>
+			<p>
+				note: gradient doesn't apply to font awesome icons because
+				they're an icon font. it applies to bootstrap icons since we're
+				rendering them inline as svgs.
+			</p>
+		</template>
+		<!-- https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Gradients -->
+		<!-- https://fvsch.com/svg-gradient-fill -->
+		<!-- https://stackoverflow.com/q/9025678/2766908 -->
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			aria-hidden="true"
+			focusable="false"
+			class="invisible-but-not-hidden"
+		>
+			<defs>
+				<linearGradient
+					id="gradient"
+					:gradientTransform="`rotate(${angle} 0.5 0.5)`"
+				>
+					<stop
+						offset="0%"
+						:stop-color="startColor"
+					/>
+					<stop
+						offset="100%"
+						:stop-color="endColor"
+					/>
+				</linearGradient>
+			</defs>
+		</svg>
 	</m-theme>
 </template>
 
@@ -147,6 +211,7 @@ const bsIcons = [
 ];
 
 const iconPatterns = Object.keys(defaultTheme().icon.patterns);
+iconPatterns.push('gradient');
 
 export default {
 	components: {
@@ -163,6 +228,9 @@ export default {
 			iconStyles,
 			chosenIconPattern: iconPatterns[0],
 			iconPatterns,
+			startColor: '#ff0000',
+			endColor: '#0000ff',
+			angle: '0',
 		};
 	},
 	computed: {
@@ -191,7 +259,17 @@ export default {
 					/>;
 				*/
 			}
-			return { icons };
+			const icon = {
+				patterns: {
+					gradient: {
+						fill: 'url(#gradient)',
+					},
+				},
+			};
+			return {
+				icons,
+				icon,
+			};
 		},
 		allIcons() {
 			return this.faIcons.concat(this.bsIcons);
@@ -224,5 +302,12 @@ export default {
 
 label {
 	display: block;
+}
+
+/* https://fvsch.com/svg-gradient-fill */
+.invisible-but-not-hidden {
+	position: absolute;
+	width: 0;
+	height: 0;
 }
 </style>

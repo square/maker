@@ -452,6 +452,7 @@ module.exports = function defaultComponents() {
 		},
 		icon: {
 			color: 'inherit',
+			fill: 'currentColor',
 			name: 'info',
 			pattern: undefined,
 			patterns: {
