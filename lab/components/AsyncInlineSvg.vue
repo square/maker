@@ -1,25 +1,28 @@
 <template>
-	<!--
-		hack I temporarily used to fix an issue
-		that seems to have magically fixed itself
-		but I'm keeping this code here in case
-		I wanna experiment more with it later
-	-->
-	<html-fragment
+	<!-- eslint-disable vue/no-v-html -->
+	<!-- <html-fragment
 		v-if="fragment"
 		:class="classes"
 		:html="svgText"
+	/> -->
+	<fragment
+		v-html="svgText"
 	/>
-	<!-- eslint-disable vue/no-v-html -->
-	<i
+
+	<!-- v-if="fragment || true"
+	:class="classes" -->
+
+	<!-- <i
 		v-else
 		:class="classes"
 		v-html="svgText"
-	/>
+	/> -->
 </template>
 
 <script>
-import HtmlFragment from './HtmlFragment.vue';
+import { Fragment } from 'vue-frag';
+// import frag from 'vue-frag';
+// import HtmlFragment from './HtmlFragment.vue';
 
 /**
  * trims anything before the opening svg tag
@@ -62,15 +65,22 @@ function cleanText(svgText) {
  * by CSS for styling.
  */
 export default {
+	// components: {
+	// 	// HtmlFragment,
+	// 	Fragment,
+	// },
 	components: {
-		HtmlFragment,
+		Fragment,
 	},
+	// directives: {
+	// 	frag,
+	// },
 	props: {
 		src: {
 			type: String,
 			required: true,
 		},
-		fragment: {
+		noWrapper: {
 			type: Boolean,
 			default: false,
 		},

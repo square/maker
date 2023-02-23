@@ -407,7 +407,7 @@ export default {
 				// icons async and render them inline
 				icons[bsIcon] = () => <AsyncInlineSvg
 					class="icon"
-					fragment={false}
+					noWrapper={true}
 					src={`https://icons.getbootstrap.com/assets/icons/${bsIcon}${iconStyleToBs[this.chosenIconStyle]}.svg`}
 				/>;
 				/*
