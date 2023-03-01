@@ -1,6 +1,18 @@
 # Migration guides for Maker major releases
 
-## [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) -> [16.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](https://github.com/square/maker/pull/500))
+## [16.x](https://square.github.io/maker/styleguide/16.7.0/#/) -> [17.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](#))
+
+### Theme icons now using render functions
+
+Before to theme icons you'd have to pass Vue components to the MTheme config object. This had two big limitations: icon components must be compiled either ahead of time or on the fly, and it wasn't possible to customize the prop values on the icon component, it would always be rendered with the defaults. Furthermore, doing this just for icon components was a little odd since we already established the pattern of using render functions for all other components which conditionally render nested content, e.g. MModals, MDialogs, MBlades, MToasts. Now to theme icons you use render functions, which solves all of the problems noted above.
+
+16.x (before) | 17.x (after)
+-|-
+`const theme = { icons: { error: AlertTriangle } };` | `const theme = { icons: { error: (h) => h(AlertTriangle) } };`
+`<m-icon name="error" />` | `<m-icon name="error" />` (no changes)
+
+
+## [15.x](https://square.github.io/maker/styleguide/15.10.2/#/) -> [16.x](https://square.github.io/maker/styleguide/16.7.0/#/) ([PR](https://github.com/square/maker/pull/500))
 
 ### `parentModal` removed from `modalApi`, use `closeAll` instead
 
@@ -10,7 +22,7 @@ Before, if a user wanted to close a stack of modals simultaneously, they would w
 -|-
 `this.modalApi.parentModal.close()` | `this.modalApi.closeAll()`
 
-### Loading `normal` size renamed to `medium`
+### MLoading `normal` size renamed to `medium`
 
 The naming scheme for Maker component semantic sizes is: `xsmall`, `small`, `medium`, `large`, `xlarge` but MLoading was implemented forever ago and its size values were `normal` and `large` which is weird so we're renaming `normal` to `medium` so it's more consistent with the rest of the library.
 
@@ -18,7 +30,7 @@ The naming scheme for Maker component semantic sizes is: `xsmall`, `small`, `med
 -|-
 `<m-loading size="normal" />` | `<m-loading size="medium" />`
 
-## MenuOption `click-handler` prop removed, use `@click` instead
+## MMenuOption `click-handler` prop removed, use `@click` instead
 
 Should've been `@click` from the beginning, but was overlooked during code review.
 
@@ -82,7 +94,7 @@ Before we put visual components into `/components` and functional components int
 `import { MTransitionStack } from '@square/maker/utils/TransitionStack'` | `import { MTransitionStack } from '@square/maker/components/TransitionStack'`
 `import { MTransitionStaggered } from '@square/maker/utils/TransitionStaggered'` | `import { MTransitionStaggered } from '@square/maker/components/TransitionStaggered'`
 
-## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.9.0/#/) ([PR](https://github.com/square/maker/pull/441))
+## [14.x](https://square.github.io/maker/styleguide/14.18.3/#/) -> [15.x](https://square.github.io/maker/styleguide/15.10.2/#/) ([PR](https://github.com/square/maker/pull/441))
 
 ### MButton pattern & variant renames
 
