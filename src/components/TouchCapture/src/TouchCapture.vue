@@ -111,7 +111,7 @@ export default {
 
 	methods: {
 		handleTouchEvent(event) {
-			if (this.preventDefault) {
+			if (this.preventDefault && event.cancelable) { // Some things are not cancelable like scrolling - https://www.uriports.com/blog/easy-fix-for-intervention-ignored-attempt-to-cancel-a-touchmove-event-with-cancelable-false/
 				event.preventDefault();
 			}
 			switch (event.type) {
