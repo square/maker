@@ -17,6 +17,8 @@ import RenderFn from '@square/maker/utils/RenderFn';
 const ICON_SIZES = {
 	medium: '16px',
 	large: '24px',
+	xlarge: '48px',
+	xxlarge: '64px',
 };
 
 /**
@@ -53,12 +55,12 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * size of icon, medium = 16px, large = 24px
+		 * size of icon
 		 */
 		size: {
 			type: String,
 			default: 'medium',
-			validator: (size) => ['medium', 'large'].includes(size),
+			validator: (size) => ['medium', 'large', 'xlarge', 'xxlarge'].includes(size),
 		},
 		/**
 		 * color of icon
