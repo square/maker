@@ -6,7 +6,7 @@ Use Icon to render icons defined in the Theme.
 
 ### Built-in default icons
 
-Maker provides several built-in icons (listed below). The icons `error`, `warning`, `success` and `info` are used within [Notice](#/Notice). `chevronLeft` and `chevronRight` are used within [Calendar](#/Calendar). `chevronDown` is used within [Select](#/Select). `plus` and `arrowUp` are used within [ImageUploader](#/ImageUploader). `close` is used within [Toast](#/Toast) and [ImageUploader](#/ImageUploader). `check` is used within [Menu](#/Menu). `plus` and `minus` are used within [Stepper](#/Stepper). Any of these can be customized via the [Theme](#/Theme) component.
+Maker provides several built-in icons (listed below). The icons `error`, `warning`, `success` and `info` are used within [Notice](#/Notice). `chevronLeft` and `chevronRight` are used within [Calendar](#/Calendar). `chevronDown` is used within [Select](#/Select). `plus` and `arrowUp` are used within [ImageUploader](#/ImageUploader). `close` is used within [Toast](#/Toast) and [ImageUploader](#/ImageUploader). `check` is used within [Menu](#/Menu). `plus` and `minus` are used within [Stepper](#/Stepper). `spinner` is used within [Loading](#/Loading). Any of these can be customized via the [Theme](#/Theme) component.
 
 ```vue
 <template>
