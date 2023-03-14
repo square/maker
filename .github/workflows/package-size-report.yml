@@ -1,3 +1,7 @@
+# this workflow has been broken for a while
+# so we manually disabled it from the Github UI
+# we can re-enable it after it is fixed
+
 name: Package size report
 
 on: pull_request
