@@ -106,12 +106,13 @@ Supports attributes from [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/
 
 Themable props* can be configured via the [Theme](#/Theme) component using the key `icon`.
 
-| Prop     | Type     | Default     | Possible values                                                                                         | Description                               |
-| -------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| pattern* | `string` | —           | `'info'`, `'warning'`, `'error'`, `'success'`, `'primary'`, any custom pattern defined within the theme | pattern defined in theme                  |
-| name*    | `string` | `'info'`    | -                                                                                                       | name of icon, defined in theme            |
-| size     | `string` | `'medium'`  | `'medium'`, `'large'`                                                                                   | size of icon, medium = 16px, large = 24px |
-| color*   | `string` | `'inherit'` | -                                                                                                       | color of icon                             |
+| Prop     | Type     | Default          | Possible values                                                                                         | Description                               |
+| -------- | -------- | ---------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| pattern* | `string` | —                | `'info'`, `'warning'`, `'error'`, `'success'`, `'primary'`, any custom pattern defined within the theme | pattern defined in theme                  |
+| name*    | `string` | `'info'`         | -                                                                                                       | name of icon, defined in theme            |
+| size     | `string` | `'medium'`       | `'medium'`, `'large'`                                                                                   | size of icon, medium = 16px, large = 24px |
+| color*   | `string` | `'inherit'`      | -                                                                                                       | color of icon                             |
+| fill*    | `string` | `'currentColor'` | -                                                                                                       | fill of icon                              |
 
 
 ## Events
