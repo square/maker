@@ -11,6 +11,7 @@ const Plus = require('@square/maker-icons/Plus').default;
 const Minus = require('@square/maker-icons/Minus').default;
 const ArrowUp = require('@square/maker-icons/ArrowUp').default;
 const Check = require('@square/maker-icons/Check').default;
+const Spinner = require('@square/maker-icons/Spinner').default;
 
 module.exports = function defaultIcons() {
 	return {
@@ -27,5 +28,6 @@ module.exports = function defaultIcons() {
 		minus: (h) => h(Minus),
 		arrowUp: (h) => h(ArrowUp),
 		check: (h) => h(Check),
+		spinner: (h) => h(Spinner),
 	};
 };
