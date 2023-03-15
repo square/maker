@@ -3,6 +3,23 @@
 		:class="$s.PinInputContainer"
 		:style="computedStyles"
 	>
+		<input
+			ref="input"
+			:class="$s.PinInput"
+			:maxlength="pinLength"
+			:value="inputValue"
+			type="text"
+			inputmode="numeric"
+			pattern="[0-9]*"
+			:disabled="disabled || isShaking"
+			@keydown="handleKeyDown"
+			@keypress="sanitizePinInput"
+			@input="onInputPin"
+			@keyup="updateCaretPosition"
+			@click="updateCaretPosition"
+			@focus="setFocus(true)"
+			@blur="setFocus(false)"
+		>
 		<div
 			:class="{
 				[$s.PinInputCells]: true,
@@ -22,24 +39,6 @@
 				{{ inputValue[pinPosition - 1] }}
 			</div>
 		</div>
-
-		<input
-			ref="input"
-			:class="$s.PinInput"
-			:maxlength="pinLength"
-			:value="inputValue"
-			type="text"
-			inputmode="numeric"
-			pattern="[0-9]*"
-			:disabled="disabled || isShaking"
-			@keydown="handleKeyDown"
-			@keypress="sanitizePinInput"
-			@input="onInputPin"
-			@keyup="updateCaretPosition"
-			@click="updateCaretPosition"
-			@focus="setFocus(true)"
-			@blur="setFocus(false)"
-		>
 	</div>
 </template>
 
@@ -267,12 +266,22 @@ export default {
 	background: transparent;
 	border: 0;
 	outline: 0;
+
+	/* Prevents Safari styles */
+	&:-webkit-autofill-and-obscured,
+	&:-webkit-autofill-strong-password,
+	&:-webkit-autofill-strong-password-viewable,
+	&:-webkit-autofill {
+		color: transparent !important;
+		box-shadow: 0 0 0 1000px $maker-color-background inset;
+	}
 }
 
 .PinInputCells {
 	position: relative;
 	display: flex;
 	gap: 8px;
+	pointer-events: none;
 }
 
 .PinInputCell {
