@@ -298,7 +298,7 @@ export default {
 	font-size: 16px;
 	font-family: inherit;
 	text-align: center;
-	background: $maker-color-background;
+	background: transparent;
 	border: 1px solid $maker-color-neutral-20;
 	border-radius: $maker-shape-default-border-radius;
 	outline: none;
