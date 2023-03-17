@@ -22,7 +22,8 @@ const ICON_SIZES = {
 	xxlarge: '48px',
 };
 
-const widthValidator = cssValidator('width');
+// width & height css props accept same set of values
+const sizeValidator = cssValidator('width');
 
 /**
  * @inheritAttrs svg
@@ -64,7 +65,7 @@ export default {
 		size: {
 			type: String,
 			default: 'small',
-			validator: (size) => ICON_SIZES[size] || widthValidator(size),
+			validator: (size) => ICON_SIZES[size] || sizeValidator(size),
 		},
 		/**
 		 * color of icon

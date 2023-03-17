@@ -20,7 +20,8 @@ const ICON_SIZES = new Set([
 	'xxlarge',
 ]);
 
-const widthValidator = cssValidator('width');
+// width & height css props accept same set of values
+const sizeValidator = cssValidator('width');
 
 /**
  * @inheritAttrs div
@@ -39,7 +40,7 @@ export default {
 		size: {
 			type: String,
 			default: 'small',
-			validator: (size) => ICON_SIZES.has(size) || widthValidator(size),
+			validator: (size) => ICON_SIZES.has(size) || sizeValidator(size),
 		},
 	},
 };
