@@ -15,11 +15,14 @@ import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/co
 import RenderFn from '@square/maker/utils/RenderFn';
 
 const ICON_SIZES = {
-	medium: '16px',
-	large: '24px',
-	xlarge: '48px',
-	xxlarge: '64px',
+	small: '16px',
+	medium: '24px',
+	large: '32px',
+	xlarge: '40px',
+	xxlarge: '48px',
 };
+
+const widthValidator = cssValidator('width');
 
 /**
  * @inheritAttrs svg
@@ -55,12 +58,13 @@ export default {
 			default: undefined,
 		},
 		/**
-		 * size of icon
+		 * size of icon, can be named value or any valid CSS width/height
+		 * @values small, medium, large, xlarge, xxlarge
 		 */
 		size: {
 			type: String,
-			default: 'medium',
-			validator: (size) => ['medium', 'large', 'xlarge', 'xxlarge'].includes(size),
+			default: 'small',
+			validator: (size) => ICON_SIZES[size] || widthValidator(size),
 		},
 		/**
 		 * color of icon
@@ -95,7 +99,7 @@ export default {
 		inlineStyles() {
 			return {
 				'--color': this.resolvedColor,
-				'--icon-size': ICON_SIZES[this.size],
+				'--icon-size': ICON_SIZES[this.size] || this.size,
 				'--fill': this.resolvedFill,
 			};
 		},

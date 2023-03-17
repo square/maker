@@ -18,11 +18,23 @@ export default {
 </script>
 ```
 
-It also comes in a `large` size.
+### Sizes
+
+MLoading supports a few named sizes, but also supports any valid CSS width or height value passed to its `size` prop.
 
 ```vue
 <template>
-	<m-loading size="large" />
+	<ul class="loading-list">
+		<li
+			v-for="size in sizes"
+			:key="size"
+		>
+			<m-loading
+				:size="size"
+			/>
+			{{ size }}
+		</li>
+	</ul>
 </template>
 
 <script>
@@ -32,8 +44,37 @@ export default {
 	components: {
 		MLoading,
 	},
+	data() {
+		return {
+			sizes: [
+				// named sizes
+				'small',
+				'medium',
+				'large',
+				'xlarge',
+				'xxlarge',
+				// custom sizes
+				'56px',
+				'64px',
+			],
+		};
+	},
 };
 </script>
+
+<style scoped>
+.loading-list {
+	margin: 0 !important;
+	padding: 0 !important;
+	list-style: none;
+}
+
+.loading-list li {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+</style>
 ```
 
 <!-- api-tables:start -->
@@ -41,9 +82,9 @@ export default {
 
 Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
-| Prop | Type     | Default    | Possible values       | Description |
-| ---- | -------- | ---------- | --------------------- | ----------- |
-| size | `string` | `'medium'` | `'medium'`, `'large'` | -           |
+| Prop | Type     | Default   | Possible values                                           | Description                                                            |
+| ---- | -------- | --------- | --------------------------------------------------------- | ---------------------------------------------------------------------- |
+| size | `string` | `'small'` | `'small'`, `'medium'`, `'large'`, `'xlarge'`, `'xxlarge'` | size of spinner icon, can be named value or any valid CSS width/height |
 
 
 ## Events

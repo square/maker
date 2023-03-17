@@ -1,6 +1,34 @@
 # Migration guides for Maker major releases
 
-## [16.x](https://square.github.io/maker/styleguide/16.7.0/#/) -> [17.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](#))
+## [17.x](https://square.github.io/maker/styleguide/17.2.2/#/) -> [18.x](https://square.github.io/maker/styleguide/latest-stable/#/) ([PR](#))
+
+### Standardizes size values for MIcon & MLoading
+
+The `size` prop values for MLoading did not match those of MIcon, which is a problem because MLoading was recently refactored to use MIcon internally. They now match. Also the `size` prop for either MLoading or MIcon can now also take any arbitrary valid CSS value for width or height. The default sizes for both components remains unchanged.
+
+size | MIcon 17.x | MLoading 17.x | MIcon 18.x | MLoading 18.x
+-|-|-|-|-
+16px | `medium` |  `medium` | `small` | `small`
+24px | `large` |  - | `medium` | `medium`
+32px | - | - | `large` | `large`
+40px | - | - | `xlarge` | `xlarge`
+48px | `xlarge` | - | `xxlarge` | `xxlarge`
+56px | - | - | `56px` | `56px`
+64px | `xxlarge` | `large` | `64px` | `64px`
+
+
+17.x (before) | 18.x (after)
+-|-
+`<m-icon />` | `<m-icon />` (no changes)
+`<m-icon size="medium" />` | `<m-icon size="small" />`
+`<m-icon size="large" />` | `<m-icon size="medium" />`
+`<m-icon size="xlarge" />` | `<m-icon size="xxlarge" />`
+`<m-icon size="xxlarge" />` | `<m-icon size="64px" />`
+`<m-loading />` | `<m-loading />` (no changes)
+`<m-loading size="medium" />` | `<m-loading size="small" />`
+`<m-loading size="large" />` | `<m-loading size="64px" />`
+
+## [16.x](https://square.github.io/maker/styleguide/16.7.0/#/) -> [17.x](https://square.github.io/maker/styleguide/17.2.2/#/) ([PR](https://github.com/square/maker/pull/528))
 
 ### Theme icons now using render functions
 
