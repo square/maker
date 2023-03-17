@@ -88,8 +88,9 @@ export default {
 			'fill',
 		]),
 		iconRenderFn() {
-			const renderFn = this.theme.icons[this.resolvedName];
-			assert.error(renderFn, `'${this.resolvedName}' icon not defined in theme`, 'Icon');
+			let renderFn = this.theme.icons[this.resolvedName];
+			assert.warn(renderFn, `'${this.resolvedName}' icon not defined in theme`, 'Icon');
+			renderFn = renderFn || this.theme.icons.info; // fallback to info icon
 			return renderFn;
 		},
 		inlineStyles() {
