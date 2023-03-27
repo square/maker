@@ -11,6 +11,7 @@
 				[$s.invalid]: invalid,
 			},
 		]"
+		:disabled="disabled"
 		v-bind="$attrs"
 		v-on="$listeners"
 	/>
