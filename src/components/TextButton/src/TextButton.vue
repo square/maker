@@ -176,7 +176,7 @@ export default {
 	}
 
 	&:disabled {
-		cursor: initial;
+		cursor: not-allowed;
 
 		& > * {
 			opacity: 0.5;
