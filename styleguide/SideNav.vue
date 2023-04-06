@@ -12,7 +12,7 @@
 				</a>
 				<router-link
 					v-for="link in group.links"
-					:key="link.path.name"
+					:key="group.name + '-' + link.path.name"
 					:to="link.path"
 					class="link"
 					@click.native="$emit('route:click')"
