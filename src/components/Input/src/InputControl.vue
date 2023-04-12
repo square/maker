@@ -205,6 +205,7 @@ export default {
 	flex-grow: 1;
 	order: 2;
 	box-sizing: inherit;
+	width: 100%;
 	color: inherit;
 	font-weight: inherit;
 	font-size: inherit;
