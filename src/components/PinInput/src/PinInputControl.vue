@@ -272,8 +272,12 @@ export default {
 	&:-webkit-autofill-strong-password,
 	&:-webkit-autofill-strong-password-viewable,
 	&:-webkit-autofill {
-		color: transparent !important;
-		box-shadow: 0 0 0 1000px $maker-color-background inset;
+		color: var(--bg-color, #fff) !important;
+		background-color: var(--bg-color, #fff) !important;
+		background-clip: content-box !important;
+		-webkit-box-shadow: 0 0 0 1000px var(--bg-color, #fff) inset !important;
+		box-shadow: 0 0 0 1000px var(--bg-color, #fff) inset !important;
+		-webkit-text-fill-color: var(--bg-color, #fff);
 	}
 }
 
