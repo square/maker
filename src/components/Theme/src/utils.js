@@ -9,7 +9,7 @@ const get = require('lodash/get');
  * @param {value} valueOrPointer
  * @return {*} resolvedValue
  */
-function resolve(valueOrPointer) {
+export function resolve(valueOrPointer) {
 	if (!isString(valueOrPointer)) {
 		return valueOrPointer; // non-strings are always values
 	}
@@ -24,7 +24,7 @@ function resolve(valueOrPointer) {
  * @param {*} pointer
  * @returns {*} _.get(this, pointer)
  */
-function getPath(pointer) {
+export function getPath(pointer) {
 	if (!isString(pointer)) {
 		throw new Error(`cannot resolve pointer ${pointer} it is not a string`);
 	}
@@ -59,7 +59,7 @@ function capitalizeFirstLetter(string) {
  * Validate the value using the Vue Component's validator for that prop name, if one is defined.
  * Return the value
 */
-function resolveThemeableProps(componentKeyInTheme, propNames) {
+export function resolveThemeableProps(componentKeyInTheme, propNames) {
 	const computedResolvedProps = {};
 	for (const propName of propNames) {
 		if (propName === 'pattern') {
@@ -148,9 +148,3 @@ function resolveThemeableProps(componentKeyInTheme, propNames) {
 	}
 	return computedResolvedProps;
 }
-
-module.exports = {
-	getPath,
-	resolve,
-	resolveThemeableProps,
-};

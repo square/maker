@@ -1,7 +1,7 @@
 const markdownTable = require('markdown-table');
 const { kebabCase, get } = require('lodash');
 const assert = require('assert');
-const defaultTheme = require('../../src/components/Theme/src/default-theme.cjs');
+const defaultTheme = require('../../src/components/Theme/src/default-theme');
 
 const DEFAULT_THEME = Object.freeze(defaultTheme());
 

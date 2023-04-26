@@ -9,7 +9,7 @@ const {
 const commentMark = require('comment-mark');
 const generateApiTables = require('./generate-api-tables');
 const developmentConfig = require('../webpack-development-config');
-const defaultTheme = require('../../src/components/Theme/src/default-theme.cjs');
+const defaultTheme = require('../../src/components/Theme/src/default-theme');
 
 const DEFAULT_THEME = Object.freeze(defaultTheme());
 

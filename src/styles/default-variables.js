@@ -1,7 +1,7 @@
-const defaultColors = require('../components/Theme/src/default-colors.cjs');
-const defaultFonts = require('../components/Theme/src/default-fonts.cjs');
-const defaultShapes = require('../components/Theme/src/default-shapes.cjs');
-const publicizeVars = require('../components/Theme/src/publicize-vars.cjs');
+import defaultColors from '../components/Theme/src/default-colors';
+import defaultFonts from '../components/Theme/src/default-fonts';
+import defaultShapes from '../components/Theme/src/default-shapes';
+import publicizeVars from '../components/Theme/src/publicize-vars';
 
 const defaultTheme = {
 	colors: defaultColors(),
@@ -19,4 +19,4 @@ for (const [cssVarName, defaultFallbackValue] of Object.entries(defaultCssVars))
 	defaultVars[simpleVarName] = `var(${cssVarName}, ${defaultFallbackValue})`;
 }
 
-module.exports = defaultVars;
+export default defaultVars;

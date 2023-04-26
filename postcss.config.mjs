@@ -1,11 +1,13 @@
-const variables = require('./src/styles/default-variables.cjs');
+import postcssSimpleVars from 'postcss-simple-vars';
+import postcssPresetEnv from 'postcss-preset-env';
+import variables from './src/styles/default-variables';
 
-module.exports = {
+export default {
 	plugins: [
-		require('postcss-simple-vars')({
+		postcssSimpleVars({
 			variables,
 		}),
-		require('postcss-preset-env')({
+		postcssPresetEnv({
 			stage: 0,
 			preserve: false,
 			features: {

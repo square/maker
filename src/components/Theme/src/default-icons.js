@@ -13,7 +13,7 @@ const ArrowUp = require('@square/maker-icons/ArrowUp').default;
 const Check = require('@square/maker-icons/Check').default;
 const Spinner = require('@square/maker-icons/Spinner').default;
 
-module.exports = function defaultIcons() {
+export default function defaultIcons() {
 	return {
 		error: (h) => h(AlertCircleFilled),
 		warning: (h) => h(AlertTriangleFilled),
@@ -30,4 +30,4 @@ module.exports = function defaultIcons() {
 		check: (h) => h(Check),
 		spinner: (h) => h(Spinner),
 	};
-};
+}

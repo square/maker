@@ -8,7 +8,7 @@ function clamp(value, min, max) {
 	return Math.min(Math.max(Number.parseInt(value, BASE_TEN), min), max);
 }
 
-module.exports = function publicizeVars(theme) {
+export default function publicizeVars(theme) {
 	const { colors, fonts, shapes } = theme;
 	const MAX_THUMBNAIL_RADIUS = 8;
 
@@ -47,4 +47,4 @@ module.exports = function publicizeVars(theme) {
 		'--maker-shape-image-border-radius': shapes.imageBorderRadius,
 		'--maker-shape-thumbnail-border-radius': `${clamp(shapes.imageBorderRadius, 0, MAX_THUMBNAIL_RADIUS)}px`,
 	};
-};
+}

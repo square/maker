@@ -28,8 +28,7 @@ const webpackBuildConfig = (() => {
 		module: {
 			rules: [
 				{
-					// passes .cjs, .mjs, .js
-					test: /\.(c|m)?js$/,
+					test: /\.js$/,
 					loader: 'babel-loader',
 				},
 			],
@@ -85,7 +84,16 @@ const buildUtil = (utilPath) => merge({}, webpackBuildConfig, {
 	},
 });
 
+const buildVars = () => merge({}, webpackBuildConfig, {
+	entry: './src/styles/default-variables.js',
+	output: {
+		filename: 'default-variables.js',
+		path: path.resolve('./styles'),
+	},
+});
+
 module.exports = async () => [
+	buildVars(),
 	...(await tinyGlob('./src/{components,utils}/**/index.js')).map(
 		(componentPath) => buildComponent(`./${componentPath}`),
 	),

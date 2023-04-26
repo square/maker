@@ -4,6 +4,7 @@ module.exports = {
 	ignorePatterns: [
 		// Distribution files
 		'/components/',
+		'/styles/',
 		'/utils/',
 	],
 
