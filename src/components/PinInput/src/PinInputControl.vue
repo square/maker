@@ -34,6 +34,7 @@
 					[$s.isFocused]: isCellFocused(pinPosition - 1),
 					[$s.fill]: variant === 'fill',
 					[$s.error]: invalid,
+					[$s.disabled]: disabled || isShaking
 				}"
 			>
 				{{ inputValue[pinPosition - 1] }}
@@ -267,18 +268,8 @@ export default {
 	border: 0;
 	outline: 0;
 
-	/* Prevents Safari styles */
-	&:-webkit-autofill-and-obscured,
-	&:-webkit-autofill-strong-password,
-	&:-webkit-autofill-strong-password-viewable,
-	&:-webkit-autofill {
-		color: var(--bg-color, #fff) !important;
-		background-color: var(--bg-color, #fff) !important;
-		background-clip: content-box !important;
-		-webkit-box-shadow: 0 0 0 1000px var(--bg-color, #fff) inset !important;
-		box-shadow: 0 0 0 1000px var(--bg-color, #fff) inset !important;
-		-webkit-text-fill-color: var(--bg-color, #fff);
-	}
+	/* This makes the input clickable but not actually visible */
+	opacity: 0 !important;
 }
 
 .PinInputCells {
@@ -318,6 +309,11 @@ export default {
 
 	&.error {
 		border-color: $maker-color-error-fill;
+	}
+
+	&.disabled {
+		border: 1px solid $maker-color-neutral-20;
+		opacity: 0.9;
 	}
 }
 
