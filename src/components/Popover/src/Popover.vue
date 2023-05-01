@@ -16,7 +16,7 @@
 						v-if="isOpen"
 						:action-el="actionEl"
 						:popper-config="popperConfig"
-						@popover-instance:new-popper="setPopper"
+						@popover-instance:new-popper="setPopperToDestroy"
 					>
 						<!-- @slot Content that will appear in the floating popover -->
 						<slot name="content" />
@@ -120,7 +120,6 @@ export default {
 			 * will be pushed into the popoverApi state as the opened popover.
 			 */
 			id: getPopoverId(),
-			currentPopper: undefined,
 			popperToDestroy: undefined,
 			actionAPI: {
 				open(...ignoreElements) {
@@ -136,8 +135,6 @@ export default {
 				},
 
 				close() {
-					this.popperToDestroy = this.currentPopper;
-					this.currentPopper = undefined;
 					vm.popoverApi.closePopover();
 				},
 
@@ -214,8 +211,8 @@ export default {
 			this.actionAPI.toggle(...ignoreElements);
 		},
 
-		setPopper(popper) {
-			this.currentPopper = popper;
+		setPopperToDestroy(popper) {
+			this.popperToDestroy = popper;
 		},
 
 		destroyPopper() {
