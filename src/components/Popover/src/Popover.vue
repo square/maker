@@ -123,7 +123,9 @@ export default {
 			popperToDestroy: undefined,
 			actionAPI: {
 				open(...ignoreElements) {
-					if (vm.isOpen) {
+					// Even though popover may be closed, need to wait for
+					// the popper to be destroyed before re-opening
+					if (vm.isOpen || Boolean(vm.popperToDestroy)) {
 						return;
 					}
 
