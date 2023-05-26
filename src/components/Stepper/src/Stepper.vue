@@ -9,6 +9,7 @@
 			:text-color="resolvedTextColor"
 			:shape="resolvedShape"
 			:disabled="value === minVal"
+			aria-label="−"
 			@click="decrement"
 		>
 			<m-icon
@@ -49,6 +50,7 @@
 			:text-color="resolvedTextColor"
 			:shape="resolvedShape"
 			:disabled="value === maxVal"
+			aria-label="+"
 			@click="increment"
 		>
 			<m-icon
