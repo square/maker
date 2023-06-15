@@ -114,12 +114,15 @@ export default {
 	background-color: $maker-color-background;
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
-	outline: none;
 	cursor: inherit;
 	transition:
 		border 0.2s ease,
 		background-color 0.2s ease;
 	appearance: none;
+
+	&:not(:focus) {
+		outline: none;
+	}
 
 	&:invalid {
 		border-color: var(--color-error);
