@@ -1,28 +1,28 @@
-const semver = require('semver');
 const packageJson = require('../../package.json');
 
-(function assertPeerDependenciesAsDevDependencies({
+(function assertPeerDependenciesAsDevelopmentDependencies({
 	peerDependencies,
 	devDependencies,
 }) {
 	const errors = [];
 
-	for (const depName in peerDependencies) {
-		if (!devDependencies.hasOwnProperty(depName)) {
+	Object.keys(peerDependencies).forEach((depName) => {
+		if (!devDependencies[depName]) {
 			errors.push(`Missing "${depName}" in devDependencies`);
-			continue;
+			return;
 		}
 
 		const peerDepSemver = peerDependencies[depName];
-		const devDepSemver = devDependencies[depName];
-		if (peerDepSemver !== devDepSemver) {
-			errors.push(`devDependency "${depName}@${devDepSemver}" doesn't match "${peerDepSemver}"`);
-			continue;
+		const developmentDepSemver = devDependencies[depName];
+		if (peerDepSemver !== developmentDepSemver) {
+			errors.push(`devDependency "${depName}@${developmentDepSemver}" doesn't match "${peerDepSemver}"`);
 		}
-	}
+	});
 
 	if (errors.length > 0) {
+		// eslint-disable-next-line no-console
 		console.error(`Error:\n${errors.join('\n')}`);
+		// eslint-disable-next-line no-magic-numbers
 		process.exit(1);
 	}
-})(packageJson);
+}(packageJson));
