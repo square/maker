@@ -5,7 +5,7 @@ module.exports = {
 		// Distribution files
 		'/components/',
 		'/utils/',
-		'.github',
+		'!.github',
 	],
 
 	extends: [

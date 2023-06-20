@@ -7,9 +7,6 @@ const packageJson = require('../../package.json');
 	const errors = [];
 
 	Object.keys(peerDependencies).forEach((depName) => {
-		// Skip vue since we can't check ranges reliable
-		if (depName === 'vue') return;
-
 		if (!devDependencies[depName]) {
 			errors.push(`Missing "${depName}" in devDependencies`);
 			return;
