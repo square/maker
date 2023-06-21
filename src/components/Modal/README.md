@@ -153,15 +153,17 @@ When using the composition API, you can use the `useModalLayer` composable inste
 
 <script>
 import { inject } from 'vue';
-import { MModalLayer, modalApi } from '@square/maker/components/Modal';
+import { MModalLayer, modalApi as modalKey } from '@square/maker/components/Modal';
 import MyModal from './MyModal.vue';
 
 export default {
-	setup() {
-		MModalLayer.useModalLayer();
-		const modal = inject(modalApi)
+	components: {
+		MModalLayer,
+	},
 
-		const openMyModal = () => this.modalApi.open(() => <MyModal />);
+	setup() {
+		const { modalApi } = ModalLayer.useModalLayer();
+		const openMyModal = () => this.modalApi.open((h) => h(MyModal));
 
 		return {
 			openMyModal,

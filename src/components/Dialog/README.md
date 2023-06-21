@@ -128,6 +128,46 @@ export default {
 </script>
 ```
 
+### Composition API
+
+When using the composition API, you can use the `useDialogLayer` composable instead of the mixin:
+
+```html
+<template>
+	<div>
+		<button @click="openMyDialog">
+			Open MyDialog
+		</button>
+
+		<m-dialog-layer />
+	</div>
+</template>
+
+<script>
+import { inject } from 'vue';
+import { MDialogLayer, dialogApi } from '@square/maker/components/Dialog';
+import MyDialog from './MyDialog.vue';
+
+export default {
+	components: {
+		MDialogLayer,
+	},
+
+	setup() {
+		MDialogLayer.useDialogLayer();
+		const modal = inject(modalApi)
+
+		const openMyDialog = () => this.modalApi.open((h) => h(MyDialog));
+
+		return {
+			openMyDialog,
+		};
+	}
+}
+
+</script>
+```
+
 ## Usage
 
 Dialogs must always be created in their own Single File Component (SFC) file to separate concerns because it introduces a new mode or context to your app. Use the `MDialog` component at the root of your Dialog SFC which signifies the component is a Maker Dialog and allows it to communicate with the Dialog Layer.
@@ -273,6 +313,91 @@ type dialogApi = {
 ```
 
 ## Examples
+
+### Composition API
+
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openMyDialog"
+		>
+			Open Modal From Root
+		</m-button>
+
+		<nested-component />
+
+		<m-dialog-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MDialogLayer } from '@square/maker/components/Dialog';
+import DemoDialog from 'doc/DemoDialog.vue';
+import NestedComponent from 'doc/NestedComponent.vue';
+
+export default {
+	components: {
+		MDialogLayer,
+		MButton,
+		NestedComponent,
+	},
+
+	setup() {
+		const { dialogApi } = MDialogLayer.useDialogLayer();
+
+		// eslint-disable-next-line no-unused-vars
+		const openMyDialog = () => dialogApi.open((h) => h(DemoDialog));
+
+		return {
+			openMyDialog,
+		};
+	},
+};
+</script>
+```
+
+_NestedComponent.vue_
+```vue
+<template>
+	<m-button
+		size="small"
+		pattern="primaryOutline"
+		@click="openMyDialog"
+	>
+		Open Modal From Nested Component
+	</m-button>
+</template>
+
+<script>
+import { inject } from 'vue';
+import { dialogApi as dialogKey } from '@square/maker/components/Dialog';
+import { MButton } from '@square/maker/components/Button';
+import DemoDialog from 'doc/DemoDialog.vue';
+
+export default {
+	components: {
+		MButton,
+	},
+
+	setup() {
+		const dialogApi = inject(dialogKey);
+		const openMyDialog = () => dialogApi.open((h) => h(DemoDialog), {
+			// eslint-disable-next-line no-restricted-globals, no-alert
+			beforeCloseHook: () => confirm('Are you sure???'),
+		});
+
+		return {
+			openMyDialog,
+		};
+	},
+};
+</script>
+```
+
 
 ### beforeClose & afterClose hooks
 
