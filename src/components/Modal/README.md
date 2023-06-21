@@ -136,6 +136,42 @@ export default {
 </script>
 ```
 
+### Composition API
+
+When using the composition API, you can use the `useModalLayer` composable instead of the mixin:
+
+```html
+<template>
+	<div>
+		<button @click="openMyModal">
+			Open MyModal
+		</button>
+
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { inject } from 'vue';
+import { MModalLayer, modalApi } from '@square/maker/components/Modal';
+import MyModal from './MyModal.vue';
+
+export default {
+	setup() {
+		MModalLayer.useModalLayer();
+		const modal = inject(modalApi)
+
+		const openMyModal = () => this.modalApi.open(() => <MyModal />);
+
+		return {
+			openMyModal,
+		};
+	}
+}
+
+</script>
+```
+
 ## Usage
 
 Modals must always be created in their own Single File Component (SFC) file to separate concerns because it introduces a new mode or context to your app. Use the `MModal` component at the root of your Modal SFC to signify the modal and to communicate with the Modal Layer.
@@ -257,6 +293,90 @@ type modalApi = {
 ```
 
 ## Examples
+
+### Composition API
+
+```vue
+<template>
+	<div>
+		<m-button
+			size="small"
+			pattern="primaryOutline"
+			@click="openMyModal"
+		>
+			Open Modal From Root
+		</m-button>
+
+		<nested-component />
+
+		<m-modal-layer />
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MModalLayer } from '@square/maker/components/Modal';
+import DemoModal from 'doc/DemoModal.vue';
+import NestedComponent from 'doc/NestedComponent.vue';
+
+export default {
+	components: {
+		MModalLayer,
+		MButton,
+		NestedComponent,
+	},
+
+	setup() {
+		const { modalApi } = MModalLayer.useModalLayer();
+
+		// eslint-disable-next-line no-unused-vars
+		const openMyModal = () => modalApi.open((h) => h(DemoModal));
+
+		return {
+			openMyModal,
+		};
+	},
+};
+</script>
+```
+
+_NestedComponent.vue_
+```vue
+<template>
+	<m-button
+		size="small"
+		pattern="primaryOutline"
+		@click="openMyModal"
+	>
+		Open Modal From Nested Component
+	</m-button>
+</template>
+
+<script>
+import { inject } from 'vue';
+import { modalApi as modalKey } from '@square/maker/components/Modal';
+import { MButton } from '@square/maker/components/Button';
+import DemoModal from 'doc/DemoModal.vue';
+
+export default {
+	components: {
+		MButton,
+	},
+
+	setup() {
+		const modalApi = inject(modalKey);
+		const openMyModal = () => modalApi.open((h) => h(DemoModal), {
+			// eslint-disable-next-line no-restricted-globals, no-alert
+			beforeCloseHook: () => confirm('Are you sure???'),
+		});
+
+		return {
+			openMyModal,
+		};
+	},
+};
+</script>
+```
 
 ### beforeCloseHook
 
