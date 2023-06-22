@@ -20,45 +20,60 @@
 <script>
 import { fadeInFn, fadeOutFn } from '@square/maker/utils/transitions';
 import PseudoWindow from 'vue-pseudo-window';
-import Vue from 'vue';
+import Vue, { inject, provide } from 'vue';
 import { PopoverAPIKey } from './keys';
 import { getPopoverId } from './utils';
 
+function createPopoverConfig() {
+	/**
+	 * This is to avoid name collisions for the popover portal if
+	 * multiple exist at the same 'level'.
+	 */
+	const layerId = getPopoverId();
+	const target = `popover-portal-${layerId}`;
+
+	const api = Vue.observable({
+		currentInstance: undefined,
+		actionEl: undefined,
+		ignoreEls: [],
+		clickSrc: undefined,
+		layerId,
+		target,
+		targetSelector: `#${target}`,
+		setPopover(popoverData) {
+			if (this.currentInstance) {
+				this.closePopover();
+			}
+
+			if (!popoverData || !popoverData.actionEl) {
+				return;
+			}
+
+			this.actionEl = popoverData.actionEl;
+			this.ignoreEls = popoverData.ignoreEls;
+			this.currentInstance = popoverData.id;
+		},
+
+		closePopover() {
+			this.currentInstance = undefined;
+		},
+	});
+
+	return { api, layerId, target };
+}
+
+const usePopoverLayer = () => {
+	const { api } = createPopoverConfig();
+	const parentPopoverApi = inject(PopoverAPIKey, undefined);
+
+	provide(PopoverAPIKey, api);
+
+	return parentPopoverApi || api;
+};
+
 const popoverMixin = {
 	provide() {
-		/**
-		 * This is to avoid name collisions for the popover portal if
-		 * multiple exist at the same 'level'.
-		 */
-		const layerId = getPopoverId();
-		const target = `popover-portal-${layerId}`;
-
-		const api = Vue.observable({
-			currentInstance: undefined,
-			actionEl: undefined,
-			ignoreEls: [],
-			clickSrc: undefined,
-			layerId,
-			target,
-			targetSelector: `#${target}`,
-			setPopover(popoverData) {
-				if (this.currentInstance) {
-					this.closePopover();
-				}
-
-				if (!popoverData || !popoverData.actionEl) {
-					return;
-				}
-
-				this.actionEl = popoverData.actionEl;
-				this.ignoreEls = popoverData.ignoreEls;
-				this.currentInstance = popoverData.id;
-			},
-
-			closePopover() {
-				this.currentInstance = undefined;
-			},
-		});
+		const { api } = createPopoverConfig();
 
 		if (!this.popoverApi) {
 			this.popoverApi = api;
@@ -87,6 +102,7 @@ export default {
 	},
 
 	popoverMixin,
+	usePopoverLayer,
 
 	beforeDestroy() {
 		this.popoverApi.closePopover();
