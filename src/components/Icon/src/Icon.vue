@@ -112,7 +112,7 @@ export default {
 <style module="$s">
 .Icon {
 	--icon-size: 16px;
-	--color: inherit;
+	--color: currentColor;
 	--fill: currentColor;
 
 	width: var(--icon-size);
