@@ -20,7 +20,7 @@ Use the popover to provide the user with more context or options. The Popover La
 
 			<template #content>
 				<m-popover-content>
-					Content for a basic popover
+					Content for a basic composition API popover
 				</m-popover-content>
 			</template>
 		</m-popover>
@@ -47,6 +47,51 @@ export default {
 ```
 
 ## Examples
+
+### Composition API
+```vue
+<template>
+	<div>
+		<m-popover-layer />
+
+		<m-popover>
+			<template #action="popover">
+				<m-button
+					size="small"
+					pattern="primaryOutline"
+					@click="popover.toggle()"
+				>
+					Toggle popover
+				</m-button>
+			</template>
+
+			<template #content>
+				<m-popover-content>
+					Content for a basic composition API popover
+				</m-popover-content>
+			</template>
+		</m-popover>
+	</div>
+</template>
+
+<script>
+import { MButton } from '@square/maker/components/Button';
+import { MPopoverLayer, MPopover, MPopoverContent } from '@square/maker/components/Popover';
+
+export default {
+	components: {
+		MButton,
+		MPopoverLayer,
+		MPopover,
+		MPopoverContent,
+	},
+
+	setup() {
+		MPopoverLayer.usePopoverLayer();
+	},
+};
+</script>
+```
 
 ### Theming
 

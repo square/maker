@@ -51,7 +51,7 @@
     "lodash": "^4.17.20",
     "popmotion": "^9.3.1",
     "stylefire": "^7.0.3",
-    "vue": "^2.6.14"
+    "vue": "^2.7.14"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.10",
@@ -62,7 +62,7 @@
     "@square/maker-icons": "^3.2.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
-    "@vue/composition-api": "^1.4.9",
+    "@vue/composition-api": "^1.7.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-date-fns": "^2.0.0",
@@ -116,7 +116,7 @@
     "terser-webpack-plugin": "^5.1.4",
     "tiny-glob": "^0.2.9",
     "tippy.js": "^6.2.6",
-    "vue": "^2.6.14",
+    "vue": "^2.7.14",
     "vue-demo-collapse": "0.0.2",
     "vue-docgen-api": "^4.34.2",
     "vue-frag": "^1.1.2",
@@ -125,9 +125,9 @@
     "vue-meta": "^2.4.0",
     "vue-pseudo-window": "^0.4.0",
     "vue-router": "^3.4.5",
-    "vue-server-renderer": "^2.6.14",
+    "vue-server-renderer": "^2.7.14",
     "vue-subslot": "^1.2.3",
-    "vue-template-compiler": "^2.6.14",
+    "vue-template-compiler": "^2.7.14",
     "vue-v": "^1.2.0",
     "vue-vnode-syringe": "^3.1.0",
     "webfontloader": "^1.6.28",

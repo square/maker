@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import Vue, { inject, provide } from 'vue';
 import PseudoWindow from 'vue-pseudo-window';
 import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MTransitionResponsive } from '@square/maker/components/TransitionResponsive';
@@ -47,54 +47,67 @@ import {
 import RenderFn from '@square/maker/utils/RenderFn';
 import dialogApi from './dialog-api';
 
-const apiMixin = {
-	provide() {
-		const api = {
-			state: Vue.observable({
-				renderFn: undefined,
-				options: {},
-			}),
+function createDialogApi() {
+	return {
+		state: Vue.observable({
+			renderFn: undefined,
+			options: {},
+		}),
 
-			open(renderFn, options = {}) {
-				this.state.renderFn = renderFn;
-				this.state.options = options;
+		open(renderFn, options = {}) {
+			this.state.renderFn = renderFn;
+			this.state.options = options;
 
-				// function that only closes this specific dialog
-				return () => {
-					// no dialog open, so closing trivially "succeeds"
-					if (!this.state.renderFn) {
-						return true;
-					}
-					// we can attempt to close this dialog
-					if (this.state.renderFn === renderFn) {
-						// BUT closing might still be blocked by
-						// a beforeClose hook
-						return this.close();
-					}
-					// dialog changed since we returned this function
-					// hence we cannot close a dialog we did not open
-					return false;
-				};
-			},
-
-			async close(closeData) {
-				// no dialog to close, so closing is "successful"
+			// function that only closes this specific dialog
+			return () => {
+				// no dialog open, so closing trivially "succeeds"
 				if (!this.state.renderFn) {
 					return true;
 				}
-
-				// check beforeClose hook, if present
-				if (typeof this.state.options.beforeCloseHook === 'function') {
-					if (!(await this.state.options.beforeCloseHook(closeData))) {
-						return false; // closing failed
-					}
+				// we can attempt to close this dialog
+				if (this.state.renderFn === renderFn) {
+					// BUT closing might still be blocked by
+					// a beforeClose hook
+					return this.close();
 				}
+				// dialog changed since we returned this function
+				// hence we cannot close a dialog we did not open
+				return false;
+			};
+		},
 
-				this.state.renderFn = undefined;
-				this.state.options.afterCloseHook?.(closeData);
+		async close(closeData) {
+			// no dialog to close, so closing is "successful"
+			if (!this.state.renderFn) {
 				return true;
-			},
-		};
+			}
+
+			// check beforeClose hook, if present
+			if (typeof this.state.options.beforeCloseHook === 'function') {
+				if (!(await this.state.options.beforeCloseHook(closeData))) {
+					return false; // closing failed
+				}
+			}
+
+			this.state.renderFn = undefined;
+			this.state.options.afterCloseHook?.(closeData);
+			return true;
+		},
+	};
+}
+
+export const useDialogLayer = () => {
+	const parentDialogApi = inject(dialogApi, undefined);
+	const api = createDialogApi();
+
+	provide(dialogApi, api);
+
+	return { dialogApi: parentDialogApi || api };
+};
+
+const apiMixin = {
+	provide() {
+		const api = createDialogApi();
 
 		if (!this.dialogApi) {
 			this.dialogApi = api;
@@ -121,6 +134,7 @@ export default {
 	inheritAttrs: false,
 
 	apiMixin,
+	useDialogLayer,
 
 	data() {
 		return {
