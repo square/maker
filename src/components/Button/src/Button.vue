@@ -75,7 +75,7 @@ function setColorVariables(tokens, variant) {
 	const hoverStateAdjust = 0.08;
 	const activeStateAdjust = 0.16;
 	const focusAlphaAdjust = 0.3;
-	const colorHover = tokens.colorHover
+	const colorHover = tokens.colorHover && variant === 'fill'
 		? tokens.colorHover : colorMainHover[stateAdjustment](hoverStateAdjust).toHex();
 	const colorActive = colorMainHover[stateAdjustment](activeStateAdjust).toHex();
 	const colorFocus = colorMainHover.alpha(focusAlphaAdjust).toHex();
