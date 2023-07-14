@@ -170,7 +170,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | pattern* | `string` | —                | `'info'`, `'warning'`, `'error'`, `'success'`, `'primary'`, any custom pattern defined within the theme | pattern defined in theme                                       |
 | name*    | `string` | `'info'`         | -                                                                                                       | name of icon, defined in theme                                 |
 | size     | `string` | `'small'`        | `'small'`, `'medium'`, `'large'`, `'xlarge'`, `'xxlarge'`                                               | size of icon, can be named value or any valid CSS width/height |
-| color*   | `string` | `'inherit'`      | -                                                                                                       | color of icon                                                  |
+| color*   | `string` | `'currentColor'` | -                                                                                                       | color of icon                                                  |
 | fill*    | `string` | `'currentColor'` | -                                                                                                       | fill of icon                                                   |
 
 
