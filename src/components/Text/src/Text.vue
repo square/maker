@@ -72,6 +72,14 @@ export default {
 			validator: cssValidator('line-height'),
 		},
 		/**
+		 * [Letter spacing](https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing). Overrides the internally calculated line height.
+		 */
+		letterSpacing: {
+			type: String,
+			default: undefined,
+			validator: cssValidator('letter-spacing'),
+		},
+		/**
 		 * [Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)
 		 */
 		color: {
@@ -157,6 +165,7 @@ export default {
 			const styles = {
 				fontSize: this.resolvedFontSize,
 				lineHeight: this.lineHeight,
+				letterSpacing: this.letterSpacing,
 				'--mobile-base-font-size': fonts.baseSize,
 				'--mobile-font-size-scale': fonts.sizeScale,
 			};
