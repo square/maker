@@ -134,6 +134,8 @@ export default {
 			'textTransform',
 			'textDecoration',
 			'textAlign',
+			'lineHeight',
+			'letterSpacing',
 		]),
 		tag() {
 			if (this.resolvedElement) {
@@ -189,6 +191,12 @@ export default {
 			}
 			if (this.resolvedTextAlign !== 'inherit') {
 				styles.textAlign = this.resolvedTextAlign;
+			}
+			if (this.resolvedLineHeight !== 'inherit') {
+				styles.lineHeight = this.resolvedLineHeight;
+			}
+			if (this.resolvedLetterSpacing !== 'inherit') {
+				styles.letterSpacing = this.resolvedLetterSpacing;
 			}
 			return styles;
 		},
