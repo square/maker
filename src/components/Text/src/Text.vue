@@ -205,7 +205,7 @@ export default {
 				styles.letterSpacing = this.resolvedLetterSpacing;
 			}
 			if (this.isCentered) {
-				styles.paddingLeft = this.letterSpacing;
+				styles.paddingLeft = styles.letterSpacing;
 			}
 			return styles;
 		},
