@@ -121,6 +121,12 @@ export default {
 		},
 	},
 
+	data() {
+		return {
+			isCentered: false,
+		};
+	},
+
 	computed: {
 		...resolveThemeableProps('text', [
 			'pattern',
@@ -198,7 +204,33 @@ export default {
 			if (this.resolvedLetterSpacing !== 'inherit') {
 				styles.letterSpacing = this.resolvedLetterSpacing;
 			}
+			if (this.isCentered) {
+				styles.paddingLeft = this.letterSpacing;
+			}
 			return styles;
+		},
+	},
+
+	mounted() {
+		this.detectAlignCenter();
+	},
+
+	updated() {
+		this.detectAlignCenter();
+	},
+
+	methods: {
+		/**
+		 * Letter spacing is applied to the right-side of the letter
+		 * so when the text is centered, it becomes misaligned
+		 *
+		 * Detect if the text is center aligned and add left padding
+		 * to balance out the letter spacing
+		 */
+		detectAlignCenter() {
+			const computedStyle = window.getComputedStyle(this.$el);
+			const textAlign = computedStyle.getPropertyValue('text-align');
+			this.isCentered = textAlign === 'center';
 		},
 	},
 
