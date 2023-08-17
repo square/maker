@@ -58,6 +58,69 @@ export default {
 </script>
 ```
 
+## Letter spacing alignment
+CSS applies letter spacing to the right side of the letter. This is problematic when the text is centered because it adds more space to the right side. To counter act this, we add a left-padding to the text that is equal to the letter spacing. This ensures that the text is centered correctly.
+
+```vue
+<template>
+	<div>
+		<div class="container">
+			<div class="line" />
+			<m-text
+				class="text"
+				letter-spacing="2em"
+			>
+				Text
+			</m-text>
+		</div>
+		<div class="container">
+			<div class="line" />
+			<m-text
+				class="text"
+				letter-spacing="1.5em"
+			>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget
+			</m-text>
+		</div>
+	</div>
+</template>
+
+<script>
+import { MText } from '@square/maker/components/Text';
+
+export default {
+	components: {
+		MText,
+	},
+};
+</script>
+
+<style scoped>
+.container {
+	position: relative;
+	width: 600px;
+	margin: 0 auto;
+	background-color: #eee;
+	overflow: hidden;
+	padding: 16px;
+	text-align: center;
+}
+
+.line {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 1px;
+	left: 50%;
+	background-color: #000;
+}
+
+.text {
+	border: 1px solid #000;
+}
+</style>
+```
+
 <!-- api-tables:start -->
 ## Props
 
