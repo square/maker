@@ -106,6 +106,8 @@ const TEXT_STYLES = new Set([
 	'fontStyle',
 	'textTransform',
 	'textDecoration',
+	'lineHeight',
+	'letterSpacing',
 ]);
 
 function isValidCss(style, value) {
