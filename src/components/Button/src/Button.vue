@@ -106,7 +106,6 @@ const TEXT_STYLES = new Set([
 	'fontStyle',
 	'textTransform',
 	'textDecoration',
-	'lineHeight',
 	'letterSpacing',
 ]);
 
@@ -460,6 +459,7 @@ export default {
 	font-style: var(--font-style);
 	text-transform: var(--text-transform);
 	text-decoration: var(--text-decoration);
+	letter-spacing: var(--letter-spacing);
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
