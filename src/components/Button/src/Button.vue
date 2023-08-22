@@ -673,6 +673,7 @@ export default {
 .MainText {
 	gap: 8px;
 	width: max-content;
+	padding-left: var(--letter-spacing);
 }
 
 .iconButton .MainText {
@@ -682,6 +683,7 @@ export default {
 .InformationText {
 	width: min-content;
 	opacity: 0.6;
+	padding-left: var(--letter-spacing);
 }
 
 .TruncateText {
