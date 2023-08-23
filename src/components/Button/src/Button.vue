@@ -457,9 +457,9 @@ export default {
 	font-size: var(--font-size);
 	font-family: var(--font-family);
 	font-style: var(--font-style);
+	letter-spacing: var(--letter-spacing);
 	text-transform: var(--text-transform);
 	text-decoration: var(--text-decoration);
-	letter-spacing: var(--letter-spacing);
 	vertical-align: middle;
 	background-color: var(--color-main);
 	border: none;
@@ -682,8 +682,8 @@ export default {
 
 .InformationText {
 	width: min-content;
-	opacity: 0.6;
 	padding-left: var(--letter-spacing);
+	opacity: 0.6;
 }
 
 .TruncateText {
