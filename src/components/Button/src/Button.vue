@@ -106,6 +106,7 @@ const TEXT_STYLES = new Set([
 	'fontStyle',
 	'textTransform',
 	'textDecoration',
+	'letterSpacing',
 ]);
 
 function isValidCss(style, value) {
@@ -456,6 +457,7 @@ export default {
 	font-size: var(--font-size);
 	font-family: var(--font-family);
 	font-style: var(--font-style);
+	letter-spacing: var(--letter-spacing);
 	text-transform: var(--text-transform);
 	text-decoration: var(--text-decoration);
 	vertical-align: middle;
@@ -671,6 +673,7 @@ export default {
 .MainText {
 	gap: 8px;
 	width: max-content;
+	padding-left: var(--letter-spacing);
 }
 
 .iconButton .MainText {
@@ -679,6 +682,7 @@ export default {
 
 .InformationText {
 	width: min-content;
+	padding-left: var(--letter-spacing);
 	opacity: 0.6;
 }
 
