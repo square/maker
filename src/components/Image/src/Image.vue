@@ -29,6 +29,28 @@
 		<pseudo-window
 			@resize="throttledResizeHandler"
 		/>
+		<div
+			:class="$s.ImageClipPaths"
+		>
+			<svg
+				viewBox="0 0 456 456"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<defs>
+					<clipPath
+						id="mImageHexPath"
+						clipPathUnits="objectBoundingBox"
+						:transform="svgScale"
+					>
+						<path
+							:d="SVG_PATH"
+							fill="white"
+						/>
+					</clipPath>
+				</defs>
+			</svg>
+		</div>
 	</div>
 </template>
 
@@ -39,6 +61,11 @@ import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import cssValidator from '@square/maker/utils/css-validator';
+
+const SVG_PATH = 'M 228.192 0 L 425.646 114 V 342 L 228.192 456 L 30.738586 342 V 114 L 228.192 0 Z';
+// Calculate scale based on viewbox dimensions
+// eslint-disable-next-line no-magic-numbers
+const SVG_SCALE = 1 / 456;
 
 /** @constructor */
 function SharedIntersectionObserver() {
@@ -104,7 +131,7 @@ export default {
 		shape: {
 			type: String,
 			default: undefined,
-			validator: (shape) => ['original', 'square', 'circle', 'arch'].includes(shape),
+			validator: (shape) => ['original', 'square', 'circle', 'arch', 'hexagon'].includes(shape),
 		},
 		lazyload: {
 			type: Boolean,
@@ -135,6 +162,7 @@ export default {
 			throttledResizeHandler: throttle(this.getImageDimensions, THROTTLE_DELAY),
 			height: 0,
 			width: 0,
+			SVG_PATH,
 		};
 	},
 
@@ -165,6 +193,10 @@ export default {
 
 		isThumbnail() {
 			return this.width < THUMBNAIL_MAX_WIDTH;
+		},
+
+		svgScale() {
+			return `scale(${SVG_SCALE}, ${SVG_SCALE})`;
 		},
 	},
 
@@ -252,5 +284,16 @@ export default {
 		border-top-left-radius: var(--image-height);
 		border-top-right-radius: var(--image-height);
 	}
+
+	&.shape_hexagon {
+		-webkit-clip-path: url(#mImageHexPath);
+		clip-path: url(#mImageHexPath);
+	}
+}
+
+.ImageClipPaths {
+	width: 0;
+	height: 0;
+	overflow: hidden;
 }
 </style>
