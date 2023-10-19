@@ -286,6 +286,9 @@ type OpenOptions = {
 	// Dialog will close when clicked outside of it - default false
 	closeOnClickOutside?: boolean;
 
+	// Dialog will closed when a user swipes down
+	closeOnSwipeDown?: boolean;
+
 	// Dialog will close when esc key is pressed - default false
 	closeOnEsc?: boolean;
 
