@@ -286,9 +286,6 @@ type OpenOptions = {
 	// Dialog will close when clicked outside of it - default false
 	closeOnClickOutside?: boolean;
 
-	// Dialog will closed when a user swipes down
-	closeOnSwipeDown?: boolean;
-
 	// Dialog will close when esc key is pressed - default false
 	closeOnEsc?: boolean;
 
@@ -804,10 +801,11 @@ export default {
 
 Themable props* can be configured via the [Theme](#/Theme) component using the key `dialog`.
 
-| Prop      | Type     | Default     | Possible values | Description                |
-| --------- | -------- | ----------- | --------------- | -------------------------- |
-| bg-color* | `string` | `'#ffffff'` | -               | Background color of dialog |
-| color*    | `string` | `'#000000'` | -               | Text color of dialog       |
+| Prop                | Type      | Default     | Possible values | Description                             |
+| ------------------- | --------- | ----------- | --------------- | --------------------------------------- |
+| bg-color*           | `string`  | `'#ffffff'` | -               | Background color of dialog              |
+| color*              | `string`  | `'#000000'` | -               | Text color of dialog                    |
+| close-on-swipe-down | `boolean` | `true`      | -               | Toggle to allow swiping the dialog away |
 
 
 ## Dialog Slots

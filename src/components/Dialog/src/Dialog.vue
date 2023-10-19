@@ -53,6 +53,14 @@ export default {
 			default: undefined,
 			validator: cssValidator('color'),
 		},
+
+		/**
+		 * Toggle to allow swiping the dialog away
+		 */
+		closeOnSwipeDown: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	data() {
@@ -77,14 +85,6 @@ export default {
 				'--color': this.resolvedColor,
 				...this.dialogStyles,
 			};
-		},
-
-		closeOnSwipeDown() {
-			const { closeOnSwipeDown } = this.dialogApi.state.options;
-
-			// Nullish values are true, else respect value given
-			// eslint-disable-next-line unicorn/no-null
-			return closeOnSwipeDown == null || Boolean(closeOnSwipeDown);
 		},
 	},
 

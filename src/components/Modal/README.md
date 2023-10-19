@@ -768,11 +768,12 @@ export default {
 
 Themable props* can be configured via the [Theme](#/Theme) component using the key `modal`.
 
-| Prop         | Type     | Default     | Possible values | Description                          |
-| ------------ | -------- | ----------- | --------------- | ------------------------------------ |
-| before-close | `func`   | —           | -               | Before close hook, can block closing |
-| bg-color*    | `string` | `'#ffffff'` | -               | Background color of modal            |
-| color*       | `string` | `'#000000'` | -               | Text color of modal                  |
+| Prop                | Type      | Default     | Possible values | Description                             |
+| ------------------- | --------- | ----------- | --------------- | --------------------------------------- |
+| before-close        | `func`    | —           | -               | Before close hook, can block closing    |
+| bg-color*           | `string`  | `'#ffffff'` | -               | Background color of modal               |
+| color*              | `string`  | `'#000000'` | -               | Text color of modal                     |
+| close-on-swipe-down | `boolean` | `true`      | -               | Toggle to allow swiping the dialog away |
 
 
 ## Modal Slots
