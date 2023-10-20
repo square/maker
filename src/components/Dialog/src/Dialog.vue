@@ -53,6 +53,14 @@ export default {
 			default: undefined,
 			validator: cssValidator('color'),
 		},
+
+		/**
+		 * Toggle to allow swiping the dialog away
+		 */
+		closeOnSwipeDown: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	data() {
@@ -82,11 +90,19 @@ export default {
 
 	methods: {
 		setScrollTop() {
+			if (!this.closeOnSwipeDown) {
+				return;
+			}
+
 			const scrollTop = this.$refs?.dialog?.$el?.scrollTop || 0;
 			this.isScrolledToTop = scrollTop <= 0;
 		},
 
 		onSwipeDown() {
+			if (!this.closeOnSwipeDown) {
+				return;
+			}
+
 			if (this.isScrolledToTop) {
 				this.preventDefault = true;
 				this.dialogApi.close();
@@ -94,6 +110,10 @@ export default {
 		},
 
 		onDragDown(gesture) {
+			if (!this.closeOnSwipeDown) {
+				return;
+			}
+
 			if (this.isScrolledToTop) {
 				this.preventDefault = true;
 				this.dialogStyles = {
@@ -106,6 +126,10 @@ export default {
 		},
 
 		onDragEnd(gesture) {
+			if (!this.closeOnSwipeDown) {
+				return;
+			}
+
 			// Pixels dialog must be dragged to close on release
 			const minDragCloseDistance = 50;
 			if (this.isScrolledToTop
