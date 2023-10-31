@@ -247,7 +247,9 @@ export default {
 
 		onLoaded() {
 			this.loaded = true;
-			this.getImageDimensions();
+			// We can't get the proper height of the image until after the DOM has been updated
+			// The image will otherwise be hidden, and the offsetHeight will be 0
+			this.$nextTick(() => this.getImageDimensions());
 		},
 	},
 };
