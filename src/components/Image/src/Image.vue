@@ -267,10 +267,4 @@ export default {
 		clip-path: var(--maker-image-hexagon);
 	}
 }
-
-.ImageClipPaths {
-	width: 0;
-	height: 0;
-	overflow: hidden;
-}
 </style>
