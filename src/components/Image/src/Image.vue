@@ -1,6 +1,7 @@
 <template>
 	<div
 		:class="$s.ImageWrapper"
+		:style="imageWrapperStyles"
 	>
 		<m-skeleton-block
 			v-if="!loaded"
@@ -29,28 +30,6 @@
 		<pseudo-window
 			@resize="throttledResizeHandler"
 		/>
-		<div
-			:class="$s.ImageClipPaths"
-		>
-			<svg
-				viewBox="0 0 456 456"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<defs>
-					<clipPath
-						id="mImageHexPath"
-						clipPathUnits="objectBoundingBox"
-						:transform="svgScale"
-					>
-						<path
-							:d="SVG_PATH"
-							fill="white"
-						/>
-					</clipPath>
-				</defs>
-			</svg>
-		</div>
 	</div>
 </template>
 
@@ -62,10 +41,7 @@ import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import cssValidator from '@square/maker/utils/css-validator';
 
-const SVG_PATH = 'M 228.192 0 L 425.646 114 V 342 L 228.192 456 L 30.738586 342 V 114 L 228.192 0 Z';
-// Calculate scale based on viewbox dimensions
-// eslint-disable-next-line no-magic-numbers
-const SVG_SCALE = 1 / 456;
+const hexagon = 'polygon(50% 0, 93.3012701892219% 25%, 93.3012701892219% 75%, 50% 100%, 6.69872981077807% 75%, 6.69872981077807% 25%)';
 
 /** @constructor */
 function SharedIntersectionObserver() {
@@ -162,7 +138,6 @@ export default {
 			throttledResizeHandler: throttle(this.getImageDimensions, THROTTLE_DELAY),
 			height: 0,
 			width: 0,
-			SVG_PATH,
 		};
 	},
 
@@ -183,6 +158,12 @@ export default {
 				: '';
 		},
 
+		imageWrapperStyles() {
+			return {
+				'--maker-image-hexagon': hexagon,
+			};
+		},
+
 		style() {
 			return {
 				'--image-height': `${this.height}px`,
@@ -193,10 +174,6 @@ export default {
 
 		isThumbnail() {
 			return this.width < THUMBNAIL_MAX_WIDTH;
-		},
-
-		svgScale() {
-			return `scale(${SVG_SCALE}, ${SVG_SCALE})`;
 		},
 	},
 
@@ -288,14 +265,8 @@ export default {
 	}
 
 	&.shape_hexagon {
-		-webkit-clip-path: url(#mImageHexPath);
-		clip-path: url(#mImageHexPath);
+		-webkit-clip-path: var(--maker-image-hexagon);
+		clip-path: var(--maker-image-hexagon);
 	}
-}
-
-.ImageClipPaths {
-	width: 0;
-	height: 0;
-	overflow: hidden;
 }
 </style>
