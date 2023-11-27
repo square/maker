@@ -10,7 +10,7 @@
 			<div
 				v-if="dialogApi.state.renderFn"
 				:class="$s.DialogLayer"
-				@click.capture="closeOnClickOutside"
+				@mousedown.capture="closeOnClickOutside"
 			>
 				<pseudo-window
 					body

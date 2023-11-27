@@ -35,7 +35,7 @@ export default {
 
 	methods: {
 		openDialog() {
-			this.dialogApi.open(() => <DemoDialog />);
+			this.dialogApi.open(() => <DemoDialog />, { closeOnClickOutside: true });
 		},
 	},
 };

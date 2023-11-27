@@ -33,7 +33,7 @@ export default {
 
 	methods: {
 		openModal() {
-			this.modalApi.open(() => <DemoModal />);
+			this.modalApi.open(() => <DemoModal />, { closeOnClickOutside: true });
 		},
 	},
 };

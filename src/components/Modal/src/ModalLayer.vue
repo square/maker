@@ -19,7 +19,7 @@
 				v-if="parentModalApi.state.renderFn"
 				ref="baseModalLayer"
 				:class="$s.ModalLayer"
-				@click.capture="closeOnClickOutside"
+				@mousedown.capture="closeOnClickOutside"
 			>
 				<pseudo-window
 					body
