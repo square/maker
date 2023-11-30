@@ -681,7 +681,7 @@ export default {
 }
 
 .InformationText {
-	width: min-content;
+	flex: 0 0 fit-content;
 	padding-left: var(--letter-spacing);
 	opacity: 0.6;
 }
