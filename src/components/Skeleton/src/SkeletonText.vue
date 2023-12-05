@@ -76,6 +76,7 @@ export default {
 		top: 50%;
 		width: 100%;
 		height: 75%;
+		background-color: $maker-color-neutral-20;
 		border-radius: $maker-shape-default-border-radius;
 		transform: translateY(-50%);
 		animation: pulsing 0.5s ease-in-out infinite alternate;
@@ -84,7 +85,7 @@ export default {
 }
 
 @keyframes pulsing {
-	0% { background-color: $maker-color-neutral-10; }
-	100% { background-color: $maker-color-neutral-20; }
+	0% { opacity: 0.4; }
+	100% { opacity: 1; }
 }
 </style>

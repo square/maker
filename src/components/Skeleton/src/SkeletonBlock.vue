@@ -42,6 +42,7 @@ export default {
 .SkeletonBlock {
 	width: 100%;
 	height: 100%;
+	background-color: $maker-color-neutral-20;
 
 	&.loading {
 		animation: pulsing 0.5s ease-in-out infinite alternate;
@@ -49,7 +50,7 @@ export default {
 }
 
 @keyframes pulsing {
-	0% { background-color: $maker-color-neutral-10; }
-	100% { background-color: $maker-color-neutral-20; }
+	0% { opacity: 0.4; }
+	100% { opacity: 1; }
 }
 </style>
