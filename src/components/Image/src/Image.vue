@@ -138,6 +138,8 @@ export default {
 			throttledResizeHandler: throttle(this.getImageDimensions, THROTTLE_DELAY),
 			height: 0,
 			width: 0,
+			getImageDimensionsFnAttemptsLeft: 20,
+			getImageDimensionsTimeout: undefined,
 		};
 	},
 
@@ -175,11 +177,23 @@ export default {
 		isThumbnail() {
 			return this.width < THUMBNAIL_MAX_WIDTH;
 		},
+
+		shouldGetImageDimensions() {
+			return this.shape !== 'square';
+		},
 	},
 
 	watch: {
 		src: 'load',
 		srcset: 'load',
+		shape: {
+			immediate: true,
+			handler() {
+				if (this.shouldGetImageDimensions && (!this.height || !this.width)) {
+					this.$nextTick(() => this.getImageDimensions());
+				}
+			},
+		},
 	},
 
 	mounted() {
@@ -201,11 +215,30 @@ export default {
 			this.load();
 		}
 
-		this.getImageDimensions();
+		// Safari seems to really struggle with getImageDimensions, specifically calling
+		// offsetHeight/offsetWidth which triggers a style recalculation. If you're
+		// scrolling a list that has images, it just causes the main thread to get frozen.
+		// Let's try and preload those values before the image is actually loaded.
+		const timeoutValue = 100;
+		const getImageDimensionsFn = () => {
+			this.getImageDimensions();
+			// Just to ensure we don't have an infinite loop
+			this.getImageDimensionsFnAttemptsLeft -= 1;
+			if (this.getImageDimensionsFnAttemptsLeft === 0) {
+				return;
+			}
+			if (!this.height || !this.width) {
+				this.getImageDimensionsTimeout = setTimeout(getImageDimensionsFn, timeoutValue);
+			}
+		};
+		if (this.shouldGetImageDimensions) {
+			this.$nextTick(getImageDimensionsFn);
+		}
 	},
 
 	beforeDestroy() {
 		observer?.unwatch(this.$el);
+		clearTimeout(this.getImageDimensionsTimeout);
 	},
 
 	methods: {
@@ -214,8 +247,8 @@ export default {
 		},
 
 		getImageDimensions() {
-			this.height = this.$el?.offsetHeight || '0';
-			this.width = this.$el?.offsetWidth || '0';
+			this.height = this.$el?.offsetHeight || 0;
+			this.width = this.$el?.offsetWidth || 0;
 		},
 
 		afterEnter() {
@@ -224,9 +257,11 @@ export default {
 
 		onLoaded() {
 			this.loaded = true;
-			// We can't get the proper height of the image until after the DOM has been updated
-			// The image will otherwise be hidden, and the offsetHeight will be 0
-			this.$nextTick(() => this.getImageDimensions());
+			if (this.shouldGetImageDimensions && (!this.height || !this.width)) {
+				// We can't get the proper height of the image until after the DOM has been updated
+				// The image will otherwise be hidden, and the offsetHeight will be 0
+				this.$nextTick(() => this.getImageDimensions());
+			}
 		},
 	},
 };
