@@ -177,11 +177,23 @@ export default {
 		isThumbnail() {
 			return this.width < THUMBNAIL_MAX_WIDTH;
 		},
+
+		shouldGetImageDimensions() {
+			return this.shape !== 'square';
+		},
 	},
 
 	watch: {
 		src: 'load',
 		srcset: 'load',
+		shape: {
+			immediate: true,
+			handler() {
+				if (this.shouldGetImageDimensions && (!this.height || !this.width)) {
+					this.$nextTick(() => this.getImageDimensions());
+				}
+			},
+		},
 	},
 
 	mounted() {
@@ -219,7 +231,9 @@ export default {
 				this.getImageDimensionsTimeout = setTimeout(getImageDimensionsFn, timeoutValue);
 			}
 		};
-		this.$nextTick(getImageDimensionsFn);
+		if (this.shouldGetImageDimensions) {
+			this.$nextTick(getImageDimensionsFn);
+		}
 	},
 
 	beforeDestroy() {
@@ -243,7 +257,7 @@ export default {
 
 		onLoaded() {
 			this.loaded = true;
-			if (!this.height || !this.width) {
+			if (this.shouldGetImageDimensions && (!this.height || !this.width)) {
 				// We can't get the proper height of the image until after the DOM has been updated
 				// The image will otherwise be hidden, and the offsetHeight will be 0
 				this.$nextTick(() => this.getImageDimensions());
