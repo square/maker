@@ -43,7 +43,6 @@ import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import cssValidator from '@square/maker/utils/css-validator';
-import { isSafari } from '../../../utils/devices';
 
 const hexagon = 'polygon(50% 0, 93.3012701892219% 25%, 93.3012701892219% 75%, 50% 100%, 6.69872981077807% 75%, 6.69872981077807% 25%)';
 
@@ -133,6 +132,10 @@ export default {
 			validator: cssValidator('object-position'),
 			default: 'center',
 		},
+		disableTransition: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
@@ -183,14 +186,13 @@ export default {
 		},
 
 		shouldGetImageDimensions() {
-			return this.shape !== 'square';
+			return this.shape !== 'square' || this.shape !== 'original';
 		},
 
 		transitionComponent() {
-			if (!isSafari()) {
+			if (!this.disableTransition) {
 				return 'm-transition-fade-in';
 			}
-			// Don't want transition on Safari for perf reasons
 			return 'span';
 		},
 	},
@@ -211,8 +213,8 @@ export default {
 	mounted() {
 		// Emit image:visible right away if Image is cached,
 		// since it will just render instead of transitioning in
-		// Safari doesn't have a transition, so we'll just trigger it here
-		if (this.loaded || isSafari()) {
+		// If it doesn't have a transition, so we'll just trigger it here
+		if (this.loaded || this.disableTransition) {
 			this.$emit('image:visible');
 		}
 
