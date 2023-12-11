@@ -10,7 +10,10 @@
 				$s[`shape_${resolvedShape}`],
 			]"
 		/>
-		<m-transition-fade-in @after-enter="afterEnter">
+		<component
+			:is="transitionComponent"
+			@after-enter="afterEnter"
+		>
 			<img
 				v-show="loaded"
 				:class="{
@@ -26,7 +29,7 @@
 				@load="onLoaded"
 				v-on="$listeners"
 			>
-		</m-transition-fade-in>
+		</component>
 		<pseudo-window
 			@resize="throttledResizeHandler"
 		/>
@@ -40,6 +43,7 @@ import { MTransitionFadeIn } from '@square/maker/components/TransitionFadeIn';
 import { MSkeletonBlock } from '@square/maker/components/Skeleton';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import cssValidator from '@square/maker/utils/css-validator';
+import { isSafari } from '../../../utils/devices';
 
 const hexagon = 'polygon(50% 0, 93.3012701892219% 25%, 93.3012701892219% 75%, 50% 100%, 6.69872981077807% 75%, 6.69872981077807% 25%)';
 
@@ -181,6 +185,14 @@ export default {
 		shouldGetImageDimensions() {
 			return this.shape !== 'square';
 		},
+
+		transitionComponent() {
+			if (!isSafari()) {
+				return 'm-transition-fade-in';
+			}
+			// Don't want transition on Safari for perf reasons
+			return 'span';
+		},
 	},
 
 	watch: {
@@ -199,7 +211,8 @@ export default {
 	mounted() {
 		// Emit image:visible right away if Image is cached,
 		// since it will just render instead of transitioning in
-		if (this.loaded) {
+		// Safari doesn't have a transition, so we'll just trigger it here
+		if (this.loaded || isSafari()) {
 			this.$emit('image:visible');
 		}
 
@@ -244,6 +257,7 @@ export default {
 	methods: {
 		load() {
 			this.shouldLoad = true;
+			observer?.unwatch(this.$el);
 		},
 
 		getImageDimensions() {

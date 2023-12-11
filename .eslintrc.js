@@ -25,6 +25,10 @@ module.exports = {
 		},
 	},
 
+	globals: {
+		window: true,
+	},
+
 	rules: {
 		indent: 'off',
 		'indent-legacy': ['error', 'tab'],
