@@ -10,7 +10,10 @@
 				$s[`shape_${resolvedShape}`],
 			]"
 		/>
-		<m-transition-fade-in @after-enter="afterEnter">
+		<component
+			:is="transitionComponent"
+			@after-enter="afterEnter"
+		>
 			<img
 				v-show="loaded"
 				:class="{
@@ -26,7 +29,7 @@
 				@load="onLoaded"
 				v-on="$listeners"
 			>
-		</m-transition-fade-in>
+		</component>
 		<pseudo-window
 			@resize="throttledResizeHandler"
 		/>
@@ -129,6 +132,10 @@ export default {
 			validator: cssValidator('object-position'),
 			default: 'center',
 		},
+		shouldDisableTransition: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
@@ -179,7 +186,14 @@ export default {
 		},
 
 		shouldGetImageDimensions() {
-			return this.shape !== 'square';
+			return this.shape !== 'square' || this.shape !== 'original';
+		},
+
+		transitionComponent() {
+			if (!this.shouldDisableTransition) {
+				return 'm-transition-fade-in';
+			}
+			return 'span';
 		},
 	},
 
@@ -199,7 +213,8 @@ export default {
 	mounted() {
 		// Emit image:visible right away if Image is cached,
 		// since it will just render instead of transitioning in
-		if (this.loaded) {
+		// If it doesn't have a transition, so we'll just trigger it here
+		if (this.loaded || this.shouldDisableTransition) {
 			this.$emit('image:visible');
 		}
 
@@ -244,6 +259,7 @@ export default {
 	methods: {
 		load() {
 			this.shouldLoad = true;
+			observer?.unwatch(this.$el);
 		},
 
 		getImageDimensions() {
