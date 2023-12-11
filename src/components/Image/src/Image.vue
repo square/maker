@@ -186,7 +186,7 @@ export default {
 		},
 
 		shouldGetImageDimensions() {
-			return this.shape !== 'square' || this.shape !== 'original';
+			return this.shape !== 'square' && this.shape !== 'original';
 		},
 
 		transitionComponent() {
