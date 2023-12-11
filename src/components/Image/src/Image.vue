@@ -132,7 +132,7 @@ export default {
 			validator: cssValidator('object-position'),
 			default: 'center',
 		},
-		disableTransition: {
+		shouldDisableTransition: {
 			type: Boolean,
 			default: false,
 		},
@@ -190,7 +190,7 @@ export default {
 		},
 
 		transitionComponent() {
-			if (!this.disableTransition) {
+			if (!this.shouldDisableTransition) {
 				return 'm-transition-fade-in';
 			}
 			return 'span';
@@ -214,7 +214,7 @@ export default {
 		// Emit image:visible right away if Image is cached,
 		// since it will just render instead of transitioning in
 		// If it doesn't have a transition, so we'll just trigger it here
-		if (this.loaded || this.disableTransition) {
+		if (this.loaded || this.shouldDisableTransition) {
 			this.$emit('image:visible');
 		}
 
