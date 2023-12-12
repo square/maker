@@ -215,11 +215,6 @@ export default {
 		this.detectAlignCenter();
 	},
 
-	// updated() {
-	// 	console.log('update text');
-	// 	this.detectAlignCenter();
-	// },
-
 	methods: {
 		/**
 		 * Letter spacing is applied to the right-side of the letter
