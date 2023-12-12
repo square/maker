@@ -232,7 +232,7 @@ export default {
 			const computedStyle = window.getComputedStyle(this.$el);
 			console.log('computed style: ', computedStyle);
 			const textAlign = computedStyle.getPropertyValue('text-align');
-			console.log('text align: ', textAlign');
+			console.log('text align: ', textAlign);
 			this.isCentered = textAlign === 'center';
 		},
 	},
