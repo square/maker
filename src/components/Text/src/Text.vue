@@ -215,10 +215,10 @@ export default {
 		this.detectAlignCenter();
 	},
 
-	updated() {
-		console.log('update text');
-		this.detectAlignCenter();
-	},
+	// updated() {
+	// 	console.log('update text');
+	// 	this.detectAlignCenter();
+	// },
 
 	methods: {
 		/**
