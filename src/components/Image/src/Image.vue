@@ -10,8 +10,27 @@
 				$s[`shape_${resolvedShape}`],
 			]"
 		/>
-		<component
-			:is="transitionComponent"
+		<!-- Need to use a template. Using an actual element (e.g span)
+		and needing to style it causes the performance issue in Safari. -->
+		<template v-if="shouldDisableTransition">
+			<img
+				v-show="loaded"
+				:class="{
+					[$s.Image]: true,
+					[$s[`shape_${resolvedShape}`]]: resolvedShape,
+					[$s.thumbnail]: isThumbnail,
+				}"
+				:style="style"
+				:srcset="calculatedSrcSet"
+				:sizes="sizes"
+				:src="calculatedSrc"
+				v-bind="$attrs"
+				@load="onLoaded"
+				v-on="$listeners"
+			>
+		</template>
+		<m-transition-fade-in
+			v-else
 			@after-enter="afterEnter"
 		>
 			<img
@@ -29,7 +48,7 @@
 				@load="onLoaded"
 				v-on="$listeners"
 			>
-		</component>
+		</m-transition-fade-in>
 		<pseudo-window
 			@resize="throttledResizeHandler"
 		/>
@@ -188,13 +207,6 @@ export default {
 		shouldGetImageDimensions() {
 			return this.shape !== 'square' && this.shape !== 'original';
 		},
-
-		transitionComponent() {
-			if (!this.shouldDisableTransition) {
-				return 'm-transition-fade-in';
-			}
-			return 'span';
-		},
 	},
 
 	watch: {
@@ -292,8 +304,10 @@ export default {
 
 .Image {
 	display: block;
-	width: 100%;
-	height: 100%;
+
+	/* Need to use inherit instead of 100% for performance on Safari */
+	width: inherit;
+	height: inherit;
 	object-fit: var(--image-object-fit);
 	object-position: var(--image-object-position);
 	border-radius: $maker-shape-image-border-radius;
