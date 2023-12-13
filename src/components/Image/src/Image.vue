@@ -155,6 +155,11 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/* Should only be needed for Safari */
+		shouldUseStaticSizeStyles: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
@@ -193,11 +198,22 @@ export default {
 		},
 
 		style() {
-			return {
+			const imageStyle = {
 				'--image-height': `${this.height}px`,
 				'--image-object-fit': this.objectFit,
 				'--image-object-position': this.objectPosition,
 			};
+			/*
+				Safari doesn't seem to like `inherit` or `100%` for height/width.
+				By setting it static, the scrolling performance is vastly improved,
+				and it does properly update on screen resize.
+			*/
+			if (this.shouldUseStaticSizeStyles && this.height && this.width) {
+				imageStyle.height = `${this.height}px`;
+				imageStyle.width = `${this.width}px`;
+			}
+
+			return imageStyle;
 		},
 
 		isThumbnail() {
@@ -205,7 +221,7 @@ export default {
 		},
 
 		shouldGetImageDimensions() {
-			return this.shape !== 'square' && this.shape !== 'original';
+			return this.shouldUseStaticSizeStyles || (this.shape !== 'square' && this.shape !== 'original');
 		},
 	},
 
@@ -304,10 +320,8 @@ export default {
 
 .Image {
 	display: block;
-
-	/* Need to use inherit instead of 100% for performance on Safari */
-	width: inherit;
-	height: inherit;
+	width: 100%;
+	height: 100%;
 	object-fit: var(--image-object-fit);
 	object-position: var(--image-object-position);
 	border-radius: $maker-shape-image-border-radius;
