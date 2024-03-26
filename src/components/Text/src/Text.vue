@@ -232,9 +232,8 @@ export default {
 				return;
 			}
 
-			const computedStyle = window.getComputedStyle(this.$el);
-			const textAlign = computedStyle.getPropertyValue('text-align');
-			this.isCenteredAndSpaced = textAlign === 'center';
+			// this does not account for inheritted centered text
+			this.isCenteredAndSpaced = this.textAlign === 'center';
 		},
 	},
 
