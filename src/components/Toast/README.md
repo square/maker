@@ -936,6 +936,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | dismiss-after* | `number`  | `5000`      | -                                                                                                       | auto-dismiss after x milliseconds (ignored if persistent) |
 | icon-name*     | `string`  | `'info'`    | -                                                                                                       | name of icon to show                                      |
 | show-icon*     | `boolean` | `false`     | -                                                                                                       | shows icon                                                |
+| icon-size      | `string`  | `'small'`   | -                                                                                                       | changes icon size                                         |
 | text           | `string`  | `''`        | -                                                                                                       | toast text content                                        |
 | progress       | `number`  | —           | -                                                                                                       | optional toast progress (0 - 100)                         |
 | color*         | `string`  | `'#000000'` | -                                                                                                       | toast text & button color                                 |

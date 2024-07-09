@@ -13,14 +13,7 @@ import cssValidator from '@square/maker/utils/css-validator';
 import assert from '@square/maker/utils/assert';
 import { MThemeKey, defaultTheme, resolveThemeableProps } from '@square/maker/components/Theme';
 import RenderFn from '@square/maker/utils/RenderFn';
-
-const ICON_SIZES = {
-	small: '16px',
-	medium: '24px',
-	large: '32px',
-	xlarge: '40px',
-	xxlarge: '48px',
-};
+import { ICON_SIZES } from '@square/maker/utils/constants';
 
 // width & height css props accept same set of values
 const sizeValidator = cssValidator('width');

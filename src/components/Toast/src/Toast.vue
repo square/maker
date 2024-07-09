@@ -21,6 +21,7 @@
 				<slot name="icon">
 					<m-icon
 						:name="resolvedIconName"
+						:size="iconSize"
 					/>
 				</slot>
 			</div>
@@ -59,6 +60,7 @@
 			>
 				<m-icon
 					:class="$s.CloseIcon"
+					:size="iconSize"
 					name="close"
 				/>
 			</div>
@@ -81,9 +83,13 @@ import { MProgressBar } from '@square/maker/components/ProgressBar';
 import { MTextButton } from '@square/maker/components/TextButton';
 import { MIcon } from '@square/maker/components/Icon';
 import { MText } from '@square/maker/components/Text';
+import { ICON_SIZES } from '@square/maker/utils/constants';
 import cssValidator from '@square/maker/utils/css-validator';
 import MBread from './Bread.vue';
 import toastApi from './toast-api';
+
+// width & height css props accept same set of values
+const sizeValidator = cssValidator('width');
 
 const MIN_PROGRESS = 0;
 const MAX_PROGRESS = 100;
@@ -147,6 +153,14 @@ export default {
 		showIcon: {
 			type: Boolean,
 			default: undefined,
+		},
+		/**
+		 * changes icon size
+		 */
+		iconSize: {
+			type: String,
+			default: 'small',
+			validator: (size) => ICON_SIZES[size] || sizeValidator(size),
 		},
 		/**
 		 * toast text content
