@@ -1,6 +1,10 @@
 <template>
 	<div
 		:class="$s.Stepper"
+		:aria-label="ariaLabel"
+		:aria-labelledby="ariaLabelledby"
+		:aria-describedby="ariaDescribedby"
+		role="group"
 	>
 		<m-button
 			variant="fill"
@@ -9,7 +13,7 @@
 			:text-color="resolvedTextColor"
 			:shape="resolvedShape"
 			:disabled="value === minVal"
-			aria-label="−"
+			:aria-label="decrementAriaLabel"
 			@click="decrement"
 		>
 			<m-icon
@@ -27,16 +31,22 @@
 				:class="$s.QuantityManualInput"
 				:min="min"
 				:max="max"
+				:aria-label="computedInputAriaLabel"
+				:aria-describedby="inputAriaDescribedby"
+				:aria-valuemin="minVal"
+				:aria-valuemax="maxVal"
+				:aria-valuenow="value"
 				type="number"
 				inputmode="numeric"
 				@change="commitManualValue"
 				@blur="commitManualValue"
-			>
+			/>
 			<span
 				:class="[
 					$s.QuantityReadonly,
 					{ [$s.isManualInput]: isSettingManualValue }
 				]"
+				:aria-label="computedQuantityAriaLabel"
 				@click="triggerManualInput"
 			>
 				<!-- This allows us to auto-resize the input as users type -->
@@ -50,7 +60,7 @@
 			:text-color="resolvedTextColor"
 			:shape="resolvedShape"
 			:disabled="value === maxVal"
-			aria-label="+"
+			:aria-label="incrementAriaLabel"
 			@click="increment"
 		>
 			<m-icon
@@ -134,6 +144,63 @@ export default {
 			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
 		},
+		/**
+		 * Stepper aria label
+		 */
+		ariaLabel: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Stepper aria labelled by
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Stepper aria described by
+		 */
+		ariaDescribedby: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Decrement aria label
+		 */
+		decrementAriaLabel: {
+			type: String,
+			default: 'Decrement',
+		},
+		/**
+		 * Increment aria label
+		 */
+		incrementAriaLabel: {
+			type: String,
+			default: 'Increment',
+		},
+		/**
+		 * Input aria label
+		 */
+		inputAriaLabel: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Input aria described by
+		 */
+		inputAriaDescribedby: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Quantity aria label
+		 */
+		quantityAriaLabel: {
+			type: String,
+			default: '',
+		},
+
 	},
 
 	data() {
@@ -156,6 +223,14 @@ export default {
 
 		minVal() {
 			return Number.parseInt(this.min, BASE_TEN);
+		},
+
+		computedInputAriaLabel() {
+			return this.inputAriaLabel || `Enter value between ${this.minVal || 'any'} and ${this.maxVal || 'any'}`;
+		},
+
+		computedQuantityAriaLabel() {
+			return this.quantityAriaLabel || `Current value ${this.value}. Click to edit manually.`;
 		},
 	},
 
