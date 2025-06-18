@@ -16,6 +16,9 @@
 		:type="type"
 		:disabled="isDisabled"
 		:style="style"
+		:role="tag === 'a' ? 'button' : undefined"
+		:aria-label="ariaLabel"
+		:aria-pressed="pressed !== undefined ? String(pressed) : undefined"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -343,6 +346,20 @@ export default {
 			type: String,
 			default: undefined,
 			validator: cssValidator('box-shadow'),
+		},
+		/**
+		 * Accessible label for the button when no visible text.
+		 */
+		ariaLabel: {
+			type: String,
+			default: undefined,
+		},
+		/**
+		 * Indicates the pressed state for toggle buttons.
+		 */
+		pressed: {
+			type: Boolean,
+			default: undefined,
 		},
 	},
 

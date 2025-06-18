@@ -118,6 +118,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | size        | `string`  | `'medium'`  | `'small'`, `'medium'`, `'large'` | Size of rating component                                                   |
 | color*      | `string`  | `'#ffbf00'` | -                                | Color of the star                                                          |
 | is-editable | `boolean` | `false`     | -                                | Determines whether to bubble up click/hover events and show pointer cursor |
+| ariaLabel   | `string`  | `'Rating'`  | -                                | Accessible label for the rating slider                                     |
 
 
 ## StarRating Events

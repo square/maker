@@ -1,5 +1,7 @@
 <template>
 	<button
+		v-bind="$attrs"
+		v-on="$listeners"
 		:class="[
 			$s.Segment,
 			$s[`shape_${controlState.shapeInner}`],

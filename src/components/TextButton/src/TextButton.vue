@@ -12,6 +12,7 @@
 		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
+		:aria-label="ariaLabel"
 	>
 		<m-loading
 			v-if="loading"
@@ -106,6 +107,13 @@ export default {
 		truncateText: {
 			type: Boolean,
 			default: false,
+		},
+		/**
+		 * Accessible label for the button when there is no visible text
+		 */
+		ariaLabel: {
+			type: String,
+			default: undefined,
 		},
 	},
 

@@ -404,6 +404,7 @@ export default {
 | variant    | `string`  | `'fill'`             | `'fill'`, `'outline'` | Input variant               |
 | invalid    | `boolean` | `false`              | -                     | Toggles input invalid state |
 | disabled   | `boolean` | `false`              | -                     | Disable the inputs          |
+| ariaLabel  | `string`  | —                    | -                     | Accessible label for the input group |
 
 
 ## Slots

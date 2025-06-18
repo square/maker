@@ -1,5 +1,7 @@
 <template>
 	<m-touch-capture
+		role="dialog"
+		aria-modal="true"
 		ref="dialog"
 		:class="$s.Dialog"
 		:style="style"

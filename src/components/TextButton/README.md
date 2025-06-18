@@ -193,6 +193,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | color*        | `string`  | `'#006aff'` | -                                                                                                       | Text color of button                    |
 | disabled      | `boolean` | `false`     | -                                                                                                       | Toggles button disabled state           |
 | loading       | `boolean` | `false`     | -                                                                                                       | Toggles button loading state            |
+| ariaLabel     | `string`  | —           | -                                                                                                       | Accessible label when button has no visible text |
 | truncate-text | `boolean` | `false`     | -                                                                                                       | Truncate text if it overflows container |
 
 

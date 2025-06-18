@@ -3,6 +3,8 @@
 		:render-fn="iconRenderFn"
 		:class="$s.Icon"
 		:style="inlineStyles"
+		:aria-hidden="decorative ? 'true' : undefined"
+		:aria-label="decorative ? undefined : ariaLabel"
 		v-bind="$attrs"
 		v-on="$listeners"
 	/>
@@ -75,6 +77,22 @@ export default {
 			type: String,
 			default: undefined,
 			validator: cssValidator('fill'),
+		},
+		/**
+		 * Whether the icon is purely decorative.
+		 * If true, the icon will be hidden from assistive technologies.
+		 * If false you should provide an ariaLabel.
+		 */
+		decorative: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * Descriptive label for non-decorative icons.
+		 */
+		ariaLabel: {
+			type: String,
+			default: undefined,
 		},
 	},
 

@@ -32,6 +32,9 @@
 				<div
 					ref="modal"
 					:class="$s.Container"
+					role="dialog"
+					aria-modal="true"
+					tabindex="-1"
 				>
 					<render-fn :render-fn="parentModalApi.state.renderFn" />
 				</div>

@@ -32,7 +32,10 @@ export default {
 				},
 			],
 			on: this.$listeners,
-			attrs: this.$attrs,
+			attrs: {
+				...this.$attrs,
+				'aria-hidden': !this.loaded ? 'true' : undefined,
+			},
 		});
 	},
 };

@@ -1,6 +1,8 @@
 <template>
 	<div
 		:class="$s.Stepper"
+		v-bind="$attrs"
+		v-on="$listeners"
 	>
 		<m-button
 			variant="fill"
@@ -19,6 +21,12 @@
 		</m-button>
 		<div
 			:class="$s.Quantity"
+			role="spinbutton"
+			tabindex="0"
+			:aria-valuemin="min !== undefined ? Number(min) : undefined"
+			:aria-valuemax="max !== undefined ? Number(max) : undefined"
+			:aria-valuenow="value"
+			:aria-label="ariaLabel || 'Quantity'"
 		>
 			<input
 				v-if="isSettingManualValue"
@@ -133,6 +141,13 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (shape) => ['squared', 'rounded', 'pill'].includes(shape),
+		},
+		/**
+		 * Accessible label for quantity value.
+		 */
+		ariaLabel: {
+			type: String,
+			default: undefined,
 		},
 	},
 

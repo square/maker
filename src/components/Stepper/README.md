@@ -44,6 +44,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | color*      | `string`        | `'#f1f1f1'` | -                                  | stepper button background color |
 | text-color* | `string`        | `'#1b1b1b'` | -                                  | stepper button text color       |
 | shape*      | `string`        | —           | `'squared'`, `'rounded'`, `'pill'` | stepper button shape            |
+| ariaLabel   | `string`        | —           | -                                  | Accessible label for the quantity value |
 
 
 ## Events
