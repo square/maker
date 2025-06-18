@@ -88,6 +88,13 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | input-aria-label         | `string`        | `''`          | -                                  | Custom label for the manual input field                |
 | input-aria-describedby   | `string`        | `''`          | -                                  | Additional description for the input field             |
 | quantity-aria-label      | `string`        | `''`          | -                                  | Custom label for the quantity display                  |
+| ariaLabel                | `string`        | —             | -                                  | Accessible label for the entire stepper control         |
+| ariaLabelledby           | `string`        | —             | -                                  | ID of an element that labels the stepper                |
+| decrementAriaLabel       | `string`        | `'Decrement'` | -                                  | Accessible label for the minus button                   |
+| incrementAriaLabel       | `string`        | `'Increment'` | -                                  | Accessible label for the plus button                    |
+| inputAriaLabel           | `string`        | —             | -                                  | Accessible label for the manual number input            |
+| inputAriaDescribedby     | `string`        | —             | -                                  | ID of element that describes the manual input           |
+| quantityAriaLabel        | `string`        | —             | -                                  | Accessible label for the quantity display                |
 
 
 ## Events

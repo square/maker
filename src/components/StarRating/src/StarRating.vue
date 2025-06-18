@@ -10,7 +10,6 @@
 		:aria-label="ariaLabel"
 		v-bind="$attrs"
 		v-on="$listeners"
-		@keydown="onKeyDown"
 	>
 		<m-star
 			v-for="star in MAX_RATING"
@@ -165,25 +164,6 @@ export default {
 			if (this.isEditable) {
 				this.$emit('star-unhover', star);
 				this.hoveredRating = 0;
-			}
-		},
-
-		onKeyDown(event) {
-			if (!this.isEditable) {
-				return;
-			}
-
-			const { key } = event;
-			if (key === 'ArrowRight' || key === 'ArrowUp') {
-				event.preventDefault();
-				const increment = 1;
-				const newRating = Math.min(this.displayedRating + increment, MAX_RATING);
-				this.$emit('star-click', newRating);
-			} else if (key === 'ArrowLeft' || key === 'ArrowDown') {
-				event.preventDefault();
-				const decrement = 1;
-				const newRating = Math.max(this.displayedRating - decrement, MIN_RATING);
-				this.$emit('star-click', newRating);
 			}
 		},
 	},
