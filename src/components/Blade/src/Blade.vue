@@ -4,6 +4,7 @@
 		:style="style"
 		v-bind="$attrs"
 		v-on="$listeners"
+		:aria-labelledby="ariaLabelledby"
 	>
 		<div :class="$s.Blade">
 			<!-- @slot Blade content -->
@@ -42,6 +43,13 @@ export default {
 			type: String,
 			default: undefined,
 			validator: cssValidator('color'),
+		},
+		/**
+		 * The ID of the element that labels the blade.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 

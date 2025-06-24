@@ -8,6 +8,9 @@
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
+		:aria-labelledby="ariaLabelledby"
+		v-bind="$attrs"
+		v-on="$listeners"
 	>
 		<!-- @slot Modal content -->
 		<slot />
@@ -27,6 +30,8 @@ export default {
 	components: {
 		MTouchCapture,
 	},
+
+	inheritAttrs: false,
 
 	inject: {
 		modalApi,
@@ -67,6 +72,14 @@ export default {
 		closeOnSwipeDown: {
 			type: Boolean,
 			default: true,
+		},
+
+		/**
+		 * The ID of the element that labels the modal.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 

@@ -10,6 +10,9 @@
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
+		:aria-labelledby="ariaLabelledby"
+		v-bind="$attrs"
+		v-on="$listeners"
 	>
 		<!-- @slot Dialog content -->
 		<slot />
@@ -29,6 +32,8 @@ export default {
 	components: {
 		MTouchCapture,
 	},
+
+	inheritAttrs: false,
 
 	inject: {
 		dialogApi,
@@ -62,6 +67,14 @@ export default {
 		closeOnSwipeDown: {
 			type: Boolean,
 			default: true,
+		},
+
+		/**
+		 * The ID of the element that labels the dialog.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 

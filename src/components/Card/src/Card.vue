@@ -9,6 +9,7 @@
 		:style="style"
 		:theme="cardTheme"
 		v-on="$listeners"
+		:aria-labelledby="ariaLabelledby"
 	>
 		<!-- @slot card content -->
 		<slot />
@@ -60,6 +61,13 @@ export default {
 			type: String,
 			default: undefined,
 			validator: (variant) => ['outline', 'glass'].includes(variant),
+		},
+		/**
+		 * The ID of the element that labels the card.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 

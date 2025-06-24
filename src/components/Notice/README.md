@@ -152,6 +152,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | icon-color* | `string` | `'#707070'` | -                                                                                                       | icon color                         |
 | color*      | `string` | `'#1b1b1b'` | -                                                                                                       | text color for inline notices      |
 | bg-color*   | `string` | `'#f1f1f1'` | -                                                                                                       | background color for block notices |
+| role        | `string` | `'status'`  | `'status'`, `'alert'`                                                                                   | The ARIA role for the notice.      |
 
 
 ## Slots

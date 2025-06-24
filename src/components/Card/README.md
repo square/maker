@@ -117,6 +117,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | -------- | -------- | ----------- | ---------------------------------- | ------------ |
 | shape*   | `string` | —           | `'squared'`, `'rounded'`, `'pill'` | card shape   |
 | variant* | `string` | `'outline'` | `'outline'`, `'glass'`             | card variant |
+| aria-labelledby | `string` | — | - | The ID of the element that labels the card. |
 
 
 ## Slots

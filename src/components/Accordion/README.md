@@ -340,6 +340,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 | secondary      | `string`         | `''`    | -               | secondary info, will be overridden if secondary slot is used                          |
 | side           | `string`         | `''`    | -               | accordion side title, will be overriden if title slot is used                         |
 | side-secondary | `string`         | `''`    | -               | secondary side info, will be overridden if side-secondary slot is used                |
+| id             | `string`         | —       | -               | ID for the accordion header, used for `aria-controls`. A unique ID is generated if not provided. |
 
 
 ## Slots
