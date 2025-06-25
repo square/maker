@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-unregistered-components -->
 # Modal
 
 Use the modal component to enter the user into a new _mode_.
@@ -762,7 +763,6 @@ export default {
 }
 </style>
 ```
-
 <!-- api-tables:start -->
 ## Modal Props
 
@@ -794,7 +794,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 It is highly recommended to label your modals for assistive technologies. You can do this by adding an `id` to your modal's title element and passing that `id` to the `MModal` component via the `aria-labelledby` prop.
 
-```vue
+```html
 <template>
 	<m-modal aria-labelledby="modal-title">
 		<m-modal-content>
@@ -817,3 +817,4 @@ It is highly recommended to label your modals for assistive technologies. You ca
 | aria-labelledby | `string` | — | - | The ID of the element that labels the modal. |
 
 <!-- api-tables:end -->
+

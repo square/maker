@@ -1,17 +1,17 @@
 <template>
 	<m-touch-capture
+		ref="dialog"
 		role="dialog"
 		aria-modal="true"
-		ref="dialog"
 		:class="$s.Dialog"
 		:style="style"
 		:prevent-default="preventDefault"
+		v-bind="$attrs"
+		:aria-labelledby="ariaLabelledby"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
-		:aria-labelledby="ariaLabelledby"
-		v-bind="$attrs"
 		v-on="$listeners"
 	>
 		<!-- @slot Dialog content -->
@@ -33,8 +33,6 @@ export default {
 		MTouchCapture,
 	},
 
-	inheritAttrs: false,
-
 	inject: {
 		dialogApi,
 		theme: {
@@ -42,6 +40,8 @@ export default {
 			from: MThemeKey,
 		},
 	},
+
+	inheritAttrs: false,
 
 	props: {
 		/**

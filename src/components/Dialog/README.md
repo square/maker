@@ -1,4 +1,5 @@
-# Dialog
+<!-- eslint-disable vue/no-unregistered-components -->
+t# Dialog
 
 Use the Dialog component to prompt the user with some immediate information that they have to acknowledge or respond to.
 
@@ -826,7 +827,7 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 
 It is highly recommended to label your dialogs for assistive technologies. You can do this by adding an `id` to your dialog's title element and passing that `id` to the `MDialog` component via the `aria-labelledby` prop.
 
-```vue
+```html
 <template>
 	<m-dialog aria-labelledby="dialog-title">
 		<m-dialog-content>

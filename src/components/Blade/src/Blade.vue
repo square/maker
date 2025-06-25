@@ -3,8 +3,8 @@
 		:class="$s.BladeContainer"
 		:style="style"
 		v-bind="$attrs"
-		v-on="$listeners"
 		:aria-labelledby="ariaLabelledby"
+		v-on="$listeners"
 	>
 		<div :class="$s.Blade">
 			<!-- @slot Blade content -->

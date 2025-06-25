@@ -70,8 +70,8 @@
 		</m-row>
 		<m-transition-collapse>
 			<div
-				:id="`${id}-content`"
 				v-if="isExpanded"
+				:id="`${id}-content`"
 				role="region"
 				:aria-labelledby="id"
 				:aria-hidden="!isExpanded"
@@ -163,7 +163,14 @@ export default {
 		 */
 		id: {
 			type: String,
-			default: () => `m-accordion-header-${Math.random().toString(36).substr(2, 9)}`,
+			default: () => {
+				const BASE_36 = 36;
+				const RANDOM_ID_START_INDEX = 2;
+				const RANDOM_ID_LENGTH = 9;
+				return `m-accordion-header-${Math.random()
+					.toString(BASE_36)
+					.slice(RANDOM_ID_START_INDEX, RANDOM_ID_START_INDEX + RANDOM_ID_LENGTH)}`;
+			},
 		},
 	},
 

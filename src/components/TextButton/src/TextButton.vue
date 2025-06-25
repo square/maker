@@ -11,8 +11,8 @@
 		:disabled="isDisabled"
 		:style="style"
 		v-bind="$attrs"
-		v-on="$listeners"
 		:aria-label="ariaLabel"
+		v-on="$listeners"
 	>
 		<m-loading
 			v-if="loading"

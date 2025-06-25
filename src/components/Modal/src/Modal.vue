@@ -4,12 +4,12 @@
 		:class="$s.Modal"
 		:style="style"
 		:prevent-default="preventDefault"
+		v-bind="$attrs"
+		:aria-labelledby="ariaLabelledby"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
-		:aria-labelledby="ariaLabelledby"
-		v-bind="$attrs"
 		v-on="$listeners"
 	>
 		<!-- @slot Modal content -->
@@ -31,8 +31,6 @@ export default {
 		MTouchCapture,
 	},
 
-	inheritAttrs: false,
-
 	inject: {
 		modalApi,
 		theme: {
@@ -40,6 +38,8 @@ export default {
 			from: MThemeKey,
 		},
 	},
+
+	inheritAttrs: false,
 
 	props: {
 		/**

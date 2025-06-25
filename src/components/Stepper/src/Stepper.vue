@@ -46,7 +46,7 @@
 				inputmode="numeric"
 				@change="commitManualValue"
 				@blur="commitManualValue"
-			/>
+			>
 			<span
 				:class="[
 					$s.QuantityReadonly,

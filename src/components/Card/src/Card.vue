@@ -8,8 +8,8 @@
 		v-bind="$attrs"
 		:style="style"
 		:theme="cardTheme"
-		v-on="$listeners"
 		:aria-labelledby="ariaLabelledby"
+		v-on="$listeners"
 	>
 		<!-- @slot card content -->
 		<slot />
