@@ -18,7 +18,7 @@ const NEUTRAL_RATIOS = {
 	light: {
 		'neutral-0': 0,
 		'neutral-10': 0.05,
-		'neutral-20': 0.155,
+		'neutral-20': 0.385,
 		'neutral-80': 0.527,
 		'neutral-90': 0.9,
 		'neutral-100': 1,
@@ -26,7 +26,7 @@ const NEUTRAL_RATIOS = {
 	dark: {
 		'neutral-0': 0,
 		'neutral-10': 0.225,
-		'neutral-20': 0.37,
+		'neutral-20': 0.385,
 		'neutral-80': 0.55,
 		'neutral-90': 0.95,
 		'neutral-100': 1,
