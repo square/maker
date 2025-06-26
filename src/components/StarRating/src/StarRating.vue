@@ -1,6 +1,13 @@
 <template>
 	<div
 		:style="starComputedStyles"
+		:role="isEditable ? 'slider' : 'img'"
+		tabindex="0"
+		aria-readonly="true"
+		aria-valuemin="0"
+		aria-valuemax="5"
+		:aria-valuenow="displayedRating"
+		:aria-label="ariaLabel"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -90,6 +97,13 @@ export default {
 		isEditable: {
 			type: Boolean,
 			default: false,
+		},
+		/**
+		 * Accessible label for the star rating
+		 */
+		ariaLabel: {
+			type: String,
+			default: 'Rating',
 		},
 	},
 

@@ -92,3 +92,7 @@ Supports attributes from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/
 
 Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 <!-- api-tables:end -->
+
+## Accessibility
+
+While the skeleton is in the loading state (`loaded` is `false`), the generated placeholder elements are automatically marked `aria-hidden="true"` so they will be ignored by assistive technologies.

@@ -1,13 +1,18 @@
 <template>
 	<m-touch-capture
 		ref="dialog"
+		role="dialog"
+		aria-modal="true"
 		:class="$s.Dialog"
 		:style="style"
 		:prevent-default="preventDefault"
+		v-bind="$attrs"
+		:aria-labelledby="ariaLabelledby"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
+		v-on="$listeners"
 	>
 		<!-- @slot Dialog content -->
 		<slot />
@@ -36,6 +41,8 @@ export default {
 		},
 	},
 
+	inheritAttrs: false,
+
 	props: {
 		/**
 		 * Background color of dialog
@@ -60,6 +67,14 @@ export default {
 		closeOnSwipeDown: {
 			type: Boolean,
 			default: true,
+		},
+
+		/**
+		 * The ID of the element that labels the dialog.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 

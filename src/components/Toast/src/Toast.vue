@@ -9,6 +9,8 @@
 		:persistent="resolvedPersistent"
 		:dismiss-after="resolvedDismissAfter"
 		:style="style"
+		role="alert"
+		aria-live="assertive"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>

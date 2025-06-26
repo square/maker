@@ -1,11 +1,13 @@
 <template>
 	<button
+		v-bind="$attrs"
 		:class="[
 			$s.Segment,
 			$s[`shape_${controlState.shapeInner}`],
 			$s[`size_${controlState.sizeInner}`],
 			{ [$s.selected]: isSelected },
 		]"
+		v-on="$listeners"
 		@click="selectSelf"
 	>
 		<slot />

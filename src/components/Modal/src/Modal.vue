@@ -4,10 +4,13 @@
 		:class="$s.Modal"
 		:style="style"
 		:prevent-default="preventDefault"
+		v-bind="$attrs"
+		:aria-labelledby="ariaLabelledby"
 		@scroll.native="onScroll"
 		@on-drag-down="onDragDown"
 		@on-drag-end="onDragEnd"
 		@on-swipe-down="onSwipeDown"
+		v-on="$listeners"
 	>
 		<!-- @slot Modal content -->
 		<slot />
@@ -35,6 +38,8 @@ export default {
 			from: MThemeKey,
 		},
 	},
+
+	inheritAttrs: false,
 
 	props: {
 		/**
@@ -67,6 +72,14 @@ export default {
 		closeOnSwipeDown: {
 			type: Boolean,
 			default: true,
+		},
+
+		/**
+		 * The ID of the element that labels the modal.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 

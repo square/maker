@@ -23,6 +23,12 @@
 		</m-button>
 		<div
 			:class="$s.Quantity"
+			role="spinbutton"
+			tabindex="0"
+			:aria-valuemin="min !== undefined ? Number(min) : undefined"
+			:aria-valuemax="max !== undefined ? Number(max) : undefined"
+			:aria-valuenow="value"
+			:aria-label="ariaLabel || 'Quantity'"
 		>
 			<input
 				v-if="isSettingManualValue"
@@ -40,7 +46,7 @@
 				inputmode="numeric"
 				@change="commitManualValue"
 				@blur="commitManualValue"
-			/>
+			>
 			<span
 				:class="[
 					$s.QuantityReadonly,
@@ -200,7 +206,6 @@ export default {
 			type: String,
 			default: '',
 		},
-
 	},
 
 	data() {

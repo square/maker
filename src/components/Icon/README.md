@@ -172,6 +172,8 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | size     | `string` | `'small'`        | `'small'`, `'medium'`, `'large'`, `'xlarge'`, `'xxlarge'`                                               | size of icon, can be named value or any valid CSS width/height |
 | color*   | `string` | `'currentColor'` | -                                                                                                       | color of icon                                                  |
 | fill*    | `string` | `'currentColor'` | -                                                                                                       | fill of icon                                                   |
+| decorative | `boolean` | `true` | - | When true (default) the icon is marked `aria-hidden="true"`; set to false and provide `ariaLabel` when the icon conveys information |
+| ariaLabel | `string` | — | - | Accessible label for non-decorative icons |
 
 
 ## Events
