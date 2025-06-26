@@ -5,7 +5,7 @@ module.exports = function defaultColors() {
 	return {
 		'neutral-0': '#ffffff',
 		'neutral-10': '#f1f1f1',
-		'neutral-20': '#d3d3d3',
+		'neutral-20': '#919191',
 		'neutral-80': '#707070',
 		'neutral-90': '#1b1b1b',
 		'neutral-100': '#000000',
