@@ -37,7 +37,12 @@
 					$s.QuantityReadonly,
 					{ [$s.isManualInput]: isSettingManualValue }
 				]"
+				tabindex="0"
+				role="button"
+				:aria-label="`Edit quantity, current value is ${value}`"
 				@click="triggerManualInput"
+				@keydown.enter="triggerManualInput"
+				@keydown.space.prevent="triggerManualInput"
 			>
 				<!-- This allows us to auto-resize the input as users type -->
 				{{ isSettingManualValue ? manualValue : value }}
