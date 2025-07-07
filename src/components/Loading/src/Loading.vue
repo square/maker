@@ -1,5 +1,8 @@
 <template>
-	<div :class="$s.Loading">
+	<div
+		:class="$s.Loading"
+		aria-hidden="true"
+	>
 		<m-icon
 			:class="$s.Spinner"
 			:size="size"

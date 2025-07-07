@@ -247,24 +247,20 @@ Supports attributes from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/
 
 Themable props* can be configured via the [Theme](#/Theme) component using the key `image`.
 
-| Prop                          | Type      | Default    | Possible values                                             | Description                                                                         |
-| ----------------------------- | --------- | ---------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| src                           | `string`  | —          | -                                                           | -                                                                                   |
-| srcset                        | `string`  | —          | -                                                           | -                                                                                   |
-| sizes                         | `string`  | —          | -                                                           | -                                                                                   |
-| shape*                        | `string`  | —          | `'original'`, `'square'`, `'circle'`, `'arch'`, `'hexagon'` | Original applies theme's border radius, square applies border radius of 0           |
-| lazyload                      | `boolean` | `false`    | -                                                           | -                                                                                   |
-| object-fit                    | `string`  | `'cover'`  | -                                                           | [Object fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)           |
-| object-position               | `string`  | `'center'` | -                                                           | [Object position](https://developer.mozilla.org/en-US/docs/Web/CSS/object-position) |
-| should-disable-transition     | `boolean` | `false`    | -                                                           | -                                                                                   |
-| should-use-static-size-styles | `boolean` | `false`    | -                                                           | -                                                                                   |
+| Prop                        | Type      | Default   | Possible values                                               | Description                                                |
+| --------------------------- | --------- | --------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
+| alt                         | `string`  | `''`      | -                                                             | Alternative text for the image, for accessibility.         |
+| src                         | `string`  | —         | -                                                             | -                                                          |
+| srcset                      | `string`  | —         | -                                                             | -                                                          |
+| sizes                       | `string`  | —         | -                                                             | -                                                          |
+| shape*                      | `string`  | —         | `'original'`, `'square'`, `'circle'`, `'arch'`, `'hexagon'`   | Original applies theme's border radius, square applies border radius of 0 |
+| lazyload                    | `boolean` | `false`   | -                                                             | -                                                          |
+| object-fit                | `string`  | `'cover'` | -                                                             | [Object fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) |
+| object-position             | `string`  | `'center'`  | -                                                             | [Object position](https://developer.mozilla.org/en-US/docs/Web/CSS/object-position) |
+| should-disable-transition   | `boolean` | `false`   | -                                                             | -                                                          |
+| should-use-static-size-styles | `boolean` | `false`   | -                                                             | Should only be needed for Safari                           |
 
 
 ## Events
 
-Supports events from [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img).
-
-| Event         | Type | Description |
-| ------------- | ---- | ----------- |
-| image:visible | -    | —           |
-<!-- api-tables:end -->
+Supports events from [`<img>`

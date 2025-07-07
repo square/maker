@@ -6,6 +6,7 @@
 			$s[`display_${display}`],
 		]"
 		:style="style"
+		:role="role"
 		v-bind="$attrs"
 		v-on="$listeners"
 	>
@@ -112,6 +113,15 @@ export default {
 			type: String,
 			default: undefined,
 			validator: cssValidator('color'),
+		},
+		/**
+		 * The ARIA role for the notice, for accessibility.
+		 * 'status' is for general information, 'alert' is for important, time-sensitive information.
+		 */
+		role: {
+			type: String,
+			default: 'status',
+			validator: (role) => ['status', 'alert'].includes(role),
 		},
 	},
 

@@ -4,10 +4,12 @@
 		v-on="$listeners"
 	>
 		<m-row
+			:id="id"
 			:class="$s.AccordionHeader"
 			type="button"
 			element="button"
 			:aria-expanded="isExpanded"
+			:aria-controls="`${id}-content`"
 			@click="toggleExpanded"
 		>
 			<template #default>
@@ -69,6 +71,9 @@
 		<m-transition-collapse>
 			<div
 				v-if="isExpanded"
+				:id="`${id}-content`"
+				role="region"
+				:aria-labelledby="id"
 				:aria-hidden="!isExpanded"
 				:class="$s.ContentWrapper"
 			>
@@ -151,6 +156,21 @@ export default {
 			type: String,
 			required: false,
 			default: '',
+		},
+		/**
+		 * ID for the accordion header, used for aria-controls.
+		 * A unique ID will be generated if not provided.
+		 */
+		id: {
+			type: String,
+			default: () => {
+				const BASE_36 = 36;
+				const RANDOM_ID_START_INDEX = 2;
+				const RANDOM_ID_LENGTH = 9;
+				return `m-accordion-header-${Math.random()
+					.toString(BASE_36)
+					.slice(RANDOM_ID_START_INDEX, RANDOM_ID_START_INDEX + RANDOM_ID_LENGTH)}`;
+			},
 		},
 	},
 

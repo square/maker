@@ -24,6 +24,7 @@
 				:srcset="calculatedSrcSet"
 				:sizes="sizes"
 				:src="calculatedSrc"
+				:alt="alt"
 				v-bind="$attrs"
 				@load="onLoaded"
 				v-on="$listeners"
@@ -44,6 +45,7 @@
 				:srcset="calculatedSrcSet"
 				:sizes="sizes"
 				:src="calculatedSrc"
+				:alt="alt"
 				v-bind="$attrs"
 				@load="onLoaded"
 				v-on="$listeners"
@@ -159,6 +161,13 @@ export default {
 		shouldUseStaticSizeStyles: {
 			type: Boolean,
 			default: false,
+		},
+		/**
+		 * Alternative text for the image, for accessibility.
+		 */
+		alt: {
+			type: String,
+			default: '',
 		},
 	},
 

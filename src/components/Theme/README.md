@@ -412,7 +412,7 @@ export default {
 					primary: '#000000',
 					'neutral-0': '#ffffff',
 					'neutral-10': '#f1f1f1',
-					'neutral-20': '#d3d3d3',
+					'neutral-20': '#949494',
 					'neutral-80': '#707070',
 					'neutral-90': '#1b1b1b',
 					'neutral-100': '#000000',
@@ -520,7 +520,11 @@ We have a preset scale of neutral colors that are used within most components. D
 					class="color"
 					:style="{backgroundColor: value }"
 				>
-					<span class="label">{{ key }}: {{ value }}</span>
+					<span class="label">
+						{{ key }}: {{ value }}
+						<br>
+						Contrast: {{ getContrastRatio(key, true).toFixed(3) }}
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -535,33 +539,52 @@ We have a preset scale of neutral colors that are used within most components. D
 					class="color"
 					:style="{backgroundColor: value }"
 				>
-					<span class="label">{{ key }}: {{ value }}</span>
+					<span class="label">
+						{{ key }}: {{ value }}
+						<br>
+						Contrast: {{ getContrastRatio(key, false).toFixed(3) }}
+					</span>
 				</li>
 			</ul>
 		</div>
 	</div>
 </template>
 <script>
+import makerColors from '@square/maker/utils/maker-colors';
+import { colord } from 'colord';
+
 export default {
 	data() {
+		// Generate colors using the actual maker-colors.js utility
+		const lightColors = makerColors('#ffffff');
+		const darkColors = makerColors('#000000');
+
 		return {
 			colors: {
-				'neutral-0': '#ffffff',
-				'neutral-10': '#f1f1f1',
-				'neutral-20': '#d3d3d3',
-				'neutral-80': '#707070',
-				'neutral-90': '#1b1b1b',
-				'neutral-100': '#000000',
+				'neutral-0': lightColors['neutral-0'],
+				'neutral-10': lightColors['neutral-10'],
+				'neutral-20': lightColors['neutral-20'],
+				'neutral-80': lightColors['neutral-80'],
+				'neutral-90': lightColors['neutral-90'],
+				'neutral-100': lightColors['neutral-100'],
 			},
 			demoDarkColors: {
-				'neutral-0': '#000000',
-				'neutral-10': '#3c3c3c',
-				'neutral-20': '#575757',
-				'neutral-80': '#848484',
-				'neutral-90': '#f1f1f1',
-				'neutral-100': '#ffffff',
+				'neutral-0': darkColors['neutral-0'],
+				'neutral-10': darkColors['neutral-10'],
+				'neutral-20': darkColors['neutral-20'],
+				'neutral-80': darkColors['neutral-80'],
+				'neutral-90': darkColors['neutral-90'],
+				'neutral-100': darkColors['neutral-100'],
 			},
 		};
+	},
+	methods: {
+		getContrastRatio(key, isLight) {
+			const background = isLight ? '#ffffff' : '#000000';
+			const color = isLight ? this.colors[key] : this.demoDarkColors[key];
+			// Calculate WCAG contrast ratio
+			return colord(color).contrast(background);
+		},
 	},
 };
 </script>

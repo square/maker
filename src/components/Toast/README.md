@@ -957,5 +957,10 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 Supports events from [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div).
 
 
+## Accessibility
+
+MToast automatically sets `role="alert"` and `aria-live="assertive"` so that screen-readers announce the toast as soon as it appears. You can still override or add additional aria attributes through standard HTML props.
+
+
 
 <!-- api-tables:end -->

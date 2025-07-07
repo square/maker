@@ -9,6 +9,7 @@
 				v-for="idx in linesNum"
 				:key="`skeleton-text-${idx}`"
 				:class="$s.SkeletonText"
+				aria-hidden="true"
 				v-bind="$attrs"
 				v-on="$listeners"
 			/>

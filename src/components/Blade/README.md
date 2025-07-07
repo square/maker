@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-unregistered-components -->
 # Blade
 
 Use the Blade component to open a blade.
@@ -234,6 +235,34 @@ Themable props* can be configured via the [Theme](#/Theme) component using the k
 | ------- | -------------------------------------------- |
 | default | Blade Content content (gets correct padding) |
 
+
+## Accessibility
+
+It is recommended to label your blades for assistive technologies. You can do this by adding an `id` to your blade's title element and passing that `id` to the `MBlade` component via the `aria-labelledby` prop.
+
+```html
+<template>
+	<m-blade aria-labelledby="blade-title">
+		<m-blade-content>
+			<m-text
+				id="blade-title"
+				pattern="title"
+			>
+				Blade heading
+			</m-text>
+			...
+		</m-blade-content>
+	</m-blade>
+</template>
+```
+
+## Props
+
+| Prop | Type | Default | Possible values | Description |
+| --- | --- | --- | --- | --- |
+| aria-labelledby | `string` | — | - | The ID of the element that labels the blade. |
+| bg-color* | `string` | `'#ffffff'` | - | Background color of blade |
+| color* | `string` | `'#1b1b1b'` | - | Text color of blade |
 
 
 <!-- api-tables:end -->

@@ -3,6 +3,7 @@
 		:class="$s.BladeContainer"
 		:style="style"
 		v-bind="$attrs"
+		:aria-labelledby="ariaLabelledby"
 		v-on="$listeners"
 	>
 		<div :class="$s.Blade">
@@ -42,6 +43,13 @@ export default {
 			type: String,
 			default: undefined,
 			validator: cssValidator('color'),
+		},
+		/**
+		 * The ID of the element that labels the blade.
+		 */
+		ariaLabelledby: {
+			type: String,
+			default: undefined,
 		},
 	},
 
