@@ -201,7 +201,6 @@ export default {
 }
 
 .ThumbnailImage {
-	border-radius: 4px;
 	cursor: var(--thumbnail-cursor, auto);
 }
 
@@ -214,18 +213,11 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #f5f5f5;
-	border: 1px solid #ccc;
-	border-radius: 4px;
 	cursor: var(--overflow-cursor, default);
 }
 
 .ThumbnailOverflow:focus {
 	outline: 2px solid #06c;
 	outline-offset: 2px;
-}
-
-.ThumbnailOverflow:hover {
-	background-color: #e8e8e8;
 }
 </style>
