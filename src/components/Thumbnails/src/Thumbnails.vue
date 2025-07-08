@@ -3,7 +3,7 @@
 		:class="$s.Thumbnails"
 		:style="thumbnailStyles"
 		role="group"
-		:aria-label="thumbnailsAriaLabel"
+		:aria-label="thumbnailContainerAriaLabel"
 	>
 		<m-image
 			v-for="(thumbnailSrc, index) in visibleThumbnails"
@@ -86,14 +86,14 @@ export default {
 		 * Alt text for thumbnail images. Can be a string (used for all) or
 		 * array of strings (one per thumbnail).
 		 */
-		thumbnailAlt: {
+		thumbnailAlts: {
 			type: [String, Array],
 			default: () => [],
 		},
 		/**
 		 * ARIA label for the thumbnails group
 		 */
-		thumbnailsAriaLabel: {
+		thumbnailContainerAriaLabel: {
 			type: String,
 			default: 'Thumbnail images',
 		},
@@ -144,12 +144,12 @@ export default {
 
 	methods: {
 		getThumbnailAlt(thumbnailSource, index) {
-			if (Array.isArray(this.thumbnailAlt)) {
+			if (Array.isArray(this.thumbnailAlts)) {
 				// eslint-disable-next-line no-magic-numbers
-				return this.thumbnailAlt[index] || `Thumbnail ${index + 1}`;
+				return this.thumbnailAlts[index] || `Thumbnail ${index + 1}`;
 			}
-			if (typeof this.thumbnailAlt === 'string' && this.thumbnailAlt) {
-				return this.thumbnailAlt;
+			if (typeof this.thumbnailAlts === 'string' && this.thumbnailAlts) {
+				return this.thumbnailAlts;
 			}
 			// eslint-disable-next-line no-magic-numbers
 			return `Thumbnail ${index + 1}`;

@@ -40,8 +40,8 @@ Use Thumbnails to display a list of images with built-in accessibility features.
 		<m-thumbnails
 			:thumbnails="thumbnails"
 			:max-thumbnails="4"
-			:thumbnail-alt="altTexts"
-			thumbnails-aria-label="Product gallery"
+			:thumbnail-alts="altTexts"
+			thumbnail-container-aria-label="Product gallery"
 			overflow-aria-label="View additional product images"
 			@thumbnail:click="clickThumbnail"
 			@overflow:click="clickOverflow"
@@ -51,7 +51,7 @@ Use Thumbnails to display a list of images with built-in accessibility features.
 		<m-thumbnails
 			:thumbnails="thumbnails"
 			:max-thumbnails="3"
-			thumbnail-alt="Product image"
+			thumbnail-alts="Product image"
 		/>
 	</div>
 </template>
@@ -132,13 +132,13 @@ You can provide alt text in several ways:
 <!-- Single alt text for all images -->
 <m-thumbnails
   :thumbnails="images"
-  thumbnail-alt="Product image"
+  thumbnail-alts="Product image"
 />
 
 <!-- Individual alt text for each image -->
 <m-thumbnails
   :thumbnails="images"
-  :thumbnail-alt="['Front view', 'Side view', 'Back view']"
+  :thumbnail-alts="['Front view', 'Side view', 'Back view']"
 />
 ```
 
@@ -149,7 +149,7 @@ Customize ARIA labels for better screen reader experience:
 ```html
 <m-thumbnails 
   :thumbnails="images" 
-  thumbnails-aria-label="Product gallery"
+  thumbnail-container-aria-label="Product gallery"
   overflow-aria-label="View additional product images"
 />
 ```
@@ -163,9 +163,9 @@ Customize ARIA labels for better screen reader experience:
 | size                  | `string`       | `'32px'`             | -               | Size to display thumbnail images                                                                       |
 | max-thumbnails        | `number`       | `5`                  | -               | Maximum number of thumbnails to display                                                                |
 | overflow-text-size    | `number`       | `0`                  | -               | Overflow text size. Size of text as step in fluid scale (-2 to 7).                                     |
-| thumbnail-alt         | `string|array` | `() => []`           | -               | Alt text for thumbnail images. Can be a string (used for all) or
+| thumbnail-alts                | `string|array` | `() => []`           | -               | Alt text for thumbnail images. Can be a string (used for all) or
 array of strings (one per thumbnail). |
-| thumbnails-aria-label | `string`       | `'Thumbnail images'` | -               | ARIA label for the thumbnails group                                                                    |
+| thumbnail-container-aria-label | `string`       | `'Thumbnail images'` | -               | ARIA label for the thumbnails group                                                                    |
 | overflow-aria-label   | `string`       | —                    | -               | ARIA label for the overflow button                                                                     |
 
 

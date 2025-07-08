@@ -38,8 +38,8 @@
 			<m-thumbnails
 				:thumbnails="sampleImages"
 				:max-thumbnails="3"
-				:thumbnail-alt="customAltTexts"
-				thumbnails-aria-label="Product gallery"
+				:thumbnail-alts="customAltTexts"
+				thumbnail-container-aria-label="Product gallery"
 				overflow-aria-label="View additional product images"
 				@thumbnail:click="onThumbnailClick"
 				@overflow:click="onOverflowClick"
@@ -66,8 +66,8 @@
 			<m-thumbnails
 				:thumbnails="sampleImages.slice(0, 3)"
 				:max-thumbnails="5"
-				thumbnail-alt="Profile photo"
-				thumbnails-aria-label="Profile photos"
+				thumbnail-alts="Profile photo"
+				thumbnail-container-aria-label="Profile photos"
 				@thumbnail:click="onThumbnailClick"
 			/>
 		</section>
@@ -88,8 +88,8 @@
 				:max-thumbnails="2"
 				size="80px"
 				:overflow-text-size="2"
-				:thumbnail-alt="customAltTexts"
-				thumbnails-aria-label="Event photos"
+				:thumbnail-alts="customAltTexts"
+				thumbnail-container-aria-label="Event photos"
 				overflow-aria-label="View 4 more event photos"
 				@thumbnail:click="onThumbnailClick"
 				@overflow:click="onOverflowClick"
@@ -114,7 +114,7 @@
 				<m-thumbnails
 					:thumbnails="[]"
 					:max-thumbnails="3"
-					thumbnail-alt="Empty image"
+					thumbnail-alts="Empty image"
 				/>
 			</div>
 
@@ -128,7 +128,7 @@
 				<m-thumbnails
 					:thumbnails="sampleImages"
 					:max-thumbnails="5"
-					:thumbnail-alt="partialAltTexts"
+					:thumbnail-alts="partialAltTexts"
 					@thumbnail:click="onThumbnailClick"
 				/>
 			</div>
@@ -143,7 +143,7 @@
 				<m-thumbnails
 					:thumbnails="sampleImages.slice(0, 3)"
 					:max-thumbnails="5"
-					:thumbnail-alt="invalidAltTexts"
+					:thumbnail-alts="invalidAltTexts"
 					@thumbnail:click="onThumbnailClick"
 				/>
 			</div>
