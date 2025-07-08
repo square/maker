@@ -109,8 +109,9 @@
 				Manual Input Testing
 			</m-text>
 			<m-text :size="0">
-				Click on the quantity display to test manual input functionality.
-				The input should be properly labeled for screen readers.
+				Tab to the quantity display and press Enter/Space to activate manual input.
+				You can also use Arrow Up/Down keys to increment/decrement.
+				Press Escape to cancel manual input.
 			</m-text>
 			<div :class="$s.StepperContainer">
 				<m-stepper
@@ -120,6 +121,74 @@
 				/>
 				<m-text :size="-1">
 					Current value: {{ manualValue }}
+				</m-text>
+			</div>
+		</section>
+
+		<section :class="$s.Section">
+			<m-text
+				pattern="title"
+				:size="2"
+			>
+				Keyboard Navigation Testing
+			</m-text>
+			<m-text :size="0">
+				This section focuses on keyboard navigation:
+				<br>• Tab to focus the quantity display
+				<br>• Press Enter or Space to activate manual input
+				<br>• Use Arrow Up/Down keys to increment/decrement
+				<br>• Press Escape to cancel manual input
+			</m-text>
+			<div :class="$s.StepperContainer">
+				<m-stepper
+					v-model="keyboardValue"
+					:min="0"
+					:max="50"
+					aria-label="Keyboard test stepper"
+					decrement-aria-label="Decrease value"
+					increment-aria-label="Increase value"
+					quantity-aria-label="Current value. Press Enter to edit, Arrow keys to adjust"
+				/>
+				<m-text :size="-1">
+					Current value: {{ keyboardValue }}
+				</m-text>
+			</div>
+		</section>
+
+		<section :class="$s.Section">
+			<m-text
+				pattern="title"
+				:size="2"
+			>
+				Screen Reader Announcements
+			</m-text>
+			<m-text :size="0">
+				This section tests screen reader value announcements.
+				When using a screen reader, value changes should be announced automatically.
+				Try different aria-live settings: 'polite' (default) vs 'assertive'.
+			</m-text>
+			<div :class="$s.StepperContainer">
+				<m-stepper
+					v-model="screenReaderValue"
+					:min="0"
+					:max="20"
+					aria-label="Screen reader test stepper"
+					aria-live="polite"
+				/>
+				<m-text :size="-1">
+					Current value: {{ screenReaderValue }} (aria-live: polite)
+				</m-text>
+			</div>
+			<div :class="$s.StepperContainer">
+				<m-stepper
+					v-model="assertiveValue"
+					:min="0"
+					:max="20"
+					aria-label="Assertive announcements stepper"
+					aria-live="assertive"
+				/>
+				<m-text :size="-1">
+					Current value: {{ assertiveValue }} (aria-live: assertive)
 				</m-text>
 			</div>
 		</section>
@@ -206,6 +275,9 @@
 					<li>Test that disabled states are properly announced</li>
 					<li>Verify manual input mode has appropriate labels</li>
 					<li>Check that current value is communicated clearly</li>
+					<li>Test value change announcements when incrementing/decrementing</li>
+					<li>Verify aria-live regions announce value changes appropriately</li>
+					<li>Compare 'polite' vs 'assertive' announcement timing</li>
 				</ul>
 
 				<m-text :size="0">
@@ -214,7 +286,9 @@
 				<ul :class="$s.List">
 					<li>Tab through all stepper components</li>
 					<li>Use Enter and Space to activate increment/decrement buttons</li>
-					<li>Test manual input mode with Enter/Space on quantity display</li>
+					<li>Tab to quantity display, press Enter/Space to activate manual input</li>
+					<li>Use Arrow Up/Down keys on quantity display to increment/decrement</li>
+					<li>Press Escape to cancel manual input mode</li>
 					<li>Verify input validation works correctly</li>
 					<li>Check that Tab moves focus correctly between elements</li>
 				</ul>
@@ -261,6 +335,9 @@ export default {
 			styledValue: 8,
 			pillValue: 50,
 			manualValue: 25,
+			keyboardValue: 15,
+			screenReaderValue: 10,
+			assertiveValue: 5,
 			largeValue: 5000,
 			negativeValue: 0,
 			singleValue: 5,

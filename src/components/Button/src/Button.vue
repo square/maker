@@ -17,6 +17,7 @@
 		:disabled="isDisabled"
 		:style="style"
 		:role="tag === 'a' ? 'button' : undefined"
+		:aria-disabled="isDisabled ? 'true' : undefined"
 		:aria-label="ariaLabel"
 		:aria-pressed="pressed !== undefined ? String(pressed) : undefined"
 		v-bind="$attrs"
