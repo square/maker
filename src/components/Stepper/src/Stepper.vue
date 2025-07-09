@@ -6,6 +6,14 @@
 		:aria-describedby="ariaDescribedby"
 		role="group"
 	>
+		<!-- Invisible live region for announcing value changes -->
+		<div
+			:aria-live="ariaLive"
+			:aria-atomic="true"
+			:class="$s.ScreenReaderOnly"
+		>
+			{{ screenReaderAnnouncement }}
+		</div>
 		<m-button
 			variant="fill"
 			size="small"
@@ -23,12 +31,6 @@
 		</m-button>
 		<div
 			:class="$s.Quantity"
-			role="spinbutton"
-			tabindex="0"
-			:aria-valuemin="min !== undefined ? Number(min) : undefined"
-			:aria-valuemax="max !== undefined ? Number(max) : undefined"
-			:aria-valuenow="value"
-			:aria-label="ariaLabel || 'Quantity'"
 		>
 			<input
 				v-if="isSettingManualValue"
@@ -39,21 +41,25 @@
 				:max="max"
 				:aria-label="computedInputAriaLabel"
 				:aria-describedby="inputAriaDescribedby"
-				:aria-valuemin="minVal"
-				:aria-valuemax="maxVal"
-				:aria-valuenow="value"
 				type="number"
 				inputmode="numeric"
 				@change="commitManualValue"
 				@blur="commitManualValue"
+				@keydown.escape="cancelManualInput"
 			>
 			<span
 				:class="[
 					$s.QuantityReadonly,
 					{ [$s.isManualInput]: isSettingManualValue }
 				]"
+				tabindex="0"
+				role="spinbutton"
+				:aria-valuemin="min !== undefined ? Number(min) : undefined"
+				:aria-valuemax="max !== undefined ? Number(max) : undefined"
+				:aria-valuenow="value"
 				:aria-label="computedQuantityAriaLabel"
 				@click="triggerManualInput"
+				@keydown="onQuantityKeydown"
 			>
 				<!-- This allows us to auto-resize the input as users type -->
 				{{ isSettingManualValue ? manualValue : value }}
@@ -206,12 +212,21 @@ export default {
 			type: String,
 			default: '',
 		},
+		/**
+		 * Aria live politeness setting for value announcements
+		 */
+		ariaLive: {
+			type: String,
+			default: 'polite',
+			validator: (value) => ['off', 'polite', 'assertive'].includes(value),
+		},
 	},
 
 	data() {
 		return {
 			manualValue: 0,
 			isSettingManualValue: false,
+			lastAnnouncedValue: undefined,
 		};
 	},
 
@@ -236,6 +251,18 @@ export default {
 
 		computedQuantityAriaLabel() {
 			return this.quantityAriaLabel || `Current value ${this.value}. Click to edit manually.`;
+		},
+
+		screenReaderAnnouncement() {
+			// Return current announcement text
+			return this.lastAnnouncedValue !== undefined ? `Value is ${this.value}` : '';
+		},
+	},
+
+	watch: {
+		value(newValue) {
+			// Trigger announcement when value changes
+			this.lastAnnouncedValue = newValue;
 		},
 	},
 
@@ -296,6 +323,25 @@ export default {
 			 * @property {number}
 			 */
 			this.$emit('stepper:update', newValue);
+		},
+
+		onQuantityKeydown(event) {
+			// Handle keyboard navigation for the quantity spinbutton
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				this.triggerManualInput();
+			} else if (event.key === 'ArrowUp') {
+				event.preventDefault();
+				this.increment();
+			} else if (event.key === 'ArrowDown') {
+				event.preventDefault();
+				this.decrement();
+			}
+		},
+
+		cancelManualInput() {
+			this.isSettingManualValue = false;
+			this.manualValue = this.value;
 		},
 	},
 };
@@ -366,5 +412,17 @@ export default {
 .Icon {
 	width: 16px;
 	height: 16px;
+}
+
+.ScreenReaderOnly {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0;
+	clip: rect(0, 0, 0, 0);
 }
 </style>

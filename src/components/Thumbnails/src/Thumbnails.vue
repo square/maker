@@ -2,21 +2,33 @@
 	<div
 		:class="$s.Thumbnails"
 		:style="thumbnailStyles"
+		role="group"
+		:aria-label="thumbnailContainerAriaLabel"
 	>
 		<m-image
-			v-for="thumbnailSrc in visibleThumbnails"
+			v-for="(thumbnailSrc, index) in visibleThumbnails"
 			:key="thumbnailSrc"
 			:class="$s.ThumbnailImage"
 			:src="thumbnailSrc"
+			:alt="getThumbnailAlt(thumbnailSrc, index)"
+			:role="isClickable ? 'button' : 'img'"
+			:tabindex="isClickable ? 0 : undefined"
+			:aria-label="isClickable ? getThumbnailClickLabel(thumbnailSrc, index) : undefined"
 			@click="$emit('thumbnail:click', thumbnailSrc)"
+			@keydown="onThumbnailKeydown($event, thumbnailSrc)"
 		/>
 		<div
 			v-if="overflowImageCount > 0"
 			:class="$s.ThumbnailOverflow"
+			role="button"
+			:tabindex="isOverflowClickable ? 0 : undefined"
+			:aria-label="computedOverflowAriaLabel"
 			@click="$emit('overflow:click')"
+			@keydown="onOverflowKeydown"
 		>
 			<m-text
 				:size="overflowTextSize"
+				aria-hidden="true"
 			>
 				+{{ overflowImageCount }}
 			</m-text>
@@ -70,6 +82,28 @@ export default {
 			default: 0,
 			validator: (size) => size >= MIN_TEXT_SIZE && size <= MAX_TEXT_SIZE,
 		},
+		/**
+		 * Alt text for thumbnail images. Can be a string (used for all) or
+		 * array of strings (one per thumbnail).
+		 */
+		thumbnailAlts: {
+			type: [String, Array],
+			default: () => [],
+		},
+		/**
+		 * ARIA label for the thumbnails group
+		 */
+		thumbnailContainerAriaLabel: {
+			type: String,
+			default: 'Thumbnail images',
+		},
+		/**
+		 * ARIA label for the overflow button
+		 */
+		overflowAriaLabel: {
+			type: String,
+			default: undefined,
+		},
 	},
 
 	computed: {
@@ -81,17 +115,71 @@ export default {
 			return this.thumbnails.length - this.maxThumbnails;
 		},
 
+		isClickable() {
+			return !!this.$listeners['thumbnail:click'];
+		},
+
+		isOverflowClickable() {
+			return !!this.$listeners['overflow:click'];
+		},
+
+		computedOverflowAriaLabel() {
+			return this.overflowAriaLabel
+				|| `View ${this.overflowImageCount} more images`;
+		},
+
 		thumbnailStyles() {
 			const styles = {
 				'--size': this.size,
 			};
-			if (this.$listeners['thumbnail:click']) {
+			if (this.isClickable) {
 				styles['--thumbnail-cursor'] = 'pointer';
 			}
-			if (this.$listeners['overflow:click']) {
+			if (this.isOverflowClickable) {
 				styles['--overflow-cursor'] = 'pointer';
 			}
 			return styles;
+		},
+	},
+
+	methods: {
+		getThumbnailAlt(thumbnailSource, index) {
+			if (Array.isArray(this.thumbnailAlts)) {
+				// eslint-disable-next-line no-magic-numbers
+				return this.thumbnailAlts[index] || `Thumbnail ${index + 1}`;
+			}
+			if (typeof this.thumbnailAlts === 'string' && this.thumbnailAlts) {
+				return this.thumbnailAlts;
+			}
+			// eslint-disable-next-line no-magic-numbers
+			return `Thumbnail ${index + 1}`;
+		},
+
+		getThumbnailClickLabel(thumbnailSource, index) {
+			// eslint-disable-next-line no-magic-numbers
+			return `View thumbnail ${index + 1}`;
+		},
+
+		onThumbnailKeydown(event, thumbnailSource) {
+			if (!this.isClickable) {
+				return;
+			}
+
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				this.$emit('thumbnail:click', thumbnailSource);
+			}
+		},
+
+		onOverflowKeydown(event) {
+			if (!this.isOverflowClickable) {
+				return;
+			}
+
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				this.$emit('overflow:click');
+			}
 		},
 	},
 };
@@ -104,10 +192,6 @@ export default {
 	align-items: center;
 }
 
-.ThumbnailImage {
-	cursor: var(--thumbnail-cursor, auto);
-}
-
 .ThumbnailImage,
 .ThumbnailOverflow {
 	width: var(--size);
@@ -116,10 +200,24 @@ export default {
 	height: var(--size);
 }
 
+.ThumbnailImage {
+	cursor: var(--thumbnail-cursor, auto);
+}
+
+.ThumbnailImage:focus {
+	outline: 2px solid #06c;
+	outline-offset: 2px;
+}
+
 .ThumbnailOverflow {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: var(--overflow-cursor, default);
+}
+
+.ThumbnailOverflow:focus {
+	outline: 2px solid #06c;
+	outline-offset: 2px;
 }
 </style>
