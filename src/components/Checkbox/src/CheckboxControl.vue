@@ -94,7 +94,7 @@ export default {
 	position: relative;
 	display: inline-block;
 	line-height: 0;
-	cursor: pointer;
+	cursor: inherit;
 	user-select: none;
 
 	/* these should later be pulled from

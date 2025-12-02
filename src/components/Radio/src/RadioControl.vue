@@ -94,7 +94,7 @@ export default {
 .RadioContainer {
 	display: inline-block;
 	line-height: 0;
-	cursor: pointer;
+	cursor: inherit;
 	user-select: none;
 
 	/* these should later be pulled from
@@ -116,7 +116,7 @@ export default {
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
 	outline: none;
-	cursor: pointer;
+	cursor: inherit;
 	transition:
 		border 0.2s ease,
 		background-color 0.2s ease;
