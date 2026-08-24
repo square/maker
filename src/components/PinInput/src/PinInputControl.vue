@@ -8,6 +8,7 @@
 			:class="$s.PinInput"
 			:maxlength="pinLength"
 			:value="inputValue"
+			:aria-label="ariaLabel"
 			type="text"
 			inputmode="numeric"
 			pattern="[0-9]*"
@@ -87,6 +88,14 @@ export default {
 		disabled: {
 			type: Boolean,
 			default: false,
+		},
+
+		/**
+		 * Accessible label for the input group
+		 */
+		ariaLabel: {
+			type: String,
+			default: undefined,
 		},
 	},
 
