@@ -7,6 +7,7 @@
 		<div :class="$s.CalendarHeader">
 			<m-button
 				v-bind="calendarNavButtons"
+				:aria-label="previousMonthAriaLabel"
 				:disabled="isCalendarNavDisabled(-1)"
 				size="medium"
 				variant="fill"
@@ -24,6 +25,7 @@
 
 			<m-button
 				v-bind="calendarNavButtons"
+				:aria-label="nextMonthAriaLabel"
 				:disabled="isCalendarNavDisabled(1)"
 				size="medium"
 				variant="fill"
@@ -59,13 +61,18 @@
 					>
 						<button
 							v-if="date"
+							ref="dateButtons"
 							:class="[$s.DateCellButton, {
 								[$s.selected]: isDateSelected(date),
 								[$s.disabled]: isDateDisabled(date),
 								[$s.today]: isToday(date),
 							}]"
 							type="button"
-							tabindex="-1"
+							:tabindex="isActiveDate(date) && !isDateDisabled(date) ? 0 : -1"
+							@keydown.left.prevent="moveFocus(date, -1)"
+							@keydown.right.prevent="moveFocus(date, 1)"
+							@keydown.up.prevent="moveFocus(date, -7)"
+							@keydown.down.prevent="moveFocus(date, 7)"
 							@click.prevent="emitDate(date)"
 						>
 							{{ date.getDate() }}
@@ -155,11 +162,26 @@ export default {
 			type: String,
 			default: undefined,
 		},
+		/**
+		 * Accessible label for the previous month button.
+		 */
+		previousMonthAriaLabel: {
+			type: String,
+			default: 'Previous month',
+		},
+		/**
+		 * Accessible label for the next month button.
+		 */
+		nextMonthAriaLabel: {
+			type: String,
+			default: 'Next month',
+		},
 	},
 
 	data() {
 		return {
 			showingMonth: new Date(),
+			activeDate: undefined,
 		};
 	},
 
@@ -172,6 +194,12 @@ export default {
 			const firstDayOfWeek = startOfWeek(new Date());
 			const weekdays = Array.from({ length: 7 }, (_, i) => addDays(firstDayOfWeek, i));
 			return weekdays.map((date) => date.toLocaleDateString(this.locale, { weekday: 'short' }));
+		},
+
+		visibleDates() {
+			const dates = [];
+			this.weeks.forEach((week) => dates.push(...week));
+			return dates.filter(Boolean);
 		},
 
 		weeks() {
@@ -226,12 +254,25 @@ export default {
 				this.showingMonth = newSelectedDate;
 			}
 		},
+
+		minDate: 'reconcileActiveDate',
+
+		maxDate: 'reconcileActiveDate',
+
+		disabledDates: {
+			deep: true,
+			handler: 'reconcileActiveDate',
+		},
+
+		showingMonth: 'reconcileActiveDate',
 	},
 
 	mounted() {
 		if (this.selectedDateObject) {
 			this.showingMonth = this.selectedDateObject;
 		}
+
+		this.reconcileActiveDate();
 	},
 
 	methods: {
@@ -262,6 +303,74 @@ export default {
 		 */
 		incrementMonth(incrementBy) {
 			this.showingMonth = addMonths(this.showingMonth, incrementBy);
+		},
+
+		/**
+		 * Reconciles the single date button that can receive tab focus.
+		 */
+		reconcileActiveDate() {
+			const selectedDate = this.selectedDateObject;
+			if (selectedDate && this.isDateVisible(selectedDate) && !this.isDateDisabled(selectedDate)) {
+				this.activeDate = formatISOdate(selectedDate);
+				return;
+			}
+
+			const currentActiveDate = this.visibleDates.find((date) => this.isActiveDate(date));
+			if (currentActiveDate && !this.isDateDisabled(currentActiveDate)) {
+				return;
+			}
+
+			const firstEnabledDate = this.visibleDates.find((date) => !this.isDateDisabled(date));
+			this.activeDate = firstEnabledDate && formatISOdate(firstEnabledDate);
+		},
+
+		/**
+		 * Determines if the date is shown in the current calendar month.
+		 * @param {Date} date
+		 * @return {boolean}
+		 */
+		isDateVisible(date) {
+			return date.getFullYear() === this.showingMonth.getFullYear()
+				&& date.getMonth() === this.showingMonth.getMonth();
+		},
+
+		/**
+		 * Determines if the date is the current roving tab stop.
+		 * @param {Date} date
+		 * @return {boolean}
+		 */
+		isActiveDate(date) {
+			return this.activeDate === formatISOdate(date);
+		},
+
+		/**
+		 * Moves roving focus by the given number of days without changing the selection.
+		 * @param {Date} date
+		 * @param {number} incrementBy
+		 */
+		moveFocus(date, incrementBy) {
+			let nextDate = addDays(date, incrementBy);
+			while (this.isDateVisible(nextDate)) {
+				if (!this.isDateDisabled(nextDate)) {
+					this.activeDate = formatISOdate(nextDate);
+					this.$nextTick(() => this.focusActiveDate());
+					return;
+				}
+
+				nextDate = addDays(nextDate, incrementBy);
+			}
+		},
+
+		/**
+		 * Focuses the current roving tab stop after it has rendered.
+		 */
+		focusActiveDate() {
+			const activeDateButton = this.$refs.dateButtons.find(
+				(dateButton) => dateButton.tabIndex === 0,
+			);
+			if (activeDateButton) {
+				activeDateButton.focus();
+			}
 		},
 
 		/**
