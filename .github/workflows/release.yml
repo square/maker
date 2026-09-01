@@ -10,18 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     concurrency: changes-deploys
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
 
     steps:
-      - name: Checkout Maker master branch
-        uses: actions/checkout@v2
+      - name: Checkout Maker
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          # commenting out line which is erroring atm
-          # maybe uncomment this in the future
-          # cache: 'npm'
+          node-version: '24'
 
       - name: Install dependencies
         run: npm ci
@@ -29,17 +33,19 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release@19
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: npx semantic-release@25
 
       - name: Checkout Maker deploys branch in .dist directory
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           repository: square/maker
           ref: deploys
           path: .dist
 
       - name: Build & deploy Styleguide & Lab
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: |
           cd .dist
           git config user.name github-actions
