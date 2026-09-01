@@ -3,6 +3,10 @@
   "version": "0.0.0-semantic-release",
   "description": "Maker Design System by Square",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/square/maker.git"
+  },
   "files": [
     "components",
     "utils"
